@@ -278,7 +278,7 @@ function MobileMenu() {
           
           <motion.a
             href="mailto:jayleekr0125@gmail.com"
-            className="glass px-10 py-5 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 bg-purple-600/20 relative overflow-hidden"
+            className="glass px-10 py-5 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 bg-purple-600/20 relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-zinc-950"
             onClick={() => setIsOpen(false)}
             initial={{ opacity: 0, y: 30, scale: 0.9 }}
             animate={{ 
@@ -292,6 +292,13 @@ function MobileMenu() {
               boxShadow: "0 0 40px rgba(168, 85, 247, 0.4)"
             }}
             whileTap={{ scale: 0.95 }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                (e.target as HTMLElement).click();
+              }
+            }}
+            aria-label="Send email to jayleekr0125@gmail.com"
           >
             <motion.div 
               className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-indigo-500/20"
@@ -950,7 +957,7 @@ function CommunityHero() {
           >
             HypeProof AI Community는 AI의 진짜 가치를 추구하는 전문가들이 모인 글로벌 허브입니다.
             <br />
-            <span className="text-purple-400 font-medium">Signal > Noise. Proof > Promise.</span>
+            <span className="text-purple-400 font-medium">Signal &gt; Noise. Proof &gt; Promise.</span>
           </motion.p>
 
           {/* CTAs */}
@@ -1078,7 +1085,11 @@ function Features() {
   ];
 
   return (
-    <section id="features" className="py-32 px-6 relative overflow-hidden">
+    <section 
+      id="features" 
+      className="py-32 px-6 relative overflow-hidden" 
+      aria-labelledby="features-heading"
+    >
       {/* Decorative elements */}
       <motion.div
         className="absolute top-20 left-10 w-20 h-20 rounded-full bg-purple-500/10 blur-xl"
@@ -1100,11 +1111,13 @@ function Features() {
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <motion.h2 
+            id="features-heading"
             className="text-4xl font-bold text-white mb-4 overflow-hidden"
             initial={{ y: 40, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: "easeOut" }}
+            tabIndex={-1}
           >
             <motion.span 
               className="inline-block"
@@ -1786,7 +1799,11 @@ function Team() {
   ];
 
   return (
-    <section id="team" className="py-32 px-6 relative">
+    <section 
+      id="team" 
+      className="py-32 px-6 relative" 
+      aria-labelledby="team-heading"
+    >
       {/* Team constellation background */}
       <motion.div
         className="absolute inset-0 pointer-events-none overflow-hidden"
@@ -1833,7 +1850,9 @@ function Team() {
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <motion.h2 
+            id="team-heading"
             className="text-4xl font-bold text-white mb-4 relative overflow-hidden"
+            tabIndex={-1}
           >
             <motion.span
               className="inline-block"
