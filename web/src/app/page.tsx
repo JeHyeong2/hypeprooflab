@@ -1184,6 +1184,26 @@ function Philosophy() {
               }}
             />
             
+            {/* Decorative quote marks */}
+            <motion.div
+              className="absolute -top-4 -left-4 text-6xl text-purple-500/20 font-serif leading-none"
+              initial={{ opacity: 0, scale: 0, rotate: -10 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              "
+            </motion.div>
+            <motion.div
+              className="absolute -bottom-4 -right-4 text-6xl text-purple-500/20 font-serif leading-none rotate-180"
+              initial={{ opacity: 0, scale: 0, rotate: 170 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 180 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              "
+            </motion.div>
+            
             <motion.p 
               className="text-xl sm:text-2xl md:text-3xl text-zinc-300 leading-relaxed font-light relative z-10"
               initial={{ opacity: 0, y: 30 }}
@@ -1191,44 +1211,110 @@ function Philosophy() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              &ldquo;We don&apos;t chase{' '}
-              <motion.span 
-                className="text-white font-medium relative"
-                whileHover={{
-                  scale: 1.05,
-                  textShadow: "0 0 20px rgba(255, 255, 255, 0.5)"
-                }}
-                transition={{ type: "spring", stiffness: 300 }}
+              <motion.span
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
               >
-                Hype
+                We don&apos;t chase{' '}
+              </motion.span>
+              <motion.span 
+                className="text-white font-medium relative cursor-pointer"
+                whileHover={{
+                  scale: 1.08,
+                  textShadow: "0 0 30px rgba(255, 255, 255, 0.7)"
+                }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+              >
+                {['H', 'y', 'p', 'e'].map((letter, i) => (
+                  <motion.span
+                    key={i}
+                    className="inline-block"
+                    initial={{ opacity: 0, y: 20, rotateX: -90 }}
+                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                    whileHover={{ 
+                      y: -5,
+                      color: "#f3f4f6",
+                      scale: 1.1
+                    }}
+                    transition={{ 
+                      duration: 0.4, 
+                      delay: 0.5 + (i * 0.1),
+                      type: "spring",
+                      stiffness: 400
+                    }}
+                  >
+                    {letter}
+                  </motion.span>
+                ))}
                 <motion.div
-                  className="absolute -inset-1 bg-gradient-to-r from-transparent via-white/10 to-transparent rounded"
+                  className="absolute -inset-1 bg-gradient-to-r from-transparent via-white/15 to-transparent rounded blur-sm"
                   whileHover={{ opacity: 1 }}
                   initial={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 />
               </motion.span>
-              .
+              <motion.span
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.9 }}
+              >
+                .
+              </motion.span>
               <br />
-              We{' '}
+              <motion.span
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 1.1 }}
+              >
+                We{' '}
+              </motion.span>
               <motion.span 
-                className="text-purple-400 font-medium relative"
+                className="text-purple-400 font-medium relative cursor-pointer"
                 whileHover={{
-                  scale: 1.05,
-                  textShadow: "0 0 20px rgba(168, 85, 247, 0.8)",
+                  scale: 1.08,
+                  textShadow: "0 0 30px rgba(168, 85, 247, 0.9)",
                   color: "#c084fc"
                 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
               >
-                Prove
+                {['P', 'r', 'o', 'v', 'e'].map((letter, i) => (
+                  <motion.span
+                    key={i}
+                    className="inline-block"
+                    initial={{ opacity: 0, y: 20, rotateX: -90 }}
+                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                    whileHover={{ 
+                      y: -5,
+                      color: "#d8b4fe",
+                      scale: 1.1
+                    }}
+                    transition={{ 
+                      duration: 0.4, 
+                      delay: 1.3 + (i * 0.1),
+                      type: "spring",
+                      stiffness: 400
+                    }}
+                  >
+                    {letter}
+                  </motion.span>
+                ))}
                 <motion.div
-                  className="absolute -inset-1 bg-gradient-to-r from-transparent via-purple-500/20 to-transparent rounded"
+                  className="absolute -inset-1 bg-gradient-to-r from-transparent via-purple-500/25 to-transparent rounded blur-sm"
                   whileHover={{ opacity: 1 }}
                   initial={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 />
               </motion.span>
-              {' '}it.&rdquo;
+              <motion.span
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 1.8 }}
+              >
+                {' '}it.
+              </motion.span>
             </motion.p>
             
             <motion.div 
