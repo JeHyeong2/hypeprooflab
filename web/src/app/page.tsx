@@ -494,19 +494,61 @@ function FeatureCard({ icon, title, description, delay }: {
         {icon}
       </motion.div>
       <motion.h3 
-        className="text-xl font-semibold text-white mb-4 group-hover:text-purple-400 transition-colors duration-300 relative z-10"
+        className="text-xl font-semibold text-white mb-4 group-hover:text-purple-400 transition-colors duration-300 relative z-10 overflow-hidden"
         whileHover={{ x: 5 }}
         transition={{ type: "spring", stiffness: 400 }}
       >
-        {title}
+        <motion.div
+          initial={{ y: "100%" }}
+          whileInView={{ y: "0%" }}
+          transition={{ duration: 0.6, delay: delay + 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          viewport={{ once: true }}
+        >
+          {title.split('').map((char, i) => (
+            <motion.span
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: delay + 0.4 + (i * 0.02) }}
+              viewport={{ once: true }}
+              className="inline-block"
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </motion.span>
+          ))}
+        </motion.div>
       </motion.h3>
-      <motion.p 
-        className="text-zinc-400 leading-relaxed text-[15px] flex-1 relative z-10"
+      <motion.div 
+        className="text-zinc-400 leading-relaxed text-[15px] flex-1 relative z-10 overflow-hidden"
         whileHover={{ color: "#d4d4d8" }}
         transition={{ duration: 0.3 }}
       >
-        {description}
-      </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: delay + 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+          viewport={{ once: true }}
+        >
+          {description}
+        </motion.p>
+        
+        {/* Read more indicator on hover */}
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          initial={{ y: 10 }}
+          whileHover={{ y: 0 }}
+        >
+          <div className="text-xs text-purple-400 font-medium flex items-center gap-1 mt-2">
+            <motion.span
+              animate={{ x: [0, 3, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              →
+            </motion.span>
+            Explore this
+          </div>
+        </motion.div>
+      </motion.div>
       
       <motion.div 
         className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-purple-500 via-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-center"
