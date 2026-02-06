@@ -123,9 +123,17 @@ function MobileMenu() {
     <div className="md:hidden">
       {/* Hamburger Button */}
       <motion.button
-        className="p-2 text-white"
+        className="p-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-zinc-950 rounded-md"
         onClick={() => setIsOpen(!isOpen)}
         whileTap={{ scale: 0.95 }}
+        aria-expanded={isOpen}
+        aria-controls="mobile-menu"
+        aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape' && isOpen) {
+            setIsOpen(false);
+          }
+        }}
       >
         <motion.div
           className="w-6 h-6 flex flex-col justify-center items-center"
@@ -160,6 +168,7 @@ function MobileMenu() {
 
       {/* Mobile Menu Overlay */}
       <motion.div
+        id="mobile-menu"
         className="fixed inset-0 z-50 bg-zinc-950/95 backdrop-blur-lg"
         initial={{ opacity: 0, scale: 1.1 }}
         animate={{ 
@@ -168,7 +177,16 @@ function MobileMenu() {
         }}
         style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
         transition={{ duration: 0.4, ease: "easeOut" }}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mobile-menu-title"
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') {
+            setIsOpen(false);
+          }
+        }}
       >
+        <div className="sr-only" id="mobile-menu-title">Navigation Menu</div>
         {/* Background gradient effects */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-br from-purple-600/10 via-transparent to-indigo-600/10"
@@ -184,8 +202,13 @@ function MobileMenu() {
         <div className="flex flex-col items-center justify-center h-full space-y-12 relative z-10">
           <motion.a
             href="#features"
-            className="text-white text-3xl font-medium relative"
-            onClick={() => setIsOpen(false)}
+            className="text-white text-3xl font-medium relative focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-zinc-950 rounded-lg px-4 py-2"
+            onClick={(e) => {
+              e.preventDefault();
+              setIsOpen(false);
+              const element = document.querySelector('#features');
+              element?.scrollIntoView({ behavior: 'smooth' });
+            }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ 
               opacity: isOpen ? 1 : 0,
@@ -198,19 +221,32 @@ function MobileMenu() {
               textShadow: "0 0 20px rgba(168, 85, 247, 0.5)" 
             }}
             whileTap={{ scale: 0.95 }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                (e.target as HTMLElement).click();
+              }
+            }}
+            aria-label="Navigate to What We Do section"
           >
             What We Do
             <motion.div
               className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400"
               whileHover={{ width: "100%" }}
               transition={{ duration: 0.3 }}
+              aria-hidden="true"
             />
           </motion.a>
           
           <motion.a
             href="#team"
-            className="text-white text-3xl font-medium relative"
-            onClick={() => setIsOpen(false)}
+            className="text-white text-3xl font-medium relative focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-zinc-950 rounded-lg px-4 py-2"
+            onClick={(e) => {
+              e.preventDefault();
+              setIsOpen(false);
+              const element = document.querySelector('#team');
+              element?.scrollIntoView({ behavior: 'smooth' });
+            }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ 
               opacity: isOpen ? 1 : 0,
@@ -223,12 +259,20 @@ function MobileMenu() {
               textShadow: "0 0 20px rgba(168, 85, 247, 0.5)"
             }}
             whileTap={{ scale: 0.95 }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                (e.target as HTMLElement).click();
+              }
+            }}
+            aria-label="Navigate to Team section"
           >
             Team
             <motion.div
               className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400"
               whileHover={{ width: "100%" }}
               transition={{ duration: 0.3 }}
+              aria-hidden="true"
             />
           </motion.a>
           
@@ -267,7 +311,7 @@ function NavLink({ children, href }: { children: React.ReactNode; href: string }
   return (
     <motion.a
       href={href}
-      className="text-zinc-400 hover:text-white transition-colors duration-200 text-sm relative group cursor-pointer"
+      className="text-zinc-400 hover:text-white transition-colors duration-200 text-sm relative group cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-zinc-950 rounded-sm"
       whileHover={{ y: -2, scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
@@ -276,18 +320,41 @@ function NavLink({ children, href }: { children: React.ReactNode; href: string }
         if (href.startsWith('#')) {
           const element = document.querySelector(href);
           element?.scrollIntoView({ behavior: 'smooth' });
+          // Focus management for screen readers
+          const target = element as HTMLElement;
+          if (target) {
+            target.setAttribute('tabindex', '-1');
+            target.focus();
+            // Announce navigation to screen readers
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.className = 'sr-only';
+            announcement.textContent = `Navigated to ${children} section`;
+            document.body.appendChild(announcement);
+            setTimeout(() => document.body.removeChild(announcement), 1000);
+          }
         }
       }}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          (e.target as HTMLElement).click();
+        }
+      }}
+      aria-label={`Navigate to ${children} section`}
     >
       {children}
       <motion.div
         className="absolute -bottom-2 left-0 right-0 h-px bg-gradient-to-r from-purple-500 to-indigo-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"
+        aria-hidden="true"
       />
       <motion.div
         className="absolute inset-0 bg-purple-500/0 group-hover:bg-purple-500/10 rounded-md -m-2 transition-colors duration-300"
         whileHover={{
           boxShadow: "0 0 20px rgba(168, 85, 247, 0.2)"
         }}
+        aria-hidden="true"
       />
     </motion.a>
   );
@@ -826,6 +893,164 @@ function NewsletterSignup() {
             >
               Subscribe
             </motion.button>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// Community Section Component
+function CommunityHero() {
+  const stats = [
+    { label: "Countries", value: "50+", icon: "🌍" },
+    { label: "Expert Verification Rate", value: "95%", icon: "✅" },
+    { label: "Member Satisfaction", value: "4.8/5", icon: "⭐" },
+    { label: "Active Projects", value: "12+", icon: "🚀" }
+  ];
+
+  return (
+    <section id="community" className="py-32 px-6 relative overflow-hidden">
+      <FloatingOrb className="w-[600px] h-[600px] bg-purple-600/20 -left-60 top-1/4" delay={1} />
+      <FloatingOrb className="w-[400px] h-[400px] bg-indigo-600/15 -right-40 bottom-1/4" delay={3} />
+      
+      <div className="max-w-6xl mx-auto relative z-10">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <motion.span 
+            className="glass px-4 py-2 text-xs text-purple-400 uppercase tracking-widest inline-block mb-6"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            Global Community
+          </motion.span>
+          
+          <motion.h2 
+            className="text-4xl md:text-6xl font-bold text-white mb-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Where AI <span className="text-gradient">Professionals</span> Connect
+          </motion.h2>
+          
+          <motion.p 
+            className="text-xl text-zinc-300 max-w-3xl mx-auto leading-relaxed mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            HypeProof AI Community는 AI의 진짜 가치를 추구하는 전문가들이 모인 글로벌 허브입니다.
+            <br />
+            <span className="text-purple-400 font-medium">Signal > Noise. Proof > Promise.</span>
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <motion.a
+              href="https://discord.gg/hypeproof"
+              className="glass px-8 py-4 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 transition-all duration-300 inline-flex items-center gap-3 bg-purple-600/20"
+              whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(168, 85, 247, 0.4)" }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.317 4.369a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/>
+              </svg>
+              Join 3,500+ AI Experts
+            </motion.a>
+            <motion.a
+              href="/community"
+              className="glass px-8 py-4 text-white font-medium rounded-full border border-zinc-700/50 hover:border-zinc-600 transition-all duration-300 inline-flex items-center gap-2"
+              whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(255, 255, 255, 0.1)" }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Explore Community
+            </motion.a>
+          </motion.div>
+        </motion.div>
+
+        {/* Stats Grid */}
+        <motion.div 
+          className="grid grid-cols-2 lg:grid-cols-4 gap-6"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              className="glass p-6 text-center group cursor-pointer"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: 0.8 + i * 0.1 }}
+              whileHover={{ y: -5, scale: 1.02 }}
+            >
+              <motion.div 
+                className="text-3xl mb-2"
+                whileHover={{ scale: 1.2, rotate: 10 }}
+              >
+                {stat.icon}
+              </motion.div>
+              <motion.div 
+                className="text-2xl font-bold text-purple-400 mb-1"
+                whileHover={{ color: "#c084fc" }}
+              >
+                {stat.value}
+              </motion.div>
+              <div className="text-sm text-zinc-500">{stat.label}</div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Features Preview */}
+        <motion.div 
+          className="mt-20 grid md:grid-cols-3 gap-8"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          <motion.div 
+            className="glass p-6 group"
+            whileHover={{ y: -5 }}
+          >
+            <div className="text-3xl mb-4">🔬</div>
+            <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-purple-400 transition-colors">Research Collaboration</h3>
+            <p className="text-zinc-400 text-sm">논문 리뷰부터 실험 결과 공유까지, 깊이 있는 연구 토론</p>
+          </motion.div>
+          
+          <motion.div 
+            className="glass p-6 group"
+            whileHover={{ y: -5 }}
+          >
+            <div className="text-3xl mb-4">🛠️</div>
+            <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-purple-400 transition-colors">Practical Implementation</h3>
+            <p className="text-zinc-400 text-sm">실제 구현과 디버깅, 아키텍처 설계 지원</p>
+          </motion.div>
+          
+          <motion.div 
+            className="glass p-6 group"
+            whileHover={{ y: -5 }}
+          >
+            <div className="text-3xl mb-4">🎓</div>
+            <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-purple-400 transition-colors">Expert Mentorship</h3>
+            <p className="text-zinc-400 text-sm">스터디 그룹과 멘토링으로 함께 성장하는 커뮤니티</p>
           </motion.div>
         </motion.div>
       </div>
@@ -1911,6 +2136,7 @@ export default function Home() {
       
       <main role="main" aria-label="Main content">
         <Hero />
+        <CommunityHero />
         <LatestContentPreview />
         <Features />
         <NewsletterSignup />
