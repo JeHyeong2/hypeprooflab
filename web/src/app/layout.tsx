@@ -3,6 +3,8 @@ import "./globals.css";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import SkipLink from "@/components/SkipLink";
 import { I18nProvider } from "@/contexts/I18nContext";
+import { CookieConsent } from "@/components/CookieConsent";
+import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -256,9 +258,12 @@ export default function RootLayout({
       <body className="antialiased">
         <SkipLink />
         <I18nProvider>
-          <ErrorBoundary>
-            {children}
-          </ErrorBoundary>
+          <AnalyticsProvider>
+            <ErrorBoundary>
+              {children}
+              <CookieConsent />
+            </ErrorBoundary>
+          </AnalyticsProvider>
         </I18nProvider>
       </body>
     </html>

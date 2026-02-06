@@ -3,30 +3,7 @@
 import React, { useRef, useMemo, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-// Performance optimizations
-const useIntersectionObserver = (options: IntersectionObserverInit = {}) => {
-  const [isIntersecting, setIsIntersecting] = useState(false);
-  const [node, setNode] = useState<Element | null>(null);
-
-  const observer = useMemo(
-    () =>
-      typeof window !== 'undefined'
-        ? new IntersectionObserver(([entry]) => {
-            setIsIntersecting(entry.isIntersecting);
-          }, options)
-        : null,
-    [options]
-  );
-
-  React.useEffect(() => {
-    if (!observer || !node) return;
-    
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [observer, node]);
-
-  return [setNode, isIntersecting] as const;
-};
+import { usePerformanceOptimization, useOptimizedIntersectionObserver, getOptimizedAnimationVariants } from '@/hooks/usePerformanceOptimization';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -43,7 +20,13 @@ const stagger = {
 };
 
 const FloatingOrb = React.memo(({ className, delay = 0 }: { className: string; delay?: number }) => {
-  const [ref, isIntersecting] = useIntersectionObserver({ threshold: 0.1 });
+  const [ref, isIntersecting] = useOptimizedIntersectionObserver({ threshold: 0.1 });
+  const { animationConfig } = usePerformanceOptimization();
+  
+  // Don't render on low-end devices or slow connections
+  if (!animationConfig.enableFloatingOrbs) {
+    return null;
+  }
   
   return (
     <motion.div
@@ -52,17 +35,18 @@ const FloatingOrb = React.memo(({ className, delay = 0 }: { className: string; d
       style={{ 
         willChange: isIntersecting ? 'transform, opacity' : 'auto',
         transform: isIntersecting ? undefined : 'translateZ(0)', // GPU layer optimization
+        contain: 'layout style paint', // CSS containment for better performance
       }}
       initial={{ opacity: 0, scale: 0.8 }}
-      animate={isIntersecting ? {
+      animate={isIntersecting && animationConfig.enableComplexEffects ? {
         y: [0, -60, 15, -40, 0],
         x: [0, 25, -10, 20, 0],
         scale: [1, 1.2, 0.95, 1.05, 1],
         opacity: [0.3, 0.7, 0.5, 0.6, 0.3],
-        rotate: [0, 90, 180, 270, 360],
+        rotate: animationConfig.enableComplexEffects ? [0, 90, 180, 270, 360] : [0, 0, 0, 0, 0],
       } : { opacity: 0.3 }}
       transition={{
-        duration: 10 + delay * 1.5,
+        duration: animationConfig.reducedDuration ? 5 : (10 + delay * 1.5),
         repeat: isIntersecting ? Infinity : 0,
         ease: "easeInOut",
         delay: isIntersecting ? delay : 0,
@@ -110,16 +94,30 @@ function SocialProofBar() {
 
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
+  const { animationConfig } = usePerformanceOptimization();
+  
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"]
   });
   
-  const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
-  const yFast = useTransform(scrollYProgress, [0, 1], [0, 500]);
-  const ySlow = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  // Conditional parallax effects for better performance
+  const y = animationConfig.enableParallax 
+    ? useTransform(scrollYProgress, [0, 1], [0, 300])
+    : useTransform(scrollYProgress, [0, 1], [0, 0]);
+    
+  const yFast = animationConfig.enableParallax 
+    ? useTransform(scrollYProgress, [0, 1], [0, 500])
+    : useTransform(scrollYProgress, [0, 1], [0, 0]);
+    
+  const ySlow = animationConfig.enableParallax 
+    ? useTransform(scrollYProgress, [0, 1], [0, 150])
+    : useTransform(scrollYProgress, [0, 1], [0, 0]);
+    
   const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
+  const scale = animationConfig.enableComplexEffects
+    ? useTransform(scrollYProgress, [0, 0.5], [1, 0.8])
+    : useTransform(scrollYProgress, [0, 0.5], [1, 1]);
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24">

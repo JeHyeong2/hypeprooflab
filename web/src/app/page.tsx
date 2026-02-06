@@ -10,6 +10,14 @@ import { ScrollProgress, CursorFollower } from '@/components/ui/UIEffects';
 import { SocialProofBar, Hero, FloatingOrb } from '@/components/sections/HeroSection';
 import { FeaturesSection, FeatureCard } from '@/components/sections/FeaturesSection';
 import { LatestContentPreview, NewsletterSignup } from '@/components/sections/ContentSection';
+import { 
+  LazyWrapper, 
+  LazyFeaturesSection, 
+  LazyLatestContentPreview, 
+  LazyNewsletterSignup,
+  MemoizedHero,
+  MemoizedSocialProofBar
+} from '@/components/LazyComponents';
 
 // Performance optimizations
 const useIntersectionObserver = (options: IntersectionObserverInit = {}) => {
@@ -399,22 +407,26 @@ export default function Home() {
         </motion.nav>
         
         {/* Social Proof Bar */}
-        <SocialProofBar />
+        <MemoizedSocialProofBar />
         
         {/* Hero Section */}
         <LazySection>
-          <Hero />
+          <MemoizedHero />
         </LazySection>
         
         {/* Features Section */}
-        <LazySection>
-          <FeaturesSection />
-        </LazySection>
+        <LazyWrapper>
+          <LazySection>
+            <LazyFeaturesSection />
+          </LazySection>
+        </LazyWrapper>
         
         {/* Latest Content */}
-        <LazySection>
-          <LatestContentPreview />
-        </LazySection>
+        <LazyWrapper>
+          <LazySection>
+            <LazyLatestContentPreview />
+          </LazySection>
+        </LazyWrapper>
         
         {/* Columns Preview */}
         <LazySection>
@@ -471,9 +483,11 @@ export default function Home() {
         </LazySection>
         
         {/* Newsletter */}
-        <LazySection>
-          <NewsletterSignup />
-        </LazySection>
+        <LazyWrapper>
+          <LazySection>
+            <LazyNewsletterSignup />
+          </LazySection>
+        </LazyWrapper>
         
         {/* Footer */}
         <footer className="py-16 px-6 border-t border-zinc-800">

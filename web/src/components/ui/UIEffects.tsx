@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
+import { usePerformanceOptimization } from '@/hooks/usePerformanceOptimization';
 
 // Scroll Progress Indicator
 function ScrollProgress() {
@@ -26,10 +27,14 @@ function ScrollProgress() {
 // Enhanced Cursor Follower
 // Performance-optimized Custom Cursor Follower
 const CursorFollower = React.memo(() => {
+  const { animationConfig } = usePerformanceOptimization();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const animationRef = useRef<number | undefined>(undefined);
+  
+  // Don't render if disabled by performance settings
+  if (!animationConfig.enableCursorFollower) return null;
   
   const updateMousePosition = useCallback((e: MouseEvent) => {
     if (animationRef.current) {
