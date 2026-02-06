@@ -1,7 +1,7 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const fadeInUp = {
@@ -757,22 +757,119 @@ function Team() {
 
 function Footer() {
   return (
-    <footer className="py-12 px-6 border-t border-white/5">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <Logo />
-        <div className="flex items-center gap-6">
-          <Link href="/columns" className="text-zinc-500 hover:text-white text-sm transition-colors">
-            Columns
-          </Link>
-          <Link href="#team" className="text-zinc-500 hover:text-white text-sm transition-colors">
-            Team
-          </Link>
+    <motion.footer 
+      className="py-12 px-6 border-t border-white/5 relative overflow-hidden"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+    >
+      {/* Subtle background animation */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/5 to-transparent"
+        animate={{
+          x: ["-100%", "100%"],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      />
+      
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring", stiffness: 400 }}
+        >
+          <Logo />
+        </motion.div>
+        
+        <div className="flex items-center gap-8">
+          <motion.div
+            whileHover={{ y: -2 }}
+            transition={{ type: "spring", stiffness: 400 }}
+          >
+            <Link 
+              href="/columns" 
+              className="text-zinc-500 hover:text-purple-400 text-sm transition-all duration-300 relative group"
+            >
+              Columns
+              <motion.div
+                className="absolute -bottom-1 left-0 w-0 h-px bg-purple-400 group-hover:w-full transition-all duration-300"
+              />
+            </Link>
+          </motion.div>
+          
+          <motion.div
+            whileHover={{ y: -2 }}
+            transition={{ type: "spring", stiffness: 400 }}
+          >
+            <Link 
+              href="#team" 
+              className="text-zinc-500 hover:text-purple-400 text-sm transition-all duration-300 relative group"
+            >
+              Team
+              <motion.div
+                className="absolute -bottom-1 left-0 w-0 h-px bg-purple-400 group-hover:w-full transition-all duration-300"
+              />
+            </Link>
+          </motion.div>
+          
+          <motion.div
+            whileHover={{ y: -2 }}
+            transition={{ type: "spring", stiffness: 400 }}
+          >
+            <a 
+              href="mailto:jayleekr0125@gmail.com" 
+              className="text-zinc-500 hover:text-purple-400 text-sm transition-all duration-300 relative group flex items-center gap-1"
+            >
+              <motion.svg 
+                className="w-3 h-3" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+                whileHover={{ scale: 1.2, rotate: 15 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </motion.svg>
+              Contact
+              <motion.div
+                className="absolute -bottom-1 left-0 w-0 h-px bg-purple-400 group-hover:w-full transition-all duration-300"
+              />
+            </a>
+          </motion.div>
         </div>
-        <p className="text-zinc-600 text-sm">
+        
+        <motion.p 
+          className="text-zinc-600 text-sm"
+          whileHover={{ 
+            color: "#71717a",
+            scale: 1.02 
+          }}
+          transition={{ duration: 0.3 }}
+        >
           © 2026 HypeProof AI. All rights reserved.
-        </p>
+        </motion.p>
       </div>
-    </footer>
+      
+      {/* Decorative elements */}
+      <motion.div
+        className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-purple-500/20 to-transparent"
+        initial={{ scaleY: 0 }}
+        whileInView={{ scaleY: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, delay: 0.5 }}
+      />
+      <motion.div
+        className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-indigo-500/20 to-transparent"
+        initial={{ scaleY: 0 }}
+        whileInView={{ scaleY: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, delay: 0.7 }}
+      />
+    </motion.footer>
   );
 }
 
