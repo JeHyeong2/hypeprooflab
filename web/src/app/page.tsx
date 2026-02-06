@@ -868,15 +868,18 @@ function TeamMember({ name, role, credential, delay }: {
   delay: number;
 }) {
   const gradient = memberColors[name] || "from-purple-500 to-indigo-600";
+  const [isHovered, setIsHovered] = useState(false);
   
   return (
     <motion.div
-      className="text-center group cursor-pointer"
+      className="text-center group cursor-pointer relative"
       initial={{ opacity: 0, scale: 0.9, y: 20 }}
       whileInView={{ opacity: 1, scale: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, delay, ease: [0.25, 0.1, 0.25, 1] }}
       whileHover={{ y: -8 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <motion.div 
         className={`w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br ${gradient} p-[2px] cursor-pointer relative overflow-hidden`}
@@ -961,6 +964,65 @@ function TeamMember({ name, role, credential, delay }: {
         }}
         transition={{ duration: 0.3 }}
       />
+      
+      {/* Enhanced hover card */}
+      <motion.div
+        className="absolute -top-16 left-1/2 -translate-x-1/2 w-64 glass p-4 rounded-xl border border-white/10 backdrop-blur-xl pointer-events-none z-50"
+        initial={{ opacity: 0, y: 10, scale: 0.9 }}
+        animate={{
+          opacity: isHovered ? 1 : 0,
+          y: isHovered ? 0 : 10,
+          scale: isHovered ? 1 : 0.9
+        }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <div className="text-center">
+          <h5 className="text-white font-semibold text-sm mb-1">{name}</h5>
+          <p className="text-purple-400 text-xs font-medium mb-2">{role}</p>
+          {credential && (
+            <p className="text-zinc-400 text-xs leading-relaxed">{credential}</p>
+          )}
+          
+          {/* Skills/Interests based on name */}
+          <div className="mt-3 flex flex-wrap gap-1 justify-center">
+            {name === "Jay" && (
+              <>
+                <span className="text-[10px] px-2 py-1 bg-purple-500/20 text-purple-300 rounded-full">React</span>
+                <span className="text-[10px] px-2 py-1 bg-indigo-500/20 text-indigo-300 rounded-full">AI/ML</span>
+              </>
+            )}
+            {name === "Ryan" && (
+              <>
+                <span className="text-[10px] px-2 py-1 bg-blue-500/20 text-blue-300 rounded-full">Physics</span>
+                <span className="text-[10px] px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded-full">Quant</span>
+              </>
+            )}
+            {name === "JY" && (
+              <>
+                <span className="text-[10px] px-2 py-1 bg-emerald-500/20 text-emerald-300 rounded-full">AI Research</span>
+                <span className="text-[10px] px-2 py-1 bg-teal-500/20 text-teal-300 rounded-full">Physics</span>
+              </>
+            )}
+            {name === "TJ" && (
+              <>
+                <span className="text-[10px] px-2 py-1 bg-orange-500/20 text-orange-300 rounded-full">Content</span>
+                <span className="text-[10px] px-2 py-1 bg-red-500/20 text-red-300 rounded-full">Media</span>
+              </>
+            )}
+            {name === "Kiwon" && (
+              <>
+                <span className="text-[10px] px-2 py-1 bg-pink-500/20 text-pink-300 rounded-full">Marketing</span>
+                <span className="text-[10px] px-2 py-1 bg-rose-500/20 text-rose-300 rounded-full">Strategy</span>
+              </>
+            )}
+          </div>
+        </div>
+        
+        {/* Arrow pointing down */}
+        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-zinc-900 rotate-45 border-r border-b border-white/10"></div>
+      </motion.div>
     </motion.div>
   );
 }
@@ -1275,7 +1337,7 @@ export default function Home() {
       {/* Social Proof Bar */}
       <SocialProofBar />
       
-      <main>
+      <main role="main" aria-label="Main content">
         <Hero />
         <LatestContentPreview />
         <Features />
