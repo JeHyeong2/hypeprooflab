@@ -4,15 +4,40 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import SkipLink from "@/components/SkipLink";
 
 export const metadata: Metadata = {
-  title: "HypeProof AI - We Don't Chase Hype. We Prove It.",
+  title: {
+    default: "HypeProof AI - We Don't Chase Hype. We Prove It.",
+    template: "%s | HypeProof AI"
+  },
   description: "Deep research, honest conversations, and practical AI insights for builders and skeptics alike. Cutting through AI hype with rigorous validation and real-world testing.",
-  keywords: ["AI research", "artificial intelligence", "AI podcast", "machine learning", "AI tools", "technology research", "AI insights"],
-  authors: [{ name: "HypeProof AI Team" }],
+  applicationName: "HypeProof AI",
+  keywords: [
+    "AI research", "artificial intelligence", "AI podcast", "machine learning", 
+    "AI tools", "technology research", "AI insights", "AI validation", 
+    "AI testing", "AI skeptics", "AI builders", "technology podcast",
+    "artificial intelligence research", "AI hype", "AI proof", "AI trends"
+  ],
+  authors: [
+    { name: "Jay Lee", url: "https://hypeproof-ai.xyz/team/jay" },
+    { name: "HypeProof AI Team", url: "https://hypeproof-ai.xyz/team" }
+  ],
   creator: "HypeProof AI",
   publisher: "HypeProof AI",
-  icons: {
-    icon: "/favicon.ico",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
   },
+  icons: {
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" }
+    ],
+    shortcut: "/favicon.ico",
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }
+    ],
+  },
+  manifest: "/manifest.json",
   openGraph: {
     title: "HypeProof AI - We Don't Chase Hype. We Prove It.",
     description: "Deep research, honest conversations, and practical AI insights for builders and skeptics alike. Join our podcast and research lab exploring the real impact of AI.",
@@ -25,23 +50,36 @@ export const metadata: Metadata = {
         height: 630,
         alt: "HypeProof AI - Research Lab and Podcast for AI Builders and Skeptics",
       },
+      {
+        url: "https://hypeproof-ai.xyz/og-image-square.png", 
+        width: 1200,
+        height: 1200,
+        alt: "HypeProof AI Logo",
+      }
     ],
     locale: "en_US",
     type: "website",
+    countryName: "Global",
   },
   twitter: {
     card: "summary_large_image",
+    site: "@hypeproofai",
+    creator: "@hypeproofai",
     title: "HypeProof AI - We Don't Chase Hype. We Prove It.",
     description: "Deep research, honest conversations, and practical AI insights for builders and skeptics alike.",
-    images: ["https://hypeproof-ai.xyz/og-image.png"],
-    creator: "@hypeproofai",
+    images: {
+      url: "https://hypeproof-ai.xyz/og-image.png",
+      alt: "HypeProof AI - Research Lab and Podcast"
+    },
   },
   robots: {
     index: true,
     follow: true,
+    nocache: true,
     googleBot: {
       index: true,
       follow: true,
+      noimageindex: false,
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
@@ -49,7 +87,15 @@ export const metadata: Metadata = {
   },
   verification: {
     google: "your-google-verification-code",
+    yandex: "your-yandex-verification-code",
   },
+  category: "Technology",
+  classification: "AI Research and Podcast",
+  referrer: "origin-when-cross-origin",
+  generator: "Next.js",
+  alternates: {
+    canonical: "https://hypeproof-ai.xyz",
+  }
 };
 
 export default function RootLayout({
@@ -57,56 +103,136 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const structuredData = {
+  const organizationData = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "HypeProof AI",
+    "alternateName": "HypeProof",
     "description": "AI research lab and podcast focused on cutting through hype with rigorous validation and real-world testing.",
     "url": "https://hypeproof-ai.xyz",
     "logo": "https://hypeproof-ai.xyz/logo.png",
+    "image": "https://hypeproof-ai.xyz/og-image.png",
     "sameAs": [
       "https://twitter.com/hypeproofai",
-      "https://podcasts.apple.com/podcast/hypeproof-ai"
+      "https://podcasts.apple.com/podcast/hypeproof-ai",
+      "https://github.com/hypeproofai"
     ],
     "contactPoint": {
       "@type": "ContactPoint",
       "email": "jayleekr0125@gmail.com",
-      "contactType": "customer service"
+      "contactType": "customer service",
+      "availableLanguage": ["English", "Korean"]
     },
     "foundingDate": "2026",
+    "foundingLocation": {
+      "@type": "Place",
+      "name": "Global"
+    },
+    "slogan": "We Don't Chase Hype. We Prove It.",
+    "keywords": "AI research, artificial intelligence, machine learning, AI podcast, technology validation, AI tools",
     "founder": [
       {
         "@type": "Person",
-        "name": "Jay Lee"
+        "name": "Jay Lee",
+        "jobTitle": "Founder & Lead Engineer",
+        "description": "Staff Engineer with Silicon Valley experience"
       }
     ],
     "employee": [
       {
         "@type": "Person",
         "name": "Jay",
-        "jobTitle": "Lead / Tech"
+        "jobTitle": "Lead / Tech",
+        "description": "Staff Engineer @ Silicon Valley"
       },
       {
         "@type": "Person", 
         "name": "Ryan",
-        "jobTitle": "Research / Data"
+        "jobTitle": "Research / Data",
+        "description": "Physics PhD, Quant Dev"
       },
       {
         "@type": "Person",
         "name": "JY", 
-        "jobTitle": "Research / AI"
+        "jobTitle": "Research / AI",
+        "description": "AI Engineer, M.S. Physics"
       },
       {
         "@type": "Person",
         "name": "TJ",
-        "jobTitle": "Content / Media"
+        "jobTitle": "Content / Media",
+        "description": "Ex-Founder, Media Specialist"
       },
       {
         "@type": "Person",
         "name": "Kiwon",
-        "jobTitle": "Marketing"
+        "jobTitle": "Marketing",
+        "description": "GWU, Global Marketing"
+      }
+    ],
+    "makesOffer": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "AI Research",
+          "description": "Rigorous AI validation and real-world testing"
+        }
+      },
+      {
+        "@type": "Offer", 
+        "itemOffered": {
+          "@type": "Service",
+          "name": "AI Podcast",
+          "description": "Deep-dive conversations on AI trends and tools"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service", 
+          "name": "AI Education",
+          "description": "Learning paradigms for the age of artificial intelligence"
+        }
       }
     ]
+  };
+
+  const websiteData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "HypeProof AI",
+    "url": "https://hypeproof-ai.xyz",
+    "description": "Deep research, honest conversations, and practical AI insights for builders and skeptics alike.",
+    "inLanguage": "en-US",
+    "copyrightYear": "2026",
+    "copyrightHolder": {
+      "@type": "Organization",
+      "name": "HypeProof AI"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://hypeproof-ai.xyz/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
+  const podcastData = {
+    "@context": "https://schema.org",
+    "@type": "PodcastSeries",
+    "name": "HypeProof AI Podcast",
+    "description": "Deep-dive conversations on AI trends, tools, and the people building tomorrow.",
+    "url": "https://hypeproof-ai.xyz/podcast",
+    "author": {
+      "@type": "Organization",
+      "name": "HypeProof AI"
+    },
+    "publisher": {
+      "@type": "Organization", 
+      "name": "HypeProof AI"
+    },
+    "genre": ["Technology", "Artificial Intelligence", "Research"],
+    "inLanguage": "en-US"
   };
 
   return (
@@ -115,9 +241,16 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData)
+            __html: JSON.stringify([organizationData, websiteData, podcastData])
           }}
         />
+        <link rel="canonical" href="https://hypeproof-ai.xyz" />
+        <meta name="theme-color" content="#7c3aed" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="HypeProof AI" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="antialiased">
         <SkipLink />
