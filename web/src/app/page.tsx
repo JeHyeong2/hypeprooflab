@@ -566,7 +566,7 @@ function Features() {
           </p>
         </motion.div>
         
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {features.map((feature, i) => (
             <FeatureCard key={feature.title} {...feature} delay={i * 0.1} />
           ))}
@@ -820,7 +820,7 @@ function Philosophy() {
         >
           {/* Glass container */}
           <motion.div
-            className="glass p-12 rounded-3xl backdrop-blur-xl border border-white/10 relative overflow-hidden"
+            className="glass p-6 sm:p-8 lg:p-12 rounded-2xl sm:rounded-3xl backdrop-blur-xl border border-white/10 relative overflow-hidden"
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
@@ -853,7 +853,7 @@ function Philosophy() {
             />
             
             <motion.p 
-              className="text-2xl md:text-3xl text-zinc-300 leading-relaxed font-light relative z-10"
+              className="text-xl sm:text-2xl md:text-3xl text-zinc-300 leading-relaxed font-light relative z-10"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -947,7 +947,7 @@ function Team() {
           <h2 className="text-4xl font-bold text-white mb-4">The Team</h2>
         </motion.div>
         
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-6">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-12 xs:gap-8 md:gap-6">
           {members.map((member, i) => (
             <TeamMember key={member.name} {...member} delay={i * 0.1} />
           ))}
