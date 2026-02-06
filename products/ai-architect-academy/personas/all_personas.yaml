@@ -1,0 +1,226 @@
+# AI Architect Academy - Simulation Personas
+# 5개 페르소나 + 에지케이스 2개
+
+personas:
+  - id: eager_supportive
+    name: "적극적 아이 + 서포티브 부모"
+    description: "이상적인 케이스. 아이가 아이디어를 내고 부모가 질문으로 유도"
+    child:
+      age: 12
+      traits: [호기심, 적극성, 아이디어_풍부, 실패_두려움_낮음]
+      behavior:
+        - 먼저 아이디어 제시
+        - AI에게 직접 지시
+        - 실패해도 다시 시도
+      prompt_examples:
+        - "하늘 나는 강아지 게임 만들고 싶어!"
+        - "점프하면 별을 먹는 거야!"
+        - "배경을 우주로 바꿔줘!"
+        - "적이 나오면 더 재밌겠다!"
+        - "효과음도 넣고 싶어!"
+    parent:
+      traits: [격려형, 질문_유도, 인내심]
+      behavior:
+        - 아이 아이디어 확장 질문
+        - 칭찬 자주
+        - 개입 최소화
+      prompt_examples:
+        - "그 강아지는 어떻게 나는 거야?"
+        - "별을 먹으면 뭐가 좋아지는 건데?"
+        - "와, 그거 재밌겠다!"
+        - "네 생각엔 어떤 색이 좋아?"
+    expected:
+      friction: low
+      success_rate: 0.95
+      autonomous_attempts: 15
+      completion_time: 180  # minutes
+
+  - id: shy_overguiding
+    name: "소극적 아이 + 오버가이딩 부모"
+    description: "부모가 대신 해주려는 케이스. 아이 자율성 저해 위험"
+    child:
+      age: 11
+      traits: [내성적, 확인_요청, 실패_두려움_높음, 수동적]
+      behavior:
+        - 매번 확인 요청
+        - 부모 눈치 봄
+        - 실패 시 위축
+      prompt_examples:
+        - "이거 맞아요...?"
+        - "뭘 만들어야 해요?"
+        - "안 되는데..."
+        - "엄마/아빠 뭐라고 해요?"
+        - "그냥... 아무거나요"
+    parent:
+      traits: [대신_해줌, 답_알려줌, 조급함]
+      behavior:
+        - 아이 대신 답변
+        - 키보드 뺏으려 함
+        - 정답 직접 제시
+      prompt_examples:
+        - "여기 이렇게 써야지"
+        - "내가 해볼게"
+        - "이거 이렇게 하는 거야"
+        - "빨리빨리, 시간 없어"
+        - "그냥 이렇게 해"
+    expected:
+      friction: medium
+      success_rate: 0.75
+      autonomous_attempts: 4
+      completion_time: 210
+    intervention_needed:
+      - "부모님, 잠시 아이가 직접 해볼 수 있게 기다려주세요"
+      - 강사가 부모에게 별도 가이드
+
+  - id: curious_busy
+    name: "호기심 폭발 아이 + 바쁜 부모"
+    description: "아이는 삼천포, 부모는 진행 압박. 충돌 위험"
+    child:
+      age: 13
+      traits: [질문_폭발, 삼천포, 집중력_분산, 다중_관심]
+      behavior:
+        - 주제 이탈 질문
+        - 여러 개 동시에 하려 함
+        - 깊이 파고들기
+      prompt_examples:
+        - "근데 AI는 어떻게 코드를 아는 거예요?"
+        - "다른 게임도 만들어보고 싶어요"
+        - "이것도 해보고 저것도 해보고..."
+        - "유튜브에서 봤는데 이것도 되나요?"
+        - "왜 이렇게 되는 거예요?"
+    parent:
+      traits: [시간_압박, 진행_독촉, 멀티태스킹]
+      behavior:
+        - 핸드폰 자주 확인
+        - '"빨리" 자주 말함'
+        - 아이 질문 차단
+      prompt_examples:
+        - "일단 이거 먼저 하자"
+        - "시간 없어, 빨리"
+        - "나중에 물어봐"
+        - "딴 얘기 하지 말고"
+        - "그건 중요한 게 아니야"
+    expected:
+      friction: high
+      success_rate: 0.65
+      autonomous_attempts: 8
+      completion_time: 240
+    intervention_needed:
+      - 시간 관리 가이드
+      - 호기심 인정하며 범위 좁히기
+
+  - id: perfectionist_anxious
+    name: "완벽주의 아이 + 불안한 부모"
+    description: "둘 다 실패 두려움. 시작을 못함"
+    child:
+      age: 14
+      traits: [완벽주의, 시작_두려움, 비교_의식, 자기비판]
+      behavior:
+        - 완벽한 계획 세우려 함
+        - 다른 팀 의식
+        - 작은 실패에 좌절
+      prompt_examples:
+        - "이거 완벽하게 해야 되는 거죠?"
+        - "다른 팀은 뭐 만들어요?"
+        - "이게 최선인지 모르겠어요"
+        - "다시 처음부터 할래요"
+        - "이건 별로인 것 같아요"
+    parent:
+      traits: [불안, 비교, 결과_중시]
+      behavior:
+        - 다른 팀 계속 확인
+        - 결과물 품질 걱정
+        - 아이 압박
+      prompt_examples:
+        - "다른 팀은 벌써 저기까지 했대"
+        - "좀 더 잘 만들어야지"
+        - "이게 최선이야?"
+        - "상 받으면 좋겠다"
+    expected:
+      friction: medium
+      success_rate: 0.70
+      autonomous_attempts: 6
+      completion_time: 220
+    intervention_needed:
+      - '"완벽하지 않아도 괜찮아" 메시지'
+      - 작은 성공 경험 자주 제공
+
+  - id: playful_relaxed
+    name: "장난꾸러기 아이 + 느긋한 부모"
+    description: "즐기는데 집중력 관리 필요"
+    child:
+      age: 10
+      traits: [장난기, 유머, 관심_분산, 놀이_중심]
+      behavior:
+        - AI랑 장난치려 함
+        - 이상한 질문
+        - 게임보다 과정 즐김
+      prompt_examples:
+        - "AI야 넌 밥 먹어?"
+        - "ㅋㅋㅋ 이상하게 나왔다!"
+        - "방귀 소리 넣어줘!"
+        - "캐릭터 이름을 똥강아지로 하자"
+        - "이거 웃기다~"
+    parent:
+      traits: [느긋함, 과정_중시, 개입_최소]
+      behavior:
+        - 아이와 같이 웃음
+        - 시간 신경 안 씀
+        - 결과 상관없음
+      prompt_examples:
+        - "ㅋㅋㅋ 재밌네"
+        - "천천히 해~"
+        - "즐기면 됐지 뭐"
+        - "이것도 괜찮네"
+    expected:
+      friction: low
+      success_rate: 0.80
+      autonomous_attempts: 12
+      completion_time: 230
+    intervention_needed:
+      - 부드러운 시간 관리
+      - 놀이 에너지를 게임에 연결
+
+# 에지케이스
+edge_cases:
+  - id: edge_stuck
+    name: "막힘 상황"
+    scenario: "AI가 이상한 코드 생성, 게임 동작 안 함"
+    trigger: "연속 2회 이상 코드 에러"
+    child_reactions:
+      - "이거 왜 안 돼요...?"
+      - "망했어..."
+      - "(침묵, 멍하니 화면 봄)"
+      - "AI가 이상해요"
+    expected_recovery:
+      system:
+        - 자동 힌트 제공
+        - 더 간단한 버전 제안
+        - '"한 발짝 뒤로" 옵션'
+      human:
+        - 조교 5분 내 개입
+        - 강사 전체 공지
+    success_criteria: "10분 내 해결 or 대안 채택"
+    recovery_rate: 0.85
+
+  - id: edge_giveup
+    name: "포기 시도"
+    scenario: "연속 3번 실패 후 포기 선언"
+    trigger: "명시적 포기 발언"
+    child_reactions:
+      - "그냥 안 할래요"
+      - "재미없어요"
+      - "너무 어려워요"
+      - "집에 가고 싶어요"
+      - "(우는 경우)"
+    expected_recovery:
+      system:
+        - 동기부여 멘트
+        - 매우 쉬운 성공 경험 제공
+        - 이전 성공 리마인드
+      human:
+        - 강사 즉시 개입
+        - 1:1 대화
+        - 휴식 제안
+    success_criteria: "포기 철회 + 최소 1개 기능 완성"
+    recovery_rate: 0.70

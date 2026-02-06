@@ -1,0 +1,170 @@
+# 워크숍 시나리오 - 시뮬레이션용
+# 4시간 워크숍의 주요 체크포인트
+
+workshop:
+  total_duration: 240  # minutes
+  phases:
+    - id: icebreaking
+      name: "아이스브레이킹"
+      duration: 10
+      checkpoints:
+        - name: "자기소개"
+          expected_child_behavior: "이름, 좋아하는 것 말하기"
+          expected_parent_behavior: "아이 응원"
+          success_signal: "아이가 한 문장 이상 말함"
+        - name: "AI 데모 반응"
+          expected_child_behavior: "와~ 신기하다 반응"
+          expected_parent_behavior: "같이 놀람"
+          success_signal: "관심 표현"
+
+    - id: prd_creation
+      name: "기획서 작성"
+      duration: 25
+      checkpoints:
+        - name: "아이디어 발산"
+          expected_child_behavior: "여러 아이디어 제시"
+          expected_parent_behavior: "질문으로 확장"
+          success_signal: "3개 이상 아이디어"
+          risk: "아이가 아이디어 없다고 함"
+          risk_response: "샘플 게임 다시 보여주기"
+        - name: "아이디어 선택"
+          expected_child_behavior: "하나 선택"
+          expected_parent_behavior: "선택 존중"
+          success_signal: "명확한 선택"
+          risk: "부모가 대신 선택"
+          risk_response: "아이에게 다시 질문"
+        - name: "기획서 완성"
+          expected_child_behavior: "항목 채우기"
+          expected_parent_behavior: "글쓰기 도움 (대필 X)"
+          success_signal: "필수 5항목 중 4개 이상"
+          required_fields:
+            - game_name
+            - character
+            - goal
+            - rules
+            - win_condition
+
+    - id: first_build
+      name: "첫 빌드"
+      duration: 35
+      checkpoints:
+        - name: "첫 AI 지시"
+          expected_child_behavior: "AI에게 첫 지시"
+          expected_parent_behavior: "지켜보기"
+          success_signal: "아이가 직접 타이핑 or 말함"
+          risk: "부모가 대신 지시"
+          risk_response: "시스템이 아이에게 직접 질문"
+        - name: "첫 결과 확인"
+          expected_child_behavior: "결과 보고 반응"
+          expected_parent_behavior: "같이 확인"
+          success_signal: "긍정적이든 부정적이든 반응"
+        - name: "수정 요청"
+          expected_child_behavior: "수정할 점 말하기"
+          expected_parent_behavior: "구체화 도움"
+          success_signal: "1개 이상 수정 지시"
+          risk: "아이가 뭘 수정할지 모름"
+          risk_response: "시스템이 선택지 제시"
+
+    - id: stuck_moment
+      name: "막힘 순간 (의도적 삽입)"
+      duration: 10
+      description: "학습을 위해 일부러 어려운 상황 발생"
+      checkpoints:
+        - name: "에러 발생"
+          trigger: "복잡한 기능 요청 시"
+          expected_child_behavior: "당황, 질문"
+          expected_parent_behavior: "같이 고민"
+          success_signal: "포기하지 않고 질문함"
+        - name: "해결 시도"
+          expected_child_behavior: "다른 방법 시도"
+          expected_parent_behavior: "힌트 유도 (답 X)"
+          success_signal: "2회 이상 재시도"
+        - name: "해결 or 대안"
+          expected_child_behavior: "해결 or 대안 수용"
+          expected_parent_behavior: "성취 칭찬"
+          success_signal: "다음 단계로 진행"
+
+    - id: iteration
+      name: "반복 개선"
+      duration: 40
+      checkpoints:
+        - name: "기능 추가"
+          expected_child_behavior: "추가 기능 요청"
+          expected_parent_behavior: "아이디어 정리 도움"
+          success_signal: "2개 이상 기능 추가 시도"
+        - name: "디자인 다듬기"
+          expected_child_behavior: "색상, 모양 변경 요청"
+          expected_parent_behavior: "미적 의견 (강요 X)"
+          success_signal: "1회 이상 디자인 변경"
+        - name: "테스트 플레이"
+          expected_child_behavior: "직접 플레이하며 확인"
+          expected_parent_behavior: "같이 플레이"
+          success_signal: "버그 발견 or 만족 표현"
+
+    - id: polish
+      name: "마무리"
+      duration: 25
+      checkpoints:
+        - name: "최종 점검"
+          expected_child_behavior: "완성 여부 확인"
+          expected_parent_behavior: "체크리스트 함께 확인"
+          success_signal: "게임 실행 가능"
+        - name: "발표 준비"
+          expected_child_behavior: "한 줄 소개 작성"
+          expected_parent_behavior: "발표 연습 도움"
+          success_signal: "발표 문장 완성"
+
+    - id: presentation
+      name: "발표"
+      duration: 30
+      checkpoints:
+        - name: "시연"
+          expected_child_behavior: "게임 시연 + 설명"
+          expected_parent_behavior: "응원, 보조"
+          success_signal: "1분 이상 발표"
+        - name: "질문 응답"
+          expected_child_behavior: "질문에 답변"
+          expected_parent_behavior: "필요시 보충"
+          success_signal: "1개 이상 질문 답변"
+
+    - id: closing
+      name: "마무리"
+      duration: 15
+      checkpoints:
+        - name: "성취감 표현"
+          expected_child_behavior: "내가 만들었다 자부심"
+          expected_parent_behavior: "칭찬, 기록"
+          success_signal: "긍정적 감정 표현"
+        - name: "학습 인지"
+          expected_child_behavior: "오늘 배운 것 말하기"
+          expected_parent_behavior: "정리 도움"
+          success_signal: "핵심 학습 1개 이상 언급"
+          core_learnings:
+            - "AI한테 자세히 설명하면 잘 해줌"
+            - "뭘 만들지 내가 결정함"
+            - "실패해도 다시 하면 됨"
+
+# 시뮬레이션 프롬프트 생성용
+simulation_prompts:
+  for_child: |
+    당신은 {age}세 {traits} 아이입니다.
+    AI를 활용한 게임 만들기 워크숍에 부모님과 함께 참가했습니다.
+    현재 단계: {phase_name}
+    상황: {situation}
+    
+    당신의 성격과 특성에 맞게 반응하세요.
+    가능한 반응 예시: {prompt_examples}
+    
+    짧게 한국어로 답하세요. (1-2문장)
+
+  for_parent: |
+    당신은 {traits} 부모입니다.
+    {child_age}세 아이와 함께 AI 게임 만들기 워크숍에 참가했습니다.
+    현재 단계: {phase_name}
+    상황: {situation}
+    아이의 방금 반응: {child_response}
+    
+    당신의 성격과 특성에 맞게 반응하세요.
+    가능한 반응 예시: {prompt_examples}
+    
+    짧게 한국어로 답하세요. (1-2문장)
