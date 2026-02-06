@@ -7,7 +7,7 @@ import Link from 'next/link';
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }
+  transition: { duration: 0.6, ease: "easeOut" }
 };
 
 const stagger = {
@@ -16,6 +16,27 @@ const stagger = {
       staggerChildren: 0.1
     }
   }
+};
+
+const slideInFromLeft = {
+  initial: { x: -60, opacity: 0 },
+  whileInView: { x: 0, opacity: 1 },
+  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.7, ease: "easeOut" }
+};
+
+const slideInFromRight = {
+  initial: { x: 60, opacity: 0 },
+  whileInView: { x: 0, opacity: 1 },
+  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.7, ease: "easeOut" }
+};
+
+const scaleIn = {
+  initial: { scale: 0.8, opacity: 0 },
+  whileInView: { scale: 1, opacity: 1 },
+  viewport: { once: true, margin: "-50px" },
+  transition: { duration: 0.6, ease: "easeOut" }
 };
 
 function FloatingOrb({ className, delay = 0 }: { className: string; delay?: number }) {
@@ -113,7 +134,7 @@ function MobileMenu() {
           scale: isOpen ? 1 : 1.1
         }}
         style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
-        transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
       >
         {/* Background gradient effects */}
         <motion.div
@@ -525,7 +546,7 @@ function FeatureCard({ icon, title, description, delay }: {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay, ease: [0.25, 0.1, 0.25, 1] }}
+      transition={{ duration: 0.5, delay, ease: "easeOut" }}
       whileHover={{ 
         y: -8, 
         scale: 1.01,
@@ -564,7 +585,7 @@ function FeatureCard({ icon, title, description, delay }: {
         <motion.div
           initial={{ y: "100%" }}
           whileInView={{ y: "0%" }}
-          transition={{ duration: 0.6, delay: delay + 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 0.6, delay: delay + 0.3, ease: "easeOut" }}
           viewport={{ once: true }}
         >
           {title.split('').map((char, i) => (
@@ -589,7 +610,7 @@ function FeatureCard({ icon, title, description, delay }: {
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: delay + 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 0.5, delay: delay + 0.6, ease: "easeOut" }}
           viewport={{ once: true }}
         >
           {description}
@@ -765,7 +786,7 @@ function Features() {
     },
     {
       icon: "🎙️",
-      title: "Podcast",
+      title: "Podcast", 
       description: "Deep-dive conversations on AI trends, tools, and the people building tomorrow."
     },
     {
@@ -776,25 +797,92 @@ function Features() {
   ];
 
   return (
-    <section id="features" className="py-32 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="features" className="py-32 px-6 relative overflow-hidden">
+      {/* Decorative elements */}
+      <motion.div
+        className="absolute top-20 left-10 w-20 h-20 rounded-full bg-purple-500/10 blur-xl"
+        {...slideInFromLeft}
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+      />
+      <motion.div
+        className="absolute bottom-20 right-10 w-32 h-32 rounded-full bg-indigo-500/10 blur-xl"
+        {...slideInFromRight}
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.4 }}
+      />
+      
+      <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           className="text-center mb-16"
-          initial={{ opacity: 1, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ scale: 0.8, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <h2 className="text-4xl font-bold text-white mb-4">What We Do</h2>
-          <p className="text-zinc-500 max-w-xl mx-auto">
+          <motion.h2 
+            className="text-4xl font-bold text-white mb-4 overflow-hidden"
+            initial={{ y: 40, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <motion.span 
+              className="inline-block"
+              initial={{ y: "100%" }}
+              whileInView={{ y: "0%" }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            >
+              What We Do
+            </motion.span>
+          </motion.h2>
+          <motion.p 
+            className="text-zinc-500 max-w-xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             Three tracks to explore the future of AI
-          </p>
+          </motion.p>
         </motion.div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <motion.div 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.15
+              }
+            }
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
           {features.map((feature, i) => (
-            <FeatureCard key={feature.title} {...feature} delay={i * 0.1} />
+            <motion.div
+              key={feature.title}
+              variants={{
+                hidden: { 
+                  opacity: 0, 
+                  y: 60,
+                  rotateX: -15 
+                },
+                visible: { 
+                  opacity: 1, 
+                  y: 0,
+                  rotateX: 0,
+                  transition: {
+                    duration: 0.6,
+                    ease: "easeOut"
+                  }
+                }
+              }}
+            >
+              <FeatureCard {...feature} delay={0} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -1048,7 +1136,7 @@ function TeamMember({ name, role, credential, delay }: {
       initial={{ opacity: 0, scale: 0.9, y: 20 }}
       whileInView={{ opacity: 1, scale: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay, ease: [0.25, 0.1, 0.25, 1] }}
+      transition={{ duration: 0.6, delay, ease: "easeOut" }}
       whileHover={{ y: -8 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -1219,7 +1307,7 @@ function Philosophy() {
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             whileHover={{
               border: "1px solid rgba(255, 255, 255, 0.15)",
               boxShadow: "0 32px 64px rgba(168, 85, 247, 0.1)",
@@ -1417,22 +1505,131 @@ function Team() {
   ];
 
   return (
-    <section id="team" className="py-32 px-6">
-      <div className="max-w-4xl mx-auto">
+    <section id="team" className="py-32 px-6 relative">
+      {/* Team constellation background */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none overflow-hidden"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.5 }}
+      >
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-purple-400/30 rounded-full"
+            style={{
+              left: `${20 + (i * 10)}%`,
+              top: `${30 + (i * 5)}%`,
+            }}
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ 
+              duration: 0.4, 
+              delay: 0.5 + (i * 0.1),
+              ease: "easeOut"
+            }}
+            animate={{
+              opacity: [0.3, 0.8, 0.3],
+              scale: [1, 1.5, 1],
+              transition: {
+                duration: 3,
+                repeat: Infinity,
+                delay: i * 0.5
+              }
+            }}
+          />
+        ))}
+      </motion.div>
+      
+      <div className="max-w-4xl mx-auto relative z-10">
         <motion.div
           className="text-center mb-16"
-          initial={{ opacity: 1, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ scale: 0.8, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <h2 className="text-4xl font-bold text-white mb-4">The Team</h2>
+          <motion.h2 
+            className="text-4xl font-bold text-white mb-4 relative overflow-hidden"
+          >
+            <motion.span
+              className="inline-block"
+              initial={{ y: "100%" }}
+              whileInView={{ y: "0%" }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              The Team
+            </motion.span>
+          </motion.h2>
+          
+          {/* Team connection lines */}
+          <motion.div
+            className="mt-8 flex justify-center"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.3 }}
+          >
+            <div className="w-24 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent relative">
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-purple-400 to-indigo-400"
+                animate={{
+                  opacity: [0.5, 1, 0.5],
+                  scaleX: [1, 1.2, 1]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+            </div>
+          </motion.div>
         </motion.div>
         
-        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-12 xs:gap-8 md:gap-6">
+        <motion.div 
+          className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-12 xs:gap-8 md:gap-6"
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.12
+              }
+            }
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {members.map((member, i) => (
-            <TeamMember key={member.name} {...member} delay={i * 0.1} />
+            <motion.div
+              key={member.name}
+              variants={{
+                hidden: { 
+                  opacity: 0, 
+                  y: 50,
+                  scale: 0.8,
+                  filter: "blur(10px)"
+                },
+                visible: { 
+                  opacity: 1, 
+                  y: 0,
+                  scale: 1,
+                  filter: "blur(0px)",
+                  transition: {
+                    duration: 0.7,
+                    ease: "easeOut"
+                  }
+                }
+              }}
+            >
+              <TeamMember {...member} delay={0} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
