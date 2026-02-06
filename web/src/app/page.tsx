@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Link from 'next/link';
 import { LoadingBoundary, LazySection } from '@/components/LoadingBoundary';
 import { PageLoader } from '@/components/LoadingSpinner';
+import { LanguageSwitcher } from '@/contexts/I18nContext';
 
 // Performance optimizations
 const useIntersectionObserver = (options: IntersectionObserverInit = {}) => {
@@ -2138,9 +2139,10 @@ export default function Home() {
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <Logo />
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             <NavLink href="#features">What We Do</NavLink>
             <NavLink href="#team">Team</NavLink>
+            <LanguageSwitcher />
           </div>
           <MobileMenu />
         </div>

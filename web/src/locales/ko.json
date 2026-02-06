@@ -1,0 +1,130 @@
+{
+  "common": {
+    "loading": "로딩 중...",
+    "error": "오류",
+    "retry": "다시 시도",
+    "cancel": "취소",
+    "save": "저장",
+    "delete": "삭제",
+    "edit": "편집",
+    "close": "닫기",
+    "back": "뒤로",
+    "next": "다음",
+    "previous": "이전",
+    "search": "검색",
+    "filter": "필터",
+    "sort": "정렬",
+    "share": "공유",
+    "copy": "복사",
+    "download": "다운로드"
+  },
+  "navigation": {
+    "home": "홈",
+    "features": "우리가 하는 일",
+    "team": "팀",
+    "columns": "칼럼",
+    "about": "소개",
+    "contact": "연락처",
+    "openMenu": "메뉴 열기",
+    "closeMenu": "메뉴 닫기"
+  },
+  "hero": {
+    "title": "HypeProof AI",
+    "tagline": "우리는 허상을 쫓지 않습니다. 증명합니다.",
+    "subtitle": "깊이 있는 연구, 솔직한 대화, 그리고 창조자와 회의론자를 위한 실용적인 AI 인사이트.",
+    "cta": {
+      "primary": "연락하기",
+      "secondary": "더 알아보기"
+    },
+    "philosophy": "우리는 허상을 쫓지 않습니다. 증명합니다.",
+    "scrollHint": "스크롤하여 탐색"
+  },
+  "features": {
+    "title": "우리가 하는 일",
+    "subtitle": "AI의 미래를 탐험하는 세 가지 트랙",
+    "research": {
+      "title": "연구",
+      "description": "일상적인 실험과 엄격한 검증 방법을 통해 AI의 경계를 넓혀갑니다."
+    },
+    "podcast": {
+      "title": "팟캐스트",
+      "description": "AI 트렌드, 도구, 그리고 내일을 만들어가는 사람들에 대한 심도 있는 대화."
+    },
+    "education": {
+      "title": "교육",
+      "description": "인공지능 시대를 위한 새로운 학습 패러다임 설계."
+    }
+  },
+  "team": {
+    "title": "팀",
+    "members": {
+      "jay": {
+        "role": "리드 / 기술",
+        "credential": "실리콘밸리 스태프 엔지니어"
+      },
+      "ryan": {
+        "role": "연구 / 데이터",
+        "credential": "물리학 박사, 퀀트 개발자"
+      },
+      "jy": {
+        "role": "연구 / AI",
+        "credential": "AI 엔지니어, 물리학 석사"
+      },
+      "tj": {
+        "role": "콘텐츠 / 미디어",
+        "credential": "전 창업자, 미디어 전문가"
+      },
+      "kiwon": {
+        "role": "마케팅",
+        "credential": "조지워싱턴대, 글로벌 마케팅"
+      }
+    }
+  },
+  "columns": {
+    "title": "칼럼",
+    "subtitle": "AI, 기술, 그리고 미래에 대한 예리한 시각",
+    "readMore": "더 읽기",
+    "viewAll": "전체 보기",
+    "readTime": "분 소요",
+    "categories": {
+      "research": "연구",
+      "analysis": "분석",
+      "education": "교육",
+      "opinion": "의견"
+    }
+  },
+  "footer": {
+    "tagline": "우리는 허상을 쫓지 않습니다. 증명합니다.",
+    "copyright": "© 2026 HypeProof AI. 모든 권리 보유.",
+    "links": {
+      "privacy": "개인정보 정책",
+      "terms": "서비스 약관",
+      "contact": "문의하기"
+    }
+  },
+  "errors": {
+    "generic": {
+      "title": "문제가 발생했습니다",
+      "message": "예상치 못한 오류가 발생했습니다. 저희 AI 엔지니어들이 알림을 받았습니다.",
+      "cta": "다시 시도"
+    },
+    "notFound": {
+      "title": "페이지를 찾을 수 없습니다",
+      "message": "찾으시는 페이지가 존재하지 않거나 이동되었습니다.",
+      "cta": "홈으로 가기"
+    },
+    "serverError": {
+      "title": "서버 오류",
+      "message": "서버에 문제가 발생했습니다. 나중에 다시 시도해주세요.",
+      "cta": "다시 시도"
+    }
+  },
+  "meta": {
+    "title": "HypeProof AI - 우리는 허상을 쫓지 않습니다. 증명합니다.",
+    "description": "깊이 있는 연구, 솔직한 대화, 그리고 창조자와 회의론자를 위한 실용적인 AI 인사이트.",
+    "keywords": [
+      "AI 연구", "인공지능", "AI 팟캐스트", "머신러닝",
+      "AI 도구", "기술 연구", "AI 인사이트", "AI 검증"
+    ]
+  }
+}

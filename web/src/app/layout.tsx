@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import SkipLink from "@/components/SkipLink";
+import { I18nProvider } from "@/contexts/I18nContext";
 
 export const metadata: Metadata = {
   title: {
@@ -254,9 +255,11 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <SkipLink />
-        <ErrorBoundary>
-          {children}
-        </ErrorBoundary>
+        <I18nProvider>
+          <ErrorBoundary>
+            {children}
+          </ErrorBoundary>
+        </I18nProvider>
       </body>
     </html>
   );
