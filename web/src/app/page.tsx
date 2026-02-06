@@ -49,6 +49,8 @@ function Logo() {
         initial={{ opacity: 1 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
       >
         <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
           <span className="text-white font-bold text-sm">H</span>
@@ -56,6 +58,91 @@ function Logo() {
         <span className="text-white font-semibold text-lg tracking-tight">HypeProof AI</span>
       </motion.div>
     </Link>
+  );
+}
+
+// Mobile Navigation Menu Component
+function MobileMenu() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="md:hidden">
+      {/* Hamburger Button */}
+      <motion.button
+        className="p-2 text-white"
+        onClick={() => setIsOpen(!isOpen)}
+        whileTap={{ scale: 0.95 }}
+      >
+        <motion.div
+          className="w-6 h-6 flex flex-col justify-center items-center"
+          animate={isOpen ? "open" : "closed"}
+        >
+          <motion.span
+            className="w-5 h-0.5 bg-white block"
+            variants={{
+              closed: { rotate: 0, y: 0 },
+              open: { rotate: 45, y: 6 }
+            }}
+            transition={{ duration: 0.3 }}
+          />
+          <motion.span
+            className="w-5 h-0.5 bg-white block mt-1"
+            variants={{
+              closed: { opacity: 1 },
+              open: { opacity: 0 }
+            }}
+            transition={{ duration: 0.3 }}
+          />
+          <motion.span
+            className="w-5 h-0.5 bg-white block mt-1"
+            variants={{
+              closed: { rotate: 0, y: 0 },
+              open: { rotate: -45, y: -6 }
+            }}
+            transition={{ duration: 0.3 }}
+          />
+        </motion.div>
+      </motion.button>
+
+      {/* Mobile Menu Overlay */}
+      <motion.div
+        className="fixed inset-0 z-50 bg-zinc-950/95 backdrop-blur-lg"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isOpen ? 1 : 0 }}
+        style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
+        transition={{ duration: 0.3 }}
+      >
+        <div className="flex flex-col items-center justify-center h-full space-y-8">
+          <motion.a
+            href="#features"
+            className="text-white text-2xl font-medium"
+            onClick={() => setIsOpen(false)}
+            whileHover={{ scale: 1.05, color: "#a855f7" }}
+            whileTap={{ scale: 0.95 }}
+          >
+            What We Do
+          </motion.a>
+          <motion.a
+            href="#team"
+            className="text-white text-2xl font-medium"
+            onClick={() => setIsOpen(false)}
+            whileHover={{ scale: 1.05, color: "#a855f7" }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Team
+          </motion.a>
+          <motion.a
+            href="mailto:jayleekr0125@gmail.com"
+            className="glass px-8 py-4 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 bg-purple-600/20"
+            onClick={() => setIsOpen(false)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Contact
+          </motion.a>
+        </div>
+      </motion.div>
+    </div>
   );
 }
 
@@ -200,20 +287,51 @@ function Hero() {
     offset: ["start start", "end start"]
   });
   
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
+  const yFast = useTransform(scrollYProgress, [0, 1], [0, 500]);
+  const ySlow = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24">
-      {/* Floating orbs */}
-      <FloatingOrb className="w-[800px] h-[800px] bg-purple-600/30 -top-60 -left-60" delay={0} />
-      <FloatingOrb className="w-[600px] h-[600px] bg-indigo-600/30 -bottom-40 -right-40" delay={2} />
-      <FloatingOrb className="w-[400px] h-[400px] bg-violet-500/25 top-1/3 left-1/3" delay={4} />
-      <FloatingOrb className="w-[300px] h-[300px] bg-blue-600/20 bottom-1/4 right-1/4" delay={6} />
+      {/* Background floating orbs - slowest parallax */}
+      <motion.div style={{ y: ySlow }}>
+        <FloatingOrb className="w-[800px] h-[800px] bg-purple-600/25 -top-60 -left-60" delay={0} />
+        <FloatingOrb className="w-[600px] h-[600px] bg-indigo-600/25 -bottom-40 -right-40" delay={2} />
+      </motion.div>
+      
+      {/* Mid-layer orbs - medium parallax */}
+      <motion.div style={{ y }}>
+        <FloatingOrb className="w-[400px] h-[400px] bg-violet-500/30 top-1/3 left-1/3" delay={4} />
+        <FloatingOrb className="w-[300px] h-[300px] bg-blue-600/25 bottom-1/4 right-1/4" delay={6} />
+      </motion.div>
+      
+      {/* Foreground particles - fastest parallax */}
+      <motion.div 
+        style={{ y: yFast, opacity: useTransform(scrollYProgress, [0, 0.2], [1, 0]) }}
+        className="absolute inset-0 pointer-events-none"
+      >
+        <motion.div 
+          className="absolute top-1/4 left-1/4 w-2 h-2 bg-purple-400/60 rounded-full"
+          animate={{ scale: [1, 1.5, 1], opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 3, repeat: Infinity }}
+        />
+        <motion.div 
+          className="absolute top-1/3 right-1/3 w-1 h-1 bg-indigo-400/80 rounded-full"
+          animate={{ scale: [1, 2, 1], opacity: [0.8, 0.4, 0.8] }}
+          transition={{ duration: 2.5, repeat: Infinity, delay: 1 }}
+        />
+        <motion.div 
+          className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 bg-violet-400/70 rounded-full"
+          animate={{ scale: [1, 1.8, 1], opacity: [0.7, 1, 0.7] }}
+          transition={{ duration: 4, repeat: Infinity, delay: 2 }}
+        />
+      </motion.div>
       
       <motion.div 
         className="relative z-10 text-center px-6 max-w-4xl mx-auto"
-        style={{ y, opacity }}
+        style={{ y, opacity, scale }}
       >
         <motion.div
           variants={stagger}
@@ -1102,6 +1220,7 @@ export default function Home() {
             <NavLink href="#features">What We Do</NavLink>
             <NavLink href="#team">Team</NavLink>
           </div>
+          <MobileMenu />
         </div>
         
         {/* Scroll Progress Bar */}
