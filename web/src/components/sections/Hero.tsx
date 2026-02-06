@@ -1,0 +1,204 @@
+'use client';
+
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+
+import { usePerformanceOptimization } from '@/hooks/usePerformanceOptimization';
+import { FloatingOrb } from './HeroSection';
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, ease: "easeOut" }
+};
+
+const stagger = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+export function Hero() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { animationConfig } = usePerformanceOptimization();
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"]
+  });
+
+  // Conditional parallax effects for better performance
+  const y = animationConfig.enableParallax
+    ? useTransform(scrollYProgress, [0, 1], [0, 300])
+    : useTransform(scrollYProgress, [0, 1], [0, 0]);
+
+  const yFast = animationConfig.enableParallax
+    ? useTransform(scrollYProgress, [0, 1], [0, 500])
+    : useTransform(scrollYProgress, [0, 1], [0, 0]);
+
+  const ySlow = animationConfig.enableParallax
+    ? useTransform(scrollYProgress, [0, 1], [0, 150])
+    : useTransform(scrollYProgress, [0, 1], [0, 0]);
+
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  const scale = animationConfig.enableComplexEffects
+    ? useTransform(scrollYProgress, [0, 0.5], [1, 0.8])
+    : useTransform(scrollYProgress, [0, 0.5], [1, 1]);
+
+  return (
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24">
+      {/* Background floating orbs - slowest parallax */}
+      <motion.div style={{ y: ySlow }}>
+        <FloatingOrb className="w-[800px] h-[800px] bg-purple-600/25 -top-60 -left-60" delay={0} />
+        <FloatingOrb className="w-[600px] h-[600px] bg-indigo-600/25 -bottom-40 -right-40" delay={2} />
+      </motion.div>
+
+      {/* Mid-layer orbs - medium parallax */}
+      <motion.div style={{ y }}>
+        <FloatingOrb className="w-[400px] h-[400px] bg-violet-500/30 top-1/3 left-1/3" delay={4} />
+        <FloatingOrb className="w-[300px] h-[300px] bg-blue-600/25 bottom-1/4 right-1/4" delay={6} />
+      </motion.div>
+
+      {/* Foreground particles - fastest parallax */}
+      <motion.div
+        style={{ y: yFast, opacity: useTransform(scrollYProgress, [0, 0.2], [1, 0]) }}
+        className="absolute inset-0 pointer-events-none"
+      >
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-2 h-2 bg-purple-400/60 rounded-full"
+          animate={{ scale: [1, 1.5, 1], opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 3, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute top-1/3 right-1/3 w-1 h-1 bg-indigo-400/80 rounded-full"
+          animate={{ scale: [1, 2, 1], opacity: [0.8, 0.4, 0.8] }}
+          transition={{ duration: 2.5, repeat: Infinity, delay: 1 }}
+        />
+        <motion.div
+          className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 bg-violet-400/70 rounded-full"
+          animate={{ scale: [1, 1.8, 1], opacity: [0.7, 1, 0.7] }}
+          transition={{ duration: 4, repeat: Infinity, delay: 2 }}
+        />
+      </motion.div>
+
+      <motion.div
+        className="relative z-10 text-center px-6 max-w-4xl mx-auto"
+        style={{ y, opacity, scale }}
+      >
+        <motion.div
+          variants={stagger}
+          initial="initial"
+          animate="animate"
+          className="space-y-8"
+        >
+          {/* Badge */}
+          <motion.div variants={fadeInUp}>
+            <span className="glass px-4 py-2 text-xs text-zinc-400 uppercase tracking-widest">
+              Research Lab
+            </span>
+          </motion.div>
+
+          {/* Main heading */}
+          <motion.h1
+            variants={fadeInUp}
+            className="text-6xl md:text-8xl font-bold tracking-tight"
+          >
+            <span className="text-gradient">HypeProof AI</span>
+          </motion.h1>
+
+          {/* Enhanced Tagline */}
+          <motion.div variants={fadeInUp} className="space-y-4">
+            <p className="text-2xl md:text-3xl text-zinc-300 max-w-3xl mx-auto leading-relaxed font-medium">
+              We don't chase <span className="text-white">Hype</span>.
+              <br />
+              We <span className="text-purple-400">Prove</span> it.
+            </p>
+            <p className="text-lg text-zinc-500 max-w-2xl mx-auto">
+              Deep research, honest conversations, and practical AI insights for builders and skeptics alike.
+            </p>
+          </motion.div>
+
+          {/* Dual CTA */}
+          <motion.div variants={fadeInUp} className="pt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <motion.a
+              href="https://podcasts.apple.com/podcast/hypeproof-ai"
+              className="glass px-8 py-4 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 transition-all duration-300 inline-flex items-center gap-2 bg-purple-600/20"
+              whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(168, 85, 247, 0.4)" }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h8m2-10l.707.707a7 7 0 01-7.071 12.586L1 16l.414-.414A4 4 0 013.828 13H6V5.414A2 2 0 017.414 4H18v6z" />
+              </svg>
+              Listen Now
+            </motion.a>
+            <motion.a
+              href="mailto:jayleekr0125@gmail.com"
+              className="glass px-8 py-4 text-white font-medium rounded-full border border-zinc-700/50 hover:border-zinc-600 transition-all duration-300 inline-flex items-center gap-2"
+              whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(255, 255, 255, 0.1)" }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Contact
+            </motion.a>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 cursor-pointer group"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 0.8 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => {
+          const featuresSection = document.getElementById('features');
+          featuresSection?.scrollIntoView({ behavior: 'smooth' });
+        }}
+      >
+        <motion.div
+          className="w-6 h-10 rounded-full border border-zinc-700 flex justify-center pt-2 relative group-hover:border-purple-500/50 transition-colors duration-300"
+          animate={{
+            opacity: [0.5, 1, 0.5],
+            scale: [1, 1.05, 1]
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <motion.div
+            className="w-1 h-2 bg-zinc-500 rounded-full group-hover:bg-purple-400 transition-colors duration-300"
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          />
+
+          <motion.div
+            className="absolute inset-0 rounded-full border border-purple-500/0 group-hover:border-purple-500/30"
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0, 0.5, 0]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeOut"
+            }}
+          />
+        </motion.div>
+
+        <motion.div
+          className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-zinc-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap"
+        >
+          Scroll to explore
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+}

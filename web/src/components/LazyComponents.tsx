@@ -53,13 +53,6 @@ export const LazyWrapper: React.FC<LazyWrapperProps> = ({
 };
 
 // Memoized components for better performance
-export const MemoizedHero = React.memo(() => {
-  const { Hero } = require('./sections/HeroSection');
-  return <Hero />;
-});
-
-MemoizedHero.displayName = 'MemoizedHero';
-
 export const MemoizedSocialProofBar = React.memo(() => {
   const { SocialProofBar } = require('./sections/HeroSection');
   return <SocialProofBar />;

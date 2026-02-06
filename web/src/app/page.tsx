@@ -7,15 +7,15 @@ import { LoadingBoundary, LazySection } from '@/components/LoadingBoundary';
 import { PageLoader } from '@/components/LoadingSpinner';
 import { Logo, MobileMenu, NavLink } from '@/components/layout/Navigation';
 import { ScrollProgress, CursorFollower } from '@/components/ui/UIEffects';
-import { SocialProofBar, Hero, FloatingOrb } from '@/components/sections/HeroSection';
+import { SocialProofBar, FloatingOrb } from '@/components/sections/HeroSection';
+import { Hero } from '@/components/sections/Hero';
 import { FeaturesSection, FeatureCard } from '@/components/sections/FeaturesSection';
 import { LatestContentPreview, NewsletterSignup } from '@/components/sections/ContentSection';
-import { 
-  LazyWrapper, 
-  LazyFeaturesSection, 
-  LazyLatestContentPreview, 
+import {
+  LazyWrapper,
+  LazyFeaturesSection,
+  LazyLatestContentPreview,
   LazyNewsletterSignup,
-  MemoizedHero,
   MemoizedSocialProofBar
 } from '@/components/LazyComponents';
 
@@ -411,7 +411,7 @@ export default function Home() {
         
         {/* Hero Section */}
         <LazySection>
-          <MemoizedHero />
+          <Hero />
         </LazySection>
         
         {/* Features Section */}
