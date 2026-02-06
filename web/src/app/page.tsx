@@ -107,38 +107,101 @@ function MobileMenu() {
       {/* Mobile Menu Overlay */}
       <motion.div
         className="fixed inset-0 z-50 bg-zinc-950/95 backdrop-blur-lg"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isOpen ? 1 : 0 }}
+        initial={{ opacity: 0, scale: 1.1 }}
+        animate={{ 
+          opacity: isOpen ? 1 : 0,
+          scale: isOpen ? 1 : 1.1
+        }}
         style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
       >
-        <div className="flex flex-col items-center justify-center h-full space-y-8">
+        {/* Background gradient effects */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-br from-purple-600/10 via-transparent to-indigo-600/10"
+          animate={{
+            background: isOpen ? [
+              "linear-gradient(135deg, rgba(147, 51, 234, 0.1), transparent, rgba(79, 70, 229, 0.1))",
+              "linear-gradient(135deg, rgba(79, 70, 229, 0.1), transparent, rgba(147, 51, 234, 0.1))",
+            ] : "linear-gradient(135deg, transparent, transparent, transparent)",
+          }}
+          transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
+        />
+        
+        <div className="flex flex-col items-center justify-center h-full space-y-12 relative z-10">
           <motion.a
             href="#features"
-            className="text-white text-2xl font-medium"
+            className="text-white text-3xl font-medium relative"
             onClick={() => setIsOpen(false)}
-            whileHover={{ scale: 1.05, color: "#a855f7" }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ 
+              opacity: isOpen ? 1 : 0,
+              y: isOpen ? 0 : 30
+            }}
+            transition={{ delay: 0.1, duration: 0.4 }}
+            whileHover={{ 
+              scale: 1.08, 
+              color: "#a855f7",
+              textShadow: "0 0 20px rgba(168, 85, 247, 0.5)" 
+            }}
             whileTap={{ scale: 0.95 }}
           >
             What We Do
+            <motion.div
+              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400"
+              whileHover={{ width: "100%" }}
+              transition={{ duration: 0.3 }}
+            />
           </motion.a>
+          
           <motion.a
             href="#team"
-            className="text-white text-2xl font-medium"
+            className="text-white text-3xl font-medium relative"
             onClick={() => setIsOpen(false)}
-            whileHover={{ scale: 1.05, color: "#a855f7" }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ 
+              opacity: isOpen ? 1 : 0,
+              y: isOpen ? 0 : 30
+            }}
+            transition={{ delay: 0.2, duration: 0.4 }}
+            whileHover={{ 
+              scale: 1.08, 
+              color: "#a855f7",
+              textShadow: "0 0 20px rgba(168, 85, 247, 0.5)"
+            }}
             whileTap={{ scale: 0.95 }}
           >
             Team
+            <motion.div
+              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400"
+              whileHover={{ width: "100%" }}
+              transition={{ duration: 0.3 }}
+            />
           </motion.a>
+          
           <motion.a
             href="mailto:jayleekr0125@gmail.com"
-            className="glass px-8 py-4 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 bg-purple-600/20"
+            className="glass px-10 py-5 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 bg-purple-600/20 relative overflow-hidden"
             onClick={() => setIsOpen(false)}
-            whileHover={{ scale: 1.05 }}
+            initial={{ opacity: 0, y: 30, scale: 0.9 }}
+            animate={{ 
+              opacity: isOpen ? 1 : 0,
+              y: isOpen ? 0 : 30,
+              scale: isOpen ? 1 : 0.9
+            }}
+            transition={{ delay: 0.3, duration: 0.4 }}
+            whileHover={{ 
+              scale: 1.1,
+              boxShadow: "0 0 40px rgba(168, 85, 247, 0.4)"
+            }}
             whileTap={{ scale: 0.95 }}
           >
-            Contact
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-indigo-500/20"
+              initial={{ x: "-100%" }}
+              whileHover={{ x: "100%" }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+            />
+            <span className="relative z-10">Contact</span>
           </motion.a>
         </div>
       </motion.div>
