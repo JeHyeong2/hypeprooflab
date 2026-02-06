@@ -3,6 +3,8 @@
 import React, { useRef, useState, useEffect, useMemo, useCallback, lazy } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Link from 'next/link';
+import { LoadingBoundary, LazySection } from '@/components/LoadingBoundary';
+import { PageLoader } from '@/components/LoadingSpinner';
 
 // Performance optimizations
 const useIntersectionObserver = (options: IntersectionObserverInit = {}) => {
@@ -2157,11 +2159,28 @@ export default function Home() {
         <Hero />
         <CommunityHero />
         <LatestContentPreview />
-        <Features />
+        <LoadingBoundary 
+          variant="cards" 
+          sectionTitle="What We Do" 
+          delay={200}
+        >
+          <Features />
+        </LoadingBoundary>
         <NewsletterSignup />
         <Philosophy />
-        <Team />
-        <Columns />
+        <LoadingBoundary 
+          variant="team" 
+          sectionTitle="The Team" 
+          delay={300}
+        >
+          <Team />
+        </LoadingBoundary>
+        <LazySection 
+          threshold={0.1} 
+          rootMargin="50px"
+        >
+          <Columns />
+        </LazySection>
       </main>
       
       <Footer />
