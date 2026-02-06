@@ -1,7 +1,7 @@
 'use client';
 
+import React, { useRef, useState, useEffect, useMemo, useCallback, lazy } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { useRef, useState, useEffect, useMemo, useCallback, lazy } from 'react';
 import Link from 'next/link';
 
 // Performance optimizations
@@ -314,52 +314,75 @@ function ScrollProgress() {
 }
 
 // Enhanced Cursor Follower
-function CursorFollower() {
+// Performance-optimized Custom Cursor Follower
+const CursorFollower = React.memo(() => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-
-  useEffect(() => {
-    const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    const handleMouseEnter = () => setIsHovering(true);
-    const handleMouseLeave = () => setIsHovering(false);
-
-    window.addEventListener('mousemove', updateMousePosition);
+  const [isVisible, setIsVisible] = useState(false);
+  const animationRef = useRef<number | undefined>(undefined);
+  
+  const updateMousePosition = useCallback((e: MouseEvent) => {
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
     
-    // Add hover listeners to interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .cursor-pointer');
-    interactiveElements.forEach(el => {
-      el.addEventListener('mouseenter', handleMouseEnter);
-      el.addEventListener('mouseleave', handleMouseLeave);
+    animationRef.current = requestAnimationFrame(() => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+      if (!isVisible) setIsVisible(true);
     });
+  }, [isVisible]);
+  
+  useEffect(() => {
+    // Check if device has a cursor
+    const hasCoarseCursor = window.matchMedia('(pointer: coarse)').matches;
+    if (hasCoarseCursor) return; // Don't show cursor on touch devices
+    
+    window.addEventListener('mousemove', updateMousePosition, { passive: true });
+    
+    // Use event delegation for better performance
+    const handleMouseOverOut = (e: MouseEvent) => {
+      const target = e.target as Element;
+      if (target.closest('a, button, .cursor-pointer')) {
+        setIsHovering(e.type === 'mouseover');
+      }
+    };
+    
+    document.addEventListener('mouseover', handleMouseOverOut, { passive: true });
+    document.addEventListener('mouseout', handleMouseOverOut, { passive: true });
 
     return () => {
       window.removeEventListener('mousemove', updateMousePosition);
-      interactiveElements.forEach(el => {
-        el.removeEventListener('mouseenter', handleMouseEnter);
-        el.removeEventListener('mouseleave', handleMouseLeave);
-      });
+      document.removeEventListener('mouseover', handleMouseOverOut);
+      document.removeEventListener('mouseout', handleMouseOverOut);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
     };
-  }, []);
+  }, [updateMousePosition]);
+
+  if (!isVisible) return null;
 
   return (
     <motion.div
       className="fixed top-0 left-0 w-4 h-4 bg-purple-500/50 rounded-full pointer-events-none z-50 hidden md:block"
+      style={{ willChange: 'transform' }}
       animate={{
         x: mousePosition.x - 8,
         y: mousePosition.y - 8,
         scale: isHovering ? 1.5 : 1,
+        opacity: isVisible ? 1 : 0,
       }}
       transition={{
         type: "spring",
         stiffness: 500,
-        damping: 30
+        damping: 30,
+        opacity: { duration: 0.2 }
       }}
     />
   );
-}
+});
+
+CursorFollower.displayName = 'CursorFollower';
 
 // Social Proof Bar Component
 function SocialProofBar() {
@@ -1786,57 +1809,65 @@ function Footer() {
   );
 }
 
-function DynamicGradientMesh() {
+const DynamicGradientMesh = React.memo(() => {
+  const [ref, isIntersecting] = useIntersectionObserver({ threshold: 0.1 });
+  const [isReducedMotion, setIsReducedMotion] = useState(false);
+  
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setIsReducedMotion(mediaQuery.matches);
+    
+    const handler = () => setIsReducedMotion(mediaQuery.matches);
+    mediaQuery.addListener(handler);
+    return () => mediaQuery.removeListener(handler);
+  }, []);
+
+  const gradientStates = useMemo(() => [
+    `
+      radial-gradient(circle at 20% 50%, #9333ea 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, #3b82f6 0%, transparent 50%),
+      radial-gradient(circle at 40% 90%, #8b5cf6 0%, transparent 50%),
+      radial-gradient(circle at 90% 80%, #06b6d4 0%, transparent 50%)
+    `,
+    `
+      radial-gradient(circle at 40% 30%, #9333ea 0%, transparent 50%),
+      radial-gradient(circle at 60% 70%, #3b82f6 0%, transparent 50%),
+      radial-gradient(circle at 20% 60%, #8b5cf6 0%, transparent 50%),
+      radial-gradient(circle at 80% 40%, #06b6d4 0%, transparent 50%)
+    `,
+    `
+      radial-gradient(circle at 80% 70%, #9333ea 0%, transparent 50%),
+      radial-gradient(circle at 20% 40%, #3b82f6 0%, transparent 50%),
+      radial-gradient(circle at 60% 20%, #8b5cf6 0%, transparent 50%),
+      radial-gradient(circle at 30% 90%, #06b6d4 0%, transparent 50%)
+    `,
+  ], []);
+
   return (
-    <div className="fixed inset-0 pointer-events-none z-0">
-      {/* Animated gradient meshes */}
+    <div 
+      ref={ref}
+      className="fixed inset-0 pointer-events-none z-0"
+    >
       <motion.div
         className="absolute inset-0 opacity-15"
         style={{
-          background: `
-            radial-gradient(circle at 20% 50%, #9333ea 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, #3b82f6 0%, transparent 50%),
-            radial-gradient(circle at 40% 90%, #8b5cf6 0%, transparent 50%),
-            radial-gradient(circle at 90% 80%, #06b6d4 0%, transparent 50%)
-          `,
+          willChange: isIntersecting && !isReducedMotion ? 'background' : 'auto',
+          background: gradientStates[0],
         }}
-        animate={{
-          background: [
-            `
-              radial-gradient(circle at 20% 50%, #9333ea 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, #3b82f6 0%, transparent 50%),
-              radial-gradient(circle at 40% 90%, #8b5cf6 0%, transparent 50%),
-              radial-gradient(circle at 90% 80%, #06b6d4 0%, transparent 50%)
-            `,
-            `
-              radial-gradient(circle at 40% 30%, #9333ea 0%, transparent 50%),
-              radial-gradient(circle at 60% 70%, #3b82f6 0%, transparent 50%),
-              radial-gradient(circle at 20% 60%, #8b5cf6 0%, transparent 50%),
-              radial-gradient(circle at 80% 40%, #06b6d4 0%, transparent 50%)
-            `,
-            `
-              radial-gradient(circle at 80% 70%, #9333ea 0%, transparent 50%),
-              radial-gradient(circle at 20% 40%, #3b82f6 0%, transparent 50%),
-              radial-gradient(circle at 60% 20%, #8b5cf6 0%, transparent 50%),
-              radial-gradient(circle at 30% 90%, #06b6d4 0%, transparent 50%)
-            `,
-            `
-              radial-gradient(circle at 20% 50%, #9333ea 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, #3b82f6 0%, transparent 50%),
-              radial-gradient(circle at 40% 90%, #8b5cf6 0%, transparent 50%),
-              radial-gradient(circle at 90% 80%, #06b6d4 0%, transparent 50%)
-            `,
-          ],
-        }}
+        animate={isIntersecting && !isReducedMotion ? {
+          background: gradientStates,
+        } : {}}
         transition={{
           duration: 25,
-          repeat: Infinity,
+          repeat: isIntersecting && !isReducedMotion ? Infinity : 0,
           ease: "easeInOut",
         }}
       />
     </div>
   );
-}
+});
+
+DynamicGradientMesh.displayName = 'DynamicGradientMesh';
 
 export default function Home() {
   return (
