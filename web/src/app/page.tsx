@@ -771,48 +771,157 @@ const columns = [
 
 function ColumnCard({ column, delay }: { column: typeof columns[0]; delay: number }) {
   const style = categoryStyles[column.category] || categoryStyles["Research"];
+  const [isHovered, setIsHovered] = useState(false);
   
   return (
     <motion.article
-      className="group cursor-pointer"
+      className="group cursor-pointer relative"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, delay }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      whileHover={{ y: -4 }}
     >
       <Link href={`/columns/${column.slug}`}>
-        <div className="flex flex-col md:flex-row gap-6 p-6 glass rounded-2xl hover:border-purple-500/30 transition-all duration-300">
-          {/* Image placeholder with category-specific gradient */}
-          <div className={`w-full md:w-64 h-40 bg-gradient-to-br ${style.gradient} rounded-xl flex items-center justify-center overflow-hidden flex-shrink-0 group-hover:scale-[1.02] transition-transform duration-300`}>
-            <span className="text-5xl opacity-60 group-hover:scale-110 transition-transform duration-300">{style.icon}</span>
-          </div>
+        <motion.div 
+          className="flex flex-col md:flex-row gap-6 p-6 glass rounded-2xl hover:border-purple-500/30 transition-all duration-300 relative overflow-hidden"
+          whileHover={{ 
+            boxShadow: "0 20px 40px rgba(168, 85, 247, 0.15)",
+            borderColor: "rgba(168, 85, 247, 0.5)"
+          }}
+        >
+          {/* Enhanced background gradient */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          />
           
-          {/* Content */}
-          <div className="flex flex-col justify-center flex-1">
-            <div className="flex items-center gap-3 mb-3">
-              <span className="text-xs text-purple-400 uppercase tracking-wider font-medium">
+          {/* Scanning line effect */}
+          <motion.div
+            className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-400 to-transparent opacity-0 group-hover:opacity-100"
+            animate={isHovered ? { x: ["-100%", "100%"] } : {}}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+          />
+          {/* Enhanced image placeholder with category-specific gradient */}
+          <motion.div 
+            className={`w-full md:w-64 h-40 bg-gradient-to-br ${style.gradient} rounded-xl flex items-center justify-center overflow-hidden flex-shrink-0 relative`}
+            whileHover={{ 
+              scale: 1.03,
+              rotateY: 5,
+              rotateX: 2,
+            }}
+            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+          >
+            {/* Shimmer effect */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full opacity-0 group-hover:opacity-100"
+              animate={isHovered ? { x: ["0%", "200%"] } : {}}
+              transition={{ duration: 1, ease: "easeInOut" }}
+            />
+            
+            <motion.span 
+              className="text-5xl opacity-60 relative z-10"
+              whileHover={{ 
+                scale: 1.2,
+                rotate: 10,
+                textShadow: "0 0 20px rgba(255,255,255,0.5)"
+              }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
+              {style.icon}
+            </motion.span>
+            
+            {/* Category indicator */}
+            <motion.div
+              className="absolute top-2 right-2 text-xs bg-black/20 px-2 py-1 rounded-full text-white/80 opacity-0 group-hover:opacity-100"
+              initial={{ scale: 0, opacity: 0 }}
+              animate={isHovered ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              {column.category}
+            </motion.div>
+          </motion.div>
+          
+          {/* Enhanced Content */}
+          <div className="flex flex-col justify-center flex-1 relative z-10">
+            <motion.div 
+              className="flex items-center gap-3 mb-3"
+              initial={{ opacity: 0.8 }}
+              whileHover={{ opacity: 1 }}
+            >
+              <motion.span 
+                className="text-xs text-purple-400 uppercase tracking-wider font-medium"
+                whileHover={{ scale: 1.05, color: "#c084fc" }}
+              >
                 {column.category}
-              </span>
+              </motion.span>
               <span className="text-zinc-600">•</span>
               <span className="text-xs text-zinc-500">{column.date}</span>
-            </div>
+              <span className="text-zinc-600">•</span>
+              <motion.span 
+                className="text-xs text-zinc-500"
+                initial={{ opacity: 0 }}
+                animate={isHovered ? { opacity: 1 } : { opacity: 0 }}
+              >
+                3 min read
+              </motion.span>
+            </motion.div>
             
-            <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors">
-              {column.title}
-            </h3>
+            <motion.h3 
+              className="text-xl font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors overflow-hidden"
+              whileHover={{ x: 3 }}
+            >
+              <motion.div
+                initial={{ y: 0 }}
+                whileHover={{ y: -2 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                {column.title}
+              </motion.div>
+            </motion.h3>
             
-            <p className="text-zinc-400 text-sm leading-relaxed">
+            <motion.p 
+              className="text-zinc-400 text-sm leading-relaxed"
+              whileHover={{ color: "#a1a1aa" }}
+              transition={{ duration: 0.3 }}
+            >
               {column.excerpt}
-            </p>
+            </motion.p>
             
-            <div className="mt-4 flex items-center text-purple-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-              Read more
-              <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
+            <motion.div 
+              className="mt-4 flex items-center justify-between"
+              initial={{ opacity: 0, y: 10 }}
+              animate={isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ delay: 0.1 }}
+            >
+              <div className="flex items-center text-purple-400 text-sm font-medium">
+                <motion.span whileHover={{ x: 2 }}>Read more</motion.span>
+                <motion.svg 
+                  className="w-4 h-4 ml-1" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                  animate={isHovered ? { x: 2 } : { x: 0 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </motion.svg>
+              </div>
+              
+              {/* Share indicator */}
+              <motion.div
+                className="flex items-center gap-1 text-zinc-600 text-xs"
+                whileHover={{ color: "#9ca3af" }}
+              >
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
+                </svg>
+                Share
+              </motion.div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </Link>
     </motion.article>
   );
