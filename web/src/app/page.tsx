@@ -1,8 +1,33 @@
 'use client';
 
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useMemo, useCallback, lazy } from 'react';
 import Link from 'next/link';
+
+// Performance optimizations
+const useIntersectionObserver = (options: IntersectionObserverInit = {}) => {
+  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [node, setNode] = useState<Element | null>(null);
+
+  const observer = useMemo(
+    () =>
+      typeof window !== 'undefined'
+        ? new IntersectionObserver(([entry]) => {
+            setIsIntersecting(entry.isIntersecting);
+          }, options)
+        : null,
+    [options]
+  );
+
+  useEffect(() => {
+    if (!observer || !node) return;
+    
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [observer, node]);
+
+  return [setNode, isIntersecting] as const;
+};
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -39,28 +64,36 @@ const scaleIn = {
   transition: { duration: 0.6, ease: "easeOut" }
 };
 
-function FloatingOrb({ className, delay = 0 }: { className: string; delay?: number }) {
+const FloatingOrb = React.memo(({ className, delay = 0 }: { className: string; delay?: number }) => {
+  const [ref, isIntersecting] = useIntersectionObserver({ threshold: 0.1 });
+  
   return (
     <motion.div
+      ref={ref}
       className={`absolute rounded-full blur-[100px] ${className}`}
-      style={{ willChange: 'transform, opacity' }}
+      style={{ 
+        willChange: isIntersecting ? 'transform, opacity' : 'auto',
+        transform: isIntersecting ? undefined : 'translateZ(0)', // GPU layer optimization
+      }}
       initial={{ opacity: 0, scale: 0.8 }}
-      animate={{
+      animate={isIntersecting ? {
         y: [0, -60, 15, -40, 0],
         x: [0, 25, -10, 20, 0],
         scale: [1, 1.2, 0.95, 1.05, 1],
         opacity: [0.3, 0.7, 0.5, 0.6, 0.3],
         rotate: [0, 90, 180, 270, 360],
-      }}
+      } : { opacity: 0.3 }}
       transition={{
         duration: 10 + delay * 1.5,
-        repeat: Infinity,
+        repeat: isIntersecting ? Infinity : 0,
         ease: "easeInOut",
-        delay,
+        delay: isIntersecting ? delay : 0,
       }}
     />
   );
-}
+});
+
+FloatingOrb.displayName = 'FloatingOrb';
 
 function Logo() {
   return (
