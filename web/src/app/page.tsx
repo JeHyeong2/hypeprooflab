@@ -808,34 +808,118 @@ function Philosophy() {
   return (
     <section className="py-32 px-6 relative overflow-hidden">
       <FloatingOrb className="w-[500px] h-[500px] bg-indigo-600/20 -left-40 top-0" delay={1} />
+      <FloatingOrb className="w-[300px] h-[300px] bg-purple-600/15 -right-20 bottom-20" delay={3} />
       
       <div className="max-w-4xl mx-auto relative z-10">
         <motion.div
-          className="text-center"
+          className="text-center relative"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
         >
-          <motion.p 
-            className="text-2xl md:text-3xl text-zinc-300 leading-relaxed font-light"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+          {/* Glass container */}
+          <motion.div
+            className="glass p-12 rounded-3xl backdrop-blur-xl border border-white/10 relative overflow-hidden"
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+            whileHover={{
+              border: "1px solid rgba(255, 255, 255, 0.15)",
+              boxShadow: "0 32px 64px rgba(168, 85, 247, 0.1)",
+            }}
           >
-            &ldquo;We don&apos;t chase <span className="text-white font-medium">Hype</span>.
-            <br />
-            We <span className="text-purple-400 font-medium">Prove</span> it.&rdquo;
-          </motion.p>
-          
-          <motion.div 
-            className="mt-12 h-px w-24 mx-auto bg-gradient-to-r from-transparent via-purple-500 to-transparent"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.5 }}
-          />
+            {/* Dynamic background gradient */}
+            <motion.div
+              className="absolute inset-0 opacity-30"
+              style={{
+                background: "radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.1), transparent 70%)",
+              }}
+              animate={{
+                background: [
+                  "radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.1), transparent 70%)",
+                  "radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.1), transparent 70%)",
+                  "radial-gradient(circle at 20% 80%, rgba(147, 51, 234, 0.1), transparent 70%)",
+                  "radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.1), transparent 70%)",
+                  "radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.1), transparent 70%)",
+                ],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            
+            <motion.p 
+              className="text-2xl md:text-3xl text-zinc-300 leading-relaxed font-light relative z-10"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              &ldquo;We don&apos;t chase{' '}
+              <motion.span 
+                className="text-white font-medium relative"
+                whileHover={{
+                  scale: 1.05,
+                  textShadow: "0 0 20px rgba(255, 255, 255, 0.5)"
+                }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                Hype
+                <motion.div
+                  className="absolute -inset-1 bg-gradient-to-r from-transparent via-white/10 to-transparent rounded"
+                  whileHover={{ opacity: 1 }}
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.span>
+              .
+              <br />
+              We{' '}
+              <motion.span 
+                className="text-purple-400 font-medium relative"
+                whileHover={{
+                  scale: 1.05,
+                  textShadow: "0 0 20px rgba(168, 85, 247, 0.8)",
+                  color: "#c084fc"
+                }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                Prove
+                <motion.div
+                  className="absolute -inset-1 bg-gradient-to-r from-transparent via-purple-500/20 to-transparent rounded"
+                  whileHover={{ opacity: 1 }}
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.span>
+              {' '}it.&rdquo;
+            </motion.p>
+            
+            <motion.div 
+              className="mt-12 h-px w-32 mx-auto bg-gradient-to-r from-transparent via-purple-500 to-transparent relative"
+              initial={{ scaleX: 0, opacity: 0 }}
+              whileInView={{ scaleX: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, delay: 0.6 }}
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-purple-500 via-indigo-500 to-purple-500 opacity-0"
+                animate={{
+                  opacity: [0, 0.8, 0],
+                  scaleY: [1, 2, 1],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            </motion.div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
@@ -998,9 +1082,15 @@ export default function Home() {
       <div className="grid-pattern" />
       <div className="noise" />
       
+      {/* Scroll Progress Indicator */}
+      <ScrollProgress />
+      
+      {/* Cursor Follower */}
+      <CursorFollower />
+      
       {/* Navigation */}
       <motion.nav 
-        className="fixed top-0 left-0 right-0 z-50 px-6 py-4 bg-zinc-950/50 backdrop-blur-lg border-b border-white/5"
+        className="fixed top-0 left-0 right-0 z-40 px-6 py-4 bg-zinc-950/50 backdrop-blur-lg border-b border-white/5"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
