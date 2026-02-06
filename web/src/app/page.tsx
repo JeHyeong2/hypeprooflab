@@ -799,11 +799,17 @@ export default function Home() {
         </div>
       </motion.nav>
       
+      {/* Social Proof Bar */}
+      <SocialProofBar />
+      
       <main>
         <Hero />
+        <LatestContentPreview />
         <Features />
+        <NewsletterSignup />
         <Philosophy />
         <Team />
+        <Columns />
       </main>
       
       <Footer />
