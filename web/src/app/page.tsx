@@ -149,46 +149,41 @@ function Hero() {
             <span className="text-gradient">HypeProof AI</span>
           </motion.h1>
           
-          {/* Tagline */}
-          <motion.p 
-            variants={fadeInUp}
-            className="text-xl md:text-2xl text-zinc-500 max-w-2xl mx-auto leading-relaxed"
-          >
-            AI solves problems.
-            <br />
-            <span className="text-zinc-300">Humans define them.</span>
-          </motion.p>
+          {/* Enhanced Tagline */}
+          <motion.div variants={fadeInUp} className="space-y-4">
+            <p className="text-2xl md:text-3xl text-zinc-300 max-w-3xl mx-auto leading-relaxed font-medium">
+              We don't chase <span className="text-white">Hype</span>.
+              <br />
+              We <span className="text-purple-400">Prove</span> it.
+            </p>
+            <p className="text-lg text-zinc-500 max-w-2xl mx-auto">
+              Deep research, honest conversations, and practical AI insights for builders and skeptics alike.
+            </p>
+          </motion.div>
           
-          {/* CTA */}
-          <motion.div variants={fadeInUp} className="pt-8 flex justify-center">
+          {/* Dual CTA */}
+          <motion.div variants={fadeInUp} className="pt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <motion.a
+              href="https://podcasts.apple.com/podcast/hypeproof-ai"
+              className="glass px-8 py-4 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 transition-all duration-300 inline-flex items-center gap-2 bg-purple-600/20"
+              whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(168, 85, 247, 0.4)" }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h8m2-10l.707.707a7 7 0 01-7.071 12.586L1 16l.414-.414A4 4 0 013.828 13H6V5.414A2 2 0 017.414 4H18v6z" />
+              </svg>
+              Listen Now
+            </motion.a>
             <motion.a
               href="mailto:jayleekr0125@gmail.com"
-              className="glass px-8 py-4 text-white font-medium rounded-full border border-purple-500/30 hover:border-purple-500/60 transition-all duration-300 inline-flex items-center gap-2 relative overflow-hidden"
-              whileHover={{ 
-                scale: 1.05, 
-                boxShadow: "0 0 40px rgba(168, 85, 247, 0.4)",
-                borderColor: "rgba(168, 85, 247, 0.8)"
-              }}
-              whileTap={{ scale: 0.95 }}
-              onHoverStart={() => {}}
+              className="glass px-8 py-4 text-white font-medium rounded-full border border-zinc-700/50 hover:border-zinc-600 transition-all duration-300 inline-flex items-center gap-2"
+              whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(255, 255, 255, 0.1)" }}
+              whileTap={{ scale: 0.98 }}
             >
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-indigo-500/20"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "100%" }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
-              />
-              <motion.svg 
-                className="w-5 h-5 relative z-10" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-                whileHover={{ rotate: 15, scale: 1.1 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </motion.svg>
-              <span className="relative z-10">Contact</span>
+              </svg>
+              Contact
             </motion.a>
           </motion.div>
         </motion.div>
@@ -231,29 +226,73 @@ function FeatureCard({ icon, title, description, delay }: {
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6, delay, ease: [0.25, 0.1, 0.25, 1] }}
       whileHover={{ 
-        y: -8, 
-        transition: { duration: 0.3 },
+        y: -12, 
+        scale: 1.02,
+        transition: { type: "spring", stiffness: 400, damping: 25 },
       }}
+      onHoverStart={(event) => {}}
     >
       <motion.div 
         className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-indigo-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        style={{ background: "radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.1), transparent 70%)" }}
+        style={{ background: "radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.15), transparent 70%)" }}
+        whileHover={{
+          background: [
+            "radial-gradient(circle at 30% 30%, rgba(168, 85, 247, 0.15), transparent 70%)",
+            "radial-gradient(circle at 70% 70%, rgba(99, 102, 241, 0.15), transparent 70%)",
+            "radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.15), transparent 70%)"
+          ]
+        }}
+        transition={{ duration: 2, repeat: Infinity }}
       />
       
       <motion.div 
-        className="text-5xl mb-5"
-        whileHover={{ scale: 1.1, rotate: 5 }}
-        transition={{ type: "spring", stiffness: 300 }}
+        className="text-5xl mb-5 relative z-10"
+        whileHover={{ 
+          scale: 1.2, 
+          rotate: [0, -5, 5, 0],
+          y: -5
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
         {icon}
       </motion.div>
-      <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-purple-400 transition-colors duration-300">
+      <motion.h3 
+        className="text-xl font-semibold text-white mb-4 group-hover:text-purple-400 transition-colors duration-300 relative z-10"
+        whileHover={{ x: 5 }}
+        transition={{ type: "spring", stiffness: 400 }}
+      >
         {title}
-      </h3>
-      <p className="text-zinc-400 leading-relaxed text-[15px] flex-1">{description}</p>
+      </motion.h3>
+      <motion.p 
+        className="text-zinc-400 leading-relaxed text-[15px] flex-1 relative z-10"
+        whileHover={{ color: "#d4d4d8" }}
+        transition={{ duration: 0.3 }}
+      >
+        {description}
+      </motion.p>
       
       <motion.div 
-        className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-purple-500 to-indigo-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
+        className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-purple-500 via-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-center"
+        whileHover={{
+          background: [
+            "linear-gradient(90deg, #a855f7, #6366f1, #a855f7)",
+            "linear-gradient(90deg, #6366f1, #a855f7, #6366f1)",
+            "linear-gradient(90deg, #a855f7, #6366f1, #a855f7)"
+          ]
+        }}
+        transition={{ duration: 1.5, repeat: Infinity }}
+      />
+      
+      <motion.div
+        className="absolute inset-0 border border-transparent group-hover:border-purple-500/30 rounded-xl transition-colors duration-500"
+        whileHover={{
+          boxShadow: [
+            "0 0 0 1px rgba(168, 85, 247, 0.3)",
+            "0 0 20px rgba(168, 85, 247, 0.2)",
+            "0 0 0 1px rgba(168, 85, 247, 0.3)"
+          ]
+        }}
+        transition={{ duration: 2, repeat: Infinity }}
       />
     </motion.div>
   );
