@@ -62,11 +62,97 @@ function NavLink({ children, href }: { children: React.ReactNode; href: string }
   return (
     <motion.a
       href={href}
-      className="text-zinc-400 hover:text-white transition-colors duration-200 text-sm"
-      whileHover={{ y: -1 }}
+      className="text-zinc-400 hover:text-white transition-colors duration-200 text-sm relative group cursor-pointer"
+      whileHover={{ y: -2, scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+      onClick={(e) => {
+        e.preventDefault();
+        if (href.startsWith('#')) {
+          const element = document.querySelector(href);
+          element?.scrollIntoView({ behavior: 'smooth' });
+        }
+      }}
     >
       {children}
+      <motion.div
+        className="absolute -bottom-2 left-0 right-0 h-px bg-gradient-to-r from-purple-500 to-indigo-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"
+      />
+      <motion.div
+        className="absolute inset-0 bg-purple-500/0 group-hover:bg-purple-500/10 rounded-md -m-2 transition-colors duration-300"
+        whileHover={{
+          boxShadow: "0 0 20px rgba(168, 85, 247, 0.2)"
+        }}
+      />
     </motion.a>
+  );
+}
+
+// Scroll Progress Indicator
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  return (
+    <motion.div
+      className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-indigo-500 transform-gpu z-50"
+      style={{
+        scaleX,
+        transformOrigin: "0%"
+      }}
+    />
+  );
+}
+
+// Enhanced Cursor Follower
+function CursorFollower() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+
+  useEffect(() => {
+    const updateMousePosition = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleMouseEnter = () => setIsHovering(true);
+    const handleMouseLeave = () => setIsHovering(false);
+
+    window.addEventListener('mousemove', updateMousePosition);
+    
+    // Add hover listeners to interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .cursor-pointer');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', handleMouseEnter);
+      el.addEventListener('mouseleave', handleMouseLeave);
+    });
+
+    return () => {
+      window.removeEventListener('mousemove', updateMousePosition);
+      interactiveElements.forEach(el => {
+        el.removeEventListener('mouseenter', handleMouseEnter);
+        el.removeEventListener('mouseleave', handleMouseLeave);
+      });
+    };
+  }, []);
+
+  return (
+    <motion.div
+      className="fixed top-0 left-0 w-4 h-4 bg-purple-500/50 rounded-full pointer-events-none z-50 hidden md:block"
+      animate={{
+        x: mousePosition.x - 8,
+        y: mousePosition.y - 8,
+        scale: isHovering ? 1.5 : 1,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 500,
+        damping: 30
+      }}
+    />
   );
 }
 
@@ -191,21 +277,53 @@ function Hero() {
       
       {/* Scroll indicator */}
       <motion.div 
-        className="absolute bottom-12 left-1/2 -translate-x-1/2"
-        initial={{ opacity: 1, y: -10 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 cursor-pointer group"
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
+        transition={{ delay: 2, duration: 0.8 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => {
+          const featuresSection = document.getElementById('features');
+          featuresSection?.scrollIntoView({ behavior: 'smooth' });
+        }}
       >
         <motion.div
-          className="w-6 h-10 rounded-full border border-zinc-700 flex justify-center pt-2"
-          animate={{ opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          className="w-6 h-10 rounded-full border border-zinc-700 flex justify-center pt-2 relative group-hover:border-purple-500/50 transition-colors duration-300"
+          animate={{ 
+            opacity: [0.5, 1, 0.5],
+            scale: [1, 1.05, 1]
+          }}
+          transition={{ 
+            duration: 2, 
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
         >
           <motion.div
-            className="w-1 h-2 bg-zinc-500 rounded-full"
+            className="w-1 h-2 bg-zinc-500 rounded-full group-hover:bg-purple-400 transition-colors duration-300"
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           />
+          
+          <motion.div
+            className="absolute inset-0 rounded-full border border-purple-500/0 group-hover:border-purple-500/30"
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0, 0.5, 0]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeOut"
+            }}
+          />
+        </motion.div>
+        
+        <motion.div
+          className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-zinc-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap"
+        >
+          Scroll to explore
         </motion.div>
       </motion.div>
     </section>
