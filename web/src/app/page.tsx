@@ -24,13 +24,14 @@ function FloatingOrb({ className, delay = 0 }: { className: string; delay?: numb
       className={`absolute rounded-full blur-[100px] ${className}`}
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{
-        y: [0, -50, 0],
-        x: [0, 20, 0],
-        scale: [1, 1.2, 1],
-        opacity: [0.4, 0.7, 0.4],
+        y: [0, -80, 20, -50, 0],
+        x: [0, 30, -15, 25, 0],
+        scale: [1, 1.3, 0.9, 1.1, 1],
+        opacity: [0.3, 0.8, 0.5, 0.7, 0.3],
+        rotate: [0, 180, 360],
       }}
       transition={{
-        duration: 10,
+        duration: 12 + delay * 2,
         repeat: Infinity,
         ease: "easeInOut",
         delay,
@@ -66,6 +67,42 @@ function NavLink({ children, href }: { children: React.ReactNode; href: string }
     >
       {children}
     </motion.a>
+  );
+}
+
+// Social Proof Bar Component
+function SocialProofBar() {
+  const stats = [
+    { label: "Episodes", value: "12+" },
+    { label: "Researchers", value: "5" },
+    { label: "Active Projects", value: "3" },
+    { label: "Countries", value: "2" }
+  ];
+
+  return (
+    <motion.div 
+      className="fixed top-16 left-0 right-0 z-40 bg-zinc-950/80 backdrop-blur-md border-b border-purple-500/20"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.5 }}
+    >
+      <div className="max-w-6xl mx-auto px-6 py-3">
+        <div className="flex items-center justify-center gap-8 md:gap-12 text-sm">
+          {stats.map((stat, i) => (
+            <motion.div 
+              key={stat.label}
+              className="flex items-center gap-2"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.7 + i * 0.1 }}
+            >
+              <span className="text-purple-400 font-semibold">{stat.value}</span>
+              <span className="text-zinc-500">{stat.label}</span>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </motion.div>
   );
 }
 
@@ -126,14 +163,32 @@ function Hero() {
           <motion.div variants={fadeInUp} className="pt-8 flex justify-center">
             <motion.a
               href="mailto:jayleekr0125@gmail.com"
-              className="glass px-8 py-4 text-white font-medium rounded-full border border-purple-500/30 hover:border-purple-500/60 transition-all duration-300 inline-flex items-center gap-2"
-              whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(168, 85, 247, 0.3)" }}
-              whileTap={{ scale: 0.98 }}
+              className="glass px-8 py-4 text-white font-medium rounded-full border border-purple-500/30 hover:border-purple-500/60 transition-all duration-300 inline-flex items-center gap-2 relative overflow-hidden"
+              whileHover={{ 
+                scale: 1.05, 
+                boxShadow: "0 0 40px rgba(168, 85, 247, 0.4)",
+                borderColor: "rgba(168, 85, 247, 0.8)"
+              }}
+              whileTap={{ scale: 0.95 }}
+              onHoverStart={() => {}}
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-indigo-500/20"
+                initial={{ x: "-100%" }}
+                whileHover={{ x: "100%" }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+              />
+              <motion.svg 
+                className="w-5 h-5 relative z-10" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+                whileHover={{ rotate: 15, scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              Contact
+              </motion.svg>
+              <span className="relative z-10">Contact</span>
             </motion.a>
           </motion.div>
         </motion.div>
