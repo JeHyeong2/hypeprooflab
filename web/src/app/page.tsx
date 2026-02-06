@@ -1298,12 +1298,65 @@ function Footer() {
   );
 }
 
+function DynamicGradientMesh() {
+  return (
+    <div className="fixed inset-0 pointer-events-none z-0">
+      {/* Animated gradient meshes */}
+      <motion.div
+        className="absolute inset-0 opacity-15"
+        style={{
+          background: `
+            radial-gradient(circle at 20% 50%, #9333ea 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, #3b82f6 0%, transparent 50%),
+            radial-gradient(circle at 40% 90%, #8b5cf6 0%, transparent 50%),
+            radial-gradient(circle at 90% 80%, #06b6d4 0%, transparent 50%)
+          `,
+        }}
+        animate={{
+          background: [
+            `
+              radial-gradient(circle at 20% 50%, #9333ea 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, #3b82f6 0%, transparent 50%),
+              radial-gradient(circle at 40% 90%, #8b5cf6 0%, transparent 50%),
+              radial-gradient(circle at 90% 80%, #06b6d4 0%, transparent 50%)
+            `,
+            `
+              radial-gradient(circle at 40% 30%, #9333ea 0%, transparent 50%),
+              radial-gradient(circle at 60% 70%, #3b82f6 0%, transparent 50%),
+              radial-gradient(circle at 20% 60%, #8b5cf6 0%, transparent 50%),
+              radial-gradient(circle at 80% 40%, #06b6d4 0%, transparent 50%)
+            `,
+            `
+              radial-gradient(circle at 80% 70%, #9333ea 0%, transparent 50%),
+              radial-gradient(circle at 20% 40%, #3b82f6 0%, transparent 50%),
+              radial-gradient(circle at 60% 20%, #8b5cf6 0%, transparent 50%),
+              radial-gradient(circle at 30% 90%, #06b6d4 0%, transparent 50%)
+            `,
+            `
+              radial-gradient(circle at 20% 50%, #9333ea 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, #3b82f6 0%, transparent 50%),
+              radial-gradient(circle at 40% 90%, #8b5cf6 0%, transparent 50%),
+              radial-gradient(circle at 90% 80%, #06b6d4 0%, transparent 50%)
+            `,
+          ],
+        }}
+        transition={{
+          duration: 25,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <>
       <div className="gradient-bg" />
       <div className="grid-pattern" />
       <div className="noise" />
+      <DynamicGradientMesh />
       
       {/* Scroll Progress Indicator */}
       <ScrollProgress />

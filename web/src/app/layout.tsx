@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import SkipLink from "@/components/SkipLink";
 
 export const metadata: Metadata = {
   title: "HypeProof AI - We Don't Chase Hype. We Prove It.",
@@ -119,6 +120,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
+        <SkipLink />
         <ErrorBoundary>
           {children}
         </ErrorBoundary>
