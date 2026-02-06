@@ -117,7 +117,7 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24">
       {/* Floating orbs */}
       <FloatingOrb className="w-[800px] h-[800px] bg-purple-600/30 -top-60 -left-60" delay={0} />
       <FloatingOrb className="w-[600px] h-[600px] bg-indigo-600/30 -bottom-40 -right-40" delay={2} />
@@ -298,6 +298,122 @@ function FeatureCard({ icon, title, description, delay }: {
   );
 }
 
+// Latest Content Preview Component
+function LatestContentPreview() {
+  const latestContent = [
+    {
+      type: "Episode",
+      title: "The AI Safety Debate: Are We Solving the Right Problem?",
+      description: "A deep dive into Anthropic's Constitutional AI and what it means for the future of alignment.",
+      date: "Feb 6, 2026",
+      duration: "42 min",
+      icon: "🎙️"
+    },
+    {
+      type: "Research",
+      title: "Claude Opus 4.6 Performance Analysis",
+      description: "Comprehensive benchmarks and practical testing of Anthropic's latest model release.",
+      date: "Feb 5, 2026",
+      duration: "8 min read",
+      icon: "🔬"
+    }
+  ];
+
+  return (
+    <section className="py-24 px-6">
+      <div className="max-w-4xl mx-auto">
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl font-bold text-white mb-4">Latest Content</h2>
+          <p className="text-zinc-500">Fresh research and conversations from the lab</p>
+        </motion.div>
+        
+        <div className="grid md:grid-cols-2 gap-6">
+          {latestContent.map((item, i) => (
+            <motion.div
+              key={item.title}
+              className="glass p-6 group cursor-pointer"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              whileHover={{ y: -4 }}
+            >
+              <div className="flex items-start gap-4">
+                <div className="text-3xl">{item.icon}</div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs text-purple-400 uppercase tracking-wider font-medium">
+                      {item.type}
+                    </span>
+                    <span className="text-zinc-600">•</span>
+                    <span className="text-xs text-zinc-500">{item.date}</span>
+                    <span className="text-zinc-600">•</span>
+                    <span className="text-xs text-zinc-500">{item.duration}</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-zinc-400 text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Newsletter Signup Component
+function NewsletterSignup() {
+  return (
+    <section className="py-24 px-6 relative overflow-hidden">
+      <FloatingOrb className="w-[400px] h-[400px] bg-purple-600/20 -right-40 top-1/2" delay={2} />
+      
+      <div className="max-w-2xl mx-auto text-center relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl font-bold text-white mb-4">Stay Updated</h2>
+          <p className="text-zinc-400 mb-8">
+            Get weekly insights on AI research, tools, and the intersection of technology and humanity.
+          </p>
+          
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="flex-1 glass px-4 py-3 text-white placeholder-zinc-500 rounded-full border border-zinc-700/50 focus:border-purple-500/50 focus:outline-none transition-colors"
+            />
+            <motion.button
+              className="glass px-6 py-3 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 bg-purple-600/20 transition-all duration-300"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Subscribe
+            </motion.button>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 function Features() {
   const features = [
     {
@@ -472,37 +588,100 @@ function TeamMember({ name, role, credential, delay }: {
   credential?: string;
   delay: number;
 }) {
-  const gradient = memberColors[name] || "from-purple-500/20 to-indigo-500/20";
+  const gradient = memberColors[name] || "from-purple-500 to-indigo-600";
   
   return (
     <motion.div
-      className="text-center group"
+      className="text-center group cursor-pointer"
       initial={{ opacity: 0, scale: 0.9, y: 20 }}
       whileInView={{ opacity: 1, scale: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, delay, ease: [0.25, 0.1, 0.25, 1] }}
+      whileHover={{ y: -8 }}
     >
       <motion.div 
-        className={`w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br ${gradient} p-[2px] cursor-pointer`}
-        whileHover={{ scale: 1.1, rotate: 5 }}
+        className={`w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br ${gradient} p-[2px] cursor-pointer relative overflow-hidden`}
+        whileHover={{ 
+          scale: 1.15, 
+          rotate: 10,
+          transition: { type: "spring", stiffness: 300, damping: 20 }
+        }}
         whileTap={{ scale: 0.95 }}
       >
-        <div className="w-full h-full rounded-full bg-zinc-950 flex items-center justify-center">
-          <span className="text-2xl font-bold text-white">{name[0]}</span>
-        </div>
+        <motion.div
+          className="absolute inset-0 rounded-full bg-gradient-to-br opacity-0 group-hover:opacity-100"
+          style={{
+            background: `conic-gradient(from 0deg, ${gradient.replace('from-', '').replace(' to-', ', ')}, ${gradient.replace('from-', '').replace(' to-', ', ')})`,
+          }}
+          animate={{
+            rotate: [0, 360],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+        <motion.div 
+          className="w-full h-full rounded-full bg-zinc-950 flex items-center justify-center relative z-10"
+          whileHover={{ 
+            boxShadow: "inset 0 0 20px rgba(168, 85, 247, 0.3)" 
+          }}
+        >
+          <motion.span 
+            className="text-2xl font-bold text-white"
+            whileHover={{ 
+              scale: 1.1,
+              rotate: -10,
+              color: "#a855f7"
+            }}
+            transition={{ type: "spring", stiffness: 400 }}
+          >
+            {name[0]}
+          </motion.span>
+        </motion.div>
       </motion.div>
+      
       <motion.h4 
-        className="text-white font-semibold text-lg"
-        whileHover={{ color: "#a855f7" }}
+        className="text-white font-semibold text-lg group-hover:text-purple-400 transition-colors duration-300"
+        whileHover={{ 
+          scale: 1.05,
+          y: -2
+        }}
+        transition={{ type: "spring", stiffness: 400 }}
       >
         {name}
       </motion.h4>
-      <p className="text-zinc-400 text-sm mt-1">{role}</p>
+      
+      <motion.p 
+        className="text-zinc-400 text-sm mt-1 group-hover:text-zinc-300 transition-colors duration-300"
+        whileHover={{ scale: 1.02 }}
+      >
+        {role}
+      </motion.p>
+      
       {credential && (
-        <p className="text-zinc-600 text-xs mt-1 max-w-[180px] mx-auto leading-relaxed">
+        <motion.p 
+          className="text-zinc-600 text-xs mt-1 max-w-[180px] mx-auto leading-relaxed group-hover:text-zinc-500 transition-colors duration-300"
+          initial={{ opacity: 0.7 }}
+          whileHover={{ 
+            opacity: 1,
+            scale: 1.05,
+            y: -1
+          }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
           {credential}
-        </p>
+        </motion.p>
       )}
+      
+      <motion.div
+        className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-purple-500/20 transition-colors duration-500 pointer-events-none"
+        whileHover={{
+          boxShadow: "0 8px 32px rgba(168, 85, 247, 0.15)"
+        }}
+        transition={{ duration: 0.3 }}
+      />
     </motion.div>
   );
 }
