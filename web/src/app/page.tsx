@@ -5,9 +5,9 @@ import { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const fadeInUp = {
-  initial: { opacity: 1, y: 0 },
+  initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }
+  transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }
 };
 
 const stagger = {
@@ -22,16 +22,17 @@ function FloatingOrb({ className, delay = 0 }: { className: string; delay?: numb
   return (
     <motion.div
       className={`absolute rounded-full blur-[100px] ${className}`}
+      style={{ willChange: 'transform, opacity' }}
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{
-        y: [0, -80, 20, -50, 0],
-        x: [0, 30, -15, 25, 0],
-        scale: [1, 1.3, 0.9, 1.1, 1],
-        opacity: [0.3, 0.8, 0.5, 0.7, 0.3],
-        rotate: [0, 180, 360],
+        y: [0, -60, 15, -40, 0],
+        x: [0, 25, -10, 20, 0],
+        scale: [1, 1.2, 0.95, 1.05, 1],
+        opacity: [0.3, 0.7, 0.5, 0.6, 0.3],
+        rotate: [0, 90, 180, 270, 360],
       }}
       transition={{
-        duration: 12 + delay * 2,
+        duration: 10 + delay * 1.5,
         repeat: Infinity,
         ease: "easeInOut",
         delay,
@@ -339,16 +340,16 @@ function FeatureCard({ icon, title, description, delay }: {
   return (
     <motion.div
       className="relative glass p-8 group cursor-pointer overflow-hidden min-h-[240px] flex flex-col"
-      initial={{ opacity: 0, y: 40 }}
+      style={{ willChange: 'transform' }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.6, delay, ease: [0.25, 0.1, 0.25, 1] }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, delay, ease: [0.25, 0.1, 0.25, 1] }}
       whileHover={{ 
-        y: -12, 
-        scale: 1.02,
-        transition: { type: "spring", stiffness: 400, damping: 25 },
+        y: -8, 
+        scale: 1.01,
+        transition: { type: "spring", stiffness: 300, damping: 30 },
       }}
-      onHoverStart={(event) => {}}
     >
       <motion.div 
         className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-indigo-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -1102,6 +1103,12 @@ export default function Home() {
             <NavLink href="#team">Team</NavLink>
           </div>
         </div>
+        
+        {/* Scroll Progress Bar */}
+        <motion.div
+          className="absolute bottom-0 left-0 h-[1px] bg-gradient-to-r from-purple-500 to-indigo-500 origin-left"
+          style={{ scaleX: useTransform(useScroll().scrollYProgress, [0, 1], [0, 1]) }}
+        />
       </motion.nav>
       
       {/* Social Proof Bar */}
