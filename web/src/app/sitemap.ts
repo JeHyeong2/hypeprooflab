@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next'
- 
+import { getAllColumns } from '@/lib/columns'
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://hypeproof-ai.xyz'
   
-  return [
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -16,36 +17,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'daily',
       priority: 0.8,
     },
-    {
-      url: `${baseUrl}/team`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly', 
-      priority: 0.5,
-    },
-    // Add dynamic column pages
-    {
-      url: `${baseUrl}/columns/claude-opus-4-6-alignment`,
-      lastModified: new Date('2026-02-06'),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/columns/openai-agents-sdk`,
-      lastModified: new Date('2026-02-05'),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/columns/ai-education-paradigm`,
-      lastModified: new Date('2026-02-03'),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    }
   ]
+  
+  // Add column pages from MD files
+  const koColumns = getAllColumns('ko')
+  const enColumns = getAllColumns('en')
+  
+  const columnPages: MetadataRoute.Sitemap = []
+  const seenSlugs = new Set<string>()
+  
+  for (const col of [...koColumns, ...enColumns]) {
+    const slug = col.frontmatter.slug
+    if (seenSlugs.has(slug)) continue
+    seenSlugs.add(slug)
+    
+    columnPages.push({
+      url: `${baseUrl}/columns/${slug}`,
+      lastModified: new Date(col.frontmatter.date),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    })
+  }
+  
+  return [...staticPages, ...columnPages]
 }

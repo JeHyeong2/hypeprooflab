@@ -106,10 +106,10 @@ const ColumnCard = React.memo(function ColumnCard({ column, delay }: { column: t
       
       <div className="space-y-3 relative z-10">
         <time className="text-xs text-zinc-500">
-          {new Date(column.date).toLocaleDateString('en-US', { 
-            month: 'short', 
-            day: 'numeric',
-            year: 'numeric'
+          {new Date(column.date).toLocaleDateString('ko-KR', { 
+            year: 'numeric',
+            month: 'long', 
+            day: 'numeric'
           })}
         </time>
         
@@ -125,7 +125,7 @@ const ColumnCard = React.memo(function ColumnCard({ column, delay }: { column: t
         </p>
         
         <div className="flex items-center text-purple-400 text-sm font-medium mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <span>Read article</span>
+          <span>칼럼 읽기</span>
           {!shouldReduce ? (
             <motion.span
               className="ml-1"
@@ -204,7 +204,7 @@ const CommunityHero = React.memo(function CommunityHero() {
             viewport={{ once: true }}
             transition={{ duration: shouldReduce ? 0.2 : 0.6, delay: shouldReduce ? 0 : 0.4 }}
           >
-            HypeProof AI Community is a global hub where professionals gather to pursue the real value of AI.
+            HypeProof AI Community는 AI의 진짜 가치를 추구하는 전문가들이 모인 글로벌 허브입니다.
             <br />
             <span className="text-purple-400 font-medium">Signal &gt; Noise. Proof &gt; Promise.</span>
           </motion.p>
