@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     default: "HypeProof AI - We Don't Chase Hype. We Prove It.",
     template: "%s | HypeProof AI"
   },
-  description: "AI의 진짜 가치를 추구합니다. 심층 리서치, 에이전트 아키텍처 설계, 그리고 글로벌 AI 커뮤니티. Deep research, honest conversations, and practical AI insights.",
+  description: "AI의 진짜 가치를 함께 탐구합니다. 심층 리서치, 칼럼, 그리고 AI 커뮤니티. Deep research, columns, and practical AI insights.",
   applicationName: "HypeProof AI",
   keywords: [
-    "AI research", "artificial intelligence", "AI podcast", "machine learning", 
+    "AI research", "artificial intelligence", "machine learning", 
     "AI tools", "technology research", "AI insights", "AI validation", 
     "AI agent", "multi-agent system", "에이전트 아키텍처", "AI 리서치",
     "인공지능", "AI 커뮤니티", "HypeProof", "AI 분석"
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   openGraph: {
     title: "HypeProof AI - We Don't Chase Hype. We Prove It.",
-    description: "Deep research, honest conversations, and practical AI insights for builders and skeptics alike. Join our podcast and research lab exploring the real impact of AI.",
+    description: "Deep research, columns, and practical AI insights for builders and skeptics alike. Exploring the real impact of AI.",
     url: "https://hypeproof-ai.xyz",
     siteName: "HypeProof AI",
     images: [
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
         url: "https://hypeproof-ai.xyz/og-image.png",
         width: 1200,
         height: 630,
-        alt: "HypeProof AI - Research Lab and Podcast for AI Builders and Skeptics",
+        alt: "HypeProof AI - Research Lab for AI Builders and Skeptics",
       },
       {
         url: "https://hypeproof-ai.xyz/og-image-square.png", 
@@ -62,7 +62,6 @@ export const metadata: Metadata = {
     ],
     locale: "en_US",
     type: "website",
-    countryName: "Global",
   },
   twitter: {
     card: "summary_large_image",
@@ -72,7 +71,7 @@ export const metadata: Metadata = {
     description: "Deep research, honest conversations, and practical AI insights for builders and skeptics alike.",
     images: {
       url: "https://hypeproof-ai.xyz/og-image.png",
-      alt: "HypeProof AI - Research Lab and Podcast"
+      alt: "HypeProof AI - Research Lab"
     },
   },
   robots: {
@@ -93,7 +92,7 @@ export const metadata: Metadata = {
     yandex: "your-yandex-verification-code",
   },
   category: "Technology",
-  classification: "AI Research and Podcast",
+  classification: "AI Research",
   referrer: "origin-when-cross-origin",
   generator: "Next.js",
   alternates: {
@@ -111,13 +110,12 @@ export default function RootLayout({
     "@type": "Organization",
     "name": "HypeProof AI",
     "alternateName": "HypeProof",
-    "description": "AI research lab and podcast focused on cutting through hype with rigorous validation and real-world testing.",
+    "description": "AI research team focused on cutting through hype with rigorous validation and real-world testing.",
     "url": "https://hypeproof-ai.xyz",
     "logo": "https://hypeproof-ai.xyz/logo.png",
     "image": "https://hypeproof-ai.xyz/og-image.png",
     "sameAs": [
       "https://twitter.com/hypeproofai",
-      "https://podcasts.apple.com/podcast/hypeproof-ai",
       "https://github.com/hypeproofai"
     ],
     "contactPoint": {
@@ -129,10 +127,10 @@ export default function RootLayout({
     "foundingDate": "2026",
     "foundingLocation": {
       "@type": "Place",
-      "name": "Global"
+      "name": "Seoul, South Korea"
     },
     "slogan": "We Don't Chase Hype. We Prove It.",
-    "keywords": "AI research, artificial intelligence, machine learning, AI podcast, technology validation, AI tools",
+    "keywords": "AI research, artificial intelligence, machine learning, technology validation, AI tools",
     "founder": [
       {
         "@type": "Person",
@@ -183,14 +181,6 @@ export default function RootLayout({
         }
       },
       {
-        "@type": "Offer", 
-        "itemOffered": {
-          "@type": "Service",
-          "name": "AI Podcast",
-          "description": "Deep-dive conversations on AI trends and tools"
-        }
-      },
-      {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service", 
@@ -220,31 +210,13 @@ export default function RootLayout({
     }
   };
 
-  const podcastData = {
-    "@context": "https://schema.org",
-    "@type": "PodcastSeries",
-    "name": "HypeProof AI Podcast",
-    "description": "Deep-dive conversations on AI trends, tools, and the people building tomorrow.",
-    "url": "https://hypeproof-ai.xyz/podcast",
-    "author": {
-      "@type": "Organization",
-      "name": "HypeProof AI"
-    },
-    "publisher": {
-      "@type": "Organization", 
-      "name": "HypeProof AI"
-    },
-    "genre": ["Technology", "Artificial Intelligence", "Research"],
-    "inLanguage": "en-US"
-  };
-
   return (
     <html lang="en">
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify([organizationData, websiteData, podcastData])
+            __html: JSON.stringify([organizationData, websiteData])
           }}
         />
         <link rel="canonical" href="https://hypeproof-ai.xyz" />

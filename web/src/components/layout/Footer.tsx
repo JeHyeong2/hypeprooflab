@@ -42,7 +42,6 @@ export function Footer() {
           >
             <h4 className="text-white font-medium mb-4">Content</h4>
             <ul className="space-y-2 text-sm text-zinc-500">
-              <li><a href="#" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">Podcast</a></li>
               <li><a href="/columns" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">Columns</a></li>
               <li><a href="#" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">Research</a></li>
             </ul>

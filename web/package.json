@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "verify": "python3 ~/.openclaw/workspace/skills/hypeproof-org/scripts/verify_content.py",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

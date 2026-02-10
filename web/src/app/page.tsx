@@ -278,7 +278,7 @@ const CommunityHero = React.memo(function CommunityHero() {
             viewport={{ once: true }}
             transition={{ duration: shouldReduce ? 0.2 : 0.6, delay: shouldReduce ? 0 : 0.4 }}
           >
-            {isKo ? 'HypeProof AI Community는 AI의 진짜 가치를 추구하는 전문가들이 모인 글로벌 허브입니다.' : 'HypeProof AI Community is a global hub where experts pursue the real value of AI.'}
+            {isKo ? 'HypeProof AI Community는 AI의 진짜 가치를 함께 탐구하는 팀입니다.' : 'HypeProof AI Community is a team exploring the real value of AI together.'}
             <br />
             <span className="text-purple-400 font-medium">Signal &gt; Noise. Proof &gt; Promise.</span>
           </motion.p>
