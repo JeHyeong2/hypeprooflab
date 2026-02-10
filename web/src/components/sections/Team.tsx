@@ -32,14 +32,14 @@ const teamMembers = [
     role: "Research / Data Analysis",
     bio: "Quantitative Researcher @ AssetPlus (AlphaBridge)",
     education: "Ph.D in Physics — Ex-Scientist @ CERN",
-    image: "/members/ryan.svg",
+    image: "/members/ryan.png",
   },
   {
     name: "JY",
     role: "Research / AI Engineering",
     bio: "AI/ML Engineer @ Remember | Ex-Quant",
     education: "M.S. in Physics",
-    image: "/members/jy.svg",
+    image: "/members/jy.png",
   },
   {
     name: "Sebastian",
@@ -152,7 +152,7 @@ export function Team() {
             viewport={{ once: true }}
             transition={{ duration: shouldReduce ? 0.2 : 0.8, delay: shouldReduce ? 0 : 0.2 }}
           >
-            Built by <span className="text-gradient">AI Experts</span>
+            <span className="text-gradient">AI 전문가</span>들이 만듭니다
           </motion.h2>
 
           <motion.p

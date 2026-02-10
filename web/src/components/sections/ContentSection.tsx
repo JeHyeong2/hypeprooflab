@@ -8,20 +8,22 @@ import { FloatingOrb } from './HeroSection';
 function LatestContentPreview() {
   const latestContent = [
     {
-      type: "Episode",
-      title: "The AI Safety Debate: Are We Solving the Right Problem?",
-      description: "A deep dive into Anthropic's Constitutional AI and what it means for the future of alignment.",
-      date: "Feb 6, 2026",
-      duration: "42 min",
-      icon: "🎙️"
+      type: "Podcast",
+      title: "Coming Soon 🚧",
+      description: "HypeProof Lab 팟캐스트를 준비하고 있습니다. AI의 실체를 파헤치는 대화, 곧 만나보세요.",
+      date: "Coming Soon",
+      duration: "준비중",
+      icon: "🎙️",
+      comingSoon: true,
     },
     {
-      type: "Research",
-      title: "Claude Opus 4.6 Performance Analysis",
-      description: "Comprehensive benchmarks and practical testing of Anthropic's latest model release.",
-      date: "Feb 5, 2026",
-      duration: "8 min read",
-      icon: "🔬"
+      type: "Column",
+      title: "회장님의 시대가 열리다",
+      description: "에이전트가 모든 실행을 대행하는 세상에서, 인간 고유의 가치는 정확히 어디에 있는가?",
+      date: "Feb 10, 2026",
+      duration: "12 min read",
+      icon: "📝",
+      href: "/columns/2026-02-10-era-of-the-chairman?lang=ko",
     }
   ];
 
@@ -34,43 +36,51 @@ function LatestContentPreview() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-bold text-white mb-4">Latest Content</h2>
-          <p className="text-zinc-500">Fresh research and conversations from the lab</p>
+          <h2 className="text-3xl font-bold text-white mb-4">최신 콘텐츠</h2>
+          <p className="text-zinc-500">연구실에서 전하는 최신 리서치와 대화</p>
         </motion.div>
         
         <div className="grid md:grid-cols-2 gap-6">
-          {latestContent.map((item, i) => (
-            <motion.div
-              key={item.title}
-              className="glass p-6 group cursor-pointer"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              whileHover={{ y: -4 }}
-            >
-              <div className="flex items-start gap-4">
-                <div className="text-3xl">{item.icon}</div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs text-purple-400 uppercase tracking-wider font-medium">
-                      {item.type}
-                    </span>
-                    <span className="text-zinc-600">•</span>
-                    <span className="text-xs text-zinc-500">{item.date}</span>
-                    <span className="text-zinc-600">•</span>
-                    <span className="text-xs text-zinc-500">{item.duration}</span>
+          {latestContent.map((item, i) => {
+            const Wrapper = item.href ? ({ children, ...props }: any) => <a href={item.href} {...props}>{children}</a> : 'div' as any;
+            return (
+              <motion.div
+                key={item.title}
+                className={`glass p-6 group ${item.comingSoon ? 'opacity-70' : 'cursor-pointer'}`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                whileHover={item.comingSoon ? {} : { y: -4 }}
+              >
+                <div className="flex items-start gap-4">
+                  <div className="text-3xl">{item.icon}</div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xs text-purple-400 uppercase tracking-wider font-medium">
+                        {item.type}
+                      </span>
+                      <span className="text-zinc-600">•</span>
+                      <span className="text-xs text-zinc-500">{item.date}</span>
+                      <span className="text-zinc-600">•</span>
+                      <span className="text-xs text-zinc-500">{item.duration}</span>
+                    </div>
+                    <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-zinc-400 text-sm leading-relaxed">
+                      {item.description}
+                    </p>
+                    {item.comingSoon && (
+                      <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-xs font-medium">
+                        🚧 준비중
+                      </div>
+                    )}
                   </div>
-                  <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed">
-                    {item.description}
-                  </p>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -89,9 +99,9 @@ function NewsletterSignup() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-bold text-white mb-4">Stay Updated</h2>
+          <h2 className="text-3xl font-bold text-white mb-4">소식 받기</h2>
           <p className="text-zinc-400 mb-8">
-            Get weekly insights on AI research, tools, and the intersection of technology and humanity.
+            AI 리서치, 도구, 그리고 기술과 인간의 교차점에 대한 주간 인사이트를 받아보세요.
           </p>
           
           <motion.div 
@@ -111,7 +121,7 @@ function NewsletterSignup() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              Subscribe
+              구독하기
             </motion.button>
           </motion.div>
         </motion.div>
