@@ -142,7 +142,7 @@ export function Team() {
             viewport={{ once: true }}
             transition={{ duration: shouldReduce ? 0.2 : 0.6 }}
           >
-            Meet the Team
+            팀 소개
           </motion.span>
 
           <motion.h2
@@ -196,7 +196,7 @@ export function Team() {
             whileHover={shouldReduce ? {} : { scale: 1.05, boxShadow: "0 0 30px rgba(168, 85, 247, 0.4)" }}
             whileTap={tap}
           >
-            Join Our Team
+            팀 합류하기
           </motion.a>
         </motion.div>
       </div>

@@ -184,7 +184,7 @@ const CommunityHero = React.memo(function CommunityHero() {
             viewport={{ once: true }}
             transition={{ duration: shouldReduce ? 0.2 : 0.6 }}
           >
-            Global Community
+            글로벌 커뮤니티
           </motion.span>
           
           <motion.h2
@@ -194,7 +194,7 @@ const CommunityHero = React.memo(function CommunityHero() {
             viewport={{ once: true }}
             transition={{ duration: shouldReduce ? 0.2 : 0.8, delay: shouldReduce ? 0 : 0.2 }}
           >
-            Where AI <span className="text-gradient">Professionals</span> Connect
+            AI <span className="text-gradient">전문가</span>들이 모이는 곳
           </motion.h2>
           
           <motion.p

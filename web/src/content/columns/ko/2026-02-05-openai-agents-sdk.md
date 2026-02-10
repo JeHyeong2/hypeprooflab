@@ -9,18 +9,6 @@ readTime: "6 min"
 excerpt: "OpenAI Swarm에서 Claude Code SDK까지, 에이전트 전쟁이 뜨거워지고 있다. 개발자들에게 이것이 의미하는 바를 분석한다."
 authorImage: "/members/ryan.png"
 ---
-
-## 현재 지형
-
-에이전트 프레임워크 전쟁이 시작되었다. 단순한 챗봇에서 시작된 것이 자율적으로 추론하고, 계획하고, 복잡한 작업을 실행하는 정교한 멀티 에이전트 시스템으로 진화했다.
-
-네 개의 주요 플레이어가 에이전트 프레임워크 공간을 지배한다:
-
-- **OpenAI Swarm**: OpenAI의 공식 프레임워크
-- **Claude Code SDK**: Anthropic의 개발자 중심 접근법
-- **AutoGPT**: 오픈소스 선구자
-- **LangChain Agents**: 에코시스템 플레이
-
 ---
 
 ## 성능 벤치마크
@@ -34,8 +22,19 @@ authorImage: "/members/ryan.png"
 **AutoGPT**는 가장 많은 유연성을 제공하지만 상당한 커스터마이징이 필요하다.
 
 **LangChain Agents**는 가장 풍부한 에코시스템을 제공하지만 초보자에게는 압도적일 수 있다.
-
 ---
+
+## 현재 지형
+
+에이전트 프레임워크 전쟁이 시작되었다. 단순한 챗봇에서 시작된 것이 자율적으로 추론하고, 계획하고, 복잡한 작업을 실행하는 정교한 멀티 에이전트 시스템으로 진화했다.
+
+네 개의 주요 플레이어가 에이전트 프레임워크 공간을 지배한다:
+
+- **OpenAI Swarm**: OpenAI의 공식 프레임워크
+- **Claude Code SDK**: Anthropic의 개발자 중심 접근법
+- **AutoGPT**: 오픈소스 선구자
+- **LangChain Agents**: 에코시스템 플레이
+
 
 ## 추천
 
