@@ -1,0 +1,180 @@
+'use client';
+
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useRouter, useSearchParams } from 'next/navigation';
+import type { Column } from '@/lib/columns';
+
+function parseMarkdown(md: string): string {
+  return md
+    // Headers
+    .replace(/^### (.*$)/gm, '<h3 class="text-xl font-bold text-white mt-10 mb-4">$1</h3>')
+    .replace(/^## (.*$)/gm, '<h2 class="text-2xl font-bold text-white mt-12 mb-6">$1</h2>')
+    // Bold
+    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
+    // Italic
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    // Horizontal rule
+    .replace(/^---$/gm, '<hr class="border-zinc-800 my-12" />')
+    // Blockquote
+    .replace(/^"(.*)"$/gm, '<blockquote class="border-l-2 border-purple-500 pl-6 my-8 text-zinc-300 italic text-lg">$1</blockquote>')
+    // Paragraphs (double newline)
+    .replace(/\n\n/g, '</p><p class="mb-6 leading-relaxed">')
+    // Wrap in paragraph
+    ;
+}
+
+interface Props {
+  column: Column;
+  slug: string;
+  availableLocales: string[];
+}
+
+export default function ColumnArticle({ column, slug, availableLocales }: Props) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentLocale = column.locale;
+  
+  const { frontmatter, content } = column;
+  const htmlContent = parseMarkdown(content);
+  
+  const switchLocale = (locale: string) => {
+    router.push(`/columns/${slug}?lang=${locale}`);
+  };
+
+  return (
+    <div className="min-h-screen bg-zinc-950">
+      {/* Sticky compact nav */}
+      <nav className="sticky top-0 z-50 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800/50">
+        <div className="max-w-[680px] mx-auto px-6 py-3 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-md bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
+              <span className="text-white font-bold text-xs">H</span>
+            </div>
+            <span className="text-white font-semibold text-sm tracking-tight">HypeProof AI</span>
+          </Link>
+          
+          <div className="flex items-center gap-4">
+            {/* Language toggle */}
+            {availableLocales.length > 1 && (
+              <div className="flex items-center gap-1 text-sm">
+                {availableLocales.map((locale, i) => (
+                  <React.Fragment key={locale}>
+                    {i > 0 && <span className="text-zinc-600">|</span>}
+                    <button
+                      onClick={() => switchLocale(locale)}
+                      className={`px-2 py-1 rounded transition-colors ${
+                        currentLocale === locale
+                          ? 'text-white font-semibold'
+                          : 'text-zinc-500 hover:text-zinc-300'
+                      }`}
+                    >
+                      {locale.toUpperCase()}
+                    </button>
+                  </React.Fragment>
+                ))}
+              </div>
+            )}
+            
+            <Link
+              href="/columns"
+              className="text-sm text-zinc-400 hover:text-white transition-colors"
+            >
+              All Columns
+            </Link>
+          </div>
+        </div>
+      </nav>
+      
+      {/* Article */}
+      <article className="max-w-[680px] mx-auto px-6 py-12">
+        {/* Category */}
+        <div className="mb-6">
+          <span className="text-sm text-purple-400 uppercase tracking-wider font-medium">
+            {frontmatter.category}
+          </span>
+        </div>
+        
+        {/* Title */}
+        <h1 className={`font-bold text-white mb-6 leading-tight ${
+          currentLocale === 'ko' 
+            ? 'text-3xl md:text-[32px] tracking-[0.03em] leading-[1.4]' 
+            : 'text-3xl md:text-[32px] tracking-[0.01em] leading-[1.3]'
+        }`}>
+          {frontmatter.title}
+        </h1>
+        
+        {/* Excerpt */}
+        <p className={`text-zinc-400 mb-8 ${
+          currentLocale === 'ko'
+            ? 'text-lg leading-[1.8] tracking-[0.03em]'
+            : 'text-lg leading-[1.7] tracking-[0.01em]'
+        }`}>
+          {frontmatter.excerpt}
+        </p>
+        
+        {/* Author block */}
+        <div className="flex items-center gap-4 mb-10 pb-10 border-b border-zinc-800">
+          <div className="w-12 h-12 rounded-full overflow-hidden bg-zinc-800 flex-shrink-0">
+            {frontmatter.authorImage ? (
+              <Image
+                src={frontmatter.authorImage}
+                alt={frontmatter.author}
+                width={48}
+                height={48}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-white font-bold">
+                {frontmatter.author[0]}
+              </div>
+            )}
+          </div>
+          <div>
+            <div className="text-white font-medium">{frontmatter.author}</div>
+            <div className="text-zinc-500 text-sm">
+              {new Date(frontmatter.date).toLocaleDateString(
+                currentLocale === 'ko' ? 'ko-KR' : 'en-US',
+                { year: 'numeric', month: 'long', day: 'numeric' }
+              )}
+              {' · '}
+              {frontmatter.readTime} read
+            </div>
+          </div>
+        </div>
+        
+        {/* Content */}
+        <div
+          className={`column-content ${
+            currentLocale === 'ko'
+              ? 'text-[18px] leading-[32px] tracking-[0.03em] md:text-[18px] md:leading-[32px]'
+              : 'text-[18px] leading-[30px] tracking-[0.01em] md:text-[18px] md:leading-[30px]'
+          } text-zinc-300`}
+          dangerouslySetInnerHTML={{ __html: `<p class="mb-6 leading-relaxed">${htmlContent}</p>` }}
+        />
+        
+        {/* Tags */}
+        <div className="mt-12 pt-8 border-t border-zinc-800">
+          <div className="flex flex-wrap gap-2">
+            {frontmatter.tags?.map((tag: string) => (
+              <span key={tag} className="px-3 py-1 text-xs text-zinc-400 bg-zinc-900 rounded-full border border-zinc-800">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+        
+        {/* Back to columns */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/columns"
+            className="text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium"
+          >
+            ← Back to all columns
+          </Link>
+        </div>
+      </article>
+    </div>
+  );
+}

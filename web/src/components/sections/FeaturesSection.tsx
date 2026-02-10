@@ -149,18 +149,18 @@ function FeaturesSection() {
   const features = [
     {
       icon: "🔬",
-      title: "Research",
-      description: "Pushing AI boundaries through daily experiments and rigorous validation methods."
+      title: "AI Research & Analysis",
+      description: "최신 AI 기술을 리서치하고, 심층 분석 칼럼을 통해 진짜 인사이트를 전달합니다. Hype를 걷어내고 실체를 검증합니다."
     },
     {
-      icon: "🎙️",
-      title: "Podcast", 
-      description: "Deep-dive conversations on AI trends, tools, and the people building tomorrow."
+      icon: "🏗️",
+      title: "Agent Architecture Design", 
+      description: "멀티 에이전트 시스템 설계부터 실전 구축까지. 이론이 아닌 실제 동작하는 에이전트 아키텍처를 만듭니다."
     },
     {
-      icon: "📖",
-      title: "Education",
-      description: "Designing new paradigms for learning in the age of artificial intelligence."
+      icon: "🌐",
+      title: "Open Community",
+      description: "디스코드 기반 AI 엔지니어 커뮤니티. 전 세계 전문가들과 함께 배우고, 토론하고, 만듭니다."
     }
   ];
 
@@ -220,7 +220,7 @@ function FeaturesSection() {
         </motion.div>
         
         <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10"
           variants={{
             hidden: {},
             visible: {
