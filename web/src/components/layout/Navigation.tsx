@@ -194,6 +194,14 @@ function MobileMenu() {
             )}
           </motion.a>
           
+          <Link
+            href="/columns"
+            className="text-white text-3xl font-medium relative"
+            onClick={() => setIsOpen(false)}
+          >
+            Columns
+          </Link>
+          
           <motion.a
             href="mailto:jayleekr0125@gmail.com"
             className="glass px-10 py-5 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 bg-purple-600/20 relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-zinc-950"

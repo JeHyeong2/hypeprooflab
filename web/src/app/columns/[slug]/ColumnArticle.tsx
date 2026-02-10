@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import type { Column } from '@/lib/columns';
 
 function parseMarkdown(md: string): string {
@@ -39,7 +39,6 @@ interface Props {
 
 export default function ColumnArticle({ column, slug, availableLocales }: Props) {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const currentLocale = column.locale;
   
   const [readProgress, setReadProgress] = useState(0);
