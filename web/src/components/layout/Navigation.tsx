@@ -4,7 +4,7 @@ import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useAnimationConfig } from '@/hooks/useReducedMotion';
-import { LanguageSwitcher } from '@/contexts/I18nContext';
+import { useI18n } from '@/contexts/I18nContext';
 
 function Logo() {
   const { hover, tap } = useAnimationConfig();
@@ -294,6 +294,27 @@ const NavLink = React.memo(function NavLink({ children, href }: NavLinkProps) {
   );
 });
 
+function SimpleLanguageToggle() {
+  const { locale, setLocale } = useI18n();
+  return (
+    <div className="flex items-center gap-1 text-sm">
+      <button
+        onClick={() => setLocale('en')}
+        className={`px-1.5 py-0.5 rounded transition-colors ${locale === 'en' ? 'text-white font-semibold' : 'text-zinc-500 hover:text-zinc-300'}`}
+      >
+        EN
+      </button>
+      <span className="text-zinc-600">|</span>
+      <button
+        onClick={() => setLocale('ko')}
+        className={`px-1.5 py-0.5 rounded transition-colors ${locale === 'ko' ? 'text-white font-semibold' : 'text-zinc-500 hover:text-zinc-300'}`}
+      >
+        KO
+      </button>
+    </div>
+  );
+}
+
 export function Navigation() {
   const { shouldReduce, hover, tap } = useAnimationConfig();
 
@@ -315,7 +336,7 @@ export function Navigation() {
           <Link href="/columns" className="text-zinc-400 hover:text-white transition-colors duration-200 text-sm">
             Columns
           </Link>
-          <LanguageSwitcher />
+          <SimpleLanguageToggle />
           <motion.a
             href="mailto:jayleekr0125@gmail.com"
             className="glass px-4 py-2 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 transition-all duration-300"

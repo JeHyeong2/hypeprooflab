@@ -17,11 +17,17 @@ function parseMarkdown(md: string): string {
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
     // Horizontal rule
     .replace(/^---$/gm, '<hr class="border-zinc-800 my-12" />')
-    // Blockquote
-    .replace(/^"(.*)"$/gm, '<blockquote class="border-l-2 border-purple-500 pl-6 my-8 text-zinc-300 italic text-lg">$1</blockquote>')
+    // Blockquote (Markdown > style)
+    .replace(/^> (.*)$/gm, '<blockquote class="border-l-2 border-purple-500 pl-6 my-8 text-zinc-300 italic text-lg">$1</blockquote>')
+    // Quoted text with Korean-style quotes
+    .replace(/^["""](.+)["""]$/gm, '<blockquote class="border-l-2 border-purple-500 pl-6 my-8 text-zinc-300 italic text-lg">"$1"</blockquote>')
+    // List items
+    .replace(/^- \*\*(.*?)\*\*: (.*)$/gm, '<li class="mb-3 ml-4 list-disc"><strong class="text-white font-semibold">$1:</strong> $2</li>')
+    .replace(/^- (.*)$/gm, '<li class="mb-2 ml-4 list-disc">$1</li>')
     // Paragraphs (double newline)
     .replace(/\n\n/g, '</p><p class="mb-6 leading-relaxed">')
-    // Wrap in paragraph
+    // Single newlines in running text
+    .replace(/\n/g, '<br />')
     ;
 }
 
