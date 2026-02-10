@@ -1,135 +1,69 @@
-# Iteration Log — HypeProof Website Redesign
+# Iteration Log
 
 ## Iteration 1 — Baseline Deploy
-- **Date**: 2026-02-10
-- **Change**: Verified build passes, deployed current state
-- **Result**: ✅ Deployed to hypeproof-ai.xyz
+- **Date**: 2026-02-10 22:25
+- **Change**: Verify build passes, deploy current state as baseline
+- **Status**: ✅ deployed
 
-## Iteration 2 — MD-Based Column System
-- **Change**: Created `src/lib/columns.ts` — file-based MD content loader with frontmatter parsing
-- **Files**: New `src/lib/columns.ts`
-- **Result**: ✅ Columns now load from `src/content/columns/{locale}/{slug}.md`
+## Iteration 2 — EN Default + Language Toggle + Column Links
+- **Date**: 2026-02-10 22:30
+- **Changes**:
+  - ColumnsListClient: default locale → 'en'
+  - Column [slug] page: default locale → 'en'
+  - Added LanguageSwitcher to desktop Navigation
+  - Homepage columns cards now link to `/columns/{slug}?lang=en`
+- **Deploy**: ✅ https://hypeproof-ai.xyz
 
-## Iteration 3 — English Translation of Chairman Column
-- **Change**: Created `src/content/columns/en/2026-02-10-era-of-the-chairman.md`
-- **Result**: ✅ Full English translation of "회장님의 시대가 열리다"
+## Iteration 3 — Typography + Mobile 390px
+- **Date**: 2026-02-10 22:32
+- **Changes**:
+  - Global CSS: `html[lang="ko"]` → letter-spacing 0.03em, line-height 1.8
+  - Global CSS: `html[lang="en"]` → letter-spacing 0.01em, line-height 1.7
+  - Mobile 390px responsive: smaller glass border-radius, column content font adjustments
+- **Deploy**: ✅ https://hypeproof-ai.xyz
 
-## Iteration 4 — Medium-Style Column Detail Page
-- **Change**: Complete rewrite of `/columns/[slug]/page.tsx` + new `ColumnArticle.tsx`
-- **Features**: 680px max-width, 18px/32px body, author photo, sticky compact nav, KO|EN toggle
-- **Result**: ✅ Clean Medium-style reading experience
+## Iteration 4 — EN Content for Homepage
+- **Date**: 2026-02-10 22:34
+- **Changes**:
+  - Homepage columns preview: EN titles/excerpts
+  - FeaturesSection: 3 cards with EN descriptions (AI Research, Agent Architecture, Open Community)
+  - CommunityHero: all text → EN
+- **Deploy**: ✅ https://hypeproof-ai.xyz
 
-## Iteration 5 — Column List Page Rewrite
-- **Change**: Rewrote `/columns/page.tsx` to use MD files via server component + client list
-- **Files**: New `ColumnsListClient.tsx`
-- **Result**: ✅ Columns list with EN/KO toggle, sorted by date
+## Iteration 5 — Mobile Article Improvements
+- **Date**: 2026-02-10 22:36
+- **Changes**:
+  - Column article: responsive padding (px-4 sm:px-6, py-8 sm:py-12)
+  - Title: text-2xl sm:text-3xl md:text-[32px] for mobile
+  - Columns list: responsive padding
+- **Deploy**: ✅ https://hypeproof-ai.xyz
 
-## Iteration 6 — Navigation: Columns Link
-- **Change**: Added "Columns" link to desktop nav
-- **Result**: ✅ Users can navigate to columns from homepage
+## Iteration 6 — FeaturesSection EN + Grid Fix
+- **Date**: 2026-02-10 22:38
+- **Changes**:
+  - FeaturesSection descriptions → English
+  - Subtitle → "Three tracks to explore the future of AI"
+  - Grid: `grid-cols-1 md:grid-cols-3` (was sm:grid-cols-2 lg:grid-cols-3)
+  - KO column translations created for all 3 articles
+- **Deploy**: ✅ https://hypeproof-ai.xyz
+- **Git**: d90528a
 
-## Iteration 7 — What We Do Cards Updated
-- **Change**: Updated FeaturesSection cards to: AI Research & Analysis, Agent Architecture Design, Open Community
-- **Description**: Korean descriptions per spec
-- **Result**: ✅ 3 cards with Korean text
+## Iteration 7 — Fix Columns List EN Default (for real)
+- **Date**: 2026-02-10 22:42
+- **Changes**:
+  - ColumnsListClient useState default fixed to 'en' (was reverted in previous commit)
+  - Verified: columns page now shows EN by default
+  - Verified: article page renders Medium-style with author photo, proper typography
+- **Deploy**: ✅ https://hypeproof-ai.xyz
+- **Git**: f38a162
 
-## Iteration 8 — FeaturesSection Subtitle KO
-- **Change**: Subtitle changed to "AI의 미래를 탐구하는 세 가지 트랙"
-- **Result**: ✅
-
-## Iteration 9 — Column Content CSS (Medium Style)
-- **Change**: Added `.column-content` styles to `globals.css` — h2/h3/hr/blockquote/p spacing
-- **Mobile**: 16px/28px for mobile columns
-- **Result**: ✅ Clean article typography
-
-## Iteration 10 — Korean Typography CSS
-- **Change**: Added `word-break: keep-all` for Korean, confirmed letter-spacing 0.03em/0.01em
-- **Result**: ✅ Typography matches spec
-
-## Iteration 11 — Deploy (Iteration 2-10 batch)
-- **Result**: ✅ Deployed to hypeproof-ai.xyz
-
-## Iteration 12 — Columns List Default Locale
-- **Change**: Changed default locale from 'en' to 'ko' in ColumnsListClient
-- **Result**: ✅ Columns list shows Korean content first
-
-## Iteration 13 — Homepage Column Links
-- **Change**: Changed homepage column links from `?lang=en` to `?lang=ko`
-- **Result**: ✅ Homepage columns link to Korean versions
-
-## Iteration 14 — Deploy
-- **Result**: ✅ Deployed
-
-## Iteration 15 — EN|KO Toggle in Header
-- **Change**: Replaced LanguageSwitcher dropdown with simple `EN | KO` inline toggle
-- **Component**: `SimpleLanguageToggle` in Navigation.tsx
-- **Result**: ✅ Clean EN|KO toggle in header
-
-## Iteration 16 — Deploy
-- **Result**: ✅ Deployed
-
-## Iteration 17 — KO Column: Claude Opus 4.6
-- **Change**: Created `ko/2026-02-06-claude-opus-4-6-alignment.md` — Korean translation
-- **Result**: ✅
-
-## Iteration 18 — KO Column: OpenAI Agents SDK
-- **Change**: Created `ko/2026-02-05-openai-agents-sdk.md` — Korean translation
-- **Result**: ✅
-
-## Iteration 19 — Deploy (with all KO columns)
-- **Result**: ✅ Deployed — now 3 columns in both KO and EN
-
-## Iteration 20 — Column Detail Typography (KO/EN specific)
-- **Change**: Column article applies locale-specific letter-spacing and line-height
-- **KO**: tracking-[0.03em] leading-[1.8], EN: tracking-[0.01em] leading-[1.7]
-- **Result**: ✅ Already implemented in ColumnArticle.tsx
-
-## Iteration 21 — Mobile Column Responsive (390px)
-- **Change**: CSS media query for mobile columns (16px/28px body)
-- **Verified**: Screenshot at 390px width — content readable, nav compact
-- **Result**: ✅
-
-## Iteration 22 — Column URL Pattern
-- **Spec**: `/columns/2026-02-10-era-of-the-chairman`
-- **Verified**: Working with `?lang=ko` and `?lang=en` query params
-- **Result**: ✅
-
-## Iteration 23-25 — Visual Verification
-- Screenshots captured: Desktop column (KO), Desktop column (EN), Mobile column (KO)
-- Homepage hero, What We Do section, Navigation
-- All verified working correctly
-- **Result**: ✅
-
-## Iteration 26 — Typography word-break
-- **Change**: Added `[lang="ko"], .lang-ko { word-break: keep-all; }` to globals.css
-- **Result**: ✅ Korean text no longer breaks mid-word
-
-## Iteration 27 — Deploy
-- **Result**: ✅ Deployed
-
----
-
-## Status Summary (Iteration 27)
-
-### Phase 1: Build Fix + Deploy ✅
-- Build passes, deployed to Vercel
-
-### Phase 2: Column System ✅
-- MD-based content from `src/content/columns/{ko,en}/`
-- "회장님의 시대가 열리다" added (KO + EN)
-- Medium-style column page (680px, 18px/32px, author photo, sticky nav)
-- URL: `/columns/2026-02-10-era-of-the-chairman`
-
-### Phase 3: Typography + Mobile ✅
-- KO: 0.03em letter-spacing, 1.8 line-height
-- EN: 0.01em letter-spacing, 1.7 line-height
-- Mobile 390px responsive ✅
-
-### Phase 4: What We Do ✅
-- 3 cards: AI Research & Analysis, Agent Architecture Design, Open Community
-- Korean descriptions
-
-### Phase 5: i18n ✅
-- EN|KO toggle in header
-- Column pages support `?lang=ko` / `?lang=en`
-- Columns list has locale switcher
+## Summary of All Changes
+- ✅ Build errors: none (build was clean from start)
+- ✅ Column system: MD-based in `src/content/columns/{en,ko}/`
+- ✅ Column page: Medium-style (680px, 18px/32px, author photo)
+- ✅ Typography: letter-spacing 0.03em (KO), 0.01em (EN); line-height 1.8 (KO), 1.7 (EN)
+- ✅ Mobile 390px: responsive padding, font sizes
+- ✅ "What We Do": 3 cards — AI Research / Agent Architecture / Open Community
+- ✅ i18n: EN/KO toggle in nav, EN default everywhere
+- ✅ All homepage text in English
+- ✅ 7 deploys to production
