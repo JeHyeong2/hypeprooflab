@@ -8,7 +8,7 @@ import { PageLoader } from '@/components/LoadingSpinner';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { ScrollProgress, CursorFollower } from '@/components/ui/UIEffects';
-import { SocialProofBar, FloatingOrb } from '@/components/sections/HeroSection';
+import { FloatingOrb } from '@/components/sections/HeroSection';
 import { Hero } from '@/components/sections/Hero';
 import { FeaturesSection, FeatureCard } from '@/components/sections/FeaturesSection';
 import { LatestContentPreview, NewsletterSignup } from '@/components/sections/ContentSection';
@@ -18,7 +18,6 @@ import {
   LazyFeaturesSection,
   LazyLatestContentPreview,
   LazyNewsletterSignup,
-  MemoizedSocialProofBar
 } from '@/components/LazyComponents';
 import { useAnimationConfig } from '@/hooks/useReducedMotion';
 import { useI18n } from '@/contexts/I18nContext';
@@ -234,12 +233,7 @@ const CommunityHero = React.memo(function CommunityHero() {
   const { shouldReduce, hover, tap } = useAnimationConfig();
   const { locale } = useI18n();
   const isKo = locale === 'ko';
-  const stats = [
-    { label: isKo ? "참여 국가" : "Countries", value: "50+", icon: "🌍" },
-    { label: isKo ? "전문가 검증율" : "Expert Verified", value: "95%", icon: "✅" },
-    { label: isKo ? "멤버 만족도" : "Satisfaction", value: "4.8/5", icon: "⭐" },
-    { label: isKo ? "진행 프로젝트" : "Active Projects", value: "12+", icon: "🚀" }
-  ];
+  const stats: { label: string; value: string; icon: string }[] = [];
 
   return (
     <section id="community" className="py-32 px-6 relative overflow-hidden">
@@ -264,7 +258,7 @@ const CommunityHero = React.memo(function CommunityHero() {
             viewport={{ once: true }}
             transition={{ duration: shouldReduce ? 0.2 : 0.6 }}
           >
-            {isKo ? '글로벌 커뮤니티' : 'Global Community'}
+            {isKo ? '커뮤니티' : 'Community'}
           </motion.span>
           
           <motion.h2
@@ -274,7 +268,7 @@ const CommunityHero = React.memo(function CommunityHero() {
             viewport={{ once: true }}
             transition={{ duration: shouldReduce ? 0.2 : 0.8, delay: shouldReduce ? 0 : 0.2 }}
           >
-            {isKo ? <>AI <span className="text-gradient">전문가</span>들이 모이는 곳</> : <>Where AI <span className="text-gradient">Experts</span> Gather</>}
+            {isKo ? <>AI를 함께 <span className="text-gradient">탐구</span>하는 공간</> : <>Exploring AI <span className="text-gradient">Together</span></>}
           </motion.h2>
           
           <motion.p
@@ -306,7 +300,7 @@ const CommunityHero = React.memo(function CommunityHero() {
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M20.317 4.369a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/>
               </svg>
-              {isKo ? '3,500+ AI 전문가와 함께' : 'Join 3,500+ AI Experts'}
+              {isKo ? 'Discord 참여하기' : 'Join Our Discord'}
             </motion.a>
             <motion.a
               href="/community"
@@ -376,13 +370,13 @@ const CommunityHero = React.memo(function CommunityHero() {
           {[
             {
               icon: "🎯",
-              title: isKo ? "전문가 검증 콘텐츠" : "Expert-Verified Content",
-              description: isKo ? "모든 콘텐츠는 현업 AI 전문가들의 검증을 거쳐 신뢰성을 보장합니다." : "All content is verified by working AI professionals to ensure reliability."
+              title: isKo ? "팩트체크 콘텐츠" : "Fact-Checked Content",
+              description: isKo ? "팀이 직접 리서치하고 검증한 콘텐츠를 제공합니다." : "Content researched and verified by our team."
             },
             {
               icon: "🤝",
-              title: isKo ? "글로벌 네트워킹" : "Global Networking",
-              description: isKo ? "전 세계 50+ 국가의 AI 전문가들과 실시간으로 소통하고 협업하세요." : "Connect and collaborate in real-time with AI experts from 50+ countries."
+              title: isKo ? "함께 배우기" : "Learn Together",
+              description: isKo ? "AI에 관심 있는 사람들과 소통하고 협업하세요." : "Connect and collaborate with people who share your interest in AI."
             },
             {
               icon: "🚀",
@@ -437,8 +431,7 @@ export default function Home() {
         {/* Navigation */}
         <Navigation />
         
-        {/* Social Proof Bar */}
-        <MemoizedSocialProofBar />
+        {/* Social Proof Bar removed - contained fabricated stats */}
         
         {/* Hero Section */}
         <LazySection>
