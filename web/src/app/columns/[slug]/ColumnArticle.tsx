@@ -88,7 +88,7 @@ export default function ColumnArticle({ column, slug, availableLocales }: Props)
       </nav>
       
       {/* Article */}
-      <article className="max-w-[680px] mx-auto px-6 py-12">
+      <article className="max-w-[680px] mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Category */}
         <div className="mb-6">
           <span className="text-sm text-purple-400 uppercase tracking-wider font-medium">
@@ -97,10 +97,10 @@ export default function ColumnArticle({ column, slug, availableLocales }: Props)
         </div>
         
         {/* Title */}
-        <h1 className={`font-bold text-white mb-6 leading-tight ${
+        <h1 className={`font-bold text-white mb-6 ${
           currentLocale === 'ko' 
-            ? 'text-3xl md:text-[32px] tracking-[0.03em] leading-[1.4]' 
-            : 'text-3xl md:text-[32px] tracking-[0.01em] leading-[1.3]'
+            ? 'text-2xl sm:text-3xl md:text-[32px] tracking-[0.03em] leading-[1.4]' 
+            : 'text-2xl sm:text-3xl md:text-[32px] tracking-[0.01em] leading-[1.3]'
         }`}>
           {frontmatter.title}
         </h1>

@@ -215,7 +215,7 @@ function FeaturesSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            Three tracks to explore the future of AI
+            AI의 미래를 탐구하는 세 가지 트랙
           </motion.p>
         </motion.div>
         

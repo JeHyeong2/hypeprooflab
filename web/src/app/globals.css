@@ -250,6 +250,11 @@ body:lang(en) {
   to { transform: rotate(360deg); }
 }
 
+/* Korean word-break */
+[lang="ko"], .lang-ko {
+  word-break: keep-all;
+}
+
 /* Column article content - Medium style */
 .column-content h2 {
   font-size: 24px;
@@ -311,6 +316,39 @@ body:lang(en) {
     font-size: 18px;
     margin-top: 28px;
     margin-bottom: 12px;
+  }
+}
+
+/* Language-specific typography */
+html[lang="ko"] body {
+  letter-spacing: 0.03em;
+  line-height: 1.8;
+}
+
+html[lang="en"] body {
+  letter-spacing: 0.01em;
+  line-height: 1.7;
+}
+
+/* Mobile 390px responsive */
+@media (max-width: 390px) {
+  .glass {
+    border-radius: 14px;
+    padding: 16px;
+  }
+  
+  .column-content {
+    font-size: 15px !important;
+    line-height: 26px !important;
+  }
+  
+  .column-content h2 {
+    font-size: 18px;
+  }
+  
+  .column-content blockquote {
+    padding-left: 16px;
+    font-size: 15px;
   }
 }
 

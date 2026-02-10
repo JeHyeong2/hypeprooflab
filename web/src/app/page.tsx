@@ -61,8 +61,8 @@ const categoryStyles: Record<string, { gradient: string; icon: string }> = {
 const columns = [
   {
     slug: "2026-02-10-era-of-the-chairman",
-    title: "회장님의 시대가 열리다",
-    excerpt: "에이전트가 모든 실행을 대행하는 세상에서, 인간 고유의 가치는 정확히 어디에 있는가?",
+    title: "The Era of the Chairman Has Begun",
+    excerpt: "In a world where agents handle all execution, where exactly does uniquely human value reside?",
     date: "2026-02-10",
     category: "Opinion",
   },
@@ -204,7 +204,7 @@ const CommunityHero = React.memo(function CommunityHero() {
             viewport={{ once: true }}
             transition={{ duration: shouldReduce ? 0.2 : 0.6, delay: shouldReduce ? 0 : 0.4 }}
           >
-            HypeProof AI Community는 AI의 진짜 가치를 추구하는 전문가들이 모인 글로벌 허브입니다.
+            HypeProof AI Community is a global hub where professionals gather to pursue the real value of AI.
             <br />
             <span className="text-purple-400 font-medium">Signal &gt; Noise. Proof &gt; Promise.</span>
           </motion.p>
@@ -297,17 +297,17 @@ const CommunityHero = React.memo(function CommunityHero() {
             {
               icon: "🎯",
               title: "Expert-Verified Content",
-              description: "모든 콘텐츠는 현업 AI 전문가들의 검증을 거쳐 신뢰성을 보장합니다."
+              description: "All content is verified by working AI professionals, ensuring credibility and real-world relevance."
             },
             {
               icon: "🤝",
               title: "Global Networking",
-              description: "전 세계 50+ 국가의 AI 전문가들과 실시간으로 소통하고 협업하세요."
+              description: "Connect and collaborate in real-time with AI experts from 50+ countries worldwide."
             },
             {
               icon: "🚀",
               title: "Collaborative Projects",
-              description: "아이디어를 실제 프로젝트로 발전시킬 수 있는 환경과 파트너를 제공합니다."
+              description: "We provide the environment and partners to turn ideas into real, working projects."
             }
           ].map((feature, i) => (
             <motion.div
@@ -397,7 +397,7 @@ export default function Home() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {columns.map((column, i) => (
-                  <Link key={column.slug} href={`/columns/${column.slug}?lang=en`}>
+                  <Link key={column.slug} href={`/columns/${column.slug}?lang=ko`}>
                     <ColumnCard column={column} delay={i * 0.1} />
                   </Link>
                 ))}
