@@ -19,21 +19,35 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { slug } = await params;
   const { lang } = await searchParams;
-  const locale = lang === 'ko' ? 'ko' : 'en';
-  const column = getColumn(slug, locale) || getColumn(slug, locale === 'en' ? 'ko' : 'en');
+  const locale = lang === 'en' ? 'en' : 'ko';
+  const column = getColumn(slug, locale) || getColumn(slug, locale === 'ko' ? 'en' : 'ko');
   if (!column) return {};
+  const fm = column.frontmatter;
   return {
-    title: column.frontmatter.title,
-    description: column.frontmatter.excerpt,
+    title: fm.title,
+    description: fm.excerpt,
+    openGraph: {
+      title: fm.title,
+      description: fm.excerpt,
+      type: 'article',
+      publishedTime: fm.date,
+      authors: [fm.author],
+      tags: fm.tags,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: fm.title,
+      description: fm.excerpt,
+    },
   };
 }
 
 export default async function ColumnPage({ params, searchParams }: Props) {
   const { slug } = await params;
   const { lang } = await searchParams;
-  const locale = lang === 'ko' ? 'ko' : 'en';
+  const locale = lang === 'en' ? 'en' : 'ko';
   
-  const column = getColumn(slug, locale) || getColumn(slug, locale === 'en' ? 'ko' : 'en');
+  const column = getColumn(slug, locale) || getColumn(slug, locale === 'ko' ? 'en' : 'ko');
   if (!column) notFound();
   
   const availableLocales = getAvailableLocalesForSlug(slug);

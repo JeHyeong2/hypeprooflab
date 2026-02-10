@@ -61,7 +61,7 @@ export default function ColumnArticle({ column, slug, availableLocales }: Props)
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-300">
+    <div className="min-h-screen bg-zinc-950 text-zinc-300" style={{ scrollBehavior: 'smooth' }}>
       {/* Reading progress bar */}
       <div className="fixed top-0 left-0 right-0 z-[60] h-[2px] bg-transparent">
         <div
@@ -71,7 +71,7 @@ export default function ColumnArticle({ column, slug, availableLocales }: Props)
       </div>
       
       {/* Sticky compact nav */}
-      <nav className="sticky top-0 z-50 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800/50">
+      <nav className="sticky top-0 z-50 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800/50" aria-label="Column navigation">
         <div className="max-w-[680px] mx-auto px-6 py-3 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-md bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
@@ -106,7 +106,7 @@ export default function ColumnArticle({ column, slug, availableLocales }: Props)
               href="/columns"
               className="text-sm text-zinc-400 hover:text-white transition-colors"
             >
-              All Columns
+              {currentLocale === 'ko' ? '모든 칼럼' : 'All Columns'}
             </Link>
           </div>
         </div>
@@ -159,12 +159,14 @@ export default function ColumnArticle({ column, slug, availableLocales }: Props)
           <div>
             <div className="text-white font-medium">{frontmatter.author}</div>
             <div className="text-zinc-500 text-sm">
-              {new Date(frontmatter.date).toLocaleDateString(
-                currentLocale === 'ko' ? 'ko-KR' : 'en-US',
-                { year: 'numeric', month: 'long', day: 'numeric' }
-              )}
+              <time dateTime={frontmatter.date}>
+                {new Date(frontmatter.date).toLocaleDateString(
+                  currentLocale === 'ko' ? 'ko-KR' : 'en-US',
+                  { year: 'numeric', month: 'long', day: 'numeric' }
+                )}
+              </time>
               {' · '}
-              {frontmatter.readTime} read
+              {frontmatter.readTime} {currentLocale === 'ko' ? '읽기' : 'read'}
             </div>
           </div>
         </div>
@@ -196,7 +198,7 @@ export default function ColumnArticle({ column, slug, availableLocales }: Props)
             href="/columns"
             className="text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium"
           >
-            ← Back to all columns
+            {currentLocale === 'ko' ? '← 모든 칼럼으로 돌아가기' : '← Back to all columns'}
           </Link>
         </div>
       </article>

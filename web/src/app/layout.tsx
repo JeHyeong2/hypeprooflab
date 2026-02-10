@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     default: "HypeProof AI - We Don't Chase Hype. We Prove It.",
     template: "%s | HypeProof AI"
   },
-  description: "Deep research, honest conversations, and practical AI insights for builders and skeptics alike. Cutting through AI hype with rigorous validation and real-world testing.",
+  description: "AI의 진짜 가치를 추구합니다. 심층 리서치, 에이전트 아키텍처 설계, 그리고 글로벌 AI 커뮤니티. Deep research, honest conversations, and practical AI insights.",
   applicationName: "HypeProof AI",
   keywords: [
     "AI research", "artificial intelligence", "AI podcast", "machine learning", 
     "AI tools", "technology research", "AI insights", "AI validation", 
-    "AI testing", "AI skeptics", "AI builders", "technology podcast",
-    "artificial intelligence research", "AI hype", "AI proof", "AI trends"
+    "AI agent", "multi-agent system", "에이전트 아키텍처", "AI 리서치",
+    "인공지능", "AI 커뮤니티", "HypeProof", "AI 분석"
   ],
   authors: [
     { name: "Jay Lee", url: "https://hypeproof-ai.xyz/team/jay" },
