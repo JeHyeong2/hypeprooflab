@@ -9,52 +9,52 @@ const mockContent = {
   article: [
     {
       id: '1',
-      slug: 'claude-opus-4-6-alignment',
-      title: 'Claude Opus 4.6: When Safety Meets Soul',
+      slug: 'era-of-the-chairman',
+      title: 'The Era of the Chairman Has Begun',
       type: 'article' as const,
-      excerpt: 'Anthropic\'s latest release isn\'t just an upgrade—it\'s a philosophical statement about where AI alignment is heading.',
+      excerpt: 'In a world where agents handle all execution, where exactly does uniquely human value reside?',
       content: {
         format: 'markdown' as const,
-        content: '# Claude Opus 4.6: When Safety Meets Soul\n\nAnthropic has just released Claude Opus 4.6...'
+        content: '# The Era of the Chairman Has Begun\n\n...'
       },
       author: {
         id: '1',
         name: 'Jay Lee',
         slug: 'jay-lee',
         role: 'founder' as const,
-        expertise: ['AI Safety', 'Machine Learning']
+        expertise: ['AI Agent', 'Digital Economy']
       },
-      category: 'research' as const,
-      tags: ['Claude', 'AI Safety', 'Alignment'],
-      readingTime: 8,
-      createdAt: '2026-02-06T00:00:00Z',
-      updatedAt: '2026-02-06T00:00:00Z',
-      publishedAt: '2026-02-06T00:00:00Z',
+      category: 'opinion' as const,
+      tags: ['AI Agent', 'Digital Economy', 'AEO'],
+      readingTime: 12,
+      createdAt: '2026-02-10T00:00:00Z',
+      updatedAt: '2026-02-10T00:00:00Z',
+      publishedAt: '2026-02-10T00:00:00Z',
       status: 'published' as const
     },
     {
       id: '2',
-      slug: 'openai-agents-sdk',
-      title: 'The Rise of Agent Frameworks',
+      slug: 'quiet-exit',
+      title: 'Five Stages of Losing Your Job — A Worker\'s Quiet Exit',
       type: 'article' as const,
-      excerpt: 'From OpenAI Swarm to Claude Code SDK, the agent wars are heating up. Here\'s what it means for developers.',
+      excerpt: 'The day workplace automation became real, one office worker traversed the Kübler-Ross five stages to redefine what his Job truly meant.',
       content: {
         format: 'markdown' as const,
-        content: '# The Rise of Agent Frameworks\n\nThe AI agent ecosystem is exploding...'
+        content: '# Five Stages of Losing Your Job\n\n...'
       },
       author: {
         id: '1',
         name: 'Jay Lee',
         slug: 'jay-lee',
         role: 'founder' as const,
-        expertise: ['AI Development', 'Software Engineering']
+        expertise: ['AI', 'Future of Work']
       },
-      category: 'analysis' as const,
-      tags: ['OpenAI', 'Agents', 'SDK'],
-      readingTime: 6,
-      createdAt: '2026-02-05T00:00:00Z',
-      updatedAt: '2026-02-05T00:00:00Z',
-      publishedAt: '2026-02-05T00:00:00Z',
+      category: 'opinion' as const,
+      tags: ['AI', 'Career', 'Automation'],
+      readingTime: 15,
+      createdAt: '2026-02-10T00:00:00Z',
+      updatedAt: '2026-02-10T00:00:00Z',
+      publishedAt: '2026-02-10T00:00:00Z',
       status: 'published' as const
     }
   ],

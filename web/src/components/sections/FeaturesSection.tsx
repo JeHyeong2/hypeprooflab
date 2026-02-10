@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useI18n } from '@/contexts/I18nContext';
 
 const slideInFromLeft = {
   initial: { x: -60, opacity: 0 },
@@ -146,21 +147,30 @@ function FeatureCard({ icon, title, description, delay }: {
 }
 
 function FeaturesSection() {
+  const { locale } = useI18n();
+  const isKo = locale === 'ko';
+  
   const features = [
     {
       icon: "🔬",
       title: "AI Research & Analysis",
-      description: "최신 AI 기술을 리서치하고, 심층 분석 칼럼을 통해 진짜 인사이트를 전달합니다. Hype를 걷어내고 실체를 검증합니다."
+      description: isKo 
+        ? "최신 AI 기술을 리서치하고, 심층 분석 칼럼을 통해 진짜 인사이트를 전달합니다. Hype를 걷어내고 실체를 검증합니다."
+        : "We research cutting-edge AI and deliver real insights through deep analysis columns. Stripping away hype to verify substance."
     },
     {
       icon: "🏗️",
       title: "Agent Architecture Design", 
-      description: "멀티 에이전트 시스템 설계부터 실전 구축까지. 이론이 아닌 실제 동작하는 에이전트 아키텍처를 만듭니다."
+      description: isKo
+        ? "멀티 에이전트 시스템 설계부터 실전 구축까지. 이론이 아닌 실제 동작하는 에이전트 아키텍처를 만듭니다."
+        : "From multi-agent system design to production deployment. We build agent architectures that actually work, not just theory."
     },
     {
       icon: "🌐",
       title: "Open Community",
-      description: "디스코드 기반 AI 엔지니어 커뮤니티. 전 세계 전문가들과 함께 배우고, 토론하고, 만듭니다."
+      description: isKo
+        ? "디스코드 기반 AI 엔지니어 커뮤니티. 전 세계 전문가들과 함께 배우고, 토론하고, 만듭니다."
+        : "A Discord-based AI engineer community. Learn, discuss, and build with experts from around the world."
     }
   ];
 
@@ -215,7 +225,7 @@ function FeaturesSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            AI의 미래를 탐구하는 세 가지 트랙
+            {isKo ? 'AI의 미래를 탐구하는 세 가지 트랙' : 'Three tracks to explore the future of AI'}
           </motion.p>
         </motion.div>
         

@@ -21,6 +21,7 @@ import {
   MemoizedSocialProofBar
 } from '@/components/LazyComponents';
 import { useAnimationConfig } from '@/hooks/useReducedMotion';
+import { useI18n } from '@/contexts/I18nContext';
 
 // Performance optimizations
 const useIntersectionObserver = (
@@ -58,31 +59,42 @@ const categoryStyles: Record<string, { gradient: string; icon: string }> = {
   "Opinion": { gradient: "from-orange-600/50 to-red-900/50", icon: "💭" },
 };
 
-const columns = [
-  {
-    slug: "2026-02-10-era-of-the-chairman",
-    title: "회장님의 시대가 열리다",
-    excerpt: "에이전트가 모든 실행을 대행하는 세상에서, 인간 고유의 가치는 정확히 어디에 있는가?",
-    date: "2026-02-10",
-    category: "Opinion",
-  },
-  {
-    slug: "2026-02-06-claude-opus-4-6-alignment",
-    title: "Claude Opus 4.6: 안전과 영혼이 만나다",
-    excerpt: "Anthropic의 최신 릴리스는 단순한 업그레이드가 아니다 — AI 정렬의 미래에 대한 철학적 선언.",
-    date: "2026-02-06",
-    category: "Research",
-  },
-  {
-    slug: "2026-02-05-openai-agents-sdk",
-    title: "에이전트 프레임워크의 부상",
-    excerpt: "OpenAI Swarm에서 Claude Code SDK까지, 에이전트 전쟁이 뜨거워지고 있다.",
-    date: "2026-02-05",
-    category: "Analysis",
-  },
-];
+const columnsData = {
+  ko: [
+    {
+      slug: "2026-02-10-era-of-the-chairman",
+      title: "회장님의 시대가 열리다",
+      excerpt: "에이전트가 모든 실행을 대행하는 세상에서, 인간 고유의 가치는 정확히 어디에 있는가?",
+      date: "2026-02-10",
+      category: "Opinion",
+    },
+    {
+      slug: "2026-02-10-quiet-exit",
+      title: "Job을 잃는 다섯 단계 — 어느 직장인의 조용한 퇴장기",
+      excerpt: "업무 자동화가 현실이 된 어느 날, 한 직장인이 쿠블러-로스의 다섯 단계를 거치며 자신의 Job을 재정의하기까지의 이야기.",
+      date: "2026-02-10",
+      category: "Opinion",
+    },
+  ],
+  en: [
+    {
+      slug: "2026-02-10-era-of-the-chairman",
+      title: "The Era of the Chairman Has Begun",
+      excerpt: "In a world where agents handle all execution, where exactly does uniquely human value reside?",
+      date: "2026-02-10",
+      category: "Opinion",
+    },
+    {
+      slug: "2026-02-10-quiet-exit",
+      title: "Five Stages of Losing Your Job — A Worker's Quiet Exit",
+      excerpt: "The day workplace automation became real, one office worker traversed the Kübler-Ross five stages to redefine what his Job truly meant.",
+      date: "2026-02-10",
+      category: "Opinion",
+    },
+  ],
+};
 
-const ColumnCard = React.memo(function ColumnCard({ column, delay }: { column: typeof columns[0]; delay: number }) {
+const ColumnCard = React.memo(function ColumnCard({ column, delay, locale }: { column: typeof columnsData.ko[0]; delay: number; locale?: string }) {
   const style = categoryStyles[column.category] || categoryStyles["Research"];
   const { shouldReduce, hover, tap } = useAnimationConfig();
 
@@ -125,7 +137,7 @@ const ColumnCard = React.memo(function ColumnCard({ column, delay }: { column: t
         </p>
         
         <div className="flex items-center text-purple-400 text-sm font-medium mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <span>칼럼 읽기</span>
+          <span>{locale === 'ko' ? '칼럼 읽기' : 'Read column'}</span>
           {!shouldReduce ? (
             <motion.span
               className="ml-1"
@@ -151,14 +163,82 @@ const ColumnCard = React.memo(function ColumnCard({ column, delay }: { column: t
   );
 });
 
+// Columns Preview Section
+const ColumnsPreview = React.memo(function ColumnsPreview() {
+  const { locale } = useI18n();
+  const { shouldReduce, hover, tap } = useAnimationConfig();
+  const columns = locale === 'ko' ? columnsData.ko : columnsData.en;
+  const isKo = locale === 'ko';
+
+  return (
+    <LazySection>
+      <section className="py-24 px-6">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl font-bold text-white mb-4">
+              {isKo ? '최신 칼럼' : 'Latest Columns'}
+            </h2>
+            <p className="text-zinc-500 max-w-2xl mx-auto">
+              {isKo ? '팀의 심층 분석, 리서치, 그리고 인사이트' : 'Deep analysis, research, and insights from the team'}
+            </p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {columns.map((column, i) => (
+              <Link key={column.slug} href={`/columns/${column.slug}?lang=${locale}`}>
+                <ColumnCard column={column} delay={i * 0.1} locale={locale} />
+              </Link>
+            ))}
+          </div>
+          
+          <motion.div
+            className="text-center mt-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+          >
+            <Link href="/columns">
+              <motion.span
+                className="glass px-8 py-3 text-white font-medium rounded-full border border-zinc-700/50 hover:border-purple-500/50 transition-all duration-300 inline-flex items-center gap-2 cursor-pointer"
+                whileHover={hover}
+                whileTap={tap}
+              >
+                {isKo ? '모든 칼럼 보기' : 'View all columns'}
+                {!shouldReduce ? (
+                  <motion.span
+                    animate={{ x: [0, 3, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    →
+                  </motion.span>
+                ) : (
+                  <span>→</span>
+                )}
+              </motion.span>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+    </LazySection>
+  );
+});
+
 // Community Section Component
 const CommunityHero = React.memo(function CommunityHero() {
   const { shouldReduce, hover, tap } = useAnimationConfig();
+  const { locale } = useI18n();
+  const isKo = locale === 'ko';
   const stats = [
-    { label: "참여 국가", value: "50+", icon: "🌍" },
-    { label: "전문가 검증율", value: "95%", icon: "✅" },
-    { label: "멤버 만족도", value: "4.8/5", icon: "⭐" },
-    { label: "진행 프로젝트", value: "12+", icon: "🚀" }
+    { label: isKo ? "참여 국가" : "Countries", value: "50+", icon: "🌍" },
+    { label: isKo ? "전문가 검증율" : "Expert Verified", value: "95%", icon: "✅" },
+    { label: isKo ? "멤버 만족도" : "Satisfaction", value: "4.8/5", icon: "⭐" },
+    { label: isKo ? "진행 프로젝트" : "Active Projects", value: "12+", icon: "🚀" }
   ];
 
   return (
@@ -184,7 +264,7 @@ const CommunityHero = React.memo(function CommunityHero() {
             viewport={{ once: true }}
             transition={{ duration: shouldReduce ? 0.2 : 0.6 }}
           >
-            글로벌 커뮤니티
+            {isKo ? '글로벌 커뮤니티' : 'Global Community'}
           </motion.span>
           
           <motion.h2
@@ -194,7 +274,7 @@ const CommunityHero = React.memo(function CommunityHero() {
             viewport={{ once: true }}
             transition={{ duration: shouldReduce ? 0.2 : 0.8, delay: shouldReduce ? 0 : 0.2 }}
           >
-            AI <span className="text-gradient">전문가</span>들이 모이는 곳
+            {isKo ? <>AI <span className="text-gradient">전문가</span>들이 모이는 곳</> : <>Where AI <span className="text-gradient">Experts</span> Gather</>}
           </motion.h2>
           
           <motion.p
@@ -204,7 +284,7 @@ const CommunityHero = React.memo(function CommunityHero() {
             viewport={{ once: true }}
             transition={{ duration: shouldReduce ? 0.2 : 0.6, delay: shouldReduce ? 0 : 0.4 }}
           >
-            HypeProof AI Community는 AI의 진짜 가치를 추구하는 전문가들이 모인 글로벌 허브입니다.
+            {isKo ? 'HypeProof AI Community는 AI의 진짜 가치를 추구하는 전문가들이 모인 글로벌 허브입니다.' : 'HypeProof AI Community is a global hub where experts pursue the real value of AI.'}
             <br />
             <span className="text-purple-400 font-medium">Signal &gt; Noise. Proof &gt; Promise.</span>
           </motion.p>
@@ -226,7 +306,7 @@ const CommunityHero = React.memo(function CommunityHero() {
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M20.317 4.369a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/>
               </svg>
-              3,500+ AI 전문가와 함께
+              {isKo ? '3,500+ AI 전문가와 함께' : 'Join 3,500+ AI Experts'}
             </motion.a>
             <motion.a
               href="/community"
@@ -234,7 +314,7 @@ const CommunityHero = React.memo(function CommunityHero() {
               whileHover={shouldReduce ? {} : { scale: 1.02, boxShadow: "0 0 20px rgba(255, 255, 255, 0.1)" }}
               whileTap={tap}
             >
-              커뮤니티 둘러보기
+              {isKo ? '커뮤니티 둘러보기' : 'Explore Community'}
             </motion.a>
           </motion.div>
         </motion.div>
@@ -296,18 +376,18 @@ const CommunityHero = React.memo(function CommunityHero() {
           {[
             {
               icon: "🎯",
-              title: "전문가 검증 콘텐츠",
-              description: "모든 콘텐츠는 현업 AI 전문가들의 검증을 거쳐 신뢰성을 보장합니다."
+              title: isKo ? "전문가 검증 콘텐츠" : "Expert-Verified Content",
+              description: isKo ? "모든 콘텐츠는 현업 AI 전문가들의 검증을 거쳐 신뢰성을 보장합니다." : "All content is verified by working AI professionals to ensure reliability."
             },
             {
               icon: "🤝",
-              title: "글로벌 네트워킹",
-              description: "전 세계 50+ 국가의 AI 전문가들과 실시간으로 소통하고 협업하세요."
+              title: isKo ? "글로벌 네트워킹" : "Global Networking",
+              description: isKo ? "전 세계 50+ 국가의 AI 전문가들과 실시간으로 소통하고 협업하세요." : "Connect and collaborate in real-time with AI experts from 50+ countries."
             },
             {
               icon: "🚀",
-              title: "협업 프로젝트",
-              description: "아이디어를 실제 프로젝트로 발전시킬 수 있는 환경과 파트너를 제공합니다."
+              title: isKo ? "협업 프로젝트" : "Collaborative Projects",
+              description: isKo ? "아이디어를 실제 프로젝트로 발전시킬 수 있는 환경과 파트너를 제공합니다." : "We provide the environment and partners to turn ideas into real projects."
             }
           ].map((feature, i) => (
             <motion.div
@@ -380,59 +460,8 @@ export default function Home() {
         </LazyWrapper>
         
         {/* Columns Preview */}
-        <LazySection>
-          <section className="py-24 px-6">
-            <div className="max-w-6xl mx-auto">
-              <motion.div
-                className="text-center mb-16"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <h2 className="text-4xl font-bold text-white mb-4">Latest Columns</h2>
-                <p className="text-zinc-500 max-w-2xl mx-auto">
-                  팀의 심층 분석, 리서치, 그리고 인사이트
-                </p>
-              </motion.div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {columns.map((column, i) => (
-                  <Link key={column.slug} href={`/columns/${column.slug}?lang=ko`}>
-                    <ColumnCard column={column} delay={i * 0.1} />
-                  </Link>
-                ))}
-              </div>
-              
-              <motion.div
-                className="text-center mt-12"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-              >
-                <Link href="/columns">
-                  <motion.span
-                    className="glass px-8 py-3 text-white font-medium rounded-full border border-zinc-700/50 hover:border-purple-500/50 transition-all duration-300 inline-flex items-center gap-2 cursor-pointer"
-                    whileHover={hover}
-                    whileTap={tap}
-                  >
-                    모든 칼럼 보기
-                    {!shouldReduce ? (
-                      <motion.span
-                        animate={{ x: [0, 3, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      >
-                        →
-                      </motion.span>
-                    ) : (
-                      <span>→</span>
-                    )}
-                  </motion.span>
-                </Link>
-              </motion.div>
-            </div>
-          </section>
-        </LazySection>
+        <ColumnsPreview />
+        
         
         {/* Community Section */}
         <LazySection>

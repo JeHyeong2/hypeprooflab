@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useI18n } from '@/contexts/I18nContext';
 import { FloatingOrb } from './HeroSection';
 import { useAnimationConfig } from '@/hooks/useReducedMotion';
 
@@ -117,6 +118,8 @@ const TeamMemberCard = React.memo(function TeamMemberCard({ member, index }: Tea
 
 export function Team() {
   const { shouldReduce, tap } = useAnimationConfig();
+  const { locale } = useI18n();
+  const isKo = locale === 'ko';
 
   return (
     <section id="team" className="py-32 px-6 relative overflow-hidden">
@@ -142,7 +145,7 @@ export function Team() {
             viewport={{ once: true }}
             transition={{ duration: shouldReduce ? 0.2 : 0.6 }}
           >
-            팀 소개
+            {isKo ? '팀 소개' : 'Meet the Team'}
           </motion.span>
 
           <motion.h2
@@ -152,7 +155,7 @@ export function Team() {
             viewport={{ once: true }}
             transition={{ duration: shouldReduce ? 0.2 : 0.8, delay: shouldReduce ? 0 : 0.2 }}
           >
-            <span className="text-gradient">AI 전문가</span>들이 만듭니다
+            {isKo ? <><span className="text-gradient">AI 전문가</span>들이 만듭니다</> : <>Built by <span className="text-gradient">AI Experts</span></>}
           </motion.h2>
 
           <motion.p
@@ -162,7 +165,7 @@ export function Team() {
             viewport={{ once: true }}
             transition={{ duration: shouldReduce ? 0.2 : 0.6, delay: shouldReduce ? 0 : 0.4 }}
           >
-            우리는 AI의 진짜 가치를 발견하고 공유하는 데 열정을 가진 전문가들입니다.
+            {isKo ? '우리는 AI의 진짜 가치를 발견하고 공유하는 데 열정을 가진 전문가들입니다.' : 'We are experts passionate about discovering and sharing the real value of AI.'}
           </motion.p>
         </motion.div>
 
@@ -188,7 +191,7 @@ export function Team() {
           transition={{ duration: shouldReduce ? 0.2 : 0.6, delay: shouldReduce ? 0 : 0.6 }}
         >
           <p className="text-zinc-400 mb-6">
-            AI 분야의 전문가이신가요? 함께 더 나은 미래를 만들어갑시다.
+            {isKo ? 'AI 분야의 전문가이신가요? 함께 더 나은 미래를 만들어갑시다.' : 'Are you an AI expert? Let\'s build a better future together.'}
           </p>
           <motion.a
             href="mailto:jayleekr0125@gmail.com"
@@ -196,7 +199,7 @@ export function Team() {
             whileHover={shouldReduce ? {} : { scale: 1.05, boxShadow: "0 0 30px rgba(168, 85, 247, 0.4)" }}
             whileTap={tap}
           >
-            팀 합류하기
+            {isKo ? '팀 합류하기' : 'Join the Team'}
           </motion.a>
         </motion.div>
       </div>

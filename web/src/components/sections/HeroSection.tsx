@@ -2,6 +2,7 @@
 
 import React, { useRef, useMemo, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useI18n } from '@/contexts/I18nContext';
 
 import { usePerformanceOptimization, useOptimizedIntersectionObserver, getOptimizedAnimationVariants } from '@/hooks/usePerformanceOptimization';
 
@@ -58,11 +59,13 @@ const FloatingOrb = React.memo(({ className, delay = 0 }: { className: string; d
 FloatingOrb.displayName = 'FloatingOrb';
 
 function SocialProofBar() {
+  const { locale } = useI18n();
+  const isKo = locale === 'ko';
   const stats = [
-    { label: "에피소드", value: "12+" },
-    { label: "리서처", value: "5" },
-    { label: "진행 프로젝트", value: "3" },
-    { label: "참여 국가", value: "2" }
+    { label: isKo ? "에피소드" : "Episodes", value: "12+" },
+    { label: isKo ? "리서처" : "Researchers", value: "5" },
+    { label: isKo ? "진행 프로젝트" : "Active Projects", value: "3" },
+    { label: isKo ? "참여 국가" : "Countries", value: "2" }
   ];
 
   return (
