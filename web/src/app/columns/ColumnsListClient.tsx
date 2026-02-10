@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function ColumnsListClient({ koColumns, enColumns }: Props) {
-  const [locale, setLocale] = useState<'ko' | 'en'>('ko');
+  const [locale, setLocale] = useState<'ko' | 'en'>('en');
   const columns = locale === 'ko' ? koColumns : enColumns;
 
   return (

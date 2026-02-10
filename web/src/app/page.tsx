@@ -61,22 +61,22 @@ const categoryStyles: Record<string, { gradient: string; icon: string }> = {
 const columns = [
   {
     slug: "2026-02-10-era-of-the-chairman",
-    title: "The Era of the Chairman Has Begun",
-    excerpt: "In a world where agents handle all execution, where exactly does uniquely human value reside?",
+    title: "회장님의 시대가 열리다",
+    excerpt: "에이전트가 모든 실행을 대행하는 세상에서, 인간 고유의 가치는 정확히 어디에 있는가?",
     date: "2026-02-10",
     category: "Opinion",
   },
   {
     slug: "2026-02-06-claude-opus-4-6-alignment",
-    title: "Claude Opus 4.6: When Safety Meets Soul",
-    excerpt: "Anthropic's latest release isn't just an upgrade—it's a philosophical statement about where AI alignment is heading.",
+    title: "Claude Opus 4.6: 안전과 영혼이 만나다",
+    excerpt: "Anthropic의 최신 릴리스는 단순한 업그레이드가 아니다 — AI 정렬의 미래에 대한 철학적 선언.",
     date: "2026-02-06",
     category: "Research",
   },
   {
     slug: "2026-02-05-openai-agents-sdk",
-    title: "The Rise of Agent Frameworks",
-    excerpt: "From OpenAI Swarm to Claude Code SDK, the agent wars are heating up. Here's what it means for developers.",
+    title: "에이전트 프레임워크의 부상",
+    excerpt: "OpenAI Swarm에서 Claude Code SDK까지, 에이전트 전쟁이 뜨거워지고 있다.",
     date: "2026-02-05",
     category: "Analysis",
   },
@@ -389,9 +389,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-4xl font-bold text-white mb-4">Latest Thinking</h2>
+                <h2 className="text-4xl font-bold text-white mb-4">Latest Columns</h2>
                 <p className="text-zinc-500 max-w-2xl mx-auto">
-                  In-depth analysis, research findings, and opinions from our team
+                  팀의 심층 분석, 리서치, 그리고 인사이트
                 </p>
               </motion.div>
               
@@ -416,7 +416,7 @@ export default function Home() {
                     whileHover={hover}
                     whileTap={tap}
                   >
-                    View All Articles
+                    모든 칼럼 보기
                     {!shouldReduce ? (
                       <motion.span
                         animate={{ x: [0, 3, 0] }}
