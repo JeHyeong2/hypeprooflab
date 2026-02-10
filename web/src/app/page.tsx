@@ -118,7 +118,7 @@ const ColumnCard = React.memo(function ColumnCard({ column, delay, locale }: { c
       
       <div className="space-y-3 relative z-10">
         <time className="text-xs text-zinc-500">
-          {new Date(column.date).toLocaleDateString('ko-KR', { 
+          {new Date(column.date).toLocaleDateString(locale === 'ko' ? 'ko-KR' : 'en-US', { 
             year: 'numeric',
             month: 'long', 
             day: 'numeric'
