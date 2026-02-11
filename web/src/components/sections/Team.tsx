@@ -26,7 +26,7 @@ const teamMembers = [
     name: "TJ",
     role: "Contents / Media Production",
     bio: "Media Specialist / Ex-Founder",
-    image: "/members/tj.svg",
+    image: "/members/tj.png",
   },
   {
     name: "Ryan",
