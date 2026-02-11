@@ -20,7 +20,7 @@ const teamMembers = [
     role: "Marketing / Strategy",
     bio: "Global Offline Marketing Specialist",
     education: "George Washington Univ. — Psychology & Philosophy",
-    image: "/members/kiwon.png",
+    image: "/members/kiwon.jpeg",
   },
   {
     name: "TJ",
