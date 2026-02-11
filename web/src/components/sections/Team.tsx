@@ -43,6 +43,12 @@ const teamMembers = [
     image: "/members/jy.png",
   },
   {
+    name: "BH",
+    role: "Tech",
+    bio: "Ph.D Candidate in Physics",
+    image: "/members/bh.jpg",
+  },
+  {
     name: "Sebastian",
     role: "Engineering / Management",
     bio: "Engineering Manager @ Silicon Valley Tech Company",

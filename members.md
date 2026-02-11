@@ -35,6 +35,13 @@
 - **Education**: M.S. in Physics
 - **Role**: Research / AI Engineering
 
+## BH
+
+> **Ph.D Candidate in Physics**
+
+- **Education**: Ph.D in Physics (in progress)
+- **Role**: Tech
+
 ## Sebastian
 
 > **Engineering Manager @ Silicon Valley Tech Company**
