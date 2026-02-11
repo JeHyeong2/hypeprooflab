@@ -7,6 +7,7 @@ import { CookieConsent } from "@/components/CookieConsent";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://hypeproof-ai.xyz'),
   title: {
     default: "HypeProof AI - We Don't Chase Hype. We Prove It.",
     template: "%s | HypeProof AI"
