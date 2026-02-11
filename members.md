@@ -37,10 +37,10 @@
 
 ## BH
 
-> **Ph.D Candidate in Physics**
+> **Ph.D. Candidate @ CMS Collaboration (CERN)**
 
-- **Education**: Ph.D in Physics (in progress)
-- **Role**: Tech
+- **Education**: Kyungpook National Univ. — Experimental Physics
+- **Role**: Particle Physics / Data Analysis
 
 ## Sebastian
 

@@ -44,8 +44,9 @@ const teamMembers = [
   },
   {
     name: "BH",
-    role: "Tech",
-    bio: "Ph.D Candidate in Physics",
+    role: "Particle Physics / Data Analysis",
+    bio: "Ph.D. Candidate @ CMS Collaboration (CERN)",
+    education: "Kyungpook National Univ. — Experimental Physics",
     image: "/members/bh.jpg",
   },
   {
