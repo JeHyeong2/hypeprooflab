@@ -8,6 +8,7 @@ export interface MemberInfo {
 
 const KNOWN_MEMBERS: MemberInfo[] = [
   { email: 'jayleekr0125@gmail.com', displayName: 'Jay', role: 'admin' },
+  { email: 'jabang3@gmail.com', displayName: 'Jay', role: 'admin' },
   { email: 'kiwonam96@gmail.com', displayName: 'Kiwon', role: 'author' },
   { email: 'tj456852@gmail.com', displayName: 'TJ', role: 'author' },
   { email: 'jkimak1124@gmail.com', displayName: 'Ryan', role: 'author' },

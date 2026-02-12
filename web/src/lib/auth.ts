@@ -14,6 +14,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       clientSecret: process.env.AUTH_GITHUB_SECRET!,
     }),
   ],
+  pages: {
+    error: '/auth/error',
+  },
   session: {
     strategy: 'jwt',
   },

@@ -6,10 +6,12 @@ import { useState, useRef, useEffect } from 'react';
 import type { MemberRole } from '@/lib/members';
 
 function RoleBadge({ role }: { role?: MemberRole }) {
-  if (!role || role === 'spectator') return null;
+  if (!role) return null;
   const colors = role === 'admin'
     ? 'bg-red-500/20 text-red-400 border-red-500/30'
-    : 'bg-purple-500/20 text-purple-400 border-purple-500/30';
+    : role === 'author'
+    ? 'bg-purple-500/20 text-purple-400 border-purple-500/30'
+    : 'bg-zinc-500/20 text-zinc-400 border-zinc-500/30';
   return (
     <span className={`text-[10px] px-1.5 py-0.5 rounded border font-medium uppercase ${colors}`}>
       {role}

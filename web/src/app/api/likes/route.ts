@@ -11,30 +11,37 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'slug required' }, { status: 400 });
   }
 
-  const supabase = getSupabase();
+  try {
+    const supabase = getSupabase();
 
-  // Get total count
-  const { count } = await supabase
-    .from('likes')
-    .select('*', { count: 'exact', head: true })
-    .eq('content_slug', slug)
-    .eq('content_type', contentType);
-
-  // Check if current user liked
-  let liked = false;
-  const session = await auth();
-  if (session?.user?.id) {
-    const { data } = await supabase
+    // Get total count
+    const { count, error: countError } = await supabase
       .from('likes')
-      .select('id')
-      .eq('user_id', session.user.id)
+      .select('*', { count: 'exact', head: true })
       .eq('content_slug', slug)
-      .eq('content_type', contentType)
-      .maybeSingle();
-    liked = !!data;
-  }
+      .eq('content_type', contentType);
 
-  return NextResponse.json({ count: count || 0, liked });
+    if (countError) throw countError;
+
+    // Check if current user liked
+    let liked = false;
+    const session = await auth();
+    if (session?.user?.id) {
+      const { data } = await supabase
+        .from('likes')
+        .select('id')
+        .eq('user_id', session.user.id)
+        .eq('content_slug', slug)
+        .eq('content_type', contentType)
+        .maybeSingle();
+      liked = !!data;
+    }
+
+    return NextResponse.json({ count: count || 0, liked });
+  } catch (error) {
+    console.error('Likes GET error:', error);
+    return NextResponse.json({ count: 0, liked: false });
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -50,36 +57,38 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'slug required' }, { status: 400 });
   }
 
-  const supabase = getSupabase();
-  const userId = session.user.id;
+  try {
+    const supabase = getSupabase();
+    const userId = session.user.id;
 
-  // Check if already liked
-  const { data: existing } = await supabase
-    .from('likes')
-    .select('id')
-    .eq('user_id', userId)
-    .eq('content_slug', slug)
-    .eq('content_type', contentType)
-    .maybeSingle();
+    // Check if already liked
+    const { data: existing } = await supabase
+      .from('likes')
+      .select('id')
+      .eq('user_id', userId)
+      .eq('content_slug', slug)
+      .eq('content_type', contentType)
+      .maybeSingle();
 
-  if (existing) {
-    // Unlike
-    await supabase.from('likes').delete().eq('id', existing.id);
-  } else {
-    // Like
-    await supabase.from('likes').insert({
-      user_id: userId,
-      content_slug: slug,
-      content_type: contentType,
-    });
+    if (existing) {
+      await supabase.from('likes').delete().eq('id', existing.id);
+    } else {
+      await supabase.from('likes').insert({
+        user_id: userId,
+        content_slug: slug,
+        content_type: contentType,
+      });
+    }
+
+    const { count } = await supabase
+      .from('likes')
+      .select('*', { count: 'exact', head: true })
+      .eq('content_slug', slug)
+      .eq('content_type', contentType);
+
+    return NextResponse.json({ count: count || 0, liked: !existing });
+  } catch (error) {
+    console.error('Likes POST error:', error);
+    return NextResponse.json({ error: 'Service unavailable' }, { status: 503 });
   }
-
-  // Return updated count
-  const { count } = await supabase
-    .from('likes')
-    .select('*', { count: 'exact', head: true })
-    .eq('content_slug', slug)
-    .eq('content_type', contentType);
-
-  return NextResponse.json({ count: count || 0, liked: !existing });
 }
