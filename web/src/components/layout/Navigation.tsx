@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useAnimationConfig } from '@/hooks/useReducedMotion';
@@ -104,8 +105,8 @@ function MobileMenu() {
         </motion.div>
       </motion.button>
 
-      {/* Mobile Menu Overlay */}
-      {isOpen && (
+      {/* Mobile Menu Overlay - Portal to body to escape stacking context */}
+      {isOpen && createPortal(
         <div
           id="mobile-menu"
           className="fixed inset-0 z-[9999] bg-zinc-950"
@@ -182,7 +183,8 @@ function MobileMenu() {
               Contact
             </a>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

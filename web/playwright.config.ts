@@ -1,0 +1,35 @@
+import { defineConfig, devices } from '@playwright/test';
+
+export default defineConfig({
+  testDir: './tests/e2e',
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
+  retries: 1,
+  workers: process.env.CI ? 1 : undefined,
+  reporter: [['list'], ['html', { open: 'never' }]],
+  timeout: 30_000,
+
+  use: {
+    baseURL: 'https://hypeproof-ai.xyz',
+    trace: 'on-first-retry',
+  },
+
+  projects: [
+    {
+      name: 'desktop',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1280, height: 720 },
+      },
+      grep: [/@desktop/, /@all/],
+    },
+    {
+      name: 'mobile',
+      use: {
+        ...devices['iPhone SE'],
+        viewport: { width: 375, height: 667 },
+      },
+      grep: [/@mobile/, /@all/],
+    },
+  ],
+});
