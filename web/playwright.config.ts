@@ -26,7 +26,7 @@ export default defineConfig({
     {
       name: 'mobile',
       use: {
-        ...devices['iPhone SE'],
+        ...devices['Pixel 5'],
         viewport: { width: 375, height: 667 },
       },
       grep: [/@mobile/, /@all/],

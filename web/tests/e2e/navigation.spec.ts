@@ -13,7 +13,7 @@ test.describe('Navigation — Mobile', () => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
     await page.locator('button[aria-label="Open navigation menu"]').click();
     await expect(page.locator('#mobile-menu')).toBeVisible();
-    await page.locator('button[aria-label="Close navigation menu"]').click();
+    await page.locator('#mobile-menu button[aria-label="Close navigation menu"]').click();
     await expect(page.locator('#mobile-menu')).not.toBeVisible();
   });
 

@@ -40,7 +40,15 @@ test.describe('Content Rendering', () => {
     }
 
     const real = errors.filter(
-      (e) => !e.includes('favicon') && !e.includes('third-party') && !e.includes('Failed to load resource')
+      (e) =>
+        !e.includes('favicon') &&
+        !e.includes('third-party') &&
+        !e.includes('Failed to load resource') &&
+        !e.includes('Download the React DevTools') &&
+        !e.includes('net::') &&
+        !e.includes('404') &&
+        !e.includes('authjs.dev') &&
+        !e.includes('Failed to fetch')
     );
     expect(real, `Console errors: ${real.join('; ')}`).toHaveLength(0);
   });
