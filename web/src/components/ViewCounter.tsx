@@ -29,7 +29,12 @@ export default function ViewCounter({ slug, trackView = false }: ViewCounterProp
   }, [slug, trackView]);
 
   if (count === null) {
-    return <span className="text-zinc-500 text-sm">—</span>;
+    return (
+      <span className="text-zinc-500 text-sm inline-flex items-center gap-1">
+        <span className="w-4 h-4 bg-zinc-800 rounded animate-pulse" />
+        <span className="w-8 h-3 bg-zinc-800 rounded animate-pulse" />
+      </span>
+    );
   }
 
   return (

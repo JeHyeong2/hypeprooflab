@@ -45,12 +45,17 @@ export default function LikeButton({ slug, contentType = 'column' }: LikeButtonP
     setCount(count + (liked ? -1 : 1));
 
     try {
-      const res = await fetch('/api/likes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slug, type: contentType }),
-      });
-      if (!res.ok) throw new Error('Failed');
+      let res: Response | null = null;
+      for (let attempt = 0; attempt < 3; attempt++) {
+        res = await fetch('/api/likes', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug, type: contentType }),
+        });
+        if (res.ok || res.status < 500) break;
+        if (attempt < 2) await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
+      }
+      if (!res || !res.ok) throw new Error('Failed');
       const data = await res.json();
       setCount(data.count);
       setLiked(data.liked);

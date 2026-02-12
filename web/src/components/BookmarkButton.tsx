@@ -40,12 +40,17 @@ export default function BookmarkButton({ slug, contentType = 'column' }: Bookmar
     setBookmarked(!bookmarked);
 
     try {
-      const res = await fetch('/api/bookmarks', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slug, type: contentType }),
-      });
-      if (!res.ok) throw new Error('Failed');
+      let res: Response | null = null;
+      for (let attempt = 0; attempt < 3; attempt++) {
+        res = await fetch('/api/bookmarks', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug, type: contentType }),
+        });
+        if (res.ok || res.status < 500) break;
+        if (attempt < 2) await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
+      }
+      if (!res || !res.ok) throw new Error('Failed');
       const data = await res.json();
       setBookmarked(data.bookmarked);
     } catch {

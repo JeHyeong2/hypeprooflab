@@ -36,13 +36,16 @@ CREATE TABLE bookmarks (
   UNIQUE(user_id, content_slug, content_type)
 );
 
--- Comments table
+-- Comments table (denormalized user info for display without joins)
 CREATE TABLE comments (
   id           UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id      TEXT NOT NULL,
   content_slug TEXT NOT NULL,
   content_type TEXT NOT NULL DEFAULT 'column',
-  body         TEXT NOT NULL,
+  content      TEXT NOT NULL,
+  user_name    TEXT NOT NULL DEFAULT 'Anonymous',
+  user_image   TEXT,
+  user_role    TEXT NOT NULL DEFAULT 'spectator',
   created_at   TIMESTAMPTZ DEFAULT now(),
   updated_at   TIMESTAMPTZ DEFAULT now()
 );

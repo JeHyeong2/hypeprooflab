@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { getSupabase } from '@/lib/supabase';
+import { getRatelimit } from '@/lib/redis';
+
+const SLUG_REGEX = /^[a-z0-9][a-z0-9-]{0,199}$/;
+const VALID_TYPES = ['column', 'novel'];
 
 export async function GET(req: NextRequest) {
   const session = await auth();
@@ -12,6 +16,13 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const slug = searchParams.get('slug');
     const contentType = searchParams.get('type') || 'column';
+
+    if (slug && !SLUG_REGEX.test(slug)) {
+      return NextResponse.json({ error: 'Invalid slug' }, { status: 400 });
+    }
+    if (!VALID_TYPES.includes(contentType)) {
+      return NextResponse.json({ error: 'Invalid type' }, { status: 400 });
+    }
 
     const supabase = getSupabase();
 
@@ -45,11 +56,20 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Login required' }, { status: 401 });
   }
 
+  // Rate limiting (H2)
+  const { success: rateLimitOk } = await getRatelimit().limit(session.user.id);
+  if (!rateLimitOk) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
+
   const body = await req.json();
   const { slug, type: contentType = 'column' } = body;
 
-  if (!slug) {
-    return NextResponse.json({ error: 'slug required' }, { status: 400 });
+  if (!slug || !SLUG_REGEX.test(slug)) {
+    return NextResponse.json({ error: 'Invalid slug' }, { status: 400 });
+  }
+  if (!VALID_TYPES.includes(contentType)) {
+    return NextResponse.json({ error: 'Invalid type' }, { status: 400 });
   }
 
   try {
@@ -65,7 +85,7 @@ export async function POST(req: NextRequest) {
       .maybeSingle();
 
     if (existing) {
-      await supabase.from('bookmarks').delete().eq('id', existing.id);
+      await supabase.from('bookmarks').delete().eq('id', existing.id).eq('user_id', userId);
     } else {
       await supabase.from('bookmarks').insert({
         user_id: userId,

@@ -34,6 +34,8 @@ function SimpleLanguageToggle() {
     <div className="flex items-center gap-1 text-sm">
       <button
         onClick={() => setLocale('en')}
+        aria-label="Switch to English"
+        lang="en"
         className={`px-1.5 py-0.5 rounded transition-colors ${locale === 'en' ? 'text-white font-semibold' : 'text-zinc-500 hover:text-zinc-300'}`}
       >
         EN
@@ -41,6 +43,8 @@ function SimpleLanguageToggle() {
       <span className="text-zinc-600">|</span>
       <button
         onClick={() => setLocale('ko')}
+        aria-label="한국어로 전환"
+        lang="ko"
         className={`px-1.5 py-0.5 rounded transition-colors ${locale === 'ko' ? 'text-white font-semibold' : 'text-zinc-500 hover:text-zinc-300'}`}
       >
         KO
@@ -240,6 +244,7 @@ function MobileMenu() {
           
           <motion.a
             href="mailto:jayleekr0125@gmail.com"
+            rel="noopener noreferrer"
             className="glass px-10 py-5 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 bg-purple-600/20 relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-zinc-950"
             onClick={() => setIsOpen(false)}
             initial={{ opacity: 0, y: shouldReduce ? 0 : 30, scale: shouldReduce ? 1 : 0.9 }}
@@ -370,6 +375,7 @@ export function Navigation() {
           <AuthButton />
           <motion.a
             href="mailto:jayleekr0125@gmail.com"
+            rel="noopener noreferrer"
             className="glass px-4 py-2 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 transition-all duration-300"
             whileHover={hover}
             whileTap={tap}

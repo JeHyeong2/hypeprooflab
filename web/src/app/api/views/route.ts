@@ -1,17 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createHmac } from 'crypto';
 import { getRedis, getRatelimit } from '@/lib/redis';
 
 const BOT_PATTERNS = /bot|crawler|spider|slurp|googlebot|bingbot|yandex|baidu|duckduck|facebookexternalhit|twitterbot|linkedinbot|embedly|quora|pinterest|semrush|ahref/i;
 
+const SLUG_REGEX = /^[a-z0-9][a-z0-9-]{0,199}$/;
+
+// H4: Strong IP hashing with HMAC-SHA256
 function hashIp(ip: string): string {
-  let hash = 0;
-  const str = ip + (process.env.IP_HASH_SALT || 'hypeproof-salt');
-  for (let i = 0; i < str.length; i++) {
-    const char = str.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash |= 0;
+  const salt = process.env.IP_HASH_SALT;
+  if (!salt) {
+    throw new Error('IP_HASH_SALT environment variable is required');
   }
-  return Math.abs(hash).toString(36);
+  return createHmac('sha256', salt)
+    .update(ip)
+    .digest('hex')
+    .slice(0, 16);
 }
 
 export async function POST(request: NextRequest) {
@@ -22,8 +26,8 @@ export async function POST(request: NextRequest) {
     }
 
     const { slug } = await request.json();
-    if (!slug || typeof slug !== 'string') {
-      return NextResponse.json({ error: 'slug required' }, { status: 400 });
+    if (!slug || typeof slug !== 'string' || !SLUG_REGEX.test(slug)) {
+      return NextResponse.json({ error: 'Invalid slug' }, { status: 400 });
     }
 
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
@@ -65,7 +69,14 @@ export async function GET(request: NextRequest) {
     const slugs = searchParams.get('slugs');
 
     if (slugs) {
-      const slugList = slugs.split(',').filter(Boolean);
+      // M2: Cap batch size to 50
+      const slugList = slugs.split(',').filter(Boolean).slice(0, 50);
+      // Validate each slug
+      for (const s of slugList) {
+        if (!SLUG_REGEX.test(s)) {
+          return NextResponse.json({ error: 'Invalid slug in batch' }, { status: 400 });
+        }
+      }
       const pipeline = redis.pipeline();
       for (const s of slugList) {
         pipeline.get(`views:${s}`);
@@ -80,6 +91,10 @@ export async function GET(request: NextRequest) {
 
     if (!slug) {
       return NextResponse.json({ error: 'slug or slugs required' }, { status: 400 });
+    }
+
+    if (!SLUG_REGEX.test(slug)) {
+      return NextResponse.json({ error: 'Invalid slug' }, { status: 400 });
     }
 
     const count = (await redis.get<number>(`views:${slug}`)) || 0;

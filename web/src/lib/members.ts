@@ -6,6 +6,8 @@ export interface MemberInfo {
   role: MemberRole;
 }
 
+// TODO: Migrate to Supabase `profiles` table for dynamic role management.
+// This hardcoded list should be replaced with DB-driven roles (see R5 in audit).
 const KNOWN_MEMBERS: MemberInfo[] = [
   { email: 'jayleekr0125@gmail.com', displayName: 'Jay', role: 'admin' },
   { email: 'jabang3@gmail.com', displayName: 'Jay', role: 'admin' },

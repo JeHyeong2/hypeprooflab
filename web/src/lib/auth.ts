@@ -21,11 +21,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     strategy: 'jwt',
   },
   callbacks: {
-    async jwt({ token, user }) {
-      if (user?.email) {
-        const role = getRoleForEmail(user.email);
-        token.role = role;
-        const member = getMemberByEmail(user.email);
+    async jwt({ token }) {
+      // M4: Always re-check role from email (not just on first sign-in)
+      if (token.email) {
+        token.role = getRoleForEmail(token.email);
+        const member = getMemberByEmail(token.email);
         if (member) {
           token.displayName = member.displayName;
         }

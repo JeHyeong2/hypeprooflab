@@ -4,40 +4,16 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import ReactMarkdown from 'react-markdown';
+import rehypeSanitize from 'rehype-sanitize';
+import remarkGfm from 'remark-gfm';
 import type { Column } from '@/lib/columns';
 import { Footer } from '@/components/layout/Footer';
 import ViewCounter from '@/components/ViewCounter';
 import AuthButton from '@/components/auth/AuthButton';
 import LikeButton from '@/components/LikeButton';
 import BookmarkButton from '@/components/BookmarkButton';
-
-function parseMarkdown(md: string): string {
-  return md
-    // Headers
-    .replace(/^### (.*$)/gm, '<h3 class="text-xl font-bold text-white mt-10 mb-4">$1</h3>')
-    .replace(/^## (.*$)/gm, '<h2 class="text-2xl font-bold text-white mt-12 mb-6">$1</h2>')
-    // Bold
-    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
-    // Italic
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    // Horizontal rule
-    .replace(/^---$/gm, '<hr class="border-zinc-800 my-12" />')
-    // Blockquote (Markdown > style)
-    .replace(/^> (.*)$/gm, '<blockquote class="border-l-2 border-purple-500 pl-6 my-8 text-zinc-300 italic text-lg">$1</blockquote>')
-    // Quoted text with Korean-style quotes
-    .replace(/^["""](.+)["""]$/gm, '<blockquote class="border-l-2 border-purple-500 pl-6 my-8 text-zinc-300 italic text-lg">"$1"</blockquote>')
-    // Numbered list items
-    .replace(/^\d+\. \*\*(.*?)\*\*: (.*)$/gm, '<li class="mb-3 ml-4 list-decimal"><strong class="text-white font-semibold">$1:</strong> $2</li>')
-    .replace(/^\d+\. (.*)$/gm, '<li class="mb-2 ml-4 list-decimal">$1</li>')
-    // List items
-    .replace(/^- \*\*(.*?)\*\*: (.*)$/gm, '<li class="mb-3 ml-4 list-disc"><strong class="text-white font-semibold">$1:</strong> $2</li>')
-    .replace(/^- (.*)$/gm, '<li class="mb-2 ml-4 list-disc">$1</li>')
-    // Paragraphs (double newline)
-    .replace(/\n\n/g, '</p><p class="mb-6 leading-relaxed">')
-    // Single newlines in running text
-    .replace(/\n/g, '<br />')
-    ;
-}
+import CommentSection from '@/components/CommentSection';
 
 interface Props {
   column: Column;
@@ -62,7 +38,6 @@ export default function ColumnArticle({ column, slug, availableLocales }: Props)
   }, []);
 
   const { frontmatter, content } = column;
-  const htmlContent = parseMarkdown(content);
   
   const switchLocale = (locale: string) => {
     router.push(`/columns/${slug}?lang=${locale}`);
@@ -106,6 +81,8 @@ export default function ColumnArticle({ column, slug, availableLocales }: Props)
                     {i > 0 && <span className="text-zinc-600">|</span>}
                     <button
                       onClick={() => switchLocale(locale)}
+                      aria-label={`Switch to ${locale === 'ko' ? 'Korean' : 'English'}`}
+                      lang={locale}
                       className={`px-2 py-1 rounded transition-colors ${
                         currentLocale === locale
                           ? 'text-white font-semibold'
@@ -193,19 +170,28 @@ export default function ColumnArticle({ column, slug, availableLocales }: Props)
         
         {/* Content */}
         <div
-          className={`column-content ${
+          className={`column-content prose prose-invert max-w-none ${
             currentLocale === 'ko'
               ? 'text-[18px] leading-[32px] tracking-[0.03em] md:text-[18px] md:leading-[32px]'
               : 'text-[18px] leading-[30px] tracking-[0.01em] md:text-[18px] md:leading-[30px]'
-          } text-zinc-300`}
-          dangerouslySetInnerHTML={{ __html: `<p class="mb-6 leading-relaxed">${htmlContent}</p>` }}
-        />
+          } text-zinc-300 prose-headings:text-white prose-h2:text-2xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:font-bold prose-h3:mt-10 prose-h3:mb-4 prose-strong:text-white prose-strong:font-semibold prose-blockquote:border-l-2 prose-blockquote:border-purple-500 prose-blockquote:pl-6 prose-blockquote:my-8 prose-blockquote:text-zinc-300 prose-blockquote:italic prose-blockquote:text-lg prose-hr:border-zinc-800 prose-hr:my-12 prose-p:mb-6 prose-p:leading-relaxed prose-li:mb-2 prose-li:ml-4`}
+        >
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeSanitize]}
+          >
+            {content}
+          </ReactMarkdown>
+        </div>
         
         {/* Like & Bookmark */}
         <div className="mt-10 flex items-center gap-3">
           <LikeButton slug={slug} />
           <BookmarkButton slug={slug} />
         </div>
+
+        {/* Comments */}
+        <CommentSection slug={slug} locale={currentLocale} />
 
         {/* Tags */}
         <div className="mt-12 pt-8 border-t border-zinc-800">

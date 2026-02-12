@@ -4,29 +4,41 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
-const ERROR_MESSAGES: Record<string, { title: string; desc: string }> = {
+const ERROR_MESSAGES: Record<string, { title: string; desc: string; titleEn: string; descEn: string }> = {
   Configuration: {
     title: '서버 설정 오류',
     desc: '인증 서비스에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.',
+    titleEn: 'Server Configuration Error',
+    descEn: 'There was a problem with the authentication service. Please try again later.',
   },
   AccessDenied: {
     title: '접근이 거부되었습니다',
     desc: '이 계정으로는 로그인할 수 없습니다.',
+    titleEn: 'Access Denied',
+    descEn: 'You cannot sign in with this account.',
   },
   Verification: {
     title: '인증 링크 만료',
     desc: '인증 링크가 만료되었거나 이미 사용되었습니다. 다시 로그인해주세요.',
+    titleEn: 'Verification Link Expired',
+    descEn: 'The verification link has expired or has already been used. Please sign in again.',
   },
   Default: {
     title: '로그인 중 오류가 발생했습니다',
     desc: '잠시 후 다시 시도해주세요. 문제가 계속되면 관리자에게 문의해주세요.',
+    titleEn: 'An error occurred during sign in',
+    descEn: 'Please try again later. If the problem persists, contact an administrator.',
   },
 };
 
 function ErrorContent() {
   const searchParams = useSearchParams();
   const errorType = searchParams.get('error') || 'Default';
-  const { title, desc } = ERROR_MESSAGES[errorType] || ERROR_MESSAGES.Default;
+  const msgs = ERROR_MESSAGES[errorType] || ERROR_MESSAGES.Default;
+  // L4: Detect browser language for English fallback
+  const isKo = typeof navigator !== 'undefined' ? navigator.language.startsWith('ko') : true;
+  const title = isKo ? msgs.title : msgs.titleEn;
+  const desc = isKo ? msgs.desc : msgs.descEn;
 
   return (
     <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4">
@@ -43,13 +55,13 @@ function ErrorContent() {
             href="/api/auth/signin"
             className="px-6 py-2.5 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-sm font-medium transition-colors"
           >
-            다시 로그인
+            {isKo ? '다시 로그인' : 'Sign in again'}
           </Link>
           <Link
             href="/"
             className="px-6 py-2.5 border border-zinc-700 hover:border-zinc-500 text-zinc-300 rounded-lg text-sm font-medium transition-colors"
           >
-            홈으로 돌아가기
+            {isKo ? '홈으로 돌아가기' : 'Back to Home'}
           </Link>
         </div>
       </div>
