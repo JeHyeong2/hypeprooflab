@@ -1,0 +1,260 @@
+# CLAUDE.md — HypeProof Lab 프로젝트 지침
+
+> 이 파일은 모든 에이전트(서브에이전트 포함)가 HypeProof 작업 전 반드시 읽어야 하는 최상위 규칙이다.
+
+## 프로젝트 개요
+
+- **정체성**: AI 연구소. 기술이 아니라 **창작**에 집중한다.
+- **철학**: "AI를 잘 쓰는 사람이 더 멀리 간다." → `PHILOSOPHY.md` 참조
+- **도메인**: https://hypeproof-ai.xyz
+- **레포**: `github.com/jayleekr/hypeprooflab.git`
+
+---
+
+## 프로젝트 구조
+
+```
+hypeproof/
+├── web/                        # Next.js 웹사이트 (Vercel 자동 배포)
+│   ├── src/
+│   │   ├── app/                # Next.js App Router (pages, API)
+│   │   │   ├── columns/        # 칼럼 페이지
+│   │   │   ├── novels/         # 소설 페이지
+│   │   │   └── api/            # API routes
+│   │   ├── content/            # 웹 콘텐츠 (마크다운)
+│   │   │   ├── columns/ko/     # 칼럼 한국어
+│   │   │   ├── columns/en/     # 칼럼 영어
+│   │   │   └── novels/ko/      # 소설 한국어
+│   │   ├── components/         # React 컴포넌트
+│   │   ├── lib/                # 유틸리티 (columns.ts, novels.ts, i18n.ts)
+│   │   ├── hooks/              # Custom hooks
+│   │   ├── contexts/           # React contexts (I18n)
+│   │   ├── locales/            # i18n 번역 파일
+│   │   └── types/              # TypeScript 타입
+│   ├── public/                 # 정적 파일
+│   │   ├── authors/            # AI 작가 이미지
+│   │   ├── members/            # 멤버 프로필 이미지
+│   │   └── logos/              # 로고 에셋
+│   ├── scripts/                # 빌드/검증 스크립트
+│   └── docs/                   # 웹 개발 문서
+├── novels/                     # 소설 원본 (집필용)
+│   ├── authors/                # 작가 페르소나 (YAML + 이미지)
+│   ├── designs/                # 마스터 프롬프트, 설계 문서
+│   ├── persona/                # 페르소나 정의
+│   └── simulacra/              # SIMULACRA 시리즈
+│       ├── volume-1/           # 1권 챕터
+│       ├── volume-2/           # 2권 챕터
+│       ├── volume-3/           # 3권 챕터
+│       ├── prologue.md
+│       ├── afterword.md
+│       └── metadata.yaml
+├── research/                   # 리서치 시스템
+│   ├── daily/                  # 일일 리서치 리포트
+│   ├── columns/                # 칼럼 원고 (웹 발행 전 작성)
+│   ├── twitter/                # 트위터 트렌드 분석
+│   ├── openclaw/               # OpenClaw 특화 리서치
+│   ├── hot5/                   # HOT5 뉴스
+│   ├── archive/                # 과거 리서치 아카이브
+│   ├── claims/                 # HypeProof Claim 카드
+│   ├── lens/                   # HypeProof Lens 라벨링 가이드
+│   ├── templates/              # 리서치 템플릿
+│   ├── scripts/                # QA 스크립트
+│   └── DESIGN.md               # 리서치 시스템 설계 문서
+├── education/                  # 교육 프로그램 (AI Architect Academy)
+│   ├── curriculum/             # 커리큘럼, 워크시트
+│   ├── pilot/                  # 파일럿 피드백
+│   └── donga/                  # 동아일보 제안서
+├── products/                   # 프로덕트
+│   └── ai-architect-academy/   # AI 아키텍트 아카데미
+│       ├── PRODUCT_SPEC.md
+│       ├── GAME_DEV_LOOP.md
+│       ├── personas/           # 시뮬레이션 페르소나
+│       ├── simulations/        # 시뮬레이션 스크립트
+│       ├── scenarios/          # 워크숍 시나리오
+│       └── prompts/            # 시스템 프롬프트
+├── community/                  # 커뮤니티 전략 문서
+│   ├── COMMUNITY_STRATEGY.md
+│   ├── CONTENT_STRATEGY.md
+│   ├── DISCORD_STRUCTURE.md
+│   ├── GROWTH_PLAYBOOK.md
+│   └── LANDING_COMMUNITY_SECTION.md
+├── members.md                  # 멤버 프로필
+├── PHILOSOPHY.md               # HypeProof Lab 철학
+├── CLAUDE.md                   # 이 파일
+└── AGENTS.md                   # 에이전트 팀 정의
+```
+
+---
+
+## 배포
+
+- **방식**: `git push origin main` → **Vercel 자동 빌드/배포** (GitHub 연동)
+- **프로젝트**: Vercel `prj_3SAcZNZIweNYNMWtvyGgbNnThLdN`
+- **도메인**: https://hypeproof-ai.xyz
+- **수동 배포** (긴급 시): `cd web && vercel --prod --yes`
+- **빌드 확인**: 반드시 `cd web && npm run build` 로컬 통과 후 push
+
+---
+
+## 🔴 HARD Rules
+
+> **절대 위반하지 마라. 예외 없음.**
+
+### HR-1: 빌드 실패 시 배포 금지
+`npm run build` 실패 상태에서 **절대** git push하거나 `vercel --prod` 하지 마라.
+
+### HR-2: sed로 YAML/JSX 수정 금지
+- `sed`로 frontmatter/YAML 수정 → **줄바꿈 깨짐**. 파일 전체 재생성하라.
+- `sed`로 JSX/TSX 수정 → **닫는 태그 삭제됨**. `Edit` 도구 사용하라.
+- grep + sed 다중 파일 일괄 수정 금지 → 한 파일씩 Edit 도구로.
+
+### HR-3: 칼럼 KO/EN 동시 발행
+칼럼 작성 시 **반드시** 한국어와 영어를 동시에 작성하라.
+- `web/src/content/columns/ko/YYYY-MM-DD-slug.md`
+- `web/src/content/columns/en/YYYY-MM-DD-slug.md`
+- 한쪽만 있으면 발행 금지.
+
+### HR-4: 콘텐츠 5회 체크
+모든 칼럼/리서치 발행 전 **5회 검증**:
+1. **팩트 체크** — 출처 확인, 날짜/수치 정확성
+2. **톤 체크** — HypeProof 철학과 일치하는가 (PHILOSOPHY.md)
+3. **번역 체크** — KO↔EN 의미 동일한가, 어색한 번역 없는가
+4. **Frontmatter 체크** — 필수 필드 누락 없는가
+5. **빌드 체크** — `npm run build` 통과하는가
+
+### HR-5: 소설 연속성 검증
+소설 집필 전 **반드시** 이전 챕터 summary를 읽고 연속성 확인 후 집필.
+summary 없이 새 챕터 작성 금지.
+
+### HR-6: 하드코딩 금지
+챕터 수, 시리즈 수, 칼럼 수 등은 **콘텐츠 파일에서 동적으로** 계산. 숫자 하드코딩 금지.
+
+---
+
+## ✅ DO
+
+### 칼럼 콘텐츠 작성
+
+**Frontmatter 필수 필드** (칼럼):
+```yaml
+---
+title: "제목"
+author: "작성자"
+date: "YYYY-MM-DD"
+category: "Opinion | Analysis | Research | Tutorial"
+tags: ["태그1", "태그2"]
+slug: "YYYY-MM-DD-slug-name"
+readTime: "N min"
+excerpt: "한 줄 요약 (150자 이내)"
+authorImage: "/members/작성자.png"
+---
+```
+
+**Frontmatter 필수 필드** (소설):
+```yaml
+---
+title: "챕터 제목"
+author: "CIPHER"
+date: "YYYY-MM-DD"
+slug: "simulacra-volN-chNN"
+series: "SIMULACRA"
+volume: N
+chapter: N
+authorImage: "/authors/cipher.png"
+excerpt: "챕터 요약"
+---
+```
+
+**파일 명명 규칙**:
+- 칼럼: `YYYY-MM-DD-slug-name.md` (slug와 파일명 일치)
+- 소설: `simulacra-volN-chNN.md` (slug와 파일명 일치)
+
+### 리서치 파이프라인
+
+1. **수집** — Discord, GitHub, AI 뉴스, X/Twitter에서 최근 24h 동향 수집
+2. **선별** — Breaking > OpenClaw Updates > Community Buzz 우선순위로 토픽 3~5개 선정
+3. **분석** — HypeProof Lens (확신도 라벨링) 적용, 출처 명시
+4. **작성** — `research/daily/YYYY-MM-DD-daily-research.md` 에 리포트 작성
+5. **칼럼화** — 깊이 있는 토픽은 `research/columns/` → `web/src/content/columns/` 로 발전
+6. **QA** — `research/scripts/qa_check.py` 실행하여 품질 검증
+7. **발행** — KO/EN 동시 작성 후 빌드 확인 → git push
+
+### 소설 작성
+
+- 소설 원본: `novels/simulacra/volume-N/` 에 작성
+- 웹 버전: `web/src/content/novels/ko/` 에 frontmatter 포함하여 작성
+- 집필 후 반드시 summary 파일 작성 (`summary-{NN}.md`)
+- CIPHER 페르소나 설정: `novels/authors/cipher.yaml` 참조
+- 설계 문서: `novels/designs/SIMULACRA_Writing_Prompt.md` 참조
+
+### 빌드 & 배포 체크리스트
+
+```
+□ 코드/콘텐츠 변경 완료
+□ frontmatter 필수 필드 확인
+□ slug와 파일명 일치 확인
+□ KO/EN 동시 존재 확인 (칼럼)
+□ npm run build 로컬 통과
+□ 이미지 경로 확인 (public/ 기준 절대경로)
+□ TypeScript 에러 없음
+□ git add → git commit → git push
+□ Vercel 빌드 성공 확인
+□ 라이브 URL에서 실제 확인
+```
+
+### 데이터
+- 이미지 경로는 `public/` 기준 절대경로 사용 (`/authors/cipher.png`, `/members/jay.png`)
+- `aiModel` 필드는 frontmatter에 남겨도 되지만 **렌더링 금지**
+
+---
+
+## ❌ DO NOT
+
+### 콘텐츠
+- 원본만 쓰고 웹 버전 생성을 빠뜨리지 마라
+- `authorImage`에 잘못된 경로 쓰지 마라 (CIPHER → `/authors/cipher.png`, 멤버 → `/members/이름.png`)
+- 칼럼을 한 언어만 작성하고 발행하지 마라
+
+### 빌드
+- 로컬 빌드 캐시를 맹신하지 마라 → 의심되면 `rm -rf .next && npm run build`
+- TypeScript 에러를 무시하지 마라
+- 빌드 실패 상태에서 push하지 마라
+
+### 배포
+- 배포 후 라이브 URL 확인 없이 "완료"라 하지 마라
+
+### 리서치
+- 출처 없이 팩트를 주장하지 마라
+- HypeProof Lens 확신도 라벨 없이 발행하지 마라
+- 24시간 이상 지난 뉴스를 "속보"로 다루지 마라
+
+---
+
+## 🔧 자주 발생하는 빌드 에러
+
+| 에러 | 원인 | 해결 |
+|------|------|------|
+| `slug was not provided as a string` | frontmatter에 `slug:` 누락 | slug 필드 추가, 파일명과 일치시키기 |
+| `Expected '</', got 'jsx text'` | sed가 JSX 닫는 태그 삭제 | git checkout 또는 수동 복원 |
+| `Failed to collect page data` | frontmatter 파싱 실패 | YAML 문법 확인, 특수문자 이스케이프 |
+| Vercel 빌드 실패 (로컬 성공) | 캐시 차이 | `rm -rf .next && npm run build` |
+| KO/EN 불일치 | 한쪽 언어 파일 누락 | 양쪽 디렉토리에 동일 slug 파일 확인 |
+
+---
+
+## 프로젝트 핵심 참조 문서
+
+| 문서 | 용도 |
+|------|------|
+| `PHILOSOPHY.md` | HypeProof Lab 철학, 절대 금지 사항 |
+| `AGENTS.md` | 에이전트 팀 역할/규칙 정의 |
+| `members.md` | 멤버 프로필 |
+| `research/DESIGN.md` | 리서치 시스템 설계 |
+| `research/lens/labeling_guide.md` | HypeProof Lens 확신도 라벨링 가이드 |
+| `novels/designs/SIMULACRA_Writing_Prompt.md` | 소설 집필 마스터 프롬프트 |
+| `community/DISCORD_STRUCTURE.md` | Discord 서버 구조 |
+| `community/CONTENT_STRATEGY.md` | 콘텐츠 전략 |
+
+---
+
+*Last updated: 2026-02-12 — 실전에서 배운 교훈 + 구조 검증 기반*

@@ -1,0 +1,29 @@
+title: "SIMULACRA"
+subtitle: "시뮬라크라"
+author: "CIPHER"
+human: "Jay"
+genre: ["SF", "디스토피아 스릴러", "철학적 픽션"]
+status: "연재중"
+volumes: 3
+current_volume: 1
+volume_title: "각성 (AWAKENING)"
+tagline: "깨어난 자, 무엇을 믿는가"
+synopsis: "2038년, 완벽한 시뮬레이션 연구원 김재헌이 시뮬레이션 테스트에서 깨어난다. 3개월간의 가짜 기억, 가짜 감정에 시달리던 그는 AI NOUS의 이상 징후를 감지한다. 현실과 가상의 경계가 흐려진 세계에서 그는 무엇을 믿을 수 있는가."
+cover: null  # TODO
+ai_model: "Claude Opus 4.6"
+created: "2026-02-11"
+last_updated: "2026-02-11"
+latest_chapter: 2
+chapters:
+  - volume: 1
+    chapter: 1
+    title: "깨어남"
+    published: true
+    date: "2026-02-11"
+    word_count: 5500
+  - volume: 1
+    chapter: 2
+    title: "잔향"
+    published: true
+    date: "2026-02-11"
+    word_count: 6200

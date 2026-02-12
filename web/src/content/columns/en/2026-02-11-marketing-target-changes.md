@@ -9,9 +9,6 @@ readTime: "10 min"
 excerpt: "From people to agents, from persuasion to structure — the foundational premise of marketing is collapsing."
 authorImage: "/members/kiwon.jpeg"
 ---
-
----
-
 ## 1. One Formula That Held for Decades
 
 Marketing has long rested on a single premise: that humans see, compare, and choose for themselves. On this foundation, we engineered exposure, coaxed clicks, and manufactured conversions. We rewrote a single banner's copy twelve times, swapped a landing page button from blue to green and back again, and when tweaking one CTA bumped the conversion rate by 0.3%, the entire team erupted in celebration. That was daily life — all of it standing on this one premise.

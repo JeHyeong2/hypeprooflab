@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 import { usePerformanceOptimization } from '@/hooks/usePerformanceOptimization';
 import { FloatingOrb } from './HeroSection';
+import { useI18n } from '@/contexts/I18nContext';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -23,6 +24,8 @@ const stagger = {
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const { animationConfig } = usePerformanceOptimization();
+  const { locale } = useI18n();
+  const isKo = locale === 'ko';
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -111,12 +114,17 @@ export function Hero() {
           {/* Enhanced Tagline */}
           <motion.div variants={fadeInUp} className="space-y-4">
             <p className="text-2xl md:text-3xl text-zinc-300 max-w-3xl mx-auto leading-relaxed font-medium">
-              We don't chase <span className="text-white">Hype</span>.
-              <br />
-              We <span className="text-purple-400">Prove</span> it.
+              {isKo ? (
+                <>Hype를 쫓지 않습니다.<br /><span className="text-purple-400">증명</span>합니다.</>
+              ) : (
+                <>We don&apos;t chase <span className="text-white">Hype</span>.<br />We <span className="text-purple-400">Prove</span> it.</>
+              )}
             </p>
             <p className="text-lg text-zinc-500 max-w-2xl mx-auto">
-              Deep research, honest conversations, and practical AI insights for builders and skeptics alike.
+              {isKo 
+                ? 'AI의 진짜 가치를 함께 탐구합니다. 심층 리서치, 칼럼, 그리고 AI 커뮤니티.'
+                : 'Deep research, honest conversations, and practical AI insights for builders and skeptics alike.'
+              }
             </p>
           </motion.div>
 
@@ -131,7 +139,7 @@ export function Hero() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
               </svg>
-              Join Discord
+              {isKo ? 'Discord 참여' : 'Join Discord'}
             </motion.a>
             <motion.a
               href="mailto:jayleekr0125@gmail.com"
@@ -142,7 +150,7 @@ export function Hero() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              Contact
+              {isKo ? '문의하기' : 'Contact'}
             </motion.a>
           </motion.div>
         </motion.div>

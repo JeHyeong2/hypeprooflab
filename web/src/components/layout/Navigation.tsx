@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useAnimationConfig } from '@/hooks/useReducedMotion';
 import { useI18n } from '@/contexts/I18nContext';
+import AuthButton from '@/components/auth/AuthButton';
 
 function Logo() {
   const { hover, tap } = useAnimationConfig();
@@ -24,6 +25,27 @@ function Logo() {
         <span className="text-white font-semibold text-lg tracking-tight">HypeProof AI</span>
       </motion.div>
     </Link>
+  );
+}
+
+function SimpleLanguageToggle() {
+  const { locale, setLocale } = useI18n();
+  return (
+    <div className="flex items-center gap-1 text-sm">
+      <button
+        onClick={() => setLocale('en')}
+        className={`px-1.5 py-0.5 rounded transition-colors ${locale === 'en' ? 'text-white font-semibold' : 'text-zinc-500 hover:text-zinc-300'}`}
+      >
+        EN
+      </button>
+      <span className="text-zinc-600">|</span>
+      <button
+        onClick={() => setLocale('ko')}
+        className={`px-1.5 py-0.5 rounded transition-colors ${locale === 'ko' ? 'text-white font-semibold' : 'text-zinc-500 hover:text-zinc-300'}`}
+      >
+        KO
+      </button>
+    </div>
   );
 }
 
@@ -202,6 +224,20 @@ function MobileMenu() {
             Columns
           </Link>
           
+          <Link
+            href="/novels"
+            className="text-white text-3xl font-medium relative flex items-center gap-2"
+            onClick={() => setIsOpen(false)}
+          >
+            <span>Novels</span>
+            <div className="inline-flex items-center gap-1">
+              <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></div>
+              <span className="text-sm text-purple-400 font-medium">NEW</span>
+            </div>
+          </Link>
+          
+          <SimpleLanguageToggle />
+          
           <motion.a
             href="mailto:jayleekr0125@gmail.com"
             className="glass px-10 py-5 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 bg-purple-600/20 relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-zinc-950"
@@ -302,33 +338,12 @@ const NavLink = React.memo(function NavLink({ children, href }: NavLinkProps) {
   );
 });
 
-function SimpleLanguageToggle() {
-  const { locale, setLocale } = useI18n();
-  return (
-    <div className="flex items-center gap-1 text-sm">
-      <button
-        onClick={() => setLocale('en')}
-        className={`px-1.5 py-0.5 rounded transition-colors ${locale === 'en' ? 'text-white font-semibold' : 'text-zinc-500 hover:text-zinc-300'}`}
-      >
-        EN
-      </button>
-      <span className="text-zinc-600">|</span>
-      <button
-        onClick={() => setLocale('ko')}
-        className={`px-1.5 py-0.5 rounded transition-colors ${locale === 'ko' ? 'text-white font-semibold' : 'text-zinc-500 hover:text-zinc-300'}`}
-      >
-        KO
-      </button>
-    </div>
-  );
-}
-
 export function Navigation() {
   const { shouldReduce, hover, tap } = useAnimationConfig();
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 right-0 z-50 glass bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800/50"
+      className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800/50"
       initial={{ y: shouldReduce ? 0 : -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: shouldReduce ? 0.2 : 0.8 }}
@@ -344,7 +359,15 @@ export function Navigation() {
           <Link href="/columns" className="text-zinc-400 hover:text-white transition-colors duration-200 text-sm">
             Columns
           </Link>
+          <Link href="/novels" className="text-zinc-400 hover:text-white transition-colors duration-200 text-sm relative group">
+            <span>Novels</span>
+            <div className="inline-flex items-center gap-1 ml-1">
+              <div className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></div>
+              <span className="text-xs text-purple-400 font-medium">NEW</span>
+            </div>
+          </Link>
           <SimpleLanguageToggle />
+          <AuthButton />
           <motion.a
             href="mailto:jayleekr0125@gmail.com"
             className="glass px-4 py-2 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 transition-all duration-300"

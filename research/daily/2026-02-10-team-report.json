@@ -1,0 +1,39 @@
+{
+  "team": "research-team",
+  "date": "2026-02-10",
+  "total_time": 3.3,
+  "workers": "5/5",
+  "stages": {
+    "research": [
+      {
+        "role": "researcher-openclaw",
+        "success": true,
+        "elapsed": 1.1
+      },
+      {
+        "role": "researcher-ai",
+        "success": true,
+        "elapsed": 1.1
+      },
+      {
+        "role": "researcher-dev",
+        "success": true,
+        "elapsed": 1.2
+      }
+    ],
+    "write": [
+      {
+        "role": "columnist",
+        "success": true,
+        "elapsed": 1.1
+      }
+    ],
+    "qa": [
+      {
+        "role": "qa-checker",
+        "success": true,
+        "elapsed": 1.0
+      }
+    ]
+  }
+}

@@ -1,10 +1,26 @@
 import type { Metadata } from "next";
+import { Noto_Sans_KR, Noto_Sans_Mono } from "next/font/google";
 import "./globals.css";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import SkipLink from "@/components/SkipLink";
 import { I18nProvider } from "@/contexts/I18nContext";
 import { CookieConsent } from "@/components/CookieConsent";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
+import AuthProvider from "@/components/auth/AuthProvider";
+
+const notoSansKR = Noto_Sans_KR({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-noto-sans-kr',
+});
+
+const notoSansMono = Noto_Sans_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-noto-sans-mono',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://hypeproof-ai.xyz'),
@@ -212,7 +228,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
+    <html lang="ko">
       <head>
         <script
           type="application/ld+json"
@@ -228,16 +244,18 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className="antialiased">
+      <body className={`antialiased ${notoSansKR.variable} ${notoSansMono.variable}`}>
         <SkipLink />
-        <I18nProvider>
-          <AnalyticsProvider>
-            <ErrorBoundary>
-              {children}
-              <CookieConsent />
-            </ErrorBoundary>
-          </AnalyticsProvider>
-        </I18nProvider>
+        <AuthProvider>
+          <I18nProvider>
+            <AnalyticsProvider>
+              <ErrorBoundary>
+                {children}
+                <CookieConsent />
+              </ErrorBoundary>
+            </AnalyticsProvider>
+          </I18nProvider>
+        </AuthProvider>
       </body>
     </html>
   );

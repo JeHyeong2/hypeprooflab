@@ -101,22 +101,7 @@ function FeatureCard({ icon, title, description, delay }: {
           {description}
         </motion.p>
         
-        {/* Read more indicator on hover */}
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          initial={{ y: 10 }}
-          whileHover={{ y: 0 }}
-        >
-          <div className="text-xs text-purple-400 font-medium flex items-center gap-1 mt-2">
-            <motion.span
-              animate={{ x: [0, 3, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              →
-            </motion.span>
-            Explore this
-          </div>
-        </motion.div>
+        {/* spacer */}
       </motion.div>
       
       <motion.div 

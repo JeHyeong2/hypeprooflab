@@ -43,7 +43,7 @@ export function Footer() {
             <h4 className="text-white font-medium mb-4">Content</h4>
             <ul className="space-y-2 text-sm text-zinc-500">
               <li><a href="/columns" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">Columns</a></li>
-              <li><a href="#" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">Research</a></li>
+              <li><a href="/novels" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">Novels</a></li>
             </ul>
           </motion.nav>
 
@@ -57,8 +57,8 @@ export function Footer() {
             <h4 className="text-white font-medium mb-4">Community</h4>
             <ul className="space-y-2 text-sm text-zinc-500">
               <li><a href="https://discord.gg/hypeproof" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded" target="_blank" rel="noopener noreferrer">Discord</a></li>
-              <li><a href="#" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">Events</a></li>
-              <li><a href="#" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">Newsletter</a></li>
+              <li><span className="text-zinc-600 cursor-default">Events <span className="text-xs">(Coming Soon)</span></span></li>
+              <li><span className="text-zinc-600 cursor-default">Newsletter <span className="text-xs">(Coming Soon)</span></span></li>
             </ul>
           </motion.nav>
 
@@ -72,8 +72,8 @@ export function Footer() {
             <h4 className="text-white font-medium mb-4">Connect</h4>
             <ul className="space-y-2 text-sm text-zinc-500">
               <li><a href="mailto:jayleekr0125@gmail.com" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">Contact</a></li>
-              <li><a href="#" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">Twitter</a></li>
-              <li><a href="#" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">LinkedIn</a></li>
+              <li><span className="text-zinc-600 cursor-default">Twitter <span className="text-xs">(Coming Soon)</span></span></li>
+              <li><span className="text-zinc-600 cursor-default">LinkedIn <span className="text-xs">(Coming Soon)</span></span></li>
             </ul>
           </motion.nav>
         </motion.div>

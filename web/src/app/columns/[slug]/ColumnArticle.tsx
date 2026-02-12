@@ -5,6 +5,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import type { Column } from '@/lib/columns';
+import { Footer } from '@/components/layout/Footer';
+import ViewCounter from '@/components/ViewCounter';
+import AuthButton from '@/components/auth/AuthButton';
 
 function parseMarkdown(md: string): string {
   return md
@@ -21,6 +24,9 @@ function parseMarkdown(md: string): string {
     .replace(/^> (.*)$/gm, '<blockquote class="border-l-2 border-purple-500 pl-6 my-8 text-zinc-300 italic text-lg">$1</blockquote>')
     // Quoted text with Korean-style quotes
     .replace(/^["""](.+)["""]$/gm, '<blockquote class="border-l-2 border-purple-500 pl-6 my-8 text-zinc-300 italic text-lg">"$1"</blockquote>')
+    // Numbered list items
+    .replace(/^\d+\. \*\*(.*?)\*\*: (.*)$/gm, '<li class="mb-3 ml-4 list-decimal"><strong class="text-white font-semibold">$1:</strong> $2</li>')
+    .replace(/^\d+\. (.*)$/gm, '<li class="mb-2 ml-4 list-decimal">$1</li>')
     // List items
     .replace(/^- \*\*(.*?)\*\*: (.*)$/gm, '<li class="mb-3 ml-4 list-disc"><strong class="text-white font-semibold">$1:</strong> $2</li>')
     .replace(/^- (.*)$/gm, '<li class="mb-2 ml-4 list-disc">$1</li>')
@@ -81,6 +87,15 @@ export default function ColumnArticle({ column, slug, availableLocales }: Props)
           </Link>
           
           <div className="flex items-center gap-4">
+            {/* Breadcrumb */}
+            <div className="hidden sm:flex items-center gap-2 text-sm text-zinc-400">
+              <Link href="/columns" className="hover:text-white transition-colors">
+                {currentLocale === 'ko' ? '칼럼' : 'Columns'}
+              </Link>
+              <span className="text-zinc-600">›</span>
+              <span className="text-zinc-300 truncate max-w-[200px]">{frontmatter.title}</span>
+            </div>
+
             {/* Language toggle */}
             {availableLocales.length > 1 && (
               <div className="flex items-center gap-1 text-sm">
@@ -104,10 +119,11 @@ export default function ColumnArticle({ column, slug, availableLocales }: Props)
             
             <Link
               href="/columns"
-              className="text-sm text-zinc-400 hover:text-white transition-colors"
+              className="sm:hidden text-sm text-zinc-400 hover:text-white transition-colors"
             >
               {currentLocale === 'ko' ? '모든 칼럼' : 'All Columns'}
             </Link>
+            <AuthButton />
           </div>
         </div>
       </nav>
@@ -167,6 +183,8 @@ export default function ColumnArticle({ column, slug, availableLocales }: Props)
               </time>
               {' · '}
               {frontmatter.readTime} {currentLocale === 'ko' ? '읽기' : 'read'}
+              {' · '}
+              <ViewCounter slug={slug} trackView={true} />
             </div>
           </div>
         </div>
@@ -202,6 +220,7 @@ export default function ColumnArticle({ column, slug, availableLocales }: Props)
           </Link>
         </div>
       </article>
+      <Footer />
     </div>
   );
 }

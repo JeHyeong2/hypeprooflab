@@ -7,6 +7,7 @@ export const usePerformanceOptimization = () => {
   const [connectionQuality, setConnectionQuality] = useState<'fast' | 'slow' | 'unknown'>('unknown');
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     // Check for reduced motion preference
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setShouldReduceMotion(mediaQuery.matches);
@@ -63,7 +64,7 @@ export const usePerformanceOptimization = () => {
     enableComplexEffects: !shouldReduceMotion && !isLowEndDevice && connectionQuality === 'fast',
     reducedDuration: shouldReduceMotion || isLowEndDevice,
     enableFloatingOrbs: !isLowEndDevice && connectionQuality === 'fast',
-    enableCursorFollower: !isLowEndDevice && !('ontouchstart' in window)
+    enableCursorFollower: !isLowEndDevice && (typeof window === 'undefined' ? true : !('ontouchstart' in window))
   }), [shouldReduceMotion, isLowEndDevice, connectionQuality]);
 
   return {

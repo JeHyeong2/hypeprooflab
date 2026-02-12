@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Column } from '@/lib/columns';
+import { Footer } from '@/components/layout/Footer';
+import ViewCounter from '@/components/ViewCounter';
+import AuthButton from '@/components/auth/AuthButton';
 
 interface Props {
   koColumns: Column[];
@@ -11,7 +14,7 @@ interface Props {
 }
 
 export default function ColumnsListClient({ koColumns, enColumns }: Props) {
-  const [locale, setLocale] = useState<'ko' | 'en'>('en');
+  const [locale, setLocale] = useState<'ko' | 'en'>('ko');
   const columns = locale === 'ko' ? koColumns : enColumns;
 
   return (
@@ -42,7 +45,13 @@ export default function ColumnsListClient({ koColumns, enColumns }: Props) {
                 KO
               </button>
             </div>
-            <Link href="/" className="text-sm text-zinc-400 hover:text-white transition-colors">Home</Link>
+            <Link href="/novels" className="text-sm text-zinc-400 hover:text-white transition-colors">
+              {locale === 'ko' ? '웹소설' : 'Novels'}
+            </Link>
+            <Link href="/" className="text-sm text-zinc-400 hover:text-white transition-colors">
+              {locale === 'ko' ? '홈' : 'Home'}
+            </Link>
+            <AuthButton />
           </div>
         </div>
       </nav>
@@ -72,9 +81,11 @@ export default function ColumnsListClient({ koColumns, enColumns }: Props) {
                   <div className="flex items-center gap-3 mb-3 text-sm text-zinc-500">
                     <span className="text-purple-400 uppercase tracking-wider text-xs font-medium">{fm.category}</span>
                     <span>·</span>
-                    <time>{fm.date}</time>
+                    <time>{new Date(fm.date).toLocaleDateString(locale === 'ko' ? 'ko-KR' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
                     <span>·</span>
                     <span>{fm.readTime} read</span>
+                    <span>·</span>
+                    <ViewCounter slug={fm.slug} />
                   </div>
                   
                   <h2 className={`text-xl md:text-2xl font-bold text-white group-hover:text-purple-400 transition-colors mb-3 ${
@@ -109,6 +120,7 @@ export default function ColumnsListClient({ koColumns, enColumns }: Props) {
           </div>
         )}
       </main>
+      <Footer />
     </div>
   );
 }
