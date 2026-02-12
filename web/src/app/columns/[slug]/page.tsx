@@ -31,10 +31,26 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   const column = getColumn(slug, locale) || getColumn(slug, locale === 'ko' ? 'en' : 'ko');
   if (!column) return {};
   const fm = column.frontmatter;
+  const availableLocales = getAvailableLocalesForSlug(slug);
+  const baseUrl = 'https://hypeproof-ai.xyz';
+  const columnUrl = `${baseUrl}/columns/${slug}`;
+
+  const alternatesLanguages: Record<string, string> = {};
+  if (availableLocales.includes('ko')) {
+    alternatesLanguages['ko'] = `${columnUrl}?lang=ko`;
+  }
+  if (availableLocales.includes('en')) {
+    alternatesLanguages['en'] = `${columnUrl}?lang=en`;
+  }
+  alternatesLanguages['x-default'] = columnUrl;
 
   return {
     title: fm.title,
     description: fm.excerpt,
+    alternates: {
+      canonical: columnUrl,
+      languages: alternatesLanguages,
+    },
     openGraph: {
       title: fm.title,
       description: fm.excerpt,
@@ -164,6 +180,44 @@ export default async function ColumnPage({ params, searchParams }: Props) {
 
         {/* Server-rendered markdown content */}
         <ColumnContent content={content} locale={currentLocale} />
+
+        {/* Citations / References */}
+        {frontmatter.citations && frontmatter.citations.length > 0 && (
+          <section className="mt-12 pt-8 border-t border-zinc-800">
+            <h2 className="text-lg font-semibold text-white mb-4">
+              {currentLocale === 'ko' ? '참고문헌' : 'References'}
+            </h2>
+            <ol className="list-decimal list-inside space-y-2 text-sm text-zinc-400">
+              {frontmatter.citations.map((cite: { title: string; url: string; author?: string; year?: string }, i: number) => (
+                <li key={i} className="leading-relaxed">
+                  {cite.author && <span>{cite.author}. </span>}
+                  {cite.year && <span>({cite.year}). </span>}
+                  <a
+                    href={cite.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-purple-400 hover:text-purple-300 underline underline-offset-2"
+                  >
+                    {cite.title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
+
+        {frontmatter.references && frontmatter.references.length > 0 && (
+          <section className="mt-8 pt-6 border-t border-zinc-800/50">
+            <h3 className="text-base font-semibold text-white mb-3">
+              {currentLocale === 'ko' ? '추가 참고자료' : 'Additional References'}
+            </h3>
+            <ul className="list-disc list-inside space-y-1 text-sm text-zinc-400">
+              {frontmatter.references.map((ref: string, i: number) => (
+                <li key={i}>{ref}</li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {/* Share buttons */}
         <ShareButtons

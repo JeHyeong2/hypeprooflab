@@ -1,6 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 
+export interface Citation {
+  title: string;
+  url: string;
+  author?: string;
+  year?: string;
+}
+
 export interface ColumnFrontmatter {
   title: string;
   author: string;
@@ -11,6 +18,8 @@ export interface ColumnFrontmatter {
   readTime: string;
   excerpt: string;
   authorImage?: string;
+  citations?: Citation[];
+  references?: string[];
 }
 
 export interface Column {

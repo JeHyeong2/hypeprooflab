@@ -168,6 +168,10 @@ function MobileMenu() {
               <span className="text-sm text-purple-400 font-medium">NEW</span>
             </Link>
 
+            <Link href="/glossary" className="text-white text-2xl font-medium hover:text-purple-400 transition-colors" onClick={() => setIsOpen(false)}>
+              Glossary
+            </Link>
+
             <Link href="/my-activity" className="text-white text-2xl font-medium hover:text-purple-400 transition-colors" onClick={() => setIsOpen(false)}>
               My Activity
             </Link>
@@ -277,6 +281,9 @@ export function Navigation() {
               <div className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></div>
               <span className="text-xs text-purple-400 font-medium">NEW</span>
             </div>
+          </Link>
+          <Link href="/glossary" className="text-zinc-400 hover:text-white transition-colors duration-200 text-sm">
+            Glossary
           </Link>
           <SimpleLanguageToggle />
           <AuthButton />

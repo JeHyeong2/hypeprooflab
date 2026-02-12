@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { getAllColumns } from '@/lib/columns'
+import { getAllColumns, getAvailableLocalesForSlug } from '@/lib/columns'
 import { getAllNovels } from '@/lib/novels'
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -24,9 +24,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'daily',
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/glossary`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.6,
+    },
   ]
   
-  // Column pages
+  // Column pages with hreflang alternates
   const koColumns = getAllColumns('ko')
   const enColumns = getAllColumns('en')
   const columnPages: MetadataRoute.Sitemap = []
@@ -36,11 +42,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const slug = col.frontmatter.slug
     if (seenSlugs.has(slug)) continue
     seenSlugs.add(slug)
+
+    const locales = getAvailableLocalesForSlug(slug)
+    const alternates: Record<string, string> = {}
+    if (locales.includes('ko')) alternates['ko'] = `${baseUrl}/columns/${slug}?lang=ko`
+    if (locales.includes('en')) alternates['en'] = `${baseUrl}/columns/${slug}?lang=en`
+
     columnPages.push({
       url: `${baseUrl}/columns/${slug}`,
       lastModified: new Date(col.frontmatter.date),
       changeFrequency: 'monthly',
       priority: 0.7,
+      ...(locales.length > 1 ? {
+        alternates: {
+          languages: alternates,
+        },
+      } : {}),
     })
   }
   

@@ -1,4 +1,4 @@
-import { Column, ColumnFrontmatter } from './columns';
+import { Column, ColumnFrontmatter, Citation } from './columns';
 
 const SITE_URL = 'https://hypeproof-ai.xyz';
 const ORG_NAME = 'HypeProof AI Lab';
@@ -68,6 +68,17 @@ export function generateArticleJsonLd(column: { frontmatter: ColumnFrontmatter; 
       url: SITE_URL,
       logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
     },
+    ...(fm.citations && fm.citations.length > 0
+      ? {
+          citation: fm.citations.map((c: Citation) => ({
+            '@type': 'CreativeWork',
+            name: c.title,
+            url: c.url,
+            ...(c.author ? { author: { '@type': 'Person', name: c.author } } : {}),
+            ...(c.year ? { datePublished: c.year } : {}),
+          })),
+        }
+      : {}),
   };
 }
 
