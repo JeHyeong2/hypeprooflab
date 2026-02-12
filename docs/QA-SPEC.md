@@ -17,6 +17,7 @@
 - [ ] **M7**: My Activity page — tabs and content fit mobile width
 
 ### Content Rendering
+- [ ] **R0**: No raw `**` visible in rendered output — check `**'text'**` patterns that break bold rendering. Strip quotes from inside bold markers or move bold inside quotes.
 - [ ] **R1**: No `dangerouslySetInnerHTML` anywhere — ReactMarkdown + rehype-sanitize only
 - [ ] **R2**: All columns render markdown correctly (headings, lists, links, code blocks, images)
 - [ ] **R3**: All novels render markdown correctly
@@ -91,6 +92,7 @@
 | 2026-02-12 | Homepage hardcoded columns | P0 | SSR not implemented | getAllColumns() → props |
 | 2026-02-12 | Missing favicon/OG | P1 | Assets never created | Generated all variants |
 | 2026-02-12 | My Activity shows slugs | P1 | No title lookup | /api/column-meta endpoint |
+| 2026-02-13 | `**'text'**` not rendering as bold | P0 | Quotes inside bold markers break parser | Remove quotes from inside `**` |
 
 ---
 
