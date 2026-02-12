@@ -107,7 +107,7 @@ function MobileMenu() {
       {/* Mobile Menu Overlay */}
       <motion.div
         id="mobile-menu"
-        className="fixed inset-0 z-50 bg-zinc-950/95 backdrop-blur-lg"
+        className="fixed inset-0 z-50 bg-zinc-950"
         initial={{ opacity: 0, scale: shouldReduce ? 1 : 1.1 }}
         animate={{
           opacity: isOpen ? 1 : 0,
