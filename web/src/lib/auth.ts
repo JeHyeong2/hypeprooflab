@@ -28,9 +28,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: {
     strategy: 'jwt',
   },
-  pages: {
-    signIn: '/auth/signin',
-  },
+  // Use default Auth.js signin page at /api/auth/signin
   callbacks: {
     async session({ session, token }) {
       if (session.user && token.sub) {
