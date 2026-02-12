@@ -43,17 +43,31 @@ export function generateWebSiteJsonLd() {
   };
 }
 
-export function generateArticleJsonLd(column: { frontmatter: ColumnFrontmatter; locale: string; slug: string }) {
+export function generateArticleJsonLd(column: { frontmatter: ColumnFrontmatter; locale: string; slug: string }, availableLocales?: string[]) {
   const fm = column.frontmatter;
   const url = `${SITE_URL}/columns/${column.slug}`;
+  const lang = column.locale === 'ko' ? 'ko-KR' : 'en-US';
+  const altLocale = column.locale === 'ko' ? 'en' : 'ko';
+  const hasTranslation = availableLocales ? availableLocales.includes(altLocale) : false;
+
+  const translationLinks: Record<string, unknown> = {};
+  if (hasTranslation) {
+    const altUrl = `${url}?lang=${altLocale}`;
+    const altLang = altLocale === 'ko' ? 'ko-KR' : 'en-US';
+    if (column.locale === 'ko') {
+      translationLinks.workTranslation = { '@type': 'ScholarlyArticle', '@id': altUrl, inLanguage: altLang, url: altUrl };
+    } else {
+      translationLinks.translationOfWork = { '@type': 'ScholarlyArticle', '@id': altUrl, inLanguage: altLang, url: altUrl };
+    }
+  }
 
   return {
-    '@context': 'https://schema.org',
+    '@context': { '@vocab': 'https://schema.org/', '@language': lang },
     '@type': 'ScholarlyArticle',
     headline: fm.title,
     description: fm.excerpt,
     datePublished: fm.date,
-    inLanguage: column.locale === 'ko' ? 'ko-KR' : 'en-US',
+    inLanguage: lang,
     url,
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     keywords: fm.tags?.join(', '),
@@ -79,6 +93,7 @@ export function generateArticleJsonLd(column: { frontmatter: ColumnFrontmatter; 
           })),
         }
       : {}),
+    ...translationLinks,
   };
 }
 

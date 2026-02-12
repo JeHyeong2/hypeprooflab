@@ -79,7 +79,7 @@ export default async function ColumnPage({ params, searchParams }: Props) {
   const { frontmatter, content } = column;
   const currentLocale = column.locale;
 
-  const articleJsonLd = generateArticleJsonLd(column);
+  const articleJsonLd = generateArticleJsonLd(column, availableLocales);
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-300" style={{ scrollBehavior: 'smooth' }}>
