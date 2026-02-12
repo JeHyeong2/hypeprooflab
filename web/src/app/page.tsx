@@ -1,6 +1,7 @@
 import { getAllNovels } from '@/lib/novels';
 import { getAllColumns } from '@/lib/columns';
 import HomeClient from './HomeClient';
+import { generateOrganizationJsonLd } from '@/lib/jsonld';
 
 export default function Home() {
   const allNovels = getAllNovels('ko');
@@ -24,11 +25,19 @@ export default function Home() {
     category: c.frontmatter.category,
   }));
 
+  const organizationJsonLd = generateOrganizationJsonLd();
+
   return (
-    <HomeClient
-      novelChapterCount={chapterCount}
-      koColumns={koColumns}
-      enColumns={enColumns}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
+      <HomeClient
+        novelChapterCount={chapterCount}
+        koColumns={koColumns}
+        enColumns={enColumns}
+      />
+    </>
   );
 }

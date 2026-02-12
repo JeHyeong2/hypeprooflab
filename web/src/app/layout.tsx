@@ -7,6 +7,7 @@ import { I18nProvider } from "@/contexts/I18nContext";
 import { CookieConsent } from "@/components/CookieConsent";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 import AuthProvider from "@/components/auth/AuthProvider";
+import { generateWebSiteJsonLd } from "@/lib/jsonld";
 
 const notoSansKR = Noto_Sans_KR({
   subsets: ['latin'],
@@ -205,24 +206,7 @@ export default function RootLayout({
     ]
   };
 
-  const websiteData = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "HypeProof AI",
-    "url": "https://hypeproof-ai.xyz",
-    "description": "Deep research, honest conversations, and practical AI insights for builders and skeptics alike.",
-    "inLanguage": "en-US",
-    "copyrightYear": "2026",
-    "copyrightHolder": {
-      "@type": "Organization",
-      "name": "HypeProof AI"
-    },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://hypeproof-ai.xyz/search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  };
+  const websiteData = generateWebSiteJsonLd();
 
   return (
     <html lang="ko">

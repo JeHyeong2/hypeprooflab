@@ -9,6 +9,7 @@ import { Footer } from '@/components/layout/Footer';
 import ViewCounter from '@/components/ViewCounter';
 import AuthButton from '@/components/auth/AuthButton';
 import ShareButtons from '@/components/ShareButtons';
+import { generateArticleJsonLd } from '@/lib/jsonld';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -31,17 +32,6 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   if (!column) return {};
   const fm = column.frontmatter;
 
-  const articleJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: fm.title,
-    description: fm.excerpt,
-    datePublished: fm.date,
-    author: { '@type': 'Person', name: fm.author },
-    publisher: { '@type': 'Organization', name: 'HypeProof AI', url: 'https://hypeproof-ai.xyz' },
-    mainEntityOfPage: `https://hypeproof-ai.xyz/columns/${slug}`,
-  };
-
   return {
     title: fm.title,
     description: fm.excerpt,
@@ -58,9 +48,6 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
       title: fm.title,
       description: fm.excerpt,
     },
-    other: {
-      'script:ld+json': JSON.stringify(articleJsonLd),
-    },
   };
 }
 
@@ -76,16 +63,7 @@ export default async function ColumnPage({ params, searchParams }: Props) {
   const { frontmatter, content } = column;
   const currentLocale = column.locale;
 
-  const articleJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: frontmatter.title,
-    description: frontmatter.excerpt,
-    datePublished: frontmatter.date,
-    author: { '@type': 'Person', name: frontmatter.author },
-    publisher: { '@type': 'Organization', name: 'HypeProof AI', url: 'https://hypeproof-ai.xyz' },
-    mainEntityOfPage: `https://hypeproof-ai.xyz/columns/${slug}`,
-  };
+  const articleJsonLd = generateArticleJsonLd(column);
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-300" style={{ scrollBehavior: 'smooth' }}>
