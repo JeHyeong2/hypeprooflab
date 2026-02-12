@@ -105,180 +105,85 @@ function MobileMenu() {
       </motion.button>
 
       {/* Mobile Menu Overlay */}
-      <motion.div
-        id="mobile-menu"
-        className="fixed inset-0 z-50 bg-zinc-950"
-        initial={{ opacity: 0, scale: shouldReduce ? 1 : 1.1 }}
-        animate={{
-          opacity: isOpen ? 1 : 0,
-          scale: isOpen ? 1 : (shouldReduce ? 1 : 1.1)
-        }}
-        style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
-        transition={{ duration: shouldReduce ? 0.2 : 0.4, ease: "easeOut" }}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="mobile-menu-title"
-        onKeyDown={(e) => {
-          if (e.key === 'Escape') {
-            setIsOpen(false);
-          }
-        }}
-      >
-        <div className="sr-only" id="mobile-menu-title">Navigation Menu</div>
-        {/* Background gradient effects - disabled on reduced motion */}
-        {!shouldReduce && (
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-purple-600/10 via-transparent to-indigo-600/10"
-            animate={{
-              background: isOpen ? [
-                "linear-gradient(135deg, rgba(147, 51, 234, 0.1), transparent, rgba(79, 70, 229, 0.1))",
-                "linear-gradient(135deg, rgba(79, 70, 229, 0.1), transparent, rgba(147, 51, 234, 0.1))",
-              ] : "linear-gradient(135deg, transparent, transparent, transparent)",
-            }}
-            transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
-          />
-        )}
-        
-        <div className="flex flex-col items-center justify-center h-full space-y-12 relative z-10">
-          <motion.a
-            href="#features"
-            className="text-white text-3xl font-medium relative focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-zinc-950 rounded-lg px-4 py-2"
-            onClick={(e) => {
-              e.preventDefault();
+      {isOpen && (
+        <div
+          id="mobile-menu"
+          className="fixed inset-0 z-[9999] bg-zinc-950"
+          style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: '#09090b' }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="mobile-menu-title"
+          onKeyDown={(e: React.KeyboardEvent) => {
+            if (e.key === 'Escape') {
               setIsOpen(false);
-              const element = document.querySelector('#features');
-              element?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            initial={{ opacity: 0, y: shouldReduce ? 0 : 30 }}
-            animate={{
-              opacity: isOpen ? 1 : 0,
-              y: isOpen ? 0 : (shouldReduce ? 0 : 30)
-            }}
-            transition={{ delay: shouldReduce ? 0 : 0.1, duration: shouldReduce ? 0.2 : 0.4 }}
-            whileHover={shouldReduce ? {} : {
-              scale: 1.08,
-              color: "#a855f7",
-              textShadow: "0 0 20px rgba(168, 85, 247, 0.5)"
-            }}
-            whileTap={tap}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                (e.target as HTMLElement).click();
-              }
-            }}
-            aria-label="Navigate to What We Do section"
-          >
-            What We Do
-            {!shouldReduce && (
-              <motion.div
-                className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400"
-                whileHover={{ width: "100%" }}
-                transition={{ duration: 0.3 }}
-                aria-hidden="true"
-              />
-            )}
-          </motion.a>
+            }
+          }}
+        >
+          <div className="sr-only" id="mobile-menu-title">Navigation Menu</div>
           
-          <motion.a
-            href="#team"
-            className="text-white text-3xl font-medium relative focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-zinc-950 rounded-lg px-4 py-2"
-            onClick={(e) => {
-              e.preventDefault();
-              setIsOpen(false);
-              const element = document.querySelector('#team');
-              element?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            initial={{ opacity: 0, y: shouldReduce ? 0 : 30 }}
-            animate={{
-              opacity: isOpen ? 1 : 0,
-              y: isOpen ? 0 : (shouldReduce ? 0 : 30)
-            }}
-            transition={{ delay: shouldReduce ? 0 : 0.2, duration: shouldReduce ? 0.2 : 0.4 }}
-            whileHover={shouldReduce ? {} : {
-              scale: 1.08,
-              color: "#a855f7",
-              textShadow: "0 0 20px rgba(168, 85, 247, 0.5)"
-            }}
-            whileTap={tap}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                (e.target as HTMLElement).click();
-              }
-            }}
-            aria-label="Navigate to Team section"
-          >
-            Team
-            {!shouldReduce && (
-              <motion.div
-                className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400"
-                whileHover={{ width: "100%" }}
-                transition={{ duration: 0.3 }}
-                aria-hidden="true"
-              />
-            )}
-          </motion.a>
-          
-          <Link
-            href="/columns"
-            className="text-white text-3xl font-medium relative"
+          {/* Close button */}
+          <button
+            className="absolute top-5 right-5 z-[10000] p-2 text-white hover:text-purple-400 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded-md"
             onClick={() => setIsOpen(false)}
+            aria-label="Close navigation menu"
           >
-            Columns
-          </Link>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
           
-          <Link
-            href="/novels"
-            className="text-white text-3xl font-medium relative flex items-center gap-2"
-            onClick={() => setIsOpen(false)}
-          >
-            <span>Novels</span>
-            <div className="inline-flex items-center gap-1">
-              <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></div>
+          <div className="flex flex-col items-center justify-center h-full space-y-8 relative z-10 px-6">
+            <a
+              href="#features"
+              className="text-white text-2xl font-medium hover:text-purple-400 transition-colors px-4 py-2"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsOpen(false);
+                document.querySelector('#features')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              What We Do
+            </a>
+          
+            <a
+              href="#team"
+              className="text-white text-2xl font-medium hover:text-purple-400 transition-colors px-4 py-2"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsOpen(false);
+                document.querySelector('#team')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Team
+            </a>
+          
+            <Link href="/columns" className="text-white text-2xl font-medium hover:text-purple-400 transition-colors" onClick={() => setIsOpen(false)}>
+              Columns
+            </Link>
+          
+            <Link href="/novels" className="text-white text-2xl font-medium hover:text-purple-400 transition-colors flex items-center gap-2" onClick={() => setIsOpen(false)}>
+              <span>Novels</span>
               <span className="text-sm text-purple-400 font-medium">NEW</span>
-            </div>
-          </Link>
+            </Link>
+
+            <Link href="/my-activity" className="text-white text-2xl font-medium hover:text-purple-400 transition-colors" onClick={() => setIsOpen(false)}>
+              My Activity
+            </Link>
           
-          <SimpleLanguageToggle />
+            <SimpleLanguageToggle />
+            <div className="mt-4"><AuthButton /></div>
           
-          <motion.a
-            href="mailto:jayleekr0125@gmail.com"
-            rel="noopener noreferrer"
-            className="glass px-10 py-5 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 bg-purple-600/20 relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-zinc-950"
-            onClick={() => setIsOpen(false)}
-            initial={{ opacity: 0, y: shouldReduce ? 0 : 30, scale: shouldReduce ? 1 : 0.9 }}
-            animate={{
-              opacity: isOpen ? 1 : 0,
-              y: isOpen ? 0 : (shouldReduce ? 0 : 30),
-              scale: isOpen ? 1 : (shouldReduce ? 1 : 0.9)
-            }}
-            transition={{ delay: shouldReduce ? 0 : 0.3, duration: shouldReduce ? 0.2 : 0.4 }}
-            whileHover={shouldReduce ? {} : {
-              scale: 1.1,
-              boxShadow: "0 0 40px rgba(168, 85, 247, 0.4)"
-            }}
-            whileTap={tap}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                (e.target as HTMLElement).click();
-              }
-            }}
-            aria-label="Send email to jayleekr0125@gmail.com"
-          >
-            {!shouldReduce && (
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-indigo-500/20"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "100%" }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
-              />
-            )}
-            <span className="relative z-10">Contact</span>
-          </motion.a>
+            <a
+              href="mailto:jayleekr0125@gmail.com"
+              className="px-8 py-4 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 bg-purple-600/20 transition-all"
+              onClick={() => setIsOpen(false)}
+            >
+              Contact
+            </a>
+          </div>
         </div>
-      </motion.div>
+      )}
     </div>
   );
 }

@@ -12,12 +12,18 @@ interface ActivityItem {
   created_at: string;
 }
 
+interface ColumnMeta {
+  slug: string;
+  title: string;
+}
+
 export default function MyActivityClient() {
   const { data: session, status } = useSession();
   const [likes, setLikes] = useState<ActivityItem[]>([]);
   const [bookmarks, setBookmarks] = useState<ActivityItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<'likes' | 'bookmarks'>('likes');
+  const [titleMap, setTitleMap] = useState<Record<string, string>>({});
 
   useEffect(() => {
     if (!session) return;
@@ -29,6 +35,20 @@ export default function MyActivityClient() {
     ]).then(([likesData, bookmarksData]) => {
       setLikes(likesData.likes || []);
       setBookmarks(bookmarksData.bookmarks || []);
+
+      // Fetch titles for all slugs
+      const allSlugs = new Set([
+        ...(likesData.likes || []).map((i: ActivityItem) => i.content_slug),
+        ...(bookmarksData.bookmarks || []).map((i: ActivityItem) => i.content_slug),
+      ]);
+      if (allSlugs.size > 0) {
+        fetch(`/api/column-meta?slugs=${[...allSlugs].join(',')}`)
+          .then(r => r.json())
+          .then((data: { titles: Record<string, string> }) => {
+            if (data.titles) setTitleMap(data.titles);
+          })
+          .catch(() => {});
+      }
     }).finally(() => setLoading(false));
   }, [session]);
 
@@ -141,7 +161,7 @@ export default function MyActivityClient() {
                 className="block px-4 py-3 rounded-lg bg-zinc-900/50 border border-zinc-800 hover:border-zinc-600 transition-colors"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-zinc-200 font-medium">{item.content_slug}</span>
+                  <span className="text-sm text-zinc-200 font-medium">{titleMap[item.content_slug] || item.content_slug}</span>
                   <span className="text-xs text-zinc-600">
                     {new Date(item.created_at).toLocaleDateString('ko-KR')}
                   </span>

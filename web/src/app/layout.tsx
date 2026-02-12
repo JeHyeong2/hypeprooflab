@@ -104,10 +104,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code",
-    yandex: "your-yandex-verification-code",
-  },
+  // verification: add real codes when available
   category: "Technology",
   classification: "AI Research",
   referrer: "origin-when-cross-origin",

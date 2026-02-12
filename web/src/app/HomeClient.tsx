@@ -14,6 +14,14 @@ import { FloatingOrb } from '@/components/sections/HeroSection';
 import { useAnimationConfig } from '@/hooks/useReducedMotion';
 import { useI18n } from '@/contexts/I18nContext';
 
+export interface ColumnPreview {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  category: string;
+}
+
 const categoryStyles: Record<string, { gradient: string; icon: string }> = {
   "Research": { gradient: "from-purple-600/50 to-indigo-900/50", icon: "🔬" },
   "Analysis": { gradient: "from-blue-600/50 to-cyan-900/50", icon: "📊" },
@@ -21,56 +29,7 @@ const categoryStyles: Record<string, { gradient: string; icon: string }> = {
   "Opinion": { gradient: "from-orange-600/50 to-red-900/50", icon: "💭" },
 };
 
-const columnsData = {
-  ko: [
-    {
-      slug: "2026-02-11-marketing-target-changes",
-      title: "마케팅의 대상이 바뀐다",
-      excerpt: "사람에서 에이전트로, 설득에서 구조로 — 마케팅의 근본 전제가 무너지고 있다.",
-      date: "2026-02-11",
-      category: "Opinion",
-    },
-    {
-      slug: "2026-02-10-era-of-the-chairman",
-      title: "회장님의 시대가 열리다",
-      excerpt: "에이전트가 모든 실행을 대행하는 세상에서, 인간 고유의 가치는 정확히 어디에 있는가?",
-      date: "2026-02-10",
-      category: "Opinion",
-    },
-    {
-      slug: "2026-02-10-quiet-exit",
-      title: "Job을 잃는 다섯 단계 — 어느 직장인의 조용한 퇴장기",
-      excerpt: "업무 자동화가 현실이 된 어느 날, 한 직장인이 쿠블러-로스의 다섯 단계를 거치며 자신의 Job을 재정의하기까지의 이야기.",
-      date: "2026-02-10",
-      category: "Opinion",
-    },
-  ],
-  en: [
-    {
-      slug: "2026-02-11-marketing-target-changes",
-      title: "The Target of Marketing Is Shifting",
-      excerpt: "From people to agents, from persuasion to structure — the foundational premise of marketing is collapsing.",
-      date: "2026-02-11",
-      category: "Opinion",
-    },
-    {
-      slug: "2026-02-10-era-of-the-chairman",
-      title: "The Era of the Chairman Has Begun",
-      excerpt: "In a world where agents handle all execution, where exactly does uniquely human value reside?",
-      date: "2026-02-10",
-      category: "Opinion",
-    },
-    {
-      slug: "2026-02-10-quiet-exit",
-      title: "Five Stages of Losing Your Job — A Worker's Quiet Exit",
-      excerpt: "The day workplace automation became real, one office worker traversed the Kübler-Ross five stages to redefine what his Job truly meant.",
-      date: "2026-02-10",
-      category: "Opinion",
-    },
-  ],
-};
-
-function ColumnCard({ column, delay, locale }: { column: typeof columnsData.ko[0]; delay: number; locale?: string }) {
+function ColumnCard({ column, delay, locale }: { column: ColumnPreview; delay: number; locale?: string }) {
   const style = categoryStyles[column.category] || categoryStyles["Research"];
 
   return (
@@ -113,9 +72,9 @@ function ColumnCard({ column, delay, locale }: { column: typeof columnsData.ko[0
   );
 }
 
-function ColumnsPreview() {
+function ColumnsPreview({ koColumns, enColumns }: { koColumns: ColumnPreview[]; enColumns: ColumnPreview[] }) {
   const { locale } = useI18n();
-  const columns = locale === 'ko' ? columnsData.ko : columnsData.en;
+  const columns = locale === 'ko' ? koColumns : (enColumns.length > 0 ? enColumns : koColumns);
   const isKo = locale === 'ko';
 
   return (
@@ -357,7 +316,7 @@ function CommunityHero() {
   );
 }
 
-export default function HomeClient({ novelChapterCount }: { novelChapterCount: number }) {
+export default function HomeClient({ novelChapterCount, koColumns, enColumns }: { novelChapterCount: number; koColumns: ColumnPreview[]; enColumns: ColumnPreview[] }) {
   const { shouldReduce } = useAnimationConfig();
 
   return (
@@ -372,7 +331,7 @@ export default function HomeClient({ novelChapterCount }: { novelChapterCount: n
       <Navigation />
       <Hero />
       <FeaturesSection />
-      <ColumnsPreview />
+      <ColumnsPreview koColumns={koColumns} enColumns={enColumns} />
       <NovelsPreview chapterCount={novelChapterCount} />
       <CommunityHero />
       <Team />

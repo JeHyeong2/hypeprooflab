@@ -4,35 +4,14 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import ReactMarkdown from 'react-markdown';
+import rehypeSanitize from 'rehype-sanitize';
+import remarkGfm from 'remark-gfm';
 import type { Novel } from '@/lib/novels';
 import { Footer } from '@/components/layout/Footer';
-
-function parseMarkdown(md: string): string {
-  return md
-    // Headers
-    .replace(/^### (.*$)/gm, '<h3 class="text-xl font-bold text-white mt-10 mb-4">$1</h3>')
-    .replace(/^## (.*$)/gm, '<h2 class="text-2xl font-bold text-white mt-12 mb-6">$1</h2>')
-    // Bold
-    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
-    // Italic
-    .replace(/\*(.*?)\*/g, '<em class="text-purple-300">$1</em>')
-    // Horizontal rule
-    .replace(/^---$/gm, '<hr class="border-zinc-800 my-12" />')
-    // Code blocks
-    .replace(/```([\s\S]*?)```/g, '<pre class="bg-zinc-900 border border-zinc-800 rounded-lg p-4 my-6 overflow-x-auto text-sm"><code class="text-green-400">$1</code></pre>')
-    // Blockquote (Markdown > style)
-    .replace(/^> (.*)$/gm, '<blockquote class="border-l-2 border-purple-500 pl-6 my-8 text-zinc-300 italic text-lg">$1</blockquote>')
-    // Chat/dialogue format
-    .replace(/^\*\*\[([^\]]+)\]\*\*: (.*)$/gm, '<div class="my-4 p-3 bg-zinc-900/50 rounded-lg border-l-4 border-blue-500"><div class="text-blue-300 font-mono text-sm mb-1">[$1]</div><div class="text-zinc-200">$2</div></div>')
-    // List items
-    .replace(/^- \*\*(.*?)\*\*: (.*)$/gm, '<li class="mb-3 ml-4 list-disc"><strong class="text-white font-semibold">$1:</strong> $2</li>')
-    .replace(/^- (.*)$/gm, '<li class="mb-2 ml-4 list-disc">$1</li>')
-    // Paragraphs (double newline)
-    .replace(/\n\n/g, '</p><p class="mb-6 leading-relaxed">')
-    // Single newlines in running text
-    .replace(/\n/g, '<br />')
-    ;
-}
+import LikeButton from '@/components/LikeButton';
+import BookmarkButton from '@/components/BookmarkButton';
+import ShareButtons from '@/components/ShareButtons';
 
 interface Props {
   novel: Novel;
@@ -69,7 +48,6 @@ export default function NovelArticle({
   }, []);
 
   const { frontmatter, content } = novel;
-  const htmlContent = parseMarkdown(content);
   
   const switchLocale = (locale: string) => {
     router.push(`/novels/${slug}?lang=${locale}`);
@@ -272,8 +250,27 @@ export default function NovelArticle({
             isKo 
               ? 'text-[17px] leading-[1.9] tracking-[0.02em]' 
               : 'text-[17px] leading-[1.8] tracking-[0.01em]'
-          }`}
-          dangerouslySetInnerHTML={{ __html: `<p class="mb-6 leading-relaxed">${htmlContent}</p>` }}
+          } prose-headings:text-white prose-h2:text-2xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:font-bold prose-h3:mt-10 prose-h3:mb-4 prose-strong:text-white prose-strong:font-semibold prose-blockquote:border-l-2 prose-blockquote:border-purple-500 prose-blockquote:pl-6 prose-blockquote:my-8 prose-blockquote:text-zinc-300 prose-blockquote:italic prose-blockquote:text-lg prose-hr:border-zinc-800 prose-hr:my-12 prose-p:mb-6 prose-p:leading-relaxed prose-li:mb-2 prose-li:ml-4 prose-em:text-purple-300`}
+        >
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeSanitize]}
+          >
+            {content}
+          </ReactMarkdown>
+        </div>
+
+        {/* Like & Bookmark */}
+        <div className="mt-10 flex items-center gap-3">
+          <LikeButton slug={slug} />
+          <BookmarkButton slug={slug} />
+        </div>
+
+        {/* Share */}
+        <ShareButtons
+          url={`https://hypeproof-ai.xyz/novels/${slug}`}
+          title={frontmatter.title}
+          locale={currentLocale}
         />
 
         {/* Chapter Navigation */}
