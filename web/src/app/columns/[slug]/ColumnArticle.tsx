@@ -8,6 +8,8 @@ import type { Column } from '@/lib/columns';
 import { Footer } from '@/components/layout/Footer';
 import ViewCounter from '@/components/ViewCounter';
 import AuthButton from '@/components/auth/AuthButton';
+import LikeButton from '@/components/LikeButton';
+import BookmarkButton from '@/components/BookmarkButton';
 
 function parseMarkdown(md: string): string {
   return md
@@ -199,6 +201,12 @@ export default function ColumnArticle({ column, slug, availableLocales }: Props)
           dangerouslySetInnerHTML={{ __html: `<p class="mb-6 leading-relaxed">${htmlContent}</p>` }}
         />
         
+        {/* Like & Bookmark */}
+        <div className="mt-10 flex items-center gap-3">
+          <LikeButton slug={slug} />
+          <BookmarkButton slug={slug} />
+        </div>
+
         {/* Tags */}
         <div className="mt-12 pt-8 border-t border-zinc-800">
           <div className="flex flex-wrap gap-2">

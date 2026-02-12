@@ -3,6 +3,19 @@
 import { useSession, signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
+import type { MemberRole } from '@/lib/members';
+
+function RoleBadge({ role }: { role?: MemberRole }) {
+  if (!role || role === 'spectator') return null;
+  const colors = role === 'admin'
+    ? 'bg-red-500/20 text-red-400 border-red-500/30'
+    : 'bg-purple-500/20 text-purple-400 border-purple-500/30';
+  return (
+    <span className={`text-[10px] px-1.5 py-0.5 rounded border font-medium uppercase ${colors}`}>
+      {role}
+    </span>
+  );
+}
 
 export default function AuthButton() {
   const { data: session, status } = useSession();
@@ -36,6 +49,8 @@ export default function AuthButton() {
     );
   }
 
+  const role = (session.user as Record<string, unknown>).role as MemberRole | undefined;
+
   return (
     <div className="relative" ref={menuRef}>
       <button
@@ -55,14 +70,28 @@ export default function AuthButton() {
             {(session.user.name || '?')[0]}
           </div>
         )}
+        <RoleBadge role={role} />
       </button>
 
       {menuOpen && (
-        <div className="absolute right-0 top-10 w-48 bg-zinc-900 border border-zinc-700 rounded-lg shadow-xl py-2 z-50">
+        <div className="absolute right-0 top-10 w-56 bg-zinc-900 border border-zinc-700 rounded-lg shadow-xl py-2 z-50">
           <div className="px-4 py-2 border-b border-zinc-800">
-            <p className="text-sm text-white font-medium truncate">{session.user.name}</p>
+            <div className="flex items-center gap-2">
+              <p className="text-sm text-white font-medium truncate">{session.user.name}</p>
+              <RoleBadge role={role} />
+            </div>
             <p className="text-xs text-zinc-500 truncate">{session.user.email}</p>
           </div>
+          {role === 'spectator' && (
+            <div className="px-4 py-2 border-b border-zinc-800">
+              <p className="text-xs text-zinc-500">
+                Author 권한이 필요하신가요?{' '}
+                <a href="mailto:jayleekr0125@gmail.com" className="text-purple-400 hover:underline">
+                  관리자에게 문의
+                </a>
+              </p>
+            </div>
+          )}
           <button
             onClick={() => signOut()}
             className="w-full text-left px-4 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
