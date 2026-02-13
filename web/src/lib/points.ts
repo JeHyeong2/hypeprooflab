@@ -1,7 +1,11 @@
-import { Client } from '@notionhq/client';
-
-const notion = new Client({ auth: process.env.NOTION_API_KEY });
+const NOTION_API_KEY = process.env.NOTION_API_KEY!;
 const DB_ID = process.env.NOTION_POINTS_DB_ID!;
+
+const NOTION_HEADERS = {
+  'Authorization': `Bearer ${NOTION_API_KEY}`,
+  'Notion-Version': '2022-06-28',
+  'Content-Type': 'application/json',
+};
 
 export interface PointTransaction {
   id: string;
@@ -45,6 +49,26 @@ function parseRow(page: any): PointTransaction {
   };
 }
 
+async function notionQuery(body: Record<string, any>): Promise<any> {
+  const res = await fetch(`https://api.notion.com/v1/databases/${DB_ID}/query`, {
+    method: 'POST',
+    headers: NOTION_HEADERS,
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) throw new Error(`Notion API error: ${res.status} ${res.statusText}`);
+  return res.json();
+}
+
+async function notionCreatePage(properties: Record<string, any>): Promise<any> {
+  const res = await fetch('https://api.notion.com/v1/pages', {
+    method: 'POST',
+    headers: NOTION_HEADERS,
+    body: JSON.stringify({ parent: { database_id: DB_ID }, properties }),
+  });
+  if (!res.ok) throw new Error(`Notion API error: ${res.status} ${res.statusText}`);
+  return res.json();
+}
+
 export class NotionPointsService {
   async addPoints(data: {
     transaction: string;
@@ -54,17 +78,14 @@ export class NotionPointsService {
     category: 'Content' | 'Review' | 'Community' | 'Referral';
     note?: string;
   }) {
-    const response = await notion.pages.create({
-      parent: { database_id: DB_ID },
-      properties: {
-        Transaction: { title: [{ text: { content: data.transaction } }] },
-        Member: { rich_text: [{ text: { content: data.member } }] },
-        Amount: { number: data.amount },
-        Type: { select: { name: data.type } },
-        Category: { select: { name: data.category } },
-        Date: { date: { start: new Date().toISOString().split('T')[0] } },
-        ...(data.note ? { Note: { rich_text: [{ text: { content: data.note } }] } } : {}),
-      },
+    const response = await notionCreatePage({
+      Transaction: { title: [{ text: { content: data.transaction } }] },
+      Member: { rich_text: [{ text: { content: data.member } }] },
+      Amount: { number: data.amount },
+      Type: { select: { name: data.type } },
+      Category: { select: { name: data.category } },
+      Date: { date: { start: new Date().toISOString().split('T')[0] } },
+      ...(data.note ? { Note: { rich_text: [{ text: { content: data.note } }] } } : {}),
     });
     return parseRow(response);
   }
@@ -83,11 +104,10 @@ export class NotionPointsService {
     const results: PointTransaction[] = [];
     let cursor: string | undefined;
     do {
-      const res: any = await notion.databases.query({
-        database_id: DB_ID,
+      const res = await notionQuery({
         filter: { property: 'Member', rich_text: { equals: member } },
         sorts: [{ property: 'Date', direction: 'descending' }],
-        start_cursor: cursor,
+        ...(cursor ? { start_cursor: cursor } : {}),
       });
       results.push(...res.results.map(parseRow));
       cursor = res.has_more ? res.next_cursor : undefined;
@@ -99,10 +119,9 @@ export class NotionPointsService {
     const all: PointTransaction[] = [];
     let cursor: string | undefined;
     do {
-      const res: any = await notion.databases.query({
-        database_id: DB_ID,
+      const res = await notionQuery({
         sorts: [{ property: 'Date', direction: 'descending' }],
-        start_cursor: cursor,
+        ...(cursor ? { start_cursor: cursor } : {}),
       });
       all.push(...res.results.map(parseRow));
       cursor = res.has_more ? res.next_cursor : undefined;

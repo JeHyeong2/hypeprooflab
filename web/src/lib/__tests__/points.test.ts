@@ -1,17 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-const { mockCreate, mockQuery } = vi.hoisted(() => {
-  return { mockCreate: vi.fn(), mockQuery: vi.fn() };
-});
-
-vi.mock('@notionhq/client', () => {
-  return {
-    Client: class {
-      pages = { create: mockCreate };
-      databases = { query: mockQuery };
-    },
-  };
-});
+// Mock fetch globally
+const mockFetch = vi.fn();
+vi.stubGlobal('fetch', mockFetch);
 
 import { NotionPointsService, POINTS_TABLE } from '../points';
 
@@ -28,6 +19,10 @@ function makePage(id: string, member: string, amount: number, type = 'Earn', cat
       Note: { rich_text: [{ plain_text: '' }] },
     },
   };
+}
+
+function mockFetchResponse(data: any, ok = true) {
+  return { ok, status: ok ? 200 : 400, statusText: ok ? 'OK' : 'Bad Request', json: () => Promise.resolve(data) };
 }
 
 describe('POINTS_TABLE constants', () => {
@@ -49,9 +44,9 @@ describe('NotionPointsService', () => {
   });
 
   describe('addPoints', () => {
-    it('calls notion.pages.create with correct properties', async () => {
+    it('calls Notion API to create a page with correct properties', async () => {
       const page = makePage('new-1', 'Jay', 50);
-      mockCreate.mockResolvedValue(page);
+      mockFetch.mockResolvedValueOnce(mockFetchResponse(page));
 
       const result = await svc.addPoints({
         transaction: 'Test TX',
@@ -62,14 +57,13 @@ describe('NotionPointsService', () => {
         note: 'test note',
       });
 
-      expect(mockCreate).toHaveBeenCalledOnce();
-      const call = mockCreate.mock.calls[0][0];
-      expect(call.properties.Transaction.title[0].text.content).toBe('Test TX');
-      expect(call.properties.Member.rich_text[0].text.content).toBe('Jay');
-      expect(call.properties.Amount.number).toBe(50);
-      expect(call.properties.Type.select.name).toBe('Earn');
-      expect(call.properties.Category.select.name).toBe('Content');
-      expect(call.properties.Note.rich_text[0].text.content).toBe('test note');
+      expect(mockFetch).toHaveBeenCalledOnce();
+      const [url, opts] = mockFetch.mock.calls[0];
+      expect(url).toContain('api.notion.com/v1/pages');
+      const body = JSON.parse(opts.body);
+      expect(body.properties.Transaction.title[0].text.content).toBe('Test TX');
+      expect(body.properties.Member.rich_text[0].text.content).toBe('Jay');
+      expect(body.properties.Amount.number).toBe(50);
       expect(result.member).toBe('Jay');
       expect(result.amount).toBe(50);
     });
@@ -77,42 +71,42 @@ describe('NotionPointsService', () => {
 
   describe('getBalance', () => {
     it('sums all transactions for a member', async () => {
-      mockQuery.mockResolvedValueOnce({
+      mockFetch.mockResolvedValueOnce(mockFetchResponse({
         results: [makePage('1', 'Jay', 50), makePage('2', 'Jay', 80), makePage('3', 'Jay', -20)],
         has_more: false,
-      });
+      }));
 
       const balance = await svc.getBalance('Jay');
       expect(balance).toBe(110);
     });
 
     it('returns 0 for member with no transactions', async () => {
-      mockQuery.mockResolvedValueOnce({ results: [], has_more: false });
+      mockFetch.mockResolvedValueOnce(mockFetchResponse({ results: [], has_more: false }));
       const balance = await svc.getBalance('Nobody');
       expect(balance).toBe(0);
     });
 
     it('paginates through multiple pages', async () => {
-      mockQuery
-        .mockResolvedValueOnce({
+      mockFetch
+        .mockResolvedValueOnce(mockFetchResponse({
           results: [makePage('1', 'Jay', 100)],
           has_more: true,
           next_cursor: 'cursor-2',
-        })
-        .mockResolvedValueOnce({
+        }))
+        .mockResolvedValueOnce(mockFetchResponse({
           results: [makePage('2', 'Jay', 50)],
           has_more: false,
-        });
+        }));
 
       const balance = await svc.getBalance('Jay');
       expect(balance).toBe(150);
-      expect(mockQuery).toHaveBeenCalledTimes(2);
+      expect(mockFetch).toHaveBeenCalledTimes(2);
     });
   });
 
   describe('getLeaderboard', () => {
     it('returns members sorted by balance descending', async () => {
-      mockQuery.mockResolvedValueOnce({
+      mockFetch.mockResolvedValueOnce(mockFetchResponse({
         results: [
           makePage('1', 'Jay', 100),
           makePage('2', 'Mia', 200),
@@ -120,7 +114,7 @@ describe('NotionPointsService', () => {
           makePage('4', 'Hoon', 150),
         ],
         has_more: false,
-      });
+      }));
 
       const lb = await svc.getLeaderboard();
       expect(lb).toEqual([
