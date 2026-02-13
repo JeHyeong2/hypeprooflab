@@ -9,7 +9,11 @@
     "predeploy": "bash scripts/verify_content.sh && next build",
     "start": "next start",
     "lint": "eslint",
-    "test:e2e": "npx playwright test"
+    "test:unit": "vitest run",
+    "test:e2e": "npx playwright test",
+    "test:geo": "python3 ../scripts/test_geo_qa.py",
+    "test:pipeline": "python3 ../scripts/test_content_pipeline.py",
+    "test:all": "npm run test:unit && npm run test:e2e && npm run test:geo"
   },
   "dependencies": {
     "@auth/supabase-adapter": "^1.11.1",
@@ -39,6 +43,7 @@
     "eslint-config-next": "16.1.6",
     "supabase": "^2.76.8",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.0.18"
   }
 }
