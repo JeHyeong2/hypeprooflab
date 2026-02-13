@@ -14,6 +14,13 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
 
+  webServer: process.env.E2E_LOCAL ? {
+    command: 'npm run dev -- -p 3099',
+    url: 'http://127.0.0.1:3099',
+    reuseExistingServer: true,
+    timeout: 30_000,
+  } : undefined,
+
   projects: [
     {
       name: 'desktop',
@@ -30,6 +37,13 @@ export default defineConfig({
         viewport: { width: 375, height: 667 },
       },
       grep: [/@mobile/, /@all/],
+    },
+    {
+      name: 'api',
+      use: {
+        baseURL: process.env.E2E_LOCAL ? 'http://127.0.0.1:3099' : 'https://hypeproof-ai.xyz',
+      },
+      grep: [/@api/],
     },
   ],
 });
