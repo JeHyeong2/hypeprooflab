@@ -4,52 +4,60 @@
 
 > **Staff Software Engineer @ Silicon Valley Tech Company**
 
+- **Role**: Admin
 - **Education**: Hanyang University — CS Ph.D Cand.
-- **Role**: Lead / Tech
-- **Email**: jayleekr0125@gmail.com
+- **Domain**: Tech / Lead
+- **Discord ID**: TBD
 
 ## Kiwon (남기원)
 
 > **Global Offline Marketing Specialist**
 
+- **Role**: Creator
 - **Education**: George Washington University — Psychology & Philosophy
-- **Role**: Marketing / Strategy
-- **Email**: kiwonam96@gmail.com
+- **Domain**: Marketing / Strategy
+- **Discord ID**: TBD
 
 ## TJ (강태진)
 
 > **Media Specialist / Ex-Founder**
 
-- **Role**: Contents / Media Production
-- **Email**: tj456852@gmail.com
+- **Role**: Creator
+- **Domain**: Contents / Media Production
+- **Discord ID**: TBD
 
 ## Ryan (김지웅)
 
 > **Quantitative Researcher @ AssetPlus (AlphaBridge)**
 
+- **Role**: Creator
 - **Education**: Ph.D in Physics — Ex-Scientist @ CERN
-- **Role**: Research / Data Analysis
-- **Email**: jkimak1124@gmail.com
+- **Domain**: Research / Data Analysis
+- **Discord ID**: TBD
 
 ## JY (신진용)
 
 > **AI/ML Engineer @ Remember | Ex-Quant**
 
+- **Role**: Creator
 - **Education**: M.S. in Physics
-- **Role**: Research / AI Engineering
-- **Email**: jysin0102@gmail.com
+- **Domain**: Research / AI Engineering
+- **Discord ID**: TBD
 
 ## BH (태봉호)
 
 > **Ph.D. Candidate @ CMS Collaboration (CERN)**
 
+- **Role**: Creator
 - **Education**: Kyungpook National Univ. — Experimental Physics
-- **Role**: Particle Physics / Data Analysis
-- **Email**: xoqhdgh@gmail.com
+- **Domain**: Particle Physics / Data Analysis
+- **Discord ID**: TBD
 
 ## Sebastian
 
 > **Engineering Manager @ Silicon Valley Tech Company**
 
+- **Role**: Creator
 - **Education**: Politechnika Łódzka — M.Sc. in Electronics & Telecommunications
-- **Role**: Engineering / Management
+- **Domain**: Engineering / Management
+- **Discord ID**: TBD
