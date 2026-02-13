@@ -1,0 +1,25 @@
+{
+  "submissions": {
+    "20260213-b19ac4": {
+      "id": "20260213-b19ac4",
+      "author": "Jay",
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/columns/ko/2026-02-10-era-of-the-chairman.md",
+      "filename": "2026-02-10-era-of-the-chairman.md",
+      "language": "ko",
+      "geo_score": 100,
+      "geo_feedback": [],
+      "submitted_at": "2026-02-13T11:48:53.181854+00:00",
+      "status": "in_review",
+      "reviewers": [
+        "Hoon",
+        "Mia"
+      ],
+      "reviews": [],
+      "review_deadline": "2026-02-13T11:48:53.182171+00:00"
+    }
+  },
+  "last_reviewers": [
+    "Hoon",
+    "Mia"
+  ]
+}
