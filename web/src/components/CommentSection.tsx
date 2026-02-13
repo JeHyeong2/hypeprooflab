@@ -24,7 +24,7 @@ function RoleBadge({ role }: { role: string }) {
   const colors =
     role === 'admin'
       ? 'bg-red-500/20 text-red-400 border-red-500/30'
-      : role === 'author'
+      : role === 'creator'
       ? 'bg-purple-500/20 text-purple-400 border-purple-500/30'
       : 'bg-zinc-500/20 text-zinc-400 border-zinc-500/30';
   return (
