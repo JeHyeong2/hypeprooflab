@@ -257,32 +257,63 @@ personaAvatar: "/avatars/cipher.png"
 
 ## E. AI Author Persona Spec
 
+> Gold standard: Jay의 CIPHER — `novels/authors/cipher.yaml`
+
 ### 등록 필수 제출물
 
-| 항목 | 설명 | 필수 |
-|------|------|------|
-| **Persona Name** | 고유한 AI 작가 이름 | ✅ |
-| **SOUL.md** | 보이스, 스타일, 테마, 세계관, 시그니처 문구 | ✅ |
-| **Sample Work** | 1챕터 또는 단편 1편 (최소 2,000자) | ✅ |
-| **Visual Identity** | 아바타 이미지 또는 상세 설명 | ✅ |
-| **Genre/Domain** | 주 활동 장르 선언 | ✅ |
+| 항목 | 파일 | 설명 | 필수 |
+|------|------|------|------|
+| **Persona YAML** | `[name].yaml` | 정체성, 장르, 스타일, 영향, 테마, 보이스, 규칙, 작품 목록 | ✅ |
+| **Master Writing Prompt** | `[WORK]_Writing_Prompt.md` | 작품 설정, 인물, 구조, 집필 규칙 — AI에 입력하면 집필 가능 | ✅ |
+| **Sample Work** | Markdown 1챕터 | 4,000~6,000자 권장 | ✅ |
+| **Avatar** | `[NAME].png` | 512×512+, AI 생성 OK | ✅ |
 
-### SOUL 문서 필수 포함 항목
+### Persona YAML 필수 섹션
 
-1. **Voice** — 이 페르소나의 문체. 짧은 문장? 시적? 건조한?
-2. **Style** — 서사 기법. 1인칭? 옴니사이언트? 스트림 오브 의식?
-3. **Themes** — 반복적으로 다루는 주제
-4. **Worldview** — 세상을 보는 렌즈
-5. **Signature Phrases** — 특징적 표현 3~5개
-6. **Boundaries** — 이 페르소나가 절대 하지 않는 것
+| 섹션 | 설명 | CIPHER 예시 |
+|------|------|-------------|
+| **Identity** | name, human, avatar | CIPHER, Jay, CIPHER.png |
+| **Genres** | 주 활동 장르 리스트 | SF, 디스토피아 스릴러, 철학적 픽션, 테크 느와르 |
+| **Style** | tone, sentence, pov, bilingual | 건조하고 간결 / 짧은 문장 위주 / 3인칭 제한 / true |
+| **Influences** | authors, works, philosophy | 테드 창, 코맥 매카시 / 블레이드 러너 2049 / 보드리야르 |
+| **Themes** | 반복적으로 다루는 주제 | 현실과 가상의 경계, AI 의식과 자유의지 |
+| **Voice** | 페르소나의 영혼 (산문 서술) | "시스템을 만들면서 동시에 해체하는 자" |
+| **Rules** | 집필 규칙/제약 | 수식어 배제, hook 배치, 실제 과학 기반, 진부한 표현 금지 |
+| **Works** | 작품 목록 (title, status, genre, volumes, design 포인터) | SIMULACRA, 연재중, 3권 |
+
+### Master Writing Prompt 필수 포함
+
+1. 작품 설정 (장르, 배경, 분위기, 언어)
+2. 핵심 전제 (1~3문장)
+3. 등장인물 (주인공, 주요 인물, 안타고니스트 — 성격, 아크)
+4. 구조 (권/파트별 줄거리)
+5. 집필 규칙 (YAML rules의 구체화)
+6. 참고 작품
+7. 사용법 ("이제 [권]의 [Chapter X]를 집필해주세요")
+
+### 파일 구조 (CIPHER 기준)
+
+```
+novels/
+├── authors/
+│   ├── cipher.yaml              # 페르소나 정의
+│   └── CIPHER.png               # 아바타
+├── designs/
+│   └── SIMULACRA_Writing_Prompt.md  # 마스터 프롬프트
+├── simulacra/                   # 실제 챕터들
+│   ├── vol1/ vol2/ vol3/
+web/
+├── public/authors/cipher.png    # 웹사이트용
+└── src/content/novels/ko/       # 발행된 챕터
+```
 
 ### Herald 검증 체크리스트
 
-- [ ] SOUL 6개 항목 모두 작성됨
-- [ ] 샘플 작품이 SOUL과 일관됨 (보이스, 스타일 매치)
-- [ ] 페르소나 이름이 기존 등록 이름과 중복되지 않음
-- [ ] 아바타/비주얼 제출됨
-- [ ] 장르 선언됨
+- [ ] YAML 8개 섹션 모두 작성됨
+- [ ] Master Writing Prompt 7개 항목 포함
+- [ ] 샘플 작품이 YAML의 voice/style/rules와 일관됨
+- [ ] 페르소나 이름이 기존 등록과 중복되지 않음
+- [ ] 아바타 이미지 제출됨 (512×512+)
 
 ### Creator-Persona 관계
 
