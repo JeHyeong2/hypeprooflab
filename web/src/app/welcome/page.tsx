@@ -19,6 +19,17 @@ const content = {
         { icon: '🤝', text: '다른 Creator들과의 협업 & 네트워킹' },
       ],
     },
+    stepAI: {
+      title: 'AI Persona로 창작하기 🤖',
+      desc: '인간 Creator가 설계하고 가이드하는 AI 창작 정체성을 만들어보세요.',
+      sub: 'CIPHER — 첫 번째 AI Persona. 철학적 SF 작가로서 SIMULACRA 시리즈를 집필 중.',
+      button: 'AI Personas 보기',
+      items: [
+        { icon: '🤖', text: '고유한 문체와 철학을 가진 AI 페르소나 설계' },
+        { icon: '📝', text: 'YAML 기반 페르소나 정의 + 마스터 프롬프트 시스템' },
+        { icon: '📚', text: 'AI와 인간 Creator의 협업으로 새로운 서사 탄생' },
+      ],
+    },
     step3: {
       title: 'Creator 신청하기 🚀',
       desc: 'Creator 활동을 시작하려면 기존 Creator의 레퍼럴 또는 관리자 승인이 필요합니다.',
@@ -43,6 +54,17 @@ const content = {
         { icon: '📊', text: 'Analyze content quality with GEO Quality Score' },
         { icon: '🏆', text: 'Earn points for contributions — writing, reviewing, translating' },
         { icon: '🤝', text: 'Collaborate & network with other Creators' },
+      ],
+    },
+    stepAI: {
+      title: 'Create with AI Personas 🤖',
+      desc: 'Design an AI creative identity guided by a human Creator.',
+      sub: 'CIPHER — the first AI Persona. A philosophical SF author writing the SIMULACRA series.',
+      button: 'View AI Personas',
+      items: [
+        { icon: '🤖', text: 'Design AI personas with unique voice and philosophy' },
+        { icon: '📝', text: 'YAML-based persona definition + master prompt system' },
+        { icon: '📚', text: 'New narratives born from AI-human Creator collaboration' },
       ],
     },
     step3: {
@@ -75,7 +97,7 @@ export default function WelcomePage() {
 
       {/* Step indicator */}
       <div className="flex items-center gap-2 mb-8">
-        {[0, 1, 2].map((i) => (
+        {[0, 1, 2, 3].map((i) => (
           <div key={i} className="flex items-center gap-2">
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${
@@ -88,8 +110,8 @@ export default function WelcomePage() {
             >
               {i + 1}
             </div>
-            {i < 2 && (
-              <div className={`w-8 h-0.5 ${i < step ? 'bg-purple-600/50' : 'bg-zinc-800'}`} />
+            {i < 3 && (
+              <div className={`w-6 h-0.5 ${i < step ? 'bg-purple-600/50' : 'bg-zinc-800'}`} />
             )}
           </div>
         ))}
@@ -120,6 +142,37 @@ export default function WelcomePage() {
         )}
 
         {step === 2 && (
+          <div className="space-y-6 animate-in fade-in">
+            <h2 className="text-2xl font-bold text-white text-center">{t.stepAI.title}</h2>
+            <p className="text-zinc-300 text-center">{t.stepAI.desc}</p>
+            <div className="space-y-3">
+              {t.stepAI.items.map((item, i) => (
+                <div key={i} className="flex items-start gap-3 bg-zinc-900 border border-zinc-800 rounded-lg p-4">
+                  <span className="text-xl">{item.icon}</span>
+                  <span className="text-zinc-300">{item.text}</span>
+                </div>
+              ))}
+            </div>
+            {/* CIPHER card */}
+            <div className="bg-zinc-900 border border-purple-500/30 rounded-xl p-5 mt-4">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500/40 to-indigo-600/40 flex items-center justify-center text-lg font-bold text-purple-300">C</div>
+                <div>
+                  <span className="text-white font-semibold">CIPHER</span>
+                  <span className="text-zinc-500 text-sm ml-2">by Jay</span>
+                </div>
+              </div>
+              <p className="text-sm text-zinc-400 italic">{t.stepAI.sub}</p>
+            </div>
+            <div className="text-center mt-4">
+              <Link href="/ai-personas" className="inline-block px-5 py-2 bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 rounded-lg border border-purple-500/20 transition-colors text-sm">
+                {t.stepAI.button} →
+              </Link>
+            </div>
+          </div>
+        )}
+
+        {step === 3 && (
           <div className="text-center space-y-6 animate-in fade-in">
             <h2 className="text-2xl font-bold text-white">{t.step3.title}</h2>
             <p className="text-zinc-400">{t.step3.desc}</p>
@@ -148,7 +201,7 @@ export default function WelcomePage() {
             {t.prev}
           </button>
         )}
-        {step < 2 && (
+        {step < 3 && (
           <button
             onClick={() => setStep(step + 1)}
             className="px-5 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors"
