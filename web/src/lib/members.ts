@@ -4,23 +4,22 @@ export interface MemberInfo {
   email: string;
   displayName: string;
   role: MemberRole;
+  discordId?: string;
 }
 
-// Fallback hardcoded list (used when Notion API is unavailable)
-const FALLBACK_MEMBERS: MemberInfo[] = [
-  { email: 'jayleekr0125@gmail.com', displayName: 'Jay', role: 'admin' },
-  { email: 'jabang3@gmail.com', displayName: 'Jay', role: 'admin' },
-  { email: 'kiwonam96@gmail.com', displayName: 'Kiwon', role: 'creator' },
-  { email: 'tj456852@gmail.com', displayName: 'TJ', role: 'creator' },
-  { email: 'jkimak1124@gmail.com', displayName: 'Ryan', role: 'creator' },
-  { email: 'jysin0102@gmail.com', displayName: 'JY', role: 'creator' },
-  { email: 'xoqhdgh@gmail.com', displayName: 'BH', role: 'creator' },
+// Fallback list (no emails for security — Notion is source of truth)
+const FALLBACK_MEMBERS: { displayName: string; role: MemberRole }[] = [
+  { displayName: 'Jay', role: 'admin' },
+  { displayName: 'Kiwon', role: 'creator' },
+  { displayName: 'TJ', role: 'creator' },
+  { displayName: 'Ryan', role: 'creator' },
+  { displayName: 'JY', role: 'creator' },
+  { displayName: 'BH', role: 'creator' },
+  { displayName: 'Sebastian', role: 'creator' },
 ];
 
 // Cache
-let memberMap = new Map<string, MemberInfo>(
-  FALLBACK_MEMBERS.map((m) => [m.email.toLowerCase(), m])
-);
+let memberMap = new Map<string, MemberInfo>();
 let lastFetchedAt = 0;
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
 let fetchPromise: Promise<void> | null = null;
@@ -41,7 +40,7 @@ async function fetchMembersFromNotion(): Promise<Map<string, MemberInfo>> {
   const dbId = process.env.NOTION_MEMBERS_DB_ID;
   if (!apiKey || !dbId) {
     console.warn('[members] NOTION_API_KEY or NOTION_MEMBERS_DB_ID not set, using fallback');
-    return new Map(FALLBACK_MEMBERS.map((m) => [m.email.toLowerCase(), m]));
+    return new Map();
   }
 
   const res = await fetch(`https://api.notion.com/v1/databases/${dbId}/query`, {
@@ -51,7 +50,12 @@ async function fetchMembersFromNotion(): Promise<Map<string, MemberInfo>> {
       'Notion-Version': '2022-06-28',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({}),
+    body: JSON.stringify({
+      filter: {
+        property: 'Status',
+        select: { equals: 'Active' },
+      },
+    }),
   });
 
   if (!res.ok) {
@@ -65,14 +69,17 @@ async function fetchMembersFromNotion(): Promise<Map<string, MemberInfo>> {
     const props = page.properties;
     const name = props.Name?.title?.[0]?.plain_text ?? 'Unknown';
     const role = parseRole(props.Role?.select?.name);
-    const email1: string | null = props.Email?.email ?? null;
-    const email2: string | null = props['Email 2']?.email ?? null;
+    const email: string | null = props.Email?.email ?? null;
+    const discordId: string | null =
+      props['Discord ID']?.rich_text?.[0]?.plain_text ?? null;
 
-    if (email1) {
-      map.set(email1.toLowerCase(), { email: email1, displayName: name, role });
-    }
-    if (email2) {
-      map.set(email2.toLowerCase(), { email: email2, displayName: name, role });
+    if (email) {
+      map.set(email.toLowerCase(), {
+        email,
+        displayName: name,
+        role,
+        ...(discordId ? { discordId } : {}),
+      });
     }
   }
 
@@ -119,4 +126,9 @@ export function isKnownMember(email: string): boolean {
   return memberMap.has(email.toLowerCase());
 }
 
-export { FALLBACK_MEMBERS as KNOWN_MEMBERS };
+export function getAllMembers(): MemberInfo[] {
+  ensureFresh();
+  return Array.from(memberMap.values());
+}
+
+export { FALLBACK_MEMBERS };
