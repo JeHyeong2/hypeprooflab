@@ -109,10 +109,10 @@ export default function AuthButton() {
           {role === 'spectator' && (
             <div className="px-4 py-2 border-b border-zinc-800">
               <p className="text-xs text-zinc-500">
-                Author 권한이 필요하신가요?{' '}
-                <a href="mailto:jayleekr0125@gmail.com" rel="noopener noreferrer" className="text-purple-400 hover:underline">
-                  관리자에게 문의
-                </a>
+                Creator가 되고 싶으신가요?{' '}
+                <Link href="/welcome" onClick={() => setMenuOpen(false)} className="text-purple-400 hover:underline">
+                  자세히 알아보기
+                </Link>
               </p>
             </div>
           )}
