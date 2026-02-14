@@ -1,7 +1,7 @@
 # HypeProof Lab — System Architecture
 
 > 전체 시스템 아키텍처 개요 + 다이어그램
-> Version: 1.0 | Created: 2026-02-14
+> Version: 1.1 | Updated: 2026-02-15 (GAP 분석 반영)
 
 ---
 
@@ -264,6 +264,102 @@ flowchart TD
 
     style MSG fill:#2d1b69
     style PUBLISH fill:#1b4332
+```
+
+---
+
+## 7. Web Application Components (구현 완료)
+
+```mermaid
+graph TB
+    subgraph "Next.js Web App (Vercel)"
+        subgraph "Pages"
+            HOME[/ Home]
+            COLS[/columns — 칼럼 목록+상세]
+            NOVELS[/novels — 소설+작가별]
+            CREATORS[/creators — 크리에이터 프로필]
+            PERSONAS[/ai-personas — AI 페르소나 등록]
+            GLOSSARY[/glossary — 용어사전]
+            ACTIVITY[/my-activity — 내 활동]
+            AUTH_P[/auth — 로그인/에러]
+            WELCOME[/welcome — 온보딩]
+        end
+
+        subgraph "API Routes"
+            API_AUTH[/api/auth — NextAuth]
+            API_CONTENT[/api/content]
+            API_COMMENTS[/api/comments]
+            API_LIKES[/api/likes]
+            API_VIEWS[/api/views]
+            API_BOOKMARKS[/api/bookmarks]
+            API_POINTS[/api/points + /leaderboard]
+            API_COLMETA[/api/column-meta]
+        end
+
+        subgraph "Components"
+            ANALYTICS[Analytics + AnalyticsProvider]
+            BOOKMARK[BookmarkButton]
+            COMMENTS[CommentSection]
+            LIKE[LikeButton]
+            SHARE[ShareButtons]
+            VIEW[ViewCounter]
+            COOKIE[CookieConsent]
+            ERR[ErrorBoundary]
+            SKELETON[SkeletonLoader + LazyComponents]
+        end
+
+        subgraph "Libraries"
+            LIB_ANALYTICS[analytics.ts — AI referrer 감지]
+            LIB_MEMBERS[members.ts — Notion 멤버 조회]
+            LIB_POINTS[points.ts — Notion 포인트]
+            LIB_PERSONAS[personas.ts — Notion 페르소나]
+            LIB_COLUMNS[columns.ts — MDX 칼럼]
+            LIB_NOVELS[novels.ts — MDX 소설]
+            LIB_AUTH[auth.ts — NextAuth + Supabase]
+            LIB_REDIS[redis.ts — 캐싱]
+            LIB_JSONLD[jsonld.ts — Schema.org]
+            LIB_I18N[i18n.ts — KO/EN]
+            LIB_GLOSSARY[glossary.ts — 용어사전]
+        end
+    end
+
+    subgraph "Backend Pipeline (Python)"
+        GEO_QA[geo_qa_score.py — GEO 자동채점]
+        PIPELINE[content_pipeline.py — 제출/리뷰/발행]
+        TRACKER[submission_tracker.py — 상태관리]
+        REVIEWER[peer_review_manager.py — 리뷰어 매칭]
+        OVERNIGHT[overnight_loop.py — 자가발전 루프]
+    end
+
+    subgraph "Tests"
+        T_SECURITY[test_herald_security.py]
+        T_PEER[test_peer_review.py]
+        T_PIPELINE[test_pipeline_integration.py]
+    end
+
+    LIB_MEMBERS --> |Notion API| NOTION[(Notion DB)]
+    LIB_POINTS --> |Notion API| NOTION
+    LIB_PERSONAS --> |Notion API| NOTION
+    LIB_AUTH --> |OAuth| SUPABASE[(Supabase)]
+    LIB_REDIS --> REDIS[(Redis)]
+```
+
+## 8. Content Structure
+
+```
+web/src/content/
+├── columns/
+│   ├── ko/          # 한국어 칼럼 10편 (2026-02-10 ~ 02-12)
+│   └── en/          # 영어 번역 10편
+└── novels/
+    └── ko/          # 한국어 소설
+
+novels/
+├── authors/
+│   ├── cipher.yaml  # CIPHER 페르소나 (Gold Standard)
+│   └── CIPHER.png   # 아바타
+└── designs/
+    └── SIMULACRA_Writing_Prompt.md
 ```
 
 ---

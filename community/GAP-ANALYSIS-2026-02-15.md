@@ -1,0 +1,141 @@
+# HypeProof Lab — GAP Analysis Report
+
+> SPEC.md vs 실제 구현 비교 분석
+> Date: 2026-02-15 | Analyst: Mother 🫶
+
+---
+
+## 요약
+
+| 카테고리 | 완료 | 부분완료 | 미완료 |
+|---------|------|---------|--------|
+| A. Community Structure | 3 | 1 | 1 |
+| B. Herald Agent | 4 | 2 | 1 |
+| C. Content Pipeline | 5 | 3 | 2 |
+| D. Creative Works Pipeline | 2 | 1 | 3 |
+| E. AI Author Persona Spec | 3 | 0 | 1 |
+| F. Token Economy | 2 | 1 | 2 |
+| G. AEO Measurement | 1 | 1 | 2 |
+| H. Tech Stack | 5 | 2 | 2 |
+| **합계** | **25** | **11** | **14** |
+
+---
+
+## A. Community Structure
+
+| 항목 | 상태 | 근거 |
+|------|------|------|
+| 역할 정의 (Admin/Creator/Spectator) | ✅ 완료 | `members.ts` — MemberRole type, Notion DB 연동 |
+| Creator 가입 절차 | ⚠️ 부분 | 수동 프로세스 존재, Herald 자동화 미완성 |
+| 멤버 데이터 (Notion DB) | ✅ 완료 | Notion DB 6개 (Dev+Prod), `members.ts` fetch API |
+| GitHub에 개인정보 없음 | ✅ 완료 | `members.ts` FALLBACK에 이메일 없음 |
+| "Author" → "Creator" 용어 통일 | ❌ 미완료 | `grep -rl "author"` — 10+ 파일에 아직 "author" 잔존 |
+
+## B. Herald Agent
+
+| 항목 | 상태 | 근거 |
+|------|------|------|
+| Discord Bot 별도 토큰 | ✅ 완료 | `HERALD-BOT-SETUP.md` 존재, 봇 운영 중 |
+| SOUL.md 작성 | ✅ 완료 | `HERALD-SOUL.md` 존재 |
+| GEO QA 자동 채점 | ✅ 완료 | `geo_qa_score.py` — SPEC의 채점표 구현됨 |
+| Herald ↔ Mother 통신 | ⚠️ 부분 | sessions_send 구조 있으나 정형 형식(COMM-1) 미검증 |
+| Herald 보안 설정 | ✅ 완료 | tools allow/deny 설정 완료 |
+| 보안 26 MUST 테스트 | ⚠️ 부분 | `test_herald_security.py` mock만, 실 테스트 미실행 |
+| 콘텐츠+창작 모드 구분 (ID-5) | ❌ 미완료 | SOUL.md에 정의됐을 수 있으나 실동작 미확인 |
+
+## C. Content Pipeline
+
+| 항목 | 상태 | 근거 |
+|------|------|------|
+| 제출 (Herald DM) | ✅ 완료 | Discord 채널 바인딩 + SUBMIT: prefix 파싱 |
+| GEO QA 자동 채점 | ✅ 완료 | `geo_qa_score.py` — 9개 카테고리 전부 구현 |
+| 70점 미만 반려 + 피드백 | ✅ 완료 | `content_pipeline.py` GEO_QA_PASS_THRESHOLD=70 |
+| Peer Review 자동 매칭 | ✅ 완료 | `peer_review_manager.py` — match_reviewers 구현 |
+| 리뷰어 매칭 규칙 (자기글 제외, 연속 금지) | ✅ 완료 | get_recent_reviewers + 제출자 제외 로직 |
+| 48시간 기한 추적 | ⚠️ 부분 | `cmd_timeout_check` 존재, 실 운영 미확인 |
+| Mother 최종 승인 연동 | ⚠️ 부분 | 코드 구조 있으나 sessions_send 실동작 미확인 |
+| 발행 (git push + Vercel) | ⚠️ 부분 | `content_pipeline.py publish` 존재, 자동화 미완성 |
+| 프로세스 아카이브 규격 | ❌ 미완료 | process-log.md, process-note.md 수집 구조 미구현 |
+| 포인트 자동 적립 | ❌ 미완료 | Points API 존재하나 파이프라인 연동 자동 적립 없음 |
+
+## D. Creative Works Pipeline
+
+| 항목 | 상태 | 근거 |
+|------|------|------|
+| AI Persona 등록 페이지 | ✅ 완료 | `/ai-personas/register/page.tsx` |
+| AI Persona YAML (CIPHER) | ✅ 완료 | `novels/authors/cipher.yaml` + `CIPHER.png` |
+| 창작물 제출 프로세스 | ❌ 미완료 | 칼럼 파이프라인만 존재, 창작물 별도 플로우 없음 |
+| 페르소나 일관성 채점 | ❌ 미완료 | GEO만 구현, 창작물 리뷰 기준 미구현 |
+| 창작물 리뷰 프로세스 | ❌ 미완료 | 리뷰어 매칭이 칼럼 전용 |
+| 소설 콘텐츠 | ⚠️ 부분 | `web/src/content/novels/ko/` 존재, 발행 파이프라인 미연동 |
+
+## E. AI Author Persona Spec
+
+| 항목 | 상태 | 근거 |
+|------|------|------|
+| Persona YAML 8섹션 | ✅ 완료 | `cipher.yaml` gold standard 존재 |
+| AI-PERSONA-TEMPLATE.md | ✅ 완료 | `community/AI-PERSONA-TEMPLATE.md` 존재 |
+| Persona 웹 표시 | ✅ 완료 | `/ai-personas` 페이지 + Notion DB 연동 (`personas.ts`) |
+| Herald 검증 체크리스트 자동화 | ❌ 미완료 | 수동 검증만, Herald에 자동 체크 미구현 |
+
+## F. Token Economy
+
+| 항목 | 상태 | 근거 |
+|------|------|------|
+| Points API | ✅ 완료 | `points.ts` + `/api/points` + `/api/points/leaderboard` |
+| Notion Points DB | ✅ 완료 | Notion fetch API 기반 (SDK 미사용 ✅) |
+| 자동 적립 (발행 시) | ❌ 미완료 | 수동 기록만, 파이프라인 자동 연동 없음 |
+| Anti-Gaming Rules 시행 | ⚠️ 부분 | 월 8편 상한, GEO 70+ 등 규칙 정의됨, 자동 enforce 미구현 |
+| 사용 (소각) | ❌ 미완료 | Phase 1 설계만, 실행 메커니즘 없음 |
+
+## G. AEO Measurement
+
+| 항목 | 상태 | 근거 |
+|------|------|------|
+| GEO Quality Score | ✅ 완료 | `geo_qa_score.py` 완전 구현 |
+| Google Analytics AI referral | ⚠️ 부분 | `analytics.ts` AI_REFERRERS 정의됨, GA 설정 미확인 |
+| Impact Score (30일 후) | ❌ 미완료 | 설계만, 구현 없음 |
+| AI Citation Testing | ❌ 미완료 | 설계만, 자동화 없음 |
+
+## H. Tech Stack
+
+| 항목 | 상태 | 근거 |
+|------|------|------|
+| Next.js + Vercel | ✅ 완료 | 웹사이트 운영 중 |
+| Notion DB (fetch API only) | ✅ 완료 | `members.ts`, `points.ts`, `personas.ts` — SDK 미사용 |
+| Discord Herald Bot | ✅ 완료 | 봇 운영 중 |
+| Schema.org Structured Data | ✅ 완료 | `jsonld.ts` — Organization, WebSite, Article schema |
+| Google Analytics | ✅ 완료 | `analytics.ts` + `AnalyticsProvider.tsx` |
+| hypeproof-writer 스킬 | ❌ 미완료 | WRITER-AGENT-SPEC.md 설계만, 구현 없음 |
+| 탈중앙 에이전트 아키텍처 | ❌ 미완료 | Creator 자체 OpenClaw 운영 구조 미구현 |
+| Supabase (인증) | ⚠️ 부분 | `auth.ts`, `supabase.ts` — NextAuth 연동, 추가 기능 확인 필요 |
+| Redis (캐싱) | ⚠️ 부분 | `redis.ts` 존재, 활용 범위 미확인 |
+
+---
+
+## 다음 Wave 작업 목록
+
+### Wave 4: 파이프라인 완성 (우선순위 높음)
+
+1. **author → creator 용어 통일** — 10+ 파일 치환
+2. **Herald → Mother 승인 요청 정형 형식** — COMM-1 구현
+3. **포인트 자동 적립** — 파이프라인 publish 시 Notion 연동
+4. **프로세스 아카이브 수집** — process-log.md, process-note.md 검증
+5. **Herald 보안 26 MUST 실 테스트** — mock → live 전환
+
+### Wave 5: 창작 + 측정 (중기)
+
+6. **창작물 파이프라인** — 페르소나 일관성 채점, 창작물 리뷰 프로세스
+7. **Impact Score** — GA 데이터 기반 30일 후 자동 산출
+8. **AI Citation Testing** — ChatGPT/Perplexity/Gemini 자동 질의
+9. **Herald 검증 체크리스트 자동화** — Persona YAML 8섹션 검증
+
+### Wave 6: 탈중앙화 (장기)
+
+10. **hypeproof-writer 스킬** — Creator 배포용 OpenClaw 스킬
+11. **탈중앙 에이전트 아키텍처** — Creator 자체 OpenClaw 운영
+12. **Anti-Gaming 자동 enforce** — 월 상한, 연속 리뷰어 자동 차단
+
+---
+
+*Generated by Mother 🫶 · 2026-02-15*
