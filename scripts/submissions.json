@@ -6,7 +6,7 @@
       "title": "A1",
       "status": "submitted",
       "geoScore": null,
-      "submittedAt": "2026-02-14T14:27:44.099138+00:00",
+      "submittedAt": "2026-02-14T14:33:51.788314+00:00",
       "scoredAt": null,
       "reviewers": [],
       "reviews": [],
@@ -21,8 +21,8 @@
       "title": "A2",
       "status": "scored",
       "geoScore": 80,
-      "submittedAt": "2026-02-14T14:27:44.099353+00:00",
-      "scoredAt": "2026-02-14T14:27:44.099576+00:00",
+      "submittedAt": "2026-02-14T14:33:51.788451+00:00",
+      "scoredAt": "2026-02-14T14:33:51.788571+00:00",
       "reviewers": [],
       "reviews": [],
       "approvedAt": null,
@@ -36,8 +36,8 @@
       "title": "A3",
       "status": "in_review",
       "geoScore": 85,
-      "submittedAt": "2026-02-14T14:27:44.099734+00:00",
-      "scoredAt": "2026-02-14T14:27:44.099865+00:00",
+      "submittedAt": "2026-02-14T14:33:51.788736+00:00",
+      "scoredAt": "2026-02-14T14:33:51.788865+00:00",
       "reviewers": [
         "Jay",
         "Ryan"
@@ -47,7 +47,7 @@
       "publishedAt": null,
       "threadId": null,
       "channelId": "1471863670718857247",
-      "reviewDeadline": "2026-02-14T14:27:44.100018+00:00"
+      "reviewDeadline": "2026-02-14T14:33:51.788985+00:00"
     }
   },
   "nextId": 4

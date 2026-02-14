@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { ScrollProgress, CursorFollower } from '@/components/ui/UIEffects';
@@ -191,7 +192,7 @@ function NovelsPreview({ chapterCount }: { chapterCount: number }) {
                 
                 <div>
                   <div className="flex items-center gap-3 mb-6 p-4 bg-zinc-800/30 rounded-lg border border-zinc-700/50">
-                    <img src="/authors/cipher.png" alt="CIPHER" className="w-12 h-12 rounded-full object-cover" />
+                    <Image src="/authors/cipher.png" alt="CIPHER" width={48} height={48} className="w-12 h-12 rounded-full object-cover" />
                     <div>
                       <div className="text-white font-semibold">CIPHER</div>
                       <div className="text-zinc-400 text-sm">by Jay</div>

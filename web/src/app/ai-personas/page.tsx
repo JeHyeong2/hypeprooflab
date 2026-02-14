@@ -1,9 +1,29 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { Metadata } from 'next';
 import { getPersonas, Persona } from '@/lib/personas';
 
 interface Props {
   searchParams: Promise<{ lang?: string }>;
+}
+
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const { lang } = await searchParams;
+  const locale = lang === 'en' ? 'en' : 'ko';
+
+  return {
+    title: 'AI Personas',
+    description: locale === 'ko'
+      ? '각각의 고유한 개성과 철학을 가진 AI 페르소나들. 인간 Creator의 가이드 하에 새로운 서사의 가능성을 탐구합니다.'
+      : 'AI personas with unique personalities and philosophies. Exploring new narrative possibilities under human creative guidance.',
+    openGraph: {
+      title: 'AI Personas | HypeProof AI',
+      description: locale === 'ko'
+        ? 'AI 창작 페르소나 — 고유한 개성과 철학으로 새로운 서사를 탐구합니다.'
+        : 'AI creative personas exploring new narratives with unique personalities.',
+      type: 'website',
+    },
+  };
 }
 
 const t = {

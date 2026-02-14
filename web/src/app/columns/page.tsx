@@ -1,10 +1,16 @@
+import { Metadata } from 'next';
 import { getAllColumns } from '@/lib/columns';
 import ColumnsListClient from './ColumnsListClient';
 import { generateCollectionJsonLd } from '@/lib/jsonld';
 
-export const metadata = {
-  title: 'Columns | HypeProof AI',
+export const metadata: Metadata = {
+  title: 'Columns',
   description: 'Deep analysis, research insights, and sharp takes on AI, technology, and the future.',
+  openGraph: {
+    title: 'Columns | HypeProof AI',
+    description: 'Deep analysis, research insights, and sharp takes on AI, technology, and the future.',
+    type: 'website',
+  },
 };
 
 export default function ColumnsPage() {
