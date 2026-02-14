@@ -7,7 +7,7 @@
 - **Role**: Admin
 - **Education**: Hanyang University — CS Ph.D Cand.
 - **Domain**: Tech / Lead
-- **Discord ID**: TBD
+- **Discord**: jaylee_59200 (ID: 1186944844401225808)
 
 ## Kiwon (남기원)
 
@@ -16,7 +16,7 @@
 - **Role**: Creator
 - **Education**: George Washington University — Psychology & Philosophy
 - **Domain**: Marketing / Strategy
-- **Discord ID**: TBD
+- **Discord**: kiwonam96
 
 ## TJ (강태진)
 
@@ -24,7 +24,7 @@
 
 - **Role**: Creator
 - **Domain**: Contents / Media Production
-- **Discord ID**: TBD
+- **Discord**: tj.kr
 
 ## Ryan (김지웅)
 
@@ -33,7 +33,7 @@
 - **Role**: Creator
 - **Education**: Ph.D in Physics — Ex-Scientist @ CERN
 - **Domain**: Research / Data Analysis
-- **Discord ID**: TBD
+- **Discord**: jkim9564
 
 ## JY (신진용)
 
@@ -42,7 +42,7 @@
 - **Role**: Creator
 - **Education**: M.S. in Physics
 - **Domain**: Research / AI Engineering
-- **Discord ID**: TBD
+- **Discord**: jishin.addkim
 
 ## BH (태봉호)
 
@@ -51,7 +51,7 @@
 - **Role**: Creator
 - **Education**: Kyungpook National Univ. — Experimental Physics
 - **Domain**: Particle Physics / Data Analysis
-- **Discord ID**: TBD
+- **Discord**: jobaideun4740
 
 ## Sebastian
 
@@ -60,4 +60,4 @@
 - **Role**: Creator
 - **Education**: Politechnika Łódzka — M.Sc. in Electronics & Telecommunications
 - **Domain**: Engineering / Management
-- **Discord ID**: TBD
+- **Discord**: TBD
