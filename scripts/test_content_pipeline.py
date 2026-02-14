@@ -19,14 +19,14 @@ from content_pipeline import (
 
 VALID_FM = {
     "title": "Test Article",
-    "author": "Jay",
+    "creator": "Jay",
     "date": "2026-01-01",
     "category": "AI",
     "tags": "test",
     "slug": "test-article",
     "readTime": "5 min",
     "excerpt": "A test article",
-    "authorImage": "/members/jay.png",
+    "creatorImage": "/members/jay.png",
 }
 
 VALID_MD = "---\n" + "\n".join(f'{k}: "{v}"' for k, v in VALID_FM.items()) + "\n---\n\n## Content\n\nBody text here.\n"
@@ -103,14 +103,14 @@ class TestFrontmatterValidation(unittest.TestCase):
         self.assertIn("Missing frontmatter fields", errors[0])
 
     def test_required_fields_list(self):
-        expected = ["title", "author", "date", "category", "tags", "slug", "readTime", "excerpt", "authorImage"]
+        expected = ["title", "creator", "date", "category", "tags", "slug", "readTime", "excerpt", "creatorImage"]
         self.assertEqual(REQUIRED_FRONTMATTER, expected)
 
-    def test_author_image_format(self):
+    def test_creator_image_format(self):
         fm = dict(VALID_FM)
-        fm["authorImage"] = "bad-path.jpg"
+        fm["creatorImage"] = "bad-path.jpg"
         errors = validate_frontmatter(fm)
-        self.assertTrue(any("authorImage" in e for e in errors))
+        self.assertTrue(any("creatorImage" in e for e in errors))
 
 
 class TestPublishPath(unittest.TestCase):

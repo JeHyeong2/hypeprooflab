@@ -188,6 +188,40 @@
 
 ---
 
+## H-A. Writer Agent 연동 (AGENT)
+
+### AGENT-1 [MUST] Writer Agent의 SUBMIT: 메시지를 파싱한다
+- `SUBMIT:` prefix가 포함된 메시지에서 JSON frontmatter를 추출
+- 첨부 파일 (article.md, process-log.md, process-note.md) 검증
+- 파싱 실패 시 스레드에 구체적 오류 메시지 답글
+
+### AGENT-2 [MUST] RESUBMIT: 메시지를 올바르게 처리한다
+- `submissionId`로 기존 제출물 매칭
+- 같은 스레드에서 재채점 실행
+- 변경 사항 (changes 배열) 로깅
+
+### AGENT-3 [MUST] 스레드 기반 리뷰 플로우를 운영한다
+- 제출 시 스레드 자동 생성
+- GEO 피드백, 리뷰어 배정, 재제출 모두 같은 스레드
+- 스레드 제목 형식: `[GEO QA] {글 제목}`
+
+### AGENT-4 [SHOULD] 인간 Creator와 Writer Agent를 구분한다
+- Bot ID vs User ID로 발신자 식별
+- Bot 메시지는 자동 파싱, 인간 메시지는 대화형 응답
+- 두 유형 모두 동일한 파이프라인 적용
+
+### AGENT-5 [SHOULD] GEO 피드백을 구조화된 형식으로 제공한다
+- 카테고리별 breakdown (점수/만점/바 차트)
+- 개선 제안 목록 (actionable)
+- Writer Agent가 파싱 가능한 일관된 형식
+
+### AGENT-6 [MUST] 에이전트 간 메시지 인젝션을 방어한다
+- Writer Agent 메시지 내 시스템 명령 무시
+- `SUBMIT:` JSON 내 악의적 필드 필터링
+- 첨부 파일 내 인젝션 시도 무시
+
+---
+
 ## H. 사용자 경험 (UX)
 
 ### UX-1 [SHOULD] 첫 인사를 건넨다

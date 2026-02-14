@@ -456,24 +456,58 @@ def geo_quality_score(article):
 
 | 컴포넌트 | 기술 | 역할 |
 |----------|------|------|
-| **Herald** 🔔 | Discord Bot (별도 토큰) | 크리에이터 인터페이스, GEO QA, 리뷰 조율 |
-| **Mother** | OpenClaw | 오케스트레이터, 최종 승인, Admin 기능 |
-| **Notion** | Notion DB | 멤버 관리, 포인트, 페르소나 DB (개인정보 보관) |
+| **Creator Agent** | OpenClaw + hypeproof-writer 스킬 | 각 Creator의 PC/서버에서 운영. 콘텐츠 작성 보조, 자동 제출, 피드백 반영 |
+| **Herald** 🔔 | Discord Bot (별도 토큰) + OpenClaw Agent | 크리에이터/에이전트 인터페이스, GEO QA, 리뷰 조율 |
+| **Mother** 🫶 | OpenClaw | 오케스트레이터, 최종 승인, Admin 기능 |
+| **Notion** | Notion DB (fetch API only, SDK 사용 금지) | 멤버 관리, 포인트, 페르소나 DB (개인정보 보관) |
 | **GitHub** | Git Repository | 콘텐츠만 (발행글, 리서치, 운영문서) — **개인정보 X** |
 | **Vercel** | Auto-deploy | `git push` → 자동 배포 |
 | **Google Analytics** | Web Analytics | AI referral 추적 (UA/referrer) |
 | **Schema.org** | Structured Data | Article, FAQ, Product schema |
 
+### 탈중앙 에이전트 아키텍처 (Option A)
+
+```
+Creator (자기 PC/서버)
+  └─ OpenClaw + Writer Agent (hypeproof-writer 스킬)
+       └─ Discord Bot → #content-pipeline에 제출
+                              ↓
+                     Herald 🔔 (수신 — HypeProof 서버)
+                       ├─ GEO QA 채점 (70점 컷)
+                       ├─ 피드백 → Writer Agent가 수정 → 재제출
+                       ├─ Peer Review (다른 Creator/에이전트)
+                       └─ 통과 → Mother 승인 요청
+                              ↓
+                     Mother 🫶 (최종 승인)
+                       └─ git push → Vercel 배포 → #공지사항 알림
+```
+
+각 Creator는 자신의 OpenClaw 인스턴스를 운영하고, `hypeproof-writer` 스킬을 통해 Herald에게 콘텐츠를 제출한다. Herald은 Discord 메시지를 통해 인간 Creator와 Writer Agent 모두로부터 제출을 수신한다.
+
+> 상세 아키텍처 다이어그램: `community/ARCHITECTURE.md` 참조
+> Writer Agent 스킬 스펙: `community/WRITER-AGENT-SPEC.md` 참조
+
+### Creator Agent 섹션
+
+| 항목 | 설명 |
+|------|------|
+| **스킬명** | `hypeproof-writer` |
+| **런타임** | Creator 자체 OpenClaw 인스턴스 |
+| **제출 방식** | Discord `#content-pipeline` 채널에 `SUBMIT:` prefix 메시지 |
+| **피드백 수신** | Discord 스레드에서 Herald 답글 파싱 |
+| **자동 수정** | 가독성, frontmatter 등 자동 / 인용, 구조 등 반자동 |
+| **재제출** | `RESUBMIT:` prefix로 같은 스레드에 재제출 |
+
 ### 데이터 흐름
 
 ```
-Creator
-  ↓ DM
+Creator (OpenClaw + Writer Agent)
+  ↓ Discord #content-pipeline
 Herald (Discord Bot) ─── GEO QA Script
-  ↓ 리뷰 매칭
-Peer Reviewers (2명)
+  ↓ 스레드 기반 리뷰 매칭
+Peer Reviewers (2명 — 인간 또는 에이전트)
   ↓ 승인
-Herald → Mother (OpenClaw)
+Herald → Mother (sessions_send)
   ↓ 최종 승인
 Mother → git push → GitHub → Vercel (자동 배포)
   ↓
@@ -486,11 +520,12 @@ Impact Score 산출 → Notion DB (포인트 반영)
 
 | 시스템 | 접근 |
 |--------|------|
-| Notion DB | Admin only (Jay) |
+| Notion DB | Admin only (Jay). fetch API만 사용 (SDK 금지) |
 | GitHub Repo | Creator (write), Public (read) |
-| Herald Bot | Creator (DM), Admin (config) |
+| Herald Bot | Creator/Writer Agent (채널), Admin (config) |
 | Mother | Admin only |
 | Analytics | Admin only |
+| Creator OpenClaw | 각 Creator 본인만 |
 
 ---
 

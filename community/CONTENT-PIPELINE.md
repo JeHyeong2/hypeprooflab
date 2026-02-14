@@ -38,9 +38,20 @@
 
 ## Content Pipeline (칼럼/리서치)
 
-### Step 1: 크리에이터 → Herald DM
+### Step 1: Creator → Herald 제출 (DM 또는 채널)
+
+**방법 A: Writer Agent 자동 제출 (권장)**
 ```
-크리에이터가 Herald 봇에게 DM:
+Writer Agent → Discord #content-pipeline:
+SUBMIT: {"title":"글 제목","creator":"Jay","date":"2026-02-14","category":"Column",...}
++ 첨부: article.md, process-log.md, process-note.md
+
+Herald: 스레드 자동 생성 → GEO QA 채점
+```
+
+**방법 B: 인간 Creator DM 제출**
+```
+Creator가 Herald 봇에게 DM:
 "새 글 제출합니다"
 
 Herald: "🔔 안녕하세요! 글 제출 감사합니다.
@@ -50,6 +61,8 @@ Herald: "🔔 안녕하세요! 글 제출 감사합니다.
 3. 카테고리 (Research / Column / Tutorial)
 4. 한줄 요약"
 ```
+
+> Writer Agent 제출 프로토콜 상세: `community/WRITER-AGENT-SPEC.md` 참조
 
 ### Step 2: GEO QA 자동 채점
 Herald가 자동 수행. GEO Quality Score (0~100):
@@ -75,9 +88,18 @@ Herald가 자동 수행. GEO Quality Score (0~100):
 - 리뷰 기한: 48시간
 - 최소 300자 피드백 필수
 
+### Step 3.5: 피드백 수신 + 재제출 (에이전트 플로우)
+
+Writer Agent가 Herald 피드백을 자동 수신하는 경우:
+1. Herald 스레드 답글에서 GEO breakdown 파싱
+2. 자동 수정 가능한 항목 (가독성, frontmatter) 즉시 반영
+3. 반자동 항목 (인용, 구조) Creator에게 확인 요청
+4. `RESUBMIT:` prefix로 같은 스레드에 재제출
+5. Herald이 재채점 실행
+
 ### Step 4: 리뷰 결과
 - 2명 모두 승인 → Mother 최종 승인
-- 1명 이상 수정 요청 → 피드백 전달 → 수정 후 재제출
+- 1명 이상 수정 요청 → 피드백 전달 → Writer Agent/Creator가 수정 후 재제출
 - 거절 → 사유 + 반려
 
 ### Step 5: Mother 최종 승인

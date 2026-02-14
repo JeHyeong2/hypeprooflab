@@ -134,25 +134,25 @@ export default function ColumnArticle({ column, slug, availableLocales }: Props)
           {frontmatter.excerpt}
         </p>
         
-        {/* Author block */}
+        {/* Creator block */}
         <div className="flex items-center gap-4 mb-10 pb-10 border-b border-zinc-800">
           <div className="w-12 h-12 rounded-full overflow-hidden bg-zinc-800 flex-shrink-0">
-            {frontmatter.authorImage ? (
+            {(frontmatter.creatorImage || frontmatter.authorImage) ? (
               <Image
-                src={frontmatter.authorImage}
-                alt={frontmatter.author}
+                src={(frontmatter.creatorImage || frontmatter.authorImage)!}
+                alt={frontmatter.creator || frontmatter.author || ''}
                 width={48}
                 height={48}
                 className="w-full h-full object-cover"
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-white font-bold">
-                {frontmatter.author[0]}
+                {(frontmatter.creator || frontmatter.author || '?')[0]}
               </div>
             )}
           </div>
           <div>
-            <div className="text-white font-medium">{frontmatter.author}</div>
+            <div className="text-white font-medium">{frontmatter.creator || frontmatter.author}</div>
             <div className="text-zinc-500 text-sm">
               <time dateTime={frontmatter.date}>
                 {new Date(frontmatter.date).toLocaleDateString(

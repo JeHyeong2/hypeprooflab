@@ -83,7 +83,7 @@ const content = {
           'Herald가 YAML의 voice/style/rules와 샘플 챕터의 일관성을 검증합니다.',
           '또는 관리자(Jay)에게 직접 연락해도 됩니다.',
         ],
-        email: 'jayleekr0125@gmail.com',
+        discord: 'https://discord.gg/hypeproof',
       },
     ],
     copyYaml: 'YAML 템플릿 복사',
@@ -126,7 +126,7 @@ const content = {
           'Herald will verify consistency between your YAML voice/style/rules and sample chapter.',
           'Or contact the admin (Jay) directly.',
         ],
-        email: 'jayleekr0125@gmail.com',
+        discord: 'https://discord.gg/hypeproof',
       },
     ],
     copyYaml: 'Copy YAML Template',
@@ -260,12 +260,14 @@ export default function RegisterPage() {
                 </label>
               ))}
             </div>
-            {(s as any).email && (
+            {(s as any).discord && (
               <a
-                href={`mailto:${(s as any).email}?subject=AI Persona Registration`}
+                href={(s as any).discord}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-block mt-4 px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-lg transition-colors"
               >
-                ✉️ {lang === 'ko' ? '관리자에게 이메일 보내기' : 'Email the Admin'}
+                💬 {lang === 'ko' ? 'Discord에서 문의하기' : 'Join Discord to Apply'}
               </a>
             )}
           </div>

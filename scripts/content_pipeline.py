@@ -2,7 +2,7 @@
 """
 Content Pipeline Automation — Phase 1 (Mother-direct)
 Usage:
-    python content_pipeline.py submit <file.md> [--author NAME]
+    python content_pipeline.py submit <file.md> [--creator NAME]
     python content_pipeline.py review <id> <approve|reject> [--reviewer NAME] [--feedback TEXT]
     python content_pipeline.py status [id]
     python content_pipeline.py publish <id>
@@ -26,11 +26,11 @@ SUBMISSIONS_FILE = SCRIPT_DIR / "submissions.json"
 WEB_COLUMNS_DIR = PROJECT_ROOT / "web" / "src" / "content" / "columns"
 
 REQUIRED_FRONTMATTER = [
-    "title", "author", "date", "category", "tags",
-    "slug", "readTime", "excerpt", "authorImage"
+    "title", "creator", "date", "category", "tags",
+    "slug", "readTime", "excerpt", "creatorImage"
 ]
 
-ACTIVE_CREATORS = ["Jay", "Mia", "Hoon", "Sora", "Juno"]
+ACTIVE_CREATORS = ["Jay", "Kiwon", "TJ", "Ryan", "JY", "BH", "Sebastian"]
 
 GEO_QA_PASS_THRESHOLD = 70
 
@@ -67,8 +67,8 @@ def validate_frontmatter(fm: dict) -> list[str]:
     errors = []
     if missing:
         errors.append(f"Missing frontmatter fields: {', '.join(missing)}")
-    if "authorImage" in fm and not re.match(r"^/members/\w+\.png$", fm["authorImage"]):
-        errors.append(f"authorImage should be /members/{{name}}.png, got: {fm['authorImage']}")
+    if "creatorImage" in fm and not re.match(r"^/members/\w+\.png$", fm["creatorImage"]):
+        errors.append(f"creatorImage should be /members/{{name}}.png, got: {fm['creatorImage']}")
     return errors
 
 
@@ -87,7 +87,7 @@ def run_geo_qa(filepath: str) -> dict:
         return _heuristic_score(filepath)
     try:
         result = subprocess.run(
-            [sys.executable, str(geo_script), filepath],
+            [sys.executable, str(geo_script), filepath, "--json"],
             capture_output=True, text=True, timeout=60
         )
         output = result.stdout.strip()
@@ -165,7 +165,7 @@ def cmd_submit(args):
 
     text = filepath.read_text()
     fm = parse_frontmatter(text)
-    author = args.author or (fm.get("author") if fm else None) or "Unknown"
+    author = args.creator or (fm.get("creator") if fm else None) or "Unknown"
 
     # Run GEO QA
     print(f"📝 Submitting: {filepath.name} by {author}")
@@ -181,7 +181,7 @@ def cmd_submit(args):
 
     sub = {
         "id": sub_id,
-        "author": author,
+        "creator": author,
         "file": str(filepath),
         "filename": filepath.name,
         "language": lang,
@@ -285,7 +285,7 @@ def _print_submission(sub):
         "rejected": "❌", "published": "🚀"
     }
     emoji = status_emoji.get(sub["status"], "❓")
-    print(f"{emoji} [{sub['id']}] {sub['filename']} by {sub['author']}")
+    print(f"{emoji} [{sub['id']}] {sub['filename']} by {sub['creator']}")
     print(f"   Status: {sub['status']} | GEO: {sub['geo_score']}/100 | Lang: {sub['language']}")
     if sub["reviewers"]:
         print(f"   Reviewers: {', '.join(sub['reviewers'])}")
@@ -347,7 +347,7 @@ def main():
 
     p_submit = sub.add_parser("submit")
     p_submit.add_argument("file")
-    p_submit.add_argument("--author", "-a")
+    p_submit.add_argument("--creator", "-a")
 
     p_review = sub.add_parser("review")
     p_review.add_argument("id")

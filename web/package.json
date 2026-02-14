@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@auth/supabase-adapter": "^1.11.1",
-    "@notionhq/client": "^5.9.0",
     "@splinetool/react-spline": "^4.1.0",
     "@supabase/supabase-js": "^2.95.3",
     "@upstash/ratelimit": "^2.0.8",

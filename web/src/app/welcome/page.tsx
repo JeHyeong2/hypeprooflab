@@ -34,7 +34,7 @@ const content = {
       title: 'Creator 신청하기 🚀',
       desc: 'Creator 활동을 시작하려면 기존 Creator의 레퍼럴 또는 관리자 승인이 필요합니다.',
       button: 'Creator 신청 문의',
-      contact: '관리자에게 이메일로 문의하기',
+      contact: 'Discord에서 문의하기',
       back: '홈으로 돌아가기',
     },
     next: '다음',
@@ -71,7 +71,7 @@ const content = {
       title: 'Apply to become a Creator 🚀',
       desc: 'To start as a Creator, you need a referral from an existing Creator or admin approval.',
       button: 'Contact to Apply',
-      contact: 'Email the admin',
+      contact: 'Join our Discord',
       back: 'Back to Home',
     },
     next: 'Next',
@@ -177,7 +177,9 @@ export default function WelcomePage() {
             <h2 className="text-2xl font-bold text-white">{t.step3.title}</h2>
             <p className="text-zinc-400">{t.step3.desc}</p>
             <a
-              href="mailto:jayleekr0125@gmail.com?subject=HypeProof Lab Creator 신청"
+              href="https://discord.gg/hypeproof"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block bg-purple-600 hover:bg-purple-500 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
             >
               {t.step3.button}

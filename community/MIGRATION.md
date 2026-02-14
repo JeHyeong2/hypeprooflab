@@ -84,6 +84,19 @@
   - Gemini referrer 필터
 - [ ] AI Citation Testing 스프레드시트/DB 생성
 
+## 탈중앙 에이전트 아키텍처
+
+- [ ] `community/WRITER-AGENT-SPEC.md` 작성 — Writer Agent 스킬 스펙
+- [ ] `community/ARCHITECTURE.md` 작성 — 전체 시스템 아키텍처 + Mermaid 다이어그램
+- [ ] `community/SPEC.md` Section H 업데이트 — Creator Agent 섹션 추가
+- [ ] `community/HERALD-DESIGN.md` 업데이트 — 제출 프로토콜, 스레드 기반 리뷰, Agent 연동
+- [ ] `community/HERALD-REQUIREMENTS.md` 업데이트 — Agent 메시지 수신/파싱 요구사항
+- [ ] `community/HERALD-SOUL.md` 업데이트 — Agent 대 Agent 커뮤니케이션 톤
+- [ ] `community/CONTENT-PIPELINE.md` 업데이트 — 에이전트 제출 플로우 상세화
+- [ ] `hypeproof-writer` 스킬 패키지 생성
+- [ ] 스킬 설치/설정 가이드 작성
+- [ ] Writer Agent ↔ Herald 연동 end-to-end 테스트
+
 ## 문서 정리
 
 - [x] `community/SPEC.md` 생성 (마스터 스펙)
@@ -92,6 +105,8 @@
 - [x] `community/MIGRATION.md` 생성 (이 문서)
 - [x] `community/VISION.md` 업데이트
 - [x] `community/CONTENT-PIPELINE.md` 업데이트
+- [x] `community/ARCHITECTURE.md` 생성
+- [x] `community/WRITER-AGENT-SPEC.md` 생성
 
 ## 테스트 & 론칭
 

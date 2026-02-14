@@ -120,9 +120,9 @@ def score_schema(meta: dict):
         pts += 4
     if meta.get("date"):
         pts += 3
-    if meta.get("author"):
+    if meta.get("creator") or meta.get("author"):
         pts += 3
-    detail = f"fm={'Y' if meta else 'N'} date={'Y' if meta.get('date') else 'N'} author={'Y' if meta.get('author') else 'N'}"
+    detail = f"fm={'Y' if meta else 'N'} date={'Y' if meta.get('date') else 'N'} creator={'Y' if (meta.get('creator') or meta.get('author')) else 'N'}"
     return min(pts, 10), detail, "Schema-ready"
 
 

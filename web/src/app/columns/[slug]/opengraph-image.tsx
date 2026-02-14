@@ -9,7 +9,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const column = getColumn(slug, 'ko') || getColumn(slug, 'en');
 
   const title = column?.frontmatter.title || slug;
-  const author = column?.frontmatter.author || '';
+  const author = column?.frontmatter.creator || column?.frontmatter.author || '';
   const date = column?.frontmatter.date || '';
   const category = column?.frontmatter.category || '';
 

@@ -56,14 +56,49 @@
 ### Agent 간 통신
 
 ```
-Creator → Discord #content-pipeline → Herald
-Herald: GEO QA 채점, 리뷰어 매칭, 피드백
+Creator (Writer Agent) → Discord #content-pipeline → Herald
+Herald: frontmatter 파싱, GEO QA 채점, 스레드 생성
+Herald → 스레드 답글: GEO breakdown + 피드백
+Writer Agent → 피드백 파싱 → 자동/반자동 수정 → 재제출
+Herald: 리뷰어 매칭 (스레드 내)
 Herald → sessions_send → Mother: "발행 승인 요청"
 Mother: 승인/거부
 Mother → sessions_send → Herald: "승인됨"
 Herald → git push → Vercel 자동 배포
 Herald → #announcements: "🔔 새 칼럼 발행!"
 ```
+
+### 제출 프로토콜
+
+Writer Agent가 `#content-pipeline`에 보내는 메시지 형식:
+```
+SUBMIT: {"title":"제목","creator":"Creator명","date":"2026-02-14","category":"Column",...}
+```
++ 첨부: `article.md`, `process-log.md`, `process-note.md`
+
+재제출:
+```
+RESUBMIT: {"submissionId":"20260214-abc123","changes":["가독성 개선","인용 추가"]}
+```
+
+### 스레드 기반 리뷰 플로우
+
+1. Herald이 제출물 수신 시 **스레드 자동 생성** (제목: `[GEO QA] {글 제목}`)
+2. GEO 채점 결과를 스레드에 답글
+3. 피드백/재제출 모두 같은 스레드에서 진행
+4. 리뷰어 배정 알림도 스레드 내
+5. 최종 승인/발행 알림은 스레드 + `#announcements`
+
+### Writer Agent 연동
+
+Herald는 인간 Creator의 DM뿐 아니라 Writer Agent의 Discord 메시지도 수신한다:
+
+| 발신자 | 식별 방법 | 처리 |
+|--------|----------|------|
+| 인간 Creator | Discord User ID | 기존 DM 플로우 |
+| Writer Agent | Discord Bot ID + `SUBMIT:` prefix | 자동 파싱 + 스레드 기반 플로우 |
+
+> Writer Agent 스펙: `community/WRITER-AGENT-SPEC.md` 참조
 
 ---
 

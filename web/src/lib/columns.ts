@@ -10,13 +10,17 @@ export interface Citation {
 
 export interface ColumnFrontmatter {
   title: string;
-  author: string;
+  creator: string;
+  /** @deprecated Use creator instead */
+  author?: string;
   date: string;
   category: string;
   tags: string[];
   slug: string;
   readTime: string;
   excerpt: string;
+  creatorImage?: string;
+  /** @deprecated Use creatorImage instead */
   authorImage?: string;
   citations?: Citation[];
   references?: string[];
