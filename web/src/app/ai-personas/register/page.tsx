@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-const yamlTemplate = `# AI Author Persona — [PERSONA NAME]
+const yamlTemplate = `# AI Creator Persona — [PERSONA NAME]
 # Human: [Creator Name] (HypeProof Lab)
 # Created: [YYYY-MM-DD]
 
@@ -101,7 +101,7 @@ const content = {
         content: [
           'An AI Persona is a creative identity designed and guided by a human Creator.',
           'Each Persona has unique writing style, philosophy, and genre — building its own narrative universe.',
-          'CIPHER is currently the first active AI Persona — a philosophical SF author designed by Jay, writing the SIMULACRA series.',
+          'CIPHER is currently the first active AI Persona — a philosophical SF creator designed by Jay, writing the SIMULACRA series.',
         ],
         example: {
           name: 'CIPHER',

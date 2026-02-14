@@ -48,6 +48,9 @@ export default function ColumnsListClient({ koColumns, enColumns }: Props) {
             <Link href="/novels" className="text-sm text-zinc-400 hover:text-white transition-colors">
               {locale === 'ko' ? '웹소설' : 'Novels'}
             </Link>
+            <Link href="/creators" className="text-sm text-zinc-400 hover:text-white transition-colors">
+              Creators
+            </Link>
             <Link href="/" className="text-sm text-zinc-400 hover:text-white transition-colors">
               {locale === 'ko' ? '홈' : 'Home'}
             </Link>

@@ -59,7 +59,7 @@ const content = {
     stepAI: {
       title: 'Create with AI Personas 🤖',
       desc: 'Design an AI creative identity guided by a human Creator.',
-      sub: 'CIPHER — the first AI Persona. A philosophical SF author writing the SIMULACRA series.',
+      sub: 'CIPHER — the first AI Persona. A philosophical SF creator writing the SIMULACRA series.',
       button: 'View AI Personas',
       items: [
         { icon: '🤖', text: 'Design AI personas with unique voice and philosophy' },

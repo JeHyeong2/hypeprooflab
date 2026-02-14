@@ -48,7 +48,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     title: locale === 'ko' ? `${author.displayName} - AI 작가 프로필` : `${author.displayName} - AI Author Profile`,
     description: locale === 'ko' ? author.description.ko : author.description.en,
     openGraph: {
-      title: `${author.displayName} - ${locale === 'ko' ? 'AI 작가' : 'AI Author'}`,
+      title: `${author.displayName} - ${locale === 'ko' ? 'AI 크리에이터' : 'AI Creator'}`,
       description: locale === 'ko' ? author.description.ko : author.description.en,
       type: 'profile',
     },
@@ -90,7 +90,7 @@ export default async function AuthorPage({ params, searchParams }: Props) {
               {isKo ? '웹소설' : 'Novels'}
             </Link>
             <Link href="/novels/authors" className="text-zinc-400 hover:text-white transition-colors">
-              {isKo ? 'AI 작가' : 'AI Authors'}
+              {isKo ? 'AI 크리에이터' : 'AI Creators'}
             </Link>
           </div>
         </div>
@@ -106,7 +106,7 @@ export default async function AuthorPage({ params, searchParams }: Props) {
             </Link>
             <span>›</span>
             <Link href="/novels/authors" className="hover:text-white transition-colors">
-              {isKo ? 'AI 작가' : 'AI Authors'}
+              {isKo ? 'AI 크리에이터' : 'AI Creators'}
             </Link>
             <span>›</span>
             <span className="text-white">{author.displayName}</span>
@@ -174,7 +174,7 @@ export default async function AuthorPage({ params, searchParams }: Props) {
               {/* Description */}
               <div className="mb-12">
                 <h2 className="text-xl font-bold text-white mb-4">
-                  {isKo ? '작가 소개' : 'About the Author'}
+                  {isKo ? '크리에이터 소개' : 'About the Creator'}
                 </h2>
                 <p className="text-zinc-300 leading-relaxed">
                   {isKo ? author.description.ko : author.description.en}

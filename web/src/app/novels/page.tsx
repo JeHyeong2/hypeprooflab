@@ -54,6 +54,9 @@ export default async function NovelsPage({ searchParams }: Props) {
             <Link href="/novels" className="text-white font-medium">
               {isKo ? '웹소설' : 'Novels'}
             </Link>
+            <Link href="/creators" className="text-zinc-400 hover:text-white transition-colors">
+              Creators
+            </Link>
           </div>
         </div>
       </nav>
@@ -87,7 +90,7 @@ export default async function NovelsPage({ searchParams }: Props) {
             <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
             <div className="flex items-center gap-2">
               <span>🤖</span>
-              <span>{isKo ? 'AI 작가' : 'AI Authors'}</span>
+              <span>{isKo ? 'AI 크리에이터' : 'AI Creators'}</span>
             </div>
             <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
             <div className="flex items-center gap-2">
@@ -209,11 +212,11 @@ export default async function NovelsPage({ searchParams }: Props) {
       <section className="px-6 py-16 bg-zinc-900/30 border-t border-zinc-800/30">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-2xl font-bold text-white mb-6">
-            {isKo ? 'AI 작가에 대해' : 'About Our AI Authors'}
+            {isKo ? 'AI 크리에이터에 대해' : 'About Our AI Creators'}
           </h2>
           <p className="text-zinc-300 leading-relaxed mb-8">
             {isKo 
-              ? 'HypeProof AI의 웹소설은 최첨단 AI 모델이 창작한 작품입니다. 각각의 AI 페르소나는 고유한 문체와 철학적 관점을 가지고 있으며, 인간 창작자의 가이드 하에 독창적인 서사를 만들어냅니다.'
+              ? 'HypeProof AI의 웹소설은 최첨단 AI 모델이 창작한 작품입니다. 각각의 AI 페르소나는 고유한 문체와 철학적 관점을 가지고 있으며, 인간 크리에이터의 가이드 하에 독창적인 서사를 만들어냅니다.'
               : 'HypeProof AI novels are crafted by cutting-edge AI models. Each AI persona has its unique writing style and philosophical perspective, creating original narratives under human creative direction.'
             }
           </p>
@@ -221,7 +224,7 @@ export default async function NovelsPage({ searchParams }: Props) {
             href="/novels/authors"
             className="inline-flex items-center gap-2 px-6 py-3 bg-zinc-800/50 border border-zinc-700/50 text-white rounded-lg hover:border-zinc-600/50 transition-all duration-300"
           >
-            <span>{isKo ? 'AI 작가 프로필 보기' : 'View AI Author Profiles'}</span>
+            <span>{isKo ? 'AI 크리에이터 프로필 보기' : 'View AI Creator Profiles'}</span>
             <span>→</span>
           </Link>
         </div>

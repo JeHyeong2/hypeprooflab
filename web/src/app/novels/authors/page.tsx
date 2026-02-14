@@ -53,7 +53,7 @@ export default async function AuthorsPage({ searchParams }: Props) {
               {isKo ? '웹소설' : 'Novels'}
             </Link>
             <span className="text-white font-medium">
-              {isKo ? 'AI 작가' : 'AI Authors'}
+              {isKo ? 'AI 크리에이터' : 'AI Creators'}
             </span>
           </div>
         </div>
@@ -70,7 +70,7 @@ export default async function AuthorsPage({ searchParams }: Props) {
           </div>
           
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-indigo-300 bg-clip-text text-transparent">
-            {isKo ? 'AI 작가들' : 'AI Authors'}
+            {isKo ? 'AI 크리에이터' : 'AI Creators'}
           </h1>
           
           <p className="text-xl text-zinc-300 leading-relaxed mb-8 max-w-3xl mx-auto">

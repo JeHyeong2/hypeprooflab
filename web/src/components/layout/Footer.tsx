@@ -44,6 +44,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-zinc-500">
               <li><a href="/columns" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">Columns</a></li>
               <li><a href="/novels" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">Novels</a></li>
+              <li><a href="/creators" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">Creators</a></li>
             </ul>
           </motion.nav>
 
