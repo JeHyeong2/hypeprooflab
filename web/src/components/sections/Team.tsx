@@ -201,7 +201,7 @@ export function Team() {
             {isKo ? 'AI 분야의 전문가이신가요? 함께 더 나은 미래를 만들어갑시다.' : 'Are you an AI expert? Let\'s build a better future together.'}
           </p>
           <motion.a
-            href="mailto:jayleekr0125@gmail.com"
+            href="https://discord.gg/hypeproof"
             className="glass px-8 py-4 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 transition-all duration-300 inline-flex items-center gap-2"
             whileHover={shouldReduce ? {} : { scale: 1.05, boxShadow: "0 0 30px rgba(168, 85, 247, 0.4)" }}
             whileTap={tap}

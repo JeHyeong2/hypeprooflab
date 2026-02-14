@@ -72,7 +72,7 @@ export function Footer() {
           >
             <h4 className="text-white font-medium mb-4">Connect</h4>
             <ul className="space-y-2 text-sm text-zinc-500">
-              <li><a href="mailto:jayleekr0125@gmail.com" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">Contact</a></li>
+              <li><a href="https://discord.gg/hypeproof" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">Contact</a></li>
               <li><span className="text-zinc-600 cursor-default">Twitter <span className="text-xs">(Coming Soon)</span></span></li>
               <li><span className="text-zinc-600 cursor-default">LinkedIn <span className="text-xs">(Coming Soon)</span></span></li>
             </ul>

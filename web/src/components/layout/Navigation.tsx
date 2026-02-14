@@ -188,7 +188,7 @@ function MobileMenu() {
             <div className="mt-4"><AuthButton /></div>
           
             <a
-              href="mailto:jayleekr0125@gmail.com"
+              href="https://discord.gg/hypeproof"
               className="px-8 py-4 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 bg-purple-600/20 transition-all"
               onClick={() => setIsOpen(false)}
             >
@@ -302,7 +302,7 @@ export function Navigation() {
           <SimpleLanguageToggle />
           <AuthButton />
           <motion.a
-            href="mailto:jayleekr0125@gmail.com"
+            href="https://discord.gg/hypeproof"
             rel="noopener noreferrer"
             className="glass px-4 py-2 text-white font-medium rounded-full border border-purple-500/50 hover:border-purple-400 transition-all duration-300"
             whileHover={hover}

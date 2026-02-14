@@ -135,7 +135,7 @@ export default function RootLayout({
     ],
     "contactPoint": {
       "@type": "ContactPoint",
-      "email": "jayleekr0125@gmail.com",
+      "email": "contact@hypeproof-ai.xyz",
       "contactType": "customer service",
       "availableLanguage": ["English", "Korean"]
     },

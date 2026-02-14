@@ -134,11 +134,23 @@ def score_freshness(meta: dict):
 
 def score_keyword_stuffing(body: str):
     """키워드 스터핑 감점 (0 or -10)."""
+    STOP_WORDS = {
+        "the", "be", "to", "of", "and", "in", "that", "have", "it", "for",
+        "not", "on", "with", "he", "as", "you", "do", "at", "this", "but",
+        "his", "by", "from", "they", "we", "say", "her", "she", "or", "an",
+        "will", "my", "one", "all", "would", "there", "their", "what", "so",
+        "up", "out", "if", "about", "who", "get", "which", "go", "me", "when",
+        "make", "can", "like", "time", "no", "just", "him", "know", "take",
+        "is", "are", "was", "were", "been", "being", "has", "had", "did",
+        "a", "an", "its", "than", "into", "could", "may", "each", "also",
+    }
     words = re.findall(r"\w{2,}", body.lower())
     if not words:
         return 0, "", "키워드 스터핑"
     from collections import Counter
-    freq = Counter(words)
+    freq = Counter(w for w in words if w not in STOP_WORDS)
+    if not freq:
+        return 0, "no content words", "키워드 스터핑"
     top_word, top_count = freq.most_common(1)[0]
     ratio = top_count / len(words)
     penalty = -10 if ratio > 0.03 else 0

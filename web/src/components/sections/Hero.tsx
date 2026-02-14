@@ -142,7 +142,7 @@ export function Hero() {
               {isKo ? 'Discord 참여' : 'Join Discord'}
             </motion.a>
             <motion.a
-              href="mailto:jayleekr0125@gmail.com"
+              href="https://discord.gg/hypeproof"
               className="glass px-8 py-4 text-white font-medium rounded-full border border-zinc-700/50 hover:border-zinc-600 transition-all duration-300 inline-flex items-center gap-2"
               whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(255, 255, 255, 0.1)" }}
               whileTap={{ scale: 0.98 }}
