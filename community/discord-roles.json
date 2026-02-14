@@ -1,0 +1,9 @@
+{
+  "guildId": "1457738053895328004",
+  "roles": {
+    "admin": { "id": "1472232479086608475", "name": "Admin", "color": "#FF6B6B" },
+    "creator": { "id": "1472232502667251819", "name": "Creator", "color": "#4ECDC4" },
+    "spectator": { "id": "1472232521029779619", "name": "Spectator", "color": "#95A5A6" }
+  },
+  "createdAt": "2026-02-14T23:06:00+09:00"
+}

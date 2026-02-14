@@ -1,4 +1,4 @@
-import { getAllMembers, FALLBACK_MEMBERS } from '@/lib/members';
+import { getAllMembersAsync, FALLBACK_MEMBERS } from '@/lib/members';
 import { getAllColumns } from '@/lib/columns';
 import { getPersonas } from '@/lib/personas';
 import { Metadata } from 'next';
@@ -40,7 +40,7 @@ export default async function CreatorsPage({ searchParams }: Props) {
   const isKo = locale === 'ko';
 
   // Get members from Notion (or fallback)
-  const members = getAllMembers();
+  const members = await getAllMembersAsync();
   const personas = await getPersonas();
 
   // Get all columns to count per creator
@@ -138,6 +138,17 @@ export default async function CreatorsPage({ searchParams }: Props) {
                       </div>
                     </div>
 
+                    {/* Join date */}
+                    {'joinDate' in member && (member as any).joinDate && (
+                      <p className="text-xs text-zinc-500 mt-2 mb-3">
+                        {isKo ? '가입: ' : 'Joined: '}
+                        {new Date((member as any).joinDate).toLocaleDateString(
+                          isKo ? 'ko-KR' : 'en-US',
+                          { year: 'numeric', month: 'short' }
+                        )}
+                      </p>
+                    )}
+
                     {/* Stats */}
                     <div className="flex items-center gap-4 text-sm text-zinc-400">
                       <div className="flex items-center gap-1.5">
@@ -148,6 +159,12 @@ export default async function CreatorsPage({ searchParams }: Props) {
                         <span>🤖</span>
                         <span>{personaCount} {isKo ? '페르소나' : 'personas'}</span>
                       </div>
+                      {'totalPoints' in member && (member as any).totalPoints > 0 && (
+                        <div className="flex items-center gap-1.5">
+                          <span>⭐</span>
+                          <span>{(member as any).totalPoints} pts</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </Link>

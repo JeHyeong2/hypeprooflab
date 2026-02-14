@@ -1,4 +1,4 @@
-import { getAllMembers, FALLBACK_MEMBERS } from '@/lib/members';
+import { getAllMembers, getAllMembersAsync, FALLBACK_MEMBERS, MemberInfo } from '@/lib/members';
 import { getAllColumns } from '@/lib/columns';
 import { getPersonas } from '@/lib/personas';
 import { Metadata } from 'next';
@@ -52,11 +52,15 @@ export default async function CreatorDetailPage({ params, searchParams }: Props)
   const locale = lang === 'en' ? 'en' : 'ko';
   const isKo = locale === 'ko';
 
-  const list = getCreatorList();
-  const creator = list.find(m => slugify(m.displayName) === slug);
+  const members = await getAllMembersAsync();
+  const asyncList = members.length > 0
+    ? members.filter(m => m.role === 'admin' || m.role === 'creator')
+    : FALLBACK_MEMBERS.filter(m => m.role === 'admin' || m.role === 'creator');
+  const creator = asyncList.find(m => slugify(m.displayName) === slug);
   if (!creator) notFound();
 
   const name = creator.displayName;
+  const memberInfo = creator as MemberInfo;
 
   // Get columns by this creator
   const koColumns = getAllColumns('ko').filter(c =>

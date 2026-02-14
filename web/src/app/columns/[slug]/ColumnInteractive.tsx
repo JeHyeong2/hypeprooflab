@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { trackContentView } from '@/lib/analytics';
 import LikeButton from '@/components/LikeButton';
 import BookmarkButton from '@/components/BookmarkButton';
 import CommentSection from '@/components/CommentSection';
@@ -16,6 +17,10 @@ interface Props {
 export default function ColumnInteractive({ slug, availableLocales, currentLocale, showEngagement }: Props) {
   const router = useRouter();
   const [readProgress, setReadProgress] = useState(0);
+
+  useEffect(() => {
+    trackContentView(slug, 'column');
+  }, [slug]);
 
   useEffect(() => {
     const handleScroll = () => {

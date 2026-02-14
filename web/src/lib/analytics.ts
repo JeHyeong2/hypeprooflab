@@ -7,6 +7,96 @@ declare global {
     gtag: (...args: any[]) => void;
   }
 }
+
+// AI Referrer detection
+export const AI_REFERRERS: Record<string, string> = {
+  'chat.openai.com': 'chatgpt',
+  'chatgpt.com': 'chatgpt',
+  'perplexity.ai': 'perplexity',
+  'gemini.google.com': 'gemini',
+  'claude.ai': 'claude',
+  'copilot.microsoft.com': 'copilot',
+  'you.com': 'you',
+  'phind.com': 'phind',
+};
+
+/**
+ * Detect AI referral source from a referrer URL
+ */
+export function detectAIReferrer(referrer: string): string | null {
+  if (!referrer) return null;
+  try {
+    const url = new URL(referrer);
+    const hostname = url.hostname.replace(/^www\./, '');
+    for (const [domain, source] of Object.entries(AI_REFERRERS)) {
+      if (hostname === domain || hostname.endsWith('.' + domain)) {
+        return source;
+      }
+    }
+  } catch {
+    // invalid URL, try substring match
+    for (const [domain, source] of Object.entries(AI_REFERRERS)) {
+      if (referrer.includes(domain)) {
+        return source;
+      }
+    }
+  }
+  return null;
+}
+
+/**
+ * Parse UTM parameters from URL
+ */
+export function parseUTMParams(url?: string): Record<string, string> {
+  if (typeof window === 'undefined' && !url) return {};
+  try {
+    const searchParams = new URLSearchParams(
+      url ? new URL(url).search : window.location.search
+    );
+    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+    const params: Record<string, string> = {};
+    for (const key of utmKeys) {
+      const val = searchParams.get(key);
+      if (val) params[key] = val;
+    }
+    return params;
+  } catch {
+    return {};
+  }
+}
+
+/**
+ * Track AI referral event (once per session)
+ */
+function trackAIReferralIfNeeded(): void {
+  if (typeof window === 'undefined') return;
+  const key = 'hp_ai_referral_tracked';
+  if (sessionStorage.getItem(key)) return;
+
+  const source = detectAIReferrer(document.referrer);
+  if (source) {
+    sessionStorage.setItem(key, source);
+    if (window.gtag) {
+      window.gtag('event', 'ai_referral', {
+        ai_source: source,
+        referrer: document.referrer,
+      });
+    }
+  }
+}
+
+/**
+ * Track content view (column, novel, etc.)
+ */
+export function trackContentView(slug: string, type: 'column' | 'novel' | string): void {
+  if (typeof window === 'undefined') return;
+  if (window.gtag) {
+    window.gtag('event', 'content_view', {
+      content_slug: slug,
+      content_type: type,
+    });
+  }
+}
 export interface AnalyticsEvent {
   name: string;
   category: string;
@@ -151,6 +241,15 @@ export class AnalyticsService {
         page_referrer: event.referrer
       });
     }
+
+    // Track UTM parameters
+    const utmParams = parseUTMParams();
+    if (Object.keys(utmParams).length > 0 && ga) {
+      window.gtag('set', { ...utmParams });
+    }
+
+    // Detect AI referral
+    trackAIReferralIfNeeded();
 
     this.sendToCustomProvider('page_view', event);
     

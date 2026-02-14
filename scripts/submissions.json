@@ -1,25 +1,54 @@
 {
   "submissions": {
-    "20260213-b19ac4": {
-      "id": "20260213-b19ac4",
-      "author": "Jay",
-      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/columns/ko/2026-02-10-era-of-the-chairman.md",
-      "filename": "2026-02-10-era-of-the-chairman.md",
-      "language": "ko",
-      "geo_score": 100,
-      "geo_feedback": [],
-      "submitted_at": "2026-02-13T11:48:53.181854+00:00",
+    "SUB-001": {
+      "id": "SUB-001",
+      "creatorId": "Jay",
+      "title": "A1",
+      "status": "submitted",
+      "geoScore": null,
+      "submittedAt": "2026-02-14T14:11:38.158914+00:00",
+      "scoredAt": null,
+      "reviewers": [],
+      "reviews": [],
+      "approvedAt": null,
+      "publishedAt": null,
+      "threadId": null,
+      "channelId": "1471863670718857247"
+    },
+    "SUB-002": {
+      "id": "SUB-002",
+      "creatorId": "Kiwon",
+      "title": "A2",
+      "status": "scored",
+      "geoScore": 80,
+      "submittedAt": "2026-02-14T14:11:38.159137+00:00",
+      "scoredAt": "2026-02-14T14:11:38.159312+00:00",
+      "reviewers": [],
+      "reviews": [],
+      "approvedAt": null,
+      "publishedAt": null,
+      "threadId": null,
+      "channelId": "1471863670718857247"
+    },
+    "SUB-003": {
+      "id": "SUB-003",
+      "creatorId": "TJ",
+      "title": "A3",
       "status": "in_review",
+      "geoScore": 85,
+      "submittedAt": "2026-02-14T14:11:38.159443+00:00",
+      "scoredAt": "2026-02-14T14:11:38.159566+00:00",
       "reviewers": [
-        "Hoon",
-        "Mia"
+        "Jay",
+        "Ryan"
       ],
       "reviews": [],
-      "review_deadline": "2026-02-13T11:48:53.182171+00:00"
+      "approvedAt": null,
+      "publishedAt": null,
+      "threadId": null,
+      "channelId": "1471863670718857247",
+      "reviewDeadline": "2026-02-14T14:11:38.159699+00:00"
     }
   },
-  "last_reviewers": [
-    "Hoon",
-    "Mia"
-  ]
+  "nextId": 4
 }

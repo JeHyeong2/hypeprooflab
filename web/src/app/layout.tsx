@@ -8,6 +8,7 @@ import { CookieConsent } from "@/components/CookieConsent";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 import AuthProvider from "@/components/auth/AuthProvider";
 import { generateWebSiteJsonLd } from "@/lib/jsonld";
+import Analytics from "@/components/Analytics";
 
 const notoSansKR = Noto_Sans_KR({
   subsets: ['latin'],
@@ -226,6 +227,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={`antialiased ${notoSansKR.variable} ${notoSansMono.variable}`}>
+        <Analytics />
         <SkipLink />
         <AuthProvider>
           <I18nProvider>

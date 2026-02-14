@@ -12,6 +12,7 @@ import { Footer } from '@/components/layout/Footer';
 import LikeButton from '@/components/LikeButton';
 import BookmarkButton from '@/components/BookmarkButton';
 import ShareButtons from '@/components/ShareButtons';
+import { trackContentView } from '@/lib/analytics';
 
 interface Props {
   novel: Novel;
@@ -37,6 +38,10 @@ export default function NovelArticle({
   const [readProgress, setReadProgress] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   
+  useEffect(() => {
+    trackContentView(slug, 'novel');
+  }, [slug]);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
