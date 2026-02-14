@@ -107,7 +107,25 @@ export default async function CreatorDetailPage({ params, searchParams }: Props)
             {name[0]}
           </div>
           <h1 className="text-3xl md:text-4xl font-bold mb-2">{name}</h1>
-          <span className="text-sm text-purple-400 capitalize mb-6">{creator.role}</span>
+          <span className="text-sm text-purple-400 capitalize mb-2">{creator.role}</span>
+
+          {/* Join date & Discord */}
+          <div className="flex items-center gap-3 text-xs text-zinc-500 mb-6">
+            {memberInfo.joinDate && (
+              <span>
+                {isKo ? '가입: ' : 'Joined: '}
+                {new Date(memberInfo.joinDate).toLocaleDateString(
+                  isKo ? 'ko-KR' : 'en-US',
+                  { year: 'numeric', month: 'short', day: 'numeric' }
+                )}
+              </span>
+            )}
+            {memberInfo.discordUsername && (
+              <span className="text-indigo-400">
+                Discord: {memberInfo.discordUsername}
+              </span>
+            )}
+          </div>
 
           {/* Stats */}
           <div className="flex items-center gap-8 text-sm text-zinc-400">
@@ -119,6 +137,12 @@ export default async function CreatorDetailPage({ params, searchParams }: Props)
               <div className="text-2xl font-bold text-white">{creatorPersonas.length}</div>
               <div>{isKo ? 'AI 페르소나' : 'AI Personas'}</div>
             </div>
+            {memberInfo.totalPoints != null && memberInfo.totalPoints > 0 && (
+              <div className="text-center">
+                <div className="text-2xl font-bold text-white">{memberInfo.totalPoints}</div>
+                <div>{isKo ? '포인트' : 'Points'}</div>
+              </div>
+            )}
           </div>
         </div>
       </section>
