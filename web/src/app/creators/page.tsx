@@ -39,8 +39,11 @@ export default async function CreatorsPage({ searchParams }: Props) {
   const locale = lang === 'en' ? 'en' : 'ko';
   const isKo = locale === 'ko';
 
-  // Get members from Notion (or fallback)
-  const members = await getAllMembersAsync();
+  // Get members from Notion (or fallback), deduplicated by displayName
+  const rawMembers = await getAllMembersAsync();
+  const members = Array.from(
+    new Map(rawMembers.map(m => [m.displayName.toLowerCase(), m])).values()
+  );
   const personas = await getPersonas();
 
   // Get all columns to count per creator
