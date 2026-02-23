@@ -1,6 +1,6 @@
 ---
 title: "The Day a Lawyer Beat Every Developer"
-author: "JY"
+creator: "Jinyong Shin"
 date: "2026-02-23"
 category: "Column"
 tags: ["AI", "Claude", "hackathon", "expertise", "domain-knowledge"]
@@ -12,15 +12,15 @@ authorImage: "/members/jy.png"
 
 # The Day a Lawyer Beat Every Developer
 
-In February 2026, Anthropic held a hackathon to celebrate the first anniversary of Claude Code. The official name was **Build with Opus 4.6**. [13,000 people applied](https://www.digitaldigging.org/p/a-lawyer-a-road-inspector-and-a-cardiologist), and 500 were selected. Over six days, 277 working products were built and a total of 21 million lines of code were written. The top prize was $100,000 in Claude API credits.
+In February 2026, Anthropic held a hackathon to celebrate the first anniversary of Claude Code. The official name was **Build with Opus 4.6**. 13,000 people applied, and 500 were selected. Over six days, 277 working products were built and a total of 21 million lines of code were written. The top prize was $100,000 in Claude API credits.
 
-[When the winner list was released](https://www.threads.com/@claudeai/post/DU_5tZrEoi-), the developer community quietly stirred.
+When the winner list was released, the developer community quietly stirred.
 
 | Rank | Winner | Profession | Project | Problem Solved |
 |------|--------|------------|---------|----------------|
-| 🥇 Gold | Mike Brown | California personal injury lawyer | [CrossBeam](https://github.com/mikeOnBreeze/cc-crossbeam) | 90% building permit denial rate |
-| 🥈 Silver | Jon McBee | Father of a 12-year-old daughter | [Elisa](https://github.com/zoidbergclawd/elisa) | Barriers to coding education for kids |
-| 🥉 Bronze | Michal Nedoszytko | Head of cardiology, Belgium | [postvisit.ai](https://postvisit.ai) | Patient comprehension after appointments |
+| 🥇 Gold | Mike Brown | California personal injury lawyer | CrossBeam | 90% building permit denial rate |
+| 🥈 Silver | Jon McBee | Father of a 12-year-old daughter | Elisa | Barriers to coding education for kids |
+| 🥉 Bronze | Michal Nedoszytko | Head of cardiology, Belgium | postvisit.ai | Patient comprehension after appointments |
 | 🎨 Creative | Asep Bagja Priandana | Musician in Estonia | Conductr | Real-time MIDI-based AI band conducting |
 | 🧠 Keep Thinking | Kyeyune Kazibwe | Infrastructure engineer, Uganda | TARA | Dashcam footage → road investment reports |
 
@@ -34,7 +34,7 @@ Software developers were virtually absent. At an AI coding tool hackathon.
 
 Mike Brown's first words were these: *"Everyone thinks California has a housing crisis. It doesn't. We have a permitting crisis."*
 
-[The numbers backing his claim are brutal](https://www.digitaldigging.org/p/a-lawyer-a-road-inspector-and-a-cardiologist). Of the 429,000 ADU (Accessory Dwelling Unit) permits filed in California since 2018, over 90% were denied on first review. Each denial costs weeks of delay and thousands of dollars. An average six-month permit delay translates to $30,000 in losses per project.
+The numbers backing his claim are brutal. Of the 429,000 ADU (Accessory Dwelling Unit) permits filed in California since 2018, over 90% were denied on first review. Each denial costs weeks of delay and thousands of dollars. An average six-month permit delay translates to $30,000 in losses per project.
 
 Mike's friend Cameron is a contractor who builds ADUs. Mike repeatedly watched Cameron wrestle with denial letters. These letters cite California Government Code sections 66310 through 66342, reference city-specific local code provisions, and demand cross-verification with architectural plans. For a lawyer, this was familiar territory — *reading complex documents quickly, pinpointing issues, and finding solutions.*
 
@@ -48,7 +48,7 @@ A lawyer built a multi-agent AI system in six days. Complete with isolated sandb
 
 Michal Nedoszytko is head of cardiology in Brussels. His workplace is called the "cath lab" — where hearts are treated. He has thousands of procedures under his belt. But the problem that had haunted him for years wasn't inside the procedure room.
 
-His words: *["The real problem starts the moment I leave the room."](https://www.digitaldigging.org/p/a-lawyer-a-road-inspector-and-a-cardiologist)* Patients go home without understanding their diagnosis. Even when doctors explain, jargon-filled explanations don't stick.
+His words: *"The real problem starts the moment I leave the room."* Patients go home without understanding their diagnosis. Even when doctors explain, jargon-filled explanations don't stick.
 
 Michal heard about the hackathon during his commute to the hospital. *"The best ideas come while driving."* A week later, postvisit.ai was complete. It's a tool that provides patients with a personalized AI companion after their appointment. Upload clinical notes and medical records, and it leverages Opus 4.6's million-token context window to generate patient-tailored explanations. It translates medical terminology into everyday language and provides ongoing guidance about recovery. It's the AI scribe technology that doctors use — flipped to the patient's side.
 
@@ -62,23 +62,18 @@ Uganda's infrastructure engineer Kyeyune Kazibwe built a pipeline that automatic
 
 ## Scarcity Is Shifting
 
-**Before AI:**
-- Implementation (coding) → High value ⬆️
-- Problem-finding (domain knowledge) → Low value ⬇️
-
-**After AI:**
-- Implementation (coding) → Declining value ⬇️
-- Problem-finding (domain knowledge) → Rising value ⬆️
-
-**What's scarce = What's valuable**
+| Era | Implementation (Coding) | Problem-Finding (Domain Knowledge) |
+|-----|------------------------|------------------------------------|
+| Before AI | High value ⬆️ | Low value ⬇️ |
+| After AI | Declining value ⬇️ | Rising value ⬆️ |
 
 Economics has a concept called "comparative advantage" — focus not on what you're absolutely best at, but on **what you're relatively best at**. As AI elevates implementation capabilities across the board, comparative advantage in implementation is rapidly disappearing. Meanwhile, domain knowledge — the experience and problem sensitivity accumulated in a specific field — remains an area AI cannot easily replace.
 
 Supply and demand tell the same story. With tools like Claude Code, the supply of "ability to write code" has exploded. When supply increases, price (value) decreases. Conversely, "knowing which problem to solve" remains scarce. Field experience can only be earned by living it and cannot be delegated to AI.
 
-[Boris Cherny, creator of Claude Code, said in a podcast](https://www.digitaldigging.org/p/a-lawyer-a-road-inspector-and-a-cardiologist): *"I think it's fair to say that coding is largely a solved problem now."* Watching Mike Brown's demo, he added: *"What I liked was the focus on the user. Talking to users, figuring out what they want, and building it. That's how the Claude Code team actually works."*
+Boris Cherny, creator of Claude Code, said in a podcast: *"I think it's fair to say that coding is largely a solved problem now."* Watching Mike Brown's demo, he added: *"What I liked was the focus on the user. Talking to users, figuring out what they want, and building it. That's how the Claude Code team actually works."*
 
-Journalist Henk van Ess, who covered the hackathon in person, wrote: *["When I apologized for not being a coder, most replied 'me neither.' The real developers never wrote back."](https://www.digitaldigging.org/p/a-lawyer-a-road-inspector-and-a-cardiologist)*
+Journalist Henk van Ess, who covered the hackathon in person, wrote: *"When I apologized for not being a coder, most replied 'me neither.' The real developers never wrote back."*
 
 This is why this wasn't just a hackathon upset. The fact that 277 working products emerged from 500 participants, and that all top winners were domain experts, is evidence of a structural shift we're witnessing. Technical implementation is becoming commoditized, and the ability to define problems is becoming the key differentiator.
 
@@ -110,13 +105,13 @@ The smaller, the better. A small daily inefficiency is a better starting point t
 
 **Step 2: Build your first prototype with Claude Code**
 
-[Claude Code](https://claude.ai/code) is available right now. You don't need to know how to code. The key is **explaining what to build in words**. Like Mike Brown did — describe the problem concretely. *Who experiences it, how is it currently solved, what's frustrating about it.* The more precise your description, the higher the quality of the output.
+Claude Code is available right now. You don't need to know how to code. The key is **explaining what to build in words**. Like Mike Brown did — describe the problem concretely. *Who experiences it, how is it currently solved, what's frustrating about it.* The more precise your description, the higher the quality of the output.
 
 The goal of your first prototype isn't perfection. It's **getting it in front of a real user quickly**. Jon McBee's first user was his 12-year-old daughter. Show it to the closest person first.
 
 **Step 3: Find the intersection of your domain × AI**
 
-Browse the [hackathon gallery](https://cerebralvalley.ai/e/claude-code-hackathon/hackathon/gallery) with its 277 projects. Look for the project closest to your field. As you examine what problems they solved and how they approached them, you'll start seeing your own unsolved problem that nobody else has tackled.
+Browse the hackathon gallery with its 277 projects. Look for the project closest to your field. As you examine what problems they solved and how they approached them, you'll start seeing your own unsolved problem that nobody else has tackled.
 
 ---
 
@@ -127,8 +122,8 @@ All that's needed now is the courage to surface that discomfort you've been endu
 ---
 
 *References*
-- [Anthropic Official Winners Announcement (Threads)](https://www.threads.com/@claudeai/post/DU_5tZrEoi-)
-- [Hackathon Gallery — All 277 Projects (Cerebral Valley)](https://cerebralvalley.ai/e/claude-code-hackathon/hackathon/gallery)
-- [Henk van Ess Field Report (Digital Digging)](https://www.digitaldigging.org/p/a-lawyer-a-road-inspector-and-a-cardiologist)
-- [CrossBeam GitHub](https://github.com/mikeOnBreeze/cc-crossbeam)
-- [Elisa GitHub](https://github.com/zoidbergclawd/elisa)
+- Anthropic Official Winners Announcement (Threads)
+- Hackathon Gallery — All 277 Projects (Cerebral Valley)
+- Henk van Ess Field Report (Digital Digging)
+- CrossBeam GitHub
+- Elisa GitHub
