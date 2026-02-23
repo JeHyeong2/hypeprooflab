@@ -129,6 +129,72 @@ hypeproof/
 
 ---
 
+## 🎫 GitHub Issue Management
+
+Repo: `jayleekr/hypeprooflab` — Issues enabled, guide at `.github/ISSUE_GUIDE.md`.
+
+### Labels
+
+Every issue gets **one type + one area** label.
+
+**Type**: `bug` | `content` | `feature` | `question` | `infra`
+**Area**: `web` | `columns` | `novels` | `research` | `deck` | `docs`
+
+### Issue Templates
+
+| Type | Title format | Required fields |
+|------|-------------|-----------------|
+| Bug | `[bug] <description>` | URL/page, what happened, what expected, screenshot |
+| Content | `[content] <topic>` | type (column/research/novel), author, language, outline |
+| Feature | `[feature] <description>` | problem, proposed solution, affected area |
+| Question | `[question] <topic>` | context, options, who should weigh in |
+
+### Creator → Expertise Routing
+
+| Creator | Route these issues |
+|---------|-------------------|
+| JY (신진용) | AI feature design, model integration, coding workflow |
+| Ryan (김지웅) | Data pipelines, analytics, research methodology |
+| Kiwon (남기원) | UX copy, audience strategy, growth features |
+| TJ (강태진) | Video/media features, content workflow, creator tools |
+| BH (태봉호) | Physics-domain content accuracy, data analysis |
+| Sebastian | Architecture decisions, scalability, eng process |
+
+### Agent Rules for Issue Creation
+
+- Prefix title with bracket tag: `[bug]`, `[content]`, `[feature]`, `[question]`, `[infra]`
+- Add `> Filed on behalf of **{creator}**` when filing for someone
+- Link files with repo-relative paths
+- Cross-reference with `#N` syntax
+- **Don't auto-assign** — Jay (admin) triages
+
+```bash
+gh issue create \
+  --repo jayleekr/hypeprooflab \
+  --title "[bug] Column page 404 for published slug" \
+  --label "bug,columns" \
+  --body "$(cat <<'EOF'
+> Filed on behalf of **JY**
+
+**URL**: https://hypeproof-ai.xyz/columns/my-slug
+**What happened**: Page returns 404 despite file existing
+**What I expected**: Column renders normally
+EOF
+)"
+```
+
+### Workflow
+
+```
+Creator spots issue → files GitHub Issue
+  → Jay triages (label + assign)
+  → Agent or Jay implements
+  → Commit references #N
+  → Close on merge/deploy
+```
+
+---
+
 ## 📊 Deck Generation System (`/deck`)
 
 Generic Google Slides generation system. Each project has a `deck.yaml` config.

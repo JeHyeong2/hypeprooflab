@@ -2,7 +2,7 @@
 title: "The Day a Lawyer Beat Every Developer"
 author: "JY"
 date: "2026-02-23"
-category: "Essay"
+category: "Column"
 tags: ["AI", "Claude", "hackathon", "expertise", "domain-knowledge"]
 slug: "lawyer-beat-developer"
 readTime: "10 min"
