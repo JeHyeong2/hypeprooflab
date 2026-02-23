@@ -2,8 +2,8 @@
 title: "변호사가 개발자를 이긴 날"
 author: "JY"
 date: "2026-02-23"
-category: "Essay"
-tags: ["AI", "Claude", "해커톤", "전문성", "도메인지식"]
+category: "Column"
+tags: ["AI", "Claude", "hackathon", "expertise", "domain-knowledge"]
 slug: "lawyer-beat-developer"
 readTime: "10분"
 excerpt: "Anthropic Claude Code 해커톤에서 변호사, 의사, 아버지가 수상했다. 개발자는 없었다. AI 시대, 진짜 희소한 것은 무엇인가."
@@ -62,15 +62,10 @@ Michal은 병원으로 향하는 출퇴근길 차 안에서 해커톤 소식을 
 
 ## 희소성이 이동하고 있다
 
-**AI 이전:**
-- 구현 능력 (코딩) → 높은 가치 ⬆️
-- 문제 발견력 (도메인 지식) → 낮은 가치 ⬇️
-
-**AI 이후:**
-- 구현 능력 (코딩) → 낮아지는 가치 ⬇️
-- 문제 발견력 (도메인 지식) → 높아지는 가치 ⬆️
-
-**희소한 것 = 가치 있는 것**
+| 시대 | 구현 능력 (코딩) | 문제 발견력 (도메인 지식) |
+|------|-----------------|--------------------------|
+| AI 이전 | 높은 가치 ⬆️ | 낮은 가치 ⬇️ |
+| AI 이후 | 낮아지는 가치 ⬇️ | 높아지는 가치 ⬆️ |
 
 경제학에는 '비교 우위(comparative advantage)'라는 개념이 있다. 절대적으로 더 잘하는 것보다, **상대적으로 더 잘하는 것에 집중하라**는 원리다. AI가 구현 능력을 전방위로 끌어올리고 있는 지금, 구현에서의 비교 우위는 빠르게 사라지고 있다. 반면 도메인 지식, 즉 특정 현장에서 쌓인 경험과 문제 감수성은 AI가 쉽게 대체할 수 없는 영역이다.
 
@@ -97,38 +92,3 @@ Michal은 병원으로 향하는 출퇴근길 차 안에서 해커톤 소식을 
 ---
 
 ## 지금 당장 할 수 있는 것
-
-거창하게 시작할 필요 없다. 다음 세 단계로 시작해보자.
-
-**1단계: 오늘의 불편함을 기록한다**
-
-오늘 하루를 돌아보며 이 질문을 던져보자.
-
-> *"오늘 내가 그냥 참고 넘긴 불편함이 있었나?"*
-
-작을수록 좋다. 거창한 사회 문제보다, 내가 매일 겪는 작은 비효율이 더 좋은 출발점이다. 이것을 메모해두는 습관부터 시작하라. 일주일만 모아도 패턴이 보인다.
-
-**2단계: Claude Code로 첫 프로토타입을 만든다**
-
-[Claude Code](https://claude.ai/code)는 지금 바로 시작할 수 있다. 코드를 몰라도 된다. 핵심은 **무엇을 만들어야 하는지를 말로 설명하는 것**이다. Mike Brown이 했던 것처럼, 문제를 구체적으로 묘사하라. *누가 겪는 문제인지, 지금은 어떻게 해결하는지, 무엇이 불편한지.* 이 설명이 정교할수록 결과물의 질이 높아진다.
-
-첫 프로토타입의 목표는 완성도가 아니다. **실제 사용자에게 빠르게 가져가는 것**이다. Jon McBee의 첫 번째 사용자는 그의 12살 딸이었다. 가장 가까운 사람에게 먼저 보여줘라.
-
-**3단계: 내 도메인 × AI의 교차점을 찾는다**
-
-[해커톤 갤러리](https://cerebralvalley.ai/e/claude-code-hackathon/hackathon/gallery)에서 277개의 프로젝트를 둘러보자. 자신의 분야와 가장 가까운 프로젝트가 무엇인지 찾아보라. 어떤 문제를 풀었는지, 어떻게 접근했는지를 살피다 보면, 아직 아무도 풀지 않은 당신만의 문제가 보이기 시작한다.
-
----
-
-도구는 이미 갖춰졌다. Claude Code 해커톤은 그것을 증명했다. AI는 당신이 이미 알고 있는 것을 현실로 만들어줄 준비가 돼 있다.
-
-이제 필요한 건 당신이 오래 참아온 그 불편함을 꺼내드는 용기, 그것뿐이다.
-
----
-
-*참고 출처*
-- [Anthropic 공식 수상자 발표 (Threads)](https://www.threads.com/@claudeai/post/DU_5tZrEoi-)
-- [해커톤 갤러리 — 전체 277개 프로젝트 (Cerebral Valley)](https://cerebralvalley.ai/e/claude-code-hackathon/hackathon/gallery)
-- [Henk van Ess의 현장 리포트 (Digital Digging)](https://www.digitaldigging.org/p/a-lawyer-a-road-inspector-and-a-cardiologist)
-- [CrossBeam GitHub](https://github.com/mikeOnBreeze/cc-crossbeam)
-- [Elisa GitHub](https://github.com/zoidbergclawd/elisa)
