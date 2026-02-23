@@ -62,14 +62,15 @@ Uganda's infrastructure engineer Kyeyune Kazibwe built a pipeline that automatic
 
 ## Scarcity Is Shifting
 
-```
-[Before AI]                        [After AI]
+**Before AI:**
+- Implementation (coding) → High value ⬆️
+- Problem-finding (domain knowledge) → Low value ⬇️
 
-Implementation  ████████████ High   Implementation  ████░░░░░░░░ Declining
-Problem-finding ████░░░░░░░░ Low    Problem-finding ████████████ Rising
+**After AI:**
+- Implementation (coding) → Declining value ⬇️
+- Problem-finding (domain knowledge) → Rising value ⬆️
 
-Scarce = People who can code       Scarce = People who know what to build
-```
+**What's scarce = What's valuable**
 
 Economics has a concept called "comparative advantage" — focus not on what you're absolutely best at, but on **what you're relatively best at**. As AI elevates implementation capabilities across the board, comparative advantage in implementation is rapidly disappearing. Meanwhile, domain knowledge — the experience and problem sensitivity accumulated in a specific field — remains an area AI cannot easily replace.
 

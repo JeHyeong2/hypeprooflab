@@ -1,0 +1,20 @@
+name: ai-architect-academy
+title: "Future AI Leader's Academy — 동아일보 제안"
+spec: SPEC.md
+theme: navy-coral
+font: "Noto Sans KR"
+
+audience:
+  profile: "동아일보 임원 (50대, 미디어 업계)"
+  viewing: "프로젝터 3m 거리"
+
+text_limits:
+  title: 10
+  subtitle: 25
+  stat_label: 8
+  bullet: 15
+  table_cell: 12
+  quote: 40
+
+slides_module: slides.py
+output_dir: output/

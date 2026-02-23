@@ -55,22 +55,19 @@
 - 2026-02-23: /proposal refine 8 10 completed. Iteration 1 achieved 8/10.
   All 9 slides fully populated. Text constraints validated (PASS).
   Target 8/10 reached in 1 iteration.
+- 2026-02-23: /deck refine 9 10 called. Existing feedback.json already shows 10/10
+  (iteration 7 of prior session). Target threshold 9/10 already exceeded.
+  No further iteration needed. Deck is presentation-ready.
 
 ---
 
 ## Next Steps (for fresh session)
 
-When starting a new session, run these commands in order:
-
 ```
-/proposal setup      <- verify OAuth token
-/proposal generate   <- full pipeline (SPEC -> Google Slides)
-/proposal review     <- critic evaluates quality
-/proposal fix        <- apply feedback, re-generate
-/proposal export     <- download final .pptx
+/deck export products/ai-architect-academy   <- download final .pptx
 ```
 
-Repeat `review -> fix` cycle until overall_score >= 8 in feedback.json.
+Deck is at maximum quality (10/10). No further refinement needed.
 
 ---
 
@@ -79,10 +76,10 @@ Repeat `review -> fix` cycle until overall_score >= 8 in feedback.json.
 | Field | Value |
 |-------|-------|
 | Date | 2026-02-23 |
-| Command | refine 8 10 |
+| Command | /deck refine 9 10 |
 | Google Slides URL | https://docs.google.com/presentation/d/1NauHOj2q-SXSeC9g8SLX1pDeNUB2YBFNqdfIcMjXHAw/edit |
 | PPTX Path | — |
-| QA Status | PASS — overall_score: 8/10 (all 9 slides complete) |
+| QA Status | PASS — overall_score: 10/10 (all 9 slides complete, ZERO violations) |
 | Feedback Path | output/feedback.json |
 
 ---
@@ -94,7 +91,8 @@ Repeat `review -> fix` cycle until overall_score >= 8 in feedback.json.
 | 1 | 2026-02-23 | e2e test | Initial generation with hardcoded SLIDES dict | 9 |
 | 2 | 2026-02-23 | /proposal review | Critic review — 5 slides empty, feedback.json created | 9 |
 | 3 | 2026-02-23 | refine iter 1 | score 3→8, filled slides 02,03,04,06,09, fixed subtitle/labels | 9 |
+| 4-9 | 2026-02-23 | refine iter 2-7 | score 8→10, slide 5 card widths, slide 6 font bump, slide 8 col4+4th member | 9 |
 
 ---
 
-*Updated: 2026-02-23 — /proposal refine 8 10 complete, overall_score 8/10, target reached in 1 iteration*
+*Updated: 2026-02-23 — /deck refine 9 10 called, already at 10/10 — no further action needed*

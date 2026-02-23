@@ -10,6 +10,8 @@ hypeproof/
 │   ├── authors/            # 작가 페르소나 YAML
 │   ├── designs/            # 마스터 프롬프트, 설계 문서
 │   └── simulacra/          # SIMULACRA 시리즈
+├── scripts/gslides/        # Generic Google Slides toolkit
+├── products/               # Deck projects (각각 deck.yaml 보유)
 ├── research/               # 리서치 콘텐츠
 ├── education/              # 교육 프로그램
 └── PHILOSOPHY.md           # HypeProof Lab 철학
@@ -127,54 +129,84 @@ hypeproof/
 
 ---
 
-## 📊 Proposal Generation (Google Slides API)
+## 📊 Deck Generation System (`/deck`)
+
+Generic Google Slides generation system. Each project has a `deck.yaml` config.
 
 ### 파이프라인
 ```
-SPEC.md → [slide-planner] → slide-plan.json → [content-writer] → slide-content.json
-  → [gslides-builder] → Google Slides → [proposal-qa] → QA Report → .pptx
+deck.yaml + SPEC.md
+  → [slide-planner] → slide-plan.json
+  → [content-writer] → slide-content.json
+  → [gslides-builder] → Google Slides
+  → [deck-qa] → QA Report
+  → [deck-capture] → output/screenshots/s01-sNN.png
+  → [deck-critic] → feedback.json (screenshot-based visual review)
+  → export → .pptx
 ```
 
-### 핵심 파일 (에이전트 읽는 순서)
-1. `products/ai-architect-academy/Progress.md` — 현재 상태 (반드시 먼저 읽어라)
-2. `products/ai-architect-academy/Plan.md` — 아키텍처, 파일 맵, 설계 결정
-3. `products/ai-architect-academy/SPEC.md` — 콘텐츠 원본 (**수정 금지**)
-4. `products/ai-architect-academy/PPT_AGENT.md` — 디자인 시스템, 레이아웃, QA 체크리스트
+### 라이브러리
+```
+scripts/gslides/              ← Generic toolkit
+  grid.py                     ← emu(), margins, col2/3/4, font tokens
+  themes.py                   ← Theme class + navy-coral preset
+  primitives.py               ← tb, rect, card, rrect, section_header
+  api_client.py               ← OAuth + create + batch update + generate()
+  auth.py                     ← Google OAuth helper
+  export_pptx.py              ← Google Slides → .pptx
+  validate.py                 ← Text constraint checker
+  lint_typography.py           ← tb() overflow detector
+```
+
+### 프로젝트: AI Architect Academy
+```
+products/ai-architect-academy/
+  deck.yaml                   ← Project config (theme, audience, limits)
+  slides.py                   ← s01-s09 builders (imports from scripts/gslides/)
+  SPEC.md                     ← Content source (read-only)
+  output/                     ← Generated artifacts
+```
 
 ### 명령어
 | 명령 | 동작 |
 |------|------|
-| `/proposal generate` | 전체 파이프라인: SPEC → Google Slides → QA |
-| `/proposal sync` | slide-content.json부터 재생성 (plan/write 스킵) |
-| `/proposal export` | Google Slides → .pptx 다운로드 |
-| `/proposal refine` | review→fix 루프 (기본 7/10 목표, 최대 5회) |
-| `/proposal refine 8` | 목표 점수 8/10으로 루프 |
-| `/proposal setup` | OAuth 인증 설정 및 토큰 갱신 |
+| `/deck generate <dir>` | 전체 파이프라인: SPEC → Google Slides → QA |
+| `/deck review <dir>` | 슬라이드 비평 → feedback.json |
+| `/deck fix <dir>` | 피드백 반영 → 재생성 |
+| `/deck refine [score] [max] <dir>` | review→fix 루프 |
+| `/deck lint <dir>` | 타이포그래피 오버플로 검사 |
+| `/deck sync <dir>` | slide-content.json부터 재생성 |
+| `/deck export <dir>` | Google Slides → .pptx |
+| `/deck setup` | OAuth 인증 설정 |
+| `/proposal <subcmd>` | → `/deck <subcmd> products/ai-architect-academy` (redirect) |
 
 ### 에이전트
 | Agent | 역할 | Model |
 |-------|------|-------|
-| `proposal-orchestrator` | 파이프라인 총괄 | sonnet |
+| `deck-orchestrator` | 파이프라인 총괄 (generic) | sonnet |
 | `slide-planner` | SPEC → slide-plan.json | sonnet |
-| `content-writer` | 구조 → 한글 텍스트 최적화 | sonnet |
+| `content-writer` | 구조 → 텍스트 최적화 | sonnet |
 | `gslides-builder` | Google Slides API 실행 | sonnet |
-| `proposal-qa` | 텍스트 제약/완성도 검증 | haiku |
+| `deck-qa` | 텍스트 제약/완성도 검증 | haiku |
+| `deck-capture` | 슬라이드 스크린샷 캡처 (Chrome) | haiku |
+| `deck-critic` | 스크린샷 기반 시각 비평 (적대적) | opus |
 
 ### 규칙
 - **SPEC.md는 읽기 전용** — 생성 중 절대 수정하지 마라
-- **Progress.md 먼저 읽어라** — 현재 상태를 모르면 작업하지 마라
-- **작업 완료 후 Progress.md 업데이트** — 체크박스 체크 + 날짜 기록
-- **텍스트 제약은 하드 리밋** — 제목 10자, 불릿 15자, 최대 3개 (한글 기준)
-- **generate_gslides.py를 직접 수정하지 마라** — 콘텐츠 변경은 slide-content.json으로
+- **deck.yaml 먼저 읽어라** — 프로젝트 설정을 모르면 작업하지 마라
+- **Progress.md 먼저 읽어라** (있는 경우) — 현재 상태 파악
+- **텍스트 제약은 deck.yaml의 text_limits** — 하드 리밋
+- **slides.py를 직접 수정하지 마라** — 콘텐츠 변경은 slide-content.json으로
 - **OAuth 토큰**: `~/.cm-tracker/config/` — 절대 커밋하지 마라
 
-### Plan.md / Progress.md 유지 규칙
-- 에이전트는 proposal 작업 시작 전 반드시 Progress.md를 읽는다
-- 작업 완료 후 해당 체크박스를 `[x]`로 업데이트한다
-- 이슈 발생 시 "Blockers & Notes"에 날짜와 함께 기록한다
-- Plan.md는 아키텍처 변경 시에만 수정한다
-- 이 두 파일이 에이전트 간 상태 공유의 유일한 채널이다
+### 새 프로젝트 추가 방법
+1. `products/new-project/deck.yaml` — 10줄 설정
+2. `products/new-project/SPEC.md` — 콘텐츠 원본
+3. `products/new-project/slides.py` — academy 복사 후 레이아웃 수정
+4. `/deck generate products/new-project`
+
+에이전트, 커맨드, 스킬 변경 불필요.
 
 ---
 
-*Last updated: 2026-02-23 — Proposal generation system (Google Slides API) 추가*
+*Last updated: 2026-02-23 — /deck generic system refactor (from /proposal)*
