@@ -154,3 +154,4 @@ api-key-*
 .turbo/
 .LSOverride
 .claude/plans/
+.vercel

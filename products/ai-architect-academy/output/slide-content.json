@@ -1,0 +1,200 @@
+{
+  "title": "Future AI Leader's Academy — 동아일보 제안",
+  "slides": [
+    {
+      "build": "01",
+      "title": "Future AI Leader's Academy",
+      "subtitle": "AI를 지휘하는 아이로\n부모와 함께 만드는 4시간",
+      "partner": "Filamentree (HypeProof AI Lab)  ×  동아일보"
+    },
+    {
+      "build": "02",
+      "title": "시장 기회",
+      "columns": [
+        {
+          "stat": "430억$",
+          "label": "글로벌 AI교육",
+          "desc": "2030년 시장 전망 (CAGR 41%)"
+        },
+        {
+          "stat": "10배",
+          "label": "한국 시장",
+          "desc": "2019→2030 코딩 교육 성장"
+        },
+        {
+          "stat": "93%",
+          "label": "학부모 인식",
+          "desc": "AI·코딩 = 국영수급 필수 역량"
+        }
+      ],
+      "source": "Mordor Intelligence (2025), GII, 한국경제·입소스"
+    },
+    {
+      "build": "03",
+      "title": "문제 정의",
+      "bullets": [
+        {
+          "head": "코딩 기술 ≠ AI 인재",
+          "desc": "2028년 개발자 75% AI 도구 사용"
+        },
+        {
+          "head": "아이 혼자 하는 교육",
+          "desc": "부모 없이는 가정 확장 불가"
+        },
+        {
+          "head": "만드는 경험 부재",
+          "desc": "연간 34시간 이론 위주 수업"
+        }
+      ],
+      "quote": "코딩 문법을 외우게 할 것인가, AI를 지휘하는 법을 알려줄 것인가?"
+    },
+    {
+      "build": "04",
+      "title": "핵심 컨셉",
+      "left": {
+        "header": "자녀 (Visionary)",
+        "bullets": [
+          "무한한 상상력",
+          "AI 직접 지휘",
+          "아이디어 발산"
+        ]
+      },
+      "right": {
+        "header": "부모 (Integrator)",
+        "bullets": [
+          "현실 감각",
+          "구조화·구체화",
+          "기획서 정리 지원"
+        ]
+      },
+      "callout": "하나의 팀 = 하나의 스타트업"
+    },
+    {
+      "build": "05",
+      "phases": [
+        {
+          "name": "관점의 전환",
+          "time": "40분",
+          "desc": "AI 라이브 데모\n노동자 vs 건축가 토론",
+          "highlight": "설계자가 될 것인가\n노동자가 될 것인가?"
+        },
+        {
+          "name": "협업과 조율",
+          "time": "50분",
+          "desc": "샘플 게임 분석\n부모-자녀 기획서 공동 작성",
+          "highlight": "산출물:\n부모-자녀 공동\n게임 기획서 1부"
+        },
+        {
+          "name": "지휘와 소통",
+          "time": "90분",
+          "desc": "AI 지휘하여 실제 게임 제작\n10초 피드백 루프 실전 훈련",
+          "highlight": "10초 루프:\n지시→결과→수정→반복"
+        },
+        {
+          "name": "성취와 비전",
+          "time": "60분",
+          "desc": "팀 발표 및 시상\n모든 팀 수상 보장",
+          "highlight": "5개 시상 카테고리\n모든 팀 수상"
+        }
+      ]
+    },
+    {
+      "build": "06",
+      "title": "파트너십 구조",
+      "left": {
+        "header": "동아일보가 하는 것",
+        "bullets": [
+          "브랜드 공동 사용",
+          "공간 제공 (월 1~2회)",
+          "기존 채널 홍보"
+        ]
+      },
+      "right": {
+        "header": "동아일보가 얻는 것",
+        "bullets": [
+          "AI 교육 브랜드",
+          "B2C 신규 매출",
+          "콘텐츠·고객 데이터"
+        ]
+      },
+      "callout": "추가 인력·예산 없이 기존 자산만으로 참여"
+    },
+    {
+      "build": "07",
+      "phases": [
+        {
+          "name": "파일럿",
+          "period": "1~2개월",
+          "items": [
+            "프로그램 검증",
+            "1차 워크숍",
+            "피드백 수집·개선"
+          ],
+          "kpi": "NPS 80%+\n참가 15팀"
+        },
+        {
+          "name": "확산",
+          "period": "3~6개월",
+          "items": [
+            "정기 클래스 운영",
+            "학교 제휴 확보",
+            "월 4회 체계"
+          ],
+          "kpi": "월 ₩12M\n학교 3곳 제휴"
+        },
+        {
+          "name": "스케일업",
+          "period": "6~12개월",
+          "items": [
+            "기업 CSR 연계",
+            "강사 양성",
+            "온라인 SaaS"
+          ],
+          "kpi": "연 ₩93M\n온라인 MVP"
+        }
+      ]
+    },
+    {
+      "build": "08",
+      "members": [
+        {
+          "name": "이재원 (Jay)",
+          "role": "Product Lead",
+          "org": "Sonatus (Silicon Valley Unicorn)",
+          "creds": "SW Engineer · Product"
+        },
+        {
+          "name": "김지웅 (Ryan)",
+          "role": "Ex-CERN Scientist",
+          "org": "Filamentree",
+          "creds": "AX·R&D Team Leader"
+        },
+        {
+          "name": "신진용 (JY)",
+          "role": "Agentic AI Specialist",
+          "org": "Remember",
+          "creds": "AI/ML Engineer"
+        }
+      ]
+    },
+    {
+      "build": "09",
+      "title": "실적 & CTA",
+      "bullets": [
+        {
+          "head": "실제 워크숍 완료",
+          "desc": "9개 게임 플레이 가능 (링크 보유)"
+        },
+        {
+          "head": "학부모 만족도 높음",
+          "desc": "\"처음으로 함께 무언가를 완성\""
+        },
+        {
+          "head": "즉시 시작 가능",
+          "desc": "₩200,000/팀, 15~20팀/회"
+        }
+      ],
+      "quote": "다음 단계: 파일럿 1회 워크숍 함께 기획"
+    }
+  ]
+}

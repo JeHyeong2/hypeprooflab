@@ -80,4 +80,101 @@ hypeproof/
 
 ---
 
-*Last updated: 2026-02-11 — 실전에서 배운 교훈 기반*
+---
+
+## 📝 콘텐츠 운영 (Content Nudge System)
+
+### 핵심 파일
+- `members.md` — 크리에이터 7명 프로필 (전공, 직함, Discord)
+- `PHILOSOPHY.md` — HypeProof Lab 철학 (칼럼 톤 참고)
+- `research/daily/` — Daily Research 원본 (칼럼 소스)
+- `web/src/content/columns/ko/` — 발행된 칼럼 (12편, 마지막 2/14)
+- `research/templates/` — 리서치 템플릿
+
+### 크리에이터 (넛지 대상, 우선순위순)
+| 이름 | 전공 | 넛지 포인트 |
+|------|------|------------|
+| JY (신진용) | AI/ML Engineer, 퀀트, 물리 | AI코딩, Claude Code — 글쓰기 의지 높음 |
+| Ryan (김지웅) | CERN 물리 Ph.D, 퀀트리서처 | 데이터분석, AI교육 — 제안서 경험 |
+| Kiwon (남기원) | 글로벌 마케팅, GWU 심리학 | 마케팅 관점의 AI 분석 |
+| TJ (강태진) | 미디어/영상, 前 창업자 | 콘텐츠 제작 워크플로우 |
+| BH (태봉호) | CERN CMS 실험물리 박사과정 | 양자/물리 토픽에 전문성 |
+| Sebastian | 실리콘밸리 EM | Discord 미가입, 보류 |
+
+### 칼럼 작성 → 맨션 질문 워크플로우
+1. Daily Research (`research/daily/`)에서 칼럼 후보 선정
+2. `research-columnist` 스킬로 칼럼 작성
+3. `web/src/content/columns/ko/<slug>.md` + `en/<slug>.md` 생성
+4. frontmatter: title, author, date, category, tags, slug, readTime, excerpt, authorImage (`/members/jay.png`)
+5. `cd web && npm run build` 통과 확인
+6. `cd web && vercel --prod --yes` 배포
+7. #daily-research에 포스팅
+8. **크리에이터 맨션 질문** — 칼럼 키워드 ↔ 크리에이터 전공 매칭, 2~3명에게 구체적 질문
+
+### 맨션 질문 규칙
+- **구체적 질문만** — "어떻게 생각하세요?" 금지
+- **전공 기반** — 그 사람만 답할 수 있는 질문
+- **로테이션** — 같은 사람 연속 맨션 금지 (최소 2일 간격)
+- **리액션 DB**: Mother workspace `memory/hypeproof-creators.json`에 추적
+
+### Discord 채널
+- `#daily-research` (1468135779271180502) — 칼럼 + 리서치 포스팅
+- `#content-pipeline` (1471863670718857247) — Herald 관할, 제출/리뷰
+- `#인사이트-공유` (1463019098685571257) — 자유 공유
+- `#잡담` (1458325093871521895) — 일반 대화
+
+---
+
+---
+
+## 📊 Proposal Generation (Google Slides API)
+
+### 파이프라인
+```
+SPEC.md → [slide-planner] → slide-plan.json → [content-writer] → slide-content.json
+  → [gslides-builder] → Google Slides → [proposal-qa] → QA Report → .pptx
+```
+
+### 핵심 파일 (에이전트 읽는 순서)
+1. `products/ai-architect-academy/Progress.md` — 현재 상태 (반드시 먼저 읽어라)
+2. `products/ai-architect-academy/Plan.md` — 아키텍처, 파일 맵, 설계 결정
+3. `products/ai-architect-academy/SPEC.md` — 콘텐츠 원본 (**수정 금지**)
+4. `products/ai-architect-academy/PPT_AGENT.md` — 디자인 시스템, 레이아웃, QA 체크리스트
+
+### 명령어
+| 명령 | 동작 |
+|------|------|
+| `/proposal generate` | 전체 파이프라인: SPEC → Google Slides → QA |
+| `/proposal sync` | slide-content.json부터 재생성 (plan/write 스킵) |
+| `/proposal export` | Google Slides → .pptx 다운로드 |
+| `/proposal refine` | review→fix 루프 (기본 7/10 목표, 최대 5회) |
+| `/proposal refine 8` | 목표 점수 8/10으로 루프 |
+| `/proposal setup` | OAuth 인증 설정 및 토큰 갱신 |
+
+### 에이전트
+| Agent | 역할 | Model |
+|-------|------|-------|
+| `proposal-orchestrator` | 파이프라인 총괄 | sonnet |
+| `slide-planner` | SPEC → slide-plan.json | sonnet |
+| `content-writer` | 구조 → 한글 텍스트 최적화 | sonnet |
+| `gslides-builder` | Google Slides API 실행 | sonnet |
+| `proposal-qa` | 텍스트 제약/완성도 검증 | haiku |
+
+### 규칙
+- **SPEC.md는 읽기 전용** — 생성 중 절대 수정하지 마라
+- **Progress.md 먼저 읽어라** — 현재 상태를 모르면 작업하지 마라
+- **작업 완료 후 Progress.md 업데이트** — 체크박스 체크 + 날짜 기록
+- **텍스트 제약은 하드 리밋** — 제목 10자, 불릿 15자, 최대 3개 (한글 기준)
+- **generate_gslides.py를 직접 수정하지 마라** — 콘텐츠 변경은 slide-content.json으로
+- **OAuth 토큰**: `~/.cm-tracker/config/` — 절대 커밋하지 마라
+
+### Plan.md / Progress.md 유지 규칙
+- 에이전트는 proposal 작업 시작 전 반드시 Progress.md를 읽는다
+- 작업 완료 후 해당 체크박스를 `[x]`로 업데이트한다
+- 이슈 발생 시 "Blockers & Notes"에 날짜와 함께 기록한다
+- Plan.md는 아키텍처 변경 시에만 수정한다
+- 이 두 파일이 에이전트 간 상태 공유의 유일한 채널이다
+
+---
+
+*Last updated: 2026-02-23 — Proposal generation system (Google Slides API) 추가*

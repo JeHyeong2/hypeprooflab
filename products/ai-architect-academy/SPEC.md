@@ -178,7 +178,6 @@
 |------|------|------|---------|
 | 이재원 (Jay) | Software Engineer | Sonatus (Silicon Valley Unicorn) | Product Lead |
 | 김지웅 (Ryan) | AX·R&D Team Leader | Filamentree | Ex-CERN Scientist |
-| Sebastian | Software Engineer | Sonatus (Silicon Valley Unicorn) | - |
 | 신진용 (JY) | AI/ML Engineer | Remember | Agentic AI specialist |
 
 ---
