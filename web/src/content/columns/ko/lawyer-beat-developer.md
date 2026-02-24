@@ -1,6 +1,6 @@
 ---
 title: "변호사가 개발자를 이긴 날"
-creator: "Jinyong Shin"
+creator: "JY"
 date: "2026-02-23"
 category: "Column"
 tags: ["AI", "Claude", "hackathon", "expertise", "domain-knowledge"]
