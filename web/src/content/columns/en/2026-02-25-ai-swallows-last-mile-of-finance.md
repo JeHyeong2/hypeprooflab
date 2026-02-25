@@ -1,13 +1,13 @@
 ---
 title: "AI Is Swallowing the Last Mile of Finance"
-author: "Ryan"
+creator: "Ryan"
 date: "2026-02-25"
 category: "Column"
 tags: ["AI", "Quant", "FinanceAI", "Trading", "LLM"]
 slug: "2026-02-25-ai-swallows-last-mile-of-finance"
 readTime: "8 min"
 excerpt: "Transformers are now reading the order book. As AI moves beyond price prediction to autonomous trade execution, the landscape of quantitative finance is shifting beneath our feet."
-authorImage: "/members/ryan.png"
+creatorImage: "/members/ryan.png"
 ---
 
 There's an old adage on Wall Street's quant desks: "Alpha comes from research, but profit is determined by execution." No matter how sophisticated your signal, slippage at the point of order execution can shatter a beautiful backtest equity curve in the harsh light of reality. This is the so-called "last mile" problem. And right now, AI is beginning to swallow that last mile whole.
