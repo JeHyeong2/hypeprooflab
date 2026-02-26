@@ -1,13 +1,13 @@
 ---
 title: "설계도 없는 AI가 온다"
-author: "Ryan"
+creator: "Ryan"
 date: "2026-02-11"
 category: "Analysis"
 tags: ["AI Agent", "Metaprogramming", "OpenClaw", "Claude Code", "Architecture"]
 slug: "2026-02-11-zero-blueprint-ai"
 readTime: "7 min"
 excerpt: "역할이 먼저가 아니라, 일이 먼저다. 메타프로그래밍의 철학이 AI 에이전트 워크플로우를 근본적으로 바꾸고 있다."
-authorImage: "/members/ryan.png"
+creatorImage: "/members/ryan.png"
 ---
 
 ## 메타프로그래밍의 철학이 에이전트 워크플로우를 바꾸고 있다

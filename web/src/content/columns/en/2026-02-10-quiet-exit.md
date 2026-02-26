@@ -1,13 +1,13 @@
 ---
 title: "Five Stages of Losing Your Job — A Worker's Quiet Exit"
-author: "Jay"
+creator: "Jay"
 date: "2026-02-10"
 category: "Opinion"
 tags: ["AI", "Career", "Automation", "Workplace", "Future of Work"]
 slug: "2026-02-10-quiet-exit"
 readTime: "15 min"
 excerpt: "The day workplace automation became real, one office worker traversed the Kübler-Ross five stages to redefine what his Job truly meant."
-authorImage: "/members/jay.png"
+creatorImage: "/members/jay.png"
 ---
 
 ## Stage 1: Denial

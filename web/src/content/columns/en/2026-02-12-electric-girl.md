@@ -1,13 +1,13 @@
 ---
 title: "The Girl Who Changed the World with an Electricity Bill"
-author: "Jay Lee"
+creator: "Jay Lee"
 date: "2026-02-12"
 category: "Column"
 tags: ["AGI", "Edge AI", "Digital Divide", "Cambodia", "Token Economy", "Monetary Sovereignty"]
 slug: "2026-02-12-electric-girl"
 readTime: "15 min"
 excerpt: "In an era where software costs nothing more than electricity, something happened in Siem Reap, Cambodia — on the morning AGI arrived, caught between electricity bills, monetary sovereignty, and the Khmer language."
-authorImage: "/members/jay.png"
+creatorImage: "/members/jay.png"
 ---
 
 *In an era where the price of software fell to zero, what happened in Siem Reap, Cambodia*

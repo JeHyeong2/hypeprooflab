@@ -64,10 +64,10 @@ export default async function CreatorDetailPage({ params, searchParams }: Props)
 
   // Get columns by this creator
   const koColumns = getAllColumns('ko').filter(c =>
-    (c.frontmatter.creator || c.frontmatter.author || '').toLowerCase() === name.toLowerCase()
+    (c.frontmatter.creator || '').toLowerCase() === name.toLowerCase()
   );
   const enColumns = getAllColumns('en').filter(c =>
-    (c.frontmatter.creator || c.frontmatter.author || '').toLowerCase() === name.toLowerCase()
+    (c.frontmatter.creator || '').toLowerCase() === name.toLowerCase()
   );
   const columns = locale === 'ko' ? koColumns : enColumns;
   const allColumns = [...koColumns, ...enColumns];

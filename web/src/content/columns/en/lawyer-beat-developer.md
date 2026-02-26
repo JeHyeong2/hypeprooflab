@@ -7,7 +7,7 @@ tags: ["AI", "Claude", "hackathon", "expertise", "domain-knowledge"]
 slug: "lawyer-beat-developer"
 readTime: "10 min"
 excerpt: "At the Anthropic Claude Code hackathon, a lawyer, a doctor, and a father won. No developers. In the age of AI, what's truly scarce?"
-authorImage: "/members/jy.png"
+creatorImage: "/members/jy.png"
 ---
 
 # The Day a Lawyer Beat Every Developer

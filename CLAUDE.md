@@ -11,9 +11,11 @@ hypeproof/
 │   ├── designs/            # 마스터 프롬프트, 설계 문서
 │   └── simulacra/          # SIMULACRA 시리즈
 ├── scripts/gslides/        # Generic Google Slides toolkit
+├── scripts/headless/       # Mother → Claude Code headless 스크립트
 ├── products/               # Deck projects (각각 deck.yaml 보유)
 ├── research/               # 리서치 콘텐츠
 ├── education/              # 교육 프로그램
+├── AGENTS.md               # Agent 팀 구성 및 파견 가이드
 └── PHILOSOPHY.md           # HypeProof Lab 철학
 ```
 
@@ -107,7 +109,7 @@ hypeproof/
 1. Daily Research (`research/daily/`)에서 칼럼 후보 선정
 2. `research-columnist` 스킬로 칼럼 작성
 3. `web/src/content/columns/ko/<slug>.md` + `en/<slug>.md` 생성
-4. frontmatter: title, author, date, category, tags, slug, readTime, excerpt, authorImage (`/members/jay.png`)
+4. frontmatter: title, creator, date, category, tags, slug, readTime, excerpt, creatorImage (`/members/jay.png`)
 5. `cd web && npm run build` 통과 확인
 6. `cd web && vercel --prod --yes` 배포
 7. #daily-research에 포스팅
@@ -275,4 +277,140 @@ products/ai-architect-academy/
 
 ---
 
-*Last updated: 2026-02-23 — /deck generic system refactor (from /proposal)*
+## 📄 Content Pipeline (Headless)
+
+`claude -p` (headless) 기반 콘텐츠 파이프라인. 현재 수동 운영 중이며, Mother 자동화 통합 대기 상태.
+
+### 에이전트
+
+| Agent | Model | 역할 |
+|-------|-------|------|
+| `content-columnist` | sonnet | 칼럼 KO/EN 작성 |
+| `content-novelist` | opus | SIMULACRA 소설 집필 |
+| `web-developer` | sonnet | 빌드, 배포, 웹 개발 |
+| `qa-reviewer` | haiku | 콘텐츠 QA (read-only) |
+| `research-analyst` | sonnet | 일일 리서치 파이프라인 |
+| `community-manager` | haiku | Discord 포스팅 콘텐츠 생성 |
+| `publish-orchestrator` | sonnet | E2E 파이프라인 총괄 |
+| `healthcheck` | sonnet | 전체 파이프라인 테스트 + 리포트 |
+
+### 커맨드
+
+| 명령 | 에이전트 | 설명 |
+|------|--------|------|
+| `/write-column <topic>` | content-columnist | 칼럼 KO/EN 작성 |
+| `/write-novel [vol-ch]` | content-novelist | 소설 챕터 집필 |
+| `/qa-check <file>` | qa-reviewer | 콘텐츠 QA 검증 |
+| `/research [--topic X]` | research-analyst | 일일 리서치 |
+| `/deploy [--clean]` | web-developer | 빌드 + Vercel 배포 |
+| `/publish <topic>` | publish-orchestrator | E2E 파이프라인 |
+| `/announce <slug>` | community-manager | Discord 공지 콘텐츠 생성 |
+| `/healthcheck [--level]` | healthcheck | 전체 파이프라인 E2E 테스트 |
+
+### Headless 호출
+
+스크립트: `scripts/headless/`
+
+단일 진입점 `run-command.sh`로 모든 커맨드 실행. 커맨드별 예산/타임아웃 자동 설정.
+
+```bash
+# 칼럼 작성 (budget $2.00, timeout 600s)
+bash scripts/headless/run-command.sh write-column "AI 보안" --author JY
+
+# E2E 파이프라인 (budget $5.00, timeout 1800s)
+bash scripts/headless/publish.sh "AI agent 자율성"
+
+# 소설 이어쓰기 (budget $5.00, timeout 900s)
+bash scripts/headless/run-command.sh write-novel --continue
+
+# 전체 파이프라인 테스트 (dedicated orchestrator script)
+bash scripts/headless/healthcheck.sh --level all
+
+# QA 검증 (budget $1.00, timeout 300s)
+bash scripts/headless/run-command.sh qa-check "web/src/content/columns/ko/my-column.md" --type column
+
+# 리서치 (budget $2.00, timeout 600s)
+bash scripts/headless/run-command.sh research --topic "LLM agents"
+
+# Discord 공지 (budget $0.50, timeout 180s)
+bash scripts/headless/run-command.sh announce "my-slug"
+
+# 배포 (budget $2.00, timeout 600s)
+bash scripts/headless/run-command.sh deploy --clean
+```
+
+ENV 오버라이드: `CLAUDE_TIMEOUT`, `CLAUDE_BUDGET_USD` — **`run-command.sh`에만 적용**.
+`healthcheck.sh`는 Phase별 budget이 하드코딩되어 있어 env override 무시.
+
+> **Nested session 방지**: `run-command.sh`는 실행 직전 모든 `CLAUDE*`/`OTEL*` 환경변수를 unset하여
+> 부모 Claude Code 세션이 자식 `claude -p`를 nested session으로 감지하는 것을 방지한다.
+> 사용자 오버라이드(`CLAUDE_TIMEOUT`, `CLAUDE_BUDGET_USD`)는 unset 전에 캡처한다.
+
+### 스크립트 구조
+
+| 파일 | 역할 |
+|------|------|
+| `run-command.sh` | 단일 진입점. 커맨드별 예산/타임아웃 내장, `--max-budget-usd`로 비용 제한 |
+| `healthcheck.sh` | 멀티 에이전트 오케스트레이터. T1-T5 단계별 `claude -p` 호출 |
+| `publish.sh` | E2E 파이프라인. `run-command.sh` 호출 후 credit-points 처리 |
+| `credit-points.sh` | 크레딧 포인트 API 호출 (CREDIT_API_SECRET 필요) |
+
+### JSON 출력 계약
+
+모든 agent는 JSON을 stdout으로 출력:
+```json
+{"status": "ok|fail|error", ...}
+```
+
+### Exit Code
+
+| Code | 의미 | Mother 행동 |
+|------|------|------------|
+| 0 | 성공 | JSON 파싱 후 진행 |
+| 1 | agent 에러 | 에러 로깅 |
+| 2 | timeout | 1회 재시도 후 Jay 알림 |
+| 3 | build 실패 | 배포 차단, Jay 알림 |
+
+### Orchestrator Sub-Agent Delegation Rule
+
+When an orchestrator agent delegates work to a sub-agent via the Task tool, it MUST follow this pattern:
+
+#### Required Pattern
+```
+Delegate to `<agent-name>` agent:
+Task prompt: "<Specific instruction. Include file paths. Self-contained.>"
+- Wait for completion
+- Parse/verify output
+```
+
+#### Prohibited Patterns
+- Mentioning agent name without a Task prompt
+- Using "Expect:" to describe results (not a delegation instruction)
+- Implicit delegation (agent name only in section title)
+
+#### Sub-Agent Constraints
+- Sub-agents CANNOT spawn other sub-agents (1 level only)
+- Each sub-agent has its own maxTurns budget (independent of parent)
+- Include ALL necessary context in the Task prompt (sub-agents do NOT inherit parent context)
+- Always instruct sub-agents to "Read CLAUDE.md first" for project rules
+
+#### Architecture Principle: Shell Scripts as Orchestrators
+
+When a pipeline needs to call multiple agents, use a shell script (not an agent)
+as the orchestrator. Each `claude -p --agent <name>` call runs at level 0,
+bypassing the sub-agent nesting limit.
+
+- **Shell script orchestration**: healthcheck.sh, publish.sh
+- **Agent orchestration**: Only when the agent itself is level 0
+  (e.g., `/publish` called interactively runs publish-orchestrator at level 0)
+
+### 규칙
+- community-manager는 콘텐츠 생성만 — Discord 전송은 Mother가 담당
+- publish-orchestrator는 sub-agent를 Task tool로 위임
+- qa-reviewer는 **read-only** — 파일 수정 안 함
+- headless 스크립트는 `--dangerously-skip-permissions`로 실행
+- 비용 제한은 `--max-budget-usd`로 (달러 기반, 턴 기반 아님)
+
+---
+
+*Last updated: 2026-02-24*

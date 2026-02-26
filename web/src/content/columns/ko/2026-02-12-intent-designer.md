@@ -1,13 +1,13 @@
 ---
 title: "의도의 설계자"
-author: "BH"
+creator: "BH"
 date: "2026-02-12"
 category: "Research"
 tags: ["Agentic AI", "Research", "OpenClaw", "Claude Code", "Science"]
 slug: "2026-02-12-intent-designer"
 readTime: "8 min"
 excerpt: "에이전틱 AI가 여는 '지능의 시대' — 연구자의 역할이 실험 노동자에서 의도의 설계자로 진화하고 있다."
-authorImage: "/members/bh.jpg"
+creatorImage: "/members/bh.jpg"
 ---
 
 2026년, 전 세계 연구실의 풍경은 근본적으로 뒤바뀌었습니다. 과거의 AI가 단순히 논문의 초안을 잡아주거나 데이터를 요약하는 '비서'였다면, 오늘날의 AI는 스스로 실험 가설을 세우고, 복잡한 시뮬레이션 코드를 작성하며, 심지어 동료 에이전트들과 토론을 벌이는 '디지털 동료'로 진화했습니다. 이러한 변화의 중심에는 오픈소스의 폭발적 에너지를 상징하는 **OpenClaw**와 기업용 전문 도구의 정점인 **Claude Code**가 있습니다.

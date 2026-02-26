@@ -1,13 +1,13 @@
 ---
 title: "The Target of Marketing Is Shifting"
-author: "Kiwon"
+creator: "Kiwon"
 date: "2026-02-11"
 category: "Opinion"
 tags: ["Marketing", "AI Agent", "Agent Era", "AEO", "Digital Marketing"]
 slug: "2026-02-11-marketing-target-changes"
 readTime: "10 min"
 excerpt: "From people to agents, from persuasion to structure — the foundational premise of marketing is collapsing."
-authorImage: "/members/kiwon.jpeg"
+creatorImage: "/members/kiwon.jpeg"
 ---
 ## 1. One Formula That Held for Decades
 

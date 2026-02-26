@@ -189,4 +189,47 @@ FAIL 시 Content Creator에게 반려, 수정 후 재검증.
 
 ---
 
-*Last updated: 2026-02-12*
+## Claude Code Headless 통합
+
+Mother가 `claude -p` (headless)로 위 에이전트들을 호출할 수 있다.
+
+### Claude Code Agent ↔ 역할 매핑
+
+| AGENTS.md 역할 | Claude Code Agent | Command |
+|---------------|-------------------|---------|
+| Content Creator (칼럼) | `content-columnist` | `/write-column` |
+| Content Creator (소설) | `content-novelist` | `/write-novel` |
+| Web Developer | `web-developer` | `/deploy` |
+| QA Reviewer | `qa-reviewer` | `/qa-check` |
+| Research Analyst | `research-analyst` | `/research` |
+| Community Manager | `community-manager` | `/announce` |
+| E2E Orchestrator | `publish-orchestrator` | `/publish` |
+
+### Sub-Agent Delegation Rule
+
+All orchestrator agents MUST follow the delegation pattern defined in `CLAUDE.md` → "Orchestrator Sub-Agent Delegation Rule" section.
+
+### Headless 호출 방법
+
+단일 진입점 `run-command.sh`로 모든 커맨드 실행 (커맨드별 예산/타임아웃 자동 설정):
+
+```bash
+# 개별 커맨드 (via run-command.sh)
+bash scripts/headless/run-command.sh write-column "AI 보안"
+bash scripts/headless/run-command.sh research --topic "LLM agents"
+bash scripts/headless/run-command.sh deploy --clean
+
+# E2E 파이프라인 (dedicated script: research → column → QA → deploy → announce)
+bash scripts/headless/publish.sh "AI agent 자율성"
+
+# Healthcheck (dedicated orchestrator script)
+bash scripts/headless/healthcheck.sh --level all
+```
+
+### Mother OpenClaw Skill
+
+`~/.openclaw/workspace/skills/hypeproof-headless/SKILL.md` — 호출 방법, JSON 파싱, 에러 핸들링 문서화.
+
+---
+
+*Last updated: 2026-02-24*

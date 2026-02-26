@@ -1,13 +1,13 @@
 ---
 title: "The Intent Designer"
-author: "BH"
+creator: "BH"
 date: "2026-02-12"
 category: "Research"
 tags: ["Agentic AI", "Research", "OpenClaw", "Claude Code", "Science"]
 slug: "2026-02-12-intent-designer"
 readTime: "8 min"
 excerpt: "Agentic AI is ushering in the 'Intelligence Age' — researchers are evolving from lab workers to designers of intent."
-authorImage: "/members/bh.jpg"
+creatorImage: "/members/bh.jpg"
 ---
 
 In 2026, the landscape of research labs worldwide has fundamentally transformed. Where AI was once a mere "assistant" that drafted papers or summarized data, today's AI autonomously formulates experimental hypotheses, writes complex simulation code, and even debates with fellow agents. At the center of this shift stand **OpenClaw**, symbolizing the explosive energy of open source, and **Claude Code**, the pinnacle of enterprise-grade tooling.

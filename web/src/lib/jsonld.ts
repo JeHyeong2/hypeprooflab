@@ -73,8 +73,8 @@ export function generateArticleJsonLd(column: { frontmatter: ColumnFrontmatter; 
     keywords: fm.tags?.join(', '),
     author: {
       '@type': 'Person',
-      name: fm.creator || fm.author,
-      ...((fm.creatorImage || fm.authorImage) ? { image: `${SITE_URL}${fm.creatorImage || fm.authorImage}` } : {}),
+      name: fm.creator,
+      ...((fm.creatorImage) ? { image: `${SITE_URL}${fm.creatorImage}` } : {}),
     },
     publisher: {
       '@type': 'Organization',

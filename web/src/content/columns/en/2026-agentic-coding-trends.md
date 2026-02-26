@@ -1,13 +1,13 @@
 ---
 title: "[Report Review] What 2026 Agentic Coding Trends Tell Us About the Future of Developers"
-author: "Jay Lee"
+creator: "Jay Lee"
 date: "2026-02-13"
 category: "AI Engineering"
 tags: ["agentic-coding", "AI", "software-development", "2026-trends"]
 slug: "2026-agentic-coding-trends"
 readTime: "12 min read"
 excerpt: "Dissecting Anthropic's 2026 Agentic Coding Trends Report—the eight trends they predict, and a reality check from an engineer building agentic coding tools in the trenches."
-authorImage: "/members/jay.png"
+creatorImage: "/members/jay.png"
 ---
 
 Anthropic just released their 2026 Agentic Coding Trends Report. The document organizes eight trends into three categories—Foundation, Capability, and Impact—and to be honest, it's surprisingly candid for a report coming from an AI company. Burying in the foreword the admission that while developers use AI in roughly 60% of their work, they report being able to "fully delegate" only 0–20% of tasks? That takes some nerve. It signals a desire to cut through the hype.

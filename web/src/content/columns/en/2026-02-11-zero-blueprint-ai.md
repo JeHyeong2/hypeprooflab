@@ -1,13 +1,13 @@
 ---
 title: "The AI With No Blueprint Is Coming"
-author: "Ryan"
+creator: "Ryan"
 date: "2026-02-11"
 category: "Analysis"
 tags: ["AI Agent", "Metaprogramming", "OpenClaw", "Claude Code", "Architecture"]
 slug: "2026-02-11-zero-blueprint-ai"
 readTime: "7 min"
 excerpt: "Work comes first, not roles. The philosophy of metaprogramming is fundamentally reshaping AI agent workflows."
-authorImage: "/members/ryan.png"
+creatorImage: "/members/ryan.png"
 ---
 
 ## How Metaprogramming Philosophy Is Reshaping Agent Workflows

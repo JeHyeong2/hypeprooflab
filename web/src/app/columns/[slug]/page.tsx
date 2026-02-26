@@ -56,7 +56,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
       description: fm.excerpt,
       type: 'article',
       publishedTime: fm.date,
-      authors: [fm.creator || fm.author || ''],
+      authors: [fm.creator || ''],
       tags: fm.tags,
     },
     twitter: {
@@ -147,22 +147,22 @@ export default async function ColumnPage({ params, searchParams }: Props) {
 
         <div className="flex items-center gap-4 mb-10 pb-10 border-b border-zinc-800">
           <div className="w-12 h-12 rounded-full overflow-hidden bg-zinc-800 flex-shrink-0">
-            {(frontmatter.creatorImage || frontmatter.authorImage) ? (
+            {(frontmatter.creatorImage) ? (
               <Image
-                src={(frontmatter.creatorImage || frontmatter.authorImage)!}
-                alt={frontmatter.creator || frontmatter.author || ''}
+                src={(frontmatter.creatorImage)!}
+                alt={frontmatter.creator || ''}
                 width={48}
                 height={48}
                 className="w-full h-full object-cover"
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-white font-bold">
-                {(frontmatter.creator || frontmatter.author || '?')[0]}
+                {(frontmatter.creator || '?')[0]}
               </div>
             )}
           </div>
           <div>
-            <div className="text-white font-medium">{frontmatter.creator || frontmatter.author}</div>
+            <div className="text-white font-medium">{frontmatter.creator}</div>
             <div className="text-zinc-500 text-sm">
               <time dateTime={frontmatter.date}>
                 {new Date(frontmatter.date).toLocaleDateString(

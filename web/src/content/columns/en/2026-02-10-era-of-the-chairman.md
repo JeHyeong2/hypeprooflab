@@ -1,13 +1,13 @@
 ---
 title: "The Era of the Chairman Has Begun"
-author: "Jay"
+creator: "Jay"
 date: "2026-02-10"
 category: "Opinion"
 tags: ["AI Agent", "Digital Economy", "Agent Era", "AEO"]
 slug: "2026-02-10-era-of-the-chairman"
 readTime: "12 min"
 excerpt: "In a world where agents handle all execution, where exactly does uniquely human value reside? An analysis of the paradigm shift in the digital economy."
-authorImage: "/members/jay.png"
+creatorImage: "/members/jay.png"
 ---
 
 ## Prologue: A 60-Year-Old Promise Breaks

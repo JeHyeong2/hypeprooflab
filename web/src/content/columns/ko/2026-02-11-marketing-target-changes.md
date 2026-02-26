@@ -1,13 +1,13 @@
 ---
 title: "마케팅의 대상이 바뀐다"
-author: "Kiwon"
+creator: "Kiwon"
 date: "2026-02-11"
 category: "Opinion"
 tags: ["마케팅", "AI Agent", "에이전트 시대", "AEO", "디지털 마케팅"]
 slug: "2026-02-11-marketing-target-changes"
 readTime: "10 min"
 excerpt: "사람에서 에이전트로, 설득에서 구조로 — 마케팅의 근본 전제가 무너지고 있다."
-authorImage: "/members/kiwon.jpeg"
+creatorImage: "/members/kiwon.jpeg"
 ---
 ## 1. 수십 년간 바뀌지 않은 하나의 공식
 

@@ -12,7 +12,7 @@ export async function GET() {
       link: `${baseUrl}/columns/${c.frontmatter.slug}`,
       description: c.frontmatter.excerpt,
       pubDate: new Date(c.frontmatter.date).toUTCString(),
-      author: c.frontmatter.creator || c.frontmatter.author || '',
+      author: c.frontmatter.creator || '',
       category: c.frontmatter.category,
       tags: c.frontmatter.tags || [],
     })),

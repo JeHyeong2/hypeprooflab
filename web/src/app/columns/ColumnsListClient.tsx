@@ -104,10 +104,10 @@ export default function ColumnsListClient({ koColumns, enColumns }: Props) {
                   </p>
                   
                   <div className="flex items-center gap-3">
-                    {(fm.creatorImage || fm.authorImage) && (
-                      <Image src={(fm.creatorImage || fm.authorImage)!} alt={fm.creator || fm.author || ''} width={24} height={24} className="rounded-full" />
+                    {(fm.creatorImage) && (
+                      <Image src={(fm.creatorImage)!} alt={fm.creator || ''} width={24} height={24} className="rounded-full" />
                     )}
-                    <span className="text-sm text-zinc-500">{fm.creator || fm.author}</span>
+                    <span className="text-sm text-zinc-500">{fm.creator}</span>
                   </div>
                 </article>
               </Link>

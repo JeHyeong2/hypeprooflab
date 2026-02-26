@@ -60,7 +60,7 @@ export default async function CreatorsPage({ searchParams }: Props) {
   // Count columns per creator
   function getColumnCount(name: string): number {
     return uniqueColumns.filter(c => {
-      const creator = (c.frontmatter.creator || c.frontmatter.author || '').toLowerCase();
+      const creator = (c.frontmatter.creator || '').toLowerCase();
       return creator === name.toLowerCase();
     }).length;
   }

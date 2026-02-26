@@ -1,13 +1,13 @@
 ---
 title: "회장님의 시대가 열리다"
-author: "Jay"
+creator: "Jay"
 date: "2026-02-10"
 category: "Opinion"
 tags: ["AI Agent", "디지털 경제", "에이전트 시대", "AEO"]
 slug: "2026-02-10-era-of-the-chairman"
 readTime: "12 min"
 excerpt: "에이전트가 모든 실행을 대행하는 세상에서, 인간 고유의 가치는 정확히 어디에 있는가? 디지털 경제의 패러다임 전환을 분석한다."
-authorImage: "/members/jay.png"
+creatorImage: "/members/jay.png"
 citations: [{"title":"Augmenting Human Intellect: A Conceptual Framework","url":"https://www.dougengelbart.org/content/view/138","author":"Douglas Engelbart","year":"1962"},{"title":"The Age of AI Agents: Economic Implications","url":"https://arxiv.org/abs/2401.04088","author":"Andrew Ng et al.","year":"2024"}]
 ---
 

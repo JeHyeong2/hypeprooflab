@@ -1,13 +1,13 @@
 ---
 title: "AI 시대의 생존법"
-author: "TJ"
+creator: "TJ"
 date: "2026-02-11"
 category: "Opinion"
 tags: ["AI", "Future of Work", "Desire", "Authenticity", "Philosophy"]
 slug: "2026-02-11-ai-survival-guide"
 readTime: "10 min"
 excerpt: "로봇이 시를 쓰고 인간이 설거지를 하는 시대 — 김 대리의 손이 떨고 박 대표의 눈이 웃는 이유."
-authorImage: "/members/tj.png"
+creatorImage: "/members/tj.png"
 ---
 
 영화 '아이, 로봇'에는 인공지능과 인간의 경계를 날카롭게 찌르는 장면이 나옵니다. 로봇을 불신하는 형사가 로봇 '써니'를 취조하며 비아냥거립니다. "로봇이 교향곡을 작곡할 수 있나? 로봇이 텅 빈 캔버스에 걸작을 그려낼 수 있어?" 인간만의 성역이라 믿었던 창의성을 무기로 공격한 것이죠. 그러자 로봇 써니는 표정 하나 변하지 않고 되묻습니다.

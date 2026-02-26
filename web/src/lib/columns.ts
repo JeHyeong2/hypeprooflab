@@ -11,8 +11,6 @@ export interface Citation {
 export interface ColumnFrontmatter {
   title: string;
   creator: string;
-  /** @deprecated Use creator instead */
-  author?: string;
   date: string;
   category: string;
   tags: string[];
@@ -20,8 +18,6 @@ export interface ColumnFrontmatter {
   readTime: string;
   excerpt: string;
   creatorImage?: string;
-  /** @deprecated Use creatorImage instead */
-  authorImage?: string;
   citations?: Citation[];
   references?: string[];
 }

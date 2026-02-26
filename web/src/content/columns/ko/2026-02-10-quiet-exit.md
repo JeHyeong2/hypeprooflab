@@ -1,13 +1,13 @@
 ---
 title: "Job을 잃는 다섯 단계 — 어느 직장인의 조용한 퇴장기"
-author: "Jay"
+creator: "Jay"
 date: "2026-02-10"
 category: "Opinion"
 tags: ["AI", "직장", "자동화", "커리어", "퇴장기"]
 slug: "2026-02-10-quiet-exit"
 readTime: "15 min"
 excerpt: "업무 자동화가 현실이 된 어느 날, 한 직장인이 쿠블러-로스의 다섯 단계를 거치며 자신의 Job을 재정의하기까지의 이야기."
-authorImage: "/members/jay.png"
+creatorImage: "/members/jay.png"
 ---
 
 ## 1단계: 부정 (Denial)
