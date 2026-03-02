@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """
-Daily Research QA Checker
+Daily Research QA Checker v2.0
 - 불릿포인트 비율 체크
 - 금지 표현 검출
-- 링크 포함 여부
-- 파일 형식 검증
+- 링크 포함 여부 + 접속 검증 (paywall 구분)
+- 확신도 라벨 인라인 체크
+- Frontmatter v2 검증
+- 제목 패턴 다양성 체크
 """
 
 import re
@@ -12,7 +14,7 @@ import sys
 import urllib.request
 import urllib.error
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # 금지 표현
 BANNED_PHRASES = [
@@ -28,7 +30,7 @@ BANNED_PHRASES = [
     "눈여겨볼 만합니다",
 ]
 
-# 권장 패턴 (있으면 좋음)
+# 권장 패턴
 GOOD_PATTERNS = [
     r"근데 함정이 있다",
     r"결과가 소름",
@@ -39,12 +41,114 @@ GOOD_PATTERNS = [
     r"So What",
 ]
 
+# 제목 클리셰 패턴
+TITLE_CLICHES = [
+    r"전쟁", r"역설", r"균열", r"이중성", r"딜레마",
+    r"사이에서", r"새로운 국면",
+]
+
+# 확신도 라벨 (본문 인라인이면 안 됨)
+CONFIDENCE_LABELS = [
+    "🟢 Observed", "🔵 Supported", "🟡 Speculative", "⚪ Unknown",
+]
+
+# Frontmatter v2 필수 필드
+REQUIRED_FRONTMATTER = ["title", "date", "author", "category", "slug", "readTime", "excerpt", "lang"]
+
+
+def extract_frontmatter(content: str) -> dict:
+    """YAML frontmatter 추출 (간단 파서)"""
+    fm = {}
+    match = re.match(r'^---\s*\n(.*?)\n---', content, re.DOTALL)
+    if not match:
+        return fm
+    for line in match.group(1).split("\n"):
+        if ":" in line:
+            key, val = line.split(":", 1)
+            fm[key.strip()] = val.strip().strip('"').strip("'")
+    return fm
+
+
+def check_links(content: str) -> dict:
+    """링크 검증 — 200/403(paywall)/dead 구분"""
+    # <URL> 형식과 [text](URL) 형식 모두 추출
+    links_angle = re.findall(r"<(https?://[^>]+)>", content)
+    links_md = re.findall(r"\]\((https?://[^\)]+)\)", content)
+    all_links = list(set(links_angle + links_md))
+
+    result = {"total": len(all_links), "ok": [], "paywall": [], "dead": []}
+
+    for url in all_links[:15]:  # 최대 15개
+        try:
+            req = urllib.request.Request(url, headers={
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
+            })
+            resp = urllib.request.urlopen(req, timeout=8)
+            result["ok"].append(url)
+        except urllib.error.HTTPError as e:
+            if e.code in (401, 403):
+                result["paywall"].append(url)
+            else:
+                result["dead"].append(url)
+        except Exception:
+            result["dead"].append(url)
+
+    return result
+
+
+def check_confidence_inline(content: str) -> list:
+    """확신도 라벨이 Sources 섹션 바깥에서 인라인으로 쓰였는지 체크"""
+    issues = []
+    # Sources 섹션 전까지의 본문만 체크
+    parts = re.split(r"###?\s*🔗\s*Sources", content)
+    body = parts[0] if parts else content
+
+    for label in CONFIDENCE_LABELS:
+        count = body.count(label)
+        if count > 0:
+            issues.append(f"본문에 확신도 라벨 인라인 발견: '{label}' × {count}회")
+
+    return issues
+
+
+def check_title_diversity(filepath: Path) -> list:
+    """최근 3일 제목과 클리셰 패턴 비교"""
+    issues = []
+    fm = extract_frontmatter(filepath.read_text(encoding="utf-8"))
+    title = fm.get("title", "")
+
+    # 현재 제목 클리셰 체크
+    cliches_found = [p for p in TITLE_CLICHES if re.search(p, title)]
+    if len(cliches_found) >= 2:
+        issues.append(f"제목 클리셰 {len(cliches_found)}개: {', '.join(cliches_found)}")
+
+    # 최근 3일 파일과 비교
+    daily_dir = filepath.parent
+    try:
+        date_str = fm.get("date", "")
+        current_date = datetime.strptime(date_str, "%Y-%m-%d")
+    except ValueError:
+        return issues
+
+    for i in range(1, 4):
+        prev_date = current_date - timedelta(days=i)
+        prev_file = daily_dir / f"{prev_date.strftime('%Y-%m-%d')}-daily-research.md"
+        if prev_file.exists():
+            prev_fm = extract_frontmatter(prev_file.read_text(encoding="utf-8"))
+            prev_title = prev_fm.get("title", "")
+            # 공통 클리셰 패턴
+            for p in TITLE_CLICHES:
+                if re.search(p, title) and re.search(p, prev_title):
+                    issues.append(f"'{p}' 패턴이 {prev_date.strftime('%m/%d')} 제목과 중복")
+
+    return issues
+
 
 def check_file(filepath: Path) -> dict:
     """파일 QA 체크"""
     content = filepath.read_text(encoding="utf-8")
     lines = content.split("\n")
-    
+
     results = {
         "file": filepath.name,
         "passed": True,
@@ -52,113 +156,116 @@ def check_file(filepath: Path) -> dict:
         "warnings": [],
         "stats": {},
     }
-    
-    # 1. 불릿포인트 비율 체크
+
+    # 1. Frontmatter v2 검증
+    fm = extract_frontmatter(content)
+    missing_fm = [f for f in REQUIRED_FRONTMATTER if f not in fm]
+    if missing_fm:
+        results["warnings"].append(f"Frontmatter 누락 필드: {', '.join(missing_fm)}")
+
+    # 2. 불릿포인트 비율
     bullet_lines = sum(1 for line in lines if re.match(r"^\s*[-*•]\s", line))
     total_lines = len([l for l in lines if l.strip()])
     bullet_ratio = bullet_lines / total_lines if total_lines > 0 else 0
     results["stats"]["bullet_ratio"] = f"{bullet_ratio:.1%}"
-    
     if bullet_ratio > 0.15:
         results["errors"].append(f"불릿포인트 비율 {bullet_ratio:.1%} > 15%")
         results["passed"] = False
-    
-    # 2. 금지 표현 검출
+
+    # 3. 금지 표현
     for phrase in BANNED_PHRASES:
         if phrase in content:
-            results["errors"].append(f"금지 표현 발견: '{phrase}'")
+            results["errors"].append(f"금지 표현: '{phrase}'")
             results["passed"] = False
-    
-    # 3. 링크 포함 여부 + 접속 검증
-    links = re.findall(r"<(https?://[^>]+)>", content)
-    results["stats"]["link_count"] = len(links)
-    
-    if len(links) == 0:
+
+    # 4. 확신도 라벨 인라인 체크
+    confidence_issues = check_confidence_inline(content)
+    if confidence_issues:
+        for issue in confidence_issues:
+            results["errors"].append(issue)
+        results["passed"] = False
+
+    # 5. 링크 검증
+    link_result = check_links(content)
+    results["stats"]["links_total"] = link_result["total"]
+    results["stats"]["links_ok"] = len(link_result["ok"])
+    results["stats"]["links_paywall"] = len(link_result["paywall"])
+    results["stats"]["links_dead"] = len(link_result["dead"])
+
+    if link_result["total"] == 0:
         results["errors"].append("링크 없음! 출처 URL 필수")
         results["passed"] = False
-    else:
-        # 링크 접속 검증
-        dead_links = []
-        for url in links[:10]:  # 최대 10개만 체크 (속도)
-            try:
-                req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-                urllib.request.urlopen(req, timeout=5)
-            except (urllib.error.HTTPError, urllib.error.URLError, Exception) as e:
-                dead_links.append(url)
-        
-        results["stats"]["dead_links"] = len(dead_links)
-        if dead_links:
-            results["errors"].append(f"접속 불가 링크 {len(dead_links)}개 발견!")
-            for dl in dead_links[:3]:  # 최대 3개만 표시
-                results["errors"].append(f"  → {dl[:60]}...")
-            results["passed"] = False
-    
-    # 4. 날짜 형식 확인 (파일명)
-    date_match = re.match(r"(\d{4}-\d{2}-\d{2})\.md$", filepath.name)
-    if not date_match:
-        results["warnings"].append(f"파일명 형식 불일치: {filepath.name} (YYYY-MM-DD.md 권장)")
-    
-    # 5. 훅 문장 확인 (첫 비어있지 않은 문단)
-    content_start = re.sub(r"^#.*\n", "", content, flags=re.MULTILINE).strip()
-    first_para = content_start.split("\n\n")[0] if content_start else ""
-    if len(first_para) > 200:
-        results["warnings"].append("첫 문단이 너무 김 (훅은 짧고 강렬하게)")
-    
-    # 6. 권장 패턴 체크 (있으면 좋음)
+
+    if link_result["dead"]:
+        results["errors"].append(f"접속 불가 링크 {len(link_result['dead'])}개:")
+        for dl in link_result["dead"][:5]:
+            results["errors"].append(f"  ❌ {dl[:80]}")
+        results["passed"] = False
+
+    if link_result["paywall"]:
+        results["warnings"].append(f"Paywall 링크 {len(link_result['paywall'])}개 (본문에 '(paywall)' 표기 권장):")
+        for pl in link_result["paywall"][:3]:
+            results["warnings"].append(f"  🔒 {pl[:80]}")
+
+    # 6. 제목 다양성
+    title_issues = check_title_diversity(filepath)
+    for issue in title_issues:
+        results["warnings"].append(f"제목: {issue}")
+
+    # 7. 권장 패턴
     good_found = sum(1 for p in GOOD_PATTERNS if re.search(p, content))
     results["stats"]["good_patterns"] = good_found
     if good_found == 0:
         results["warnings"].append("권장 표현 없음 (근데 함정이 있다, 결과가 소름 등)")
-    
-    # 7. 글자수 체크
-    char_count = len(content)
-    results["stats"]["char_count"] = char_count
-    
-    # 멀티파트 체크
-    parts = re.findall(r"\[(\d+)/(\d+)\]", content)
-    if parts:
-        results["stats"]["parts"] = f"{len(set(parts))} parts"
-    
+
+    # 8. 글자수
+    results["stats"]["char_count"] = len(content)
+
+    # 9. 영문 버전 존재 여부
+    en_dir = filepath.parent / "en"
+    en_file = en_dir / filepath.name
+    results["stats"]["en_version"] = "✅" if en_file.exists() else "❌ 없음"
+    if not en_file.exists():
+        results["warnings"].append("영문 버전 없음 (research/daily/en/ 에 생성 필요)")
+
     return results
 
 
 def main():
     if len(sys.argv) < 2:
-        # 기본: 오늘 날짜 파일 체크
         today = datetime.now().strftime("%Y-%m-%d")
-        research_dir = Path.home() / "CodeWorkspace/side/hypeproof/research/daily"
-        filepath = research_dir / f"{today}.md"
-        
+        research_dir = Path.home() / "CodeWorkspace/hypeproof/research/daily"
+        filepath = research_dir / f"{today}-daily-research.md"
         if not filepath.exists():
             print(f"❌ 오늘 파일 없음: {filepath}")
             sys.exit(1)
     else:
         filepath = Path(sys.argv[1])
-    
+
     if not filepath.exists():
         print(f"❌ 파일 없음: {filepath}")
         sys.exit(1)
-    
+
     result = check_file(filepath)
-    
+
     # 결과 출력
-    print(f"\n📋 QA Report: {result['file']}")
-    print("=" * 50)
-    
+    print(f"\n📋 QA Report v2.0: {result['file']}")
+    print("=" * 60)
+
     print(f"\n📊 Stats:")
     for key, val in result["stats"].items():
         print(f"   {key}: {val}")
-    
+
     if result["errors"]:
         print(f"\n❌ Errors ({len(result['errors'])}):")
         for err in result["errors"]:
             print(f"   • {err}")
-    
+
     if result["warnings"]:
         print(f"\n⚠️  Warnings ({len(result['warnings'])}):")
         for warn in result["warnings"]:
             print(f"   • {warn}")
-    
+
     if result["passed"]:
         print(f"\n✅ PASSED")
         sys.exit(0)
