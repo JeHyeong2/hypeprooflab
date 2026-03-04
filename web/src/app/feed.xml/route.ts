@@ -1,12 +1,23 @@
 import { getAllColumns } from '@/lib/columns';
+import { getAllResearch } from '@/lib/research';
 import { getAllNovels } from '@/lib/novels';
 
 export async function GET() {
   const baseUrl = 'https://hypeproof-ai.xyz';
   const columns = getAllColumns('ko');
+  const research = getAllResearch('ko');
   const novels = getAllNovels('ko');
 
   const items = [
+    ...research.map(r => ({
+      title: r.frontmatter.title,
+      link: `${baseUrl}/research/${r.frontmatter.slug}`,
+      description: r.frontmatter.excerpt,
+      pubDate: new Date(r.frontmatter.date).toUTCString(),
+      author: r.frontmatter.creator || '',
+      category: r.frontmatter.category,
+      tags: r.frontmatter.tags || [],
+    })),
     ...columns.map(c => ({
       title: c.frontmatter.title,
       link: `${baseUrl}/columns/${c.frontmatter.slug}`,

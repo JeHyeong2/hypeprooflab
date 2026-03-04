@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { getAllColumns, getAvailableLocalesForSlug } from '@/lib/columns'
+import { getAllResearch, getAvailableLocalesForResearchSlug } from '@/lib/research'
 import { getAllNovels } from '@/lib/novels'
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -20,6 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/novels`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/research`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.8,
@@ -61,6 +68,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   }
   
+  // Research pages
+  const koResearch = getAllResearch('ko')
+  const enResearch = getAllResearch('en')
+  const researchPages: MetadataRoute.Sitemap = []
+  const seenResearchSlugs = new Set<string>()
+
+  for (const res of [...koResearch, ...enResearch]) {
+    const slug = res.frontmatter.slug
+    if (seenResearchSlugs.has(slug)) continue
+    seenResearchSlugs.add(slug)
+
+    const locales = getAvailableLocalesForResearchSlug(slug)
+    const alternates: Record<string, string> = {}
+    if (locales.includes('ko')) alternates['ko'] = `${baseUrl}/research/${slug}?lang=ko`
+    if (locales.includes('en')) alternates['en'] = `${baseUrl}/research/${slug}?lang=en`
+
+    researchPages.push({
+      url: `${baseUrl}/research/${slug}`,
+      lastModified: new Date(res.frontmatter.date),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+      ...(locales.length > 1 ? {
+        alternates: {
+          languages: alternates,
+        },
+      } : {}),
+    })
+  }
+
   // Novel pages
   const koNovels = getAllNovels('ko')
   const enNovels = getAllNovels('en')
@@ -79,5 +115,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   }
   
-  return [...staticPages, ...columnPages, ...novelPages]
+  return [...staticPages, ...columnPages, ...researchPages, ...novelPages]
 }

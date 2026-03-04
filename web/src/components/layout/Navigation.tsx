@@ -162,6 +162,11 @@ function MobileMenu() {
             <Link href="/columns" className="text-white text-2xl font-medium hover:text-purple-400 transition-colors" onClick={() => setIsOpen(false)}>
               Columns
             </Link>
+
+            <Link href="/research" className="text-white text-2xl font-medium hover:text-cyan-400 transition-colors flex items-center gap-2" onClick={() => setIsOpen(false)}>
+              <span>Research</span>
+              <span className="text-sm text-cyan-400 font-medium">AI</span>
+            </Link>
           
             <Link href="/novels" className="text-white text-2xl font-medium hover:text-purple-400 transition-colors flex items-center gap-2" onClick={() => setIsOpen(false)}>
               <span>Novels</span>
@@ -282,6 +287,13 @@ export function Navigation() {
           <NavLink href="#team">Team</NavLink>
           <Link href="/columns" className="text-zinc-400 hover:text-white transition-colors duration-200 text-sm">
             Columns
+          </Link>
+          <Link href="/research" className="text-zinc-400 hover:text-white transition-colors duration-200 text-sm relative group">
+            <span>Research</span>
+            <div className="inline-flex items-center gap-1 ml-1">
+              <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></div>
+              <span className="text-xs text-cyan-400 font-medium">AI</span>
+            </div>
           </Link>
           <Link href="/novels" className="text-zinc-400 hover:text-white transition-colors duration-200 text-sm relative group">
             <span>Novels</span>
