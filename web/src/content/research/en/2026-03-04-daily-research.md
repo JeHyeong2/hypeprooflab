@@ -60,4 +60,24 @@ The message running through today's news is clear: AI is no longer a lab technol
 
 ---
 
+### 🔗 Sources
+
+| # | Source | Confidence |
+|---|--------|------------|
+| 1 | [AI Startup Funding News March 2026](https://blog.mean.ceo/ai-startup-funding-news-march-2026/) (2026-03-02) | 🟢 Observed |
+| 2 | [PONY AI Financial Results Announcement](https://www.globenewswire.com/news-release/2026/03/03/3248052/0/en/PONY-AI-Inc-to-Report-Fourth-Quarter-and-Full-Year-2025-Financial-Results-on-March-26-2026.html) (2026-03-03) | 🔵 Supported |
+| 3 | [London Anti-AI Protest Coverage](https://www.technologyreview.com/2026/03/02/1133814/i-checked-out-londons-biggest-ever-anti-ai-protest/) (2026-03-02) | 🟢 Observed |
+| 4 | [Block AI-Related Layoffs](https://edition.cnn.com/2026/03/02/business/ai-tech-jobs-layoffs) (2026-03-02) | 🔵 Supported |
+| 5 | [Vietnam AI Law Implementation](https://www.jurist.org/news/2026/03/vietnam-implements-sweeping-ai-law/) (2026-03-02) | 🟢 Observed |
+| 6 | [UN AI Expert Group Launch](https://news.un.org/en/story/2026/03/1167074) (2026-03-03) | 🔵 Supported |
+| 7 | [Chrome Release Schedule Acceleration](https://techcrunch.com/2026/03/03/amid-new-competition-chrome-speeds-up-its-release-schedule/) (2026-03-03) | 🟢 Observed |
+| 8 | [Android March 2026 Security Update](https://www.news9live.com/technology/tech-news/android-march-2026-security-update-129-bugs-zero-day-2938658) (2026-03-01) | 🟢 Observed |
+| 9 | [Chrome Vulnerability CVE-2026-0628](https://thehackernews.com/2026/03/new-chrome-vulnerability-let-malicious.html) (2026-03-02) | 🟢 Observed |
+| 10 | [OpenClaw GitHub Record](https://startupnews.fyi/2026/03/03/openclaw-rocks-to-githubs-most-starred-status-but-is-it-safe/) (2026-03-03) | 🟢 Observed |
+| 11 | [Shopify-Google MCP Protocol](https://ecommercefastlane.com/shopify-mcp-model-context-protocol/) (2026-03-03) | 🟡 Speculative |
+| 12 | [RecordPoint MCP Integration](https://finance.yahoo.com/news/recordpoint-expands-ai-governance-capabilities-130000707.html) (2026-03-03) | 🔵 Supported |
+| 13 | [Cleveland AI Journalism](https://www.washingtonpost.com/technology/2026/03/01/ai-journalism-writing-cleveland-plain-dealer/) (2026-03-01) | 🟢 Observed |
+| 14 | [AI X-ray Spectroscopy Research](https://www.anl.gov/article/artificial-intelligence-makes-xray-spectroscopy-five-times-faster-smarter-and-less-prone-to-human) (2026-03-02) | 🟢 Observed |
+| 15 | [Nvidia GTC Preview](https://nationaltoday.com/us/ca/san-jose/news/2026/03/03/nvidia-gtc-promises-glimpse-into-ais-future/) (2026-03-03) | 🔵 Supported |
+
 *HypeProof Daily Research | 2026-03-04*
