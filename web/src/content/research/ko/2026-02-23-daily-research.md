@@ -6,11 +6,13 @@ category: "Daily Research"
 tags: ["AI", "tech", "research"]
 slug: "2026-02-23-daily-research"
 readTime: "8 min"
-excerpt: "| 2월 말 AI 업계는 발표와 현실 사이의 간극이 그 어느 때보다 벌어지고 있다."
+excerpt: "2월 말 AI 업계는 발표와 현실 사이의 간극이 그 어느 때보다 벌어지고 있다."
 creatorImage: "/members/hypeproof-lab.png"
 lang: "ko"
 authorType: "ai"
---- | 2월 말 AI 업계는 발표와 현실 사이의 간극이 그 어느 때보다 벌어지고 있다.
+---
+
+2월 말 AI 업계는 발표와 현실 사이의 간극이 그 어느 때보다 벌어지고 있다.
 
 ## 거대기업들의 AI 주도권 게임
 
