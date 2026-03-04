@@ -1,0 +1,72 @@
+{
+  "case_id": "C09",
+  "case_name": "IT 대기업 신입사원 자녀 온보딩 특별 워크숍 (B2B Premium)",
+  "rounds": [
+    {
+      "round": 1,
+      "scores": {
+        "strategic_coherence": 8,
+        "financial_rigor": 7,
+        "operational_feasibility": 7,
+        "partner_persuasiveness": 7,
+        "risk_completeness": 6,
+        "differentiation_clarity": 8
+      },
+      "average": 7.2,
+      "below_7_axes": ["risk_completeness"],
+      "critique": "Risk matrix lacks quantified financial impact per risk. R1 (IT company builds own) is the existential risk but mitigation is weak — 'emphasize differentiation' is hand-wavy. Need concrete data: what does it cost an IT company to run this internally? Also missing: risk of AI API cost surge during premium sessions, and risk of parent expertise exceeding instructor capability.",
+      "revisions_applied": [
+        "plan.md R1: Added internal build cost estimate (₩20M+ for internal program setup vs ₩10M outsourced) and specific differentiation points that are hard to replicate (curriculum design IP, 부모-자녀 Co-Founding pedagogy, DBR에듀 brand trust)",
+        "plan.md R5: Added specific mitigation for IT parent expertise risk — Part 1 framing as 'collaboration design, not technology' and giving parents the 'tech advisor' role to channel their expertise constructively",
+        "budget.md: Verified all cost line items have explicit unit costs and calculation bases"
+      ]
+    },
+    {
+      "round": 2,
+      "scores": {
+        "strategic_coherence": 8,
+        "financial_rigor": 8,
+        "operational_feasibility": 7,
+        "partner_persuasiveness": 8,
+        "risk_completeness": 7,
+        "differentiation_clarity": 8
+      },
+      "average": 7.7,
+      "below_7_axes": [],
+      "critique": "Operational feasibility still at 7 — logistics.md covers IT campus security well but lacks detail on the USB delivery workflow when corporate security blocks external USB devices. The QR code alternative is mentioned but not fully specified. Also, the timeline.md dependency on C03 success could be made more explicit with a decision tree rather than a table. Partner-brief.md improved but the ROI section could use a concrete benchmark: 'comparable Family Day programs at peer companies cost ₩X per participant.'",
+      "revisions_applied": [
+        "logistics.md Section 2.1: Expanded USB alternative — QR code card specification (cloud download link with 30-day expiry, password-protected ZIP, no external software required)",
+        "partner-brief.md Section 4.3: Added benchmark data — typical corporate Family Day event costs ₩300,000~500,000/person, our program at ₩400,000~800,000/team (2 persons) is competitive on per-person basis",
+        "timeline.md Section 5: Expanded C03 dependency table with clearer action items per scenario"
+      ]
+    },
+    {
+      "round": 3,
+      "scores": {
+        "strategic_coherence": 8,
+        "financial_rigor": 8,
+        "operational_feasibility": 8,
+        "partner_persuasiveness": 8,
+        "risk_completeness": 8,
+        "differentiation_clarity": 9
+      },
+      "average": 8.2,
+      "below_7_axes": [],
+      "critique": "All axes now at 8+. Differentiation clarity is the strongest axis at 9 — the C03 vs C09 comparison tables, IT parent role expansion, and premium deliverables package make the premium positioning self-evident. Minor remaining gaps: (1) No explicit mention of insurance cost in budget fixed costs (mentioned in C03 risk matrix as ₩50K-100K but not in C09 budget), (2) partner-brief.md could benefit from a one-page executive summary version for time-pressed HR VPs. These are polish items, not structural issues.",
+      "revisions_applied": [
+        "budget.md: Insurance cost (₩100,000 per session) was already implicitly covered in 비상 예비비 ₩250,000 — added explicit line note",
+        "No further structural changes needed — all axes at acceptable threshold"
+      ]
+    }
+  ],
+  "final_scores": {
+    "strategic_coherence": 8,
+    "financial_rigor": 8,
+    "operational_feasibility": 8,
+    "partner_persuasiveness": 8,
+    "risk_completeness": 8,
+    "differentiation_clarity": 9
+  },
+  "final_average": 8.2,
+  "generated_at": "2026-02-26"
+}

@@ -1,0 +1,37 @@
+{
+  "case_id": "C04",
+  "iteration": 4,
+  "timestamp": "2026-02-27T13:00:00+09:00",
+  "hitl_status": "AUTO-APPROVED",
+  "hitl_mode": "--no-hitl",
+  "scores": {
+    "completeness": {
+      "score": 9,
+      "evidence": "All 5 output files exist and complete. All 6 iteration-3 fixes applied: (1) KPI table in plan.md Section 8 is now a single unbroken table with footnotes after the last row — rendering correctly in all markdown parsers; (2) Risk Matrix has 9 entries including R8 (동아이지에듀 파트너십 계약 불성사) and R9 (교육청 공모사업 일정 불일치) — both explicitly requested in iteration 2 and escalated to CRITICAL in iteration 3; (3) No [TBD]/[TODO] structural placeholders remain in any file. One accepted non-blocking placeholder: partner-brief.md 동아이지에듀 email address is deferred to Week -7 as designed — not a generation defect."
+    },
+    "feasibility": {
+      "score": 9,
+      "evidence": "All budget arithmetic verified: Section 2.1 ₩850,000 (300K+300K+120K+50K+20K+10K+50K ✅), Section 2.2 ₩1,150,000 (300K+450K+120K+100K+40K+10K+50K+80K ✅), Phase 1 투자 ₩2,800,000 (2,550K+200K+50K ✅). Pricing contradiction resolved: 교육청 공모 패키지 (1일 2학급) row added to Section 1.2 explicitly showing -20% package discount (₩1,000,000 → ₩800,000/학급). Section 3.2 footnote updated to remove contradictory '(패키지 할인 미적용)'. Article publication timeline corrected: Week +2 task is now 'soure submission confirmation email' (not publication), Week +3~+4 has 'publication date confirmation from editor (typically 2~4 weeks from submission)'."
+    },
+    "differentiation": {
+      "score": 9,
+      "evidence": "School-specific differentiation maintained at highest level: (1) 12-item NEIS IT checklist with per-item fallback; (2) 5-step NEIS firewall escalation with URL whitelist; (3) Child-Only Mode 3-role framework (Visionary/Integrator/Commander) uniquely adapted from parent-child co-founding model; (4) Dual-audience partner-brief (장학사 + 학교장) with distinct value propositions; (5) School procurement cycle alignment (학교운영비, 창체, 교육청 공모) with 집행 난이도 ratings; (6) 담임교사 협력 matrix with explicit non-requests; (7) 조선일보 에듀조선 gap analysis as differentiator. USB offline fallback with index.html templates fully specified."
+    },
+    "partner_value": {
+      "score": 9,
+      "evidence": "Date mismatch CRITICAL fix resolved: partner-brief.md Section 1 '시기: 2026년 4월~6월 (1학기, 학교별 일정 조율)' and Section 2 '시기: 2026년 4월 하순 ~ 6월 (1학기, 학교별 일정 조율)' — both now consistent with D-Day 2026-04-24. No scheduling conflict risk for school principals allocating 컴퓨터실 time. Dual-audience brief remains effective with 장학사 curriculum linkage table and 학교장 3-decision clarity CTA."
+    },
+    "risk_coverage": {
+      "score": 9,
+      "evidence": "9 risks documented (exceeds 5-risk minimum). R8 (동아이지에듀 파트너십 계약 미성사, 높음/낮음) and R9 (교육청 공모사업 일정 불일치, 중간/높음) added as requested in iterations 2 and 3. Each has impact rating, probability, and specific mitigation: R8 → direct 교육청 공모 application route + 10-school target reduced to 6; R9 → Week -8 verification gate already in timeline + 학교운영비 + free reference hybrid fallback. logistics.md Section 7 addresses top 4 operational risks with step-by-step response protocols."
+    },
+    "actionability": {
+      "score": 9,
+      "evidence": "Week-by-week timeline from Week -8 (2026-03-02) through Week +12 (2026-07-31) with named owners and deliverables. CRITICAL path flags on 5 items: Week -8 킥오프, Week -7 계약 서명, Week -6 학교 모집, Week -5 학교 확정, Week -4 방화벽 협의, Week -2 현장 점검, Week -1 교사 오리엔테이션, D-Day (레퍼런스 학교 10개교 달성). D-Day minute-level schedule from 08:00 setup to 11:20 cleanup. Dependency columns in Weeks -5 through -2. Article milestone now realistic (publication in Week +3~+4, not Week +2). B2C attribution mechanism fully specified with UTM parameters in plan.md, logistics.md, and certificate design."
+    }
+  },
+  "overall_score": 9,
+  "issues": [],
+  "revision_prompt": null,
+  "status": "APPROVED — meets critic_threshold (9 ≥ 8). All issues from iterations 1-3 resolved. HITL gate AUTO-APPROVED. Files stamped Rev 5 Final. Case C04 ready for portfolio submission."
+}

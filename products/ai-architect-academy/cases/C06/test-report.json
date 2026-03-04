@@ -1,0 +1,76 @@
+{
+  "case_id": "C06",
+  "timestamp": "2026-02-27T14:32:00Z",
+  "tests": {
+    "structural": {
+      "all_files_exist": {
+        "pass": true,
+        "detail": "5/5 required files present: plan.md (2276 lines), timeline.md (167 lines), budget.md (161 lines), logistics.md (180 lines), partner-brief.md (120 lines). All files meet size expectations for production cases."
+      },
+      "timeline_has_dates": {
+        "pass": true,
+        "detail": "Comprehensive timeline with 35+ dated entries. Week markers: Phase 0 (Week -6 to -5, 03-02~03-13), Phase 1 (Week -4 to -1, 03-14~04-10), Phase 2 (2026-04-11 with hourly breakdown 11:00~17:30), Phase 3 (04-12~05-11), Phase 4 (05-18~07-10), Phase 5 (08-03~10-10), Phase 6 (10-19~01-30). Exceeds minimum 8 entries requirement (37 specific dates identified). D-Day structure: 2026-04-11 (Q1 pilot), 2026-07-11 (Q2), 2026-10-10 (Q3 regional), 2027-01-10 (Q4). All phases progressively detailed."
+      },
+      "budget_sums_match": {
+        "pass": true,
+        "detail": "Revenue model verified: Subscriber income (15팀 × ₩100,000) = ₩1,500,000 + Non-subscriber (5팀 × ₩200,000) = ₩1,000,000 = ₩2,500,000. Marketing retention (15팀 × ₩100,000) = ₩1,500,000. Total revenue = ₩4,000,000 ✓. Cost structure: Fixed (₩500K) + Variable (₩900K) = ₩1,400,000 ✓. Profit = ₩2,600,000; Margin = 65% ✓. Annual forecast: 4 quarters × proportional costs sum to ₩6,360,000 total costs vs ₩17,400,000 total revenue = ₩11,040,000 net profit ✓. All subtotals, quarterly calculations, and sensitivity analysis internally consistent."
+      },
+      "no_placeholder_text": {
+        "pass": true,
+        "detail": "Zero placeholder text in 5 required .md files. Comprehensive grep search for TBD, TODO, XXX, FIXME, [미정], 채워넣 returned 0 matches in plan/timeline/budget/logistics/partner-brief. Contact info uses '[별도 전달]' notation (intentional, not placeholder). All sections contain specific deliverables: dates (2026-03-02 through 2027-01-30), named roles (Jay/Ryan/JY/TJ), monetary amounts (₩100K to ₩400K), KPIs (갱신율 +15%p, NPS 70+, UGC 2~3/회), and actionable next steps. No incomplete sections."
+      }
+    },
+    "consistency": {
+      "curriculum_alignment": {
+        "pass": true,
+        "detail": "4-part curriculum structure fully preserved in C06-adapted form. Part 1 관점의 전환 (35분, down 5 from base), Part 2 협업과 조율 (45분, down 5), Part 3 지휘와 소통 (95분, up 5), Part 4 성취와 비전 (65분, up 5). Total duration exactly 240분 = base spec 4시간. Adaptations documented in plan.md §3: Part 1 adds '어린이동아 구독 특전 카드' motivation; Part 2 uses 'news-to-game' template; Part 3 emphasizes publication eligibility criteria; Part 4 includes '어린이동아 편집장 선정' ceremony. Curriculum hierarchy unchanged — all modifications are contextual enhancements, not structural breaks."
+      },
+      "spec_no_contradiction": {
+        "pass": true,
+        "detail": "Zero contradictions with SPEC.md. Program name 'Future AI Leader's Academy' ✓ matches SPEC §1. Duration 240분 ✓ matches SPEC §5. Faculty (Jay/Ryan/JY) ✓ matches SPEC §8. Base pricing model ₩200,000/팀 for full-price participants ✓ matches SPEC §10. Partner '동아이지에듀' ✓ part of 동아일보 (SPEC §6). Success metrics (구독 갱신율, NPS, UGC) ✓ align with Phase 1 roadmap (SPEC §7). Risk mitigation strategies (AI tool backup, event cancellation thresholds, legal review) ✓ consistent with SPEC §13. Case extends base spec through specialized pricing (subscriber discount) and KPI-driven rollout, not contradictory."
+      },
+      "cross_case_no_duplicate": {
+        "pass": null,
+        "detail": "SKIPPED: Cross-case overlap analysis requires multiple cases. Per casegen.yaml, this test runs 'when multiple cases exist.' Only C06 was provided. To execute: compare plan.md word count (8,200 words) and core concepts (구독 락인, 이중 가격 구조, UGC 콘텐츠) against other case directories (C01-C05, C07+). Threshold: <80% text reuse acceptable."
+      }
+    },
+    "quality": {
+      "partner_brief_standalone": {
+        "pass": true,
+        "detail": "partner-brief.md self-contained and complete. All 5 required sections present: (1) Program description: \"4시간 동안 AI를 활용해 실제 작동하는 게임을 만드는 체험 워크숍\" + verification (9 working games, 현재 온라인 플레이 가능). (2) Partner role: \"최소 예산으로 최대 효과\" — 5 contributions (장소, 홍보, 구독자 DB, 마케팅 예산 ₩1,500K/회, 편집 인력) with '추가 비용' column. (3) Benefits: 4 outcomes (구독 이탈 방어 갱신율 +15%p, UGC 콘텐츠 회당 2~3개, AI 브랜드 선점, 수익 무비용). (4) Timeline: 5 phases (계약 03-13, Q1 04-11, Q1 데이터 05-11, Q2~Q4 07~01, 번들화 11-01). (5) CTA: 3 specific action items by 2026-03-07 with contact (jay@hypeproofai.com + [별도 전달]). Document is email-ready for 동아이지에듀 운영팀장."
+      },
+      "budget_realistic": {
+        "pass": true,
+        "detail": "All unit costs verified within market range. Instructor: 메인 강사비 ₩400,000 ✓ (market ₩200K-500K). Support staff: 조교 ₩90,000/명 ✓ (entry-level TA market ₩80K-120K), 운영 스태프 ₩60,000 ✓ (event staff market ₩40K-80K). Catering: ₩7,500/인 ✓ (market ₩5K-15K for snacks+beverage). Venue: ₩0 (무상 제공, 동아미디어센터) — partnership waiver, not market purchase. Awards: ₩15,000 × 6 = ₩90,000 ✓ (modest awards market ₩10K-30K/item). Sensitivity analysis (§7) shows model remains profitable at 12팀 (₩1,200K profit, 50% margin). Regional expansion (+₩430K for venue rental ₩200K + KTX ₩150K + coordinator ₩80K) ✓ realistic for provincial operations."
+      }
+    }
+  },
+  "summary": {
+    "total": 9,
+    "passed": 8,
+    "failed": 0,
+    "skipped": 1,
+    "pass_rate": 1.0,
+    "note": "cross_case_no_duplicate skipped due to single-case test context. When run as part of full portfolio test suite, this case will be compared against peer cases C01-C05, C07+ for <80% overlap threshold."
+  },
+  "verdict": "PASS",
+  "ready_for_partner_review": true,
+  "critical_observations": [
+    {
+      "category": "Strength",
+      "finding": "Comprehensive risk matrix (9 risks) with mitigation strategies demonstrates thorough operational planning. Includes low-probability/high-impact scenarios (AI service outage, attendance shortfall, legal compliance) with concrete fallback procedures."
+    },
+    {
+      "category": "Strength",
+      "finding": "Clear role separation between Filamentree (curriculum/staff/revenue) and 동아이지에듀 (venue/promotion/partner data) removes ambiguity and reduces partnership friction."
+    },
+    {
+      "category": "Strength",
+      "finding": "Data-driven decision gate at Q3 midpoint (번들화 Go/No-Go 2026-11-01) tied to measurable KPIs (갱신율 +15%p, 참가팀 80+) creates accountability loop for continuation."
+    },
+    {
+      "category": "Readiness Note",
+      "finding": "Contract execution (Phase 0, target 2026-03-13) is critical path. Escalation protocol clearly defined for delays (Option A: 4-week slip to 2026-05-09; Option B: LOI + reduced CRM integration). Ready for legal/procurement review."
+    }
+  ]
+}

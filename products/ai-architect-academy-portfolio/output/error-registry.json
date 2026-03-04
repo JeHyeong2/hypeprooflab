@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "created": "2026-02-27",
+  "patterns": {
+    "text_overflow": {
+      "pattern": "text_overflow",
+      "component": "validate.py",
+      "severity": "critical",
+      "first_seen_iter": 6,
+      "last_seen_iter": 14,
+      "occurrences": 17,
+      "slides_affected": [1, 17, 23],
+      "sample_texts": [
+        "Title truncated to 'Future AI Lea...' — appears incomplete, not intentional",
+        "낙관 시나리오 desc 'C08 조기 승인 + C07 2파크 / Year 2 ₩480M+' wraps to 2 lines (FIXED iter 14)",
+        "Title truncation (s01, s10): autofix.py's Korean character counter incorrectly counts English chars in mixed titles."
+      ],
+      "status": "partial_fix",
+      "fix_applied": "s17 낙관 desc shortened (iter 14). s01 truncation BLOCKED (slides.py hardcoded)."
+    },
+    "empty_space": {
+      "pattern": "empty_space",
+      "component": "slides.py",
+      "severity": "critical",
+      "first_seen_iter": 6,
+      "last_seen_iter": 14,
+      "occurrences": 38,
+      "slides_affected": [2, 4, 5, 6, 8, 10, 12, 13, 14, 17, 20],
+      "sample_texts": [
+        "Bottom 30% still empty below callout — callout at ~55% height leaves dead space",
+        "Same bottom 30% empty below callout as s02 — layout geometry issue",
+        "Bottom 25% empty — same geometry as other two-col slides"
+      ],
+      "status": "open",
+      "fix_applied": "Source/callout lines added to many slides. Root cause (slides.py layout geometry) unresolved."
+    },
+    "audience_fit_gap": {
+      "pattern": "audience_fit_gap",
+      "component": "content-writer",
+      "severity": "critical",
+      "first_seen_iter": 12,
+      "last_seen_iter": 12,
+      "occurrences": 7,
+      "slides_affected": [6, 10, 16, 20, 21],
+      "sample_texts": [
+        "No brand justification slide (미디어→교육) — concern unanswered",
+        "No BEP in roadmap — audience question unanswered",
+        "No pilot cost breakdown — ₩50M criterion unverifiable",
+        "No brand risk row in risk table",
+        "Self-assessment table (10/10 self-score) with no external reference"
+      ],
+      "status": "resolved",
+      "fix_applied": "iter 12-14: s06 callout (brand), s10 source (pilot cost), s16 callout (BEP), s20 row (brand risk), s21 table (external comparison)"
+    },
+    "scoring_formula_mismatch": {
+      "pattern": "scoring_formula_mismatch",
+      "component": "deck-critic",
+      "severity": "critical",
+      "first_seen_iter": 12,
+      "last_seen_iter": 14,
+      "occurrences": 3,
+      "slides_affected": [],
+      "sample_texts": [
+        "sum/8 with 1-5 axes = max 5/10. Threshold 9 unreachable.",
+        "Previous 7-axis formula produced 9/10 through undocumented scale.",
+        "New formula and ceiling are inconsistent. BUG-009 filed."
+      ],
+      "status": "open",
+      "fix_applied": "BUG-009 filed in known-bugs.json. Formula fix needed in deck-critic.md."
+    }
+  },
+  "last_updated": "2026-02-27"
+}

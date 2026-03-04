@@ -1,0 +1,84 @@
+{
+  "case_id": "C08",
+  "case_name": "지자체 방과후 AI 교육 위탁 (정부보조금 연계)",
+  "iterations": [
+    {
+      "round": 1,
+      "scores": {
+        "specificity": 7,
+        "financial_rigor": 6,
+        "donga_strategic_alignment": 8,
+        "operational_feasibility": 7,
+        "risk_coverage": 7,
+        "partner_brief_persuasiveness": 7
+      },
+      "weaknesses": [
+        "financial_rigor: Budget split (70/30) lacks justification for why 30% to Donga when they contribute brand+channel only. C01 uses 80/20. Need explicit reasoning for the higher Donga share.",
+        "financial_rigor: No sensitivity analysis for partial government payment scenarios (e.g., 50% advance but delayed final 50% payment).",
+        "specificity: Timeline Phase 0 lumps 3 months into broad monthly blocks — C01 had day-level specificity. Need week-level granularity at minimum for Phase 0.",
+        "operational_feasibility: No mention of legal entity structure — does Filamentree or Donga apply as the legal contractor to the 자치구? Government contracts require specific legal entity.",
+        "risk_coverage: Missing risk for 'government budget freeze mid-fiscal year' — a real scenario in Korean 지자체.",
+        "partner_brief_persuasiveness: No comparison with competing education programs the 자치구 주무관 might already know about (e.g., EBS 이솦, SW중심대학 outreach programs)."
+      ],
+      "revisions_applied": [
+        "Revised budget.md: Added rationale for 70/30 split — Donga provides government network access (지역 총국) which is more valuable than C01's marketing channel. Also added cash flow risk note about delayed government payments.",
+        "Revised plan.md: Added legal entity note — Donga applies as prime contractor (신뢰도), Filamentree as subcontractor. Added R9 risk for mid-year budget freeze.",
+        "Revised timeline.md: Added week-level specificity to Phase 0 April tasks.",
+        "Revised partner-brief.md: Added competitive comparison section showing how Academy differs from EBS 이솦 and SW중심대학 outreach."
+      ]
+    },
+    {
+      "round": 2,
+      "scores": {
+        "specificity": 8,
+        "financial_rigor": 7,
+        "donga_strategic_alignment": 8,
+        "operational_feasibility": 8,
+        "risk_coverage": 8,
+        "partner_brief_persuasiveness": 7
+      },
+      "weaknesses": [
+        "financial_rigor: The 70/30 split still feels arbitrary. Need a concrete comparison: what does Donga 30% translate to in absolute terms per hour of effort? Is it fair?",
+        "partner_brief_persuasiveness: The Ask section says '30분 미팅' but doesn't specify what the 주무관 should prepare or who from Donga will attend. Government officials appreciate knowing the agenda precisely.",
+        "specificity: logistics.md lacks a 'post-event equipment return' checklist — rental laptops and LTE routers need to be returned on time to avoid extra charges.",
+        "donga_strategic_alignment: plan.md mentions MSR KPI for Donga but doesn't quantify — how many 기사 does Donga get? What's the 기사 value equivalent?"
+      ],
+      "revisions_applied": [
+        "Revised budget.md: Added per-hour value comparison for the 30% split. Donga's contribution = brand trust (government contracts require media brand credibility) + 지역총국 network (saves 3-6 months of cold outreach per 자치구). Valued at ₩1M+ per district connection.",
+        "Revised partner-brief.md: Ask section now specifies agenda items, attendees, and what 주무관 should bring (공모사업 일정표, 교육장 시설 현황).",
+        "Revised logistics.md: Added Section 8 — post-event equipment return checklist with rental return deadlines.",
+        "Revised plan.md: Quantified Donga media value — 1 어린이동아 기사 + 1 동아닷컴 기사 per 자치구 session = estimated ₩2M equivalent media exposure per session."
+      ]
+    },
+    {
+      "round": 3,
+      "scores": {
+        "specificity": 8,
+        "financial_rigor": 8,
+        "donga_strategic_alignment": 8,
+        "operational_feasibility": 8,
+        "risk_coverage": 8,
+        "partner_brief_persuasiveness": 8
+      },
+      "weaknesses": [
+        "All axes at 8 — acceptable threshold. Minor remaining gaps:",
+        "specificity: Could add more detail on 공모사업 application HWP template sections, but this is execution-level detail better handled at actual application time.",
+        "partner_brief_persuasiveness: Could include a QR code to a live demo game in the printed brief, but this is a formatting detail."
+      ],
+      "revisions_applied": [
+        "No structural revisions needed. All axes meet threshold (>=7). Minor formatting improvements applied to all files.",
+        "Final pass: Verified cross-references between plan.md budget figures and budget.md canonical numbers — consistent.",
+        "Final pass: Verified timeline.md dates align with plan.md Phase descriptions — consistent."
+      ]
+    }
+  ],
+  "final_scores": {
+    "specificity": 8,
+    "financial_rigor": 8,
+    "donga_strategic_alignment": 8,
+    "operational_feasibility": 8,
+    "risk_coverage": 8,
+    "partner_brief_persuasiveness": 8
+  },
+  "generated_at": "2026-02-26"
+}

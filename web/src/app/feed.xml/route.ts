@@ -11,7 +11,7 @@ export async function GET() {
   const items = [
     ...research.map(r => ({
       title: r.frontmatter.title,
-      link: `${baseUrl}/research/${r.frontmatter.slug}`,
+      link: `${baseUrl}/research/${r.slug || r.frontmatter.slug}`,
       description: r.frontmatter.excerpt,
       pubDate: new Date(r.frontmatter.date).toUTCString(),
       author: r.frontmatter.creator || '',

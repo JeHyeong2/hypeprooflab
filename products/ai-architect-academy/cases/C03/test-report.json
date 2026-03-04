@@ -1,0 +1,61 @@
+{
+  "case_id": "C03",
+  "timestamp": "2026-02-27T10:15:00Z",
+  "tests": {
+    "structural": {
+      "all_files_exist": {
+        "pass": true,
+        "detail": "5/5 files found: plan.md, timeline.md, budget.md, logistics.md, partner-brief.md. All required outputs present."
+      },
+      "timeline_has_dates": {
+        "pass": true,
+        "detail": "35 week/date markers found. Comprehensive timeline spans Week -10 (2026-03-02) to D+30 (2026-06-15) with specific dates for all critical milestones. Exceeds minimum requirement of 8 entries."
+      },
+      "budget_sums_match": {
+        "pass": true,
+        "detail": "All numeric totals verified. 인건비: ₩1,950,000 ✓ | 운영비: ₩1,150,000 ✓ | 기업연수원 총: ₩3,410,000 (1,950+1,150+310) ✓ | 동아미디어센터 총: ₩4,070,000 (1,950+1,150+600+370) ✓ | 수익 30팀: ₩8,000,000 (30×267K rounded) ✓ | 영업이익 기업연수원: ₩4,590,000 (57% 마진) ✓"
+      },
+      "no_placeholder_text": {
+        "pass": true,
+        "detail": "0 placeholders found across all 5 markdown files. Patterns checked: TBD, TODO, XXX, FIXME, [미정], 채워넣. All content is finalized and production-ready."
+      }
+    },
+    "consistency": {
+      "curriculum_alignment": {
+        "pass": true,
+        "detail": "All 4-part structure preserved with Korean titles: Part 1 관점의 전환 (40분) → Part 2 협업과 조율 (50분) → Part 3 지휘와 소통 (90분) → Part 4 성취와 비전 (60분). Total 240분 (4시간) matches SPEC base time. Contextual adaptations (corporate messaging, branding) applied without structural changes."
+      },
+      "spec_no_contradiction": {
+        "pass": true,
+        "detail": "No contradictions with SPEC.md. B2B corporate pricing (₩250K-₩267K/팀) is reasonable premium over B2C base (₩200K/팀). Timeline base 4시간 maintained. Faculty names (Jay, Ryan, JY) match SPEC. Partner 동아일보 confirmed. CSR budget model aligns with SPEC's diversified revenue streams."
+      },
+      "cross_case_no_duplicate": {
+        "pass": true,
+        "detail": "C03 (1,832 words in plan.md) vs C01 (2,881 words) show <30% overlap. C03 is B2B corporate CSR model (기업 임직원 자녀, CSR 예산, DBR에듀 채널, 연간 리테이너 구조) vs C01 B2C workshop model (동아미디어센터 직영, 유료 일반 참가자, ₩200K/팀 모델). Core curriculum structure shared, but venue, pricing, audience, sales channel, and business model are fundamentally different. No content cannibalization detected."
+      }
+    },
+    "quality": {
+      "partner_brief_standalone": {
+        "pass": true,
+        "detail": "All 5 required sections present and self-contained. (1) Program description: '4시간 워크숍, AI로 실제 게임 완성' clearly stated. (2) Partner role: 예산·장소·모집·임원참여·로고 사용 명확. (3) Partner benefit: 임직원 복지, ESG·CSR 성과, 브랜딩 자산, 포지셔닝 포함. (4) Timeline: '예상 일정' 표로 미팅→계약→모집→행사→보고까지 8주 구간 명시. (5) CTA: '다음 단계' with 이메일 연락처 (dbr-edu@donga.com, jay@filamentree.ai). Partner can execute entire campaign from brief alone."
+      },
+      "budget_realistic": {
+        "pass": true,
+        "detail": "All unit costs within market range. Instructor (Jay): ₩500,000/4시간 — within ₩200K-500K range (top-tier justified for Product Lead role). Venue: ₩0 corporate facility OR ₩600,000 media center — within ₩200K-1M range. Snacks: ₩5,000/person × 60 = ₩300K base — within ₩5K-15K/person range. Assistants (₩180K), staff (₩125K), honorariums (₩30K/team × 5) all reasonable for Korea market 2026."
+      }
+    }
+  },
+  "summary": {
+    "total": 9,
+    "passed": 9,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "failures": [],
+  "notes": {
+    "iteration": "iteration 5 — final approved",
+    "validation_date": "2026-02-27",
+    "tester": "academy-case-tester (deterministic rules engine)",
+    "confidence": "HIGH — all structural, consistency, and quality rules satisfied"
+  }
+}

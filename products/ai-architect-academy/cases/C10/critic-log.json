@@ -1,0 +1,89 @@
+{
+  "case_id": "C10",
+  "case_name": "동아일보 에듀투어 패키지 연계 (해외 체험 + 국내 사전 워크숍)",
+  "total_rounds": 3,
+  "final_verdict": "PASS",
+  "rounds": [
+    {
+      "round": 1,
+      "scores": {
+        "specificity": 6,
+        "donga_alignment": 7,
+        "financial_rigor": 6,
+        "risk_coverage": 6,
+        "actionability": 5,
+        "differentiator_clarity": 7
+      },
+      "average": 6.2,
+      "below_7": ["specificity", "financial_rigor", "risk_coverage", "actionability"],
+      "critique": [
+        "specificity: Overseas STEM venue details were generic ('visit Google'). Need specific program types, booking procedures, and lead times for each institution.",
+        "financial_rigor: Budget lacked per-destination cost variance. Tokyo vs Silicon Valley trip costs differ by 50%+ but were lumped together. Need destination-specific P&L.",
+        "risk_coverage: Missing visa risk detail (ESTA vs Schengen processing times), no cancellation/refund policy, no mention of travel advisory monitoring.",
+        "actionability: No per-trip timeline template. The 6-month planning cycle was described conceptually but not operationalized with specific T-minus milestones."
+      ],
+      "revisions_applied": [
+        "Added detailed venue partnership table with specific contact methods and lead times per institution (logistics.md Section 2.1)",
+        "Added destination-specific travel cost ranges in budget.md (Tokyo ₩2.0-2.5M vs SV ₩3.0-3.5M)",
+        "Added visa requirement table with processing times and risk levels (logistics.md Section 1.2)",
+        "Added cancellation/refund policy table (logistics.md Section 5.2)",
+        "Added Per-Trip Timeline Template with T-minus milestones (timeline.md Section 3)",
+        "Added travel advisory monitoring to emergency protocols (logistics.md Section 4.4)"
+      ]
+    },
+    {
+      "round": 2,
+      "scores": {
+        "specificity": 7,
+        "donga_alignment": 7,
+        "financial_rigor": 7,
+        "risk_coverage": 7,
+        "actionability": 6,
+        "differentiator_clarity": 7
+      },
+      "average": 6.8,
+      "below_7": ["actionability"],
+      "critique": [
+        "actionability: Partner brief lacked a concrete pilot proposal (specific destination, date, price). The '6.2 여행사 선정 요건' was criteria without named candidates. Need a 'Tokyo Edition' example package that could be presented in a meeting."
+      ],
+      "revisions_applied": [
+        "Added Section 4 to partner-brief.md: concrete pilot package proposal ('동아일보 AI STEM 에듀투어 — Tokyo Edition') with specific dates, pricing, and role assignments",
+        "Added Section 6.3 to partner-brief.md: named travel agency candidates (하나투어, 모두투어, 전문교육여행사) with strengths",
+        "Added pricing elasticity scenario table to budget.md (Section 6.2) with recommendation to start at ₩750K for pilot",
+        "Added critical path dependency diagram to timeline.md"
+      ]
+    },
+    {
+      "round": 3,
+      "scores": {
+        "specificity": 8,
+        "donga_alignment": 8,
+        "financial_rigor": 7,
+        "risk_coverage": 8,
+        "actionability": 7,
+        "differentiator_clarity": 8
+      },
+      "average": 7.7,
+      "below_7": [],
+      "critique": [
+        "All axes at 7 or above. Remaining improvement opportunities are incremental: financial_rigor could benefit from sensitivity analysis on exchange rate fluctuations for overseas costs, and actionability could add a RACI matrix for the 3-party partnership. These are enhancements, not gaps.",
+        "The honest treatment of the 동아 에듀투어 uncertainty (Scenario A/B throughout all documents) is the strongest aspect of this case — it demonstrates intellectual honesty and practical flexibility.",
+        "The seasonal constraint (school breaks only) is properly acknowledged as a structural limitation rather than hidden — appropriate for a Priority 3 case."
+      ],
+      "revisions_applied": [
+        "Minor: Added ROI calculation to partner-brief.md Section 3.3 (2,550-4,120% ROI) to strengthen the pitch",
+        "Minor: Added 'Seasonal Constraints & Capacity' summary table to timeline.md",
+        "No structural changes needed — all axes above threshold"
+      ]
+    }
+  ],
+  "generated_files": [
+    "plan.md",
+    "timeline.md",
+    "budget.md",
+    "logistics.md",
+    "partner-brief.md"
+  ],
+  "generation_timestamp": "2026-02-26T00:00:00Z",
+  "model": "claude-opus-4-6"
+}

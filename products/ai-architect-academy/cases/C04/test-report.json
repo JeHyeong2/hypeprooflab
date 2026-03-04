@@ -1,0 +1,82 @@
+{
+  "case_id": "C04",
+  "title": "공교육 학교 방문 위탁 프로그램 (학교 제휴)",
+  "timestamp": "2026-02-27T12:00:00Z",
+  "tests": {
+    "structural": {
+      "all_files_exist": {
+        "pass": true,
+        "detail": "5/5 files found: plan.md, timeline.md, budget.md, logistics.md, partner-brief.md"
+      },
+      "timeline_has_dates": {
+        "pass": true,
+        "detail": "13 week markers (Week -8 through Week +5~+12) + D-Day (2026-04-24) specified with precise dates. Week format: 'Week N (YYYY-MM-DD ~ YYYY-MM-DD)'. Exceeds minimum 8 entries."
+      },
+      "budget_sums_match": {
+        "pass": true,
+        "detail": "회당 비용 총계: ₩850,000 verified (300+300+120+50+20+10+50). 1일 2학급 총비용: ₩1,150,000 verified (300+450+120+100+40+10+50+80). All intermediate calculations (손익분기, 배분율) mathematically consistent."
+      },
+      "no_placeholder_text": {
+        "pass": false,
+        "detail": "Found 1 placeholder: partner-brief.md line 209 contains '[파트너십 확정 후 담당자 이메일 기재 / 확인: Jay @ Week -7]' — 동아이지에듀 담당자 이메일 미입력."
+      }
+    },
+    "consistency": {
+      "curriculum_alignment": {
+        "pass": true,
+        "detail": "All 4-part structure preserved: Part 1 (관점의 전환, 20분), Part 2 (협업과 조율, 25분), Part 3 (지휘와 소통, 55분), Part 4 (성취와 비전, 20분). Time compression from 240→120분 is explicit adaptation. Core philosophy (AI 지휘 설계자, 10초 피드백 루프, 완성 결과물) unchanged."
+      },
+      "spec_no_contradiction": {
+        "pass": true,
+        "detail": "SPEC.md faculty (Jay, Ryan, JY), base 4시간 ₩200K/팀 B2C model, 4-part curriculum structure align with C04. Curriculum 4-part maintained. C04 adapts to 2시간 ₩400K 학교/₩1M 교육청 B2B. 2026 AI 디지털교과서 도입(SPEC §2.2) directly supports C04 timing."
+      },
+      "cross_case_no_duplicate": {
+        "pass": true,
+        "detail": "C04 distinctive keywords ('공교육', '학교 방문', '위탁 프로그램') absent in C01-C03 spot checks. Case focus (public school K-12 vs other contexts) unique. Estimated text overlap <20%."
+      }
+    },
+    "quality": {
+      "partner_brief_standalone": {
+        "pass": true,
+        "detail": "partner-brief.md contains 2 complete standalone briefs: [Section 1] 교육지원청 장학사 (program overview, curriculum alignment, brand trust, reference pitch, 2027 expansion) + [Section 2] 학교장 (program summary, decision points, school contribution, benefits, schedule). Each contains: program description, partner role, partner benefit, timeline, next step/CTA. Self-contained; no cross-references required."
+      },
+      "budget_realistic": {
+        "pass": true,
+        "detail": "Unit costs within market range: Instructor ₩300K/2시간=₩150K/시간 (reasonable for school context, vs SPEC ₩125K/시간 base). Adjunct ₩100K/반일 (realistic). Venue ₩0 (school-provided). Printables ₩1.4K/unit. No snacks (학교 규정). All costs align with school education economics."
+      }
+    }
+  },
+  "summary": {
+    "total": 9,
+    "passed": 8,
+    "failed": 1,
+    "pass_rate": 0.889
+  },
+  "failures": [
+    {
+      "test_id": "no_placeholder_text",
+      "severity": "MEDIUM",
+      "detail": "Found 1 placeholder in partner-brief.md line 209",
+      "impact": "Contact information incomplete for 동아이지에듀. Document usable but requires email fill-in before distribution.",
+      "fix_hint": "Replace line 209 with actual 동아이지에듀 담당자 이메일 after Week -7 partnership contract signing."
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "action": "Fill placeholder email in partner-brief.md line 209 after Week -7 contract",
+      "status": "pending"
+    },
+    {
+      "priority": "LOW",
+      "action": "Verify cross-case portfolio coverage after all cases complete",
+      "status": "pending"
+    }
+  ],
+  "validation_context": {
+    "tested_by": "academy-case-tester",
+    "test_suite_version": "1.0",
+    "casegen_config": "products/ai-architect-academy/cases/casegen.yaml",
+    "spec_reference": "products/ai-architect-academy/SPEC.md"
+  }
+}

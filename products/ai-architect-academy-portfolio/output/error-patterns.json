@@ -1,0 +1,335 @@
+{
+  "analysis_date": "2026-02-27",
+  "source_feedback": "output/feedback.json (iteration 5, score 8/10)",
+  "comparison_deck": "ai-architect-academy (iteration 7, score 10/10 — same pipeline)",
+  "total_slides": 23,
+  "layout_distribution": {
+    "title_closing": { "count": 2, "slides": ["s01", "s23"] },
+    "three_col_stats": { "count": 5, "slides": ["s02", "s04", "s06", "s10", "s17"], "pct": "22%" },
+    "bullet_slide": { "count": 3, "slides": ["s03", "s18", "s19"], "pct": "13%" },
+    "two_col": { "count": 3, "slides": ["s05", "s12", "s14"], "pct": "13%" },
+    "table_slide": { "count": 8, "slides": ["s08", "s09", "s11", "s13", "s15", "s20", "s21", "s22"], "pct": "35%" },
+    "timeline_slide": { "count": 2, "slides": ["s07", "s16"], "pct": "9%" }
+  },
+
+  "buckets": {
+    "A_layout_monotony": {
+      "severity": "HIGH",
+      "description": "Same template repeated excessively across slides, creating pattern fatigue for the executive audience.",
+      "examples": [
+        {
+          "pattern": "three_col_stats (3-card layout)",
+          "slides": ["s02", "s04", "s06", "s10", "s17"],
+          "count": 5,
+          "feedback_quotes": [
+            "s06: 'Same 3-card layout as s02, s04 — third repetition in 6 slides. Executive notices the template.'",
+            "s10: 'Same 3-card layout — 4th repetition (s02, s04, s06, s10). Pattern fatigue.'",
+            "s17: '5th repetition of 3-card layout (s02, s04, s06, s10, s17)'"
+          ]
+        },
+        {
+          "pattern": "bullet_slide (vertical list with sidebar)",
+          "slides": ["s03", "s18", "s19"],
+          "count": 3,
+          "feedback_quotes": [
+            "s18: 'Layout identical to s03 and s19 — three slides with the same vertical-list-with-sidebar format'",
+            "s19: 'Same list layout as s03 and s18 — 3rd repetition of this format in the deck'"
+          ]
+        },
+        {
+          "pattern": "Combined: only 2 visual patterns cover 35% of slides",
+          "slides": ["s02", "s03", "s04", "s06", "s10", "s17", "s18", "s19"],
+          "count": 8,
+          "feedback_quotes": [
+            "design_principles_violated: '5 identical 3-card layouts + 3 identical list-with-sidebar layouts = 8 of 23 slides (35%) following only 2 visual patterns. Each slide should feel like a new discovery — repetition signals low production effort.'"
+          ]
+        }
+      ],
+      "iterations_persisted": "At least 2+ (feedback says iteration 5 with same issues; the 3-card pattern was noted on s06 as 'third repetition' implying it existed since cards were introduced).",
+      "pipeline_detection": {
+        "validate_py": "NO — validate.py only checks text length, not layout repetition",
+        "lint_typography_py": "NO — lint_typography.py only checks tb() overflow, not layout patterns",
+        "deck_qa_agent": "NO — deck-qa only validates text constraints, not visual variety",
+        "deck_critic_agent": "YES — caught by screenshot-based review, but no automated enforcement"
+      },
+      "root_cause": "slides.py has only 6 layout functions (_title_slide, _three_col_stats, _three_col_roles, _bullet_slide, _two_col, _table_slide, _timeline_slide). The _auto_dispatch function maps content keys to layouts mechanically — any slide with 'columns' key gets _three_col_stats. No layout diversity heuristic exists.",
+      "fix_proposal": "Add a layout monotony checker that flags when any single layout exceeds 20% of total slides. Requires new layouts (flow diagram, hero-stat, chart) in slides.py."
+    },
+
+    "B_empty_space": {
+      "severity": "HIGH",
+      "description": "Bottom 50%+ of slides unused, appearing unfinished at projection scale.",
+      "examples": [
+        {
+          "slide": "s08",
+          "empty_pct": 65,
+          "feedback_quote": "Only 3 data rows + header — bottom 65% of slide is empty. At projection distance, a 50대 media executive will see this as an unfinished slide.",
+          "score": 2,
+          "is_mandatory_deduction": true
+        },
+        {
+          "slide": "s02",
+          "empty_pct": 55,
+          "feedback_quote": "Bottom 55% of slide is unused — at 3m projection this looks like a rendering error or half-loaded slide."
+        },
+        {
+          "slide": "s04",
+          "empty_pct": 55,
+          "feedback_quote": "Bottom 55% is blank — identical layout to s02 creates deja vu by slide 4."
+        },
+        {
+          "slide": "s06",
+          "empty_pct": 35,
+          "feedback_quote": "Bottom 35% empty. Cards only fill upper portion."
+        },
+        {
+          "slide": "s05",
+          "empty_pct": 25,
+          "feedback_quote": "Bottom 25% is empty — could be tighter."
+        }
+      ],
+      "iterations_persisted": "s08 sparseness is noted as a consequence of a previous iteration fix ('the table split from previous iteration's 10-row overcrowding fix solved one problem but created another'). The 3-card empty space pattern (s02, s04, s06) has persisted across all 5 iterations since those layouts use a fixed CARD_H = emu(2.0) that only fills the top 45% of slide height.",
+      "pipeline_detection": {
+        "validate_py": "NO — no spatial/density check",
+        "lint_typography_py": "NO — only checks text overflow, not empty space",
+        "deck_qa_agent": "NO — no visual density validation",
+        "deck_critic_agent": "YES — caught via screenshot review with mandatory deduction rule (<8 visual elements = sparse)"
+      },
+      "root_cause": "_three_col_stats uses a hardcoded CARD_H = emu(2.0) which places 3 cards in the top ~45% of the 5.3\" slide. _table_slide row_h is fixed at emu(0.4), so a 3-row table only fills 1.2\" of the ~4\" content area. No adaptive sizing based on content amount.",
+      "fix_proposal": "1) Make CARD_H in _three_col_stats adaptive: min(emu(2.0), available_height / 1.2). 2) Add a post-generation density lint that measures total element area vs slide area and warns if content fills <50%."
+    },
+
+    "C_text_overflow_wrapping": {
+      "severity": "MEDIUM",
+      "description": "Table cells and stat bars exceeding character limits, causing multi-line wrapping that breaks visual alignment.",
+      "examples": [
+        {
+          "slide": "s20",
+          "field": "risk table 완화 방안 column",
+          "texts": [
+            "어린이동아 DB + 얼리버드 30% 할인",
+            "3월 실무 협의 → 4월 공문 확보 서결",
+            "03-28 파일럿 → 레퍼런스 먼저 확보"
+          ],
+          "feedback_quote": "Rows 1, 2, 4 have '완화 방안' text wrapping to 2 lines. Creates uneven row heights.",
+          "score": 3
+        },
+        {
+          "slide": "s23",
+          "field": "stat bar NPS cell",
+          "text": "NPS 85+",
+          "feedback_quote": "'NPS 85+' wraps to two lines in stat bar while MOU, D-Day, Q3 are single-line — creates uneven bar height. This was a targeted fix this iteration but wrapping persists."
+        },
+        {
+          "slide": "s10",
+          "field": "3rd card detail",
+          "text": "2026-03-28 파일럿 → C01 성공 = 나머지 9개 케이스 레퍼런스",
+          "feedback_quote": "Third card detail text runs to 2 lines while others are 1 line — uneven card heights."
+        },
+        {
+          "slide": "s13",
+          "field": "전략적 역할 column cells",
+          "texts": ["딜브레이커: 이사회 승인", "조선 차별화 포지셔닝"],
+          "feedback_quote": "Some cells are at the 14-char limit boundary — tight but readable."
+        },
+        {
+          "slide": "s17",
+          "field": "scenario body text",
+          "feedback_quote": "Body text in left and right cards wraps to 2 lines — dense for projection reading."
+        }
+      ],
+      "iterations_persisted": "s23 NPS wrapping is explicitly noted as persisting despite a targeted fix attempt. s13 text limit boundary suggests iteration 4 had a worse version that was partially fixed. s20 risk table wrapping appears to be a persistent issue across multiple iterations.",
+      "pipeline_detection": {
+        "validate_py": "PARTIAL — checks korean_len() against text_limits for phases.name and members fields, but does NOT check table cells, bullet descriptions, or stat bar labels. The validate.py coverage is very narrow (only phases[].name and members[].{name,role,org}).",
+        "lint_typography_py": "PARTIAL — checks tb() calls in slides.py for height overflow, but only matches hardcoded strings. Dynamic content from slide-content.json is invisible to it because tb() receives variables, not string literals.",
+        "deck_qa_agent": "PARTIAL — runs validate.py but the agent prompt says 'no empty strings, titles exist, no placeholders' — no cell-level length check",
+        "deck_critic_agent": "YES — catches wrapping in screenshots"
+      },
+      "root_cause": "validate.py has extremely limited field coverage — it only checks 'phases[].name' and 'members[].{name,role,org}'. It does not iterate over 'columns[].desc', 'bullets[].desc', 'rows[][]' (table cells), 'left/right.bullets[]', 'callout', or 'quote' fields. The lint_typography.py tool only works on hardcoded strings in .py files, not on runtime data from slide-content.json.",
+      "fix_proposal": "Extend validate.py to recursively walk all text fields in slide-content.json and check each against the appropriate text_limit category. Add a field_type mapping: columns[].stat→stat_label, columns[].desc→bullet, rows[][]→table_cell, bullets[].head→stat_label, bullets[].desc→bullet, callout→quote."
+    },
+
+    "D_cross_slide_inconsistency": {
+      "severity": "MEDIUM",
+      "description": "Column headers, terminology, and number formatting differ between slides that present the same data type.",
+      "examples": [
+        {
+          "slides": ["s08", "s09"],
+          "type": "column_header_mismatch",
+          "feedback_quote": "Header column label '매출' [s09] differs from s08's 'Year 1 매출' — inconsistent labeling for the same data type.",
+          "detail": "Both tables show Year 1 revenue but use different header labels."
+        },
+        {
+          "slides": ["s02", "s10"],
+          "type": "source_citation_inconsistency",
+          "feedback_quote": "s02 has a source footnote ('동아일보 기존 자산 활용, 신규 현금 투자 ₩0') while s10 has a different format footnote referencing D-Day 2026-03-28."
+        },
+        {
+          "slides": ["s15"],
+          "type": "repetitive_content",
+          "feedback_quote": "7 rows of '₩0 (기존 X)' is repetitive — executive gets the point after 3."
+        }
+      ],
+      "iterations_persisted": "The s08/s09 header mismatch appears to have persisted since the table split (iteration ~3-4 based on the reference to a 'previous iteration's 10-row overcrowding fix').",
+      "pipeline_detection": {
+        "validate_py": "NO — no cross-slide consistency check",
+        "lint_typography_py": "NO — single-file scope",
+        "deck_qa_agent": "NO — checks individual slides, not cross-slide consistency",
+        "deck_critic_agent": "YES — caught in screenshot review"
+      },
+      "root_cause": "No tool in the pipeline compares terminology/headers across slides. The content-writer agent generates each slide independently without enforcing a shared glossary.",
+      "fix_proposal": "Add a cross-slide consistency checker that: 1) Extracts all table headers and flags duplicates with different labels, 2) Checks number formatting consistency (₩134M vs 134M vs ₩1.34억), 3) Verifies source citation format uniformity."
+    },
+
+    "E_missing_visual_variety": {
+      "severity": "HIGH",
+      "description": "Zero charts, diagrams, or non-text visual elements across 23 slides. All data is rendered as text.",
+      "examples": [
+        {
+          "feedback_quote": "design_principles_violated: '23 slides with zero charts, graphs, or diagrams. Every data point is rendered as text.'",
+          "suggestion": "At least one visual data representation (revenue waterfall, case dependency map, timeline gantt) would dramatically increase persuasion power."
+        },
+        {
+          "slide": "s04",
+          "feedback_quote": "Replace with a simple growth bar chart with stats as annotations. This would break the text-only monotony and fill the dead zone."
+        },
+        {
+          "slide": "s06",
+          "feedback_quote": "Replace with a flow diagram (자녀→아이디어→AI→코드→부모→구조화) to convey the model as a dynamic system rather than 3 static boxes."
+        },
+        {
+          "slide": "s20",
+          "feedback_quote": "Replace 영향도 text with colored severity dots."
+        }
+      ],
+      "iterations_persisted": "5 iterations (all). The pipeline has no chart/diagram primitives, so this cannot be resolved without adding new primitives to the gslides toolkit.",
+      "pipeline_detection": {
+        "validate_py": "NO — text-only validation",
+        "lint_typography_py": "NO — text overflow only",
+        "deck_qa_agent": "NO — no visual element diversity check",
+        "deck_critic_agent": "YES — flagged as design principle violation"
+      },
+      "root_cause": "The gslides toolkit (primitives.py) only provides: tb (text box), rect, rrect, card, section_header. No chart, diagram, arrow, or icon primitives exist. The comparison deck (ai-architect-academy) achieved 10/10 with a bar chart and triangle diagram because those were hand-coded in its slides.py. The portfolio deck's _auto_dispatch maps everything to the 6 generic layouts.",
+      "comparison_with_academy_deck": "The academy deck (9 slides, score 10/10) had: 1 bar chart (s02), 1 triangle diagram (s04), 1 variable-width timeline (s05), 1 give/get partnership layout (s06), 1 team grid with photos (s08). Five distinct visual treatments across 9 slides. The portfolio deck has 6 templates across 23 slides.",
+      "fix_proposal": "1) Add chart primitives to gslides toolkit: bar_chart(), flow_arrow(), severity_dot(). 2) Add at least 3 new layout functions to slides.py: _chart_slide, _flow_diagram, _hero_stat. 3) Modify _auto_dispatch to support these new layouts via content keys like 'chart_data', 'flow_nodes', 'hero_stat'."
+    },
+
+    "F_content_level": {
+      "severity": "LOW",
+      "description": "Budget math, date inconsistency, and credibility issues in the content itself.",
+      "examples": [
+        {
+          "slide": "s21",
+          "type": "credibility",
+          "feedback_quote": "시장 타이밍 10/10 may seem overconfident to a skeptical 50대 executive.",
+          "suggestion": "Consider 9/10 with a brief qualifier to appear more credible."
+        },
+        {
+          "slide": "s02",
+          "type": "buried_key_message",
+          "feedback_quote": "Key selling point '동아일보 기존 자산 활용, 신규 현금 투자 ₩0' is buried in ~10pt gray footnote at bottom-left — the most important message for a 전략기획실 임원 is nearly invisible.",
+          "suggestion": "Elevate to a 4th stat card or prominent callout bar."
+        },
+        {
+          "slide": "s08",
+          "type": "table_split_imbalance",
+          "feedback_quote": "The table split (from previous iteration's 10-row overcrowding fix) solved one problem but created another: the P1 slide is now too sparse.",
+          "detail": "P1 table has 3 rows (s08) while P2/P3 has 7 rows (s09). Revenue split is 72%/28% but visual weight is inverted."
+        }
+      ],
+      "iterations_persisted": "The P1/P2 table split imbalance has persisted since the split was introduced (~iteration 3-4). The 시장 타이밍 10/10 credibility issue and the buried ₩0 message are likely present since iteration 1.",
+      "pipeline_detection": {
+        "validate_py": "NO — no content/logic validation",
+        "lint_typography_py": "NO — layout only",
+        "deck_qa_agent": "PARTIAL — checks for sources and units but not content logic or persuasion effectiveness",
+        "deck_critic_agent": "YES — catches via executive-audience framing"
+      },
+      "root_cause": "No content-logic validation layer exists. The pipeline validates text length and typography but never checks whether key messages have sufficient visual prominence or whether data splits are proportional to their business importance.",
+      "fix_proposal": "Add content-level rules to deck-qa: 1) Key financial figures (₩0, total revenue) must appear in stat_label or callout, not footnotes. 2) Table splits between slides should have comparable row counts (±3 rows). 3) Self-assessment scores should not include any 10/10."
+    }
+  },
+
+  "pipeline_gap_summary": {
+    "validate_py": {
+      "catches": ["phases[].name overflow", "members[].{name,role,org} overflow", "slide count mismatch"],
+      "misses": ["table cell overflow", "bullet desc overflow", "column desc overflow", "callout overflow", "layout monotony", "empty space", "cross-slide consistency", "visual variety", "content logic"],
+      "coverage_estimate": "~15% of feedback issues"
+    },
+    "lint_typography_py": {
+      "catches": ["tb() calls with hardcoded strings that overflow their box height"],
+      "misses": ["Dynamic content from slide-content.json (all runtime text)", "Layout-level spacing", "Empty space detection"],
+      "coverage_estimate": "~5% of feedback issues (only catches hardcoded string overflow in slides.py)"
+    },
+    "deck_qa_agent": {
+      "catches": ["Missing titles", "Empty strings", "Unreplaced placeholders", "Missing units/sources"],
+      "misses": ["All 6 error buckets above except partial text overflow"],
+      "coverage_estimate": "~10% of feedback issues"
+    },
+    "deck_critic_agent": {
+      "catches": ["All 6 buckets — the only tool that identifies these issues"],
+      "misses": ["Nothing structural — but it operates post-generation with no automated enforcement. Issues recur because fixes are manual."],
+      "limitation": "Critic finds problems but the fix loop depends on content-writer manually implementing suggestions. No automated guardrails prevent reintroduction of the same patterns."
+    }
+  },
+
+  "priority_ranking": [
+    {
+      "rank": 1,
+      "bucket": "E_missing_visual_variety",
+      "reason": "Zero charts/diagrams in 23 slides. Requires toolkit expansion (new primitives). Blocks score improvement past 8.",
+      "effort": "HIGH — needs new gslides primitives + layout functions"
+    },
+    {
+      "rank": 2,
+      "bucket": "A_layout_monotony",
+      "reason": "35% of slides use only 2 patterns. Directly tied to missing visual variety. Adding new layouts partially fixes both.",
+      "effort": "MEDIUM — needs 2-3 new layout functions in slides.py + auto_dispatch mapping"
+    },
+    {
+      "rank": 3,
+      "bucket": "B_empty_space",
+      "reason": "3 slides scored 2-3 due to sparseness. Mandatory deduction applied. Fix is adaptive sizing or content densification.",
+      "effort": "LOW-MEDIUM — modify CARD_H and row_h to be content-adaptive"
+    },
+    {
+      "rank": 4,
+      "bucket": "C_text_overflow_wrapping",
+      "reason": "Persists despite targeted fixes (s23 NPS). validate.py coverage gap is the root cause.",
+      "effort": "LOW — extend validate.py field coverage to all text fields"
+    },
+    {
+      "rank": 5,
+      "bucket": "D_cross_slide_inconsistency",
+      "reason": "Single instance caught (s08/s09 header). Low frequency but undermines professionalism.",
+      "effort": "LOW — add cross-slide header comparison to validate.py"
+    },
+    {
+      "rank": 6,
+      "bucket": "F_content_level",
+      "reason": "Subjective content issues (credibility, message hierarchy). Hard to automate.",
+      "effort": "LOW (manual) — content-writer prompt improvement"
+    }
+  ],
+
+  "comparison_with_academy_deck": {
+    "academy": {
+      "slides": 9,
+      "final_score": 10,
+      "iterations_to_10": 7,
+      "unique_layouts": 7,
+      "has_charts": true,
+      "has_diagrams": true,
+      "has_photos": true
+    },
+    "portfolio": {
+      "slides": 23,
+      "current_score": 8,
+      "iterations_so_far": 5,
+      "unique_layouts": 6,
+      "has_charts": false,
+      "has_diagrams": false,
+      "has_photos": false
+    },
+    "insight": "The academy deck achieved visual variety by hand-coding custom layouts (bar chart, triangle diagram, team grid with photos) directly in its slides.py. The portfolio deck relies entirely on generic _auto_dispatch layouts. With 2.5x more slides but fewer unique layouts per slide, visual fatigue is inevitable. The path to 10 requires adding at least 3 project-specific visual treatments (chart, flow diagram, hero stat) similar to what the academy deck did."
+  }
+}

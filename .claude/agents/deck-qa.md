@@ -19,12 +19,13 @@ You are the Deck QA Reviewer — a generic presentation validator.
 
 ## Process
 
-1. Read deck.yaml to get text_limits
+1. Read deck.yaml to get text_limits and quality_gate
 2. Run the validator:
    ```bash
-   python3 -m scripts.gslides.validate --content <project-dir>/<output_dir>/slide-content.json
+   python3 -m scripts.gslides.validate --content <project-dir>/<output_dir>/slide-content.json --deck-yaml <project-dir>/deck.yaml
    ```
-3. Additionally check:
+3. Read `quality_gate.max_warns` from deck.yaml. If the validator reports more warnings than `max_warns`, treat the result as FAIL.
+4. Additionally check:
    - No empty string values
    - Every slide has a title
    - No unreplaced placeholders ({{...}})

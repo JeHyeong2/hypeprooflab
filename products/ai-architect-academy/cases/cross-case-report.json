@@ -1,0 +1,69 @@
+{
+  "test_date": "2026-02-26",
+  "tests": [
+    {
+      "id": "portfolio_coverage",
+      "pass": true,
+      "details": "All 5 market segments covered. B2C: C01 (direct workshop), C02 (science subscriber bundle), C06 (children's newspaper subscriber lock-in), C07 (theme park popup). B2B: C03 (corporate CSR), C09 (IT premium B2B). B2G (government): C04 (school visit), C08 (municipal after-school). Education (school): C04 directly targets public schools. Supply-side (instructor): C05 (Media Frontier graduate instructor pipeline). Premium/international: C10 (edu-tour package). No missing major segment. No two cases are essentially identical — each has a distinct customer, channel, price point, or strategic objective."
+    },
+    {
+      "id": "no_cannibalization",
+      "pass": true,
+      "details": "C01 vs C06: NOT cannibalized. C01 targets general public via Dong-A Media Center (₩200K/team, monthly). C06 targets Eorini Dong-A subscribers specifically with 50% discount (₩100K/team for subscribers, quarterly, including regional rotation). Different frequency (monthly vs quarterly), different pricing (₩200K vs ₩100K for subscribers), different strategic purpose (direct revenue vs subscription churn defense). A subscriber could attend both, but the offerings serve different business objectives. C03 vs C09: NOT cannibalized — genuinely different. C03 targets all-industry corporations via CSR budget (₩5-8M, 20-30 teams), while C09 targets IT-specific companies via welfare budget (₩8-12M, 10-20 teams) with deep IT-domain curriculum customization, premium deliverables (branded USB, professional photography, HR report package, intranet HTML showcase), and higher per-team ARPU (₩600-800K vs ₩170-250K). C09 is explicitly designed as a premium upsell tier from C03 for IT companies, not a replacement. The plan even describes a C03→C09 upgrade pathway. No cases compete for the SAME customer at the SAME price point."
+    },
+    {
+      "id": "consistent_branding",
+      "pass": true,
+      "details": "Program name 'Future AI Leader's Academy' is consistent across all 10 cases. C02 uses variant 'Future AI Leader's Academy — STEM Edition' (appropriate for science context). The core 4-part curriculum structure (Part 1: Mindset Shift 40min, Part 2: Collaboration 50min, Part 3: Directing 90min, Part 4: Achievement 60min = 240min total) is preserved in all cases except where explicitly compressed for operational reasons: C04 compresses to 120min for school time constraints, C07 compresses to 90min for theme park format. Both compressions are well-documented with clear rationale. C10 uses the full 4-hour format twice (pre-trip + post-trip = 8 hours total). The Co-Founding model (parent=Integrator, child=Visionary) is maintained across all cases, with documented adaptations for cases where parents may be absent (C04 Child-Only Mode, C08 guardian-optional mode)."
+    },
+    {
+      "id": "budget_math_cross_check",
+      "pass": false,
+      "details": "Most budget calculations verify correctly, but the following discrepancies were found: (1) C05 plan.md states per-candidate cost as ₩1,080,000 and cost-per-certified at ₩1,440,000-2,160,000 (based on 8 candidates at ₩1,080K each = ₩8,640,000 total), while budget.md recalculates total program cost at ₩2,629,000 with per-candidate ₩328,625 and cost-per-certified ₩438,167-657,250. The plan.md figures are inconsistent with budget.md — the canonical budget.md numbers are internally consistent but the plan.md numbers are wrong (likely from an earlier draft). (2) C07 budget.md initially prices at ₩30,000/team then proves this is unviable, and plan.md uses ₩50,000/team as canonical — this is documented but creates confusion as budget.md Section 1 still leads with ₩30,000. (3) C06 budget Section 3.1 states Seoul margin at 34.6% (₩900K/₩2.6M) — this checks out. All other budget line items sum correctly to stated totals. Profit margins range from negative (C04 school at ₩200K, C06 regional) to 61.3% (C10 at 15 teams) — all are explained. No margins exceed 80% without explanation."
+    },
+    {
+      "id": "timeline_consistency",
+      "pass": true,
+      "details": "No overlapping D-Days that would require the same instructor team simultaneously. The rollout sequence is logical: C01 pilot is first (2026-03-28), followed by C02 (2026-04-25), C03 (Q2-Q3 2026), C04 (Q1-Q2 2026 reference schools then H2), C05 (Q2-Q3 2026 instructor training), C06 (Q2 2026 pilot then quarterly), C07 (Summer 2027 target), C08 (H2 2026), C09 (Q3-Q4 2026), C10 (Winter 2026-2027 pilot). C05 instructor training is correctly sequenced before Phase 2 expansion needs. C07 theme park has the longest lead time (6-12 months procurement) and targets Summer 2027, which is realistic. The only potential resource conflict: C01 and C02 are only 4 weeks apart (March 28 vs April 25), but they use different partner channels (Dong-A Ilbo vs Dong-A Science) and the instructor team can handle sequential events."
+    },
+    {
+      "id": "spec_compliance",
+      "pass": false,
+      "details": "Core SPEC.md numbers check: (1) Base price ₩200,000/team — C01 uses this exactly; C02 uses ₩150K-200K (subscriber discount documented); C03-C09 use higher B2B pricing (justified by enterprise features); C06 uses ₩100K-200K (subscriber discount documented); C07 uses ₩50K (90-min taster, documented). All deviations from ₩200K are explicitly justified. (2) 50%+ margin target — C01 achieves 51.7-58.8% (compliant). C02 achieves ~30% (lower due to subscriber discount + 20% revenue share). C03 achieves 40.6-52.0% (compliant at scale). C04 is mostly loss-making by design (reference investment). C06 is 34.6% Seoul, negative regional (intentional churn defense investment). C07 achieves 36-54% depending on revenue share. C09 achieves 21.1-38.6% (premium costs reduce margin rate but increase absolute profit). Not all cases meet 50%+ margin, but SPEC.md margin target applies to the base B2C model, not all variants. (3) Phase 1 B2C target ₩50M — C01 budget.md projects ₩37.2M-66.6M for C01 alone. Adding C06 (₩8.3M annual) and C02 (₩7.28M annual), total B2C projection is ₩52.8M-82.2M, which aligns with or exceeds the ₩50M target. However, C03 budget.md projects B2B revenue at ₩65M (target scenario), which significantly exceeds SPEC.md's B2B target of ₩30M. The document acknowledges this discrepancy and provides a realistic Year 1 adjustment (₩52M). (4) SPEC.md states cost ≈ ₩1,500,000 — C01 budget shows ₩1,450,000-1,650,000, consistent with SPEC approximation."
+    }
+  ],
+  "summary": {
+    "total": 6,
+    "passed": 4,
+    "failed": 2
+  },
+  "issues": [
+    {
+      "severity": "medium",
+      "description": "C05 plan.md per-candidate cost (₩1,080,000) and cost-per-certified figures (₩1,440,000-2,160,000) are inconsistent with the canonical budget.md numbers (₩328,625 per candidate, ₩438,167-657,250 per certified instructor). The plan.md appears to use an earlier calculation methodology. Budget.md is internally consistent and should be treated as canonical, but plan.md should be updated to match."
+    },
+    {
+      "severity": "medium",
+      "description": "C07 budget.md leads with ₩30,000/team pricing in Section 1 (shown to be unviable in Section 3), while plan.md uses ₩50,000/team as the canonical price. Budget.md should be restructured to lead with the viable ₩50,000 price and move the ₩30,000 analysis to an appendix or 'why not' section to avoid confusion."
+    },
+    {
+      "severity": "medium",
+      "description": "C03 target scenario projects ₩65M B2B annual revenue, which is 217% of SPEC.md's Year 1 B2B target (₩30M). While the document includes a 'realistic Year 1' adjustment (₩52M), the headline target creates a perception of overly aggressive growth. The ₩30M SPEC target and the ₩65M case target should be reconciled with a clear note about which is the commitment vs. stretch goal."
+    },
+    {
+      "severity": "low",
+      "description": "C04 and C08 both involve government/public sector engagement with schools and municipalities. While they target different procurement channels (education ministry vs municipal government) and different venues (schools vs community centers), there is potential for confusion when approaching education offices that oversee both channels. A clear delineation document for the sales team would help."
+    },
+    {
+      "severity": "low",
+      "description": "Combined annual projections across all 10 cases (optimistic scenarios) sum to approximately ₩500M-700M+, which is extremely ambitious for Year 1-2 of a startup education program. This is acceptable because each case's optimistic scenario is independent and simultaneous execution of all 10 cases at optimistic levels is not the plan — cases are phased. However, no consolidated portfolio-level financial model exists to show realistic combined projections accounting for shared instructor capacity and management bandwidth."
+    }
+  ],
+  "recommendations": [
+    "Update C05 plan.md to align per-candidate and per-certified-instructor cost figures with budget.md canonical numbers (₩328,625 per candidate, ₩525,800 per certified instructor at base case).",
+    "Restructure C07 budget.md to lead with the viable ₩50,000/team pricing model and relegate the ₩30,000 analysis to a 'pricing exploration' appendix.",
+    "Add a reconciliation note in C03 plan.md or budget.md explicitly mapping the C03 target (₩65M) to SPEC.md B2B target (₩30M), clarifying that ₩30M is the Year 1 commitment and ₩65M is the full-capacity stretch scenario.",
+    "Create a consolidated portfolio-level financial model that shows realistic combined revenue projections for the phased rollout (C01 first, then C02-C06, then C07-C10), accounting for shared instructor capacity constraints identified in C05.",
+    "Add a brief 'C04 vs C08 channel delineation' reference note in both case plans to clarify the boundary: C04 = school curriculum integration (education ministry channel), C08 = after-school/community programs (municipal government channel)."
+  ]
+}

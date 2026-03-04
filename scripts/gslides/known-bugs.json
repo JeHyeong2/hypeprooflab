@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "last_updated": "2026-02-27",
+  "bugs": [
+    {
+      "id": "BUG-001",
+      "component": "autofix.py",
+      "pattern": "truncates_english_dominant_text",
+      "description": "autofix.py _visual_len counts English chars equally to Korean, causing English-dominant titles to be truncated at Korean char limits. English chars are ~half the width of Korean.",
+      "severity": "high",
+      "fix": "_korean_ratio() < 0.3 guard skips truncation for English-dominant text",
+      "fixed_in": "2026-02-27",
+      "prevention_rule": "Never truncate text where Korean characters are <30% of total alphanumeric characters"
+    },
+    {
+      "id": "BUG-002",
+      "component": "validate.py",
+      "pattern": "sparse_slide_position_exemption",
+      "description": "Sparse slide check exempts by position (slide 01 and last slide) instead of by content type. If slide numbering changes, exemption breaks.",
+      "severity": "medium",
+      "fix": null,
+      "fixed_in": null,
+      "prevention_rule": "Use content-type detection (is_cover field) not position-based exemption"
+    },
+    {
+      "id": "BUG-003",
+      "component": "content-writer",
+      "pattern": "spec_data_discard",
+      "description": "content-writer compresses SPEC data by deleting it instead of fitting it. Margins, operating frequency, competitive positioning lost. SPEC utilization ~30% when 70%+ needed for consulting decks.",
+      "severity": "high",
+      "fix": "Added SPEC Utilization rules to content-writer.md (70%+ target)",
+      "fixed_in": "2026-02-27",
+      "prevention_rule": "Every number in SPEC must appear in slide-content.json. If layout can't fit, add callout/source field or split slide."
+    },
+    {
+      "id": "BUG-004",
+      "component": "slide-planner",
+      "pattern": "layout_monotony_three_card",
+      "description": "slide-planner defaults to three-column-stats for any slide with numbers, causing 22-35% of deck to use identical layout. No layout diversity check at planning time.",
+      "severity": "high",
+      "fix": "Added dense layouts (annotated-table, stat-table-hybrid, matrix, waterfall, chart-commentary) and layout_rules enforcement to slide-planner.md",
+      "fixed_in": "2026-02-27",
+      "prevention_rule": "No single layout type may exceed max_same_layout_pct% of slides. Default to denser layouts when SPEC has >5 data points."
+    },
+    {
+      "id": "BUG-005",
+      "component": "deck-critic",
+      "pattern": "high_score_despite_sparse_content",
+      "description": "Critic awarded 8/10 while slides had 55-65% empty space and zero charts. No mandatory deduction for information sparseness or missing visual variety.",
+      "severity": "high",
+      "fix": "Added decision_readiness axis, mandatory deductions for empty space >50%, zero charts, and layout repetition >25%",
+      "fixed_in": "2026-02-27",
+      "prevention_rule": "Slides with >50% empty space get info_density -0.5. Zero visual elements in 10+ slide deck gets info_density -1."
+    },
+    {
+      "id": "BUG-006",
+      "component": "validate.py",
+      "pattern": "text_overflow",
+      "description": "Recurring error (3x across iterations 6-6): Title truncated to 'Future AI Lea...' — appears incomplete, not intentional",
+      "severity": "high",
+      "fix": null,
+      "fixed_in": null,
+      "prevention_rule": "Auto-promoted from error registry. Needs manual fix in validate.py."
+    },
+    {
+      "id": "BUG-007",
+      "component": "slides.py",
+      "pattern": "empty_space",
+      "description": "Recurring error (7x across iterations 6-6): Bottom 30% still empty below callout — callout at ~55% height leaves dead space",
+      "severity": "critical",
+      "fix": null,
+      "fixed_in": null,
+      "prevention_rule": "Auto-promoted from error registry. Needs manual fix in slides.py."
+    },
+    {
+      "id": "BUG-008",
+      "component": "unknown",
+      "pattern": "unknown",
+      "description": "Recurring error (3x across iterations 6-6): Source '2026-03-28 파일럿 확정' is at FONT_CAPTION (tiny) — unreadable at 3m",
+      "severity": "high",
+      "fix": null,
+      "fixed_in": null,
+      "prevention_rule": "Auto-promoted from error registry. Needs manual fix in unknown."
+    },
+    {
+      "id": "BUG-009",
+      "component": "deck-critic",
+      "pattern": "scoring_formula_mismatch",
+      "description": "deck-critic.md formula 'overall = round(sum/8)' with 1-5 per-axis scores produces max overall = round(40/8) = 5/10. But score ceiling doc says 9/10 is max. Previous 7-axis version produced scores up to 9/10 using a different (undocumented) scale. The formula and the ceiling are inconsistent.",
+      "severity": "critical",
+      "fix": null,
+      "fixed_in": null,
+      "prevention_rule": "If target threshold is 9/10, use one of: (a) score each axis 1-10 scale, (b) use formula round(sum/8 * 2) to scale to 2-10 range, (c) keep 1-5 per axis but use formula round(sum/4) for 0-10 range. Document chosen formula explicitly."
+    }
+  ]
+}

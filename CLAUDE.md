@@ -240,6 +240,7 @@ products/ai-architect-academy/
 |------|------|
 | `/deck generate <dir>` | 전체 파이프라인: SPEC → Google Slides → QA |
 | `/deck review <dir>` | 슬라이드 비평 → feedback.json |
+| `/deck pov-review <dir>` | 다관점 리뷰 (buyer/skeptic/competitor/designer) |
 | `/deck fix <dir>` | 피드백 반영 → 재생성 |
 | `/deck refine [score] [max] <dir>` | review→fix 루프 |
 | `/deck lint <dir>` | 타이포그래피 오버플로 검사 |

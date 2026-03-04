@@ -43,6 +43,12 @@ font: "Noto Sans KR"            # primary font family
 audience:
   profile: "Target audience description"
   viewing: "Viewing conditions"
+  concerns:                        # What worries the audience about this proposal?
+    - "Concern 1"
+  questions:                       # What specific questions must the deck answer?
+    - "Question 1"
+  success_criteria:                # What does "yes" look like for this audience?
+    - "Criterion 1"
 
 text_limits:
   title: 10                     # max Korean chars
@@ -54,6 +60,14 @@ text_limits:
 
 slides_module: slides.py        # project-specific slide builders
 output_dir: output/             # generated artifacts directory
+
+layout_rules:
+  max_same_layout_pct: 40       # no single layout >40% of slides
+  max_consecutive_same: 2       # no more than 2 consecutive same-layout slides
+
+quality_gate:
+  min_critic_score: 7           # refine loop target (default threshold)
+  max_warns: 3                  # QA warn budget — exceeding = FAIL
 ```
 
 ---
@@ -64,12 +78,16 @@ output_dir: output/             # generated artifacts directory
 |--------|----------|
 | `grid.py` | SW, SH, emu(), rgb(), MARGIN_*, COL*_W/GAP, col2/3/4, FONT_* |
 | `themes.py` | Theme class + NAVY_CORAL preset |
-| `primitives.py` | uid, tb, rect, rrect, card, section_header, _sh, _img, _tx, _st, _pa, _fi, _bg |
-| `api_client.py` | generate(title, slides, builders) |
+| `primitives.py` | uid, tb, rect, rrect, card, section_header, bar_chart, flow_diagram, pie_segments, comparison_matrix, _sh, _img, _tx, _st, _pa, _fi, _bg |
+| `api_client.py` | generate(title, slides, builders), update(pres_id, indices, slides, builders) |
 | `auth.py` | get_credentials() — OAuth helper |
 | `export_pptx.py` | export(presentation_id, output_path) |
-| `validate.py` | validate(content, limits) — text constraint checker |
-| `lint_typography.py` | lint_file(path) — detect tb() text overflow |
+| `validate.py` | validate(content, limits, expected_slides, layout_rules) — text constraint checker |
+| `autofix.py` | autofix(content_path, feedback_path, limits, dry_run) — mechanical fix engine |
+| `lint_typography.py` | lint_file(path) — detect tb() text overflow (supports --content flag) |
+| `geometry_fix.py` | apply_geometry_fixes(slides_path, feedback_path) — auto-fix emu() values from feedback |
+| `error_registry.py` | classify, accumulate, promote errors across iterations → known-bugs.json |
+| `known-bugs.json` | Global bug pattern DB — prevention rules injected into agent prompts |
 
 ### Import pattern for slides.py:
 
@@ -130,17 +148,33 @@ ACCENT = T.colors['accent']
 | `two-column` | title, left{header, bullets}, right{header, bullets}, callout? |
 | `timeline` | title, phases[{name, period, items}], impact? |
 | `table` | title, headers[], rows[][] |
+| `stat-table-hybrid` | title, columns[{stat, label}], headers[], rows[][], callout? |
+| `matrix` | title, items[{label, stat, desc}], callout? |
+| `image-two-col` | title, image_url, bullets[{head, desc}], callout? |
+| `bar-chart` | title, chart{bars[{label, value, display}]}, callout? |
+| `flow-diagram` | title, steps[{label, desc}], callout? |
 
 ---
 
 ## CLI Commands
 
 ```bash
-# Typography linting
-python3 -m scripts.gslides.lint_typography <project-dir>/slides.py
+# Typography linting (with content-aware checking)
+python3 -m scripts.gslides.lint_typography <project-dir>/slides.py --content <project-dir>/output/slide-content.json
 
-# Validate content
-python3 -m scripts.gslides.validate --content <project-dir>/output/slide-content.json
+# Validate content (with deck.yaml limits + layout_rules)
+python3 -m scripts.gslides.validate --content <project-dir>/output/slide-content.json --deck-yaml <project-dir>/deck.yaml
+
+# Auto-fix mechanical issues from critic feedback
+python3 scripts/gslides/autofix.py \
+  --content <project-dir>/output/slide-content.json \
+  --feedback <project-dir>/output/feedback.json \
+  --deck-yaml <project-dir>/deck.yaml
+
+# Geometry fix (apply emu() corrections from feedback)
+python3 -m scripts.gslides.geometry_fix \
+  --slides <project-dir>/slides.py \
+  --feedback <project-dir>/output/feedback.json
 
 # OAuth setup
 python3 -c "from scripts.gslides.auth import get_credentials; get_credentials()"

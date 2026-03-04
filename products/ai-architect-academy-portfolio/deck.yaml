@@ -1,0 +1,53 @@
+name: ai-architect-academy-portfolio
+title: "Future AI Leader's Academy — 10-Case Portfolio 상세 제안서"
+spec: SPEC.md
+theme: navy-coral
+font: "Noto Sans KR"
+
+audience:
+  profile: "동아일보 전략기획실 임원 (50대, 미디어 업계)"
+  viewing: "프로젝터 3m 거리 / 모니터 1m"
+  concerns:
+    - "AI 교육이 동아일보 브랜드에 맞는가? 미디어 기업이 교육사업을?"
+    - "투자 대비 수익이 현실적인가? 초기 비용은 얼마?"
+    - "경쟁사(조선일보, 중앙일보)가 이미 하고 있지 않은가?"
+    - "우리 조직이 이걸 운영할 역량이 있는가?"
+    - "실패했을 때 브랜드 리스크는?"
+  questions:
+    - "왜 지금? 타이밍의 근거는?"
+    - "매출이 언제부터 나는가? BEP는?"
+    - "파일럿 규모와 비용은? 최소 투자로 검증 가능한가?"
+    - "비슷한 사례가 있는가? 레퍼런스는?"
+    - "우리만의 차별점이 뭔가? 왜 동아일보여야 하는가?"
+  success_criteria:
+    - "Year 1 파일럿 성공 → Year 2 확장 가능한 단계적 로드맵"
+    - "초기 투자 ₩50M 이하로 검증 가능"
+    - "동아일보 브랜드 강화에 기여 (교육=신뢰의 확장)"
+    - "기존 자산(독자 DB, 콘텐츠 IP) 활용 시너지"
+
+text_limits:
+  title: 12
+  subtitle: 30
+  stat_label: 10
+  bullet: 18
+  table_cell: 14
+  quote: 45
+
+slides_module: slides.py
+output_dir: output/
+
+# Extended deck: ~25-30 slides (vs original 9-slide proposal)
+slide_count_target: 28
+
+# Layout diversity rules (enforced by validate.py and slide-planner)
+layout_rules:
+  max_same_layout_pct: 30       # No single layout type > 30% of deck
+  min_visual_slides: 4          # At least N slides must have charts/diagrams/images
+  max_consecutive_same: 2       # No more than 2 consecutive slides with same layout
+  sparse_element_threshold: 4   # Slides with fewer elements get flagged
+
+# Quality gate: deck-qa must pass these to proceed
+quality_gate:
+  max_fails: 0
+  max_warns: 10
+  min_critic_score: 7

@@ -1,0 +1,78 @@
+{
+  "case_id": "C05",
+  "timestamp": "2026-02-27T00:00:00Z",
+  "validation_type": "revision_requirements_check",
+  "checks": [
+    {
+      "check_id": 1,
+      "requirement": "plan.md R3 (Risk Matrix): Mitigation mentions both 'Academy 워크숍 5회 이상 진행 경험' AND '지정 확인서 서명'",
+      "pass": true,
+      "detail": "Line 197 in plan.md: 'Filamentree 내 백업 강사 1명 공식 지정 — 자격 기준: Academy 워크숍 5회 이상 진행 경험, D-30(2026-03-01) 이전 커리큘럼 전문 공유 완료 + 지정 확인서 서명'. Both requirements present.",
+      "evidence": "plan.md line 197"
+    },
+    {
+      "check_id": 2,
+      "requirement": "plan.md Section 7 (KPIs): Footnote (※) explaining NPS 80 target is for adult instructor candidates, not parents/students as in SPEC.md",
+      "pass": true,
+      "detail": "Line 218 in plan.md contains footnote: '※ C05 NPS 측정 대상은 강사 후보자(성인 5명)로, SPEC.md의 학부모·학생 대상 NPS 90%+와 측정 모집단 상이. 소규모 코호트 특성을 반영한 보수적 목표 설정.' Explicitly distinguishes C05 cohort from SPEC.md.",
+      "evidence": "plan.md line 218"
+    },
+    {
+      "check_id": 3,
+      "requirement": "plan.md Section 2.3: Heading says '각 7시간 (11:00~18:00, 사전 세팅·접수 보조·데브리프 포함)' NOT '각 6시간'",
+      "pass": true,
+      "detail": "Line 109 in plan.md: '### 2.3 TA 참관 실습 (Day 8~9, 각 7시간 (11:00~18:00, 사전 세팅·접수 보조·데브리프 포함))'. Correct heading with 7시간.",
+      "evidence": "plan.md line 109"
+    },
+    {
+      "check_id": 4,
+      "requirement": "timeline.md Week -5 CRITICAL task: 비고 column mentions both '백업 강사 이름 및 자격 확인서 첨부 필수' AND 'Academy 워크숍 5회 이상 경험 자격 기준'",
+      "pass": true,
+      "detail": "Line 29 in timeline.md: '[CRITICAL] D-30(2026-03-01)까지 마스터 강사 계약 확정 및 백업 강사 1명 공식 지정' with 비고: '담당 예정자: 이재원(Jay). 백업 강사: Filamentree 내부 지정 — 자격 기준 Academy 워크숍 5회 이상 경험 — 백업 강사 이름 및 자격 확인서 첨부 필수 (커리큘럼 전문 공유 완료 조건). 미지정 시 전체 일정 진행 불가'. Both requirements present.",
+      "evidence": "timeline.md line 29"
+    },
+    {
+      "check_id": 5,
+      "requirement": "timeline.md Day 8 entry: Says '11:00 합류, 워크숍 12:30~17:00, 데브리프 ~18:00' NOT '오후 13:00~17:00'",
+      "pass": true,
+      "detail": "Line 110 in timeline.md Week 1 table: '| 4/9 (목) | Day 8 | [CRITICAL] 실제 워크숍 TA 참관 (11:00 합류, 워크숍 12:30~17:00, 데브리프 ~18:00)'. Correct timing.",
+      "evidence": "timeline.md line 110"
+    },
+    {
+      "check_id": 6,
+      "requirement": "budget.md Section 3.2 table: TWO columns '월 추가 gross 매출' AND '월 추가 net 기여(운영비 차감)' with 12,000,000원 and 20,000,000원 values",
+      "pass": true,
+      "detail": "Line 76-79 in budget.md: Table has exact columns requested. Row for 'Month 5' shows 12,000,000원 in net column; Row for 'Month 7' shows 20,000,000원 in net column.",
+      "evidence": "budget.md lines 76-79"
+    },
+    {
+      "check_id": 7,
+      "requirement": "budget.md Section 3.2 footnote: Says 'gross 기준 Month 5 / net 기준 Month 4 (누적 기준)' NOT 'Month 6~7'",
+      "pass": true,
+      "detail": "Line 81 in budget.md: '※ 운영비(강사비·장소·간식 합산 약 1,500,000원/회) 차감 후 net contribution은 약 2,000,000원/회. 간접 ROI 투자 회수 시점: gross 기준 Month 5 / net 기준 Month 4 (누적 기준).' Correct month designations.",
+      "evidence": "budget.md line 81"
+    },
+    {
+      "check_id": 8,
+      "requirement": "logistics.md Section 4: D-30 (2026-03-01) row shows '마스터 강사 계약 확정 + 백업 강사 지정 완료 (내부 Gate 조건)', and NEW D-21 (2026-03-09) row for '모집 공고 발송'",
+      "pass": true,
+      "detail": "Line 113 in logistics.md: D-30 row shows '마스터 강사 계약 확정 + 백업 강사 지정 완료 (내부 Gate 조건)'. Line 114: D-21 row shows '모집 공고 발송 (수료생 카카오톡 단톡방 + 이메일 동시 발송, timeline.md Week -4 기준)'. Both entries correct.",
+      "evidence": "logistics.md lines 113-114"
+    },
+    {
+      "check_id": 9,
+      "requirement": "logistics.md Section 2.2 수강생 확약서 row: Includes 'TA 실습일(Day 8~9) 전일 참여 기준 11:00~18:00'",
+      "pass": true,
+      "detail": "Line 60 in logistics.md: '| 수강생 확약서 | 5부 | 서명 후 Filamentree 보관 — 출석 정의: 일반 강의일 09:00~16:30, TA 실습일(Day 8~9) 전일 참여 기준 11:00~18:00'. Exact requirement met.",
+      "evidence": "logistics.md line 60"
+    }
+  ],
+  "summary": {
+    "total_checks": 9,
+    "passed": 9,
+    "failed": 0,
+    "pass_rate": 1.0,
+    "status": "ALL CHECKS PASSED"
+  },
+  "conclusion": "C05 case files fully comply with all 9 revision requirements. All critical details including Risk Matrix R3 mitigation, NPS footnote, timeline corrections, budget tables, and logistics entries are correctly implemented."
+}

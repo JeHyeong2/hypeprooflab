@@ -1,148 +1,211 @@
 {
-  "date": "2026-02-23",
-  "iteration": 7,
-  "previous_score": 9,
-  "overall_score": 10,
-  "reviewer": "proposal-critic",
-  "review_source": "generate_gslides.py v11 (hardcoded content -- source of truth)",
+  "date": "2026-02-27",
+  "iteration": 1,
+  "previous_score": 3,
+  "overall_score": 4,
+  "reviewer": "deck-critic",
+  "screenshot_reviewed": true,
   "scores": {
-    "readability": 5,
-    "info_density": 5,
-    "visual_order": 5,
-    "story_flow": 5,
-    "professionalism": 5
+    "readability": 4,
+    "info_density": 4,
+    "visual_order": 4,
+    "story_flow": 4,
+    "professionalism": 4,
+    "typography": 5,
+    "decision_readiness": 3
   },
-  "changes_verified": {
-    "slide5_card_widths_flush": true,
-    "slide6_description_font_bump": true,
-    "slide8_col4_4th_member": true,
-    "slide8_photo_1inch": true,
-    "slide8_creds_height_1_4": true,
-    "all_iteration6_priorities_resolved": true,
-    "remaining_unfixed": []
-  },
+  "mandatory_deductions": [
+    {
+      "axis": "readability",
+      "reason": "S06 bottom bar text partially cut off at slide edge; S09 'NEXT STEP' CTA content truncated below visible area",
+      "applied": -1
+    },
+    {
+      "axis": "story_flow",
+      "reason": "S09 final slide CTA text ('다음 단계: 파일럿 1회 워크숍 함께 기획') not fully visible — NEXT STEP label shown but action content cut off or missing",
+      "applied": -1
+    },
+    {
+      "axis": "decision_readiness",
+      "reason": "S03: '90%→60%' stat without timeframe/methodology; S07: ₩93M annual revenue with no cost/margin breakdown; S09: ₩200K/team pricing with no cost structure visible → -0.5 × 3 slides",
+      "applied": -1.5
+    }
+  ],
   "slides": [
     {
       "index": 1,
-      "score": 5,
+      "score": 4,
+      "first_impression": "Bold white title on navy, workshop photo on right, 4-stat bar at bottom. Professional and grounded.",
       "strengths": [
-        "No changes needed or made. Workshop photo, bottom metrics strip, dual-language title all remain presentation-ready.",
-        "The 4 bottom metrics (4시간, 1:1, 9개, 93%) give the exec a reason to keep watching within 3 seconds."
+        "Workshop photo immediately establishes credibility — this isn't vaporware, it's been done",
+        "Bottom stat bar (4시간, 1:1, 9개, 93%) gives a 3-second executive summary",
+        "Orange accent coral line on left + bottom bar creates strong visual frame",
+        "Partner line 'Filamentree × 동아일보' positioned correctly for a proposal"
       ],
-      "issues": [],
-      "suggestion": "No changes needed."
+      "issues": [
+        "Title wraps to 2 lines ('Future AI Leader's / Academy') — at projection distance the line break mid-phrase reads awkwardly",
+        "Subtitle '코딩하는 아이에서...' and '부모와 함께 만드는...' are two separate gray lines that compete rather than forming a single clear tagline",
+        "The Korean subtitle '미래 AI 리더 아카데미' duplicates the English title without adding information — wasted real estate for a 동아일보 임원 who reads Korean natively"
+      ],
+      "suggestion": "Consolidate to a single Korean subtitle: 'AI를 지휘하는 아이로 — 부모와 함께 만드는 4시간' and drop the duplicate Korean translation. This frees space for the English title to fit on one line."
     },
     {
       "index": 2,
       "score": 5,
+      "first_impression": "Bar chart growing left to right, $43B highlighted in orange. Two stat cards on right (10×, 93%). Immediately reads: big market, growing fast.",
       "strengths": [
-        "Bar chart + dual stat cards layout remains the strongest data slide in the deck.",
-        "CAGR 41% annotation at bottom-left of chart is well-placed and scannable."
+        "Bar chart with year-by-year values makes the CAGR 41% tangible — 동아일보 임원 can trace the growth visually",
+        "Title '시장 기회: $43B' puts the key number in the headline — passes the 3-second test perfectly",
+        "Right-side cards with sources (교육부/GII, 한국경제/입소스) build institutional trust",
+        "Color usage: orange for 2030 target bar vs gray for historical years — draws eye to the opportunity"
       ],
-      "issues": [],
-      "suggestion": "No changes needed."
+      "issues": [
+        "The '$6.9B' label at the leftmost bar has 'B' on a second line — minor text wrapping artifact",
+        "'한국 코딩교육 시장 성장' card header is near the stat_label character limit — tight fit"
+      ],
+      "suggestion": "Best slide in the deck. No major changes needed. Consider adding a thin connector from the Korea market card to the bar chart to bridge global→local narrative."
     },
     {
       "index": 3,
-      "score": 5,
+      "score": 4,
+      "first_impression": "Three-column GAP cards with bold stats (90%→60%, 0%, 34시간). Clean consulting-style problem framing.",
       "strengths": [
-        "Three GAP cards with differentiated color-coding (ACCENT, PRIMARY, NAVY_LIGHT) create natural visual scanning order.",
-        "Bottom quote serves as an emotional anchor after data-heavy cards."
+        "GAP 1/2/3 labels in navy badges create clear visual taxonomy — immediately scannable",
+        "Each gap has a headline stat + supporting bullets — good visual hierarchy",
+        "Quote at bottom ('코딩 문법을 외우게 할 것인가...') ties the three gaps into one compelling narrative",
+        "Source line at very bottom (Gartner, 교육부, 한국교육과정평가원) adds institutional authority"
       ],
-      "issues": [],
-      "suggestion": "No changes needed."
+      "issues": [
+        "GAP 1 stat '90% → 60%' lacks context: 60% of WHAT by WHEN? A 동아일보 임원 will ask 'says who?' — the Gartner source at bottom footnote is too far from the stat",
+        "GAP 2 stat '0%' for '기존 학원 부모 참여율' — is this a survey result or an assertion? No source attribution on the stat itself",
+        "GAP 3 '34시간 연간 학교 정보교육' needs comparison: 34 hours vs. what benchmark? Without 'vs 수학 200시간' it lacks urgency"
+      ],
+      "suggestion": "Add inline micro-sources next to each stat: '90%→60% (Gartner 2028)', '0% (학원 2,000곳 조사)', '34시간 (vs 수학 200시간)'. Makes each card self-contained for the executive who won't read footnotes."
     },
     {
       "index": 4,
-      "score": 5,
+      "score": 3,
+      "first_impression": "Diagram: Child (Visionary) → AI Executor ← Parent (Integrator). Three competency cards at bottom.",
       "strengths": [
-        "Child-AI-Parent triangle with directional arrows is the clearest conceptual diagram in the deck.",
-        "Three competency cards at bottom (맥락 설계, 의사결정, 협업 리더십) ground the abstract concept in concrete skill labels."
+        "The visual metaphor of child and parent flanking AI is immediately intuitive — excellent concept visualization",
+        "Concrete example quotes ('하늘 나는 고양이를 만들래!', '날개는 어떤 버튼으로 펴?') make the concept tangible and relatable",
+        "Three competency cards (맥락 설계, 의사결정, 협업 리더십) with English subtitles add educational credibility"
       ],
-      "issues": [],
-      "suggestion": "No changes needed."
+      "issues": [
+        "TWO distinct concepts on one slide: (1) the co-founding model diagram and (2) three core competencies. Violates one-message-per-slide — a 50대 임원 must process two frameworks simultaneously",
+        "Bottom section '핵심 역량 3가지' competes with the main diagram for attention. At 3m projection distance, the bottom cards' body text is too small to read",
+        "The slide has no headline stat or key number — unlike every other content slide, there's no number to anchor the executive's memory"
+      ],
+      "suggestion": "Split into two slides: S04a = Co-founding model diagram only (enlarge '하나의 팀 = 하나의 스타트업' callout), S04b = Three competencies as full-width cards. If deck must stay at 9 slides, drop the bottom competency section and integrate competency names as labels inside the main diagram."
     },
     {
       "index": 5,
-      "score": 5,
+      "score": 4,
+      "first_impression": "Timeline bar at top with proportional widths, four columns for 4 phases. Time allocation (40/50/90/60분) prominently displayed.",
       "strengths": [
-        "CARD WIDTH ALIGNMENT CONFIRMED: phase_widths at line 343 now [emu(1.90), emu(2.05), emu(2.70), emu(1.90)]. Total = 1.90 + 2.05 + 2.70 + 1.90 = 8.55 + 3 * 0.15 gaps = 9.0\" = CONTENT_W. The card block now aligns flush with the section header divider line (line 119) and the bottom callout (line 367). The left-right asymmetry flagged in iterations 5 and 6 is eliminated.",
-        "Phase 3 (지휘와 소통) at 2.70\" is 42% wider than Phase 1/4 at 1.90\", correctly reflecting the 90-minute time weight.",
-        "The time progress bar at top and the variable-width cards below now tell the same visual story."
+        "Timeline bar with proportional widths makes the 90-minute core phase visually dominant — communicates where the real value is",
+        "Part labels with progressive Korean names (관점의 전환 → 협업과 조율 → 지휘와 소통 → 성취와 비전) tell a story",
+        "Bottom callout bar '10초 피드백 루프: AI 지시 → 즉시 결과 → 수정 → 반복' is the most memorable pedagogical takeaway"
       ],
       "issues": [
-        "OBSERVATION (non-blocking): Highlight text remains at FONT_LABEL 8pt (line 363). This was noted in iterations 5 and 6 as cosmetic. At this point, bumping it to 9pt would risk text overflow in the narrower Phase 1/4 cards (1.90\" - 2*CARD_PAD = 1.60\" content width). The current 8pt is the correct pragmatic choice for variable-width cards. Not a defect."
+        "Part 4 '핵심 포인트' shows '최고창의/협업/기술/스토리/M' with 'VP' on the next line — 'MVP' is split across lines, creating a confusing read at projection distance",
+        "Each column has 6-8 lines of text — at 3m viewing distance (deck.yaml spec), the '핵심 포인트' subsections are too small for 50대 executives to read",
+        "Part 3 (90분, the longest phase) only shows 2 activity lines vs Part 1's 3 lines — the longest phase is the least detailed, which feels under-explained to an inquisitive executive"
       ],
-      "suggestion": "No changes needed. The highlight text at 8pt is a justified design trade-off given variable card widths."
+      "suggestion": "Fix MVP text split by shortening category names. Increase Part 3 content to match its time prominence — add at least one more detail line about what happens in the core 90-minute block."
     },
     {
       "index": 6,
-      "score": 5,
+      "score": 4,
+      "first_impression": "Two-panel layout: what 동아일보 provides (left) vs what they get (right). Green '추가비용 없음' badge in center. Competitor callout at top.",
       "strengths": [
-        "DESCRIPTION FONT BUMP CONFIRMED: Lines 406 and 425 both use FONT_BODY (9pt) for give/get column descriptions. The partnership details ('동아미디어센터 또는 기존 교육장 (월 1~2회)') are now readable at projection distance for the target audience.",
-        "Competitive callout at top remains effective: threat (PRIMARY) then opportunity (ACCENT).",
-        "'추가비용 없음' green badge still the best objection-killer in the deck."
+        "The '추가비용 없음' badge is perfectly positioned — the first thing an executive fears is a budget ask, and this neutralizes it immediately",
+        "Left panel uses clear category labels (브랜드, 공간, 홍보, 네트워크) that map to existing 동아일보 assets — shows you understand their operation",
+        "Top competitor callout (조선일보 에듀조선 running K-12 programs) creates urgency — brilliant framing for a media executive worried about falling behind",
+        "Right panel '동아일보 수익' items directly answer 'what's in it for us'"
       ],
       "issues": [
-        "OBSERVATION (non-blocking): The first left-column description ('\"동아일보 x Future AI Leader's Academy\" 공동 명칭') is approximately 42 characters of mixed Korean/English. At FONT_BODY 9pt on a 3.1\" text box (line 406: emu(3.1)), this line will likely wrap to 2 lines in Google Slides rendering. The text box height is emu(0.2) = 0.2\", which fits 1 line at 9pt but not 2. Google Slides auto-extends text boxes past their declared height, so the text will render -- but it may visually encroach on the next item's label row below (0.38\" spacing gives ~0.08\" clearance after a 2-line wrap). At projection distance, this is unlikely to be noticed. All other descriptions in both columns are 18-24 characters and fit single lines comfortably."
+        "Bottom bar text '미디어 프론티어(성인) · 동아이지에듀(초중고 구독) · DBR에듀(직장인) → 초중등+학부모 유료 AI 교육 = 없음' is partially cut off at the slide bottom edge — this is the strategic punch line showing the portfolio gap and it's INVISIBLE",
+        "No revenue share numbers or percentage split visible — a 동아일보 임원 will immediately ask '수익 배분은 어떻게?'",
+        "Right panel shows benefits but no quantification: HOW MUCH new revenue? WHEN does it start generating?"
       ],
-      "suggestion": "If this deck goes to a second version, consider shortening the first left-column description to '\"동아 x FALA\" 공동 브랜드' (~15 chars) to guarantee single-line rendering. For this iteration, the current text renders acceptably."
+      "suggestion": "URGENT: Ensure bottom bar text is fully visible — it's the single most compelling argument on this slide (showing the portfolio gap). Add a revenue share indicator (e.g., '수익 분배: 동아 30%'). Quantify: '신규 매출 → 연 ₩28M (동아 몫 추정)'."
     },
     {
       "index": 7,
-      "score": 5,
+      "score": 4,
+      "first_impression": "Three-phase roadmap (파일럿→확산→스케일업) with phase cards, KPI highlights in orange, and bottom stat bar.",
       "strengths": [
-        "No changes in this iteration. KPI card text at FONT_BODY (9pt) from iteration 6 remains correct.",
-        "Three-phase timeline with color-coded KPI boxes gives the exec measurable checkpoints."
+        "Phase numbering (1, 2, 3) with period labels (1~2개월, 3~6개월, 6~12개월) is immediately scannable",
+        "KPI boxes in each card (NPS 80%+, 월 ₩12M, 연 ₩93M) give concrete targets — passes the 'how will we know it's working?' test",
+        "Bottom stat bar (15팀, 학교 3곳, 월 3회, ₩93M) provides a quick executive summary line"
       ],
-      "issues": [],
-      "suggestion": "No changes needed."
+      "issues": [
+        "Bottom stat bar duplicates the KPI boxes above — wastes space that could show cost assumptions or unit economics",
+        "₩93M annual revenue has NO visible calculation path: how many sessions × how many teams × price = ₩93M? A 50대 임원 will do mental math and want to verify",
+        "No GO/NO-GO gate between phases — what happens if pilot NPS is 60%? No decision criteria visible for phase transition",
+        "Color inconsistency: Phase 1 top bar is orange, Phases 2-3 are navy — the visual reason for this distinction is unclear"
+      ],
+      "suggestion": "Replace the redundant bottom stat bar with unit economics: '₩200K/팀 × 15팀 × 31회/년 = ₩93M'. Add a GO/NO-GO gate marker after Phase 1 with clear criteria. Harmonize phase bar colors or make the gradient intentional (e.g., lighter→darker as commitment grows)."
     },
     {
       "index": 8,
-      "score": 5,
+      "score": 4,
+      "first_impression": "Four cards with real photos: Jay, Ryan, JY, and a '+' placeholder. Clean team page with colored role badges.",
       "strengths": [
-        "4TH MEMBER ADDED -- CONFIRMED: Lines 598-601 add '+ 전문 강사풀' as the 4th card with role '확장 예정', org '파트너 네트워크'. The content gap between the deck and SPEC that persisted from iterations 4 through 6 is now closed.",
-        "COL4 GRID SWITCH CONFIRMED: Line 485 uses COL4_W (emu(2.05)). Four cards at col4() positions fill the row.",
-        "PHOTO SIZE REDUCED CONFIRMED: Line 495 photo_w = emu(1.0), down from 1.2\". Photos are centered within narrower cards (line 496: photo_x = x + (cw - photo_w) // 2).",
-        "4TH CARD PLACEHOLDER DESIGN: Gray rounded rect (line 502) with '+' symbol at 20pt MID_GRAY (line 503) is a clean 'expansion' visual. It reads as intentional growth signal, not a missing element.",
-        "CREDENTIALS AREA HEIGHT CONFIRMED: Line 517 uses emu(1.4) for creds text box height. Each member's 4-line credentials at FONT_LABEL 8pt with ls=145 fits within this allocation.",
-        "The 4-card layout now signals 'team plus pipeline' -- the 3 real members carry credibility, the 4th card signals scalability."
+        "Real photos build trust — not stock images, these are actual team members a 동아일보 임원 can meet",
+        "Role badges (Product Lead, Tech Lead, Content Lead) in colored tags are immediately scannable",
+        "Credential lines (Silicon Valley, CERN, AI/ML Engineer) hit the authority markers valued in Korean executive meetings",
+        "The '+' card for future expansion signals growth ambition without overpromising"
       ],
       "issues": [
-        "OBSERVATION (non-blocking): COL4 total width = 4 * 2.05\" + 3 * 0.2\" gaps = 8.80\". Starting at MARGIN_L 0.5\", the cards end at 9.30\". The section header divider extends to 9.50\" (MARGIN_L + CONTENT_W). This leaves the card block 0.20\" shorter than the header line. At projection distance on a 10-foot screen, 0.20\" translates to approximately 0.6cm -- imperceptible. This is within acceptable tolerance and does not warrant a fix.",
-        "OBSERVATION (non-blocking): Role badge text for member 4 ('확장 예정') is in Korean while members 1-3 use English roles ('Product Lead', 'Tech Lead', 'Content Lead'). This language inconsistency is actually correct -- it signals that the 4th slot is different in nature (a placeholder vs. a confirmed team member). An exec reads this as intentional differentiation."
+        "Jay's card: 'Sonatus (Silicon Valley Unicorn)' wraps so 'Unicorn)' is orphaned on line 2 — looks sloppy at projection distance",
+        "No education/teaching experience listed for any team member — for an EDUCATION proposal, a 동아일보 임원 will wonder 'have these tech people ever taught children?'",
+        "The 4th card '+ 전문 강사풀' with '확장 예정' feels vague — weakens the slide's specificity relative to the other three concrete cards"
       ],
-      "suggestion": "No changes needed. The col4 layout is clean, the expansion card is well-designed, and the content scope gap is closed."
+      "suggestion": "Fix text wrapping: shorten to 'Sonatus (SV Unicorn)' or use two lines intentionally. Add '워크숍 9회 완료' credential to at least one member to prove teaching capability. Make the 4th card more specific: '교육학·아동심리 전공 강사 3명 확보 예정'."
     },
     {
       "index": 9,
-      "score": 5,
+      "score": 3,
+      "first_impression": "Five content blocks crammed together: 실적, 비즈니스 모델, workshop photo, parent quote, NEXT STEP. Busy and unfocused.",
       "strengths": [
-        "Achievement bullets in conclusion format remain strong.",
-        "Business model numbers are concrete and verifiable.",
-        "CTA '파일럿 워크숍 1회, 함께 시작하시죠' is specific, low-commitment, action-oriented.",
-        "Parent testimonial adds emotional proof at the right moment."
+        "Business model numbers (₩200K, ₩3~4M, ₩93M, 월 3회) are concrete and well-formatted",
+        "Parent testimonial ('AI가 어렵지 않다는 것을 배웠습니다') adds genuine emotional proof",
+        "Workshop photo with real students demonstrates execution capability"
       ],
-      "issues": [],
-      "suggestion": "No changes needed."
+      "issues": [
+        "CRITICAL: 'NEXT STEP' label at the very bottom with the actual CTA content cut off or missing — the most important element on the final slide is INVISIBLE. The executive leaves without knowing what action to take",
+        "The workshop photo appears to be a Notion page embed with visible app chrome (search icon, '...', 'Get Notion Free' button) — extremely unprofessional for a 동아일보 임원 presentation. Signals 'we didn't prepare properly'",
+        "FIVE distinct content blocks on one slide (실적, 비즈니스 모델, photo, testimonial, CTA) — the closing slide tries to do everything and accomplishes nothing decisively. Violates one-message-per-slide",
+        "No revenue calculation trail: ₩93M is stated but ₩200K × 15팀 × frequency is never shown. Executive math: ₩200K × 15 × 3회/월 × 12 = ₩108M ≠ ₩93M — the discrepancy WILL be questioned"
+      ],
+      "suggestion": "URGENT RESTRUCTURE: (1) Replace Notion screenshot with a clean, cropped workshop photo — zero app chrome visible. (2) Make CTA the DOMINANT element: '다음 단계: 파일럿 1회 워크숍 함께 기획' in 36pt+ centered text with contact info below. (3) Move 비즈니스 모델 to S07 or create a new S09a. (4) Show the math: '₩200K × 15팀 × 월3회 × 12개월 × (1-운영비14%) = ₩93M'."
     }
   ],
-  "typography_audit": {
-    "minimum_floor": "7pt (FONT_CAPTION) for source citations only",
-    "violations": [],
-    "borderline": [
-      {
-        "slide": 5,
-        "element": "highlight text in phase cards (line 363)",
-        "current_pt": 8,
-        "note": "FONT_LABEL at 8pt is a justified trade-off for variable-width cards. The narrowest cards (1.90\") would risk text overflow at 9pt. Accepted as design-correct."
-      }
-    ],
-    "verdict": "NO VIOLATIONS. The only remaining borderline element (slide 5 highlights at 8pt) is now a justified design decision rather than an oversight. The slide 6 description text that was borderline at 8pt in iteration 6 has been bumped to 9pt."
+  "lint_results": {
+    "warn_count": 0,
+    "warnings": []
   },
-  "top_priorities": [],
-  "score_justification": "All 3 iteration 6 path_to_10 items are verified and correctly implemented: (1) Slide 8 now has 4 members using COL4 grid, closing the content scope gap that persisted for 4 iterations. (2) Slide 5 card widths sum to CONTENT_W, eliminating the left-right asymmetry. (3) Slide 6 give/get descriptions are at FONT_BODY 9pt, improving projection readability. The deck now has ZERO content gaps vs SPEC, ZERO typography violations, ZERO alignment inconsistencies at projection-visible scale, and a complete 9-slide persuasion arc. Professionalism moves from 4 to 5 because the team slide now covers all 4 SPEC members, and the expansion card adds a forward-looking signal. Two non-blocking observations remain (slide 6 first description possible 2-line wrap, slide 8 col4 block 0.20\" shorter than header) -- both are imperceptible at projection distance and do not affect the audience's reading experience. Score: readability 5 + info_density 5 + visual_order 5 + story_flow 5 + professionalism 5 = 25/25 = 10.",
-  "path_to_10": [],
-  "iteration_summary": "Iteration 7 closes the loop. The three fixes from iteration 6 are all verified: slide 5 cards now fill CONTENT_W flush, slide 6 descriptions are at 9pt for projection readability, and slide 8 uses a 4-column layout with the expansion card that resolves the only remaining content gap vs SPEC. The deck is ready for presentation to a Donga Ilbo executive. No further iteration is needed."
+  "top_priorities": [
+    "Priority 1 (S09 CTA): The final slide's call-to-action is cut off or missing. '다음 단계: 파일럿 1회 워크숍 함께 기획' must be the DOMINANT visual element — 36pt minimum, centered. This is the ONLY thing the 동아일보 임원 should remember when leaving the room.",
+    "Priority 2 (S09 Notion screenshot): Replace the workshop photo that shows Notion app chrome ('Get Notion Free' button visible) with a clean, cropped image. This single artifact destroys professionalism for a 50대 media executive audience.",
+    "Priority 3 (Revenue math): Add ₩93M calculation trail to S07 or S09 — show '₩200K × 15팀 × 월3회 × 12개월 × (1-운영비) = ₩93M' so the executive can verify the claim. Currently ₩93M appears as an unsupported assertion and the naive calculation yields ₩108M, not ₩93M."
+  ],
+  "design_principles_violated": [
+    "One message per slide (Principle 1): S04 contains both the co-founding model AND three core competencies — two frameworks. S09 contains track record, business model, photo evidence, testimonial, AND CTA — five messages competing for attention.",
+    "Visual hierarchy (Principle 2): S09 has no dominant element — five content blocks of similar visual weight compete. The CTA should be 3× larger than everything else on the closing slide.",
+    "Data-ink ratio (Principle 4): S07 bottom stat bar duplicates KPI boxes from the phase cards above — decorative redundancy that wastes space where unit economics could be shown.",
+    "Projection test (Principle 6): S04 bottom competency card body text and S05 '핵심 포인트' subsections appear too small for 3m projection distance specified in deck.yaml for 50대 audience.",
+    "Progressive disclosure (Principle 5): S09 introduces new information (비즈니스 모델 pricing ₩200K) on the closing slide — pricing should appear in S07 roadmap so the final slide is purely about the ask."
+  ],
+  "path_to_next_score": [
+    "Fix S09 Notion screenshot → clean photo: +0.5 professionalism → overall contribution +0.07",
+    "Make S09 CTA fully visible and dominant (remove cut-off): +1.0 story_flow (removes mandatory deduction) → overall +0.14",
+    "Add revenue calculation trail (₩200K × teams × frequency = ₩93M): +1.0 decision_readiness → overall +0.14",
+    "Restructure S09 into 2 slides (evidence + CTA): +0.5 info_density, +0.5 readability → overall +0.14",
+    "Fix S06 bottom bar text visibility: +0.5 readability → overall +0.07",
+    "Split S04 concept + competencies: +0.5 info_density → overall +0.07",
+    "All six fixes combined: projected score 4 → 6 (28→40 across 7 axes)"
+  ]
 }

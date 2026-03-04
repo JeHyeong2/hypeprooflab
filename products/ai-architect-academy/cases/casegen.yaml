@@ -1,0 +1,108 @@
+# Academy Case Generation — Pipeline Config
+# This file defines the self-evolving loop parameters.
+
+pipeline:
+  name: academy-casegen
+  version: "1.0"
+  base_spec: ../SPEC.md          # read-only source of truth
+  base_curriculum: ../../education/curriculum/curriculum.md
+
+# ── Loop Control ──────────────────────────────────────
+loop:
+  max_iterations: 20             # max self-critique loops per case
+  critic_threshold: 8            # score >= 8/10 → auto-proceed
+  escalation_threshold: 5        # score < 5 after max loops → HITL escalation
+  test_on_every_iteration: true  # run validation tests each loop
+
+# ── HITL Gates ────────────────────────────────────────
+# Gates define when to ask the human for review.
+# mode: always | on_low_score | never
+hitl:
+  gate_seed:
+    description: "케이스 레지스트리 승인"
+    mode: always                 # always ask before generating
+    prompt: |
+      아래 케이스 목록을 검토해주세요.
+      - 추가/삭제/수정할 케이스가 있나요?
+      - 우선순위 변경이 필요한가요?
+      '승인' 또는 수정사항을 말씀해주세요.
+
+  gate_case_review:
+    description: "개별 케이스 품질 검토"
+    mode: on_low_score           # only when critic_score < threshold
+    prompt: |
+      이 케이스의 자체 평가 점수가 기준 미달입니다.
+      자동 수정을 {iterations}회 시도했으나 {score}/10입니다.
+      검토 후 방향을 잡아주세요.
+
+  gate_final:
+    description: "최종 포트폴리오 검토"
+    mode: always
+    prompt: |
+      전체 케이스 포트폴리오가 완성되었습니다.
+      동아일보 제출 전 최종 검토를 부탁드립니다.
+
+# ── Case Registry (seed phase output) ────────────────
+# This section is populated by the seed phase.
+# Format: case definitions with context.
+cases: []
+
+# ── Case Template ─────────────────────────────────────
+# Each case generates these files under cases/<case_id>/
+case_template:
+  outputs:
+    - plan.md             # full business plan (curriculum variant, staffing, budget, risks)
+    - timeline.md         # D-N → D-Day → D+N execution timetable
+    - budget.md           # revenue model or funding structure
+    - logistics.md        # venue/equipment/personnel checklist
+    - partner-brief.md    # 1-pager for external partner
+    - test-report.json    # validation test results
+    - critic-log.json     # self-critique history (all iterations)
+
+# ── Critic Scoring Axes ───────────────────────────────
+critic:
+  axes:
+    - id: completeness
+      weight: 2
+      description: "모든 필수 섹션이 빠짐없이 채워져 있는가"
+    - id: feasibility
+      weight: 2
+      description: "예산, 인력, 시간이 현실적인가"
+    - id: differentiation
+      weight: 1.5
+      description: "기본 SPEC 대비 케이스 특성이 잘 반영되었는가"
+    - id: partner_value
+      weight: 1.5
+      description: "파트너(동아일보/병원/기업)에게 명확한 가치가 있는가"
+    - id: risk_coverage
+      weight: 1
+      description: "리스크가 식별되고 완화 전략이 구체적인가"
+    - id: actionability
+      weight: 2
+      description: "타임라인이 구체적이고 바로 실행 가능한가"
+
+# ── Test Suite ────────────────────────────────────────
+tests:
+  structural:
+    - id: all_files_exist
+      check: "case_template.outputs의 모든 파일이 생성되었는가"
+    - id: timeline_has_dates
+      check: "timeline.md에 구체적 주차/날짜가 있는가 (D-N 아닌 실제 날짜)"
+    - id: budget_sums_match
+      check: "budget.md의 합계가 맞는가"
+    - id: no_placeholder_text
+      check: "[TBD], [TODO], XXX 같은 플레이스홀더가 없는가"
+
+  consistency:
+    - id: curriculum_alignment
+      check: "base curriculum의 4-part 구조를 유지하는가 (시간 변형은 OK)"
+    - id: spec_no_contradiction
+      check: "SPEC.md의 핵심 수치와 모순되지 않는가"
+    - id: cross_case_no_duplicate
+      check: "다른 케이스와 내용이 80% 이상 동일하지 않는가"
+
+  quality:
+    - id: partner_brief_standalone
+      check: "partner-brief.md만 읽어도 제안이 이해되는가"
+    - id: budget_realistic
+      check: "단가가 시장 범위 내인가 (강사비, 장소비 등)"

@@ -3,6 +3,12 @@ import { getAllColumns, getAvailableLocalesForSlug } from '@/lib/columns'
 import { getAllResearch, getAvailableLocalesForResearchSlug } from '@/lib/research'
 import { getAllNovels } from '@/lib/novels'
 
+function safeDate(dateStr: string | undefined): Date {
+  if (!dateStr) return new Date()
+  const d = new Date(dateStr)
+  return isNaN(d.getTime()) ? new Date() : d
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://hypeproof-ai.xyz'
   
@@ -57,7 +63,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     columnPages.push({
       url: `${baseUrl}/columns/${slug}`,
-      lastModified: new Date(col.frontmatter.date),
+      lastModified: safeDate(col.frontmatter.date),
       changeFrequency: 'monthly',
       priority: 0.7,
       ...(locales.length > 1 ? {
@@ -75,8 +81,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const seenResearchSlugs = new Set<string>()
 
   for (const res of [...koResearch, ...enResearch]) {
-    const slug = res.frontmatter.slug
-    if (seenResearchSlugs.has(slug)) continue
+    const slug = res.slug || res.frontmatter.slug
+    if (!slug || seenResearchSlugs.has(slug)) continue
     seenResearchSlugs.add(slug)
 
     const locales = getAvailableLocalesForResearchSlug(slug)
@@ -86,7 +92,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     researchPages.push({
       url: `${baseUrl}/research/${slug}`,
-      lastModified: new Date(res.frontmatter.date),
+      lastModified: safeDate(res.frontmatter.date),
       changeFrequency: 'monthly',
       priority: 0.7,
       ...(locales.length > 1 ? {
@@ -109,7 +115,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     seenNovelSlugs.add(slug)
     novelPages.push({
       url: `${baseUrl}/novels/${slug}`,
-      lastModified: new Date(novel.frontmatter.date),
+      lastModified: safeDate(novel.frontmatter.date),
       changeFrequency: 'monthly',
       priority: 0.6,
     })

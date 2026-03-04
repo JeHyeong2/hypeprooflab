@@ -1,0 +1,94 @@
+{
+  "case_id": "C01",
+  "case_title": "동아미디어센터 자체 정기 워크숍 (Direct B2C)",
+  "timestamp": "2026-02-26T18:30:00Z",
+  "tests": {
+    "structural": {
+      "all_files_exist": {
+        "pass": true,
+        "detail": "5/5 files found: plan.md, timeline.md, budget.md, logistics.md, partner-brief.md"
+      },
+      "timeline_has_dates": {
+        "pass": true,
+        "detail": "40+ week markers and specific dates found. Timeline spans Week -4 (2026-02-28) through Week +1 (2026-04-10) with critical path showing D-Day (2026-03-28). All major milestones dated."
+      },
+      "budget_sums_match": {
+        "pass": true,
+        "detail": "All cost subtotals verified: Fixed ₩350K, Variable 15팀 ₩1,100K, Variable 20팀 ₩1,300K. Totals: 15팀 ₩1,450K, 20팀 ₩1,650K. Profit calculations: 15팀 ₩1,550K (51.7%), 20팀 ₩2,350K (58.8%). All math consistent."
+      },
+      "no_placeholder_text": {
+        "pass": true,
+        "detail": "Grep search for [TBD], [TODO], XXX, FIXME, [미정], 채워넣 returned 0 matches. No unfilled placeholders detected."
+      }
+    },
+    "consistency": {
+      "curriculum_alignment": {
+        "pass": true,
+        "detail": "4-part curriculum structure fully preserved for 초등 4~6학년: Part 1 관점의 전환 (40분, 13:00-13:40), Part 2 협업과 조율 (50분, 13:40-14:30), Part 3 지휘와 소통 (90분, 14:30-16:00), Part 4 성취와 비전 (60분, 16:00-17:00). Total 240분 maintained. Adaptations (마인크래프트 비유, 어휘 단순화) are age-appropriate without structural deviation."
+      },
+      "spec_no_contradiction": {
+        "pass": true,
+        "detail": "Key SPEC metrics verified: 가격 ₩200,000/팀 (✓), 정원 15-20팀 (✓), 시간 4시간 (✓). Faculty roles correctly referenced: Jay (Product Lead), JY (Curriculum), Ryan (Data/Analytics support). Venue C01 (동아미디어센터) is consistent with SPEC Phase 1 pilot context. No contradictions found."
+      },
+      "cross_case_no_duplicate": {
+        "pass": null,
+        "status": "SKIPPED",
+        "detail": "Only one case (C01) currently generated. Cross-case comparison requires minimum 2 cases. Test deferred until additional cases generated."
+      }
+    },
+    "quality": {
+      "partner_brief_standalone": {
+        "pass": true,
+        "detail": "All 5 required sections present and self-contained: (1) Program description 동아 AI Academy 정의 with concrete outcome '게임이 인터넷에 올라갑니다' (2) Partner role 동아이지에듀 제공물 명시 (3) Partner benefit 직접 수익 + retention + 신규 구독 + 콘텐츠 + B2C 포트폴리오 (4) Timeline 2026-02-28~04-07 with D-Day and NPS 결과 (5) CTA '킥오프 미팅 일정을 잡아주세요' 명확함. Partner could act on brief alone."
+      },
+      "budget_realistic": {
+        "pass": true,
+        "detail": "Unit costs verified within market range: 강사비 ₩500,000/회 (target ₩200K-500K ✓), 장소비 ₩0 (target ₩200K-1M, zero acceptable for owned venue ✓), 간식 ₩5,000/명 (target ₩5K-15K ✓). All pricing defensible against Korean K-12 education market benchmarks."
+      }
+    }
+  },
+  "summary": {
+    "total_tests": 9,
+    "executed": 8,
+    "skipped": 1,
+    "passed": 8,
+    "failed": 0,
+    "pass_rate": 1.0,
+    "pass_rate_percent": "100.0%"
+  },
+  "observations": [
+    {
+      "severity": "INFO",
+      "title": "Cross-document cost figure variance",
+      "description": "plan.md section 4.2 lists costs for 15팀 ₩1,350,000 and 20팀 ₩1,500,000, while budget.md section 2.3 lists ₩1,450,000 and ₩1,650,000 respectively. Budget.md figures are mathematically verified and traceable to line-item detail. Recommend using budget.md as source-of-truth; plan.md section 4.2/4.3 costs should be updated to match.",
+      "location": "plan.md vs budget.md",
+      "impact": "Low (summary accuracy; does not affect test pass/fail since budget_sums_match measures budget.md internal consistency)"
+    },
+    {
+      "severity": "INFO",
+      "title": "Data quality: Dual cost tables in different documents",
+      "description": "Both plan.md and budget.md contain detailed cost breakdowns with different totals. This creates confusion about the canonical cost figure. Suggest consolidating cost detail into budget.md only, with plan.md referencing it for executive summary.",
+      "location": "plan.md sections 4.1-4.3 vs budget.md sections 2-3",
+      "recommendation": "Update plan.md to reference budget.md totals; maintain single source-of-truth in budget.md"
+    }
+  ],
+  "details": {
+    "case_context": {
+      "venue": "동아미디어센터 교육장 (서울 종로구)",
+      "target_audience": "초등 4~6학년 + 학부모 1:1 팀",
+      "program_date": "2026-03-28 (파일럿)",
+      "team_capacity": "15~20팀/회",
+      "price_per_team": "₩200,000",
+      "revenue_model": "Direct B2C + Partner revenue share (Filamentree 80%, 동아이지에듀 20%)"
+    },
+    "test_execution_notes": {
+      "timeline_verification": "Checked for 'Week -N', 'Week +N', 'D-X' patterns and concrete YYYY-MM-DD dates. Found 40+ distinct dates across all timeline sections with clear critical path.",
+      "budget_verification": "Extracted all ₩ amounts from budget.md: fixed costs (고정비), variable costs (변동비 per team count), totals, and profit calculations. Verified equation: 고정비 + 변동비 = 총 비용; 매출 - 총 비용 = 순이익. All arithmetic correct.",
+      "curriculum_check": "Compared plan.md section 2.2 against SPEC.md section 5. Verified Part 1-4 order, timing (40+50+90+60=240), and Part names match. Adaptations noted but structure preserved.",
+      "placeholder_search": "Full regex grep across all .md files in C01/ directory. Searched for [TBD], [TODO], XXX, FIXME, [미정], 채워넣. Zero matches = no unfilled sections.",
+      "partner_brief_audit": "Read partner-brief.md entirely. Extracted 5 key sections (program desc, partner role, partner benefit, timeline, CTA). Verified self-contained meaning without cross-references to other docs.",
+      "unit_cost_benchmark": "Compared against Korean K-12 + 교육 시장 standard rates: instructor ₩400K-600K/half-day, venue ₩200K-1M/session, snacks ₩5K-15K/person. C01 rates at conservative end of range."
+    }
+  },
+  "recommendation": "PASS — Case C01 meets all deterministic test criteria with 100% pass rate on executed tests. Case is ready for next phase (critic review, partner perspective review, or deployment). Recommend addressing cross-document cost figure variance in follow-up iteration for clarity."
+}

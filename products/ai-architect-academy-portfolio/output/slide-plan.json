@@ -1,0 +1,286 @@
+{
+  "title": "Future AI Leader's Academy — 10-Case Portfolio 상세 제안서",
+  "slideCount": 28,
+  "slides": [
+    {
+      "id": 1,
+      "slide_id": "s01",
+      "type": "title",
+      "layout": "center-title",
+      "specSections": ["1"],
+      "title": "Future AI Leader's Academy",
+      "content_notes": "정식명, 부제 '코딩하는 아이에서 AI를 지휘하는 아이로', 운영사 Filamentree(HypeProof AI Lab), 파트너 동아일보",
+      "notes": "Program name + subtitle + partner logos + 날짜 2026"
+    },
+    {
+      "id": 2,
+      "slide_id": "s02",
+      "type": "executive-summary",
+      "layout": "three-column-stats",
+      "specSections": ["9", "1"],
+      "title": "Executive Summary",
+      "content_notes": "한 줄 요약: K-12 AI 교육 공백을 동아일보 기존 자산으로 채운다. 핵심 수치: Year 1 ₩134M / Year 2 ₩373M / 10개 케이스 포트폴리오",
+      "notes": "세 개 큰 숫자 stat: ₩134M(Year 1), ₩373M(Year 2), 10(Cases). 아래에 한 줄 요약 문장"
+    },
+    {
+      "id": 3,
+      "slide_id": "s03",
+      "type": "why-now",
+      "layout": "bullet-minimal",
+      "specSections": ["2"],
+      "title": "지금이어야 하는 4가지 이유",
+      "content_notes": "① 2026년 AI 디지털교과서 전면 도입 ② 2025년 코딩 교육 필수화(시수 2배) ③ 광고 수익 하락 — 미디어 사업 다각화 절실 ④ 조선일보 에듀조선 이미 선점 중 — 동아 공백",
+      "notes": "4 bullets. 마지막 bullet은 경쟁 위기 강조. 시간 타이밍 urgency"
+    },
+    {
+      "id": 4,
+      "slide_id": "s04",
+      "type": "market-opportunity",
+      "layout": "three-column-stats",
+      "specSections": ["2.1", "2.2", "2.3"],
+      "title": "AI 교육 시장 기회",
+      "content_notes": "글로벌: 2025년 $69억 → 2030년 $430억 (CAGR 41%). 한국: 2019년 1,500억 → 2030년 1조 5,000억 (10배). 학부모: 93%가 AI·코딩을 국영수 수준 필수 역량으로 인식",
+      "notes": "세 개 stat: $69B→$430B, ₩1,500억→₩1.5조, 93%. 각 수치 아래 맥락 설명"
+    },
+    {
+      "id": 5,
+      "slide_id": "s05",
+      "type": "gap-analysis",
+      "layout": "two-column",
+      "specSections": ["2.4"],
+      "title": "동아일보의 K-12 AI 교육 공백",
+      "content_notes": "왼쪽: 조선일보가 하는 것 — 에듀조선 체험교육, 에버랜드 위탁운영, 에듀투어(해외), 신한은행 멘토링캠프. 오른쪽: 동아일보 현황 — K-12 AI 체험 교육 = 공백. EBS(무료 공교육)는 직접 경쟁자가 아님",
+      "notes": "왼쪽 조선 vs 오른쪽 동아 비교. 오른쪽에 '공백' 시각적 강조 필요. MISSING: 동아 기존 교육사업 3-layer 상세 — SPEC에 명시 없음"
+    },
+    {
+      "id": 6,
+      "slide_id": "s06",
+      "type": "core-concept",
+      "layout": "three-column-stats",
+      "specSections": ["3"],
+      "title": "Co-Founding 모델 — 아이가 CEO다",
+      "content_notes": "철학: '코딩은 AI가 합니다. 아이는 무엇을 할지 결정만 합니다.' 3 역할: 자녀=Visionary(아이디어 발산, AI 지휘), 부모=Integrator(구조화, 현실 감각), AI=Executor(코드 작성). 핵심 역량 3가지: 맥락 설계, 의사결정, 협업 리더십",
+      "notes": "세 column: Visionary(자녀) / Integrator(부모) / Executor(AI). 하단에 핵심 역량 3개"
+    },
+    {
+      "id": 7,
+      "slide_id": "s07",
+      "type": "case-overview-table",
+      "layout": "table",
+      "specSections": ["6"],
+      "title": "10-Case Portfolio 한눈에",
+      "content_notes": "표 헤더: Case / 채널 / 대상 / 가격 / Year 1 / Priority. C01~C10 전체 행. Priority 1(C01~C03), Priority 2(C04~C08), Priority 3(C09~C10) 색상 구분",
+      "notes": "10행 full table. Priority별 행 배경색 다르게. Year 1 음수(투자)는 다른 색으로 표시"
+    },
+    {
+      "id": 8,
+      "slide_id": "s08",
+      "type": "priority1-cases",
+      "layout": "three-column-stats",
+      "specSections": ["6"],
+      "title": "Priority 1 — Year 1 핵심 3케이스",
+      "content_notes": "C01: 동아미디어센터 정기 워크숍, ₩200K/팀, 마진 51~59%, Year 1 ₩37~66M, '포트폴리오 앵커'. C02: 과학동아AiR 번들, ₩150K~200K, Year 1 ₩7.3M, 'STEM 특화'. C03: 기업 CSR B2B, ₩5~8M/회, 마진 40~52%, Year 1 ₩52M, '최대 수익 채널'",
+      "notes": "3 column stat cards. 각 케이스 번호, 채널명, 핵심 수치, 한 줄 역할 설명"
+    },
+    {
+      "id": 9,
+      "slide_id": "s09",
+      "type": "priority2-cases",
+      "layout": "two-column",
+      "specSections": ["6"],
+      "title": "Priority 2 — Year 1~2 확장 5케이스",
+      "content_notes": "왼쪽 (C04, C05, C06): C04 학교방문 -₩2.6M 레퍼런스 투자 / C05 강사양성 -₩2.6M ROI 1095% / C06 구독락인 ₩0.9M + 이탈방어 ₩40M+. 오른쪽 (C07, C08): C07 테마파크 Year 2 ₩34.3M / C08 지자체 Year 1 ₩12M",
+      "notes": "5케이스 요약. 투자성 케이스(음수)와 수익 케이스 구분 명확히"
+    },
+    {
+      "id": 10,
+      "slide_id": "s10",
+      "type": "priority3-cases",
+      "layout": "two-column",
+      "specSections": ["6", "11"],
+      "title": "Priority 3 — Year 2+ 프리미엄 & 파트너 제언",
+      "content_notes": "왼쪽: C09 IT 프리미엄 ₩8~12M/회 Year 2 ₩90M '삼성 자녀가 만든 게임 바이럴', C10 에듀투어 ₩1M+₩2~3.5M Year 2 ₩22M '최고 ARPU'. 오른쪽: 파트너 리뷰 인용 — 'C09→C03 통합 제안: 10개가 아니라 3개를 증명하라'",
+      "notes": "오른쪽 callout box에 파트너 리뷰 핵심 인용문 강조"
+    },
+    {
+      "id": 11,
+      "slide_id": "s11",
+      "type": "c01-deep-dive",
+      "layout": "two-column",
+      "specSections": ["6", "4"],
+      "title": "C01 Deep Dive — 동아미디어센터 정기 워크숍",
+      "content_notes": "왼쪽: 운영 상세 — 대상 초등4~6학년+학부모 15~20팀/회, 가격 ₩200K/팀, 장소 동아미디어센터(무료), 마진 51~59%, 커리큘럼 4단계 240분. 오른쪽: 재무 — Year 1 ₩37~66M(연 3~7회 가정), D-Day: 2026-03-28 파일럿, NPS 90%+ 목표, 정기화 기준",
+      "notes": "오른쪽에 D-Day 2026-03-28 날짜 강조. 손익분기 회차 명시. MISSING: 정확한 손익분기 회차 수치 — SPEC에 없음"
+    },
+    {
+      "id": 12,
+      "slide_id": "s12",
+      "type": "c03-deep-dive",
+      "layout": "two-column",
+      "specSections": ["6", "5"],
+      "title": "C03 Deep Dive — 기업 CSR 워크숍 (B2B)",
+      "content_notes": "왼쪽: B2B 모델 — DBR에듀 영업망 활용, 대기업 임직원 자녀 20~30팀, 기업 전액 부담 ₩5~8M/회, 마진 40~52%. 오른쪽: 전략 — 조선일보×신한은행 선례 참조, HR 크로스셀 기회, Year 1 ₩52M(5~7회), C09 IT 프리미엄 업셀 경로",
+      "notes": "3-tier 가격 언급. MISSING: 3-tier 가격 상세 — SPEC에 단가 범위만 있고 tier 구분 없음"
+    },
+    {
+      "id": 13,
+      "slide_id": "s13",
+      "type": "c05-deep-dive",
+      "layout": "two-column",
+      "specSections": ["6"],
+      "title": "C05 Deep Dive — 강사 양성 파이프라인",
+      "content_notes": "왼쪽: 구조 — 미디어 프론티어 수료생 8~10명, 2주 집중 과정, 투자 -₩2.6M. 오른쪽: ROI — ROI 1,095% 근거(강사 1명이 연간 창출하는 매출 계산), C04/C06/C07/C08 스케일링 활성화, 동아 미디어 프론티어 취업률 KPI 개선",
+      "notes": "ROI 1095% 수치 시각적 강조. MISSING: ROI 계산 상세 공식 — SPEC에 수치만 있고 계산 근거 없음"
+    },
+    {
+      "id": 14,
+      "slide_id": "s14",
+      "type": "c06-deep-dive",
+      "layout": "two-column",
+      "specSections": ["6", "5"],
+      "title": "C06 Deep Dive — 어린이동아 구독 방어 전략",
+      "content_notes": "왼쪽: 현황 — 어린이동아 구독 8만→5.9만 하락 추세, ₩100K(구독자)/₩200K(비구독자) 차등 가격. 오른쪽: 이탈 방어 가치 — 구독 이탈 방어 연 ₩40M+, 콘텐츠 루프(아이 게임 → 어린이동아 게재), Year 1 직접 매출 ₩0.9M + 방어 가치 합산",
+      "notes": "구독 하락 추세 수치 강조. 이탈 방어 ₩40M이 직접 매출보다 큰 전략적 가치 부각"
+    },
+    {
+      "id": 15,
+      "slide_id": "s15",
+      "type": "c04-c08-combined",
+      "layout": "two-column",
+      "specSections": ["6"],
+      "title": "C04 + C08 — 공교육·지자체 전략 (레퍼런스 → 수주)",
+      "content_notes": "왼쪽 C04: 학교 방문 위탁, 2시간 압축 커리큘럼, ₩200K~500K/회, Year 1 -₩2.6M 레퍼런스 투자, AI 디지털교과서 선점 목적. 오른쪽 C08: 지자체 AI 교육 위탁, ₩3~5M/회, Year 1 ₩12M(3개 구), C04 레퍼런스 → C08 정부 수주 경쟁력, MSR KPI 달성",
+      "notes": "C04 투자 → C08 수주 인과관계 화살표로 표현. 공교육 선점 전략 맥락"
+    },
+    {
+      "id": 16,
+      "slide_id": "s16",
+      "type": "c07-c10-combined",
+      "layout": "two-column",
+      "specSections": ["6"],
+      "title": "C07 + C10 — 브랜드 확장 & 프리미엄",
+      "content_notes": "왼쪽 C07: 에버랜드/롯데월드 팝업, 8~10팀/세션 90분, ₩50K/팀 수익배분 70/30, Year 2 ₩34.3M, 브랜드 노출 가치 ₩78.8M. 오른쪽 C10: 에듀투어 패키지, ₩1M(워크숍)+₩2~3.5M(여행), Year 2 ₩22M, 최고 ARPU, 조선 에듀투어 대비 AI 레이어 차별화",
+      "notes": "브랜드 노출 ₩78.8M 수치 강조. C07→풀워크숍 전환 퍼널 시각화"
+    },
+    {
+      "id": 17,
+      "slide_id": "s17",
+      "type": "synergies",
+      "layout": "two-column",
+      "specSections": ["7"],
+      "title": "Cross-Case 시너지 — 의존성 구조",
+      "content_notes": "SPEC 섹션7의 ASCII 의존성 그래프를 비주얼로 재현. 핵심 경로 4가지: ① C01 파일럿 성공→전 케이스 레퍼런스 ② C05 강사양성→C04/C06/C07/C08 스케일링 ③ C04 학교레퍼런스→C08 지자체 수주 ④ C03 기업CSR→C09 프리미엄 업셀",
+      "notes": "왼쪽: 의존성 다이어그램(C05가 상단 허브). 오른쪽: 4가지 핵심 경로 bullet"
+    },
+    {
+      "id": 18,
+      "slide_id": "s18",
+      "type": "roadmap",
+      "layout": "timeline",
+      "specSections": ["8"],
+      "title": "4-Phase 실행 로드맵",
+      "content_notes": "Phase 1 Q2 2026: C01 파일럿 2026-03-28, NPS 90%+. Phase 2 Q3~Q4 2026: C02(동아사이언스 파일럿), C03(기업 3곳), C05(강사 1기). Phase 3 2027 H1: C04(학교 10곳), C06(서울+지방 순회), C08(3개 구 시범). Phase 4 2027 H2+: C07(테마파크), C09(IT 프리미엄), C10(에듀투어)",
+      "notes": "4 phase 타임라인. Phase 1에 D-Day 마커 강조"
+    },
+    {
+      "id": 19,
+      "slide_id": "s19",
+      "type": "financial-projection",
+      "layout": "three-column-stats",
+      "specSections": ["9"],
+      "title": "재무 전망 — 3 시나리오",
+      "content_notes": "3 시나리오 비교: 보수적(Year1 ₩80M, Year2 ₩200M, C01/C03만 정기화), 목표(Year1 ₩134M, Year2 ₩373M, 8개 케이스 가동), 낙관적(Year1 ₩170M, Year2 ₩500M+, 만석+C07 2파크+C09 5곳)",
+      "notes": "목표 시나리오 중앙에 강조. Year 1/Year 2 두 행으로 각 시나리오 수치 표시"
+    },
+    {
+      "id": 20,
+      "slide_id": "s20",
+      "type": "revenue-breakdown",
+      "layout": "two-column",
+      "specSections": ["9"],
+      "title": "Year 1 매출 구조 — C01+C03이 89%",
+      "content_notes": "왼쪽: 매출 분해 — C01 ₩66.6M + C03 ₩52M = ₩118.6M (89%). C02 ₩7.3M, C08 ₩12M, C06 ₩0.9M. 투자 항목: C04 -₩2.6M, C05 -₩2.6M. 오른쪽: 전략적 함의 — 2개 케이스 의존도 리스크 vs 나머지 8개는 전략 투자",
+      "notes": "파이차트 또는 bar로 89% 시각화. 투자 케이스와 수익 케이스 색 구분"
+    },
+    {
+      "id": 21,
+      "slide_id": "s21",
+      "type": "risk-management",
+      "layout": "table",
+      "specSections": ["11"],
+      "title": "핵심 리스크 & 완화 전략",
+      "content_notes": "표 헤더: 리스크 / 파트너 우려도 / 완화 전략. 리스크 1: 실행 역량 — 3명 핵심팀으로 10케이스 운영 가능성 / 완화: C05 강사 양성 + Phase별 케이스 단계 가동. 리스크 2: 운영 복잡도 — 5개+ 동아 내부 부서 협력 필요 / 완화: 전담 사내 창구 지정 요청. 리스크 3: 수익 현실 — C01/C03 외 대부분 투자 또는 미검증 / 완화: '3개를 증명하라' 집중 전략",
+      "notes": "딜브레이커 3개(인력 계획, NPS 85%, C08 이사회 승인)도 별도 callout으로"
+    },
+    {
+      "id": 22,
+      "slide_id": "s22",
+      "type": "asset-map",
+      "layout": "table",
+      "specSections": ["5"],
+      "title": "동아 자산 활용 맵",
+      "content_notes": "표: 동아 자산 / 활용 케이스 / 역할. 동아미디어센터→C01/C02/C05 무료 교육장. 어린이동아 59K 구독자→C06 구독자DB+콘텐츠 게재. 동아사이언스 AiR→C02 번들구독+STEM 커리큘럼. DBR에듀 기업망→C03/C09 B2B 영업채널. 미디어 프론티어 수료생→C05 강사 인력풀. 지역 총국→C08 지자체 접촉채널. 동아일보 브랜드→전 케이스 신뢰도+경쟁 포지셔닝",
+      "notes": "7행 테이블. 브랜드 행 마지막에 '전 케이스' 강조"
+    },
+    {
+      "id": 23,
+      "slide_id": "s23",
+      "type": "donga-value",
+      "layout": "bullet-minimal",
+      "specSections": ["10"],
+      "title": "동아일보가 얻는 5가지 가치",
+      "content_notes": "① 신규 매출원: 광고 의존 탈피, 반복 매출형 교육 사업 Year 2 ₩373M. ② 브랜드 자산: 'AI 교육의 동아일보' 포지션 선점 vs 조선일보. ③ 구독 방어: 어린이동아 이탈 방어 연 ₩40M+(C06). ④ 공익 서사: 지자체 AI 교육(C08)+학교 방문(C04) MSR KPI. ⑤ 기업 네트워크: DBR에듀 고객에게 가족 복지 상품 제안",
+      "notes": "5 bullets, 각각 수치 포함. 우측에 핵심 quote 가능"
+    },
+    {
+      "id": 24,
+      "slide_id": "s24",
+      "type": "donga-investment",
+      "layout": "table",
+      "specSections": ["10"],
+      "title": "동아가 하는 것 — 신규 투자 ₩0",
+      "content_notes": "표: 항목 / 비용. 브랜드 사용 승인 ₩0(기존 자산). 동아미디어센터 대관 기존 시설. 어린이동아 구독자 DB 기존 인프라. DBR에듀 영업망 연결 기존 인력. 지역총국 공문 발송 기존 인력. 하단 강조: 총 신규 현금 투자 = ₩0",
+      "notes": "표 하단에 '총 신규 투자 ₩0' 대형 강조 텍스트. 기존 자산 재배치의 의미 부각"
+    },
+    {
+      "id": 25,
+      "slide_id": "s25",
+      "type": "competitive-moat",
+      "layout": "table",
+      "specSections": ["2.4", "10"],
+      "title": "경쟁 우위 — 동아 vs 조선일보 에듀조선",
+      "content_notes": "비교표 헤더: 항목 / 에듀조선(조선일보) / Future AI Academy(동아일보). 항목: K-12 AI 교육, 테마파크 운영, 에듀투어, 기업 CSR, AI 디지털교과서 연계, 미디어×AI 시너지. 동아의 차별점: AI 레이어 + 미디어 브랜드 결합",
+      "notes": "MISSING: 에듀조선 각 항목 세부 현황 — SPEC에 상위 수준 언급만 있음"
+    },
+    {
+      "id": 26,
+      "slide_id": "s26",
+      "type": "partner-review",
+      "layout": "bullet-minimal",
+      "specSections": ["11"],
+      "title": "파트너 리뷰 핵심 — '3개를 증명하라'",
+      "content_notes": "핵심 인용: '10개가 아니라 3개를 증명하라: C01(제품), C03(수익), C05(강사). 이 3개가 성공하면 나머지는 자연스러운 확장. 실패하면 7개가 사업을 못 살린다.' 딜브레이커 대응: ① 인력 계획 제시 완료(C05) ② C01 NPS 85%+ 목표(파일럿 2026-03-28) ③ C08 이사회 승인 사전 동의 필요",
+      "notes": "상단 큰 quote 블록. 하단 딜브레이커 3개 체크리스트 형태"
+    },
+    {
+      "id": 27,
+      "slide_id": "s27",
+      "type": "next-steps",
+      "layout": "timeline",
+      "specSections": ["12"],
+      "title": "다음 단계 — MOU → 파일럿 → 정기화 → 확장",
+      "content_notes": "4단계: 2026-03 첫째 주 브랜드 사용 MOU 체결 / 2026-03-28 C01 파일럿 워크숍 실시 / 2026-04 NPS 결과 리뷰 → 정기화 결정 / 2026 Q3 C02/C03/C05 동시 착수",
+      "notes": "4개 마일스톤 타임라인. 첫 번째(MOU) 즉각 액션 강조"
+    },
+    {
+      "id": 28,
+      "slide_id": "s28",
+      "type": "closing",
+      "layout": "center-title",
+      "specSections": ["1", "3"],
+      "title": "함께 만들겠습니다",
+      "content_notes": "마무리 슬라이드. 프로그램명 + 철학 재인용: '코딩은 AI가 합니다. 아이는 무엇을 할지 결정만 합니다.' 연락처: Filamentree / HypeProof AI Lab. 파트너: 동아일보",
+      "notes": "Thank you + 연락처 + 파트너 로고. 철학 문장 large type으로"
+    }
+  ]
+}

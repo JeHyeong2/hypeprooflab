@@ -1,0 +1,83 @@
+{
+  "case_id": "C06",
+  "iteration": 6,
+  "timestamp": "2026-02-27T15:00:00Z",
+  "scores": {
+    "completeness": {
+      "score": 8,
+      "deductions": [],
+      "evidence": "All 5 required output files exist (plan.md, timeline.md, budget.md, logistics.md, partner-brief.md) plus test-report.json. Budget totals now match across files: plan.md ₩1,400,000 = budget.md ₩1,400,000 (previous critical discrepancy resolved). No [TBD]/[TODO]/XXX placeholders found. However: (1) logistics.md Section 4 D-1 message template contains unfilled fields 'OO월 OO일 토요일' and 'OO층' — while these are runtime-fill fields, a deployment-ready plan document should parameterize them as '[DATE]' / '[FLOOR]' markers rather than Korean 'OO' notation, which visually resembles incomplete draft text. (2) plan.md Risk R8 references '법무 비용 ₩300,000 예산 외 일회성 반영' — a real, named cost with no corresponding line in budget.md or a footnote in the annual forecast. Cost exists in risk narrative but is invisible to financial reviewers."
+    },
+    "feasibility": {
+      "score": 7,
+      "deductions": [],
+      "evidence": "Budget math is now internally consistent across all files (previous failure resolved). However three feasibility concerns remain: (1) timeline.md Phase 6, Week -1 (2027-01-04) states '조교 3명 사전 브리핑' for Q4 (25팀). budget.md Section 5 Q4 원가 explicitly uses 조교 4명 (₩360K = 4 × ₩90K) and budget.md Rule 4 states 22팀 이상 → 조교 4명 필요. This 3 vs 4 조교 inconsistency is an execution error: if the timeline drives staffing decisions, Q4 will arrive under-staffed by 1 TA, directly violating the 5~6팀 per TA coverage ratio. (2) The entire revenue model depends on ₩1,500,000/회 marketing reimbursement from 동아이지에듀 — a commitment that is a plan assumption, not a confirmed contract term. A partner budget freeze or reallocation would drop회당 순이익 from ₩2,600,000 to ₩1,100,000 (58% reduction) with no mitigation defined. (3) Hidden one-time legal cost: ₩300,000 attorney review (mentioned in R8 risk mitigation) is not in budget.md, making the total first-year cost understated by at least ₩300,000."
+    },
+    "differentiation": {
+      "score": 8,
+      "deductions": [],
+      "evidence": "C06 is genuinely differentiated from base SPEC and other potential cases. Dual pricing structure (₩100K subscriber / ₩200K non-subscriber) with marketing budget reimbursement model is case-unique. Subscription lock-in KPI system (갱신율 +15%p target, 이탈방어율 50% 감소, 비구독자 전환 20%+) is purpose-built for 어린이동아's specific churn problem. Quarterly theme rotation (봄: 환경, 여름: 우주, 가을: 역사, 겨울: AI) prevents repeat-attendee content fatigue. UGC publishing pipeline via 어린이동아 편집팀 with 게재 선정 ceremony is a distinctive editorial integration. The subscriber-first 72-hour pre-open scarcity mechanism is operationally specific. Not a copy-paste from base SPEC."
+    },
+    "partner_value": {
+      "score": 7,
+      "deductions": [],
+      "evidence": "Churn defense framing is compelling and directly quantified (₩6,000,000/year for galvanized retention + UGC content + brand positioning). Three-item action request with 2026-03-07 deadline is clear and executable. However two credibility issues remain: (1) partner-brief.md states '실제 워크숍 9회 진행, 아이들이 제작한 게임 9개 현재 온라인 플레이 가능' — SPEC.md §9 lists 9 game URLs but describes the track record only as '실제 워크숍 진행 완료 (사진 증빙 있음)' with no session count. 9 games from 1-2 large sessions ≠ 9 separate sessions. An executive conducting due diligence will ask for session dates, attendee counts, and NPS scores. If the claim of '9회' cannot be substantiated, it actively damages credibility on the document's most important trust signal. (2) partner-brief.md Section '수익 무비용' title directly contradicts the content: 어린이동아 commits ₩6,000,000/year in cash (marketing reimbursement). Calling this '수익 무비용' (revenue at zero cost) is inaccurate and will confuse or irritate a financially-literate counterpart reading the same table that lists the ₩1,500,000/회 cash outflow."
+    },
+    "risk_coverage": {
+      "score": 7,
+      "deductions": [],
+      "evidence": "9 risks now documented (R1–R9), exceeding the 5-risk minimum. R8 (아동 개인정보보호법) and R9 (담당자 교체) were added in response to prior critique — both are appropriately case-specific with concrete mitigations. Risk matrix is the strongest section. One material gap remains: the plan uses 'Notion/Google Forms' for registration (timeline.md Phase 1, Week -4, 03-17) — a system that will collect minors' names, subscription numbers, UGC consent, and payment information. Google Forms' data storage terms (Google Workspace DPA) may not satisfy Korean 개인정보보호법 처리 위탁 요건 for a commercial program targeting under-14 children, particularly for UGC publication consent records which must be retained. This is not covered by R8's legal review scope (R8 focuses on the consent form design, not the data platform). A compliance failure in the collection platform could invalidate all consent records retroactively."
+    },
+    "actionability": {
+      "score": 7,
+      "deductions": [],
+      "evidence": "Phase 0-3 (Q1 pilot through post-event) remains excellent: day-level task granularity, named owners, [CRITICAL] markers, dependency chains, and a defined escalation protocol for contract delay. Phase 6 (Q4) has been significantly expanded with full column structure. However one concrete execution inconsistency undermines Q4 actionability: timeline.md Phase 6 Week -1 (2027-01-04) assigns '조교 3명 사전 브리핑' while budget.md defines Q4 (25팀) with 4 조교 at ₩360,000. If a coordinator uses the timeline to drive staffing decisions for Q4 (the most natural thing to do), one TA will not be recruited, briefed, or budgeted. This is a direct action-to-execution gap. Additionally, Phases 4 and 5 (Q2 and Q3) contain only 6-7 summary rows versus Phase 1's 20+ rows, meaning mid-year execution relies on memory of Q1 lessons rather than a self-contained plan."
+    }
+  },
+  "overall_score": 7,
+  "issues": [
+    {
+      "severity": "critical",
+      "file": "timeline.md",
+      "location": "Phase 6, Week -1, row dated 2027-01-04",
+      "problem": "The Q4 조교 briefing task states '조교 3명 사전 브리핑' — but Q4 targets 25팀, which requires 4 조교 per budget.md Section 5 Q4 cost breakdown (조교 4명 × ₩90,000 = ₩360,000) and per budget.md Rule 4 ('22팀 이상: 조교 4명 필요'). This is a direct staffing contradiction between the timeline and the budget. If the timeline is used to drive TA recruitment (as intended), Q4 will arrive with 1 TA missing, violating the 5~6팀/TA coverage ratio and exposing 4–5 teams to inadequate technical support during the 95-minute game-building session.",
+      "fix_instruction": "In timeline.md Phase 6, change the Week -1 (2027-01-04) 조교 briefing task from '조교 3명 사전 브리핑' to '조교 4명 사전 브리핑'. Update the '산출물' column to '브리핑 완료 확인 (4명)'. Additionally, add a new task in Week -9 (2026-11-09): '조교 4명 섭외 완료 (Q4 25팀 기준, budget.md Rule 4 적용)' | TJ | 조교 확정 명단 | Q4 장소 예약 완료. This ensures the 4th TA is recruited at the same time as other Q4 prep, not last-minute."
+    },
+    {
+      "severity": "high",
+      "file": "partner-brief.md",
+      "location": "Section '우리가 하는 것', bullet '검증된 프로그램'",
+      "problem": "The brief claims '실제 워크숍 9회 진행, 아이들이 제작한 게임 9개 현재 온라인 플레이 가능.' SPEC.md §9 lists 9 game URLs but describes the track record only as '실제 워크숍 진행 완료 (사진 증빙 있음)' — no session count. 9 games could originate from a single large session (9 teams), not 9 separate workshops. The claim of '9회 진행' is unsubstantiated by the master spec and constitutes a material overstatement in the most important external document. A partner conducting due diligence will request session dates, attendee counts per session, and NPS data. If the claim cannot be defended, it damages trust at the critical negotiation stage.",
+      "fix_instruction": "Replace '실제 워크숍 9회 진행' with the factually supported claim: '실제 워크숍 진행, 아이들이 직접 제작한 플레이 가능한 게임 9개 보유'. If actual session count data exists (e.g., 2-3 sessions), use the real number (e.g., '2회 파일럿 워크숍 진행'). Do not infer session count from game count. The 9 playable games is the stronger proof point — let that stand alone without the inflated session count."
+    },
+    {
+      "severity": "high",
+      "file": "plan.md AND budget.md",
+      "location": "plan.md Section 7 Risk R8 mitigation text vs budget.md (all sections)",
+      "problem": "plan.md Risk R8 (아동 개인정보보호법) mitigation states '전문 법무 변호사 1회 검토 후 동의서 최종 확정 (법무 비용 ₩300,000 예산 외 일회성 반영)'. This acknowledges a real ₩300,000 cost, explicitly labeled as 'outside the budget'. However budget.md has no corresponding line item, footnote, or one-time cost section. Financial reviewers reading only budget.md see a total first-year cost of ₩6,360,000 that is understated by ₩300,000. More importantly, the phrase 'has been reflected outside the budget' is circular — it means 'we have not included it but call it included'. This is a budget gap that will surface at contract negotiation.",
+      "fix_instruction": "Add a new section to budget.md between Section 8 and the end: '## 9. 일회성 초기 비용 (Year 1 한정)' with a single line: | 아동 개인정보 동의서 법무 검토 | ₩300,000 | 법무 전문가 1회 자문 (R8 리스크 완화) | 1회 | ₩300,000 |. Add a note: '이 비용은 반복 원가에 포함되지 않음. Q1 파일럿 회차에 일회성 지출.' Then update plan.md Risk R8 mitigation to remove 'has been reflected' language and instead state: '법무 비용 ₩300,000은 budget.md §9 일회성 비용으로 별도 반영.' This makes the cost visible and traceable."
+    },
+    {
+      "severity": "medium",
+      "file": "partner-brief.md",
+      "location": "Section '어린이동아가 얻는 것', subsection '4. 수익 무비용' heading",
+      "problem": "The section title '수익 무비용' (revenue at zero cost) is factually incorrect: 어린이동아 commits ₩1,500,000/회 × 4회 = ₩6,000,000/year in cash as marketing reimbursement. The section body correctly describes the ROI case for this spend, but the section header explicitly says 'zero cost.' A finance or operations executive reading the table will see the ₩6M/year cash outflow in Section '어린이동아가 제공하는 것' and then encounter a heading that contradicts it two sections later. This self-contradiction undermines the brief's internal consistency.",
+      "fix_instruction": "Rename the section '4. 수익 무비용' to '4. 최소 비용, 최대 ROI'. Update the opening sentence of that section from '장소·홍보·인력 무투입으로...' to '연간 마케팅 예산 ₩6,000,000으로 구독 이탈 방어 + 신규 유입 + 콘텐츠 확보 + AI 교육 브랜드를 동시에 달성합니다.' This is honest, still highly persuasive (the ROI framing is genuinely strong), and eliminates the internal contradiction."
+    },
+    {
+      "severity": "medium",
+      "file": "logistics.md",
+      "location": "Section 4 '참가자 커뮤니케이션 플랜', D-1 리마인더 문자 template",
+      "problem": "The D-1 SMS template reads: '내일(OO월 OO일 토요일) AI 워크숍 안내. 12:30 동아미디어센터 OO층 접수.' This contains two unfilled fields: (1) 'OO월 OO일' — the event date, and (2) 'OO층' — the venue floor number. While these are runtime parameters, the logistics plan should define them as explicit named placeholders and note who is responsible for filling them. In their current 'OO' form, they are visually indistinguishable from Korean draft shorthand for 'not yet decided.' The floor number in particular should be confirmed and hardcoded once the venue booking is finalized (Phase 1, Week -4, 03-16).",
+      "fix_instruction": "Update logistics.md Section 4 D-1 message template to: '내일([EVENT_DATE] 토요일) AI 워크숍 안내. 12:30 동아미디어센터 [FLOOR]층 접수. 노트북·충전기 필수. 문의: jay@hypeproofai.com'. Add a note beneath the template: '⚠️ [EVENT_DATE]: 행사 1주 전 TJ가 해당 날짜로 교체. [FLOOR]: 동아미디어센터 예약 확정 후 TJ가 기입 (Phase 1 Week -4, 03-16 의존성).'"
+    },
+    {
+      "severity": "medium",
+      "file": "budget.md",
+      "location": "Section 8 Rule 5, 번들 패키지 가격 설계",
+      "problem": "budget.md Rule 5 states: '연간 구독 + 4회 워크숍 번들 가격 예: ₩350,000/팀/년. 개별 가격 합산(₩800,000) 대비 56% 할인 구조로 설계 예정.' The ₩800,000 comparison uses non-subscriber pricing (4 × ₩200,000 = ₩800,000), but the bundle's primary target audience is *existing subscribers* who would currently pay 4 × ₩100,000 = ₩400,000 per year. From a subscriber's perspective, the bundle offers only ₩50,000 in savings (12.5% discount vs 56% claimed). This misrepresents the bundle's value proposition to the very audience it is designed to retain. A subscriber family evaluating whether to buy the bundle will feel deceived when they calculate the actual savings.",
+      "fix_instruction": "Update budget.md Rule 5 to clearly distinguish the two comparison frames: 'For non-subscribers (converting to bundle): ₩350,000 vs ₩800,000 개별 정가 = 56% 절감. For existing subscribers (upgrading to bundle): ₩350,000 vs ₩400,000 구독자 누적가 = 12.5% 절감 (₩50,000 이점). Consider whether the bundle price is compelling enough for existing subscribers — alternative: set bundle at ₩300,000/년 (25% subscriber discount) or include exclusive bundle-only content to justify the upgrade.' Flag this as a pricing strategy decision requiring Jay + 동아이지에듀 상품팀 alignment before Q4 bundle launch."
+    }
+  ],
+  "revision_prompt": "C06 is at iteration 6 with an overall score of 7/10. Threshold is 8/10. The plan is structurally sound and has addressed major prior issues (budget mismatch, phone placeholder, 'no-cost' framing, missing risks R8/R9, Phase 6 expansion, contract escalation protocol). The remaining issues are precision errors that will surface at partner presentation or execution time. Execute the following fixes in priority order:\n\n## CRITICAL FIX (blocks execution)\n\n### 1. timeline.md — Fix Q4 조교 count\nFile: `products/ai-architect-academy/cases/C06/timeline.md`\nPhase 6, Week -1 (2027-01-04) row: Change '조교 3명 사전 브리핑' → '조교 4명 사전 브리핑'. Update 산출물 to '브리핑 완료 확인 (4명)'.\nAlso add Phase 6 Week -9 (2026-11-09) new row: | Week -9 | 2026-11-09 | 조교 4명 섭외 완료 (Q4 25팀 기준, budget.md Rule 4) | TJ | 조교 확정 명단 | Q4 장소 예약 완료 |\nRationale: budget.md Rule 4 states 22팀 이상 → 조교 4명. Q4 = 25팀. Timeline-budget inconsistency must be eliminated before anyone uses the timeline to staff Q4.\n\n## HIGH PRIORITY FIXES (affect partner trust)\n\n### 2. partner-brief.md — Fix '9회 진행' overstatement\nFile: `products/ai-architect-academy/cases/C06/partner-brief.md`\nSection '우리가 하는 것': Replace '실제 워크숍 9회 진행, 아이들이 제작한 게임 9개 현재 온라인 플레이 가능' with '실제 워크숍 진행, 아이들이 직접 제작한 플레이 가능한 게임 9개 보유 (온라인 공개 중)'.\nDo NOT claim a session count not supported by SPEC.md §9.\n\n### 3. budget.md — Add one-time legal cost section\nFile: `products/ai-architect-academy/cases/C06/budget.md`\nAdd new section '## 9. 일회성 초기 비용 (Year 1 한정)' with row: 아동 개인정보 동의서 법무 검토 | ₩300,000 | 법무 전문가 1회 자문 (R8 완화) | Q1 파일럿 전 1회 지출.\nUpdate plan.md Risk R8 mitigation last sentence: remove '예산 외 일회성 반영' and replace with 'budget.md §9 일회성 비용으로 반영.'\n\n## MEDIUM PRIORITY FIXES\n\n### 4. partner-brief.md — Rename '수익 무비용' section\nFile: `products/ai-architect-academy/cases/C06/partner-brief.md`\nChange section heading '4. 수익 무비용' → '4. 최소 비용, 최대 ROI'\nUpdate opening sentence to: '연간 마케팅 예산 ₩6,000,000으로 구독 이탈 방어 + 신규 유입 + 콘텐츠 확보 + AI 교육 브랜드를 동시에 달성합니다.'\n\n### 5. logistics.md — Replace OO placeholders with named tokens\nFile: `products/ai-architect-academy/cases/C06/logistics.md`\nSection 4, D-1 message template: Replace 'OO월 OO일 토요일' → '[EVENT_DATE]' and 'OO층' → '[FLOOR]'\nAdd note: '⚠️ [EVENT_DATE]: TJ가 행사 D-7에 교체. [FLOOR]: Phase 1 Week -4 장소 예약 확정 후 TJ 기입.'\n\n### 6. budget.md — Clarify bundle discount framing\nFile: `products/ai-architect-academy/cases/C06/budget.md`\nSection 8 Rule 5: After '개별 가격 합산(₩800,000) 대비 56% 할인' add clarification: '단, 기존 구독자 관점: ₩350,000 vs 구독자 누적가 ₩400,000 = 12.5% 절감(₩50,000). 번들 전환 유인 충분성은 Q3 설문(번들 패키지 전환 의향 60%+ KPI) 결과에 따라 가격 재조정 고려.'\n\n## Verification after fixes\n1. Confirm timeline.md Q4 Phase 6 조교 count = 4 in all rows (브리핑 + 섭외)\n2. Confirm partner-brief.md contains no unsubstantiated session count claims\n3. Confirm budget.md Section 9 exists with ₩300,000 legal cost entry\n4. Re-run: grep for 'OO층' and 'OO월 OO일' in logistics.md → should return 0 matches\nTarget: completeness 9, feasibility 8, overall 8 (threshold)."
+}

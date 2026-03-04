@@ -16,8 +16,8 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const koSlugs = getAllResearch('ko').map(r => ({ slug: r.frontmatter.slug }));
-  const enSlugs = getAllResearch('en').map(r => ({ slug: r.frontmatter.slug }));
+  const koSlugs = getAllResearch('ko').map(r => ({ slug: r.slug }));
+  const enSlugs = getAllResearch('en').map(r => ({ slug: r.slug }));
   const allSlugs = [...koSlugs, ...enSlugs];
   const unique = Array.from(new Map(allSlugs.map(s => [s.slug, s])).values());
   return unique;

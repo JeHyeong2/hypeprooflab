@@ -1,0 +1,90 @@
+{
+  "case_id": "C02",
+  "iteration": 2,
+  "timestamp": "2026-02-26T22:45:00+09:00",
+  "previous_iteration": {
+    "iteration": 1,
+    "overall_score": 4,
+    "reason": "Only partner-brief.md existed. 4 of 5 required files were missing. The linter generated iteration 1 critic-log scoring the incomplete state."
+  },
+  "scores": {
+    "completeness": {
+      "score": 8,
+      "deductions": [],
+      "evidence": "All 5 required output files now exist: plan.md, timeline.md, budget.md, logistics.md, partner-brief.md. No [TBD], [TODO], or XXX placeholders. Plan covers executive summary, case context, STEM curriculum adaptation (dual-track game/science with variable cards), staffing (STEM TA requirements), budget (bundle pricing with subscriber/non-subscriber tiers), partnership structure (3-party including Dong-A Science, Dong-A Ilbo group, Filamentree), risk register (5+ risks in linter-revised version), and success metrics with AiR-specific KPIs (subscription retention, coupon conversion). Budget includes sensitivity analysis and C01 unit economics comparison. Timeline spans W-8 to W+4 with task/owner/predecessor/done-criteria format. Partner brief includes Section 0 for group synergy and standalone Section 1."
+    },
+    "feasibility": {
+      "score": 8,
+      "deductions": [],
+      "evidence": "Budget math is internally consistent (linter version: fixed costs 1,040,000 + variable costs 560,000 + contingency 160,000 = 1,760,000 total for 20 teams). Breakeven at 9-13 teams depending on subscriber mix is achievable given AiR Smart+ subscriber base with Seoul Science High and Ajou University gifted program commitments. Timeline allows 8 weeks of lead time (W-8 to W0), appropriate for cross-business-unit negotiation with Dong-A Science. D-Day April 25 is realistic (58 days from today, Feb 26). Contract-before-registration dependency is enforced in timeline (W-7 MOU signing precedes W-5 recruitment open)."
+    },
+    "differentiation": {
+      "score": 9,
+      "deductions": [],
+      "evidence": "C02 demonstrates genuine, structural differentiation from C01: (1) STEM curriculum with dual-track project options (game vs science simulator), (2) PI/researcher framing vs C01 Minecraft metaphor, (3) 'Future AI Scientist' vs 'Future AI Leader' certification, (4) AiR-specific KPIs (subscription retention rate, coupon activation, D+90 cohort tracking), (5) Science-track TA requirements (STEM background), (6) Bundle pricing with subscriber discount, (7) AiR coupon bundled with certificates for non-subscriber conversion, (8) Variable card system for science track (mass, velocity, temperature, gravity, time, concentration, wavelength, voltage), (9) Part 2 STEM 기획서 with mandatory science-concept fields, (10) Part 4 발표 형식 adapted to 연구 발표 structure aligned with 영재원 면접 preparation."
+    },
+    "partner_value": {
+      "score": 9,
+      "deductions": [],
+      "evidence": "Partner brief addresses two audiences: Section 0 for Dong-A Ilbo group executives (group synergy framing, competitive positioning vs Chosun Ilbo), Section 1 for Dong-A Science operational decision-makers (AiR retention value, direct revenue, new subscriber conversion). Competitive framing is specific and defensible: '과기부 장관상 AI 플랫폼 x 오프라인 체험 교육 = 시장 유일'. Total annual value to Dong-A Science quantified at 14.7M-17.9M won across direct revenue, retention defense, and new conversion. Zero-cost framing for partner is clearly established. Specific ask (meeting by March 16) and timeline are concrete. Pilot-first structure with no penalty clause reduces partner risk perception."
+    },
+    "risk_coverage": {
+      "score": 8,
+      "deductions": [],
+      "evidence": "Plan covers 5 formal risks in the linter-revised version with specific mitigations: (1) AiR subscriber DB access denial — MOU clause + indirect sending option, (2) STEM curriculum mismatch — pre-registration 5-level survey + two difficulty levels (basic/advanced worksheets), (3) Publishing calendar conflict — MOU date blocking + marketing/business team coordinator (not editorial), (4) AiR push notification deliverability — multi-channel approach (email + push + Instagram + YouTube), (5) Subscriber-to-paid conversion resistance — early registration incentive (과학동아 특별호) + evidence-based marketing (9 game links). Logistics adds contingency plans for AI service failure, instructor absence, recruitment shortfall, and science track difficulty issues. Legal consent for minors addressed in logistics printables list and registration form requirements."
+    },
+    "actionability": {
+      "score": 8,
+      "deductions": [],
+      "evidence": "Timeline structured in weekly blocks (W-8 to W+4) with every task having: owner, predecessor dependency, and done-criteria columns. Critical path explicitly marked with [CRITICAL PATH] tags. D-Day hour-by-hour schedule runs 11:00 setup through 17:30 cleanup. D-5 checklist comprehensive with 10 items including AiR-specific items (coupon verification, subscriber cross-check). Communication templates for D-26, D-12, D-5, D-1, D+1. Pre-kickoff phase correctly sequences partner engagement before operational planning. W+4 includes D+30 tracking for AiR subscription retention measurement."
+    }
+  },
+  "overall_score": 8,
+  "issues": [
+    {
+      "severity": "medium",
+      "file": "partner-brief.md",
+      "location": "Section 1 timeline dates",
+      "problem": "Partner brief references May 9 as D-Day in some date references, while the linter-revised plan/timeline/budget use April 25. Minor cross-file date inconsistency.",
+      "fix_instruction": "Harmonize all date references in partner-brief.md to match April 25 D-Day from the canonical timeline.",
+      "status": "FIXED — All partner-brief.md dates harmonized to April 25 D-Day (iteration 2 post-fix)."
+    },
+    {
+      "severity": "medium",
+      "file": "logistics.md",
+      "location": "Equipment quantities",
+      "problem": "Logistics references 25-team capacity (28 copies of printables, 60 name tags), while budget and timeline are calibrated for 20 teams. This is conservative over-preparation but creates a minor inconsistency.",
+      "fix_instruction": "Either align logistics to 20-team maximum with 10% buffer, or explicitly note that 25-team quantities are for expansion flexibility.",
+      "status": "FIXED — Added explicit note: '수량 기준: 28부 = 20팀(budget.md 기준) + 5팀 확장 여유 + 3부 예비'. All logistics dates also harmonized to April 25 D-Day."
+    },
+    {
+      "severity": "low",
+      "file": "plan.md (linter version)",
+      "location": "Section (a) C01 characterization",
+      "problem": "The linter's plan.md characterizes C01 as '동아일보 직원 대상 내부 교육' which is incorrect — C01 is a B2C workshop for elementary students at Dong-A Media Center. This is a factual error in the C01 comparison table.",
+      "fix_instruction": "Correct the C01 description in plan.md from '직원 AI 역량 강화' to '초등 4-6학년 + 학부모 B2C 워크숍 (동아미디어센터 직영)'.",
+      "status": "FIXED — C01 description corrected in section (a) overview and section (b) comparison table."
+    }
+  ],
+  "self_assessment": {
+    "iteration_1_scores": {
+      "completeness": 2,
+      "feasibility": 3,
+      "differentiation": 5,
+      "partner_value": 7,
+      "risk_coverage": 1,
+      "actionability": 3
+    },
+    "iteration_2_scores": {
+      "completeness": 8,
+      "feasibility": 8,
+      "differentiation": 9,
+      "partner_value": 9,
+      "risk_coverage": 8,
+      "actionability": 8
+    },
+    "all_axes_above_7": true,
+    "revision_needed": false,
+    "improvement_summary": "Iteration 1 had only 1 of 5 files (partner-brief.md) with an overall score of 4. Iteration 2 completed all 5 files with comprehensive content. Major improvements: (1) completeness: 2→8 (all files created), (2) risk_coverage: 1→8 (5+ risks with specific mitigations), (3) actionability: 3→8 (weekly timeline with owners/dependencies/done-criteria), (4) feasibility: 3→8 (full budget with scenario analysis). The linter applied significant structural and content edits to plan.md, timeline.md, and budget.md, improving date realism (April 25 vs May 9), cost calibration (instructor 650K vs 500K), and format consistency. All 6 axes now score 8+. No further revision iteration required."
+  }
+}

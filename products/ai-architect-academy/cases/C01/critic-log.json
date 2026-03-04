@@ -1,0 +1,74 @@
+{
+  "case_id": "C01",
+  "iteration": 2,
+  "timestamp": "2026-02-26T12:00:00+09:00",
+  "previous_score": 6,
+  "scores": {
+    "completeness": {
+      "score": 9,
+      "deductions": [],
+      "evidence": "All 5 required output files present. No [TBD]/[TODO] placeholders detected (verified via grep). Budget arithmetic in plan.md now matches budget.md: 20팀 ₩1,650,000, 15팀 ₩1,450,000. Section 4.3 손익 figures are consistent (20팀 순이익 ₩2,350,000 / 58.8%, 15팀 ₩1,550,000 / 51.7%). Parental consent/privacy procedures now appear in plan.md (R8), logistics.md (printout table), timeline.md (Week -3 legal consent drafting), and are threaded through D-Day logistics (미동의자 촬영 제외 매뉴얼). Executive Summary correctly states ₩1,450,000~1,650,000. Footnote 'Canonical cost figures: budget.md' added. Minor deduction opportunity: partner-brief.md monthly estimate ₩680,000 for 17팀 avg doesn't perfectly back-calculate from the cost model (expected ~₩740,000-770,000), but the stated range ₩620,000~940,000 is internally consistent."
+    },
+    "feasibility": {
+      "score": 8,
+      "deductions": [],
+      "evidence": "Budget math error fully resolved — plan.md and budget.md are now synchronized. Contract execution timeline is explicit: Pre-Kickoff (2026-02-26~27) → 공간 사용 협약 초안 (03-02) → 서명 (03-05) → 운영 위탁 계약 서명 (03-06, 신청 오픈 전 필수) → 신청 접수 오픈 (03-07). Dependency chain is enforced: registration cannot open before contract signing. Wi-Fi verification moved to Week -4 (03-03) with 4-week procurement buffer for LTE router fallback. Pre-Kickoff section includes 1-week delay trigger if kickoff is not confirmed by 02-27. Remaining concern: the 30-day timeline from today (02-26) to D-Day (03-28) is extremely tight with zero buffer days between milestones. Any single task slipping 2+ days cascades. However, this is inherent to the case context rather than a planning deficiency — the plan acknowledges it with the Pre-Kickoff delay trigger."
+    },
+    "differentiation": {
+      "score": 8,
+      "deductions": [],
+      "evidence": "All case-specific adaptations from iteration 1 remain intact: 마인크래프트 비유, 그림 기획서, 카드게임 맥락 설계, 학부모 미션 카드, age-specific TA ratios (초4 3팀/TA, 초5-6 5팀/TA). New additions strengthen differentiation: (1) consent/privacy procedures are specifically tailored to Korean 개인정보보호법 for 14세 미만 minors — not generic privacy boilerplate, (2) 동아일보 executive brief frames the opportunity against 조선일보 에듀조선 competitive context, (3) backup instructor role includes standby compensation (₩50K-100K from contingency budget). Revenue-share rationale (80/20) still lacks explicit case-specific justification vs other deployment models, but this is a SPEC-level parameter, not a case-level decision."
+    },
+    "partner_value": {
+      "score": 9,
+      "deductions": [],
+      "evidence": "Partner-brief.md now has two distinct audience sections: Section 0 targets 동아일보 경영진 (brand/strategy decision-makers) with competitive framing (조선일보 에듀조선 vs 동아일보 공백), specific 2-item ask (brand approval + venue by 03-01), and concrete benefits (AI Academy brand asset, B2C revenue, content pipeline). The main body targets 동아이지에듀 with operational detail and ROI (₩310K~470K/session, ₩620K~940K/month). Both briefs can stand alone. The ask is time-bound (03-01 for 동아일보, 02-28 kickoff for 동아이지에듀). Contact information is included. The document successfully separates strategic approval (동아일보 parent) from operational execution (동아이지에듀 subsidiary)."
+    },
+    "risk_coverage": {
+      "score": 8,
+      "deductions": [],
+      "evidence": "8 risks now identified (R1-R8). R8 (개인정보 및 촬영 동의 미징수) addresses the critical legal gap from iteration 1 with specific mitigations: online consent in registration form + physical signature on D-Day (이중 동의), exclusion protocol for non-consenting participants, staff briefing on 미동의 참가자 list. Contract execution risk is now addressed implicitly through the timeline dependency chain (contract signing → registration opens). Remaining gap: no explicit risk entry for 'contract not executed on time' as a named risk in the R1-R8 matrix, though the timeline enforces it operationally. Also: Filamentree cash flow exposure risk (₩500K+ non-refundable pre-event costs if canceled) is not explicitly named, though the 8-team breakeven analysis and cancellation options in logistics.md Risk 3 partially cover it."
+    },
+    "actionability": {
+      "score": 9,
+      "deductions": [],
+      "evidence": "Timeline is now comprehensive: Pre-Kickoff (02-26~27) → Week -4 through Week +1, with every task having date, owner, deliverable, and dependency columns filled. Contract tasks are explicit with owners and deadlines (공간 사용 협약 03-02/03-05, 운영 위탁 03-06). D-7 checklist has owner assignments per item. Critical path diagram is up to date including Pre-Kickoff and contract milestones. Consent form handling is threaded through timeline (Week -3 drafting → Week -2 attachment to confirmation email → Week -2 독촉 → Week -1 final collection status → D-Day 현장 수거). Backup instructor has explicit assignment task (Week -3, 03-07) with dependency on curriculum finalization."
+    }
+  },
+  "overall_score": 8,
+  "self_critique_checklist": {
+    "currency_cross_check": {
+      "status": "PASS",
+      "detail": "plan.md and budget.md ₩ figures verified consistent: 20팀 총비용 ₩1,650,000, 15팀 총비용 ₩1,450,000, 20팀 순이익 ₩2,350,000, 15팀 순이익 ₩1,550,000, 8팀 손익분기 ₩150,000, 동아이지에듀 배분 20팀 ₩470,000 / 15팀 ₩310,000, Filamentree 배분 20팀 ₩1,880,000 / 15팀 ₩1,240,000. Executive summary in plan.md correctly states ₩1,450,000~1,650,000 range."
+    },
+    "timeline_owners_and_dependencies": {
+      "status": "PASS",
+      "detail": "All tasks in Pre-Kickoff, Week -4, Week -3, Week -2, Week -1, Week 0, Week +1 have 담당 and 의존성 columns populated. Contract signing tasks (03-02, 03-05, 03-06) have explicit dependency chains. 신청 접수 오픈 (03-07) depends on 운영 위탁 계약 서명 완료."
+    },
+    "no_placeholders": {
+      "status": "PASS",
+      "detail": "Grep search for [TBD], [TODO], XXX, FIXME across all 5 .md files returned 0 matches in document content (only found in test-report.json and previous critic-log.json as descriptive text)."
+    },
+    "partner_brief_standalone": {
+      "status": "PASS",
+      "detail": "partner-brief.md contains: (1) Section 0 for 동아일보 경영진 with competitive framing, 2-item ask, benefits, deadline 03-01, contact info; (2) Main body for 동아이지에듀 with program description, their contributions, their returns (direct revenue + retention + content), revenue structure table, timeline, specific ask (kickoff by 02-28), contact info. Both sections are self-contained and do not require reading plan.md or budget.md."
+    }
+  },
+  "remaining_issues": [
+    {
+      "severity": "low",
+      "file": "partner-brief.md",
+      "location": "수익 구조 요약 — 월 2회 정기화 row",
+      "problem": "Monthly estimate ₩680,000 for 17팀 avg does not precisely back-calculate from the budget model. At 17팀 (3 TAs, 34 people snacks), expected cost ~₩1,470,000, profit ~₩1,930,000, 20% = ~₩386,000 x 2 = ~₩772,000. The stated ₩680,000 appears to use simplified averaging. Not materially misleading given the range ₩620,000~940,000 is correctly bounded.",
+      "recommendation": "Consider updating to ₩700,000~750,000 for 17팀 estimate, or simply state the range without a point estimate."
+    },
+    {
+      "severity": "low",
+      "file": "plan.md",
+      "location": "Section 6 Risk Matrix",
+      "problem": "No explicit named risk for 'contract not executed before marketing launch' — this is handled operationally via timeline dependency chain but not as a formal risk entry. Filamentree cash flow exposure (₩500K+ non-refundable costs if event canceled) is also not explicitly named.",
+      "recommendation": "Consider adding R9 for contractual delay risk and R10 for Filamentree pre-event cash exposure in a future iteration if the risk matrix is expanded."
+    }
+  ],
+  "summary": "All 7 critic findings from iteration 1 have been fully addressed in Rev 2. Budget arithmetic is corrected and cross-verified. Consent/privacy procedures are threaded across plan.md (R8), logistics.md (printout table + D-Day procedures), and timeline.md (Week -3 through D-Day). Contract execution timeline is explicit with Pre-Kickoff section and dependency-enforced sequence. 동아일보 executive brief (Section 0) provides competitive framing and time-bound ask. Wi-Fi verification moved to Week -4. Budget.md revenue projections clarified with conservative scenario. Backup instructor is fully specified in staffing, timeline, and risk mitigation. Score improved from 6/10 to 8/10. Remaining issues are low-severity refinements that do not block operational readiness."
+}

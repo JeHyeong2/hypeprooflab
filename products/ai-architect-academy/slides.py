@@ -54,13 +54,13 @@ def s01_title(pid, s):
     r += rect(pid, emu(0.1), emu(0.08), SW, emu(0.04), ACCENT)
     r += tb(pid, MARGIN_L + emu(0.1), emu(0.5), emu(2), emu(0.25), 'PROPOSAL  |  2026.02', FONT_BODY, MID_GRAY)
     r += tb(pid, MARGIN_L + emu(0.1), emu(1.0), emu(5.5), emu(1.4),
-            "Future AI Leader's\nAcademy", 42, WHITE, True, ls=115)
+            "Future AI Leader's\nAcademy", 42, WHITE, True, ls=100)
     r += rect(pid, MARGIN_L + emu(0.1), emu(2.45), emu(2), emu(0.05), ACCENT)
     r += tb(pid, MARGIN_L + emu(0.1), emu(2.55), emu(5.5), emu(0.35),
-            '미래 AI 리더스 아카데미', 18, WHITE, True)
+            '미래 AI 리더 아카데미', 18, WHITE, True, ls=100)
     r += tb(pid, MARGIN_L + emu(0.1), emu(2.95), emu(5.5), emu(0.9),
             "코딩하는 아이에서 'AI를 지휘하는 아이'로\n부모와 함께 만드는 4시간의 관점 전환", 14, MID_GRAY, ls=160)
-    r += tb(pid, MARGIN_L + emu(0.1), emu(3.95), emu(5), emu(0.25),
+    r += tb(pid, MARGIN_L + emu(0.1), emu(3.95), emu(5), emu(0.32),
             'Filamentree (HypeProof AI Lab)  ×  동아일보', 11, WHITE)
     img_id = uid()
     r += [_img(pid, img_id, 'https://hypeproof-ai.xyz/workshop/edu.png', emu(6.2), emu(1.3), emu(3.3), emu(1.92))]
@@ -177,7 +177,7 @@ def s04_concept(pid, s):
     r += card(pid, parent_x, emu(1.2), COL3_W, emu(2.2))
     r += rect(pid, parent_x, emu(1.2), COL3_W, emu(0.55), PRIMARY)
     r += tb(pid, parent_x + CARD_PAD, emu(1.25), COL3_W - CARD_PAD * 2, emu(0.2), 'INTEGRATOR', FONT_BODY, WHITE, True)
-    r += tb(pid, parent_x + CARD_PAD, emu(1.42), COL3_W - CARD_PAD * 2, emu(0.22), '부모', 14, WHITE, True)
+    r += tb(pid, parent_x + CARD_PAD, emu(1.42), COL3_W - CARD_PAD * 2, emu(0.42), '부모', 14, WHITE, True)
     r += tb(pid, parent_x + CARD_PAD, emu(1.9), COL3_W - CARD_PAD * 2, emu(1.3),
             '현실 감각으로 구조화·구체화\n"날개는 어떤 버튼으로 펴?"\n기획서를 함께 정리하는\n디지털 파트너', 10, DARK_GRAY, ls=145)
     arrow1_x = col3(0) + COL3_W
@@ -193,7 +193,7 @@ def s04_concept(pid, s):
             'outline': {'outlineFill': {'solidFill': {'color': {'rgbColor': PRIMARY}}}, 'weight': {'magnitude': 0.5, 'unit': 'PT'}}},
         'fields': 'shapeBackgroundFill,outline'}}]
     r += rect(pid, MARGIN_L, emu(3.65), CONTENT_W, emu(0.02), LIGHT_GRAY)
-    r += tb(pid, MARGIN_L, emu(3.8), emu(3), emu(0.2), '핵심 역량 3가지', 10, PRIMARY, True)
+    r += tb(pid, MARGIN_L, emu(3.8), emu(3), emu(0.26), '핵심 역량 3가지', 10, PRIMARY, True, ls=100)
     comps = [
         ('맥락 설계', 'Context Engineering', 'AI에게 올바른 지시를 내리는\n논리적 사고력', ACCENT),
         ('의사결정', 'Decision Making', '무엇을 만들고 무엇을 포기할지\n판단하는 능력', PRIMARY),
@@ -244,9 +244,9 @@ def s05_curriculum(pid, s):
     r += rrect(pid, MARGIN_L, emu(4.75), CONTENT_W, emu(0.25), ACCENT_LIGHT)
     r += rect(pid, MARGIN_L, emu(4.75), emu(0.05), emu(0.25), ACCENT)
     r += tb(pid, MARGIN_L + emu(0.2), emu(4.77), emu(5), emu(0.2),
-            '10초 피드백 루프: AI 지시 → 즉시 결과 → 수정 → 반복', 10, ACCENT, True)
+            '10초 피드백 루프: AI 지시 → 즉시 결과 → 수정 → 반복', 10, ACCENT, True, ls=100)
     r += tb(pid, emu(5.8), emu(4.77), emu(3.5), emu(0.2),
-            '5개 시상 카테고리: 모든 팀이 수상', 10, PRIMARY, True)
+            '5개 시상 카테고리: 모든 팀이 수상', 10, PRIMARY, True, ls=100)
     return r
 
 
@@ -257,9 +257,9 @@ def s06_partnership(pid, s):
     r += rrect(pid, MARGIN_L, emu(1.05), CONTENT_W, emu(0.45), ACCENT_LIGHT)
     r += rect(pid, MARGIN_L, emu(1.05), emu(0.06), emu(0.45), ACCENT)
     r += tb(pid, MARGIN_L + emu(0.25), emu(1.08), CONTENT_W - emu(0.35), emu(0.2),
-            '조선일보: 에듀조선(뉴지엄·기자체험관)으로 K-12 체험 교육 운영 중', 10, PRIMARY, True)
+            '조선일보: 에듀조선(뉴지엄·기자체험관)으로 K-12 체험 교육 운영 중', 10, PRIMARY, True, ls=100)
     r += tb(pid, MARGIN_L + emu(0.25), emu(1.28), CONTENT_W - emu(0.35), emu(0.2),
-            '→ 동아일보의 빈 칸을 먼저 채우는 기회', 10, ACCENT, True)
+            '→ 동아일보의 빈 칸을 먼저 채우는 기회', 10, ACCENT, True, ls=100)
     ly = emu(1.7)
     lx = col2(0)
     r += card(pid, lx, ly, COL2_W, emu(2.8))
@@ -295,7 +295,7 @@ def s06_partnership(pid, s):
         r += tb(pid, rx + CARD_PAD + emu(1.18), iy, emu(2.9), emu(0.2), desc, FONT_BODY, DARK_GRAY)
         iy += emu(0.38)
     r += rect(pid, 0, emu(4.55), SW, emu(0.45), PRIMARY)
-    r += tb(pid, MARGIN_L, emu(4.6), emu(4), emu(0.2), '동아일보 AI 교육 포트폴리오의 빈 칸', 10, ACCENT, True)
+    r += tb(pid, MARGIN_L, emu(4.6), emu(4), emu(0.2), '동아일보 AI 교육 포트폴리오의 빈 칸', 10, ACCENT, True, ls=100)
     r += tb(pid, MARGIN_L, emu(4.8), CONTENT_W, emu(0.18),
             '미디어 프론티어(성인)  ·  동아이지에듀(초중고 구독)  ·  DBR에듀(직장인)  →  초중등+학부모 유료 AI 교육 = 없음', FONT_BODY, WHITE)
     return r
@@ -404,7 +404,7 @@ def s09_closing(pid, s):
     r += rect(pid, 0, emu(4.1), SW, emu(0.75), PRIMARY)
     r += rect(pid, MARGIN_L, emu(4.2), emu(0.05), emu(0.4), ACCENT)
     r += tb(pid, MARGIN_L + emu(0.25), emu(4.15), emu(7), emu(0.6),
-            '"AI가 어렵지 않다는 것을 배웠습니다.\n아이와 처음으로 무언가를 함께 완성했습니다."', 13, WHITE, True, ls=150)
+            '"AI가 어렵지 않다는 것을 배웠습니다.\n아이와 처음으로 무언가를 함께 완성했습니다."', 13, WHITE, True, ls=120)
     r += tb(pid, emu(8.0), emu(4.2), emu(1.5), emu(0.2), '— 참가 학부모', FONT_LABEL, MID_GRAY, a='END', it=True)
     r += tb(pid, MARGIN_L, emu(4.8), emu(2), emu(0.2), 'NEXT STEP', FONT_CARD_TITLE, ACCENT, True)
     r += tb(pid, MARGIN_L, emu(4.95), CONTENT_W, emu(0.2),

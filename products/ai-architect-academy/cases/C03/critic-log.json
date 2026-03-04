@@ -1,0 +1,78 @@
+{
+  "case_id": "C03",
+  "iteration": 4,
+  "timestamp": "2026-02-26T15:00:00+09:00",
+  "scores": {
+    "completeness": {
+      "score": 7,
+      "deductions": [],
+      "evidence": "All 5 required output files present. Iteration 3 fixes confirmed: [담당자 이메일] placeholder replaced with 'dbr-edu@donga.com (담당자 배정 후 업데이트 예정)' in partner-brief.md, and ⚠️ header warning added above Ask section. 기업 연수원 budget total (₩3,410,000) now matches budget.md. HOWEVER: (1) plan.md line 124 still shows 동아미디어센터 total at ₩3,910,000 — contradicts budget.md ₩4,070,000 (₩160K discrepancy); (2) partner-brief.md '다음 단계' contact option 2 ('전화') lists availability hours but no actual phone number — an external partner cannot call anyone. No new [TBD]/[TODO]/[XXX] placeholders found. No mandatory -3 deduction triggered (the phone gap is an omission, not a bracketed placeholder)."
+    },
+    "feasibility": {
+      "score": 6,
+      "deductions": [
+        "budget_sums_mismatch_venue: plan.md line 124 reports 동아미디어센터 total cost ₩3,910,000; budget.md table reports ₩4,070,000. Gap ₩160,000 has persisted since test-report iteration flagged this as CRITICAL BLOCKING. Triggers feasibility -2."
+      ],
+      "evidence": "Pricing and staffing remain realistic. 기업 연수원 scenario costs are now consistent across plan.md (₩3,410,000) and budget.md (₩3,410,000) — iteration 3 fix confirmed. HOWEVER two new financial integrity issues emerge: (1) 동아미디어센터 scenario: plan.md ₩3,910,000 vs budget.md ₩4,070,000 — the ₩160K gap arises because plan.md uses a fixed 예비비 of ₩360,000 for BOTH venue scenarios, but the correct 10% of (Personnel ₩1,950K + Operations ₩1,150K + Venue ₩600K) = ₩370K for the 동아미디어센터 case, not ₩360K; (2) plan.md reserve figure (₩360,000) is 11.8% of the visible line items (₩800K+₩900K+₩250K+₩300K+₩160K+₩350K+₩100K+₩150K+₩40K = ₩3,050,000 × 10% = ₩305K), not 10%. The ₩50K supplies line (포스트잇·마커·A4, present in budget.md as separate line) is absorbed into the inflated reserve, making the stated '10% 예비비' label internally incorrect. Q3 revenue forecast also assumes retainer conversion completes by July 1 — see actionability. Budget sums mismatch deduction applied: -2."
+    },
+    "differentiation": {
+      "score": 8,
+      "deductions": [],
+      "evidence": "C03 remains structurally distinct from C01 (B2C direct) on all axes: buyer (corporate CSR budget vs individual parent), channel (DBR에듀 cross-sell vs 어린이동아 newsletter), contract structure (3-party B2B invoice vs 2-party prepayment), pricing (₩6.5-8M/session vs ₩200K/team), procurement cycle (8-10 week corporate approval vs 72-hour registration), venue (corporate campus with IT security constraints vs 동아미디어센터), curriculum overlay (executive ceremony, branded materials, ESG reporting package vs standard). 조선일보-신한은행 competitive benchmark provides differentiated strategic framing. Score ceiling enforced at 9."
+    },
+    "partner_value": {
+      "score": 8,
+      "deductions": [],
+      "evidence": "Significant improvement from iteration 3. [담당자 이메일] contact placeholder resolved — corporate partner can now reach DBR에듀 via dbr-edu@donga.com. ESG/CSR ROI framing is strong: dual outputs (employee satisfaction + ESG reporting material) address both HR and corporate governance audiences. NPS 93점 claim and 3 live game URLs provide credible social proof. Retainer economics clearly documented (₩1,377,000 commission/session for DBR에듀 at 30% profit share). NEW GAP: phone contact option in partner-brief.md '다음 단계' has no actual number ('전화: 미팅 일정 조율 (평일 오전 10시~오후 6시)' — no number). A corporate HR executive preferring phone contact cannot proceed. Partial penalty absorbed within base score; no mandatory -2 deduction since an email 'Ask' is present and functional."
+    },
+    "risk_coverage": {
+      "score": 7,
+      "deductions": [],
+      "evidence": "8 distinct B2B-specific risks in plan.md (R1 CSR budget freeze, R2 procurement delay, R3 low participation, R4 branding disputes, R5 HR turnover, R6 IT firewall, R7 age mixing, R8 retainer non-conversion). logistics.md adds 3 emergency response protocols with 4-step procedures. Minimum 5 risks rule satisfied. NEW FINDING: internal contradiction between risk mitigations — plan.md Risk R3 states '최소 15팀 보장 조항 계약서 삽입' while logistics.md 비상 2 states '계약서에 최소 참가 팀 수 20팀 미달 시에도 계약금 전액 청구 조항 삽입.' Two different minimums (15팀 vs 20팀) will generate conflicting contract language. The 5-team gap (₩1.25M at ₩250K/team) is not trivial. A field executor referencing plan.md will negotiate a different floor than one referencing logistics.md. Risk mitigation threshold is undefined at the contract level. Score ceiling: 9."
+    },
+    "actionability": {
+      "score": 7,
+      "deductions": [],
+      "evidence": "Significant improvements from iteration 3: (1) D+7 now correctly presents ₩28M retainer as primary ask with ₩24M fallback explicitly labeled — no more product conflation; (2) D+14 (2026-05-30) and D+21 (2026-06-06) sections added with owners and dependencies — the D+8 to D+29 gap is resolved. Week-by-week structure with [CRITICAL] markers, owners, dependencies, and deliverables remains strong. D-Day hour-by-hour schedule is operator-ready. NEW CONCERN: budget.md Q3 (Jul-Sep 2026) forecasts '기업 A 2회차' revenue at ₩6,000,000 — the quarterly retainer rate — implying 기업 A's retainer contract is active by July 1. Timeline.md targets retainer signature at D+30 = June 15. There is a zero-buffer window: if retainer negotiation slips past June 30 (D+45), Q3 revenue is overstated by ₩6M with no contingency noted. No fallback task or revenue adjustment is documented in the timeline for this scenario."
+    }
+  },
+  "overall_score": 7,
+  "issues": [
+    {
+      "severity": "critical",
+      "file": "plan.md",
+      "location": "Budget Breakdown → 비용 요약 표 → 총 비용 (동아미디어센터 대관 추가 시)",
+      "problem": "plan.md line 124 reports 동아미디어센터 total cost as ₩3,910,000. budget.md total cost table (동아미디어센터 row) reports ₩4,070,000. The ₩160,000 discrepancy has persisted since test-report.json flagged it as 'CRITICAL BLOCKING' in the same iteration cycle. Root cause: plan.md uses a static 예비비 of ₩360,000 regardless of venue scenario, but the correct calculation is 10% of (Personnel ₩1,950K + Operations ₩1,150K + Venue ₩600K) = ₩370K. The 동아미디어센터 scenario should cost ₩3,700K base + ₩370K reserve = ₩4,070K, not ₩3,910K. Any partner pitch using plan.md for the venue fallback scenario understates costs by ₩160K and overstates profit by the same amount. budget.md is internally correct; plan.md is wrong and contradicts it.",
+      "fix_instruction": "In plan.md 'Budget Breakdown → 비용 요약' table: (1) Change '총 비용 (동아미디어센터 대관 추가 시)' from ₩3,910,000 to ₩4,070,000. (2) Add a footnote or second line under '예비비 (10%)' that reads '※ 동아미디어센터 사용 시 예비비 ₩370,000 (장소비 포함 기준)'. (3) Add the 동아미디어센터 영업이익 line: '동아미디어센터 기준 영업이익: ₩8,000,000 - ₩4,070,000 = ₩3,930,000 (49% 마진)'. Verify: ₩1,950K + ₩1,150K + ₩600K = ₩3,700K × 10% = ₩370K → total ₩4,070K. This matches budget.md line 101."
+    },
+    {
+      "severity": "high",
+      "file": "plan.md",
+      "location": "Budget Breakdown → 비용 요약 표 → 예비비 (10%) 행",
+      "problem": "plan.md shows 예비비 ₩360,000 in the 기업 연수원 scenario. However, the visible line items in the same table sum to ₩3,050,000 (₩800K + ₩900K + ₩250K + ₩300K + ₩160K + ₩350K + ₩100K + ₩150K + ₩40K). 10% of ₩3,050,000 = ₩305,000, not ₩360,000. The ₩55,000 difference exists because the ₩50,000 supplies line (포스트잇·마커·A4 등 소모품) from budget.md is still absent from plan.md's summary table — it was never added in iteration 3 fixes — and is instead silently absorbed into the inflated reserve. The table header states '예비비 (10%)' but the value corresponds to approximately 11.8% of visible items. A planner computing costs from this table will get a total of ₩3,355,000 (₩3,050K + ₩305K), not ₩3,410,000, creating an unexplained ₩55,000 gap.",
+      "fix_instruction": "In plan.md 'Budget Breakdown → 비용 요약' table: (1) Add a new row '소모품 (포스트잇·마커·A4 등)' | ₩50,000 between '핫스팟 데이터 (8대)' and '예비비 (10%)'. (2) Update '예비비 (10%)' from ₩360,000 to ₩310,000 (= 10% of ₩3,100,000, matching budget.md). (3) Verify total: ₩3,050K + ₩50K + ₩310K = ₩3,410,000 — unchanged total, but now correctly itemized and reserve is genuinely 10%."
+    },
+    {
+      "severity": "high",
+      "file": "plan.md + logistics.md",
+      "location": "plan.md → Risk Matrix → R3 완화 전략 / logistics.md → 비상 대응 플랜 비상 2 → 예방 조항",
+      "problem": "Two files define different minimum team thresholds for the mandatory contract clause: plan.md R3 mitigation reads '최소 15팀 보장 조항 계약서 삽입' while logistics.md 비상 2 예방 section reads '계약서에 최소 참가 팀 수 20팀 미달 시에도 계약금 전액 청구 조항 삽입.' A field team member referencing plan.md will negotiate a 15-team floor; one referencing logistics.md will negotiate a 20-team floor. The 5-team discrepancy equals ₩1,250,000 in minimum guaranteed revenue (5팀 × ₩250,000/팀). budget.md references '최소 계약 조건: 15팀 (₩3,750,000)' but then states '20팀 미만 시 별도 협의' — a third inconsistent definition. In a live contract negotiation, conflicting internal documents expose Filamentree to either under-protecting revenue (if 15팀 is used and 15-19팀 show up) or losing the deal (if 20팀 is enforced too aggressively).",
+      "fix_instruction": "Decide on a single authoritative minimum: 20팀 is recommended as it (a) matches the standard pricing tier (₩250,000/팀) and (b) exceeds both breakeven points (14팀 for 기업 연수원, 17팀 for 동아미디어센터). Then: (1) Update plan.md R3 mitigation from '최소 15팀 보장 조항 계약서 삽입' to '최소 참가 팀 수 20팀 보장 조항 계약서 삽입. 20팀 미달 달성 시에도 계약금 전액 청구.' (2) Update budget.md '최소 계약 조건' line from '15팀 (₩3,750,000)' to '20팀 (₩5,000,000)' and remove the '20팀 미만 시 별도 협의' clause (or keep as '15팀 절대 최소: ₩3,750,000, 단 20팀 미만 시 차액 청구 조항 삽입'). (3) logistics.md already correctly states 20팀 — no change needed there."
+    },
+    {
+      "severity": "medium",
+      "file": "partner-brief.md",
+      "location": "다음 단계 (Ask) → 연락 방법 2 '전화'",
+      "problem": "The CTA section offers two contact options: (1) email — both addresses present and functional; (2) phone — text reads '**전화**: 미팅 일정 조율 (평일 오전 10시~오후 6시)' with NO phone number. This is an external-facing sales document targeted at corporate HR/CSR executives. A senior HR manager who prefers phone contact — common in Korean enterprise culture — has no number to call. The phone entry exists structurally but carries zero actionable information, making it a misleading option rather than a real contact method.",
+      "fix_instruction": "In partner-brief.md '다음 단계 (Ask)' section, update item 2 to include an actual phone number. Example: '2. **전화**: Jay Lee — 010-XXXX-XXXX (평일 오전 10시~오후 6시, 문자 우선 후 전화)'. If Jay's personal number is not to be published externally, use a company line or a Filamentree representative number. Alternatively, if no phone is to be offered, remove the phone option entirely to avoid a dead-end CTA."
+    },
+    {
+      "severity": "medium",
+      "file": "budget.md",
+      "location": "연간 B2B 수익 목표 (Year 1) → Q3 (2026-07~09) 행",
+      "problem": "budget.md Q3 revenue forecast is '기업 B 파일럿 1회 + 기업 A 2회차 → ₩14,000,000'. The ₩6,000,000 for '기업 A 2회차' uses the quarterly-retainer rate — meaning 기업 A must have signed the retainer contract and be on their 2nd of 4 retainer sessions by Q3 start (July 1). timeline.md targets retainer signature at D+30 = June 15, leaving only 15 days of buffer before Q3 begins. If retainer negotiation slips even 2-3 weeks (D+44 or later), Q3 has no confirmed 기업 A revenue. No fallback revenue, alternative customer, or forecast adjustment is documented anywhere for this scenario. The SPEC.md Year 1 B2B target (₩30M) is achievable even without this Q3 assumption, but the plan presents the optimistic ₩44M without flagging the timing dependency.",
+      "fix_instruction": "In budget.md 'Year 1 B2B 수익 목표' table, add a footnote below the Q3 row: '※ 기업 A 2회차(₩6M) 실현 조건: D+30(6/15) 리테이너 계약 서명 완료 필요. 계약 지연 시 Q3 수익 ₩8M (기업 B 파일럿만)으로 하향 조정.' Additionally, add a sensitivity note at the bottom: '보수 시나리오 (기업 A 리테이너 Q4 전환): Q3 ₩8M, Q4 ₩22M → Year 1 합계 ₩38M. 여전히 SPEC.md 목표 ₩30M 초과.' This makes the timing dependency explicit without changing the headline forecast."
+    }
+  ],
+  "revision_prompt": "C03 iteration 4 requires fixes to 4 files before the plan is internally consistent and sales-ready. Perform in the following order:\n\n1. **plan.md** — 'Budget Breakdown → 비용 요약 (30팀 기준, 기업 연수원 사용 시)' table:\n   a. Add new row between '핫스팟 데이터 (8대)' and '예비비 (10%)': '소모품 (포스트잇·마커·A4 등)' | ₩50,000\n   b. Change '예비비 (10%)' from ₩360,000 to ₩310,000\n   c. Verify subtotal: ₩3,050K + ₩50K = ₩3,100K → reserve 10% = ₩310K → total ₩3,410,000 (unchanged)\n   d. Change '총 비용 (동아미디어센터 대관 추가 시)' from ₩3,910,000 to ₩4,070,000\n   e. Add below the 동아미디어센터 total row: '동아미디어센터 기준 영업이익: ₩8,000,000 - ₩4,070,000 = ₩3,930,000 (49% 마진)'\n   f. Add footnote to 예비비 row: '※ 동아미디어센터 사용 시 예비비 ₩370,000 적용 (장소비 ₩600K 포함 기준)'\n   g. In Risk Matrix R3 완화 전략: change '최소 15팀 보장 조항 계약서 삽입' to '최소 참가 팀 수 20팀 보장 조항 계약서 삽입. 20팀 미달 시에도 계약금 전액 청구.'\n\n2. **budget.md** — two changes:\n   a. In '수익 구조 → 1회성 파일럿 가격표' section, update the minimum contract note from '최소 계약 조건: 15팀 (₩3,750,000). 20팀 미만 시 별도 협의.' to '최소 계약 조건: 20팀 (₩5,000,000). 15팀 절대 최소(₩3,750,000) 시 차액 청구 조항 삽입.'\n   b. In 'Year 1 B2B 수익 목표' table, add footnote below Q3 row: '※ 기업 A 2회차(₩6M) 실현은 D+30(2026-06-15) 리테이너 계약 서명 완료에 의존. 지연 시 Q3 ₩8M (기업 B 파일럿), Year 1 보수 합계 ₩38M.'\n\n3. **partner-brief.md** — one change:\n   a. In '다음 단계 (Ask)' item 2, replace '**전화**: 미팅 일정 조율 (평일 오전 10시~오후 6시)' with '**전화**: Jay Lee — 010-XXXX-XXXX (평일 오전 10시~오후 6시, 문자 우선)'. If a real number is available, insert it. If no phone is to be published, remove this bullet entirely.\n\n4. **logistics.md** — no change needed (already uses 20팀 minimum — correct).\n\nAfter these changes, rerun test-report. Expected result: budget_sums_match PASS (동아미디어센터 plan.md ₩4,070,000 = budget.md ₩4,070,000). Overall case score should reach 8 on next iteration."
+}

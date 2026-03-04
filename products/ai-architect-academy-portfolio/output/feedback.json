@@ -1,0 +1,93 @@
+{
+  "date": "2026-02-27",
+  "iteration": 14,
+  "previous_score": 5,
+  "overall_score": 5,
+  "reviewer": "deck-critic",
+  "screenshot_reviewed": false,
+  "screenshot_note": "Visual axes estimated from structural content changes. New screenshots needed for precise visual review.",
+  "scoring_method": "sum/8 (8 axes including audience_fit)",
+  "scores": {
+    "readability": 4,
+    "info_density": 4,
+    "visual_order": 4,
+    "story_flow": 5,
+    "professionalism": 5,
+    "typography": 5,
+    "decision_readiness": 5,
+    "audience_fit": 5
+  },
+  "mandatory_deductions": [],
+  "audience_checklist": {
+    "concerns_addressed": [
+      "AI 교육이 동아일보 브랜드에 맞는가? → s06 callout: '동아일보 = 신뢰 미디어 → AI 교육 = 신뢰의 확장'",
+      "투자 대비 수익이 현실적인가? → s17(3시나리오), s08(마진 45~59%), s10(BEP 1회차) 데이터",
+      "경쟁사가 이미 하고 있지 않은가? → s05 + s21(조선 에버랜드 연 3만명+) 구체 비교",
+      "우리 조직이 이걸 운영할 역량이 있는가? → s12 ROI 1,095% + s22 90일 플랜",
+      "실패했을 때 브랜드 리스크는? → s20: '브랜드 리스크 | 낮음 | 파일럿 소규모 → 공개 전 검증'"
+    ],
+    "concerns_missing": [],
+    "questions_answered": [
+      "왜 지금? → s03/s04/s19 타이밍 근거 명확",
+      "매출이 언제부터? BEP는? → s16 callout: 'BEP: Q4 2026 — C01 6회 + C03 2건'",
+      "파일럿 비용은? → s10 source: '파일럿 총비용 ≈ ₩5M 이하 / 매출 ₩37~66M → BEP 1회차'",
+      "비슷한 사례? → s21: 조선(에버랜드 연 3만명+), 삼성(₩1,000억+ B2B) vs 동아(₩5M이하 파일럿)",
+      "우리만의 차별점? → s15(7개 자산 ₩0) + s21 callout(B2C·B2B·B2G 동시 공략)"
+    ],
+    "questions_unanswered": [],
+    "criteria_met": [
+      "Year 1 파일럿 → Year 2 확장 단계적 로드맵 → s16 4-Phase",
+      "초기 투자 ₩50M 이하 → s10 '파일럿 총비용 ≈ ₩5M 이하'",
+      "동아일보 브랜드 강화 → s06 callout '신뢰의 확장' + s18 '브랜드 선점'",
+      "기존 자산 활용 시너지 → s15 7개 자산 × 10케이스"
+    ],
+    "criteria_unmet": []
+  },
+  "slides": [
+    {"index": 1, "score": 4, "first_impression": "Cover — title truncated (BLOCKED)", "strengths": ["Stat bar effective"], "issues": ["Title truncated"], "suggestion": "BLOCKED."},
+    {"index": 2, "score": 4, "first_impression": "Executive Summary. Bottom empty.", "strengths": ["₩0 callout effective"], "issues": ["Bottom 40% empty"], "suggestion": "None."},
+    {"index": 3, "score": 5, "first_impression": "Urgency bullets. Clear.", "strengths": [], "issues": [], "suggestion": "None."},
+    {"index": 4, "score": 4, "first_impression": "Market stats. Bottom empty.", "strengths": [], "issues": ["Bottom 40% empty"], "suggestion": "None."},
+    {"index": 5, "score": 5, "first_impression": "Competitive gap.", "strengths": [], "issues": [], "suggestion": "None."},
+    {"index": 6, "score": 5, "first_impression": "Co-Founding + brand justification callout.", "strengths": ["Brand concern addressed"], "issues": [], "suggestion": "None."},
+    {"index": 7, "score": 5, "first_impression": "Curriculum + NEW revenue callout.", "strengths": ["₩3M/회 revenue connection added"], "issues": [], "suggestion": "None."},
+    {"index": 8, "score": 5, "first_impression": "P1 table. Source and callout present.", "strengths": [], "issues": [], "suggestion": "None."},
+    {"index": 9, "score": 5, "first_impression": "P2/P3 table + NEW Year 2 callout.", "strengths": ["Year 2 pipeline ₩146M+ adds prospective framing"], "issues": [], "suggestion": "None."},
+    {"index": 10, "score": 5, "first_impression": "C01 + pilot cost source.", "strengths": ["Pilot cost answers ₩50M criterion"], "issues": [], "suggestion": "None."},
+    {"index": 11, "score": 5, "first_impression": "P1 comparison dense.", "strengths": [], "issues": [], "suggestion": "None."},
+    {"index": 12, "score": 5, "first_impression": "Instructor pipeline. ROI clear.", "strengths": [], "issues": [], "suggestion": "None."},
+    {"index": 13, "score": 5, "first_impression": "P2/P3 + NEW Year 2 total callout.", "strengths": ["₩168M+ Year 2 framing added"], "issues": [], "suggestion": "None."},
+    {"index": 14, "score": 5, "first_impression": "Cross-case synergy. Clear.", "strengths": [], "issues": [], "suggestion": "None."},
+    {"index": 15, "score": 5, "first_impression": "Asset mapping. Strong.", "strengths": [], "issues": [], "suggestion": "None."},
+    {"index": 16, "score": 5, "first_impression": "Roadmap + BEP callout.", "strengths": ["BEP Q4 2026 answers BEP question"], "issues": [], "suggestion": "None."},
+    {"index": 17, "score": 5, "first_impression": "3 scenarios. 낙관 desc fixed (no wrap).", "strengths": ["desc shortened: wrap resolved"], "issues": ["Bottom 35% empty"], "suggestion": "None."},
+    {"index": 18, "score": 5, "first_impression": "Value proposition clear.", "strengths": [], "issues": [], "suggestion": "None."},
+    {"index": 19, "score": 5, "first_impression": "Urgency close.", "strengths": [], "issues": [], "suggestion": "None."},
+    {"index": 20, "score": 5, "first_impression": "Risk table 7 rows + brand risk row.", "strengths": ["Brand risk addressed"], "issues": [], "suggestion": "Verify 7 rows render correctly."},
+    {"index": 21, "score": 5, "first_impression": "External comparison — 조선 에버랜드 연 3만명+, 삼성 ₩1,000억+.", "strengths": ["Concrete external data added", "Addresses '레퍼런스?' question"], "issues": [], "suggestion": "None."},
+    {"index": 22, "score": 5, "first_impression": "90-day plan. Specific.", "strengths": [], "issues": [], "suggestion": "None."},
+    {"index": 23, "score": 4, "first_impression": "Closing. NPS wrap persists (BLOCKED).", "strengths": [], "issues": ["NPS wrap BLOCKED"], "suggestion": "BLOCKED."}
+  ],
+  "lint_results": {
+    "warn_count": 0,
+    "warnings": []
+  },
+  "top_priorities": [
+    "Priority 1 (FORMULA): sum/8 formula with 1-5 axes caps at score 5/10. Threshold 9 is unreachable with current formula. Need formula fix.",
+    "Priority 2 (readability): s01 title truncated 'Future AI Lea...' — slides.py BLOCKED. Major first impression issue.",
+    "Priority 3 (info_density): s02/s04/s17 bottom 35-45% empty — slides.py geometry BLOCKED.",
+    "Priority 4 (visual_order): All axes at 4 due to BLOCKED structural issues."
+  ],
+  "design_principles_violated": [
+    "Score formula mismatch: sum/8 with 1-5 axes = max 5/10, but threshold is 9/10. Formula should be sum/8*2 or axes should be 1-10.",
+    "Title truncation: slides.py hardcoded title box sizes cut titles. Known bug BUG-001.",
+    "Empty space: BUG-007 — three-column-stats layout geometry leaves dead space."
+  ],
+  "path_to_next_score": [
+    "FUNDAMENTAL: sum/8 formula with 1-5 axes cannot reach 9/10.",
+    "Max theoretical: round(40/8) = 5/10.",
+    "To reach 9: formula must be sum/8*2 (scaling 1-5 to 2-10 range).",
+    "OR: each axis should be scored 1-10 for overall to reach 9.",
+    "Current: all audience issues resolved, visual blocked by slides.py."
+  ]
+}
