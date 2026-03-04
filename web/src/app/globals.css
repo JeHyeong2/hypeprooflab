@@ -375,10 +375,23 @@ html[lang="en"] body {
   }
 }
 
-/* Sources table: prevent confidence label wrapping */
-.column-content table td:last-child,
-.column-content table th:last-child {
+/* Sources table styling */
+.column-content table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.column-content table th:first-child,
+.column-content table td:first-child {
+  width: 2rem;
+  text-align: center;
+}
+
+.column-content table th:last-child,
+.column-content table td:last-child {
+  width: 7rem;
   white-space: nowrap;
+  text-align: center;
 }
 
 /* Smooth scrollbar */
