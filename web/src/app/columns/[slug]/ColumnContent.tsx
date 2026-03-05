@@ -14,7 +14,7 @@ export default function ColumnContent({ content, locale }: Props) {
         locale === 'ko'
           ? 'text-[18px] leading-[32px] tracking-[0.03em] md:text-[18px] md:leading-[32px]'
           : 'text-[18px] leading-[30px] tracking-[0.01em] md:text-[18px] md:leading-[30px]'
-      } text-zinc-300 prose-headings:text-white prose-h2:text-2xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:font-bold prose-h3:mt-10 prose-h3:mb-4 prose-strong:text-white prose-strong:font-semibold prose-blockquote:border-l-2 prose-blockquote:border-purple-500 prose-blockquote:pl-6 prose-blockquote:my-8 prose-blockquote:text-zinc-300 prose-blockquote:italic prose-blockquote:text-lg prose-hr:border-zinc-800 prose-hr:my-12 prose-p:mb-6 prose-p:leading-relaxed prose-li:mb-2 prose-li:ml-4`}
+      } text-zinc-300 prose-headings:text-white prose-h2:text-2xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:font-bold prose-h3:mt-10 prose-h3:mb-4 prose-strong:text-white prose-strong:font-semibold prose-blockquote:border-l-2 prose-blockquote:border-purple-500 prose-blockquote:pl-6 prose-blockquote:my-8 prose-blockquote:text-zinc-300 prose-blockquote:italic prose-blockquote:text-lg prose-hr:border-zinc-800 prose-hr:my-12 prose-p:mb-6 prose-p:leading-relaxed prose-li:mb-2 prose-li:ml-4 prose-a:text-cyan-400 prose-a:underline prose-a:decoration-cyan-400/30 prose-a:underline-offset-2 hover:prose-a:decoration-cyan-400/80 prose-a:transition-colors`}
     >
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}

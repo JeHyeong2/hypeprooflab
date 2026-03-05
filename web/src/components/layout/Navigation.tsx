@@ -59,7 +59,7 @@ function MobileMenu() {
   const { shouldReduce, tap } = useAnimationConfig();
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       {/* Hamburger Button */}
       <motion.button
         className="p-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-zinc-950 rounded-md"
@@ -281,7 +281,7 @@ export function Navigation() {
         <Logo />
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-6">
           <NavLink href="#features">What We Do</NavLink>
           <NavLink href="#community">Community</NavLink>
           <NavLink href="#team">Team</NavLink>
