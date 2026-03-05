@@ -82,7 +82,7 @@ export default function ColumnsListClient({ koColumns, enColumns }: Props) {
               >
                 <article className="py-8 border-b border-zinc-800/50 hover:border-zinc-700 transition-colors">
                   <div className="flex items-center gap-3 mb-3 text-sm text-zinc-500">
-                    <span className="text-purple-400 uppercase tracking-wider text-xs font-medium">{fm.category}</span>
+                    <span className="text-purple-400 uppercase tracking-wider text-xs font-medium whitespace-nowrap">{fm.category}</span>
                     <span>·</span>
                     <time>{new Date(fm.date).toLocaleDateString(locale === 'ko' ? 'ko-KR' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
                     <span>·</span>

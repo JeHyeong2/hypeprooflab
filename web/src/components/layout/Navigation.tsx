@@ -23,7 +23,7 @@ function Logo() {
         <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
           <span className="text-white font-bold text-sm">H</span>
         </div>
-        <span className="text-white font-semibold text-lg tracking-tight">HypeProof AI</span>
+        <span className="text-white font-semibold text-lg tracking-tight whitespace-nowrap">HypeProof AI</span>
       </motion.div>
     </Link>
   );

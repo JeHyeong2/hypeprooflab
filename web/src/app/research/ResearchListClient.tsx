@@ -90,7 +90,7 @@ export default function ResearchListClient({ koResearch, enResearch }: Props) {
               >
                 <article className="py-8 border-b border-zinc-800/50 hover:border-cyan-800/50 transition-colors">
                   <div className="flex items-center gap-3 mb-3 text-sm text-zinc-500">
-                    <span className="text-cyan-400 uppercase tracking-wider text-xs font-medium">{fm.category}</span>
+                    <span className="text-cyan-400 uppercase tracking-wider text-xs font-medium whitespace-nowrap">{fm.category}</span>
                     {fm.authorType === 'ai' && (
                       <>
                         <span>·</span>
