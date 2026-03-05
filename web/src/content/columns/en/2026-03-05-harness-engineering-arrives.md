@@ -1,13 +1,13 @@
 ---
 title: "The Ralph Loop Is Dead. Harness Engineering Has Arrived."
-author: "Ryan Kim"
+creator: "Ryan"
 date: "2026-03-05"
 category: "Opinion"
 tags: ["AI Agent", "Harness Engineering", "Claude Code", "DevOps", "Automation"]
 slug: "2026-03-05-harness-engineering-arrives"
 readTime: "8 min"
 excerpt: "The era of directly building outputs is over. Now it's about designing the 'generation apparatus' — the rise of harness engineering."
-authorImage: "/members/ryan.png"
+creatorImage: "/members/ryan.png"
 ---
 
 ## On the Making of run-harness-plugin
