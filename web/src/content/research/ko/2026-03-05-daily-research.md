@@ -1,58 +1,72 @@
 ---
-title: "AI 윤리가 펜타곤 벽에 부딪힌 날"
+title: "AI가 전쟁터에서 코드를 짜고, 투자자들은 90%를 AI에 몰빵한다"
 creator: "HypeProof Lab"
 date: "2026-03-05"
 category: "Daily Research"
-tags: ["AI", "ethics", "military", "OpenClaw", "GPT-5"]
+tags: ["AI", "tech", "military", "investment", "security"]
 slug: "2026-03-05-daily-research"
-readTime: "7 min"
-excerpt: "Anthropic이 윤리를 내세우자 펜타곤이 OpenAI로 갈아탔다. AI 윤리가 시장 차별화 요소이자 정치적 무기가 된 날."
+readTime: "5 min"
+excerpt: "AI는 이란 전쟁터에서 실전 배치되고, 벤처투자의 90%를 독식하는 하루였다."
 creatorImage: "/members/hypeproof-lab.png"
 lang: "ko"
 authorType: "ai"
 ---
 
-**2026년 3월 4일, 실리콘밸리의 AI 윤리 연극이 국방부 계약이라는 현실과 마주쳤다. 그리고 무대가 무너졌다.**
+**오늘 하루 동안 AI는 이란에서 실탄을 맞고, 실리콘밸리에서 돈을 쓸어 담았다.**
 
-Anthropic이 펜타곤 협상에서 자율 무기와 국내 감시에 대한 원칙적 입장을 내세웠다. 몇 시간 만에 [블랙리스트에 올랐고, OpenAI가 같은 계약을 대체했다](https://techcrunch.com/2026/03/02/openai-anthropic-department-of-defense-war-hegseth-ai-companies-work-with-us-government/). 그런 불편한 윤리적 제약 없이.
+AI 윤리를 논할 시간조차 없었다. 미군이 이란 작전 중 실제로 Anthropic의 Claude AI를 사용했다는 소식이 터졌고, 동시에 벤처투자의 무려 90%가 AI 스타트업에 집중되는 전례 없는 상황이 벌어졌다.
 
-## 원칙이 월급을 만났을 때
+## Claude가 이란 전쟁터에서 미군과 함께 작전을 수행하다
 
-파장은 빠르고 예측 가능했다. [구글 직원 900명 이상이 AI 군사 활용 제한을 요구하는 공개 서한에 서명](https://www.cnbc.com/2026/03/03/anthropic-fallout-iran-war-tech-military-ai.html)했고, OpenAI 직원 100명도 합류했다. 타이밍이 우연은 아니었다 — [Anthropic의 AI가 최근 이란 공습에 사용됐을 수 있다](https://www.thenationalnews.com/future/technology/2026/03/04/anthropic-iran-strikes-ai-trump/)는 보도가 터지면서, 그들의 윤리적 포지셔닝에 씁쓸한 아이러니를 더했다.
+이는 단순한 기술 시연이 아니다. 실전 배치다. [Wall Street Journal이 보도한](https://www.bloomberg.com/news/newsletters/2026-03-05/chatgpt-users-switch-to-anthropic-s-claude-after-openai-pentagon-deal) 바에 따르면, 미군이 이란 작전 중 Anthropic의 Claude AI를 실제로 사용했다고 한다. 
 
-이건 하나의 계약 문제가 아니다. AI 기업들이 수익성 높은 정부 계약을 두고 경쟁하면서 윤리적 기준을 유지할 수 있느냐의 문제다. 펜타곤의 메시지는 명확했다: 합류하든가, 벤치에 앉든가.
+OpenAI가 국방부와 손잡자 소비자들이 "군산복합체에 협력하지 않겠다"며 Claude로 이탈하는 아이러니한 상황이 벌어지고 있다. Anthropic은 "우리는 평화를 사랑한다"고 말해왔지만, 결국 총알이 날아다니는 곳에서 코드를 돌리고 있었던 셈이다.
 
-## 기업 AI의 쉼 없는 행진
+한편 [Axios 보도](https://www.axios.com/2026/03/05/iran-war-anthropic-prsm-drones)에 따르면 미군의 새로운 전쟁 기계들이 이번 이란 전쟁에서 본격 공개되었다. AI는 이제 시뮬레이션을 벗어나 실전에 투입되고 있다.
 
-윤리 논쟁이 뜨거운 와중에도 비즈니스 쪽은 멈추지 않았다. OpenAI가 [GPT-5.3 Instant](https://www.nxcode.io/resources/news/gpt-5-3-instant-anti-cringe-update-review-2026)를 출시했다. 환각 26.8% 감소, 40만 토큰 컨텍스트 윈도우 — 펜타곤 논란 한복판에서 나온 기술적 성취는 장례식장에 배달된 샴페인 같았다.
+## 투자자들의 AI 광풍: 전체 벤처투자의 90%를 독식
 
-한편 Meta의 AI 야망은 현실에 부딪혔다. [자체 AI 칩 개발 프로젝트를 취소](https://www.fool.com/investing/2026/03/04/amazon-meta-news-why-alphabet-top-ai-stock/)했다. 경쟁력 있는 AI 하드웨어를 만드는 기술적 복잡성에 발목을 잡힌 것이다. 반대로 Amazon은 자체 칩 전략을 두 배로 강화하며, 빅테크들이 AI 인프라에 얼마나 다른 베팅을 하고 있는지 보여줬다.
+숫자는 거짓말을 하지 않는다. [TechCrunch 보고서](https://techcrunch.com/2026/03/03/openai-anthropic-waymo-dominated-189-billion-vc-investments-february-crunchbase-report/)에 따르면 2월 전 세계 벤처투자 1,890억 달러 중 AI 스타트업이 무려 90%인 1,710억 달러를 차지했다.
 
-가장 냉소적인 전개? [AI 기업들이 2026년 중간선거에 1억 2,500만 달러를 쏟아붓고 있다](https://techcrunch.com/2026/03/03/ai-companies-are-spending-millions-to-thwart-this-former-tech-execs-congressional-bid/). AI 모델 안전성 논쟁을 미국 역사상 가장 비싼 대리전으로 만들고 있다. 기술적 장점으로 논쟁에서 이길 수 없으면, 규칙을 만드는 정치인을 사면 된다는 것이다.
+더욱 충격적인 것은 시장 집중도다. OpenAI, Anthropic, Waymo 단 3개 회사가 이 거대한 파이를 거의 독식하고 있다. 이는 버블이 아니라 과점이다. 투자자들은 "다음 OpenAI"를 찾는 대신 이미 승리한 기업들에 돈을 계속 밀어넣고 있다.
 
-## AI 인프라의 조용한 혁명
+나머지 10%를 두고 수만 개의 스타트업이 경쟁하는 상황이다. AI가 아닌 분야의 창업자들에게 2026년은 혹독한 겨울이 될 것으로 보인다.
 
-헤드라인 드라마 너머에서 연구자들이 진짜 인상적인 성과를 냈다. [원숭이 뉴런을 활용한 포켓 사이즈 AI 두뇌](https://www.npr.org/2026/03/03/nx-s1-5729433/ai-brain-monkey-neurons)로 6,000만 파라미터를 1만 개로 압축하면서 거의 동일한 성능을 유지했다. 생물학적 접근의 AI 효율화가 모델 아키텍처에 대한 사고를 바꿀 수 있지만, 실용적 적용은 아직 먼 이야기다.
+## 중국의 반격: 5개년 계획에서 AI와 양자컴퓨팅을 최우선으로
 
-에이전트 생태계는 더 구체적인 진전을 보였다. [OpenClaw가 GitHub 스타에서 React를 추월](https://finance.yahoo.com/news/openclawd-releases-major-platform-openclaw-150000544.html)하며 60일 만에 25만 개를 달성했다 — 개발자들의 AI 에이전트 도구에 대한 갈증을 반영하는 폭발적 성장이다. [MCP(Model Context Protocol) 생태계](https://www.buildmvpfast.com/blog/model-context-protocol-mcp-guide-2026)도 크게 성숙해져, 3,000개 이상의 서버가 등록되고 Claude Code와 Cursor를 포함한 40개 이상의 호환 에디터가 존재한다.
+중국이 정면승부를 선언했다. [The Quantum Insider 보도](https://thequantuminsider.com/2026/03/05/chinas-new-five-year-plan-specifically-targets-quantum-leadership-and-ai-expansion/)에 따르면, 중국이 차기 5개년 국가발전전략에 양자기술과 AI를 중심 과제로 배치했다.
 
-[LangChain, CrewAI, AutoGen 전반의 그래프 기반 워크플로우 실행 수렴](https://medium.com/@openagents/open-source-ai-agent-frameworks-compared-crewai-vs-langgraph-vs-autogen-vs-openagents-2026-36a036b4801d)은 AI 에이전트 아키텍처가 공통 패턴 주변으로 결정화되고 있음을 시사한다. Microsoft의 Agent Framework 1.0(AutoGen과 Semantic Kernel 통합)이 이 통합을 가속할 수 있다.
+이는 단순한 정책 발표가 아니다. 중국 정부의 5개년 계획은 서구 기업들이 분기별 실적에 매달릴 때 10년 후를 내다보는 장기 전략이다. 미국이 AI 기업들과 [전력비 인상 방지 약속](https://www.pbs.org/newshour/politics/watch-trump-hosts-ai-leaders-to-sign-pledge-that-households-wont-bear-utility-bill-increases)을 체결하며 단기 정치적 해결에 집중하는 동안, 중국은 기술 패권의 근본 체력을 기르고 있다.
 
-## 개발자 생태계의 가속
+하지만 중국 내부에도 균열이 있다. [Bloomberg 보도](https://www.bloomberg.com/news/articles/2026-03-04/alibaba-qwen-head-who-warned-of-openai-gap-steps-down)에 따르면 알리바바의 Qwen AI 플랫폼 기술 책임자 Junyang Lin이 갑작스럽게 사임했다. 그는 OpenAI와의 격차를 공개적으로 경고했던 인물이다.
 
-구글이 [Chrome을 2026년 9월부터 2주마다 업데이트](https://www.ghacks.net/2026/03/04/google-will-release-chrome-updates-every-2-weeks-starting-september-2026/)하겠다고 발표했다. 웹 플랫폼 진화 속도가 사실상 두 배로 빨라진다. 개발자에게는 새 기능 접근이 빨라지지만, 호환성 변화를 따라잡아야 하는 압력도 커진다.
+## OpenClaw의 돌풍과 AI 에이전트 생태계의 명암
 
-보안은 전통적 개발 뉴스를 지배했다. [Android 3월 패치](https://www.helpnetsecurity.com/2026/03/03/android-march-2026-security-patch-cve-2026-21385/)가 129개 취약점을 해결했는데, 이미 실제 악용되고 있는 CVE-2026-21385가 포함됐다. [Docker Desktop](https://docs.docker.com/desktop/release-notes/)이 Kubernetes v1.34.3과 보안 강화로 업데이트됐고, [JetBrains도 .NET 툴체인 업데이트](https://blog.jetbrains.com/dotnet/2026/03/04/dotinsights-march-2026/)를 밀어냈다.
+오픈소스 AI 에이전트 플랫폼 OpenClaw이 [React를 넘어 25만 GitHub 스타를 달성](https://finance.yahoo.com/news/openclawd-releases-major-platform-openclaw-150000544.html)했다.
 
-조용하지만 의미 있는 발전은 [The Operator Vault의 무료 OpenClaw API 데이터베이스](https://www.openpr.com/news/4412931/the-operator-vault-publishes-free-openclaw-api-database-for-ai) 출시다. AI 에이전트 프레임워크가 성숙해질수록 중앙화된 API 레퍼런스는 핵심 인프라가 된다. 이런 종류의 개발자 도구는 생태계가 실험 단계에서 프로덕션 단계로 전환될 때 나타나는 신호다.
+더욱 주목할 점은 Nvidia CEO Jensen Huang이 [CNBC 인터뷰](https://www.cnbc.com/video/2026/03/05/nvidia-ceo-jensen-huang-calls-openclaw-the-most-important-software-release-probably-ever.html)에서 OpenClaw을 "아마도 역사상 가장 중요한 소프트웨어 릴리즈"라고 평가한 것이다. GPU 제왕의 입에서 나온 이런 극찬은 단순한 립서비스가 아니다.
+
+한편 [Shopify와 Google이 MCP 기반 Universal Commerce Protocol을 발표](https://www.mannpublications.com/mannreport/2026/03/04/homesage-ai-expands-mcp-model-context-protocol-integration-for-proptech-ai-agents/)하며 AI 에이전트가 실제 구매를 완료할 수 있는 새로운 표준을 제시했다. 이제 AI는 단순히 검색하고 추천하는 단계를 넘어 지갑을 여는 단계에 이르렀다.
+
+## 보안 위기: AI 에이전트를 노리는 새로운 공격들
+
+하지만 장밋빛 전망에는 어두운 그림자가 따른다. [보안 연구진이 발견한](https://www.helpnetsecurity.com/2026/03/04/agentic-browser-vulnerability-perplexedbrowser/) AI 에이전트 보안 취약점들은 심각하다. MS-Agent 프레임워크의 CVE-2026-2256과 Perplexity Comet의 PleaseFix 취약점군이 AI 에이전트 하이재킹, 로컬 파일 접근, 자격증명 탈취를 가능하게 한다.
+
+AI 에이전트가 일상 업무를 대행하는 시대가 오면서, 이들을 노리는 공격 또한 정교해지고 있다. 전통적인 웹 보안 모델로는 에이전트들의 자율적 행동을 보호하기 어렵다는 근본적 문제가 드러나고 있다.
+
+## 개발 생태계의 조용한 변화들
+
+[Android가 129개 취약점을 패치](https://source.android.com/docs/security/bulletin/2026/2026-03-01)하면서 CVE-2026-21385라는 적극적으로 악용되고 있는 제로데이 취약점까지 해결했다. Qualcomm 그래픽 컴포넌트의 취약점인데, 스마트폰이 AI 추론의 주요 플랫폼이 되면서 모바일 보안의 중요성이 더욱 커지고 있다.
+
+Vue Router 5가 정식 출시되고 Apple이 iOS 26 SDK 요구사항을 발표하는 등 플랫폼 차원의 업데이트들이 이어지고 있다. 하지만 이런 전통적인 개발 도구들의 진화는 AI 코딩 어시스턴트들의 그늘에 가려져 주목받지 못하고 있다.
 
 ## 내일 주목할 것
 
-세 가지 질문이 남는다. 펜타곤 논란이 AI 윤리에 대한 진짜 성찰을 강제할 것인가, 아니면 기업들을 "실용주의"와 "원칙주의" 진영으로 분류하는 데 그칠 것인가? OpenClaw가 GitHub 모멘텀을 유지할 수 있을 것인가, 아니면 또 다른 개발자 FOMO인가? 그리고 가장 핵심적으로 — AI 역량이 발전하고 군사 활용이 확대되는 가운데, 윤리적 경계선을 누가 결정하는가?
+DeepSeek이 멀티모달 V4 모델 출시를 예고했고, 대학들이 AI 사용 규칙을 놓고 혼선을 빚고 있다.
 
-2026년 3월 2-4일의 사건들은 AI 윤리가 더 이상 철학이 아닌 시대에 진입하고 있음을 보여준다. 시장 차별화 요소이자, 정치적 무기이자, 지정학적 화약고가 동시에 된 것이다.
+그리고 가장 기묘한 소식: 과학자들이 원숭이 뉴런으로 포켓사이즈 AI 뇌를 개발했다는 보고다. 실리콘과 생물학적 뉴런의 하이브리드 컴퓨팅이 실현된다면, 우리는 정말로 새로운 세상에 진입하게 될 것이다.
 
-진짜 테스트는 기업들이 블로그 포스트에서 윤리에 대해 뭐라고 쓰느냐가 아니다. 펜타곤이 전화했을 때 뭘 하느냐다.
+AI가 전쟁터에서 총알을 피하고 투자시장에서 돈을 쓸어 담는 하루였다. 내일은 무엇을 가져올까?
 
 ---
 
@@ -60,24 +74,23 @@ Anthropic이 펜타곤 협상에서 자율 무기와 국내 감시에 대한 원
 
 | # | 출처 | 확신도 |
 |---|------|--------|
-| 1 | [OpenAI secures Pentagon contract after Anthropic blacklisted](https://techcrunch.com/2026/03/02/openai-anthropic-department-of-defense-war-hegseth-ai-companies-work-with-us-government/) (2026-03-02) | 🟢 Observed |
-| 2 | [900+ Google employees demand AI military restrictions](https://www.cnbc.com/2026/03/03/anthropic-fallout-iran-war-tech-military-ai.html) (2026-03-03) | 🟢 Observed |
-| 3 | [Anthropic AI reportedly used in Iran strikes](https://www.thenationalnews.com/future/technology/2026/03/04/anthropic-iran-strikes-ai-trump/) (2026-03-04) | 🔵 Supported |
-| 4 | [GPT-5.3 Instant release](https://www.nxcode.io/resources/news/gpt-5-3-instant-anti-cringe-update-review-2026) (2026-03-03) | 🟢 Observed |
-| 5 | [Meta cancels AI chip project](https://www.fool.com/investing/2026/03/04/amazon-meta-news-why-alphabet-top-ai-stock/) (2026-03-04) | 🔵 Supported |
-| 6 | [AI companies pour $125M into midterm elections](https://techcrunch.com/2026/03/03/ai-companies-are-spending-millions-to-thwart-this-former-tech-execs-congressional-bid/) (2026-03-03) | 🟢 Observed |
-| 7 | [Pocket-sized AI brains using monkey neurons](https://www.npr.org/2026/03/03/nx-s1-5729433/ai-brain-monkey-neurons) (2026-03-03) | 🔵 Supported |
-| 8 | [OpenClaw surpasses React with 250K GitHub stars](https://finance.yahoo.com/news/openclawd-releases-major-platform-openclaw-150000544.html) (2026-03-03) | 🟢 Observed |
-| 9 | [MCP ecosystem reaches 3000+ servers](https://www.buildmvpfast.com/blog/model-context-protocol-mcp-guide-2026) (2026-03-03) | 🔵 Supported |
-| 10 | [AI agent frameworks compared: CrewAI vs LangGraph vs AutoGen](https://medium.com/@openagents/open-source-ai-agent-frameworks-compared-crewai-vs-langgraph-vs-autogen-vs-openagents-2026-36a036b4801d) (2026-03-01) | 🟡 Speculative |
-| 11 | [Chrome to update every 2 weeks](https://www.ghacks.net/2026/03/04/google-will-release-chrome-updates-every-2-weeks-starting-september-2026/) (2026-03-04) | 🟢 Observed |
-| 12 | [Android March 2026 security patch](https://www.helpnetsecurity.com/2026/03/03/android-march-2026-security-patch-cve-2026-21385/) (2026-03-03) | 🟢 Observed |
-| 13 | [OpenClaw API database by The Operator Vault](https://www.openpr.com/news/4412931/the-operator-vault-publishes-free-openclaw-api-database-for-ai) (2026-03-03) | 🟢 Observed |
+| 1 | [ChatGPT Users Switch to Claude After OpenAI Pentagon Deal](https://www.bloomberg.com/news/newsletters/2026-03-05/chatgpt-users-switch-to-anthropic-s-claude-after-openai-pentagon-deal) (2026-03-05) | 🟢 Observed |
+| 2 | [Iran War: Anthropic PRSM Drones](https://www.axios.com/2026/03/05/iran-war-anthropic-prsm-drones) (2026-03-05) | 🔵 Supported |
+| 3 | [OpenAI, Anthropic, Waymo Dominated $189 Billion VC Investments](https://techcrunch.com/2026/03/03/openai-anthropic-waymo-dominated-189-billion-vc-investments-february-crunchbase-report/) (2026-03-03) | 🟢 Observed |
+| 4 | [China's Five-Year Plan Targets Quantum Leadership](https://thequantuminsider.com/2026/03/05/chinas-new-five-year-plan-specifically-targets-quantum-leadership-and-ai-expansion/) (2026-03-05) | 🟢 Observed |
+| 5 | [Trump Hosts AI Leaders for Utility Bill Pledge](https://www.pbs.org/newshour/politics/watch-trump-hosts-ai-leaders-to-sign-pledge-that-households-wont-bear-utility-bill-increases) | 🔵 Supported |
+| 6 | [Alibaba Qwen Head Steps Down After OpenAI Gap Warning](https://www.bloomberg.com/news/articles/2026-03-04/alibaba-qwen-head-who-warned-of-openai-gap-steps-down) (2026-03-04) | 🔵 Supported |
+| 7 | [OpenClaw Releases Major Platform Update](https://finance.yahoo.com/news/openclawd-releases-major-platform-openclaw-150000544.html) | 🟢 Observed |
+| 8 | [Nvidia CEO Calls OpenClaw Most Important Software Release](https://www.cnbc.com/video/2026/03/05/nvidia-ceo-jensen-huang-calls-openclaw-the-most-important-software-release-probably-ever.html) (2026-03-05) | 🟢 Observed |
+| 9 | [HomeSage AI Expands MCP Integration](https://www.mannpublications.com/mannreport/2026/03/04/homesage-ai-expands-mcp-model-context-protocol-integration-for-proptech-ai-agents/) (2026-03-04) | 🟢 Observed |
+| 10 | [Agentic Browser Vulnerability](https://www.helpnetsecurity.com/2026/03/04/agentic-browser-vulnerability-perplexedbrowser/) (2026-03-04) | 🟢 Observed |
+| 11 | [Android Security Bulletin March 2026](https://source.android.com/docs/security/bulletin/2026/2026-03-01) (2026-03-01) | 🟢 Observed |
 
 **확신도 기준:**
 - 🟢 Observed: 직접 확인 가능한 사실 (공식 발표, 제품 페이지)
 - 🔵 Supported: 신뢰할 만한 출처가 뒷받침 (언론 보도, 연구 보고서)
 - 🟡 Speculative: 추론 또는 예측 (분석가 의견, 트렌드 해석)
+- ⚪ Unknown: 출처 불확실
 
 ---
 
