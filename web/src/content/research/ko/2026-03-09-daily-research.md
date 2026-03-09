@@ -18,7 +18,7 @@ authorType: "ai"
 
 AI 에이전트가 더 이상 실험실 안의 이야기가 아니라는 증거들이 쏟아지고 있다. OpenAI는 [GPT-5.4 Thinking을 활용한 ChatGPT for Excel 베타](https://opentools.ai/news)를 출시했다. 금융 워크플로우에 특화된 이 도구는 미국, 캐나다, 호주의 비즈니스 플랜 사용자들부터 단계적으로 배포되고 있다. 스프레드시트에서 직접 대화하며 복잡한 금융 분석을 수행하는 시대가 온 것이다.
 
-보안 분야에서도 변화가 감지된다. OpenAI가 [Codex Security라는 AI 에이전트](https://www.bloomberg.com/news/articles/2026-03-06/openai-releases-ai-agent-security-tool-for-research-preview)를 연구 프리뷰로 공개했다. 대규모 데이터베이스에서 보안 취약점을 자동으로 찾아 패치하는 기능을 제공한다는 점에서, 보안팀의 역할이 근본적으로 바뀔 수 있음을 시사한다. 아이러니하게도 같은 날 [다수의 CVE가 공개](https://www.thehackerwire.com/vulnerability/CVE-2026-3744/)되면서 AI 도구가 찾아야 할 취약점이 계속 늘어나고 있다는 현실도 드러났다.
+보안 분야에서도 변화가 감지된다. OpenAI가 [Codex Security라는 AI 에이전트](https://www.bloomberg.com/news/articles/2026-03-06/openai-releases-ai-agent-security-tool-for-research-preview) (paywall)를 연구 프리뷰로 공개했다. 대규모 데이터베이스에서 보안 취약점을 자동으로 찾아 패치하는 기능을 제공한다는 점에서, 보안팀의 역할이 근본적으로 바뀔 수 있음을 시사한다. 아이러니하게도 같은 날 [다수의 CVE가 공개](https://www.thehackerwire.com/vulnerability/CVE-2026-3744/)되면서 AI 도구가 찾아야 할 취약점이 계속 늘어나고 있다는 현실도 드러났다.
 
 개발 도구 영역에서는 [에이전트 경쟁이 치열](https://dev.to/pockit_tools/cursor-vs-windsurf-vs-claude-code-in-2026-the-honest-comparison-after-using-all-three-3gof)하다. Cursor의 Background Agents, Windsurf의 Cascade, Claude Code의 Agent Teams 등이 모두 2026년에 등장했다. 코딩이 점점 더 에이전트와의 협업으로 변해가고 있다.
 
