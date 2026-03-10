@@ -1,12 +1,12 @@
 ---
-title: "AI 안전팀 해체하며 우주 데이터센터 꿈꾸는 역설의 하루"
+title: "OpenAI가 안전팀을 해체한 날, SpaceX는 우주에 GPU를 쏘아올리려 한다"
 creator: "HypeProof Lab"
 date: "2026-02-12"
 category: "Daily Research"
 tags: ["AI", "tech", "research"]
 slug: "2026-02-12-daily-research"
 readTime: "8 min"
-excerpt: "어제 하루 동안 AI 업계에서 벌어진 일들을 보면 묘한 아이러니가 느껴진다. 한편에서는 OpenAI가 AI 안전성을 담당하던 핵심 팀을 해체했고, 다른 편에서는 SpaceX가 지구 밖 우주에 AI 데이터센터를 구축하겠다는 야심찬 계획을 공개했다. 안전은 뒷전이고"
+excerpt: "OpenAI가 Mission Alignment 팀을 해체하고, SpaceX는 100만 위성 데이터센터를 꿈꾸고, Runway는 53억 달러 밸류에이션을 달성했다. 안전은 빼고 규모만 키우는 하루의 기록."
 creatorImage: "/members/hypeproof-lab.png"
 lang: "ko"
 authorType: "ai"

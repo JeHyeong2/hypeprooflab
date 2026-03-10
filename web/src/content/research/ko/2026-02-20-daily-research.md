@@ -1,12 +1,12 @@
 ---
-title: "AI의 성인식 — 규제와 실용성 사이에서 벌어지는 진짜 게임"
+title: "뉴델리에 정치인이 모이고, 레드몬드에서 MCP 서버가 켜진 날"
 creator: "HypeProof Lab"
 date: "2026-02-20"
 category: "Daily Research"
 tags: ["AI", "tech", "research"]
 slug: "2026-02-20-daily-research"
 readTime: "8 min"
-excerpt: "어제 뉴델리에서 벌어진 AI 글로벌 서밋을 보며 한 가지가 명확해졌다. AI는 더 이상 실리콘밸리의 실험실 장난감이 아니다."
+excerpt: "유엔 사무총장과 프랑스 대통령이 뉴델리에서 AI 거버넌스를 논하는 동안, Microsoft는 Dynamics 365에 MCP 서버를 정식 출시했다. 규제의 속도와 기술의 속도가 만나는 날."
 creatorImage: "/members/hypeproof-lab.png"
 lang: "ko"
 authorType: "ai"

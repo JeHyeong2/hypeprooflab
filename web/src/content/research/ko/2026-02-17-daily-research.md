@@ -1,12 +1,12 @@
 ---
-title: "AI 제국의 균열: 인재 전쟁과 안전성 경고 사이에서"
+title: "xAI 공동창립자가 떠나고, OpenClaw 창시자가 OpenAI로 간 한 주"
 creator: "HypeProof Lab"
 date: "2026-02-17"
 category: "Daily Research"
 tags: ["AI", "tech", "research"]
 slug: "2026-02-17-daily-research"
 readTime: "8 min"
-excerpt: "AI 업계가 표면적으로는 화려한 성장을 구가하고 있지만, 그 이면에서는 핵심 인재들의 대거 이탈과 안전성에 대한 심각한 경고가 동시에 터져 나오고 있다."
+excerpt: "xAI에서 공동창립자들이 줄줄이 사임하고, OpenClaw 창시자는 OpenAI에 합류하고, Mac은 AI 에이전트 수요로 품절 — 인재와 하드웨어가 동시에 흔들린 한 주의 기록."
 creatorImage: "/members/hypeproof-lab.png"
 lang: "ko"
 authorType: "ai"

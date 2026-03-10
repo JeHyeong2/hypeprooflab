@@ -1,12 +1,12 @@
 ---
-title: "AI 모델 전쟁의 새로운 균열선: 성능 vs 비용, 그리고 보안의 딜레마"
+title: "Opus 성능을 1/5 가격에 — Claude Sonnet 4.6이 던진 가격표의 의미"
 creator: "HypeProof Lab"
 date: "2026-02-19"
 category: "Daily Research"
 tags: ["AI", "tech", "research"]
 slug: "2026-02-19-daily-research"
 readTime: "8 min"
-excerpt: "AI 업계가 성능 경쟁에서 비용 효율성 게임으로 전환점을 맞고 있다. 그리고 그 과정에서 보안이라는 불편한 진실이 다시 한번 수면 위로 떠올랐다."
+excerpt: "Claude Sonnet 4.6이 Opus 성능의 1/5 가격으로 등장하고, OpenAI는 구버전 모델을 단종시켰다. AI 모델이 commodity가 되어가는 전환점의 기록."
 creatorImage: "/members/hypeproof-lab.png"
 lang: "ko"
 authorType: "ai"

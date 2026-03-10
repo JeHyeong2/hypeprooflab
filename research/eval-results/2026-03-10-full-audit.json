@@ -1,0 +1,120 @@
+{
+  "date": "2026-03-10",
+  "total_files": 22,
+  "ko_scores": {
+    "2026-02-10": 82,
+    "2026-02-11": 83,
+    "2026-02-12": 88,
+    "2026-02-13": 84,
+    "2026-02-14": 84,
+    "2026-02-17": 88,
+    "2026-02-18": 84,
+    "2026-02-19": 88,
+    "2026-02-20": 87,
+    "2026-02-21": 89,
+    "2026-02-22": 86,
+    "2026-02-23": 88,
+    "2026-02-24": 87,
+    "2026-02-25": 89,
+    "2026-02-26": 88,
+    "2026-02-27": 82,
+    "2026-03-02": 88,
+    "2026-03-04": 86,
+    "2026-03-05": 93,
+    "2026-03-06": 92,
+    "2026-03-08": 92,
+    "2026-03-09": 97
+  },
+  "en_scores": {
+    "2026-02-10": "N/A (eval은 KO만)",
+    "2026-02-11": "N/A (eval은 KO만)",
+    "2026-02-12": "N/A (eval은 KO만)",
+    "2026-02-13": "N/A (eval은 KO만)",
+    "2026-02-14": "N/A (eval은 KO만)",
+    "2026-02-17": "N/A (eval은 KO만)",
+    "2026-02-18": "N/A (eval은 KO만)",
+    "2026-02-19": "N/A (eval은 KO만)",
+    "2026-02-20": "N/A (eval은 KO만)",
+    "2026-02-21": "N/A (eval은 KO만)",
+    "2026-02-22": "N/A (eval은 KO만)",
+    "2026-02-23": "N/A (eval은 KO만)",
+    "2026-02-24": "N/A (eval은 KO만)",
+    "2026-02-25": "N/A (eval은 KO만)",
+    "2026-02-26": "N/A (eval은 KO만)",
+    "2026-02-27": "N/A (eval은 KO만)",
+    "2026-03-02": "N/A (eval은 KO만)",
+    "2026-03-04": "N/A (eval은 KO만)",
+    "2026-03-05": "N/A (eval은 KO만)",
+    "2026-03-06": "N/A (eval은 KO만)",
+    "2026-03-08": "N/A (eval은 KO만)",
+    "2026-03-09": "N/A (eval은 KO만)"
+  },
+  "broken_links_ko": [
+    {
+      "file": "2026-02-12-daily-research.md",
+      "url": "https://trendshift.io/",
+      "reason": "Connection failed/timeout"
+    },
+    {
+      "file": "2026-03-04-daily-research.md",
+      "url": "https://www.washingtonpost.com/technology/2026/03/01/ai-journalism-writing-cleveland-plain",
+      "reason": "Connection failed/timeout"
+    }
+  ],
+  "broken_links_en": [
+    {
+      "file": "2026-02-27-daily-research.md",
+      "url": "https://www.bworldonline.com/technology/2026/02/26/732994/deepseek-withholds-latest-ai-mod",
+      "reason": "Connection failed/timeout"
+    },
+    {
+      "file": "2026-03-04-daily-research.md",
+      "url": "https://www.washingtonpost.com/technology/2026/03/01/ai-journalism-writing-cleveland-plain",
+      "reason": "Connection failed/timeout"
+    },
+    {
+      "file": "2026-03-06-daily-research.md",
+      "url": "https://www.theregister.com/2026/03/04/fake_openclaw_installers-malware/",
+      "reason": "404 Not Found"
+    }
+  ],
+  "warnings_ko": [
+    {
+      "file": "2026-02-23-daily-research.md",
+      "url": "https://eu.detroitnews.com/story/business/autos/2026/02/21/microchip-shortage-au...",
+      "status": 302
+    },
+    {
+      "file": "2026-02-25-daily-research.md",
+      "url": "https://venturebeat.com/orchestration/google-clamps-down-on-antigravity-maliciou...",
+      "status": 429
+    },
+    {
+      "file": "2026-02-27-daily-research.md",
+      "url": "https://www.euronews.com/next/2026/02/26/ai-doomsday-new-thought-experiment-warn...",
+      "status": 406
+    },
+    {
+      "file": "2026-03-05-daily-research.md",
+      "url": "https://source.android.com/docs/security/bulletin/2026/2026-03-01",
+      "status": 302
+    }
+  ],
+  "summary": {
+    "avg_score": 87.5,
+    "min_score": 82,
+    "min_score_files": ["2026-02-10", "2026-02-27"],
+    "max_score": 97,
+    "max_score_file": "2026-03-09",
+    "fail_count": 0,
+    "broken_links_ko_count": 2,
+    "broken_links_en_count": 3,
+    "total_broken_links": 5,
+    "grade_distribution": {
+      "A (90+)": 4,
+      "B (80-89)": 18,
+      "C (70-79)": 0,
+      "F (<70)": 0
+    }
+  }
+}

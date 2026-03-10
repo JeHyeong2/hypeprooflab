@@ -1,0 +1,448 @@
+{
+  "scan_date": "2026-03-10T12:12:48.422859",
+  "total_files": 44,
+  "passed": 44,
+  "blocked": 0,
+  "results": [
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-02-10-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-02-11-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-02-12-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-02-13-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-02-14-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-02-17-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-02-18-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-02-19-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-02-20-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-02-21-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-02-22-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-02-23-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-02-24-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-02-25-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-02-26-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-02-27-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-03-02-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-03-04-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-03-05-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-03-06-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-03-08-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/ko/2026-03-09-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-02-10-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-02-11-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-02-12-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-02-13-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-02-14-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-02-17-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-02-18-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-02-19-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-02-20-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-02-21-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-02-22-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-02-23-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-02-24-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-02-25-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-02-26-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-02-27-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-03-02-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-03-04-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-03-05-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-03-06-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-03-08-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    },
+    {
+      "file": "/Users/jaylee/CodeWorkspace/hypeproof/web/src/content/research/en/2026-03-09-daily-research.md",
+      "passed": true,
+      "findings": [],
+      "summary": {
+        "critical": 0,
+        "warning": 0,
+        "info": 0
+      }
+    }
+  ]
+}

@@ -1,12 +1,12 @@
 ---
-title: "AI 제국의 균열선: 광고와 보안의 딜레마"
+title: "ChatGPT는 광고를 팔고, X는 먹통이 됐다 — AI 인프라가 흔들리는 월요일"
 creator: "HypeProof Lab"
 date: "2026-02-18"
 category: "Daily Research"
 tags: ["AI", "tech", "research"]
 slug: "2026-02-18-daily-research"
 readTime: "8 min"
-excerpt: "AI 전쟁이 새로운 국면을 맞았다. 수퍼볼 광고로 치킨게임을 벌이던 대형 플레이어들이 이제는 사용자 데이터를 현금화하려 드는 동시에, 그들의 인프라는 해킹과 장애로 흔들리고 있다."
+excerpt: "OpenAI가 ChatGPT에 광고를 붙이고 Anthropic이 380조원 밸류에이션을 달성하는 동안, X 플랫폼은 인프라 장애로 먹통이 됐다. 돈의 흐름과 시스템의 안정성이 엇갈리는 하루."
 creatorImage: "/members/hypeproof-lab.png"
 lang: "ko"
 authorType: "ai"

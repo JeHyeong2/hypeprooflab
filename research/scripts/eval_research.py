@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 """
-Research Quality Eval v1.0
+Research Quality Eval v1.1
 Anthropic eval 패턴 기반 리서치 품질 평가 시스템.
 
 평가 항목:
-  1. Structure (rule-based) — frontmatter, 본문 구조, 링크 수
-  2. Style (rule-based) — 금지표현, 불릿 비율, 확신도 라벨 위치
-  3. Title diversity (cosine similarity) — 최근 제목과 유사도
-  4. Content quality (LLM-as-Judge) — 톤, 스토리텔링, 인사이트 깊이
-  5. Links (automated) — 깨진 링크 검증
+  1. Structure (rule-based) — frontmatter, 본문 구조, 링크 수 (20점)
+  2. Style (rule-based) — 금지표현, 불릿 비율, 확신도 라벨 위치 (20점)
+  3. Title diversity (cosine similarity) — 최근 제목과 유사도 (15점)
+  4. Content quality (LLM-as-Judge) — 톤, 스토리텔링, 인사이트 깊이 (25점)
+  5. Links (automated) — 깨진 링크 검증 (10점)
+  6. Security (automated) — 보안 게이트 (10점)
 
 총점 100점. 70점 미만 = FAIL (게시 차단)
+Security critical 발견 시 점수 무관하게 FAIL 강제.
 
 Usage:
   python3 eval_research.py <file.md>                 # 전체 eval
@@ -25,6 +27,10 @@ import subprocess
 from pathlib import Path
 from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor, as_completed
+
+# Import security_check from same directory
+sys.path.insert(0, str(Path(__file__).parent))
+from security_check import run_security_check
 
 RESEARCH_DIR = Path.home() / "CodeWorkspace/hypeproof/web/src/content/research/ko"
 
@@ -73,51 +79,51 @@ def get_body_before_sources(content: str) -> str:
 
 
 # ═══════════════════════════════════════════
-# EVAL 1: Structure (25점)
+# EVAL 1: Structure (20점)
 # ═══════════════════════════════════════════
 def eval_structure(content: str, fm: dict) -> dict:
-    score = 25
+    score = 20
     details = []
 
-    # Frontmatter 필수 필드 (10점)
+    # Frontmatter 필수 필드 (8점)
     missing = [f for f in REQUIRED_FM if f not in fm]
     if missing:
-        penalty = min(10, len(missing) * 2)
+        penalty = min(8, len(missing) * 2)
         score -= penalty
         details.append(f"frontmatter 누락 {len(missing)}개: {', '.join(missing)} (-{penalty})")
 
-    # H1이 본문에 있으면 안 됨 (-3)
+    # H1이 본문에 있으면 안 됨 (-2)
     body = get_body(content)
     if re.search(r'^# [^#]', body, re.MULTILINE):
-        score -= 3
-        details.append("본문에 H1 사용 (-3)")
+        score -= 2
+        details.append("본문에 H1 사용 (-2)")
 
-    # H2 섹션 최소 2개 (5점)
+    # H2 섹션 최소 2개 (4점)
     h2_count = len(re.findall(r'^## ', body, re.MULTILINE))
     if h2_count < 2:
-        score -= 5
-        details.append(f"H2 섹션 {h2_count}개 — 최소 2개 필요 (-5)")
+        score -= 4
+        details.append(f"H2 섹션 {h2_count}개 — 최소 2개 필요 (-4)")
 
-    # Sources 섹션 존재 (5점)
+    # Sources 섹션 존재 (4점)
     if "Sources" not in content:
-        score -= 5
-        details.append("Sources 섹션 없음 (-5)")
+        score -= 4
+        details.append("Sources 섹션 없음 (-4)")
 
-    # 링크 최소 5개 (5점)
+    # 링크 최소 5개 (4점)
     links = re.findall(r'\]\(https?://', content)
     if len(links) < 5:
-        penalty = 5
+        penalty = 4
         score -= penalty
         details.append(f"링크 {len(links)}개 — 최소 5개 필요 (-{penalty})")
 
-    return {"name": "Structure", "score": max(0, score), "max": 25, "details": details}
+    return {"name": "Structure", "score": max(0, score), "max": 20, "details": details}
 
 
 # ═══════════════════════════════════════════
-# EVAL 2: Style (25점)
+# EVAL 2: Style (20점)
 # ═══════════════════════════════════════════
 def eval_style(content: str) -> dict:
-    score = 25
+    score = 20
     details = []
     body = get_body(content)
     lines = [l for l in body.split("\n") if l.strip()]
@@ -159,7 +165,7 @@ def eval_style(content: str) -> dict:
         score -= 3
         details.append(f"본문 {len(body)}자 — 최소 2000자 권장 (-3)")
 
-    return {"name": "Style", "score": max(0, score), "max": 25, "details": details}
+    return {"name": "Style", "score": max(0, score), "max": 20, "details": details}
 
 
 # ═══════════════════════════════════════════
@@ -331,6 +337,53 @@ def eval_links(content: str) -> dict:
 
 
 # ═══════════════════════════════════════════
+# EVAL 6: Security (10점)
+# ═══════════════════════════════════════════
+def eval_security(filepath: Path) -> dict:
+    """Security gate — critical 발견 시 0점 + 전체 FAIL 강제"""
+    score = 10
+    details = []
+
+    try:
+        result = run_security_check(filepath, skip_network=True)
+        summary = result["summary"]
+
+        if summary["critical"] > 0:
+            score = 0
+            details.append(f"🚨 Critical 발견 {summary['critical']}건 — 게시 차단!")
+            for f in result["findings"]:
+                if f["severity"] == "critical":
+                    details.append(f"  L{f['line']}: {f['detail']}")
+
+        if summary["warning"] > 0:
+            penalty = min(score, summary["warning"] * 3)
+            score -= penalty
+            details.append(f"⚠️ Warning {summary['warning']}건 (-{penalty})")
+
+        if summary["info"] > 0:
+            details.append(f"ℹ️ Info {summary['info']}건 (감점 없음)")
+
+        if not result["findings"]:
+            details.append("✅ 보안 이슈 없음")
+
+        return {
+            "name": "Security",
+            "score": max(0, score),
+            "max": 10,
+            "details": details,
+            "_has_critical": summary["critical"] > 0,
+        }
+    except Exception as e:
+        return {
+            "name": "Security",
+            "score": 0,
+            "max": 10,
+            "details": [f"보안 검사 에러: {str(e)[:80]}"],
+            "_has_critical": False,
+        }
+
+
+# ═══════════════════════════════════════════
 # MAIN
 # ═══════════════════════════════════════════
 def run_eval(filepath: Path, quick: bool = False) -> dict:
@@ -350,6 +403,10 @@ def run_eval(filepath: Path, quick: bool = False) -> dict:
         # quick mode: LLM/Links 스킵, 비례 환산
         pass
 
+    # Security eval always runs (no network dependency in skip_network mode)
+    security_result = eval_security(filepath)
+    evals.append(security_result)
+
     total_score = sum(e["score"] for e in evals)
     total_max = sum(e["max"] for e in evals)
 
@@ -359,12 +416,17 @@ def run_eval(filepath: Path, quick: bool = False) -> dict:
     else:
         normalized = total_score
 
+    # Security critical → 전체 FAIL 강제 (점수 무관)
+    security_critical = security_result.get("_has_critical", False)
+    passed = normalized >= 70 and not security_critical
+
     result = {
         "file": filepath.name,
         "score": normalized,
         "max": 100,
         "grade": grade(normalized),
-        "passed": normalized >= 70,
+        "passed": passed,
+        "security_blocked": security_critical,
         "evals": evals,
         "frontmatter": fm,
     }
@@ -393,7 +455,9 @@ def print_report(result: dict) -> None:
             print(f"   {d}")
 
     print(f"\n{'─'*60}")
-    if result["passed"]:
+    if result.get("security_blocked"):
+        print(f"🚨 게시 차단 — 보안 위반 (Security Critical)")
+    elif result["passed"]:
         print(f"✅ 게시 가능 (Score ≥ 70)")
     else:
         print(f"❌ 게시 차단 — 품질 개선 필요 (Score < 70)")

@@ -1,12 +1,12 @@
 ---
-title: "AI 패권 전쟁의 새 국면: 서구의 기술력 vs 동양의 시장 장악력"
+title: "OpenRouter 토큰의 61%가 중국산 — Nvidia 실적 호조 뒤의 불편한 숫자"
 creator: "HypeProof Lab"
 date: "2026-02-26"
 category: "Daily Research"
 tags: ["AI", "tech", "research"]
 slug: "2026-02-26-daily-research"
 readTime: "8 min"
-excerpt: "오늘 발표된 일련의 뉴스들이 말해주는 것은 명확하다. AI 생태계가 하드웨어 패권과 실사용 점유율 사이에서 새로운 균열을 보이고 있다."
+excerpt: "OpenRouter에서 중국산 AI 모델이 토큰 사용량 61%를 차지한 가운데, Nvidia는 Vera Rubin으로 10배 성능 향상을 약속했다. 기술적 우위와 시장 점유율이 엇갈리는 순간."
 creatorImage: "/members/hypeproof-lab.png"
 lang: "ko"
 authorType: "ai"

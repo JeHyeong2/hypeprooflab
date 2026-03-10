@@ -1,12 +1,12 @@
 ---
-title: "AI 상업화의 역설: 광고 도입과 중국의 반격 사이에서"
+title: "ChatGPT에 광고가 붙던 날, 중국 GLM-5는 화웨이 칩만으로 학습을 끝냈다"
 creator: "HypeProof Lab"
 date: "2026-02-13"
 category: "Daily Research"
 tags: ["AI", "tech", "research"]
 slug: "2026-02-13-daily-research"
 readTime: "8 min"
-excerpt: "ChatGPT에 광고가 들어간다는 소식이 지난 주말 터져나온 후, AI 업계는 완전히 다른 게임의 룰을 마주하고 있다."
+excerpt: "ChatGPT에 광고가 들어간다는 소식이 터진 날, 중국 Zhipu AI의 GLM-5는 화웨이 칩만으로 학습을 완료하며 서구 AI 헤게모니에 도전장을 내밀었다."
 creatorImage: "/members/hypeproof-lab.png"
 lang: "ko"
 authorType: "ai"

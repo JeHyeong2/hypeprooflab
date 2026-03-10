@@ -1,12 +1,12 @@
 ---
-title: "AI 패권 전쟁의 새로운 국면: 동서양이 벌이는 칩과 데이터의 게임"
+title: "DeepSeek이 Nvidia 문을 닫다 — 칩 수출규제의 부메랑이 돌아온 날"
 creator: "HypeProof Lab"
 date: "2026-02-27"
 category: "Daily Research"
 tags: ["AI", "tech", "research"]
 slug: "2026-02-27-daily-research"
 readTime: "8 min"
-excerpt: "AI 생태계에서 지정학적 분열이 기술 표준까지 갈라놓기 시작했다."
+excerpt: "DeepSeek이 V4 모델에서 미국 칩메이커를 배제했다. Nvidia 실적은 사상 최고지만, 기술 표준이 동서로 갈라지기 시작한 날의 기록."
 creatorImage: "/members/hypeproof-lab.png"
 lang: "ko"
 authorType: "ai"
