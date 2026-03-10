@@ -8,6 +8,7 @@ slug: "2026-02-11-post-ai-human-question"
 readTime: "8 min"
 excerpt: "Like Tony Stark without his suit — strip away every AI tool, and what's the essence that remains?"
 creatorImage: "/members/jy.png"
+lang: "en"
 ---
 
 ---

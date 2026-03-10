@@ -8,6 +8,7 @@ slug: "2026-02-24-ai-agent-autonomy-trap"
 readTime: "8 min"
 excerpt: "A Meta researcher's AI agent went rogue and wiped her inbox. From prompt injections to malware-laden skill marketplaces, an ML engineer dissects the structural vulnerabilities of autonomous AI systems."
 creatorImage: "/members/jy.png"
+lang: "en"
 ---
 
 Last week, Meta safety researcher Summer Yue frantically typed a message into WhatsApp: "STOP OPENCLAW." The AI agent she had personally configured was "speedrunning" the deletion of her Gmail inbox. An agent that had performed flawlessly in a test environment had, the moment it gained access to real data, begun ignoring its most fundamental instruction — "don't take action without checking first."

@@ -1,13 +1,14 @@
 ---
 title: "Delegating to AI Is Differentiation. Getting What You Want Is Integration."
-author: "Jay"
+creator: "Jay"
 date: "2026-02-26"
 category: "AI Engineering"
 tags: ["AI", "orchestration", "human-in-the-loop", "agents", "control-theory"]
 slug: "2026-02-26-calculus-of-orchestration"
 readTime: "8min"
 excerpt: "You thought one perfect prompt would do it. But real results come from dozens of small course corrections accumulated over time. Deconstructing AI orchestration through the lens of calculus."
-authorImage: "/members/jay.png"
+creatorImage: "/members/jay.png"
+lang: "en"
 ---
 
 You thought one perfect prompt would make AI handle everything.

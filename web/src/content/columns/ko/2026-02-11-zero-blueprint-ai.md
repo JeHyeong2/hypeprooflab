@@ -8,6 +8,7 @@ slug: "2026-02-11-zero-blueprint-ai"
 readTime: "7 min"
 excerpt: "역할이 먼저가 아니라, 일이 먼저다. 메타프로그래밍의 철학이 AI 에이전트 워크플로우를 근본적으로 바꾸고 있다."
 creatorImage: "/members/ryan.png"
+lang: "ko"
 ---
 
 ## 메타프로그래밍의 철학이 에이전트 워크플로우를 바꾸고 있다

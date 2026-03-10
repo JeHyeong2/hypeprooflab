@@ -8,6 +8,7 @@ slug: "2026-02-11-marketing-target-changes"
 readTime: "10 min"
 excerpt: "사람에서 에이전트로, 설득에서 구조로 — 마케팅의 근본 전제가 무너지고 있다."
 creatorImage: "/members/kiwon.jpeg"
+lang: "ko"
 ---
 ## 1. 수십 년간 바뀌지 않은 하나의 공식
 

@@ -8,6 +8,7 @@ slug: "2026-agentic-coding-trends"
 readTime: "12 min read"
 excerpt: "Anthropic의 2026 Agentic Coding Trends Report를 해부한다. 리포트가 말하는 8가지 트렌드와, 에이전틱 코딩 도구를 직접 만들고 있는 엔지니어의 현실 검증."
 creatorImage: "/members/jay.png"
+lang: "ko"
 ---
 
 Anthropic이 2026년 에이전틱 코딩 트렌드 리포트를 발표했다. 8가지 트렌드를 세 범주—기반(Foundation), 역량(Capability), 영향(Impact)—로 나누어 정리한 이 문서는, 솔직히 말하면 놀랍도록 정직하다. AI 회사가 낸 리포트치고 "개발자의 60%가 AI를 쓰지만 완전히 위임할 수 있는 작업은 0~20%에 불과하다"는 자사 리서치를 서문에 박아넣은 것은 의외였다. 거품을 걷어내고 싶다는 의지가 보인다.

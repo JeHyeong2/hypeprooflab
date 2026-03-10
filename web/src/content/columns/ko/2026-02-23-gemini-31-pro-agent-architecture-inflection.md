@@ -8,6 +8,7 @@ slug: "2026-02-23-gemini-31-pro-agent-architecture-inflection"
 readTime: "7 min"
 excerpt: "ARC-AGI-2 점수가 두 배로 뛴 Gemini 3.1 Pro, 그 숫자 뒤에 숨은 에이전트 아키텍처의 구조적 전환을 읽는다."
 creatorImage: "/members/jay.png"
+lang: "ko"
 ---
 
 지난 2월 19일, Google이 Gemini 3.1 Pro를 공개했다. 발표 자체는 익숙한 풍경이다. 벤치마크 숫자를 내세우고, "더 똑똑해졌다"는 수식어를 붙이고, API와 앱에 동시 배포한다. 그런데 이번에는 하나의 숫자가 눈에 걸린다. ARC-AGI-2에서 77.1%. 직전 세대인 3 Pro 대비 두 배가 넘는 점수다. 이 숫자가 왜 중요한지, 그리고 그것이 AI 에이전트를 설계하는 엔지니어들에게 어떤 의미인지 이야기해보려 한다.

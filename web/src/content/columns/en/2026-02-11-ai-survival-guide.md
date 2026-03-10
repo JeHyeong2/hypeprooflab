@@ -8,6 +8,7 @@ slug: "2026-02-11-ai-survival-guide"
 readTime: "10 min"
 excerpt: "Robots write poetry while humans do the dishes — why one manager trembles and another CEO smiles."
 creatorImage: "/members/tj.png"
+lang: "en"
 ---
 
 There's a scene in *I, Robot* that cuts right to the nerve between AI and humanity. A detective who distrusts robots interrogates a robot named Sonny, taunting: "Can a robot write a symphony? Can a robot turn a blank canvas into a masterpiece?" He's wielding creativity — what humans believed was their sacred territory — as a weapon. Without missing a beat, Sonny asks back:

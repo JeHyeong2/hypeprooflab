@@ -8,6 +8,7 @@ slug: "2026-02-11-zero-blueprint-ai"
 readTime: "7 min"
 excerpt: "Work comes first, not roles. The philosophy of metaprogramming is fundamentally reshaping AI agent workflows."
 creatorImage: "/members/ryan.png"
+lang: "en"
 ---
 
 ## How Metaprogramming Philosophy Is Reshaping Agent Workflows

@@ -8,6 +8,7 @@ slug: "2026-02-11-post-ai-human-question"
 readTime: "8 min"
 excerpt: "슈트를 벗은 토니 스타크처럼 — AI 도구를 모두 걷어낸 뒤, 당신에게 남는 본질은 무엇인가."
 creatorImage: "/members/jy.png"
+lang: "ko"
 ---
 
 ---

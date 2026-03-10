@@ -8,6 +8,7 @@ slug: "2026-02-10-era-of-the-chairman"
 readTime: "12 min"
 excerpt: "In a world where agents handle all execution, where exactly does uniquely human value reside? An analysis of the paradigm shift in the digital economy."
 creatorImage: "/members/jay.png"
+lang: "en"
 ---
 
 ## Prologue: A 60-Year-Old Promise Breaks

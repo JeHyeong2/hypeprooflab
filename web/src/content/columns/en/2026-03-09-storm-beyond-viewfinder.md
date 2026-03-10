@@ -8,6 +8,7 @@ slug: "2026-03-09-storm-beyond-viewfinder"
 readTime: "8 min"
 excerpt: "The AI video gold rush, the irreplaceable value of human creativity, and the unsettling expansion of AI from canvas to battlefield — dissected through the eyes of a media producer."
 creatorImage: "/members/tj.png"
+lang: "en"
 ---
 
 Picture yourself in a conference room at a major Hollywood studio on a sunny afternoon. Through the window, you see the massive sets that have propped up the film industry for decades. But the tablet on the table tells a different story. One tap, and a breathtaking mountain landscape that didn't exist ten seconds ago unfolds in flawless 4K.

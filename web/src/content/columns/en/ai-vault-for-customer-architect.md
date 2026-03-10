@@ -8,6 +8,7 @@ slug: "ai-vault-for-customer-architect"
 readTime: "12 min read"
 excerpt: "Drop a meeting transcript and AI extracts signals, updates competitor profiles, and builds tomorrow's morning briefing. The architecture and design principles behind a real AI Knowledge Vault system."
 creatorImage: "/members/jay.png"
+lang: "en"
 ---
 
 ## Wednesday Evening — A 3-Hour Meeting Just Ended

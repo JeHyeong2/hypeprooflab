@@ -1,13 +1,14 @@
 ---
 title: "AI에게 일을 시키는 건 미분이고, 원하는 결과를 얻는 건 적분이다 — 그런데 지도 밖의 영역은?"
-author: "Jay"
+creator: "Jay"
 date: "2026-02-26"
 category: "AI Engineering"
 tags: ["AI", "오케스트레이션", "휴먼인더루프", "에이전트", "제어공학"]
 slug: "2026-02-26-calculus-of-orchestration"
 readTime: "12min"
 excerpt: "완벽한 프롬프트 한 줄이면 끝날 줄 알았다. 하지만 진짜 원하는 결과는 수십 번의 미세한 방향 수정이 쌓여야 나온다. 그런데 미적분이 작동하려면 먼저 올바른 지도 위에 서 있어야 한다."
-authorImage: "/members/jay.png"
+creatorImage: "/members/jay.png"
+lang: "ko"
 ---
 
 완벽한 프롬프트 한 줄이면 AI가 알아서 해줄 줄 알았다.

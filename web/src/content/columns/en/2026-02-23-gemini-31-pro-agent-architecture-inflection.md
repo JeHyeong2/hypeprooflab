@@ -8,6 +8,7 @@ slug: "2026-02-23-gemini-31-pro-agent-architecture-inflection"
 readTime: "7 min"
 excerpt: "Gemini 3.1 Pro doubled its ARC-AGI-2 score. Behind that number lies a structural shift in how we should design AI agent systems."
 creatorImage: "/members/jay.png"
+lang: "en"
 ---
 
 On February 19th, Google unveiled Gemini 3.1 Pro. The launch itself follows a familiar script: tout the benchmark numbers, slap on a "smarter than ever" label, and ship it across APIs and apps simultaneously. But one number stands out this time. 77.1% on ARC-AGI-2 — more than double what 3 Pro scored. Why that number matters, and what it means for engineers building AI agent systems, is worth unpacking.

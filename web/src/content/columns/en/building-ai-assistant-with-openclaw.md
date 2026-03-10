@@ -8,6 +8,7 @@ slug: "building-ai-assistant-with-openclaw"
 readTime: "10 min read"
 excerpt: "A step-by-step guide to installing OpenClaw, connecting it to Discord, adding skills, and customizing your own AI assistant. Real-world experience and mistakes included."
 creatorImage: "/members/jay.png"
+lang: "en"
 ---
 
 ## On a Saturday Afternoon, I Decided to Build an AI Assistant

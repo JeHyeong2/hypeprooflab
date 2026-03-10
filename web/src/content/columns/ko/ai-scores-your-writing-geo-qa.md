@@ -8,6 +8,7 @@ slug: "ai-scores-your-writing-geo-qa"
 readTime: "12 min read"
 excerpt: "AI가 콘텐츠를 채점하는 시대가 왔다. GEO(Generative Engine Optimization) 연구부터 실제 채점 시스템까지, 콘텐츠 품질의 새로운 기준을 탐구한다."
 creatorImage: "/members/jay.png"
+lang: "ko"
 ---
 
 ## 72점. 당신의 글이 받은 점수다.

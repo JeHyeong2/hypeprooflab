@@ -8,6 +8,7 @@ slug: "ai-scores-your-writing-geo-qa"
 readTime: "12 min read"
 excerpt: "The era of AI grading content has arrived. From GEO (Generative Engine Optimization) research to real-world scoring systems, we explore the new standards of content quality."
 creatorImage: "/members/jay.png"
+lang: "en"
 ---
 
 ## 72 Points. That's the Score Your Article Received.

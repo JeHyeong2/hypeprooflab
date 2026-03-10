@@ -8,6 +8,7 @@ slug: "2026-02-10-quiet-exit"
 readTime: "15 min"
 excerpt: "The day workplace automation became real, one office worker traversed the Kübler-Ross five stages to redefine what his Job truly meant."
 creatorImage: "/members/jay.png"
+lang: "en"
 ---
 
 ## Stage 1: Denial

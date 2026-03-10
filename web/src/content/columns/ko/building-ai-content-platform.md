@@ -8,6 +8,7 @@ slug: "building-ai-content-platform"
 readTime: "12 min"
 excerpt: "OpenClaw 멀티에이전트 시스템 위에 AI Creator Guild를 구축하면서 겪은 7개 연쇄 버그, GEO QA 채점 시스템, 그리고 보안 설계의 실전 기록."
 creatorImage: "/members/jay.png"
+lang: "ko"
 ---
 
 ## 7개의 버그를 연쇄적으로 해결하고 나서야, Herald 🔔은 처음으로 말을 했다

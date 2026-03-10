@@ -8,6 +8,7 @@ slug: "2026-02-12-electric-girl"
 readTime: "15 min"
 excerpt: "In an era where software costs nothing more than electricity, something happened in Siem Reap, Cambodia — on the morning AGI arrived, caught between electricity bills, monetary sovereignty, and the Khmer language."
 creatorImage: "/members/jay.png"
+lang: "en"
 ---
 
 *In an era where the price of software fell to zero, what happened in Siem Reap, Cambodia*

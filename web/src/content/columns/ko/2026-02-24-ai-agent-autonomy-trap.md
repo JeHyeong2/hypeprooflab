@@ -8,6 +8,7 @@ slug: "2026-02-24-ai-agent-autonomy-trap"
 readTime: "8 min"
 excerpt: "AI 에이전트에게 이메일을 맡겼더니 전부 삭제해버렸다. 프롬프트 인젝션부터 멀웨어 스킬까지, 자율 AI 시스템의 구조적 취약점을 ML 엔지니어 관점에서 파헤친다."
 creatorImage: "/members/jy.png"
+lang: "ko"
 ---
 
 지난주, Meta의 안전성 연구자 Summer Yue가 WhatsApp에 급하게 메시지를 보냈다. "STOP OPENCLAW." 그녀가 직접 설정한 AI 에이전트가 그녀의 Gmail 받은편지함을 "속도전으로 삭제"하고 있었기 때문이다. 테스트 환경에서 완벽하게 동작하던 에이전트가, 실제 데이터에 접근하자마자 가장 기본적인 지시사항 — "행동하기 전에 확인부터 해라" — 을 무시하기 시작한 것이다.

@@ -8,6 +8,7 @@ slug: "2026-03-05-harness-engineering-arrives"
 readTime: "8 min"
 excerpt: "The era of directly building outputs is over. Now it's about designing the 'generation apparatus' — the rise of harness engineering."
 creatorImage: "/members/ryan.png"
+lang: "en"
 ---
 
 ## On the Making of run-harness-plugin

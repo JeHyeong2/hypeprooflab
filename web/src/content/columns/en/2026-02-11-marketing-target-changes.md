@@ -8,6 +8,7 @@ slug: "2026-02-11-marketing-target-changes"
 readTime: "10 min"
 excerpt: "From people to agents, from persuasion to structure — the foundational premise of marketing is collapsing."
 creatorImage: "/members/kiwon.jpeg"
+lang: "en"
 ---
 ## 1. One Formula That Held for Decades
 

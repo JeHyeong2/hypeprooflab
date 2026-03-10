@@ -8,6 +8,7 @@ slug: "building-ai-content-platform"
 readTime: "12 min"
 excerpt: "A field report on building an AI Creator Guild on top of OpenClaw's multi-agent system — 7 chained bugs, a GEO QA scoring system, and security design from the trenches."
 creatorImage: "/members/jay.png"
+lang: "en"
 ---
 
 ## It Took Fixing 7 Chained Bugs Before Herald 🔔 Said Its First Word
