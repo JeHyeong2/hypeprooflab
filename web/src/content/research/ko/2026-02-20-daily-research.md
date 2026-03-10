@@ -35,7 +35,7 @@ OpenAI의 [GPT-5.3-Codex-Spark](https://releasebot.io/updates/openai) 실시간 
 
 그러나 장밋빛 전망만 있는 것은 아니다. [Chrome의 새로운 Zero-Day 취약점(CVE-2026-2441)](https://thehackernews.com/2026/02/new-chrome-zero-day-cve-2026-2441-under.html)은 CVSS 8.8 점수로 현재 실제 공격에 활용되고 있다. CSS 엔진의 use-after-free 버그라는 점이 흥미롭다. AI가 코드를 자동 생성하기 시작하면서, 이런 메모리 관리 실수들이 더욱 빈번해질 수 있다는 우려가 제기된다.
 
-[Solidity 0.8.34의 긴급 보안 패치](https://www.soliditylang.org/blog/2026/02/18/solidity-0.8.34-release-annotation/) 역시 같은 맥락이다. --via-ir 옵션과 transient storage의 조합에서 발견된 고심각도 버그는 블록체인 생태계의 복잡성이 기하급수적으로 증가하고 있음을 보여준다.
+[Solidity 0.8.34의 긴급 보안 패치](https://www.soliditylang.org/blog/2026/02/18/solidity-0.8.34-release-announcement/) 역시 같은 맥락이다. --via-ir 옵션과 transient storage의 조합에서 발견된 고심각도 버그는 블록체인 생태계의 복잡성이 기하급수적으로 증가하고 있음을 보여준다.
 
 흥미롭게도, [USC에서 개발된 AI 시스템이 성매매 수사에 활용](https://viterbischool.usc.edu/news/2026/02/ai-system-built-at-usc-helps-investigators-track-down-and-convict-sex-traffickers/)되고 있다는 뉴스는 AI의 양면성을 잘 보여준다. 같은 기술이 사회악을 척결하는 데 쓰일 수도, 새로운 보안 위협을 만들어낼 수도 있다.
 

@@ -71,7 +71,7 @@ DeveloperWeek 2026에서 나온 결론이 향후 1년을 관통할 키워드가 
 | 5 | [젠슨 황의 OpenClaw 극찬](https://www.cnbc.com/video/2026/03/05/nvidia-ceo-jensen-huang-calls-openclaw-the-most-important-software-release-probably-ever.html) (2026-03-05) | 🟢 Observed |
 | 6 | [OpenClaw 전용 하드웨어 iPollo ClawPC A1 Mini](https://www.manilatimes.net/2026/03/06/tmt-newswire/globenewswire/nano-labs-launches-ipollo-clawpc-a1-mini-a-dedicated-hardware-solution-for-the-openclaw-ai-agent-ecosystem/2294779) (2026-03-06) | 🟢 Observed |
 | 7 | [MCP 보안 취약점](https://adversa.ai/blog/top-mcp-security-resources-march-2026/) | 🔵 Supported |
-| 8 | [가짜 OpenClaw 악성코드](https://www.theregister.com/2026/03/04/fake_openclaw_installers-malware/) (2026-03-04) | 🟢 Observed |
+| 8 | [가짜 OpenClaw 악성코드](https://www.theregister.com/2026/03/04/fake_openclaw_installers_malware/) (2026-03-04) | 🟢 Observed |
 | 9 | [Apple iOS 26.2 정책 변화](https://developer.apple.com/news/) (2026-03-06) | 🟢 Observed |
 | 10 | [GitHub Octoverse TypeScript 급증](https://www.infoq.com/news/2026/03/ai-reshapes-language-choice/) (2026-03-06) | 🟢 Observed |
 
