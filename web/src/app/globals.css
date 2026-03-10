@@ -304,6 +304,19 @@ code, pre, .font-mono {
   font-weight: 600;
 }
 
+/* Links in articles — must be visually distinct from body text */
+.column-content a {
+  color: #22d3ee; /* cyan-400 */
+  text-decoration: underline;
+  text-decoration-color: rgba(34, 211, 238, 0.3);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s ease;
+}
+.column-content a:hover {
+  text-decoration-color: rgba(34, 211, 238, 0.8);
+  color: #67e8f9; /* cyan-300 */
+}
+
 /* Mobile typography for columns */
 @media (max-width: 640px) {
   .column-content {
