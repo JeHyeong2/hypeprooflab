@@ -18,13 +18,13 @@ Then AI arrived, and a fundamental question emerged.
 
 AI doesn't get annoyed. Comparing isn't tedious. Repetition isn't frustrating. Complexity isn't overwhelming. So does that mean every business built on solving annoyance is doomed?
 
-This report distills the findings of a large-scale verification effort designed to answer that question — conclusions reached after exchanging over 1,400 arguments across 30 expert perspectives, from legal philosophers and actuaries to SaaS founders, urban planners, and cognitive neuroscientists.
+This report distills the findings of a large-scale verification effort designed to answer that question — conclusions reached after exchanging over 1,400 arguments across 30 expert perspectives, from legal philosophers and actuaries to SaaS founders, urban planners, and cognitive neuroscientists **[1]**.
 
 The bottom line: **"Businesses that only eliminate annoyance die. Businesses that carry responsibility survive."** This intuition was not overturned. But what "responsibility" actually means, and under what conditions "survive" holds true, required far more precision.
 
 ---
 
-### Part 1. Starting Point — What Is the "Annoyance Economy"?
+## Part 1. Starting Point — What Is the "Annoyance Economy"?
 
 Humans experience three kinds of annoyance:
 
@@ -38,7 +38,7 @@ AI agents feel none of these. They can run 100,000 comparisons without fatigue, 
 
 But not everything dies. There's one more critical dividing line.
 
-#### "Solving annoyance" and "transferring responsibility" are different
+### "Solving annoyance" and "transferring responsibility" are different
 
 Think about why you really pay a tax accountant. Because filing is annoying? Sure. But there's a deeper reason.
 
@@ -50,9 +50,9 @@ The original framework's core intuition was this: **businesses that only solve a
 
 ---
 
-### Part 2. What the Verification Uncovered
+## Part 2. What the Verification Uncovered
 
-#### Finding 1: "Responsibility" isn't one thing — it's seven layers
+### Finding 1: "Responsibility" isn't one thing — it's seven layers
 
 Dig deeper and responsibility reveals seven distinct strata, with clear lines between what AI can and cannot replace:
 
@@ -66,27 +66,27 @@ Dig deeper and responsibility reveals seven distinct strata, with clear lines be
 
 A key paradox emerged: as AI automates layers 1, 3, and 4, the value of layers 5–7 paradoxically increases. This is the **"Responsibility Dispersion Paradox."**
 
-#### Finding 2: SaaS doesn't "evaporate" — it "submerges"
+### Finding 2: SaaS doesn't "evaporate" — it "submerges"
 
-SaaS doesn't disappear; it becomes invisible. Just as Stripe runs behind every mobile payment without users knowing, SaaS tools will be called by AI agents behind the scenes. Users won't touch Zapier or Calendly directly — but those services will still run underneath. This is **"submersion."**
+SaaS doesn't disappear; it becomes invisible. Just as Stripe runs behind every mobile payment without users knowing **[2]**, SaaS tools will be called by AI agents behind the scenes. Users won't touch Zapier or Calendly directly — but those services will still run underneath. This is **"submersion."**
 
 Another paradox: the **"AI Premium Paradox."** The SaaS products that integrate AI best get absorbed by AI agents first. The better you are at AI features, the easier you are to swallow.
 
-#### Finding 3: The real moat isn't concrete — it's coordinates
+### Finding 3: The real moat isn't concrete — it's coordinates
 
-Coupang's fulfillment centers are defensible not because they're made of concrete, but because they occupy logistics-optimal land in the Seoul metro area where zoning regulations make new supply nearly impossible. The moat is the coordinate, not the material. When physical assets combine with digital technology, defenses peak — the **"Phygital Moat."**
+Coupang's fulfillment centers are defensible not because they're made of concrete, but because they occupy logistics-optimal land in the Seoul metro area — home to approximately 26 million people **[3]** — where zoning regulations make new supply nearly impossible **[4]**. The moat is the coordinate, not the material. When physical assets combine with digital technology, defenses peak — the **"Phygital Moat."**
 
-#### Finding 4: Network effects — the framework's biggest blind spot
+### Finding 4: Network effects — the framework's biggest blind spot
 
 Kakao, Naver, WeChat — their moat is neither people nor concrete. It's the density of human connections. Millions interlinked in a network that AI cannot replicate overnight. An entirely different dimension of defense.
 
-#### Finding 5: Care — the fourth annoyance, and the biggest market
+### Finding 5: Care — the fourth annoyance, and the biggest market
 
-As Korea entered super-aged society in 2025, a new category of annoyance surfaced: **care annoyance** — eldercare, childcare, pet care. These demand physical presence, making AI substitution of the core function impossible. And this is becoming the largest market of all.
+As Korea entered super-aged society **[5]**, a new category of annoyance surfaced: **care annoyance** — eldercare, childcare, pet care. These demand physical presence, making AI substitution of the core function impossible. And this is becoming the largest market of all.
 
 ---
 
-### Part 3. The New Framework — AI Defense Diamond
+## Part 3. The New Framework — AI Defense Diamond
 
 Four axes for evaluating any business:
 
@@ -97,7 +97,7 @@ Four axes for evaluating any business:
 
 Score each 0–100 and sum. Above 200: robust. 100–200: shrinks but survives. Below 100: submerges or disappears.
 
-#### Quick Self-Diagnosis: 5 Questions
+### Quick Self-Diagnosis: 5 Questions
 
 If you answer "yes" to 3 or more, survival odds are high:
 
@@ -109,9 +109,9 @@ If you answer "yes" to 3 or more, survival odds are high:
 
 ---
 
-### Part 4. The Strongest Counterarguments
+## Part 4. The Strongest Counterarguments
 
-**Counterargument 1: Cognitive dependency lock-in** — The more AI solves annoyance, the more human cognitive capacity atrophies. If humans lose the cognitive ability to bear responsibility itself, the framework's core premise collapses from within.
+**Counterargument 1: Cognitive dependency lock-in** — The more AI solves annoyance, the more human cognitive capacity atrophies **[6]**. If humans lose the cognitive ability to bear responsibility itself, the framework's core premise collapses from within.
 
 **Counterargument 2: What if AI gains legal personhood?** — AI-specific insurance products or legal entity status would fundamentally weaken the value of "the human who signs."
 
@@ -119,7 +119,7 @@ If you answer "yes" to 3 or more, survival odds are high:
 
 ---
 
-### Conclusion: "Who Do I Call?"
+## Conclusion: "Who Do I Call?"
 
 One practical approach cuts through all this analysis.
 
@@ -130,3 +130,18 @@ One practical approach cuts through all this analysis.
 The original framework wasn't wrong — it was incomplete. "Solving annoyance alone isn't enough; responsibility is required to survive the AI age" still holds. But within that word "responsibility" hid seven layers, "survival" looks different across industries, shifts over time, and weighs differently across cultures.
 
 A good framework doesn't give precise answers — it forces you to ask the right questions. **"Who do I call?"** — that single question might be a more powerful tool than everything in this report.
+
+---
+
+### 🔗 Sources
+
+| # | Source | Confidence |
+|---|--------|-----------|
+| 1 | Methodology: AI-based multi-persona simulation exchanging arguments across 30 expert perspectives | ⚠️ Author clarification needed |
+| 2 | [Stripe, Inc. — Wikipedia](https://en.wikipedia.org/wiki/Stripe,_Inc.) | 🟢 Observed |
+| 3 | [Seoul Metropolitan Area — Wikipedia](https://en.wikipedia.org/wiki/Seoul_metropolitan_area) (2020 pop: 26,037,000) | 🟢 Observed |
+| 4 | [Coupang, Inc. — Wikipedia](https://en.wikipedia.org/wiki/Coupang) (Logistics infra, 2024 revenue $30.3B) | 🟢 Observed |
+| 5 | [Aging of South Korea — Wikipedia](https://en.wikipedia.org/wiki/Aging_of_South_Korea) (Projected world's most aged by 2045) | 🟢 Observed |
+| 6 | [Moravec's Paradox — Wikipedia](https://en.wikipedia.org/wiki/Moravec%27s_paradox) (Hans Moravec, 1988) | 🟢 Observed |
+
+**Note:** The 7-Layer Responsibility Model, SaaS Submersion Theory, AI Defense Diamond, Phygital Moat, Responsibility Dispersion Paradox, and AI Premium Paradox are original frameworks proposed in this column.
