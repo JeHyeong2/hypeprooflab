@@ -317,6 +317,23 @@ code, pre, .font-mono {
   color: #67e8f9; /* cyan-300 */
 }
 
+/* Footnote references — superscript clickable links */
+.column-content .footnote-ref {
+  font-size: 0.75em;
+  line-height: 0;
+  vertical-align: super;
+  margin-left: 1px;
+}
+.column-content .footnote-ref a {
+  color: #a78bfa; /* purple-400 */
+  text-decoration: none;
+  font-weight: 500;
+}
+.column-content .footnote-ref a:hover {
+  color: #c4b5fd; /* purple-300 */
+  text-decoration: underline;
+}
+
 /* Mobile typography for columns */
 @media (max-width: 640px) {
   .column-content {
