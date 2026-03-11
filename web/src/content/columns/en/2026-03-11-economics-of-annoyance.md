@@ -18,7 +18,7 @@ Then AI arrived, and a fundamental question emerged.
 
 AI doesn't get annoyed. Comparing isn't tedious. Repetition isn't frustrating. Complexity isn't overwhelming. So does that mean every business built on solving annoyance is doomed?
 
-This report distills the findings of a large-scale verification effort designed to answer that question — conclusions reached after exchanging over 1,400 arguments across 30 expert perspectives, from legal philosophers and actuaries to SaaS founders, urban planners, and cognitive neuroscientists **[1]**.
+This report distills the findings of a large-scale verification effort designed to answer that question — conclusions reached using Claude Opus 4.6's Agent Teams feature to simulate 30 expert personas (legal philosophers, actuaries, SaaS founders, urban planners, cognitive neuroscientists, and more), exchanging over 1,400 arguments across 235 rounds of structured debate **[1]**.
 
 The bottom line: **"Businesses that only eliminate annoyance die. Businesses that carry responsibility survive."** This intuition was not overturned. But what "responsibility" actually means, and under what conditions "survive" holds true, required far more precision.
 

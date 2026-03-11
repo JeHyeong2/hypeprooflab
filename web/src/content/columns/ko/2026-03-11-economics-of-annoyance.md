@@ -18,7 +18,7 @@ creatorImage: "/members/ryan.png"
 
 AI는 귀찮음을 느끼지 않는다. 비교가 귀찮지 않고, 반복이 귀찮지 않고, 복잡한 것도 귀찮지 않다. 그렇다면 귀찮음을 대신해주던 사업들은 전부 사라지는 것인가?
 
-이 글은 이 질문에 답하기 위해 진행된 대규모 검증 작업의 결과를 정리한 것이다. 법철학자, 보험수리사, SaaS 창업자, 도시계획가, 인지신경과학자 등 30개 전문 관점에서 1,400건 이상의 논증을 교환하며 도달한 결론이다 **[1]**.
+이 글은 이 질문에 답하기 위해 진행된 대규모 검증 작업의 결과를 정리한 것이다. Claude Opus 4.6의 Agent Teams 기능을 활용해 법철학자, 보험수리사, SaaS 창업자, 도시계획가, 인지신경과학자 등 30개 전문 페르소나를 설정하고, 235라운드에 걸쳐 1,400건 이상의 논증을 교환하며 도달한 결론이다 **[1]**.
 
 먼저 결론부터 말하면: **"귀찮음 해소만 하는 사업은 죽고, 책임이 있는 사업은 산다."** 이 직관은 기각되지 않았다. 다만, "책임"이 정확히 무엇인지, "산다"가 어떤 조건에서 성립하는지를 훨씬 정밀하게 밝혀야 했다.
 
@@ -153,7 +153,7 @@ SaaS도 같은 길을 간다. AI 에이전트가 보편화되면, 사용자는 Z
 
 | # | 출처 | 확신도 |
 |---|------|--------|
-| 1 | 본 칼럼의 분석 방법론: AI 기반 multi-persona 시뮬레이션으로 30개 전문 관점에서 논증 교환 | ⚠️ 저자 확인 필요 |
+| 1 | 분석 방법론: Claude Opus 4.6 Agent Teams로 30개 전문 페르소나 설정, 235라운드 토론 시뮬레이션 | 🟢 저자 확인 |
 | 2 | [Stripe, Inc. — Wikipedia](https://en.wikipedia.org/wiki/Stripe,_Inc.) | 🟢 Observed |
 | 3 | [Seoul Metropolitan Area — Wikipedia](https://en.wikipedia.org/wiki/Seoul_metropolitan_area) (2020 인구: 26,037,000) | 🟢 Observed |
 | 4 | [Coupang, Inc. — Wikipedia](https://en.wikipedia.org/wiki/Coupang) (물류 인프라, 2024 매출 $30.3B) | 🟢 Observed |
