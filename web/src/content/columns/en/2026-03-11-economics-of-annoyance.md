@@ -46,7 +46,7 @@ When the tax audit comes, you can say: "My accountant handled it."
 
 AI can file your taxes. But when the audit arrives and you say "AI did it" — that doesn't fly. You need a human who signs and bears legal liability.
 
-The original framework's core intuition was this: **businesses that only solve annoyance get replaced by AI; businesses that combine responsibility transfer with emotional reassurance survive.** The intuition was right. But incomplete.
+The core intuition from Part 1 was this: **businesses that only solve annoyance get replaced by AI; businesses that combine responsibility transfer with emotional reassurance survive.** The intuition was right. But incomplete.
 
 ---
 
@@ -127,7 +127,7 @@ One practical approach cuts through all this analysis.
 
 **Step 2 — Precision check**: Score across the AI Defense Diamond's four axes. Confirm at least 3 of 5 diagnostic questions are "yes."
 
-The original framework wasn't wrong — it was incomplete. "Solving annoyance alone isn't enough; responsibility is required to survive the AI age" still holds. But within that word "responsibility" hid seven layers, "survival" looks different across industries, shifts over time, and weighs differently across cultures.
+The initial intuition wasn't wrong — it was incomplete. "Solving annoyance alone isn't enough; responsibility is required to survive the AI age" still holds. But within that word "responsibility" hid seven layers, "survival" looks different across industries, shifts over time, and weighs differently across cultures.
 
 A good framework doesn't give precise answers — it forces you to ask the right questions. **"Who do I call?"** — that single question might be a more powerful tool than everything in this report.
 
