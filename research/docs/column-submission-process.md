@@ -20,21 +20,30 @@ Mother가 확인해야 할 것:
 - **EN 제목 제안**: "영문 제목은 이렇게 하면 어떨까요: ..."
 - 크리에이터가 최소 1회 확인/수정 응답을 해야 다음 단계 진행
 
-### 3. 보안 검사
+### 3. 🚦 Publish Gate 실행 (보안 + 품질 + 프로세스 통합)
 ```bash
 cd ~/CodeWorkspace/hypeproof
-python3 research/scripts/security_check.py <submitted_file.md>
+python3 research/scripts/publish_gate.py <submitted_file.md>
 ```
-- **CRITICAL 발견 시**: 즉시 크리에이터에게 알림, 게시 차단
-- 해당 부분 수정 후 재검사 통과 필요
+> **`publish_gate.py` 한 번으로 보안(security_check) + 품질(eval_column) + 프로세스(대화 이력) 3단계를 모두 검증합니다.**
+> 
+> 누가 썼든, 어떤 경로든 이 게이트를 안 거치면 배포 안 됨. Jay 글도 예외 없음.
 
-### 4. 품질 평가
+- **Gate 1 — Security**: CRITICAL 발견 시 즉시 BLOCKED
+- **Gate 2 — Quality**: 70점 미만 BLOCKED, 70-79 WARNING (통과는 됨)
+- **Gate 3 — Process**: 크리에이터 대화 기록 확인 (경로별 다름)
+  - `creator-submit`: 크리에이터와 최소 1회 대화 필수
+  - `jay-direct`: 대화 불필요 (자동 감지)
+  - `mother-draft`: Jay 승인 필수
+  - `ai-draft`: 크리에이터 승인 필수
+- **최종 결과**: 3개 게이트 모두 통과해야 다음 단계 진행
+
+개별 스크립트 직접 실행도 가능하지만, **반드시 publish_gate.py를 통해 실행할 것**:
 ```bash
-python3 research/scripts/eval_column.py <submitted_file.md> --quick
+# 개별 실행 (참고용, 직접 사용하지 말 것)
+# python3 research/scripts/security_check.py <file.md>
+# python3 research/scripts/eval_column.py <file.md> --quick
 ```
-- **70점 미만**: 개선 포인트를 크리에이터에게 공유
-- 크리에이터와 함께 수정 후 재평가
-- 70점 이상 통과 시 다음 단계
 
 ### 5. Frontmatter 생성 + EN 번역
 - KO frontmatter 필수 필드 확인/생성:
