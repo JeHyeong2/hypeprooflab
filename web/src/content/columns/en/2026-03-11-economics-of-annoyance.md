@@ -64,17 +64,17 @@ Dig deeper and responsibility reveals seven distinct strata, with clear lines be
 - **Layer 2 — Legal**: "Signs and bears legal liability" → Not until regulations change
 - **Layer 1 — Economic**: "Saves me money" → Fully replaceable
 
-A key paradox emerged: as AI automates layers 1, 3, and 4, the value of layers 5–7 paradoxically increases. This is the **"Responsibility Dispersion Paradox."**
+A key paradox emerged: as AI automates layers 1, 3, and 4, the value of layers 5–7 paradoxically increases. We'll call this the **"Responsibility Dispersion Paradox."**
 
 ### Finding 2: SaaS doesn't "evaporate" — it "submerges"
 
-SaaS doesn't disappear; it becomes invisible. Just as Stripe runs behind every mobile payment without users knowing **[2]**, SaaS tools will be called by AI agents behind the scenes. Users won't touch Zapier or Calendly directly — but those services will still run underneath. This is **"submersion."**
+SaaS doesn't disappear; it becomes invisible. Just as Stripe runs behind every mobile payment without users knowing **[2]**, SaaS tools will be called by AI agents behind the scenes. Users won't touch Zapier or Calendly directly — but those services will still run underneath. Let's call this **"submersion."**
 
-Another paradox: the **"AI Premium Paradox."** The SaaS products that integrate AI best get absorbed by AI agents first. The better you are at AI features, the easier you are to swallow.
+This leads to yet another paradox, which we'll name the **"AI Premium Paradox."** The SaaS products that integrate AI best get absorbed by AI agents first. The better you are at AI features, the easier you are to swallow.
 
 ### Finding 3: The real moat isn't concrete — it's coordinates
 
-Coupang's fulfillment centers are defensible not because they're made of concrete, but because they occupy logistics-optimal land in the Seoul metro area — home to approximately 26 million people **[3]** — where zoning regulations make new supply nearly impossible **[4]**. The moat is the coordinate, not the material. When physical assets combine with digital technology, defenses peak — the **"Phygital Moat."**
+Coupang's fulfillment centers are defensible not because they're made of concrete, but because they occupy logistics-optimal land in the Seoul metro area — home to approximately 26 million people **[3]** — where zoning regulations make new supply nearly impossible **[4]**. The moat is the coordinate, not the material. When physical assets combine with digital technology, defenses peak — a combination we'll call the **"Phygital Moat"** (borrowing "Phygital" from marketing and "Moat" from Warren Buffett's competitive advantage lexicon).
 
 ### Finding 4: Network effects — the framework's biggest blind spot
 
@@ -86,9 +86,9 @@ As Korea entered super-aged society **[5]**, a new category of annoyance surface
 
 ---
 
-## Part 3. The New Framework — AI Defense Diamond
+## Part 3. A Proposed Framework — AI Defense Diamond
 
-Four axes for evaluating any business:
+To address the gaps uncovered above, we propose a new evaluation tool: the **AI Defense Diamond**. Four axes for assessing any business's resilience in the AI age:
 
 - **Responsibility density** — How concentrated are legal, emotional, and existential responsibilities?
 - **Physical asset intensity** — Are there irreplaceable physical infrastructures?
