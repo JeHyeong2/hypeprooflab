@@ -1,3 +1,4 @@
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
@@ -13,6 +14,15 @@ const sanitizeSchema = {
     a: [...(defaultSchema.attributes?.a || []), 'id', 'title'],
     sup: ['className'],
   },
+};
+
+// Wrap <table> in a scrollable card container
+const markdownComponents = {
+  table: ({ children, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
+    <div className="table-wrapper">
+      <table {...props}>{children}</table>
+    </div>
+  ),
 };
 
 interface Props {
@@ -32,6 +42,7 @@ export default function ColumnContent({ content, locale }: Props) {
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkFootnotes]}
         rehypePlugins={[rehypeRaw, [rehypeSanitize, sanitizeSchema]]}
+        components={markdownComponents}
       >
         {content}
       </ReactMarkdown>

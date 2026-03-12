@@ -405,23 +405,88 @@ html[lang="en"] body {
   }
 }
 
-/* Column content table styling */
+/* Column content table — card style with visible grid */
+.column-content .table-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  margin: 28px 0;
+  border-radius: 10px;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  background: rgba(24, 24, 27, 0.7);
+}
+
 .column-content table {
   table-layout: auto;
   width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.7;
 }
 
-/* Sources table: last table in column (# | 출처 | URL) */
+.column-content table thead {
+  background: rgba(168, 85, 247, 0.12);
+}
+
+.column-content table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #f4f4f5;
+  border-bottom: 2px solid rgba(168, 85, 247, 0.4);
+  white-space: nowrap;
+  font-size: 13px;
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
+
+.column-content table td {
+  padding: 11px 16px;
+  color: #d4d4d8;
+  border-bottom: 1px solid rgba(113, 113, 122, 0.35);
+  vertical-align: top;
+}
+
+/* Alternating row stripes */
+.column-content table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.column-content table tbody tr:hover {
+  background: rgba(168, 85, 247, 0.06);
+}
+
+.column-content table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Bold/strong text inside table cells */
+.column-content table td strong {
+  color: #f4f4f5;
+}
+
+/* Links inside table cells */
+.column-content table td a {
+  color: #22d3ee;
+  word-break: break-all;
+}
+
+/* Sources table (last table): # column narrow */
 .column-content table:last-of-type th:first-child,
 .column-content table:last-of-type td:first-child {
-  width: 2rem;
+  width: 2.5rem;
   text-align: center;
 }
 
-.column-content table:last-of-type th:last-child,
-.column-content table:last-of-type td:last-child {
-  width: auto;
-  word-break: break-all;
+/* Mobile responsive tables */
+@media (max-width: 640px) {
+  .column-content table {
+    font-size: 13px;
+  }
+  .column-content table th,
+  .column-content table td {
+    padding: 8px 10px;
+  }
 }
 
 /* Smooth scrollbar */

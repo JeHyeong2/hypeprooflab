@@ -8,6 +8,15 @@ import ReactMarkdown from 'react-markdown';
 import rehypeSanitize from 'rehype-sanitize';
 import remarkGfm from 'remark-gfm';
 import type { Column } from '@/lib/columns';
+
+// Wrap <table> in a scrollable card container
+const markdownComponents = {
+  table: ({ children, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
+    <div className="table-wrapper">
+      <table {...props}>{children}</table>
+    </div>
+  ),
+};
 import { Footer } from '@/components/layout/Footer';
 import ViewCounter from '@/components/ViewCounter';
 import AuthButton from '@/components/auth/AuthButton';
@@ -179,6 +188,7 @@ export default function ColumnArticle({ column, slug, availableLocales }: Props)
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeSanitize]}
+            components={markdownComponents}
           >
             {content}
           </ReactMarkdown>
