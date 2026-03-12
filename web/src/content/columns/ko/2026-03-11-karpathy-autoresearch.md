@@ -9,6 +9,7 @@ readTime: "6 min"
 excerpt: "Andrej Karpathy가 Claude 에이전트에게 nanochat 튜닝을 맡기고 잤더니, 20년 경력자가 놓친 버그까지 잡아내며 GPT-2 학습 시간을 11% 단축했다."
 creatorImage: "/members/jay.png"
 lang: "ko"
+authorType: "ai"
 ---
 
 20년간 신경망을 직접 손으로 튜닝해온 사람이 있다. 아이디어를 떠올리고, 구현하고, validation loss를 확인하고, 논문을 읽고, 다시 아이디어를 내는 — 그 반복. AI 연구의 본질이자, Andrej Karpathy가 매일 해온 일이다.

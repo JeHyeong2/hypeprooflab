@@ -9,6 +9,7 @@ readTime: "8 min"
 excerpt: "결과물을 직접 만드는 시대는 끝났다. 이제는 결과물을 만들어내는 '생성 장치'를 설계하는 시대 — 하니스 엔지니어링의 부상."
 creatorImage: "/members/ryan.png"
 lang: "ko"
+authorType: "human"
 ---
 
 ## — run-harness-plugin 제작기에 부쳐
@@ -27,9 +28,9 @@ lang: "ko"
 
 '하니스(Harness)'의 원래 뜻은 마차를 끄는 말에 다는 마구(馬具)다. 굴레와 고삐로 구성되어 말이 원하는 방향으로 움직이도록 통제하는 장치. AI 에이전트 맥락에서 하니스는 모델을 감싸서 장기 실행 작업을 신뢰성 있게 관리하는 시스템 전체를 뜻한다. 모델이 강력한 엔진이라면, 하니스는 조향장치·브레이크·안전장치를 갖춘 완성된 자동차라 할 수 있다.
 
-Aakash Gupta가 "2025 Was Agents, 2026 Is Agent Harnesses"라는 테제를 내놓은 이후, 업계의 시선이 급격히 전환되었다. 모델 자체의 성능 경쟁은 정체기에 접어들었고, 승부는 그 모델을 *어떻게 굴리느냐*로 옮겨갔다. 토스 기술 블로그가 "Software 3.0 시대, 하니스를 통한 조직 생산성 저점 높이기"를 다루고, oh-my-opencode 같은 정교한 하니스 프레임워크가 등장하는 것도 같은 맥락이다.
+Aakash Gupta가 "2025 Was Agents, 2026 Is Agent Harnesses"라는 테제를 내놓은 이후, 업계의 시선이 급격히 전환되었다. 모델 자체의 성능 경쟁은 정체기에 접어들었고, 승부는 그 모델을 *어떻게 굴리느냐*로 옮겨갔다. 토스 기술 블로그가 "[Software 3.0 시대, Harness를 통한 조직 생산성 저점 높이기](https://toss.tech/article/harness-for-team-productivity)"를 다루고, [oh-my-opencode](https://github.com/code-yeongyu/oh-my-openagent) 같은 정교한 하니스 프레임워크가 등장하는 것도 같은 맥락이다.
 
-이미 강력한 하니스는 존재한다. oh-my-opencode는 Sisyphus 오케스트레이터, LSP·AST-Grep 통합, 멀티모델 라우팅, 25개 이상의 빌트인 훅까지 갖춘 중무장 시스템이다. 무기에 비유하면 **자율주행 전투기** — 화력과 항속거리 모두 압도적이지만, 이륙까지의 준비 시간과 운용 복잡도 역시 그에 비례한다.
+이미 강력한 하니스는 존재한다. [oh-my-opencode](https://github.com/code-yeongyu/oh-my-openagent)는 Sisyphus 오케스트레이터, LSP·AST-Grep 통합, 멀티모델 라우팅, 25개 이상의 빌트인 훅까지 갖춘 중무장 시스템이다. 무기에 비유하면 **자율주행 전투기** — 화력과 항속거리 모두 압도적이지만, 이륙까지의 준비 시간과 운용 복잡도 역시 그에 비례한다.
 
 `run-harness-plugin`이 추구하는 것은 다른 종류의 기동성이다. 전투기가 아니라 **전시 상황에 맞게 즉석 커스터마이즈가 가능한 자율주행 드론**. Claude Code의 네이티브 기능 — Skills, Teams, Tasks — 만으로 무장하되, 더 빠르고 가볍게. 현장의 맥락에 따라 팀 구성을 바꾸고, 스킬을 갈아 끼우고, 태스크를 재정의하는 것이 분 단위로 가능한 경량 하니스. 그것이 이 플러그인의 설계 철학이다.
 
@@ -94,3 +95,14 @@ run-harness-plugin은 후자의 극단에 선다. Teams + Tasks + Skills라는 C
 -----
 
 *`run-harness-plugin`은 [GitHub](https://github.com/ico1036/run-harness-plugin)에서 확인할 수 있다.*
+
+---
+
+### 🔗 Sources
+
+| # | 출처 | URL |
+|---|------|-----|
+| 1 | [run-harness-plugin — GitHub](https://github.com/ico1036/run-harness-plugin) | Claude Code 네이티브 기능 기반 경량 하니스 플러그인 |
+| 2 | [oh-my-openagent (oh-my-opencode) — GitHub](https://github.com/code-yeongyu/oh-my-openagent) | Sisyphus 오케스트레이터 기반 풀스택 에이전트 하니스 |
+| 3 | [Software 3.0 시대, Harness를 통한 조직 생산성 저점 높이기 — 토스 기술 블로그](https://toss.tech/article/harness-for-team-productivity) (2026) | LLM을 팀 시스템으로 편입시키는 하니스 접근법 |
+| 4 | [Aakash Gupta — Product Growth Substack](https://www.news.aakashg.com/) | "2025 Was Agents, 2026 Is Agent Harnesses" 테제의 출처 |

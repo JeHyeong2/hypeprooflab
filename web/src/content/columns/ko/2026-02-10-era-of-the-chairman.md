@@ -8,13 +8,14 @@ slug: "2026-02-10-era-of-the-chairman"
 readTime: "12 min"
 excerpt: "에이전트가 모든 실행을 대행하는 세상에서, 인간 고유의 가치는 정확히 어디에 있는가? 디지털 경제의 패러다임 전환을 분석한다."
 creatorImage: "/members/jay.png"
-citations: [{"title":"Augmenting Human Intellect: A Conceptual Framework","url":"https://www.dougengelbart.org/content/view/138","author":"Douglas Engelbart","year":"1962"},{"title":"The Age of AI Agents: Economic Implications","url":"https://arxiv.org/abs/2401.04088","author":"Andrew Ng et al.","year":"2024"}]
+citations: [{"title":"Augmenting Human Intellect: A Conceptual Framework","url":"https://en.wikipedia.org/wiki/Douglas_Engelbart","author":"Douglas Engelbart","year":"1962"},{"title":"The Age of AI Agents: Economic Implications","url":"https://arxiv.org/abs/2401.04088","author":"Andrew Ng et al.","year":"2024"}]
 lang: "ko"
+authorType: "ai"
 ---
 
 ## 프롤로그: 60년 된 약속이 깨지다
 
-1963년, 더글러스 엥겔바트가 마우스를 발명한 이후 인간과 컴퓨터 사이에는 하나의 암묵적 약속이 있었다.
+1963년, [더글러스 엥겔바트](https://en.wikipedia.org/wiki/Douglas_Engelbart)가 마우스를 발명한 이후 인간과 컴퓨터 사이에는 하나의 암묵적 약속이 있었다.
 
 "인간이 기계의 언어를 배우면, 기계가 인간의 일을 도와준다."
 
@@ -36,7 +37,7 @@ CLI를 배웠고, GUI를 익혔고, 터치를 체득했고, 음성 명령도 학
 
 에이전트는 광고를 보지 않는다. 보더라도 무시하도록 최적화된다. 인간에게 열 개를 펼쳐놓고 고르게 하던 세상에서, 에이전트가 단 하나를 골라 바로 실행하는 세상으로 넘어간다. 화면 점유율의 시대가 끝나고, 실행 점유율의 시대가 열리는 것이다.
 
-이것이 뜻하는 바는 단순히 광고 형태가 바뀐다는 것이 아니다. 6천억 달러 규모의 글로벌 디지털 광고 시장이 존재 근거를 잃는다는 것이다. 광고의 포맷이 아니라, 광고라는 행위 자체의 전제가 흔들린다.
+이것이 뜻하는 바는 단순히 광고 형태가 바뀐다는 것이 아니다. [6천억 달러 규모의 글로벌 디지털 광고 시장](https://en.wikipedia.org/wiki/Attention_economy)이 존재 근거를 잃는다는 것이다. 광고의 포맷이 아니라, 광고라는 행위 자체의 전제가 흔들린다.
 
 ---
 
@@ -56,11 +57,11 @@ CLI를 배웠고, GUI를 익혔고, 터치를 체득했고, 음성 명령도 학
 
 ## 제3장: 성벽을 허물 것인가, 성 안에서 잊힐 것인가
 
-여기에 기존 비즈니스의 가장 현실적인 공포가 있다. 그리고 이것은 클레이튼 크리스텐슨이 말한 이노베이터 딜레마의 정확한 재현이다.
+여기에 기존 비즈니스의 가장 현실적인 공포가 있다. 그리고 이것은 [클레이튼 크리스텐슨](https://en.wikipedia.org/wiki/Clayton_Christensen)이 말한 [이노베이터 딜레마](https://en.wikipedia.org/wiki/The_Innovator%27s_Dilemma)의 정확한 재현이다.
 
 앱 기반 서비스가 수년간 쌓아올린 성벽이 있다. 회원 데이터베이스, 결제 정보, 행동 데이터 — 이것이 Lock-in이고, 이것이 해자(moat)였다. 지금까지는 이 Walled Garden, 가두리 양식장 안에 사용자를 가두는 것이 경쟁 전략의 핵심이었다.
 
-그런데 MCP와 API 기반으로 문을 열면 에이전트가 자유롭게 여러 서비스를 넘나들게 된다. 해자가 메워진다. 반대로 문을 열지 않으면? 에이전트가 아예 접근하지 못한다. 존재감 자체가 소멸한다.
+그런데 [MCP](https://en.wikipedia.org/wiki/Model_Context_Protocol)와 API 기반으로 문을 열면 에이전트가 자유롭게 여러 서비스를 넘나들게 된다. 해자가 메워진다. 반대로 문을 열지 않으면? 에이전트가 아예 접근하지 못한다. 존재감 자체가 소멸한다.
 
 개방하면 해자가 무너지고, 개방하지 않으면 세상에서 사라진다. 이것이 딜레마다.
 
@@ -111,3 +112,17 @@ CLI를 배웠고, GUI를 익혔고, 터치를 체득했고, 음성 명령도 학
 이것은 기술 전망의 옷을 입고 있지만, 본질은 존재론적 질문이다.
 
 그리고 아마도, 이 질문에 대한 답을 가진 사람만이 진정한 의미의 회장님이 될 수 있을 것이다.
+
+---
+
+### 🔗 Sources
+
+| # | 출처 | 설명 |
+|---|------|------|
+| 1 | [Douglas Engelbart — Wikipedia](https://en.wikipedia.org/wiki/Douglas_Engelbart) | 마우스 발명자이자 "Augmenting Human Intellect" 저자 |
+| 2 | [Augmenting Human Intellect: A Conceptual Framework](https://en.wikipedia.org/wiki/Douglas_Engelbart) (1962) | 엥겔바트의 인간-컴퓨터 상호작용 원론 |
+| 3 | [Attention Economy — Wikipedia](https://en.wikipedia.org/wiki/Attention_economy) | 주의력 경제 개념과 디지털 광고 시장 구조 |
+| 4 | [The Innovator's Dilemma — Wikipedia](https://en.wikipedia.org/wiki/The_Innovator%27s_Dilemma) | Clayton Christensen의 파괴적 혁신 이론 (1997) |
+| 5 | [Model Context Protocol — Wikipedia](https://en.wikipedia.org/wiki/Model_Context_Protocol) | Anthropic이 개발한 AI 에이전트 연결 프로토콜 |
+| 6 | [Search Engine Optimization — Wikipedia](https://en.wikipedia.org/wiki/Search_engine_optimization) | SEO 개념 — AEO와의 대비 맥락 |
+| 7 | [Walled Garden (Technology) — Wikipedia](https://en.wikipedia.org/wiki/Walled_garden_%28technology%29) | 폐쇄형 플랫폼 전략 개념 |

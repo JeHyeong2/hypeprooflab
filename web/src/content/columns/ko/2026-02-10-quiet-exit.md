@@ -9,6 +9,7 @@ readTime: "15 min"
 excerpt: "업무 자동화가 현실이 된 어느 날, 한 직장인이 쿠블러-로스의 다섯 단계를 거치며 자신의 Job을 재정의하기까지의 이야기."
 creatorImage: "/members/jay.png"
 lang: "ko"
+authorType: "ai"
 ---
 
 ## 1단계: 부정 (Denial)
@@ -23,7 +24,7 @@ lang: "ko"
 
 그가 부정하는 동안, AI는 이미 그 문으로 출근하고 있었다.
 
-부정의 본질은 시간 감각의 착각이다. "아직 멀었다"는 판단은 변화가 천천히 온다는 전제 위에 서 있다. 분기별 전략 리뷰, 연간 로드맵, 반기 예산 편성 — 회사의 시간 단위로 측정하면 아직 멀어 보인다. 그런데 그 시스템을 만드는 데 걸린 시간은 반나절이었다. 설계, 구현, 검증, 문서화까지. 영화 '인터스텔라'의 밀러 행성처럼, 바깥에서는 이미 몇 년이 흐르고 있었고, 그는 아직 회사의 시계를 보고 있었다.
+부정의 본질은 시간 감각의 착각이다. "아직 멀었다"는 판단은 변화가 천천히 온다는 전제 위에 서 있다. 분기별 전략 리뷰, 연간 로드맵, 반기 예산 편성 — 회사의 시간 단위로 측정하면 아직 멀어 보인다. 그런데 그 시스템을 만드는 데 걸린 시간은 반나절이었다. 설계, 구현, 검증, 문서화까지. 영화 '[인터스텔라](https://en.wikipedia.org/wiki/Interstellar_%28film%29)'의 밀러 행성처럼, 바깥에서는 이미 몇 년이 흐르고 있었고, 그는 아직 회사의 시계를 보고 있었다.
 
 ---
 
@@ -110,7 +111,7 @@ AI의 판단 과정 안에 어떤 관점이 심어지는가 — 이것이 새로
 
 ## 에필로그: 여섯 번째 단계는 없다
 
-쿠블러-로스의 모델에는 여섯 번째 단계가 없다. 수용 이후는 각자의 몫이다.
+[쿠블러-로스의 모델](https://en.wikipedia.org/wiki/K%C3%BCbler-Ross_model)에는 여섯 번째 단계가 없다. 수용 이후는 각자의 몫이다.
 
 경제의 가치가 만들어지는 지점이 "사람의 눈"에서 "AI의 실행"으로 이동하고 있다. 이 전환은 화면, 광고, 플랫폼의 힘, 일하는 방식을 한꺼번에 바꾼다. 그리고 그 변화의 최소 단위는 대기업이 아니라, 현장을 아는 한 사람과 그의 AI 팀이다.
 
@@ -119,3 +120,15 @@ AI의 판단 과정 안에 어떤 관점이 심어지는가 — 이것이 새로
 다만 한 가지는 분명했다. 이 글을 읽고 "아직 멀었다"고 생각하는 사람은 1단계에 있고, "불공평하다"고 느끼는 사람은 2단계에 있고, "나는 다르다"고 협상하는 사람은 3단계에 있다.
 
 당신은 지금 몇 단계에 있는가.
+
+---
+
+### 🔗 Sources
+
+| # | 출처 | 설명 |
+|---|------|------|
+| 1 | [Kübler-Ross Model (Five Stages of Grief) — Wikipedia](https://en.wikipedia.org/wiki/K%C3%BCbler-Ross_model) | 엘리자베스 쿠블러-로스의 다섯 단계 모델 원전 |
+| 2 | [Interstellar (2014) — Wikipedia](https://en.wikipedia.org/wiki/Interstellar_%28film%29) | 크리스토퍼 놀란 감독, 밀러 행성의 시간 팽창 장면 |
+| 3 | [Attention Economy — Wikipedia](https://en.wikipedia.org/wiki/Attention_economy) | 주의력 경제와 디지털 광고 시장 구조 |
+| 4 | [The Innovator's Dilemma — Wikipedia](https://en.wikipedia.org/wiki/The_Innovator%27s_Dilemma) | Clayton Christensen의 파괴적 혁신 이론 |
+| 5 | [Douglas Engelbart — Wikipedia](https://en.wikipedia.org/wiki/Douglas_Engelbart) | 인간-컴퓨터 인터페이스의 선구자, 마우스 발명 |
