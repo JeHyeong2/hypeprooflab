@@ -405,23 +405,23 @@ html[lang="en"] body {
   }
 }
 
-/* Sources table styling */
+/* Column content table styling */
 .column-content table {
-  table-layout: fixed;
+  table-layout: auto;
   width: 100%;
 }
 
-.column-content table th:first-child,
-.column-content table td:first-child {
+/* Sources table: last table in column (# | 출처 | URL) */
+.column-content table:last-of-type th:first-child,
+.column-content table:last-of-type td:first-child {
   width: 2rem;
   text-align: center;
 }
 
-.column-content table th:last-child,
-.column-content table td:last-child {
-  width: 7rem;
-  white-space: nowrap;
-  text-align: center;
+.column-content table:last-of-type th:last-child,
+.column-content table:last-of-type td:last-child {
+  width: auto;
+  word-break: break-all;
 }
 
 /* Smooth scrollbar */
