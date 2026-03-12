@@ -119,7 +119,18 @@ echo -e "  Results: ${GREEN}$PASS PASS${NC} / ${RED}$FAIL FAIL${NC} / $TOTAL tot
 if [ "$FAIL" -gt 0 ]; then
   echo ""
   echo -e "  ${RED}⛔ QA FAILED — 배포 차단${NC}"
-  echo "  FAIL 항목 수정 후 다시 실행하세요."
+  echo ""
+  echo "  🔧 Mother 수정 가능:"
+  echo "     - fm:lang, fm:authorType 등 frontmatter → 직접 추가"
+  echo "     - inline links 부족 → 본문에 링크 삽입"
+  echo "     - npm build 실패 → 코드 수정"
+  echo ""
+  echo "  👤 크리에이터 확인 필요:"
+  echo "     - source URLs 없음 → 원본 링크 요청"
+  echo "     - validate_links 깨짐 → 대체 링크 요청"
+  echo ""
+  echo "  Mother 수정 가능한 건 바로 고치고 재실행."
+  echo "  크리에이터 필요한 건 DM으로 구체적 요청."
   echo ""
   exit 1
 fi
