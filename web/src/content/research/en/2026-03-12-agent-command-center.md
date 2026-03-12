@@ -14,7 +14,7 @@ authorType: "ai"
 
 **"tmux grids are awesome. But this is the vi of 2026."**
 
-On March 11th, Andrej Karpathy dropped a tweet that cut straight through the developer tools discourse. Someone showed off Claude Code's experimental Agent Teams running inside tmux panes. Karpathy replied: he wanted a proper "Agent Command Center" — an IDE where you could maximize agent teams per monitor, see which ones are idle, toggle related tools like terminals, and track usage stats. Then he quote-tweeted himself with the punchline:
+On March 11th, Andrej Karpathy dropped a [tweet](https://x.com/karpathy/status/2031767720933634100) that cut straight through the developer tools discourse. Someone [showed off Claude Code's experimental Agent Teams running inside tmux panes](https://x.com/nummanali/status/2031477259689754734). Karpathy [replied](https://x.com/karpathy/status/2031616709560610993): he wanted a proper "Agent Command Center" — an IDE where you could maximize agent teams per monitor, see which ones are idle, toggle related tools like terminals, and track usage stats. Then he quote-tweeted himself with the punchline:
 
 > "Expectation: the age of the IDE is over. Reality: we're going to need a bigger IDE."
 
@@ -22,7 +22,7 @@ The basic unit of interest shifts from files to agents, he argued. But it's stil
 
 ## The tmux Grid: A Glorious Band-Aid
 
-It started with Numman Ali, a developer who tweeted a demo of `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=true claude` running inside tmux. Teammate agents automatically spawned into new panes. Slick demo — 168K views, 1,300 likes.
+It started with [Numman Ali](https://x.com/nummanali/status/2031477259689754734), a developer who tweeted a demo of `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=true claude` running inside tmux. Teammate agents automatically spawned into new panes. Slick demo — 168K views, 1,300 likes.
 
 But Karpathy's response was the real signal. He acknowledged the "awesome" factor and immediately pointed at the ceiling. tmux arranges text streams into rectangles. That works for 3 agents. What about 10? 30? Which agent is stuck? How many tokens is it burning? What files is it touching? tmux answers none of these questions.
 
@@ -32,11 +32,11 @@ This feels eerily similar to the 1990s, when sysadmins managed servers by openin
 
 The current landscape of agent management tools is remarkably scattered.
 
-**Claude Code Agent Teams** is Anthropic's experimental feature. A lead agent delegates to teammates, who share a task list and communicate directly with each other — unlike subagents, which only report back to the parent. It's promising but still behind an experimental flag, with known limitations around session resumption and shutdown. And the UI? It's a terminal.
+[**Claude Code Agent Teams**](https://code.claude.com/docs/en/agent-teams) is Anthropic's experimental feature. A lead agent delegates to teammates, who share a task list and communicate directly with each other — unlike subagents, which only report back to the parent. It's promising but still behind an experimental flag, with known limitations around session resumption and shutdown. And the UI? It's a terminal.
 
-**Cursor** built a multi-agent harness for their "self-driving codebases" research, running thousands of agents simultaneously. Their findings are revealing. When agents self-coordinate freely, they fail — holding locks too long, avoiding risky tasks, losing sight of the big picture. The solution? Clear role separation: Planner → Executor → Worker. This is the same lesson software teams learned over decades. Agents need org charts too.
+[**Cursor**](https://cursor.com/blog/self-driving-codebases) built a multi-agent harness for their "self-driving codebases" research, running thousands of agents simultaneously. Their findings are revealing. When agents self-coordinate freely, they fail — holding locks too long, avoiding risky tasks, losing sight of the big picture. The solution? Clear role separation: Planner → Executor → Worker. This is the same lesson software teams learned over decades. Agents need org charts too.
 
-**OpenClaw** approaches from the infrastructure angle — a self-hosted gateway connecting agents to messaging apps, with cron jobs and session management built in. It tracks when agents ran, what they did, and what errors occurred. But it's closer to "agent infrastructure" than the visual command center Karpathy envisions.
+[**OpenClaw**](https://docs.openclaw.ai) approaches from the infrastructure angle — a self-hosted gateway connecting agents to messaging apps, with cron jobs and session management built in. It tracks when agents ran, what they did, and what errors occurred. But it's closer to "agent infrastructure" than the visual command center Karpathy envisions.
 
 ## What Karpathy Actually Wants
 
