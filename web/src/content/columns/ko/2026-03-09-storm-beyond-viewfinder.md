@@ -65,3 +65,15 @@ authorType: "human"
 기술의 파도가 아무리 높게 쳐도 그 바다 위에 배를 띄우고 방향을 잡는 것은 결국 인간의 몫입니다. 인공지능이 흉내 낼 수 없는 당신만의 고유한 시선은 무엇인가요? 거대한 알고리즘의 톱니바퀴 속에서도 결코 마모되지 않을 당신의 영혼은 무엇을 말하고 싶어 하나요?
 
 해가 지는 세트장의 긴 그림자를 바라보며 우리는 이제 각자의 대답을 준비해야 할 시간입니다.
+
+---
+
+### 🔗 Sources
+
+| # | 출처 | URL |
+|---|------|-----|
+| 1 | [OpenAI Sora — Text-to-Video Model](https://openai.com/index/sora/) | OpenAI의 텍스트-투-비디오 생성 모델 |
+| 2 | [Google Veo 3 — DeepMind](https://deepmind.google/models/veo/) | 구글 딥마인드의 AI 영상 생성 모델 |
+| 3 | [Runway AI](https://runwayml.com) | AI 기반 영상 생성·편집 플랫폼 |
+| 4 | [Adobe Firefly](https://www.adobe.com/products/firefly.html) | 상업적 안전성을 강조하는 어도비의 생성 AI |
+| 5 | [Deepfake — Wikipedia](https://en.wikipedia.org/wiki/Deepfake) | 딥러닝 기반 합성 미디어 기술 개요 |
