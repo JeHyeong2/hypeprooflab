@@ -8,6 +8,8 @@ slug: "2026-03-11-economics-of-annoyance"
 readTime: "12 min"
 excerpt: "AI 에이전트가 귀찮음을 느끼지 않는다면, 귀찮음을 대신해주던 SaaS는 전부 사라지는가? Zylo 실거래 데이터와 ATM-은행원 역사가 보여주는 세 가지 운명."
 creatorImage: "/members/ryan.png"
+lang: "ko"
+authorType: "human"
 ---
 
 *Jiwoong & Claude | 2026.03.12*
