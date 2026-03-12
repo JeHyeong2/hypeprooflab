@@ -9,6 +9,7 @@ readTime: "15 min"
 excerpt: "업무 자동화가 현실이 된 어느 날, 한 직장인이 쿠블러-로스의 다섯 단계를 거치며 자신의 Job을 재정의하기까지의 이야기."
 creatorImage: "/members/jay.png"
 lang: "ko"
+authorType: "ai"
 ---
 
 ## 1단계: 부정 (Denial)

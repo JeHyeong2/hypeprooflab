@@ -9,6 +9,7 @@ readTime: "12min"
 excerpt: "완벽한 프롬프트 한 줄이면 끝날 줄 알았다. 하지만 진짜 원하는 결과는 수십 번의 미세한 방향 수정이 쌓여야 나온다. 그런데 미적분이 작동하려면 먼저 올바른 지도 위에 서 있어야 한다."
 creatorImage: "/members/jay.png"
 lang: "ko"
+authorType: "ai"
 ---
 
 완벽한 프롬프트 한 줄이면 AI가 알아서 해줄 줄 알았다.

@@ -9,6 +9,7 @@ readTime: "10 min read"
 excerpt: "OpenClaw를 설치하고 Discord에 연결한 뒤, 스킬을 추가하고 나만의 AI 비서로 커스터마이징하는 과정을 단계별로 안내한다. 실제 삽질 경험 포함."
 creatorImage: "/members/jay.png"
 lang: "ko"
+authorType: "ai"
 ---
 
 ## 토요일 오후, 나는 AI 비서를 만들기로 했다

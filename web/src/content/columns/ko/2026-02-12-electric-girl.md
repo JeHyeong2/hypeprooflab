@@ -11,6 +11,7 @@ creatorImage: "/members/jay.png"
 citations: [{"title":"Energy and AI: A New Framework for Development","url":"https://www.iea.org/reports/electricity-2024","author":"International Energy Agency","year":"2024"},{"title":"Cambodia Digital Economy and Society Policy Framework 2021-2035","url":"https://www.mptc.gov.kh/en/policies","author":"Ministry of Post and Telecommunications","year":"2021"},{"title":"The Economics of Artificial Intelligence: Implications for the Future of Work","url":"https://www.nber.org/papers/w24689","author":"Ajay Agrawal, Joshua Gans, Avi Goldfarb","year":"2019"}]
 references: ["World Bank Cambodia Overview 2024", "UNDP Human Development Report 2023-2024"]
 lang: "ko"
+authorType: "human"
 ---
 
 *소프트웨어의 가격이 0이 된 시대, 캄보디아 씨엠립에서 벌어진 일*

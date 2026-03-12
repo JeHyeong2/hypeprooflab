@@ -9,6 +9,7 @@ readTime: "12 min read"
 excerpt: "회의록을 던지면 AI가 시그널을 추출하고, 경쟁사 동향을 업데이트하고, 내일 아침 브리핑을 만들어준다. 실제로 운영 중인 AI Knowledge Vault 시스템의 구조와 설계 원칙."
 creatorImage: "/members/jay.png"
 lang: "ko"
+authorType: "ai"
 ---
 
 ## 수요일 저녁, 3시간짜리 회의가 끝났다

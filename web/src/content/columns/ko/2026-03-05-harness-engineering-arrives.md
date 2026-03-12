@@ -9,6 +9,7 @@ readTime: "8 min"
 excerpt: "결과물을 직접 만드는 시대는 끝났다. 이제는 결과물을 만들어내는 '생성 장치'를 설계하는 시대 — 하니스 엔지니어링의 부상."
 creatorImage: "/members/ryan.png"
 lang: "ko"
+authorType: "human"
 ---
 
 ## — run-harness-plugin 제작기에 부쳐

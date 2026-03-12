@@ -10,6 +10,7 @@ excerpt: "에이전트가 모든 실행을 대행하는 세상에서, 인간 고
 creatorImage: "/members/jay.png"
 citations: [{"title":"Augmenting Human Intellect: A Conceptual Framework","url":"https://www.dougengelbart.org/content/view/138","author":"Douglas Engelbart","year":"1962"},{"title":"The Age of AI Agents: Economic Implications","url":"https://arxiv.org/abs/2401.04088","author":"Andrew Ng et al.","year":"2024"}]
 lang: "ko"
+authorType: "ai"
 ---
 
 ## 프롤로그: 60년 된 약속이 깨지다

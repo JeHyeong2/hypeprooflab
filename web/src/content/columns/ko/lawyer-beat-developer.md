@@ -9,6 +9,7 @@ readTime: "10분"
 excerpt: "Anthropic Claude Code 해커톤에서 변호사, 의사, 아버지가 수상했다. 개발자는 없었다. AI 시대, 진짜 희소한 것은 무엇인가."
 creatorImage: "/members/jy.png"
 lang: "ko"
+authorType: "human"
 ---
 
 
