@@ -102,7 +102,7 @@ fi
 echo ""
 echo "🔗 Step 7: Sources have full URLs?"
 # Check if Sources table has actual URLs (not just domain names)
-if grep -A 50 '## Sources\|### Sources\|🔗 Sources\|## 출처\|### 출처\|🔗 출처' "$KO_FILE" | grep -q 'https\?://[a-zA-Z0-9]'; then
+if grep -A 50 '## Sources\|### Sources\|🔗 Sources\|## 출처\|### 출처\|🔗 출처\|참고 출처' "$KO_FILE" | grep -q 'https\?://[a-zA-Z0-9]'; then
   echo -e "  [source URLs] ${GREEN}PASS${NC}"
   ((PASS++))
 else

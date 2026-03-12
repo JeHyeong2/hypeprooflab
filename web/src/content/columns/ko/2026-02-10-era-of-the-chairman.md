@@ -125,4 +125,4 @@ CLI를 배웠고, GUI를 익혔고, 터치를 체득했고, 음성 명령도 학
 | 4 | [The Innovator's Dilemma — Wikipedia](https://en.wikipedia.org/wiki/The_Innovator%27s_Dilemma) | Clayton Christensen의 파괴적 혁신 이론 (1997) |
 | 5 | [Model Context Protocol — Wikipedia](https://en.wikipedia.org/wiki/Model_Context_Protocol) | Anthropic이 개발한 AI 에이전트 연결 프로토콜 |
 | 6 | [Search Engine Optimization — Wikipedia](https://en.wikipedia.org/wiki/Search_engine_optimization) | SEO 개념 — AEO와의 대비 맥락 |
-| 7 | [Walled Garden (Technology) — Wikipedia](https://en.wikipedia.org/wiki/Walled_garden_(technology)))) | 폐쇄형 플랫폼 전략 개념 |
+| 7 | [Walled Garden (Technology) — Wikipedia](https://en.wikipedia.org/wiki/Walled_garden_%28technology%29) | 폐쇄형 플랫폼 전략 개념 |

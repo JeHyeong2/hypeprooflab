@@ -124,7 +124,7 @@ Michal은 병원으로 향하는 출퇴근길 차 안에서 해커톤 소식을 
 
 ---
 
-*참고 출처*
+### 🔗 출처
 - [Anthropic 공식 수상자 발표 (Threads)](https://www.threads.com/@claudeai/post/DU_5tZrEoi-)
 - [해커톤 갤러리 — 전체 277개 프로젝트 (Cerebral Valley)](https://cerebralvalley.ai/e/claude-code-hackathon/hackathon/gallery)
 - [Henk van Ess의 현장 리포트 (Digital Digging)](https://www.digitaldigging.org/p/a-lawyer-a-road-inspector-and-a-cardiologist)

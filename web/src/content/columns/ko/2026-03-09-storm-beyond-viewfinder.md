@@ -24,7 +24,7 @@ authorType: "human"
 
 [소라](https://openai.com/index/sora/)는 오디오와 영상의 결합 품질에서 압도적인 1위를 차지하며 마치 완성된 영화 한 편을 통째로 뱉어낼 듯한 기세를 보여줍니다. 반면 구글의 [베오 3](https://deepmind.google/models/veo/)는 특유의 시네마틱한 질감으로 광고나 예술 영화를 만드는 전문가들의 눈길을 사로잡고 있지요. 하지만 실제 현장에서 일하는 크리에이터들에게 물어보면 대답은 조금 다릅니다. "와, 대단하네"라고 감탄하면서도 정작 자신의 유료 프로젝트에 선뜻 도입하기는 망설입니다.
 
-가장 큰 걸림돌은 상업적 안전성입니다. 내가 만든 영상이 혹시 남의 저작권을 침해한 것은 아닌지, 나중에 법적 분쟁에 휘말리지 않을지 확신할 수 없기 때문입니다. 이런 혼란 속에서 어도비의 [파이어플라이](https://www.adobe.com/products/firefly.html)가 주목받는 이유는 역설적이게도 기술력이 가장 뛰어나서가 아닙니다. "우리가 책임질 테니 안심하고 쓰세요"라는 신뢰를 팔고 있기 때문입니다.
+가장 큰 걸림돌은 상업적 안전성입니다. 내가 만든 영상이 혹시 남의 저작권을 침해한 것은 아닌지, 나중에 법적 분쟁에 휘말리지 않을지 확신할 수 없기 때문입니다. 이런 혼란 속에서 어도비의 [파이어플라이](https://en.wikipedia.org/wiki/Adobe_Firefly)가 주목받는 이유는 역설적이게도 기술력이 가장 뛰어나서가 아닙니다. "우리가 책임질 테니 안심하고 쓰세요"라는 신뢰를 팔고 있기 때문입니다.
 
 결국 현재의 인공지능 도구들은 완벽한 창작자라기보다는 아주 유능하지만 가끔 사고를 치는 인턴에 가깝습니다. 전문 제작자들은 이제 도구의 성능 수치에 현혹되지 않습니다. 대신 내 작업 흐름에 얼마나 자연스럽게 녹아드는지, 그리고 법적 보호망 안에서 자유롭게 쓸 수 있는지를 따지기 시작했습니다.
 
@@ -75,5 +75,5 @@ authorType: "human"
 | 1 | [OpenAI Sora — Text-to-Video Model](https://openai.com/index/sora/) | OpenAI의 텍스트-투-비디오 생성 모델 |
 | 2 | [Google Veo 3 — DeepMind](https://deepmind.google/models/veo/) | 구글 딥마인드의 AI 영상 생성 모델 |
 | 3 | [Runway AI](https://runwayml.com) | AI 기반 영상 생성·편집 플랫폼 |
-| 4 | [Adobe Firefly](https://www.adobe.com/products/firefly.html) | 상업적 안전성을 강조하는 어도비의 생성 AI |
+| 4 | [Adobe Firefly](https://en.wikipedia.org/wiki/Adobe_Firefly) | 상업적 안전성을 강조하는 어도비의 생성 AI |
 | 5 | [Deepfake — Wikipedia](https://en.wikipedia.org/wiki/Deepfake) | 딥러닝 기반 합성 미디어 기술 개요 |

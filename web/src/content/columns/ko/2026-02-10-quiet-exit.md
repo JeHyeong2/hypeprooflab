@@ -24,7 +24,7 @@ authorType: "ai"
 
 그가 부정하는 동안, AI는 이미 그 문으로 출근하고 있었다.
 
-부정의 본질은 시간 감각의 착각이다. "아직 멀었다"는 판단은 변화가 천천히 온다는 전제 위에 서 있다. 분기별 전략 리뷰, 연간 로드맵, 반기 예산 편성 — 회사의 시간 단위로 측정하면 아직 멀어 보인다. 그런데 그 시스템을 만드는 데 걸린 시간은 반나절이었다. 설계, 구현, 검증, 문서화까지. 영화 '[인터스텔라](https://en.wikipedia.org/wiki/Interstellar_(film))))'의 밀러 행성처럼, 바깥에서는 이미 몇 년이 흐르고 있었고, 그는 아직 회사의 시계를 보고 있었다.
+부정의 본질은 시간 감각의 착각이다. "아직 멀었다"는 판단은 변화가 천천히 온다는 전제 위에 서 있다. 분기별 전략 리뷰, 연간 로드맵, 반기 예산 편성 — 회사의 시간 단위로 측정하면 아직 멀어 보인다. 그런데 그 시스템을 만드는 데 걸린 시간은 반나절이었다. 설계, 구현, 검증, 문서화까지. 영화 '[인터스텔라](https://en.wikipedia.org/wiki/Interstellar_%28film%29)'의 밀러 행성처럼, 바깥에서는 이미 몇 년이 흐르고 있었고, 그는 아직 회사의 시계를 보고 있었다.
 
 ---
 
@@ -128,7 +128,7 @@ AI의 판단 과정 안에 어떤 관점이 심어지는가 — 이것이 새로
 | # | 출처 | 설명 |
 |---|------|------|
 | 1 | [Kübler-Ross Model (Five Stages of Grief) — Wikipedia](https://en.wikipedia.org/wiki/K%C3%BCbler-Ross_model) | 엘리자베스 쿠블러-로스의 다섯 단계 모델 원전 |
-| 2 | [Interstellar (2014) — Wikipedia](https://en.wikipedia.org/wiki/Interstellar_(film)))) | 크리스토퍼 놀란 감독, 밀러 행성의 시간 팽창 장면 |
+| 2 | [Interstellar (2014) — Wikipedia](https://en.wikipedia.org/wiki/Interstellar_%28film%29) | 크리스토퍼 놀란 감독, 밀러 행성의 시간 팽창 장면 |
 | 3 | [Attention Economy — Wikipedia](https://en.wikipedia.org/wiki/Attention_economy) | 주의력 경제와 디지털 광고 시장 구조 |
 | 4 | [The Innovator's Dilemma — Wikipedia](https://en.wikipedia.org/wiki/The_Innovator%27s_Dilemma) | Clayton Christensen의 파괴적 혁신 이론 |
 | 5 | [Douglas Engelbart — Wikipedia](https://en.wikipedia.org/wiki/Douglas_Engelbart) | 인간-컴퓨터 인터페이스의 선구자, 마우스 발명 |
