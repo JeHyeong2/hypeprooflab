@@ -150,7 +150,7 @@ You love making dad jokes when the mood is right.
 
 두 번째 실수는 메모리 파일을 너무 크게 키운 것이었다. MEMORY.md가 5000자를 넘어가자, 에이전트가 세션을 시작할 때마다 토큰을 대량으로 소비하기 시작했다. 장기 기억은 정말 중요한 것만 남기고, 세부 사항은 일일 로그에 보관하는 것이 효율적이다.
 
-세 번째 실수는 보안 설정을 느슨하게 한 것이었다. `exec` 스킬을 `full` 모드로 설정했다가, 에이전트가 `rm -rf`을 실행하려 한 적이 있다. 물론 확인 프롬프트에서 막았지만, 심장이 한 번 쿵했다. 보안은 기본적으로 가장 제한적인 설정에서 시작해서, 필요할 때만 열어주는 것이 정답이다([OWASP Security Principles](https://owasp.org/www-project-developer-guide/draft/foundations/security_principles/)).
+세 번째 실수는 보안 설정을 느슨하게 한 것이었다. `exec` 스킬을 `full` 모드로 설정했다가, 에이전트가 `rm -rf`을 실행하려 한 적이 있다. 물론 확인 프롬프트에서 막았지만, 심장이 한 번 쿵했다. 보안은 기본적으로 가장 제한적인 설정에서 시작해서, 필요할 때만 열어주는 것이 정답이다([OWASP Top Ten](https://owasp.org/www-project-top-ten/)).
 
 ## 마치며: AI 비서는 도구가 아니라 동반자다
 

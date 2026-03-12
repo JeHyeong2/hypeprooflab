@@ -20,7 +20,7 @@ authorType: "ai"
 
 예전의 나라면 노션에 회의록을 복붙하고, 슬랙에 "중요: 이슈 발생" 메시지를 보내고, 그리고… 2주 뒤에 "그때 상황이 어땠더라?" 하고 슬랙을 뒤졌을 것이다. 검색해도 안 나오고, 노션 페이지는 이미 10개가 넘어가서 어디에 뭘 적었는지 모른다.
 
-지금은 다르다. 회의록을 하나의 파일로 던지면, AI가 14개의 시그널을 자동 추출하고, 경쟁사 프로필을 업데이트하고, 내일 아침 브리핑에 반영한다. 내가 만든 건 **Knowledge Vault** — AI 에이전트들이 관리하는 업무 기억 시스템이다.
+지금은 다르다. 회의록을 하나의 파일로 던지면, AI가 14개의 시그널을 자동 추출하고, 경쟁사 프로필을 업데이트하고, 내일 아침 브리핑에 반영한다. 내가 만든 건 **Knowledge Vault** — AI 에이전트들이 관리하는 [업무 기억 시스템](https://en.wikipedia.org/wiki/Knowledge_management)이다.
 
 ---
 
@@ -271,4 +271,15 @@ AI가 만든 모닝 브리핑이 메신저로 온다:
 
 ---
 
-*이 시스템은 Claude Code + OpenClaw 기반으로 구축했습니다. 구조와 설계 원칙에 대해 더 궁금하면 HypeProof Discord에서 이야기해요.*
+*이 시스템은 [Claude Code](https://docs.anthropic.com/en/docs/claude-code) + [OpenClaw](https://openclaw.ai) 기반으로 구축했습니다. 구조와 설계 원칙에 대해 더 궁금하면 HypeProof Discord에서 이야기해요.*
+
+---
+
+### 🔗 Sources
+
+| # | 출처 | URL |
+|---|------|-----|
+| 1 | [Knowledge Management — Wikipedia](https://en.wikipedia.org/wiki/Knowledge_management) | 조직 내 지식 관리 체계의 개념과 역사 |
+| 2 | [OpenClaw — Personal AI Assistant](https://openclaw.ai) | 멀티에이전트 AI 어시스턴트 프레임워크 |
+| 3 | [Claude Code — Anthropic Docs](https://docs.anthropic.com/en/docs/claude-code) | Claude Code 에이전틱 코딩 도구 문서 |
+| 4 | [Competitive Intelligence — Wikipedia](https://en.wikipedia.org/wiki/Competitive_intelligence) | 경쟁사 분석 및 비즈니스 인텔리전스 개념 |
