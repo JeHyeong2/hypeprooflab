@@ -9,6 +9,8 @@ tags: ["AI", "CERN", "LHC", "CMS", "입자물리학", "힉스보손", "머신러
 slug: "2026-03-12-ai-unlocking-universe"
 readTime: "8분"
 excerpt: "입자물리학에서 AI는 도구를 넘어 공동 연구자가 되고 있을까? CMS 현역 연구자가 본 양면의 감정."
+lang: "ko"
+authorType: "human"
 ---
 
 # AI가 우주의 비밀을 풀고 있다
