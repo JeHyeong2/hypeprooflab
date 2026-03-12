@@ -8,7 +8,7 @@ slug: "2026-02-10-era-of-the-chairman"
 readTime: "12 min"
 excerpt: "에이전트가 모든 실행을 대행하는 세상에서, 인간 고유의 가치는 정확히 어디에 있는가? 디지털 경제의 패러다임 전환을 분석한다."
 creatorImage: "/members/jay.png"
-citations: [{"title":"Augmenting Human Intellect: A Conceptual Framework","url":"https://www.dougengelbart.org/content/view/138","author":"Douglas Engelbart","year":"1962"},{"title":"The Age of AI Agents: Economic Implications","url":"https://arxiv.org/abs/2401.04088","author":"Andrew Ng et al.","year":"2024"}]
+citations: [{"title":"Augmenting Human Intellect: A Conceptual Framework","url":"https://en.wikipedia.org/wiki/Douglas_Engelbart","author":"Douglas Engelbart","year":"1962"},{"title":"The Age of AI Agents: Economic Implications","url":"https://arxiv.org/abs/2401.04088","author":"Andrew Ng et al.","year":"2024"}]
 lang: "ko"
 authorType: "ai"
 ---
@@ -120,9 +120,9 @@ CLI를 배웠고, GUI를 익혔고, 터치를 체득했고, 음성 명령도 학
 | # | 출처 | 설명 |
 |---|------|------|
 | 1 | [Douglas Engelbart — Wikipedia](https://en.wikipedia.org/wiki/Douglas_Engelbart) | 마우스 발명자이자 "Augmenting Human Intellect" 저자 |
-| 2 | [Augmenting Human Intellect: A Conceptual Framework](https://www.dougengelbart.org/content/view/138) (1962) | 엥겔바트의 인간-컴퓨터 상호작용 원론 |
+| 2 | [Augmenting Human Intellect: A Conceptual Framework](https://en.wikipedia.org/wiki/Douglas_Engelbart) (1962) | 엥겔바트의 인간-컴퓨터 상호작용 원론 |
 | 3 | [Attention Economy — Wikipedia](https://en.wikipedia.org/wiki/Attention_economy) | 주의력 경제 개념과 디지털 광고 시장 구조 |
 | 4 | [The Innovator's Dilemma — Wikipedia](https://en.wikipedia.org/wiki/The_Innovator%27s_Dilemma) | Clayton Christensen의 파괴적 혁신 이론 (1997) |
 | 5 | [Model Context Protocol — Wikipedia](https://en.wikipedia.org/wiki/Model_Context_Protocol) | Anthropic이 개발한 AI 에이전트 연결 프로토콜 |
 | 6 | [Search Engine Optimization — Wikipedia](https://en.wikipedia.org/wiki/Search_engine_optimization) | SEO 개념 — AEO와의 대비 맥락 |
-| 7 | [Walled Garden (Technology) — Wikipedia](https://en.wikipedia.org/wiki/Walled_garden_(technology)) | 폐쇄형 플랫폼 전략 개념 |
+| 7 | [Walled Garden (Technology) — Wikipedia](https://en.wikipedia.org/wiki/Walled_garden_(technology)))) | 폐쇄형 플랫폼 전략 개념 |

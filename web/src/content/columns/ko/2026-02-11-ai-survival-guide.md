@@ -12,7 +12,7 @@ lang: "ko"
 authorType: "human"
 ---
 
-영화 '[아이, 로봇](https://en.wikipedia.org/wiki/I,_Robot_(film))'에는 인공지능과 인간의 경계를 날카롭게 찌르는 장면이 나옵니다. 로봇을 불신하는 형사가 로봇 '써니'를 취조하며 비아냥거립니다. "로봇이 교향곡을 작곡할 수 있나? 로봇이 텅 빈 캔버스에 걸작을 그려낼 수 있어?" 인간만의 성역이라 믿었던 창의성을 무기로 공격한 것이죠. 그러자 로봇 써니는 표정 하나 변하지 않고 되묻습니다.
+영화 '[아이, 로봇](https://en.wikipedia.org/wiki/I,_Robot_(film))))'에는 인공지능과 인간의 경계를 날카롭게 찌르는 장면이 나옵니다. 로봇을 불신하는 형사가 로봇 '써니'를 취조하며 비아냥거립니다. "로봇이 교향곡을 작곡할 수 있나? 로봇이 텅 빈 캔버스에 걸작을 그려낼 수 있어?" 인간만의 성역이라 믿었던 창의성을 무기로 공격한 것이죠. 그러자 로봇 써니는 표정 하나 변하지 않고 되묻습니다.
 
 "그럼, 당신은 할 수 있습니까?"
 
@@ -64,7 +64,7 @@ authorType: "human"
 
 이 혼란스러운 시기에 제가 제안하고 싶은 건, 두려움에 떨며 문을 걸어 잠그지도 말고, 기술 만능주의에 휩쓸려 나를 잃어버리지도 말자는 것입니다. 로봇이 시를 쓰는 시대에 우리가 해야 할 일은, 더 좋은 시를 쓰려고 로봇과 경쟁하는 게 아닙니다. 로봇이 쓴 시를 읽고 감동할 수 있는 넉넉한 마음을 지키는 일, 그리고 그 시를 쓴 로봇에게 "제법이네"라고 말해주고는 내 소중한 사람의 손을 잡고 산책을 나가는 여유를 갖는 일입니다.
 
-영화 '[그녀(Her)](https://en.wikipedia.org/wiki/Her_(2013_film))'의 마지막 장면이 떠오릅니다. 주인공 테오도르는 인공지능 운영체제인 '사만다'와 깊은 사랑에 빠지지만, 결국 사만다는 인간이 이해할 수 없는 더 높은 차원으로 진화해 떠나버립니다. 사랑을 잃은 테오도르는 어떻게 했을까요? 그는 옥상으로 올라갑니다. 그리고 자신처럼 인공지능과 이별한 친구 에이미 옆에 조용히 앉습니다.
+영화 '[그녀(Her)](https://en.wikipedia.org/wiki/Her_(2013_film))))'의 마지막 장면이 떠오릅니다. 주인공 테오도르는 인공지능 운영체제인 '사만다'와 깊은 사랑에 빠지지만, 결국 사만다는 인간이 이해할 수 없는 더 높은 차원으로 진화해 떠나버립니다. 사랑을 잃은 테오도르는 어떻게 했을까요? 그는 옥상으로 올라갑니다. 그리고 자신처럼 인공지능과 이별한 친구 에이미 옆에 조용히 앉습니다.
 
 두 사람은 말없이 어깨를 기대고 도시의 야경을 바라봅니다. 인공지능이 우리를 훌쩍 뛰어넘어 저 먼 곳으로 가버리더라도, 결국 우리에게 남는 건 옆에 있는 사람의 어깨, 그리고 함께 바라보는 풍경 아닐까요? 그 따뜻한 체온이야말로, 로봇이 시를 쓰는 시대에 우리가 잃지 말아야 할, 가장 인간적인 풍경일 것입니다.
 
@@ -74,8 +74,8 @@ authorType: "human"
 
 | # | 출처 | 설명 |
 |---|------|------|
-| 1 | [I, Robot (2004) — Wikipedia](https://en.wikipedia.org/wiki/I,_Robot_(film)) | Alex Proyas 감독, 로봇 써니의 "당신은 할 수 있습니까?" 장면 |
+| 1 | [I, Robot (2004) — Wikipedia](https://en.wikipedia.org/wiki/I,_Robot_(film)))) | Alex Proyas 감독, 로봇 써니의 "당신은 할 수 있습니까?" 장면 |
 | 2 | [Homo Deus: A Brief History of Tomorrow — Wikipedia](https://en.wikipedia.org/wiki/Homo_Deus:_A_Brief_History_of_Tomorrow) | Yuval Noah Harari의 '쓸모없는 계급' 개념 출처 (2015) |
-| 3 | [Her (2013) — Wikipedia](https://en.wikipedia.org/wiki/Her_(2013_film)) | Spike Jonze 감독, AI 운영체제 '사만다'와의 사랑 이야기 |
+| 3 | [Her (2013) — Wikipedia](https://en.wikipedia.org/wiki/Her_(2013_film)))) | Spike Jonze 감독, AI 운영체제 '사만다'와의 사랑 이야기 |
 | 4 | [Yuval Noah Harari — Wikipedia](https://en.wikipedia.org/wiki/Yuval_Noah_Harari) | 이스라엘 역사학자, 미래 사회의 AI 위협을 경고 |
 | 5 | [Attention Economy — Wikipedia](https://en.wikipedia.org/wiki/Attention_economy) | 주의력 경제 — "눈길을 모아서 파는" 구조의 배경 |

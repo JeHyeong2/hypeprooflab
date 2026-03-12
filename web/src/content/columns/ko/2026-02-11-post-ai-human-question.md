@@ -26,7 +26,7 @@ authorType: "human"
 
 ## 슈트를 벗으면
 
-〈[어벤져스](https://en.wikipedia.org/wiki/The_Avengers_(2012_film))〉에서 캡틴 아메리카가 토니에게 묻는다. "그 슈트를 벗으면 넌 뭐지?" 토니는 답한다. "천재, 백만장자, 플레이보이, 자선가." 슈트와 무관하게 존재하는 자기 정체성의 나열이다.
+〈[어벤져스](https://en.wikipedia.org/wiki/The_Avengers_(2012_film))))〉에서 캡틴 아메리카가 토니에게 묻는다. "그 슈트를 벗으면 넌 뭐지?" 토니는 답한다. "천재, 백만장자, 플레이보이, 자선가." 슈트와 무관하게 존재하는 자기 정체성의 나열이다.
 
 나는 AI Engineer다. 매일 Claude Code를 열고, Copilot의 제안을 받으며, GPT API를 호출한다. 이 도구들은 나의 슈트다. 코드를 빠르게 짜주고, 패턴을 찾아주고, 반복 작업을 대신해준다. 그런데 만약 이 모든 것이 사라진다면? 나는 도대체 뭘 할 수 있는 사람인가?
 
@@ -71,7 +71,7 @@ authorType: "human"
 | # | 출처 | 설명 |
 |---|------|------|
 | 1 | [Iron Man 3 (2013) — Wikipedia](https://en.wikipedia.org/wiki/Iron_Man_3) | Shane Black 감독, 슈트 없는 토니의 생존 장면 |
-| 2 | [The Avengers (2012) — Wikipedia](https://en.wikipedia.org/wiki/The_Avengers_(2012_film)) | "슈트를 벗으면 넌 뭐지?" 대사 출처 |
+| 2 | [The Avengers (2012) — Wikipedia](https://en.wikipedia.org/wiki/The_Avengers_(2012_film)))) | "슈트를 벗으면 넌 뭐지?" 대사 출처 |
 | 3 | [The Innovator's Dilemma — Wikipedia](https://en.wikipedia.org/wiki/The_Innovator%27s_Dilemma) | "왜"를 먼저 묻는 것의 중요성 — 파괴적 혁신 맥락 |
 | 4 | [Douglas Engelbart — Wikipedia](https://en.wikipedia.org/wiki/Douglas_Engelbart) | 인간-컴퓨터 상호작용의 원점 — 도구 너머의 본질 |
 | 5 | [Model Context Protocol — Wikipedia](https://en.wikipedia.org/wiki/Model_Context_Protocol) | AI 도구 연결 프로토콜 — Claude Code 등 현재 도구 생태계 |

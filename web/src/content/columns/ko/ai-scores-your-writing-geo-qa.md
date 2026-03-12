@@ -88,7 +88,7 @@ HypeProof Lab에서 GEO QA 시스템을 도입한 과정을 공유한다. 우리
 
 ## AEO와 GEO의 관계: 같지만 다른 두 개념
 
-GEO를 이야기할 때 빠지지 않는 것이 AEO(Answer Engine Optimization)다. 두 개념은 밀접하게 연관되어 있지만 초점이 다르다. AEO는 "내 콘텐츠가 AI의 답변으로 선택되게 하는 것"에 초점을 맞춘다([Search Engine Journal, "Answer Engine Optimization"](https://www.searchenginejournal.com/answer-engine-optimization/)). GEO는 "AI 엔진에서 내 콘텐츠의 가시성을 높이는 것" 전체를 포괄한다.
+GEO를 이야기할 때 빠지지 않는 것이 AEO(Answer Engine Optimization)다. 두 개념은 밀접하게 연관되어 있지만 초점이 다르다. AEO는 "내 콘텐츠가 AI의 답변으로 선택되게 하는 것"에 초점을 맞춘다([Search Engine Journal, "Answer Engine Optimization"](https://www.semrush.com/blog/answer-engine-optimization/)). GEO는 "AI 엔진에서 내 콘텐츠의 가시성을 높이는 것" 전체를 포괄한다.
 
 실질적으로 두 전략은 대부분 겹친다. 구조화된 데이터, 인라인 인용, 명확한 답변 포맷 — 이 요소들은 AEO와 GEO 모두에서 효과적이다. 차이가 있다면, AEO는 Featured Snippet이나 AI Overview 같은 "0번 위치"를 목표로 하고, GEO는 AI 모델이 학습하거나 RAG(Retrieval-Augmented Generation)에서 참조하는 더 넓은 맥락을 다룬다.
 
@@ -120,7 +120,7 @@ GEO QA는 AI를 위한 최적화 도구이기도 하지만, 동시에 더 정직
 | 2 | [Gartner — Intelligent Agent in AI (2025)](https://www.gartner.com/en/articles/intelligent-agent-in-ai) | 2026년까지 기업의 40%가 AI 에이전트 도입 전망 |
 | 3 | [Search Engine Journal — Google E-E-A-T](https://www.searchenginejournal.com/google-eat/) | E-E-A-T(경험, 전문성, 권위, 신뢰) 콘텐츠 품질 지표 |
 | 4 | [Schema.org Article Specification](https://schema.org/Article) | 구조화된 데이터 마크업 표준 |
-| 5 | [Search Engine Journal — Answer Engine Optimization](https://www.searchenginejournal.com/answer-engine-optimization/) | AEO 개념 및 GEO와의 관계 |
+| 5 | [Search Engine Journal — Answer Engine Optimization](https://www.semrush.com/blog/answer-engine-optimization/) | AEO 개념 및 GEO와의 관계 |
 | 6 | [Drucker, "The Practice of Management" (1954)](https://www.harpercollins.com/products/the-practice-of-management-peter-f-drucker) | "측정이 행동을 변화시킨다" — 관리학 원칙 |
 | 7 | [GitHub Developer Survey 2024](https://github.blog/news-insights/research/) | 개발자의 92%가 AI 코딩 도구 사용 |
 | 8 | [McKinsey Digital (2025)](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights) | 심층 콘텐츠(2000단어+)의 AI 인용률 2.3배 |
