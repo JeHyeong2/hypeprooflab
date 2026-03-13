@@ -90,12 +90,41 @@ LINK_COUNT=$(grep -c '\[.*\](http' "$KO_FILE" 2>/dev/null || echo 0)
 # Subtract sources table links (lines starting with |)
 TABLE_LINKS=$(grep '^\s*|' "$KO_FILE" | grep -c '\[.*\](http' 2>/dev/null || echo 0)
 BODY_LINKS=$((LINK_COUNT - TABLE_LINKS))
-if [ "$BODY_LINKS" -ge 1 ]; then
+MIN_BODY_LINKS=3
+if [ "$BODY_LINKS" -ge "$MIN_BODY_LINKS" ]; then
   echo -e "  [inline links] ${GREEN}PASS${NC} ($BODY_LINKS body links)"
   ((PASS++))
+elif [ "$BODY_LINKS" -ge 1 ]; then
+  echo -e "  [inline links] ${YELLOW}WARN${NC} ($BODY_LINKS body links < $MIN_BODY_LINKS minimum)"
+  echo "  → 자동 주입 시도: python3 scripts/inject-inline-links.py"
+  SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+  python3 "$SCRIPT_DIR/inject-inline-links.py" "$KO_FILE" 2>/dev/null
+  # Re-count
+  LINK_COUNT2=$(grep -c '\[.*\](http' "$KO_FILE" 2>/dev/null || echo 0)
+  TABLE_LINKS2=$(grep '^\s*|' "$KO_FILE" | grep -c '\[.*\](http' 2>/dev/null || echo 0)
+  BODY_LINKS2=$((LINK_COUNT2 - TABLE_LINKS2))
+  if [ "$BODY_LINKS2" -ge "$MIN_BODY_LINKS" ]; then
+    echo -e "  [inline links] ${GREEN}PASS${NC} (auto-injected: $BODY_LINKS → $BODY_LINKS2 body links)"
+    ((PASS++))
+  else
+    echo -e "  [inline links] ${RED}FAIL${NC} ($BODY_LINKS2 body links after injection — need $MIN_BODY_LINKS+)"
+    ((FAIL++))
+  fi
 else
-  echo -e "  [inline links] ${YELLOW}WARN${NC} (0 body links — sources only in table)"
-  echo "  → 본문에 인라인 링크 추가 권장 (3-10 스타일)"
+  echo -e "  [inline links] ${YELLOW}WARN${NC} (0 body links — auto-injecting from Sources table)"
+  SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+  python3 "$SCRIPT_DIR/inject-inline-links.py" "$KO_FILE" 2>/dev/null
+  # Re-count
+  LINK_COUNT2=$(grep -c '\[.*\](http' "$KO_FILE" 2>/dev/null || echo 0)
+  TABLE_LINKS2=$(grep '^\s*|' "$KO_FILE" | grep -c '\[.*\](http' 2>/dev/null || echo 0)
+  BODY_LINKS2=$((LINK_COUNT2 - TABLE_LINKS2))
+  if [ "$BODY_LINKS2" -ge "$MIN_BODY_LINKS" ]; then
+    echo -e "  [inline links] ${GREEN}PASS${NC} (auto-injected: 0 → $BODY_LINKS2 body links)"
+    ((PASS++))
+  else
+    echo -e "  [inline links] ${RED}FAIL${NC} ($BODY_LINKS2 body links after injection — need $MIN_BODY_LINKS+)"
+    ((FAIL++))
+  fi
 fi
 
 # ── Step 7: Sources URL check ──
