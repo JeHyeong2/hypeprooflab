@@ -471,11 +471,28 @@ html[lang="en"] body {
   word-break: break-all;
 }
 
-/* Sources table (last table): # column narrow */
+/* 2-column data tables: balanced split */
+.column-content table th:first-child {
+  min-width: 120px;
+}
+
+/* Sources table (last table): # column narrow, 출처 column wide */
 .column-content table:last-of-type th:first-child,
 .column-content table:last-of-type td:first-child {
   width: 2.5rem;
+  min-width: 2.5rem;
   text-align: center;
+}
+
+.column-content table:last-of-type th:nth-child(2),
+.column-content table:last-of-type td:nth-child(2) {
+  width: 60%;
+}
+
+.column-content table:last-of-type th:last-child,
+.column-content table:last-of-type td:last-child {
+  width: auto;
+  word-break: break-all;
 }
 
 /* Mobile responsive tables */
