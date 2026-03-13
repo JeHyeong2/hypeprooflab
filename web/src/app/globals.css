@@ -434,7 +434,6 @@ html[lang="en"] body {
   font-weight: 600;
   color: #f4f4f5;
   border-bottom: 2px solid rgba(168, 85, 247, 0.4);
-  white-space: nowrap;
   font-size: 13px;
   text-transform: none;
   letter-spacing: 0.01em;
@@ -471,9 +470,11 @@ html[lang="en"] body {
   word-break: break-all;
 }
 
-/* 2-column data tables: balanced split */
-.column-content table th:first-child {
-  min-width: 120px;
+/* Data tables: first column gets reasonable width */
+.column-content table th:first-child,
+.column-content table td:first-child {
+  min-width: 140px;
+  width: 25%;
 }
 
 /* Sources table (last table): # column narrow, 출처 column wide */
