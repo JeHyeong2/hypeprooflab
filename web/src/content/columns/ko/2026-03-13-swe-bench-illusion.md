@@ -3,10 +3,10 @@ title: "SWE-bench의 환상: 누구의 잘못인가?"
 description: "AI가 벤치마크를 통과하지만 실제 코드를 못 짜는 구조적 문제 — METR 연구 데이터와 개발자의 생산성 착각"
 creator: "JY"
 creatorImage: "/members/jy.png"
-date: 2026-03-12
+date: 2026-03-13
 category: "AI × Engineering"
 tags: ["AI", "SWE-bench", "벤치마크", "소프트웨어공학", "METR", "굿하트법칙", "개발생산성"]
-slug: "2026-03-12-swe-bench-illusion"
+slug: "2026-03-13-swe-bench-illusion"
 readTime: "10분"
 excerpt: "AI가 테스트를 통과했다. 그런데 문제를 푼 게 아니라 채점지를 베꼈다면?"
 ---

@@ -3,10 +3,10 @@ title: "The SWE-bench Illusion: Whose Fault Is It?"
 description: "AI passes benchmarks but can't write real code — the structural problem revealed by METR research and the developer productivity paradox"
 creator: "JY"
 creatorImage: "/members/jy.png"
-date: 2026-03-12
+date: 2026-03-13
 category: "AI × Engineering"
 tags: ["AI", "SWE-bench", "Benchmarks", "Software Engineering", "METR", "Goodhart's Law", "Developer Productivity"]
-slug: "2026-03-12-swe-bench-illusion"
+slug: "2026-03-13-swe-bench-illusion"
 readTime: "10 min"
 excerpt: "The AI passed the tests. But what if it didn't solve the problem — it just copied the answer key?"
 ---
