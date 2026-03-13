@@ -417,7 +417,7 @@ html[lang="en"] body {
 }
 
 .column-content table {
-  table-layout: auto;
+  table-layout: fixed;
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
@@ -470,30 +470,40 @@ html[lang="en"] body {
   word-break: break-all;
 }
 
-/* Data tables: first column gets reasonable width */
+/* Data tables: first column balanced */
 .column-content table th:first-child,
 .column-content table td:first-child {
-  min-width: 140px;
+  width: 28%;
+}
+
+/* 4-column tables: even distribution */
+.column-content table th:first-child:nth-last-child(4),
+.column-content table th:first-child:nth-last-child(4) ~ th {
   width: 25%;
 }
 
-/* Sources table (last table): # column narrow, 출처 column wide */
+/* Sources table (last table): # | 출처 | URL */
 .column-content table:last-of-type th:first-child,
 .column-content table:last-of-type td:first-child {
-  width: 2.5rem;
-  min-width: 2.5rem;
+  width: 6%;
   text-align: center;
 }
 
 .column-content table:last-of-type th:nth-child(2),
 .column-content table:last-of-type td:nth-child(2) {
-  width: 60%;
+  width: 58%;
 }
 
 .column-content table:last-of-type th:last-child,
 .column-content table:last-of-type td:last-child {
-  width: auto;
+  width: 36%;
   word-break: break-all;
+}
+
+/* Table cell text wrapping for fixed layout */
+.column-content table td {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Mobile responsive tables */
