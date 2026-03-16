@@ -30,7 +30,7 @@ The core of this structure is **diversification and competition** — independen
 
 ## The Bottleneck 7 Months Ago: Code Generation
 
-Seven months ago, I unveiled a demo of **[VibeTrading](https://www.linkedin.com/posts/jiwoong-kim-b9934417a_introducing-the-prototype-of-my-new-personal-activity-7361167113148878848-quDk/)** — an agentic quant harness that took an idea from chat → strategy research → backtest → self-evolution.
+Seven months ago, I unveiled a demo of **[VibeTrading](https://www.linkedin.com/posts/jiwoong-kim-b9934417a_introducing-the-prototype-of-my-new-personal-activity-7361167113148878848-quDk/)** — an agentic quant harness that took an idea from chat → strategy research → backtest (simulating whether a strategy would have made money using historical data) → self-improvement (AI reviews results and refines the strategy on its own).
 
 At the time, I thought the bottleneck would be converting research results into code. So I created a shorthand language (DSL) that let the AI write simple formulas instead of complex code — something like `ts_rank(close, 20)` to say "rank by closing price over the last 20 days." I spent a lot of time reducing the AI's burden this way.
 
@@ -58,7 +58,7 @@ Migrating to a new data vendor and things break everywhere. Quality checks at th
 
 The questions never end.
 
-No matter how well AI writes code, deciding "whether missing price data for a suspended stock is genuinely missing or a data vendor error" requires understanding how the backtesting infrastructure works — and worrying about whether handling it introduces look-ahead bias. That's domain knowledge. Agents can't substitute for that.
+No matter how well AI writes code, deciding "whether missing price data for a suspended stock is genuinely missing or a data vendor error" requires understanding how the historical simulation infrastructure works — and worrying about whether you're accidentally using future information that wouldn't have been available at the time (look-ahead bias). That's domain knowledge. Agents can't substitute for that.
 
 ---
 
