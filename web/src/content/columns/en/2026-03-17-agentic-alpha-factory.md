@@ -58,7 +58,7 @@ Migrating to a new data vendor and things break everywhere. Quality checks at th
 
 The questions never end.
 
-No matter how well AI writes code, deciding "whether missing price data for a suspended stock is genuinely missing or a data vendor error" requires domain knowledge. Agents can't substitute for that.
+No matter how well AI writes code, deciding "whether missing price data for a suspended stock is genuinely missing or a data vendor error" requires understanding how the backtesting infrastructure works — and worrying about whether handling it introduces look-ahead bias. That's domain knowledge. Agents can't substitute for that.
 
 ---
 
