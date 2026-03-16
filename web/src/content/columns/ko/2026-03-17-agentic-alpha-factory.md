@@ -7,10 +7,10 @@ category: "AI × Finance"
 tags: ["quant", "agentic", "trading", "hedge fund", "claude code", "alpha"]
 slug: "2026-03-17-agentic-alpha-factory"
 readTime: "8분"
-excerpt: "\"하루 만에 성공\"이라고? 7개월째 삽질 중인 사람의 솔직한 기록. 에이전틱 퀀트 하니스의 3가지 병목과 Pod Shop을 AI로 복제하려는 비전."
+excerpt: "\"하루 만에 성공\"이라고? 7개월째 만들고 있는 사람의 솔직한 기록. 에이전틱 퀀트 하니스의 3가지 병목과 Pod Shop을 AI로 복제하려는 비전."
 ---
 
-*"하루 만에 성공"이라고? 7개월째 삽질 중인 사람의 솔직한 기록*
+*"하루 만에 성공"이라고? 7개월째 만들고 있는 사람의 솔직한 기록*
 
 ---
 
