@@ -7,10 +7,10 @@ category: "AI × Finance"
 tags: ["quant", "agentic", "trading", "hedge fund", "claude code", "alpha"]
 slug: "2026-03-17-agentic-alpha-factory"
 readTime: "8 min"
-excerpt: "\"Built it in a day\"? Here's the unfiltered truth from someone who's been building this for 7 months. Three bottlenecks of building an agentic quant harness, and the vision to replicate a Pod Shop with AI."
+excerpt: "\"Built it in a day\"? Here's the unfiltered truth from someone dogfooding it for 7 months. Three bottlenecks of building an agentic quant harness, and the vision to replicate a Pod Shop with AI."
 ---
 
-*"Built it in a day"? Here's the unfiltered truth from someone who's been building this for 7 months.*
+*"Built it in a day"? Here's the unfiltered truth from someone dogfooding it for 7 months.*
 
 ---
 
