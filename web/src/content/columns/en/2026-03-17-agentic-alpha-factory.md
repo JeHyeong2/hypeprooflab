@@ -90,7 +90,8 @@ And even when I rest, the brilliant people in Silicon Valley building Foundation
 
 | # | Source | URL |
 |---|--------|-----|
-| 1 | VibeTrading Demo — Agentic Quant Research Tool | https://www.linkedin.com/posts/jiwoong-kim-b9934417a_introducing-the-prototype-of-my-new-personal-activity-7361167113148878848-quDk/ |
-| 2 | Claude Code — Anthropic Official Docs | https://docs.anthropic.com/en/docs/claude-code |
-| 3 | Building Effective Agents (Ralph Loop) — Anthropic Research | https://www.anthropic.com/research/building-effective-agents |
-| 4 | OMC / OMX Community | https://discord.com/invite/JkT8CT5gq |
+| 1 | Original Post — LinkedIn | https://www.linkedin.com/feed/update/urn:li:activity:7438980199616184321/ |
+| 2 | VibeTrading Demo — Agentic Quant Research Tool | https://www.linkedin.com/posts/jiwoong-kim-b9934417a_introducing-the-prototype-of-my-new-personal-activity-7361167113148878848-quDk/ |
+| 3 | Claude Code — Anthropic Official Docs | https://docs.anthropic.com/en/docs/claude-code |
+| 4 | Building Effective Agents (Ralph Loop) — Anthropic Research | https://www.anthropic.com/research/building-effective-agents |
+| 5 | OMC / OMX Community | https://discord.com/invite/JkT8CT5gq |
