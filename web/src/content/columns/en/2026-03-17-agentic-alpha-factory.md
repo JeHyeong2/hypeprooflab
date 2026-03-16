@@ -32,7 +32,7 @@ The core of this structure is **diversification and competition** — independen
 
 Seven months ago, I unveiled a demo of **[VibeTrading](https://www.linkedin.com/posts/jiwoong-kim-b9934417a_introducing-the-prototype-of-my-new-personal-activity-7361167113148878848-quDk/)** — an agentic quant harness that took an idea from chat → strategy research → backtest → self-evolution.
 
-At the time, I thought the bottleneck would be converting research results into code. I solved it using a Domain Specific Language (DSL) approach borrowed from WorldQuant Brain — raising the level of code abstraction. I spent a lot of time generating expression trees like `ts_rank(close, 20)`.
+At the time, I thought the bottleneck would be converting research results into code. So I created a shorthand language (DSL) that let the AI write simple formulas instead of complex code — something like `ts_rank(close, 20)` to say "rank by closing price over the last 20 days." I spent a lot of time reducing the AI's burden this way.
 
 I then pitched the project to my company and ended up leading a tiny team of two (including myself). My manager suggested: "AI will keep getting smarter — why not ditch DSL and go with raw code generation?" He was exactly right.
 
