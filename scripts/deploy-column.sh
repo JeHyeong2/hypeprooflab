@@ -181,18 +181,47 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   git commit -m "column: $SLUG — QA passed (${PASS}/${TOTAL})"
   git push
   echo ""
-  echo -e "  ${GREEN}🚀 Deployed!${NC}"
-  echo "  → https://hypeproof-ai.xyz/columns/$SLUG"
-  
-  # Wait and verify
-  echo "  Verifying (15s)..."
-  sleep 15
-  HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://hypeproof-ai.xyz/columns/$SLUG")
-  if [ "$HTTP_CODE" = "200" ]; then
-    echo -e "  ${GREEN}✅ HTTP $HTTP_CODE — Live!${NC}"
+  echo -e "  ${GREEN}📦 Git pushed. Running Vercel prod deploy...${NC}"
+
+  # Vercel prod deploy (git push alone is unreliable)
+  cd "$ROOT/web"
+  VERCEL_OUT=$(npx vercel --prod --yes 2>&1)
+  VERCEL_EXIT=$?
+  cd "$ROOT"
+
+  if [ "$VERCEL_EXIT" -eq 0 ]; then
+    echo -e "  ${GREEN}🚀 Vercel deploy complete!${NC}"
   else
-    echo -e "  ${RED}⚠️ HTTP $HTTP_CODE — 확인 필요${NC}"
+    echo -e "  ${RED}⚠️ Vercel deploy failed (exit $VERCEL_EXIT)${NC}"
+    echo "$VERCEL_OUT" | tail -5
+    exit 1
   fi
+
+  echo "  → https://hypeproof-ai.xyz/columns/$SLUG"
+
+  # Verify: check response body, not just HTTP status (SPA returns 200 for 404s)
+  echo "  Verifying (10s)..."
+  sleep 10
+  VERIFY_BODY=$(curl -s "https://hypeproof-ai.xyz/columns/$SLUG")
+  HTTP_CODE=$(echo "$VERIFY_BODY" | head -1 | grep -c "<!DOCTYPE")
+
+  # Check 1: No client-side 404
+  if echo "$VERIFY_BODY" | grep -q 'NEXT_HTTP_ERROR_FALLBACK;404'; then
+    echo -e "  ${RED}⛔ VERIFY FAILED — Next.js 404 detected${NC}"
+    echo "  Page returns 200 but renders 404 client-side."
+    echo "  Check: content collection, slug format, Vercel build."
+    exit 1
+  fi
+
+  # Check 2: Title contains column title (not generic site title)
+  PAGE_TITLE=$(echo "$VERIFY_BODY" | grep -o '<title>[^<]*</title>' | head -1)
+  if echo "$PAGE_TITLE" | grep -qi "We Don't Chase Hype"; then
+    echo -e "  ${RED}⛔ VERIFY FAILED — Generic title detected (column not rendered)${NC}"
+    echo "  Got: $PAGE_TITLE"
+    exit 1
+  fi
+
+  echo -e "  ${GREEN}✅ Live! ${PAGE_TITLE}${NC}"
 else
   echo "  배포 취소됨."
 fi
