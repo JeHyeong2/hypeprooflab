@@ -161,6 +161,29 @@ if [ "$FAIL" -gt 0 ]; then
   echo "  Mother 수정 가능한 건 바로 고치고 재실행."
   echo "  크리에이터 필요한 건 DM으로 구체적 요청."
   echo ""
+
+  # Log failed deploy to metrics
+  METRICS_FILE="$ROOT/metrics/column-results.tsv"
+  if [ -d "$ROOT/metrics" ]; then
+    CREATOR=$(grep '^creator:' "$KO_FILE" 2>/dev/null | sed 's/^creator:[[:space:]]*//' | tr -d '"' | tr -d "'")
+    [ -z "$CREATOR" ] && CREATOR="unknown"
+    M_LINK_COUNT=$(grep -c '\[.*\](http' "$KO_FILE" 2>/dev/null || echo 0)
+    M_TABLE_LINKS=$(grep '^\s*|' "$KO_FILE" | grep -c '\[.*\](http' 2>/dev/null || echo 0)
+    M_BODY_LINKS=$((M_LINK_COUNT - M_TABLE_LINKS))
+    SOURCE_URLS=0
+    grep -A 50 '## Sources\|### Sources\|🔗 Sources\|## 출처\|### 출처\|🔗 출처\|참고 출처' "$KO_FILE" 2>/dev/null | grep -q 'https\?://[a-zA-Z0-9]' && SOURCE_URLS=1
+    TODAY=$(date +%Y-%m-%d)
+    TOTAL_SCORE=$(( (PASS * 100) / TOTAL ))
+    if [ ! -f "$METRICS_FILE" ]; then
+      printf "date\tslug\tcreator\tqa_score\tlink_count\tbody_links\tsource_urls\tbuild_pass\tdeploy_pass\tverify_pass\ttotal_score\n" > "$METRICS_FILE"
+    fi
+    printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" \
+      "$TODAY" "$SLUG" "$CREATOR" "0" "$M_LINK_COUNT" "$M_BODY_LINKS" "$SOURCE_URLS" "0" "0" "0" "$TOTAL_SCORE" \
+      >> "$METRICS_FILE"
+    echo -e "  📊 Metrics logged (FAILED deploy, score: ${TOTAL_SCORE}%)"
+    echo ""
+  fi
+
   exit 1
 fi
 
@@ -222,8 +245,71 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   fi
 
   echo -e "  ${GREEN}✅ Live! ${PAGE_TITLE}${NC}"
+  DEPLOY_PASS=1
+  VERIFY_PASS=1
 else
   echo "  배포 취소됨."
+  DEPLOY_PASS=0
+  VERIFY_PASS=0
+fi
+
+# ── Metrics Logging ──
+# Append results to column-results.tsv regardless of pass/fail
+METRICS_FILE="$ROOT/metrics/column-results.tsv"
+if [ -d "$ROOT/metrics" ]; then
+  # Extract creator from frontmatter
+  CREATOR=$(grep '^creator:' "$KO_FILE" 2>/dev/null | sed 's/^creator:[[:space:]]*//' | tr -d '"' | tr -d "'")
+  [ -z "$CREATOR" ] && CREATOR="unknown"
+
+  # QA score (1 if eval_research passed, 0 if not)
+  QA_SCORE=$( (python3 "$SCRIPTS/eval_research.py" "$KO_FILE" --quick > /dev/null 2>&1 && echo 1) || echo 0)
+
+  # Link counts (reuse from Step 6 if available, else recalculate)
+  M_LINK_COUNT=$(grep -c '\[.*\](http' "$KO_FILE" 2>/dev/null || echo 0)
+  M_TABLE_LINKS=$(grep '^\s*|' "$KO_FILE" | grep -c '\[.*\](http' 2>/dev/null || echo 0)
+  M_BODY_LINKS=$((M_LINK_COUNT - M_TABLE_LINKS))
+
+  # Source URLs present?
+  if grep -A 50 '## Sources\|### Sources\|🔗 Sources\|## 출처\|### 출처\|🔗 출처\|참고 출처' "$KO_FILE" 2>/dev/null | grep -q 'https\?://[a-zA-Z0-9]'; then
+    SOURCE_URLS=1
+  else
+    SOURCE_URLS=0
+  fi
+
+  # Build pass (we know it passed if we got here, but use PASS/FAIL from QA)
+  BUILD_PASS=$( [ "$FAIL" -eq 0 ] && echo 1 || echo 0)
+
+  # Deploy/verify pass (set above based on deploy outcome)
+  # If deploy wasn't attempted (user said no), mark as 0
+  : "${DEPLOY_PASS:=0}"
+  : "${VERIFY_PASS:=0}"
+
+  # Calculate total_score: count passes out of 7 checks
+  QA_PASS_COUNT=0
+  [ "$QA_SCORE" -eq 1 ] && ((QA_PASS_COUNT++))
+  [ "$M_LINK_COUNT" -gt 0 ] && ((QA_PASS_COUNT++))
+  [ "$M_BODY_LINKS" -ge 3 ] && ((QA_PASS_COUNT++))
+  [ "$SOURCE_URLS" -eq 1 ] && ((QA_PASS_COUNT++))
+  [ "$BUILD_PASS" -eq 1 ] && ((QA_PASS_COUNT++))
+  [ "$DEPLOY_PASS" -eq 1 ] && ((QA_PASS_COUNT++))
+  [ "$VERIFY_PASS" -eq 1 ] && ((QA_PASS_COUNT++))
+  TOTAL_CHECKS=7
+  TOTAL_SCORE=$(( (QA_PASS_COUNT * 100) / TOTAL_CHECKS ))
+
+  TODAY=$(date +%Y-%m-%d)
+
+  # Create TSV with header if it doesn't exist
+  if [ ! -f "$METRICS_FILE" ]; then
+    printf "date\tslug\tcreator\tqa_score\tlink_count\tbody_links\tsource_urls\tbuild_pass\tdeploy_pass\tverify_pass\ttotal_score\n" > "$METRICS_FILE"
+  fi
+
+  # Append row
+  printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" \
+    "$TODAY" "$SLUG" "$CREATOR" "$QA_SCORE" "$M_LINK_COUNT" "$M_BODY_LINKS" "$SOURCE_URLS" "$BUILD_PASS" "$DEPLOY_PASS" "$VERIFY_PASS" "$TOTAL_SCORE" \
+    >> "$METRICS_FILE"
+
+  echo ""
+  echo -e "  📊 Metrics logged to column-results.tsv (score: ${TOTAL_SCORE}%)"
 fi
 
 echo ""
