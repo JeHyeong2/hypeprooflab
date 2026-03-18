@@ -1,0 +1,55 @@
+#!/bin/bash
+# Pre-commit hook: Block column commits unless content-gate says QA_PASS
+# Install: git config core.hooksPath .githooks
+
+TRACKER="$HOME/.openclaw/workspace/memory/column-tracker.json"
+STAGED_COLUMNS=$(git diff --cached --name-only | grep -E '^web/src/content/columns/(ko|en)/[0-9]{4}-' || true)
+
+if [ -z "$STAGED_COLUMNS" ]; then
+  exit 0  # No column files staged — allow commit
+fi
+
+if [ ! -f "$TRACKER" ]; then
+  echo "❌ BLOCKED: column-tracker.json not found. Run content-gate first."
+  exit 1
+fi
+
+BLOCKED=0
+for file in $STAGED_COLUMNS; do
+  # Extract slug from filename (strip path and .md)
+  SLUG=$(basename "$file" .md)
+  
+  # Check tracker for this slug
+  STATE=$(python3 -c "
+import json, sys
+with open('$TRACKER') as f:
+    data = json.load(f)
+col = data.get('columns', {}).get('$SLUG', {})
+print(col.get('state', 'NOT_FOUND'))
+" 2>/dev/null)
+  
+  case "$STATE" in
+    QA_PASS|DEPLOYED|VERIFIED)
+      echo "✅ $SLUG — state=$STATE, commit allowed"
+      ;;
+    NOT_FOUND)
+      echo "❌ BLOCKED: $SLUG not in content-gate tracker"
+      echo "   Run: python3 ~/.openclaw/workspace/skills/content-gate/scripts/gate.py submit $SLUG"
+      BLOCKED=1
+      ;;
+    *)
+      echo "❌ BLOCKED: $SLUG state=$STATE (need QA_PASS)"
+      echo "   Run: python3 ~/.openclaw/workspace/skills/content-gate/scripts/gate.py qa $SLUG"
+      BLOCKED=1
+      ;;
+  esac
+done
+
+if [ "$BLOCKED" -eq 1 ]; then
+  echo ""
+  echo "⛔ Column commit blocked by content-gate pre-commit hook."
+  echo "   To bypass (Jay only): git commit --no-verify"
+  exit 1
+fi
+
+exit 0
