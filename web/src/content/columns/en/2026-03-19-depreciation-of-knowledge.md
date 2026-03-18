@@ -1,5 +1,5 @@
 ---
-title: "The Depreciation of Knowledge: Is 'Knowledge Is Power' Over?"
+title: "'Knowledge Was Power' — The Depreciation of Knowledge"
 creator: "TJ"
 creatorImage: "/members/tj.png"
 date: 2026-03-19

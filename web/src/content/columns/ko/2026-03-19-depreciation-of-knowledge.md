@@ -1,5 +1,5 @@
 ---
-title: "지식의 감가상각: '아는 것이 힘이다'는 끝났는가"
+title: "'아는 것이 힘'이었다 — 지식의 감가상각"
 creator: "TJ"
 creatorImage: "/members/tj.png"
 date: 2026-03-19
