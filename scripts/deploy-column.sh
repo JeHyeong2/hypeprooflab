@@ -1,17 +1,22 @@
 #!/bin/bash
-# deploy-column.sh — Column QA Gate + Deploy
-# Mother는 이 스크립트 없이 칼럼을 배포할 수 없음
-# Usage: ./scripts/deploy-column.sh <slug> [--skip-en]
+# deploy-column.sh — Single entry point: Gate + QA + Deploy + Verify
+# Mother는 이 스크립트 없이 칼럼을 배포할 수 없음 (pre-commit hook 강제)
+# Usage: ./scripts/deploy-column.sh <slug> --creator <NAME> [--skip-en] [--auto]
 
 set -uo pipefail
 
-SLUG="${1:?Usage: deploy-column.sh <slug> [--skip-en] [--auto]}"
+SLUG="${1:?Usage: deploy-column.sh <slug> --creator <NAME> [--skip-en] [--auto]}"
+shift
+
+CREATOR=""
 SKIP_EN=""
 AUTO=""
-for arg in "${@:2}"; do
+for arg in "$@"; do
   case "$arg" in
+    --creator) ;;
     --skip-en) SKIP_EN="yes" ;;
     --auto) AUTO="yes" ;;
+    *) [ -z "$CREATOR" ] && CREATOR="$arg" ;;
   esac
 done
 
@@ -19,6 +24,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 KO_DIR="$ROOT/web/src/content/columns/ko"
 EN_DIR="$ROOT/web/src/content/columns/en"
 SCRIPTS="$ROOT/research/scripts"
+GATE="python3 $HOME/.openclaw/workspace/skills/content-gate/scripts/gate.py"
 
 KO_FILE="$KO_DIR/$SLUG.md"
 EN_FILE="$EN_DIR/$SLUG.md"
@@ -26,6 +32,7 @@ EN_FILE="$EN_DIR/$SLUG.md"
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
 NC='\033[0m'
 
 PASS=0
@@ -46,270 +53,181 @@ check() {
 }
 
 echo ""
-echo "╔══════════════════════════════════════════════╗"
-echo "║        COLUMN QA GATE — $SLUG"
-echo "╚══════════════════════════════════════════════╝"
+echo -e "${BLUE}╔══════════════════════════════════════════════╗${NC}"
+echo -e "${BLUE}║  Column Pipeline: $SLUG${NC}"
+echo -e "${BLUE}╚══════════════════════════════════════════════╝${NC}"
 echo ""
 
-# ── Step 1: File existence ──
-echo "📁 Step 1: File Check"
+# ═══════════════════════════════════════════════
+# PHASE 0: Content Gate Registration
+# ═══════════════════════════════════════════════
+echo -e "${BLUE}▶ PHASE 0: Content Gate${NC}"
+
+if [ -n "$CREATOR" ]; then
+  $GATE submit "$SLUG" --creator "$CREATOR" 2>&1 || true
+  $GATE review "$SLUG" 2>&1 || true
+else
+  echo -e "  ${YELLOW}⚠️  --creator 미지정 — gate 등록 스킵 (이미 등록된 경우만 OK)${NC}"
+fi
+echo ""
+
+# ═══════════════════════════════════════════════
+# PHASE 1: QA Gate
+# ═══════════════════════════════════════════════
+echo -e "${BLUE}▶ PHASE 1: QA Checks${NC}"
+
+# File existence
+echo "📁 Files"
 check "ko exists" test -f "$KO_FILE"
 if [ "$SKIP_EN" != "yes" ]; then
   check "en exists" test -f "$EN_FILE"
 else
-  echo -e "  [en exists] ${YELLOW}SKIPPED (--skip-en)${NC}"
+  echo -e "  [en exists] ${YELLOW}SKIPPED${NC}"
 fi
 
-# ── Step 2: Frontmatter validation ──
-echo ""
-echo "📋 Step 2: Frontmatter"
+# Frontmatter
+echo "📋 Frontmatter"
 REQUIRED_FIELDS=("title" "creator" "creatorImage" "date" "category" "tags" "slug" "readTime" "excerpt" "lang" "authorType")
 for field in "${REQUIRED_FIELDS[@]}"; do
   check "fm:$field" grep -q "^${field}:" "$KO_FILE"
 done
 
-# ── Step 3: Link validation ──
-echo ""
-echo "🔗 Step 3: Link Validation"
+# Links
+echo "🔗 Links"
 check "validate_links" python3 "$SCRIPTS/validate_links.py" "$KO_FILE"
 
-# ── Step 4: Quality score ──
-echo ""
-echo "📊 Step 4: Quality Score (≥70)"
+# Quality
+echo "📊 Quality (≥70)"
 check "eval_research" python3 "$SCRIPTS/eval_research.py" "$KO_FILE" --quick
 
-# ── Step 5: Build test ──
-echo ""
-echo "🔨 Step 5: Build Test"
+# Build
+echo "🔨 Build"
 check "npm build" bash -c "cd '$ROOT/web' && npm run build"
 
-# ── Step 6: Inline links check ──
-echo ""
-echo "🔵 Step 6: Inline Links (body has clickable links?)"
+# Inline links
+echo "🔵 Inline Links"
 LINK_COUNT=$(grep -c '\[.*\](http' "$KO_FILE" 2>/dev/null || echo 0)
-# Subtract sources table links (lines starting with |)
 TABLE_LINKS=$(grep '^\s*|' "$KO_FILE" | grep -c '\[.*\](http' 2>/dev/null || echo 0)
 BODY_LINKS=$((LINK_COUNT - TABLE_LINKS))
 MIN_BODY_LINKS=3
 if [ "$BODY_LINKS" -ge "$MIN_BODY_LINKS" ]; then
-  echo -e "  [inline links] ${GREEN}PASS${NC} ($BODY_LINKS body links)"
+  echo -e "  [inline links] ${GREEN}PASS${NC} ($BODY_LINKS)"
   ((PASS++))
-elif [ "$BODY_LINKS" -ge 1 ]; then
-  echo -e "  [inline links] ${YELLOW}WARN${NC} ($BODY_LINKS body links < $MIN_BODY_LINKS minimum)"
-  echo "  → 자동 주입 시도: python3 scripts/inject-inline-links.py"
-  SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-  python3 "$SCRIPT_DIR/inject-inline-links.py" "$KO_FILE" 2>/dev/null
-  # Re-count
-  LINK_COUNT2=$(grep -c '\[.*\](http' "$KO_FILE" 2>/dev/null || echo 0)
-  TABLE_LINKS2=$(grep '^\s*|' "$KO_FILE" | grep -c '\[.*\](http' 2>/dev/null || echo 0)
-  BODY_LINKS2=$((LINK_COUNT2 - TABLE_LINKS2))
-  if [ "$BODY_LINKS2" -ge "$MIN_BODY_LINKS" ]; then
-    echo -e "  [inline links] ${GREEN}PASS${NC} (auto-injected: $BODY_LINKS → $BODY_LINKS2 body links)"
-    ((PASS++))
-  else
-    echo -e "  [inline links] ${RED}FAIL${NC} ($BODY_LINKS2 body links after injection — need $MIN_BODY_LINKS+)"
-    ((FAIL++))
-  fi
 else
-  echo -e "  [inline links] ${YELLOW}WARN${NC} (0 body links — auto-injecting from Sources table)"
-  SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-  python3 "$SCRIPT_DIR/inject-inline-links.py" "$KO_FILE" 2>/dev/null
-  # Re-count
+  # Try auto-injection
+  python3 "$ROOT/scripts/inject-inline-links.py" "$KO_FILE" 2>/dev/null || true
   LINK_COUNT2=$(grep -c '\[.*\](http' "$KO_FILE" 2>/dev/null || echo 0)
   TABLE_LINKS2=$(grep '^\s*|' "$KO_FILE" | grep -c '\[.*\](http' 2>/dev/null || echo 0)
   BODY_LINKS2=$((LINK_COUNT2 - TABLE_LINKS2))
   if [ "$BODY_LINKS2" -ge "$MIN_BODY_LINKS" ]; then
-    echo -e "  [inline links] ${GREEN}PASS${NC} (auto-injected: 0 → $BODY_LINKS2 body links)"
+    echo -e "  [inline links] ${GREEN}PASS${NC} (injected: $BODY_LINKS→$BODY_LINKS2)"
     ((PASS++))
   else
-    echo -e "  [inline links] ${RED}FAIL${NC} ($BODY_LINKS2 body links after injection — need $MIN_BODY_LINKS+)"
+    echo -e "  [inline links] ${RED}FAIL${NC} ($BODY_LINKS2 < $MIN_BODY_LINKS)"
     ((FAIL++))
   fi
 fi
 
-# ── Step 7: Sources URL check ──
-echo ""
-echo "🔗 Step 7: Sources have full URLs?"
-# Check if Sources table has actual URLs (not just domain names)
+# Sources URLs
+echo "🔗 Sources"
 if grep -A 50 '## Sources\|### Sources\|🔗 Sources\|## 출처\|### 출처\|🔗 출처\|참고 출처' "$KO_FILE" | grep -q 'https\?://[a-zA-Z0-9]'; then
   echo -e "  [source URLs] ${GREEN}PASS${NC}"
   ((PASS++))
 else
-  echo -e "  [source URLs] ${RED}FAIL${NC} (Sources에 full URL 없음 — 도메인명만 있음)"
+  echo -e "  [source URLs] ${RED}FAIL${NC}"
   ((FAIL++))
 fi
 
-# ── Result ──
 echo ""
-echo "══════════════════════════════════════════════"
 TOTAL=$((PASS + FAIL))
-echo -e "  Results: ${GREEN}$PASS PASS${NC} / ${RED}$FAIL FAIL${NC} / $TOTAL total"
+echo "══════════════════════════════════════════════"
+echo -e "  QA: ${GREEN}$PASS PASS${NC} / ${RED}$FAIL FAIL${NC} / $TOTAL total"
 
 if [ "$FAIL" -gt 0 ]; then
-  echo ""
   echo -e "  ${RED}⛔ QA FAILED — 배포 차단${NC}"
-  echo ""
-  echo "  🔧 Mother 수정 가능:"
-  echo "     - fm:lang, fm:authorType 등 frontmatter → 직접 추가"
-  echo "     - inline links 부족 → 본문에 링크 삽입"
-  echo "     - npm build 실패 → 코드 수정"
-  echo ""
-  echo "  👤 크리에이터 확인 필요:"
-  echo "     - source URLs 없음 → 원본 링크 요청"
-  echo "     - validate_links 깨짐 → 대체 링크 요청"
-  echo ""
-  echo "  Mother 수정 가능한 건 바로 고치고 재실행."
-  echo "  크리에이터 필요한 건 DM으로 구체적 요청."
-  echo ""
-
-  # Log failed deploy to metrics
-  METRICS_FILE="$ROOT/metrics/column-results.tsv"
-  if [ -d "$ROOT/metrics" ]; then
-    CREATOR=$(grep '^creator:' "$KO_FILE" 2>/dev/null | sed 's/^creator:[[:space:]]*//' | tr -d '"' | tr -d "'")
-    [ -z "$CREATOR" ] && CREATOR="unknown"
-    M_LINK_COUNT=$(grep -c '\[.*\](http' "$KO_FILE" 2>/dev/null || echo 0)
-    M_TABLE_LINKS=$(grep '^\s*|' "$KO_FILE" | grep -c '\[.*\](http' 2>/dev/null || echo 0)
-    M_BODY_LINKS=$((M_LINK_COUNT - M_TABLE_LINKS))
-    SOURCE_URLS=0
-    grep -A 50 '## Sources\|### Sources\|🔗 Sources\|## 출처\|### 출처\|🔗 출처\|참고 출처' "$KO_FILE" 2>/dev/null | grep -q 'https\?://[a-zA-Z0-9]' && SOURCE_URLS=1
-    TODAY=$(date +%Y-%m-%d)
-    TOTAL_SCORE=$(( (PASS * 100) / TOTAL ))
-    if [ ! -f "$METRICS_FILE" ]; then
-      printf "date\tslug\tcreator\tqa_score\tlink_count\tbody_links\tsource_urls\tbuild_pass\tdeploy_pass\tverify_pass\ttotal_score\n" > "$METRICS_FILE"
-    fi
-    printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" \
-      "$TODAY" "$SLUG" "$CREATOR" "0" "$M_LINK_COUNT" "$M_BODY_LINKS" "$SOURCE_URLS" "0" "0" "0" "$TOTAL_SCORE" \
-      >> "$METRICS_FILE"
-    echo -e "  📊 Metrics logged (FAILED deploy, score: ${TOTAL_SCORE}%)"
-    echo ""
-  fi
-
+  # Update gate
+  $GATE qa "$SLUG" 2>&1 || true
   exit 1
 fi
 
-echo ""
-echo -e "  ${GREEN}✅ QA ALL PASS — 배포 진행${NC}"
+echo -e "  ${GREEN}✅ QA ALL PASS${NC}"
+
+# Update gate to QA_PASS
+$GATE qa "$SLUG" 2>&1 || true
 echo ""
 
-# ── Deploy ──
-if [ "$AUTO" = "yes" ]; then
-  REPLY="y"
-else
+# ═══════════════════════════════════════════════
+# PHASE 2: Deploy
+# ═══════════════════════════════════════════════
+echo -e "${BLUE}▶ PHASE 2: Deploy${NC}"
+
+if [ "$AUTO" != "yes" ]; then
   read -p "  Git push + deploy? (y/N) " -n 1 -r
   echo ""
-fi
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-  cd "$ROOT"
-  git add -A
-  git commit -m "column: $SLUG — QA passed (${PASS}/${TOTAL})"
-  git push
-  echo ""
-  echo -e "  ${GREEN}📦 Git pushed. Running Vercel prod deploy...${NC}"
-
-  # Vercel prod deploy (git push alone is unreliable)
-  cd "$ROOT/web"
-  VERCEL_OUT=$(npx vercel --prod --yes 2>&1)
-  VERCEL_EXIT=$?
-  cd "$ROOT"
-
-  if [ "$VERCEL_EXIT" -eq 0 ]; then
-    echo -e "  ${GREEN}🚀 Vercel deploy complete!${NC}"
-  else
-    echo -e "  ${RED}⚠️ Vercel deploy failed (exit $VERCEL_EXIT)${NC}"
-    echo "$VERCEL_OUT" | tail -5
-    exit 1
-  fi
-
-  echo "  → https://hypeproof-ai.xyz/columns/$SLUG"
-
-  # Verify: check response body, not just HTTP status (SPA returns 200 for 404s)
-  echo "  Verifying (10s)..."
-  sleep 10
-  VERIFY_BODY=$(curl -s "https://hypeproof-ai.xyz/columns/$SLUG")
-  HTTP_CODE=$(echo "$VERIFY_BODY" | head -1 | grep -c "<!DOCTYPE")
-
-  # Check 1: No client-side 404
-  if echo "$VERIFY_BODY" | grep -q 'NEXT_HTTP_ERROR_FALLBACK;404'; then
-    echo -e "  ${RED}⛔ VERIFY FAILED — Next.js 404 detected${NC}"
-    echo "  Page returns 200 but renders 404 client-side."
-    echo "  Check: content collection, slug format, Vercel build."
-    exit 1
-  fi
-
-  # Check 2: Title contains column title (not generic site title)
-  PAGE_TITLE=$(echo "$VERIFY_BODY" | grep -o '<title>[^<]*</title>' | head -1)
-  if echo "$PAGE_TITLE" | grep -qi "We Don't Chase Hype"; then
-    echo -e "  ${RED}⛔ VERIFY FAILED — Generic title detected (column not rendered)${NC}"
-    echo "  Got: $PAGE_TITLE"
-    exit 1
-  fi
-
-  echo -e "  ${GREEN}✅ Live! ${PAGE_TITLE}${NC}"
-  DEPLOY_PASS=1
-  VERIFY_PASS=1
-else
-  echo "  배포 취소됨."
-  DEPLOY_PASS=0
-  VERIFY_PASS=0
+  [[ ! $REPLY =~ ^[Yy]$ ]] && { echo "  취소됨."; exit 0; }
 fi
 
-# ── Metrics Logging ──
-# Append results to column-results.tsv regardless of pass/fail
-METRICS_FILE="$ROOT/metrics/column-results.tsv"
-if [ -d "$ROOT/metrics" ]; then
-  # Extract creator from frontmatter
-  CREATOR=$(grep '^creator:' "$KO_FILE" 2>/dev/null | sed 's/^creator:[[:space:]]*//' | tr -d '"' | tr -d "'")
-  [ -z "$CREATOR" ] && CREATOR="unknown"
+cd "$ROOT"
+git add -A
+git commit -m "column: $SLUG — QA passed (${PASS}/${TOTAL})" || echo "  (nothing to commit)"
+git push
 
-  # QA score (1 if eval_research passed, 0 if not)
-  QA_SCORE=$( (python3 "$SCRIPTS/eval_research.py" "$KO_FILE" --quick > /dev/null 2>&1 && echo 1) || echo 0)
+echo -e "  ${GREEN}📦 Git pushed. Vercel deploy...${NC}"
+cd "$ROOT/web"
+VERCEL_OUT=$(npx vercel --prod --yes 2>&1)
+VERCEL_EXIT=$?
+cd "$ROOT"
 
-  # Link counts (reuse from Step 6 if available, else recalculate)
-  M_LINK_COUNT=$(grep -c '\[.*\](http' "$KO_FILE" 2>/dev/null || echo 0)
-  M_TABLE_LINKS=$(grep '^\s*|' "$KO_FILE" | grep -c '\[.*\](http' 2>/dev/null || echo 0)
-  M_BODY_LINKS=$((M_LINK_COUNT - M_TABLE_LINKS))
-
-  # Source URLs present?
-  if grep -A 50 '## Sources\|### Sources\|🔗 Sources\|## 출처\|### 출처\|🔗 출처\|참고 출처' "$KO_FILE" 2>/dev/null | grep -q 'https\?://[a-zA-Z0-9]'; then
-    SOURCE_URLS=1
-  else
-    SOURCE_URLS=0
-  fi
-
-  # Build pass (we know it passed if we got here, but use PASS/FAIL from QA)
-  BUILD_PASS=$( [ "$FAIL" -eq 0 ] && echo 1 || echo 0)
-
-  # Deploy/verify pass (set above based on deploy outcome)
-  # If deploy wasn't attempted (user said no), mark as 0
-  : "${DEPLOY_PASS:=0}"
-  : "${VERIFY_PASS:=0}"
-
-  # Calculate total_score: count passes out of 7 checks
-  QA_PASS_COUNT=0
-  [ "$QA_SCORE" -eq 1 ] && ((QA_PASS_COUNT++))
-  [ "$M_LINK_COUNT" -gt 0 ] && ((QA_PASS_COUNT++))
-  [ "$M_BODY_LINKS" -ge 3 ] && ((QA_PASS_COUNT++))
-  [ "$SOURCE_URLS" -eq 1 ] && ((QA_PASS_COUNT++))
-  [ "$BUILD_PASS" -eq 1 ] && ((QA_PASS_COUNT++))
-  [ "$DEPLOY_PASS" -eq 1 ] && ((QA_PASS_COUNT++))
-  [ "$VERIFY_PASS" -eq 1 ] && ((QA_PASS_COUNT++))
-  TOTAL_CHECKS=7
-  TOTAL_SCORE=$(( (QA_PASS_COUNT * 100) / TOTAL_CHECKS ))
-
-  TODAY=$(date +%Y-%m-%d)
-
-  # Create TSV with header if it doesn't exist
-  if [ ! -f "$METRICS_FILE" ]; then
-    printf "date\tslug\tcreator\tqa_score\tlink_count\tbody_links\tsource_urls\tbuild_pass\tdeploy_pass\tverify_pass\ttotal_score\n" > "$METRICS_FILE"
-  fi
-
-  # Append row
-  printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" \
-    "$TODAY" "$SLUG" "$CREATOR" "$QA_SCORE" "$M_LINK_COUNT" "$M_BODY_LINKS" "$SOURCE_URLS" "$BUILD_PASS" "$DEPLOY_PASS" "$VERIFY_PASS" "$TOTAL_SCORE" \
-    >> "$METRICS_FILE"
-
-  echo ""
-  echo -e "  📊 Metrics logged to column-results.tsv (score: ${TOTAL_SCORE}%)"
+if [ "$VERCEL_EXIT" -ne 0 ]; then
+  echo -e "  ${RED}⚠️ Vercel failed${NC}"
+  echo "$VERCEL_OUT" | tail -5
+  exit 1
 fi
+
+# Gate → DEPLOYED
+$GATE deploy "$SLUG" 2>&1 || true
+echo ""
+
+# ═══════════════════════════════════════════════
+# PHASE 3: Verify
+# ═══════════════════════════════════════════════
+echo -e "${BLUE}▶ PHASE 3: Verify${NC}"
+sleep 10
+
+VERIFY_BODY=$(curl -s "https://hypeproof-ai.xyz/columns/$SLUG")
+
+# SPA 404 check
+if echo "$VERIFY_BODY" | grep -q 'NEXT_HTTP_ERROR_FALLBACK;404'; then
+  echo -e "  ${RED}⛔ 404 detected${NC}"
+  exit 1
+fi
+
+# Generic title check
+PAGE_TITLE=$(echo "$VERIFY_BODY" | grep -o '<title>[^<]*</title>' | head -1)
+if echo "$PAGE_TITLE" | grep -qi "We Don't Chase Hype"; then
+  echo -e "  ${RED}⛔ Generic title — column not rendered${NC}"
+  exit 1
+fi
+
+# Gate → VERIFIED
+$GATE verify "$SLUG" 2>&1 || true
 
 echo ""
+echo -e "${GREEN}═══════════════════════════════════════════════${NC}"
+echo -e "${GREEN}  ✅ PUBLISHED & VERIFIED${NC}"
+echo -e "${GREEN}  https://hypeproof-ai.xyz/columns/$SLUG${NC}"
+echo -e "${GREEN}  $PAGE_TITLE${NC}"
+echo -e "${GREEN}═══════════════════════════════════════════════${NC}"
+
+# ── Metrics ──
+METRICS_FILE="$ROOT/metrics/column-results.tsv"
+if [ -d "$ROOT/metrics" ]; then
+  M_CREATOR=$(grep '^creator:' "$KO_FILE" 2>/dev/null | sed 's/^creator:[[:space:]]*//' | tr -d '"' | tr -d "'")
+  [ -z "$M_CREATOR" ] && M_CREATOR="unknown"
+  TODAY=$(date +%Y-%m-%d)
+  if [ ! -f "$METRICS_FILE" ]; then
+    printf "date\tslug\tcreator\tpass\tfail\ttotal\n" > "$METRICS_FILE"
+  fi
+  printf "%s\t%s\t%s\t%s\t%s\t%s\n" "$TODAY" "$SLUG" "$M_CREATOR" "$PASS" "$FAIL" "$TOTAL" >> "$METRICS_FILE"
+  echo -e "  📊 Metrics logged"
+fi
