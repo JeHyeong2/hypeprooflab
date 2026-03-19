@@ -128,6 +128,17 @@ else
   fi
 fi
 
+# Footnote-style link warning (e.g. [[1]], [[2]])
+echo "📎 Link Style"
+FOOTNOTE_LINKS=$(grep -v '^\s*|' "$KO_FILE" | grep -cE '\[\[?\d+\]?\]\(http' 2>/dev/null || echo 0)
+if [ "$FOOTNOTE_LINKS" -eq 0 ]; then
+  echo -e "  [link style] ${GREEN}PASS${NC} (no footnote-style links)"
+  ((PASS++))
+else
+  echo -e "  [link style] ${RED}FAIL${NC} — 각주번호 링크 ${FOOTNOTE_LINKS}개 발견 ([[N]] 스타일 → 키워드 링크로 변경 필요)"
+  ((FAIL++))
+fi
+
 # Sources URLs
 echo "🔗 Sources"
 if grep -A 50 '## Sources\|### Sources\|🔗 Sources\|## 출처\|### 출처\|🔗 출처\|참고 출처' "$KO_FILE" | grep -q 'https\?://[a-zA-Z0-9]'; then
