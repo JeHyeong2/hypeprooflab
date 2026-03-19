@@ -20,7 +20,7 @@ authorType: "human"
 
 ### 첫 번째 렌즈: 도구의 범람, 누가 진짜 왕관을 쓸 것인가
 
-최근 시장에 쏟아지는 인공지능 영상 도구들을 보면 마치 골드러시 시대를 보는 것 같습니다. 소라 2세대부터 구글의 베오 3, 그리고 런웨이나 미드저니의 새로운 버전들까지, 매일같이 새로운 주인공이 등장합니다. 최근의 전수 테스트 결과를 보면 재미있는 구도가 형성되고 있습니다.
+최근 시장에 쏟아지는 인공지능 영상 도구들을 보면 마치 [골드러시](https://en.wikipedia.org/wiki/Gold_rush) 시대를 보는 것 같습니다. 소라 2세대부터 구글의 베오 3, 그리고 [런웨이](https://runwayml.com)나 [미드저니](https://en.wikipedia.org/wiki/Midjourney)의 새로운 버전들까지, 매일같이 새로운 주인공이 등장합니다. 최근의 전수 테스트 결과를 보면 재미있는 구도가 형성되고 있습니다.
 
 [소라](https://openai.com/index/sora/)는 오디오와 영상의 결합 품질에서 압도적인 1위를 차지하며 마치 완성된 영화 한 편을 통째로 뱉어낼 듯한 기세를 보여줍니다. 반면 구글의 [베오 3](https://deepmind.google/models/veo/)는 특유의 시네마틱한 질감으로 광고나 예술 영화를 만드는 전문가들의 눈길을 사로잡고 있지요. 하지만 실제 현장에서 일하는 크리에이터들에게 물어보면 대답은 조금 다릅니다. "와, 대단하네"라고 감탄하면서도 정작 자신의 유료 프로젝트에 선뜻 도입하기는 망설입니다.
 
@@ -46,7 +46,7 @@ authorType: "human"
 
 우리가 영상 편집과 창작의 즐거움을 논하는 동안, 이 기술은 보이지 않는 곳에서 무서운 속도로 변모하고 있습니다. 최근 정치권과 기술 기업들 사이의 미묘한 줄다리기는 인공지능이 단순한 미디어 도구를 넘어 전략 자산이 되었음을 보여줍니다.
 
-특정 기업의 인공지능 모델 사용이 금지되었다가, 불과 몇 시간 만에 군사 작전에 활용되었다는 소식은 영화 속 이야기가 아닙니다. 오픈에이아이가 국방부와 새로운 계약을 체결하고 군 전용 네트워크에 기술을 배포하기로 한 결정은 인공지능의 본질적인 속성을 다시 생각하게 만듭니다.
+특정 기업의 인공지능 모델 사용이 금지되었다가, 불과 몇 시간 만에 군사 작전에 활용되었다는 소식은 영화 속 이야기가 아닙니다. 오픈에이아이가 [미국 국방부](https://en.wikipedia.org/wiki/United_States_Department_of_Defense)와 새로운 계약을 체결하고 군 전용 네트워크에 기술을 배포하기로 한 결정은 인공지능의 본질적인 속성을 다시 생각하게 만듭니다.
 
 콘텐츠 기획자의 눈으로 보면 이것은 매우 기이한 현상입니다. 낮에는 아이들의 교육 영상을 만들고 창의적인 영화 시나리오를 쓰던 인공지능이, 밤에는 전장의 데이터를 분석하고 타격 목표를 설정하는 뇌가 되는 셈입니다.
 
@@ -77,3 +77,7 @@ authorType: "human"
 | 3 | [Runway AI](https://runwayml.com) | AI 기반 영상 생성·편집 플랫폼 |
 | 4 | [Adobe Firefly](https://en.wikipedia.org/wiki/Adobe_Firefly) | 상업적 안전성을 강조하는 어도비의 생성 AI |
 | 5 | [Deepfake — Wikipedia](https://en.wikipedia.org/wiki/Deepfake) | 딥러닝 기반 합성 미디어 기술 개요 |
+| 6 | [Midjourney — Wikipedia](https://en.wikipedia.org/wiki/Midjourney) | AI 이미지 생성 플랫폼 |
+| 7 | [Runway AI](https://runwayml.com) | AI 기반 영상 생성·편집 플랫폼 |
+| 8 | [Gold rush — Wikipedia](https://en.wikipedia.org/wiki/Gold_rush) | 골드러시 역사와 기술 붐 비유 |
+| 9 | [U.S. Department of Defense — Wikipedia](https://en.wikipedia.org/wiki/United_States_Department_of_Defense) | 미국 국방부와 AI 계약 배경 |

@@ -28,7 +28,7 @@ The raw sense of dispossession soon transforms into a cold, logical question. Ha
 
 ## The Death of Explicit Knowledge: Dissecting Knowledge Through Polanyi's Framework
 
-To dissect this brutal phenomenon, we must borrow the epistemological framework of Michael Polanyi, the Hungarian-born philosopher and scientist. Polanyi decomposed human knowledge into two fundamental dimensions: "[Explicit Knowledge](https://en.wikipedia.org/wiki/Tacit_knowledge)," which can be clearly expressed through language and symbols, and "Tacit Knowledge," entangled with bodily experience and intuition, impossible to fully articulate in words.
+To dissect this brutal phenomenon, we must borrow the epistemological framework of Michael Polanyi, the Hungarian-born philosopher and scientist. Polanyi decomposed human knowledge into two fundamental dimensions: "[Explicit Knowledge](https://en.wikipedia.org/wiki/Explicit_knowledge)," which can be clearly expressed through language and symbols, and "[Tacit Knowledge](https://en.wikipedia.org/wiki/Tacit_knowledge)," entangled with bodily experience and intuition, impossible to fully articulate in words.
 
 Past education systems and knowledge labor markets placed a thorough premium on "the accumulation of sophisticated explicit knowledge." An accountant who memorized complex tax codes, a lawyer who commanded case precedents, an analyst who carried vast market data in their head — each was a walking database. Their explicit knowledge was expensive because it was scarce.
 
@@ -50,7 +50,7 @@ This dismantling of knowledge-power and shifting of value axes is not the first 
 
 The first example is Johannes Gutenberg's movable type printing press in the 15th century. Before the press, the storage and reproduction of knowledge was the exclusive domain of Catholic clergy who monopolized manuscripts. They controlled scripture in Latin, wielding "information brokerage power" between God and humanity. But the [printing press](https://en.wikipedia.org/wiki/Printing_press) caused the marginal cost of knowledge reproduction to plummet vertically. Once anyone could read scripture in their native language, "possessing knowledge" itself was no longer power. The axis of value shifted from knowledge storage to "interpretation and application." The Reformation was not merely a theological debate — it was a transfer of power following a revolution in knowledge distribution infrastructure.
 
-The second is a far more modern — and more blatant — case. Look at London's Black Cab drivers. To pass what's called "[The Knowledge](https://tfl.gov.uk/info-for/taxis-and-private-hire/licensing/learn-the-knowledge-of-london)," the world's most notoriously difficult exam, they imprinted 25,000 streets and tens of thousands of landmarks onto their brains. This spatial cognition was their formidable barrier to entry and their guarantee of high income. But GPS systems and Uber's algorithms instantly rendered the spatial knowledge stored in their hippocampi worthless. Knowledge was absorbed into the platform's cloud, and drivers were reduced to terminal nodes performing only the physical labor of "holding a steering wheel."
+The second is a far more modern — and more blatant — case. Look at London's [Black Cab](https://en.wikipedia.org/wiki/Hackney_carriage) drivers. To pass what's called "[The Knowledge](https://tfl.gov.uk/info-for/taxis-and-private-hire/licensing/learn-the-knowledge-of-london)," the world's most notoriously difficult exam, they imprinted 25,000 streets and tens of thousands of landmarks onto their brains. This spatial cognition was their formidable barrier to entry and their guarantee of high income. But GPS systems and Uber's algorithms instantly rendered the spatial knowledge stored in their hippocampi worthless. Knowledge was absorbed into the platform's cloud, and drivers were reduced to terminal nodes performing only the physical labor of "holding a steering wheel."
 
 If past technology smashed the rice bowls of specific classes, today's technology is taking dead aim at the entire foundation of white-collar knowledge workers.
 
@@ -84,15 +84,15 @@ At this juncture, to elevate the discussion, we must translate concepts we've ta
 
 For the past several decades, we treated the knowledge inside human heads as "Permanent Assets" — like land or buildings. Attending a good university and earning difficult certifications was like erecting a building in prime Gangnam real estate. Once built, it guaranteed steady rental income (salary and status) for life without additional investment. This was a grand idol built on the illusion that knowledge never loses value.
 
-But let's face reality. Knowledge is by no means a permanent asset. It is a machine that deteriorates rapidly over time — a **tangible asset subject to Depreciation**.
+But let's face reality. Knowledge is by no means a permanent asset. It is a machine that deteriorates rapidly over time — a **tangible asset subject to [Depreciation](https://en.wikipedia.org/wiki/Depreciation)**.
 
 Suppose you recorded the advanced data analysis techniques or industry-specific regulatory knowledge you acquired five years ago at "acquisition cost" on your ledger. This asset's value is declining every single day, right now. As AI and automation tools advance, the "depreciation expense" on your knowledge grows exponentially. The gap between book value and actual market value widens.
 
-What's even more terrifying is that when the market paradigm shifts completely, your knowledge doesn't merely depreciate — it gets written down to zero as an **"Impairment Loss."** Just as accounting writes down an asset's book value to zero when it's no longer expected to generate future economic benefits, your expertise can be expelled from the market overnight.
+What's even more terrifying is that when the market paradigm shifts completely, your knowledge doesn't merely depreciate — it gets written down to zero as an **"[Impairment Loss](https://en.wikipedia.org/wiki/Impairment_(financial_reporting))."** Just as accounting writes down an asset's book value to zero when it's no longer expected to generate future economic benefits, your expertise can be expelled from the market overnight.
 
-From this financial frame, seniors clinging to past knowledge and juniors following old credential formulas are essentially holding **"Non-Performing Loans (NPLs)"** that don't even generate interest. Just as corporations employ sophisticated tax strategies to offload NPLs at fire-sale prices to asset securitization vehicles, individuals too must make the brutal decision to write off and cut losses on their obsolete knowledge.
+From this financial frame, seniors clinging to past knowledge and juniors following old credential formulas are essentially holding **"[Non-Performing Loans (NPLs)](https://en.wikipedia.org/wiki/Non-performing_loan)"** that don't even generate interest. Just as corporations employ sophisticated tax strategies to offload NPLs at fire-sale prices to asset securitization vehicles, individuals too must make the brutal decision to write off and cut losses on their obsolete knowledge.
 
-Knowledge bound to past success formulas is no longer a revenue-generating asset but merely a sunk cost eating away at maintenance expenses. True capital lies not in hardened expertise but in **"Cognitive Liquidity"** itself — the ability to wipe the ledger clean and rapidly absorb new rules in any changing environment. Only those who accept that the knowledge in their heads could become a non-performing loan tomorrow will survive the next turn of the market.
+Knowledge bound to past success formulas is no longer a revenue-generating asset but merely a [sunk cost](https://en.wikipedia.org/wiki/Sunk_cost) eating away at maintenance expenses. True capital lies not in hardened expertise but in **"Cognitive Liquidity"** itself — the ability to wipe the ledger clean and rapidly absorb new rules in any changing environment. Only those who accept that the knowledge in their heads could become a non-performing loan tomorrow will survive the next turn of the market.
 
 ---
 
@@ -114,6 +114,12 @@ I'm going to go fire up my depreciating brain and read these tedious texts now. 
 
 | # | Source | URL |
 | --- | --- | --- |
-| 1 | Michael Polanyi — Tacit Knowledge (Wikipedia) | https://en.wikipedia.org/wiki/Tacit_knowledge |
-| 2 | Printing Press — History & Impact (Wikipedia) | https://en.wikipedia.org/wiki/Printing_press |
-| 3 | The Knowledge of London — TfL Official | https://tfl.gov.uk/info-for/taxis-and-private-hire/licensing/learn-the-knowledge-of-london |
+| 1 | Explicit Knowledge — Wikipedia | https://en.wikipedia.org/wiki/Explicit_knowledge |
+| 2 | Tacit Knowledge — Wikipedia | https://en.wikipedia.org/wiki/Tacit_knowledge |
+| 3 | Printing Press — History & Impact (Wikipedia) | https://en.wikipedia.org/wiki/Printing_press |
+| 4 | The Knowledge of London — TfL Official | https://tfl.gov.uk/info-for/taxis-and-private-hire/licensing/learn-the-knowledge-of-london |
+| 5 | Depreciation — Wikipedia | https://en.wikipedia.org/wiki/Depreciation |
+| 6 | Asset Impairment — Wikipedia | https://en.wikipedia.org/wiki/Impairment_(financial_reporting) |
+| 7 | Non-performing Loan — Wikipedia | https://en.wikipedia.org/wiki/Non-performing_loan |
+| 8 | Sunk Cost — Wikipedia | https://en.wikipedia.org/wiki/Sunk_cost |
+| 9 | London Black Cab (Hackney Carriage) — Wikipedia | https://en.wikipedia.org/wiki/Hackney_carriage |

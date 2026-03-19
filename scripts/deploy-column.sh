@@ -104,12 +104,21 @@ check "eval_research" python3 "$SCRIPTS/eval_research.py" "$KO_FILE" --quick
 echo "🔨 Build"
 check "npm build" bash -c "cd '$ROOT/web' && npm run build"
 
-# Inline links
+# Inline links (dynamic minimum based on word count)
 echo "🔵 Inline Links"
+WORD_COUNT=$(cat "$KO_FILE" | wc -w | tr -d ' ')
 LINK_COUNT=$(grep -c '\[.*\](http' "$KO_FILE" 2>/dev/null || echo 0)
 TABLE_LINKS=$(grep '^\s*|' "$KO_FILE" | grep -c '\[.*\](http' 2>/dev/null || echo 0)
 BODY_LINKS=$((LINK_COUNT - TABLE_LINKS))
-MIN_BODY_LINKS=3
+# Dynamic: ~150w/link target
+if [ "$WORD_COUNT" -ge 1000 ]; then
+  MIN_BODY_LINKS=7
+elif [ "$WORD_COUNT" -ge 500 ]; then
+  MIN_BODY_LINKS=5
+else
+  MIN_BODY_LINKS=3
+fi
+echo -e "  [word count] ${BLUE}${WORD_COUNT}w → min ${MIN_BODY_LINKS} links${NC}"
 if [ "$BODY_LINKS" -ge "$MIN_BODY_LINKS" ]; then
   echo -e "  [inline links] ${GREEN}PASS${NC} ($BODY_LINKS)"
   ((PASS++))

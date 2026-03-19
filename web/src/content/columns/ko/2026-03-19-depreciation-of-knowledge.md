@@ -28,7 +28,7 @@ authorType: "creator"
 
 ## 명시지의 종말: 폴라니의 프레임으로 본 지식의 해부
 
-이 잔혹한 현상을 해부하기 위해, 우리는 헝가리 출신의 철학자이자 과학자인 마이클 폴라니(Michael Polanyi)의 인식론적 프레임워크를 빌려와야 한다. 폴라니는 인간의 지식을 크게 두 가지 차원으로 쪼개어 분해했다. 언어나 기호로 명확히 표현될 수 있는 '[명시지(Explicit Knowledge)](https://en.wikipedia.org/wiki/Tacit_knowledge)'와, 신체적 경험과 직관에 얽혀 있어 말로 온전히 설명할 수 없는 '암묵지(Tacit Knowledge)'가 그것이다.
+이 잔혹한 현상을 해부하기 위해, 우리는 헝가리 출신의 철학자이자 과학자인 마이클 폴라니(Michael Polanyi)의 인식론적 프레임워크를 빌려와야 한다. 폴라니는 인간의 지식을 크게 두 가지 차원으로 쪼개어 분해했다. 언어나 기호로 명확히 표현될 수 있는 '[명시지(Explicit Knowledge)](https://en.wikipedia.org/wiki/Explicit_knowledge)'와, 신체적 경험과 직관에 얽혀 있어 말로 온전히 설명할 수 없는 '[암묵지(Tacit Knowledge)](https://en.wikipedia.org/wiki/Tacit_knowledge)'가 그것이다.
 
 과거의 교육 시스템과 지식 노동 시장은 철저하게 '고도화된 명시지의 축적'에 프리미엄을 부여했다. 복잡한 세법을 암기하고 있는 회계사, 판례를 꿰고 있는 변호사, 방대한 시장 데이터를 머릿속에 담고 있는 애널리스트는 그 자체로 움직이는 데이터베이스였다. 그들의 명시지는 희소했기에 비쌌다.
 
@@ -50,7 +50,7 @@ authorType: "creator"
 
 첫 번째 사례는 15세기 요하네스 구텐베르크의 활판 인쇄술이다. 인쇄기가 등장하기 전, 지식의 저장과 복제는 오직 필사본을 독점한 가톨릭 성직자들의 전유물이었다. 그들은 성서를 라틴어로 통제하며 신과 인간 사이의 '정보 중개 권력'을 행사했다. 그러나 [인쇄기](https://en.wikipedia.org/wiki/Printing_press)는 지식의 복제 한계비용을 수직으로 낙하시켰다. 누구나 모국어로 된 성서를 읽게 되자, '지식을 소유하는 것' 자체는 더 이상 권력이 되지 못했다. 가치의 축은 지식의 저장에서 '해석과 적용'으로 이동했다. 종교개혁은 단순한 신학 논쟁이 아니라, 지식 유통 구조의 혁명에 따른 권력의 이동이었다.
 
-두 번째는 훨씬 더 현대적인, 그리고 더 노골적인 사례다. 런던의 블랙캡(Black Cab) 택시 기사들을 보라. 그들은 '[The Knowledge](https://tfl.gov.uk/info-for/taxis-and-private-hire/licensing/learn-the-knowledge-of-london)'라 불리는 세계에서 가장 악명 높은 시험을 통과하기 위해 런던 시내의 2만 5천 개 도로와 수만 개의 랜드마크를 뇌에 각인시켰다. 이 공간 지각 능력은 그들의 강력한 진입 장벽이자 고소득을 보장하는 권력이었다. 그러나 GPS 시스템과 우버(Uber) 알고리즘의 등장은 기사들의 해마에 축적된 공간 지식을 순식간에 무가치한 것으로 만들었다. 지식은 플랫폼의 클라우드로 흡수되었고, 기사들은 '운전대'라는 물리적 노동만을 수행하는 말단 노드로 전락했다.
+두 번째는 훨씬 더 현대적인, 그리고 더 노골적인 사례다. 런던의 [블랙캡(Black Cab)](https://en.wikipedia.org/wiki/Hackney_carriage) 택시 기사들을 보라. 그들은 '[The Knowledge](https://tfl.gov.uk/info-for/taxis-and-private-hire/licensing/learn-the-knowledge-of-london)'라 불리는 세계에서 가장 악명 높은 시험을 통과하기 위해 런던 시내의 2만 5천 개 도로와 수만 개의 랜드마크를 뇌에 각인시켰다. 이 공간 지각 능력은 그들의 강력한 진입 장벽이자 고소득을 보장하는 권력이었다. 그러나 GPS 시스템과 우버(Uber) 알고리즘의 등장은 기사들의 해마에 축적된 공간 지식을 순식간에 무가치한 것으로 만들었다. 지식은 플랫폼의 클라우드로 흡수되었고, 기사들은 '운전대'라는 물리적 노동만을 수행하는 말단 노드로 전락했다.
 
 과거의 기술이 특정 계층의 밥그릇을 깨부수었다면, 지금의 기술은 화이트칼라 지식 노동자 전체의 기반을 정조준하고 있다.
 
@@ -84,15 +84,15 @@ authorType: "creator"
 
 과거 수십 년 동안, 우리는 인간의 머릿속에 든 지식을 토지나 건물 같은 '영구적 자산(Permanent Asset)'으로 취급해 왔다. 좋은 대학을 가고 어려운 자격증을 따는 것은, 입지가 좋은 강남 한복판에 빌딩을 올리는 것과 같았다. 한 번 건물을 세워두면, 별다른 추가 투자 없이도 평생 꾸준한 임대 수익(월급과 지위)이 보장되었다. 이는 지식이 가치를 잃지 않는다는 착각에 기반한 거대한 우상이었다.
 
-그러나 현실을 똑바로 보자. 지식은 결코 영구적 자산이 아니다. 그것은 시간이 지날수록 급격히 낡아버리는 기계 장치, 즉 **'감가상각(Depreciation)되는 유형 자산'**이다.
+그러나 현실을 똑바로 보자. 지식은 결코 영구적 자산이 아니다. 그것은 시간이 지날수록 급격히 낡아버리는 기계 장치, 즉 **'[감가상각(Depreciation)](https://en.wikipedia.org/wiki/Depreciation)되는 유형 자산'**이다.
 
 당신이 5년 전에 취득한 고도의 데이터 분석 기법이나 특정 산업의 규제 지식을 장부에 '취득원가'로 기록했다고 가정해 보자. 이 자산은 지금 이 순간에도 매일매일 가치가 하락하고 있다. AI와 자동화 툴이 고도화될수록, 당신의 지식에 대한 '감가상각비'는 기하급수적으로 커진다. 장부상의 가치(Book Value)와 실제 시장 가치의 괴리가 벌어지는 것이다.
 
-더 끔찍한 것은, 시장의 패러다임이 완전히 바뀌는 순간 당신의 지식은 단순한 감가상각을 넘어 전액 **'손상차손(Impairment Loss)'** 처리된다는 점이다. 회계상 자산이 미래에 경제적 효익을 창출하지 못할 것으로 예상될 때 그 장부가액을 0으로 만들어버리는 것처럼, 당신의 전문성은 하루아침에 시장에서 퇴출된다.
+더 끔찍한 것은, 시장의 패러다임이 완전히 바뀌는 순간 당신의 지식은 단순한 감가상각을 넘어 전액 **'[손상차손(Impairment Loss)](https://en.wikipedia.org/wiki/Impairment_of_assets)'** 처리된다는 점이다. 회계상 자산이 미래에 경제적 효익을 창출하지 못할 것으로 예상될 때 그 장부가액을 0으로 만들어버리는 것처럼, 당신의 전문성은 하루아침에 시장에서 퇴출된다.
 
-이러한 재무적 프레임에서 볼 때, 과거의 지식에 집착하는 시니어들이나 예전의 스펙 쌓기 공식에 매달리는 주니어들은, 사실상 이자조차 발생하지 않는 '부실채권(NPL, Non-Performing Loan)'을 끌어안고 있는 것과 같다. 기업들이 부실채권을 털어내기 위해 페이백(Payback) 조건으로 자산유동화전문회사에 헐값에 넘기고 장부를 정리하는 고도의 세무 전략을 취하듯, 개인 역시 자신의 낡은 지식을 상각 처리하고 손절하는 잔혹한 결단이 필요하다.
+이러한 재무적 프레임에서 볼 때, 과거의 지식에 집착하는 시니어들이나 예전의 스펙 쌓기 공식에 매달리는 주니어들은, 사실상 이자조차 발생하지 않는 '[부실채권(NPL, Non-Performing Loan)](https://en.wikipedia.org/wiki/Non-performing_loan)'을 끌어안고 있는 것과 같다. 기업들이 부실채권을 털어내기 위해 페이백(Payback) 조건으로 자산유동화전문회사에 헐값에 넘기고 장부를 정리하는 고도의 세무 전략을 취하듯, 개인 역시 자신의 낡은 지식을 상각 처리하고 손절하는 잔혹한 결단이 필요하다.
 
-과거의 성공 방정식에 묶인 지식은 이제 수익을 창출하는 자산이 아니라, 유지보수 비용만 갉아먹는 매몰비용(Sunk Cost)일 뿐이다. 진정한 자본은 단단하게 굳어진 전문 지식이 아니라, 어떤 환경의 변화에도 장부를 백지화하고 새로운 규칙을 빠르게 흡수할 수 있는 **'인지적 유동성(Cognitive Liquidity)'** 그 자체에 있다. 내 머릿속의 지식이 내일 당장 부실채권이 될 수 있음을 인정하는 자만이, 다음 턴의 시장에서 살아남는다.
+과거의 성공 방정식에 묶인 지식은 이제 수익을 창출하는 자산이 아니라, 유지보수 비용만 갉아먹는 [매몰비용(Sunk Cost)](https://en.wikipedia.org/wiki/Sunk_cost)일 뿐이다. 진정한 자본은 단단하게 굳어진 전문 지식이 아니라, 어떤 환경의 변화에도 장부를 백지화하고 새로운 규칙을 빠르게 흡수할 수 있는 **'인지적 유동성(Cognitive Liquidity)'** 그 자체에 있다. 내 머릿속의 지식이 내일 당장 부실채권이 될 수 있음을 인정하는 자만이, 다음 턴의 시장에서 살아남는다.
 
 ---
 
@@ -114,6 +114,12 @@ authorType: "creator"
 
 | # | 출처 | URL |
 | --- | --- | --- |
-| 1 | Michael Polanyi — Tacit Knowledge (Wikipedia) | https://en.wikipedia.org/wiki/Tacit_knowledge |
-| 2 | Printing Press — History & Impact (Wikipedia) | https://en.wikipedia.org/wiki/Printing_press |
-| 3 | The Knowledge of London — TfL Official | https://tfl.gov.uk/info-for/taxis-and-private-hire/licensing/learn-the-knowledge-of-london |
+| 1 | Explicit Knowledge — Wikipedia | https://en.wikipedia.org/wiki/Explicit_knowledge |
+| 2 | Tacit Knowledge — Wikipedia | https://en.wikipedia.org/wiki/Tacit_knowledge |
+| 3 | Printing Press — History & Impact (Wikipedia) | https://en.wikipedia.org/wiki/Printing_press |
+| 4 | The Knowledge of London — TfL Official | https://tfl.gov.uk/info-for/taxis-and-private-hire/licensing/learn-the-knowledge-of-london |
+| 5 | Depreciation — Wikipedia | https://en.wikipedia.org/wiki/Depreciation |
+| 6 | Asset Impairment — Wikipedia | https://en.wikipedia.org/wiki/Impairment_(financial_reporting) |
+| 7 | Non-performing Loan — Wikipedia | https://en.wikipedia.org/wiki/Non-performing_loan |
+| 8 | Sunk Cost — Wikipedia | https://en.wikipedia.org/wiki/Sunk_cost |
+| 9 | London Black Cab (Hackney Carriage) — Wikipedia | https://en.wikipedia.org/wiki/Hackney_carriage |

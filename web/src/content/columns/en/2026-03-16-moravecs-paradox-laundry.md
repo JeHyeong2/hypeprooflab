@@ -22,7 +22,7 @@ For AI, the world splits neatly in two: the digital realm defined by numbers, an
 
 Folding laundry is a challenge from an entirely different dimension. A soft piece of fabric has no fixed shape. Its form shifts constantly depending on how it's piled, how crumpled it is, and the weight of the material. Calculating in real time how cloth will bend when a robot grips a sleeve, how much it will sag under gravity — this remains an enormous challenge even with today's technology. The human brain refined these complex sensory skills over millions of years of environmental adaptation. For AI, it's all a riddle without an answer key.
 
-Technology's advance followed the path of least resistance. Data-rich domains with no physical substance — knowledge work like design and programming — became AI's first hunting ground. The reason we got a creative AI artist before the household robot we actually wanted comes down to this engineering and economic asymmetry hiding in plain sight.
+Technology's advance followed the path of least resistance. Data-rich domains with no physical substance — [knowledge work](https://en.wikipedia.org/wiki/Knowledge_worker) like design and programming — became AI's first hunting ground. The reason we got a creative AI artist before the household robot we actually wanted comes down to this engineering and economic asymmetry hiding in plain sight.
 
 ---
 
@@ -30,7 +30,7 @@ Technology's advance followed the path of least resistance. Data-rich domains wi
 
 This phenomenon hits hardest where it hurts most: the entry-level positions where newcomers take their first steps. Simple design tasks, boilerplate code, data organization — these used to be the junior employee's domain. Through repetition, they built skills. Over shoulders, they absorbed expertise. It was the bottom rung of the ladder.
 
-Now companies see no reason to hire juniors for that baseline work. AI never sleeps, never complains, and handles the output of dozens of entry-level workers in seconds. For businesses, costs plummet while quality stays above a guaranteed floor. There's no reason to say no. As a result, junior-level jobs are being absorbed by AI at speed, narrowing the very pathway that produces tomorrow's experts.
+Now companies see no reason to hire juniors for that baseline work. AI never sleeps, never complains, and handles the output of dozens of entry-level workers in seconds. For businesses, costs plummet while quality stays above a guaranteed floor. There's no reason to say no. As a result, junior-level jobs are being absorbed by AI at speed, creating a [technological unemployment](https://en.wikipedia.org/wiki/Technological_unemployment) phenomenon that narrows the very pathway that produces tomorrow's experts.
 
 Designers and developers face similar upheaval. Mastery of tools used to be a key competitive advantage, but AI now wields those tools better than humans do. The question has shifted from "What can you make?" to "What instructions can you give the AI?" Seasoned professionals harness AI like a subordinate, multiplying their output. But for beginners with everything still to learn, AI has become a wall that steals the very opportunities they need to grow.
 
@@ -38,9 +38,9 @@ Designers and developers face similar upheaval. Mastery of tools used to be a ke
 
 ### What Evolution's Paradox Teaches About Human Worth
 
-What we casually call intelligence — logical reasoning, mathematical ability — is, in the grand sweep of human history, a very recent addition. Meanwhile, the motor skills to grip tools, maintain balance while walking, and perceive texture have been refined over hundreds of millions of years of evolution. For AI, humanity's latest inventions — math and language — read like easy textbooks. But humanity's oldest heritage — bodily sensation — remains a divine domain it cannot touch.
+What we casually call intelligence — logical reasoning, mathematical ability — is, in the grand sweep of human history, a very recent addition. Meanwhile, the [motor skills](https://en.wikipedia.org/wiki/Motor_skills) to grip tools, maintain balance while walking, and perceive texture have been refined over hundreds of millions of years of [evolution](https://en.wikipedia.org/wiki/Human_evolution). For AI, humanity's latest inventions — math and language — read like easy textbooks. But humanity's oldest heritage — bodily sensation — remains a divine domain it cannot touch.
 
-This is Moravec's paradox. What's easy for humans is hellishly difficult for machines; what's hard for humans is child's play for machines. The paradox demolishes our assumptions about the value of labor. The notion that only desk-bound intellectual work is noble has reached its expiration date. The dexterity of fingertips that machines can't replicate, the empathy to read another person's emotions, the grit to solve messy real-world problems with your own body — these are becoming the most powerful weapons of the AI age.
+This is [Moravec's paradox](https://en.wikipedia.org/wiki/Moravec%27s_paradox). What's easy for humans is hellishly difficult for machines; what's hard for humans is child's play for machines. The paradox demolishes our assumptions about the value of labor. The notion that only desk-bound intellectual work is noble has reached its expiration date. The dexterity of fingertips that machines can't replicate, the empathy to read another person's emotions, the grit to solve messy real-world problems with your own body — these are becoming the most powerful weapons of the AI age.
 
 While robots threaten the painter's livelihood, the jobs that involve fixing machines on-site and caring for people remain rock-solid. A plumber reaching into a tight gap and tightening a nut by feel alone is something even a billion-dollar lab robot still can't pull off. We're only now beginning to realize how extraordinarily intelligent the ordinary physical activities and everyday sensations we took for granted truly are.
 
@@ -50,7 +50,7 @@ While robots threaten the painter's livelihood, the jobs that involve fixing mac
 
 So how should we face this massive shift? Simply fearing job loss solves nothing. If we can't reverse the technological tide, we need to sharpen the uniquely human domains that AI cannot encroach upon. The era of competing on sheer volume of knowledge is over. What matters now is the discernment to judge which of AI's countless outputs actually hold value, and the ability to read the subtle human desires that machines will never understand.
 
-Education, in particular, must change direction. Training to find the right answer can now be outsourced to AI. Instead, we need to learn how to ask the right questions. Humanistic thinking — pondering which image moves a heart, which code truly solves a societal problem — has become as vital as engineering knowledge. We must also rediscover the value of making things with our hands and engaging with the physical environment. The sense of standing on solid ground rather than drowning in a digital ocean is what will differentiate us from machines.
+Education, in particular, must change direction. Training to find the right answer can now be outsourced to AI. Instead, we need to learn how to ask the right questions. [Humanistic thinking](https://en.wikipedia.org/wiki/Humanities) — pondering which image moves a heart, which code truly solves a societal problem — has become as vital as engineering knowledge. We must also rediscover the value of making things with our hands and engaging with the physical environment. The sense of standing on solid ground rather than drowning in a digital ocean is what will differentiate us from machines.
 
 Future competitiveness will emerge from a combination: how skillfully you wield AI, and how humanly you can act without it. The more dazzling technology's magic becomes, the more we need to return to fundamentals — seeing the real face behind the pixels, reading the sincerity behind the text, and willingly embracing the messy inconveniences of reality that machines find beneath them.
 
@@ -67,3 +67,16 @@ A robot that folds laundry is still years away. In the meantime, instead of comp
 Don't be intimidated by the dazzling images or elegant code on screen. The towel you folded today, the hand you placed on someone's shoulder, the quiet perseverance with which you navigated another messy day — these are masterpieces no AI can ever replicate. The small, seemingly trivial sensations you discover in your daily life are the very gems that will make you shine brightest in the future ahead.
 
 What sensation at your fingertips left the deepest impression on you today? I'd love to talk more about that uniquely yours experience that AI could never explain. Any topic will do. Next time, shall we explore how those small sensations might connect to massive business opportunities?
+
+---
+
+### 🔗 Sources
+
+| # | Source | URL |
+|---|--------|-----|
+| 1 | [Moravec's paradox — Wikipedia](https://en.wikipedia.org/wiki/Moravec%27s_paradox) | Definition and background of Moravec's paradox |
+| 2 | [Motor skills — Wikipedia](https://en.wikipedia.org/wiki/Motor_skills) | Human motor abilities and sensorimotor functions |
+| 3 | [Human evolution — Wikipedia](https://en.wikipedia.org/wiki/Human_evolution) | Evolution of human sensory and motor capabilities |
+| 4 | [Knowledge worker — Wikipedia](https://en.wikipedia.org/wiki/Knowledge_worker) | Knowledge workers and knowledge-based work |
+| 5 | [Technological unemployment — Wikipedia](https://en.wikipedia.org/wiki/Technological_unemployment) | Unemployment caused by technological advancement |
+| 6 | [Humanities — Wikipedia](https://en.wikipedia.org/wiki/Humanities) | Humanities and humanistic thinking |
