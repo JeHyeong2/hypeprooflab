@@ -71,17 +71,16 @@ AI 에이전트가 메인스트림이 될지는 문제가 아니다. NVIDIA의 �
 | # | 출처 | 확신도 |
 |---|------|--------|
 | 1 | [Trivy Security Scanner GitHub Actions Hijacked in Supply Chain Attack](https://thehackernews.com/2026/03/trivy-security-scanner-github-actions.html) | 🟢 Observed |
-| 2 | [Supply Chain Attacks Now Target Security Tools Directly](https://techcrunch.com/2026/03/22/supply-chain-attacks-target-security-tools/) | 🔵 Supported |
-| 3 | [NVIDIA Unveils OpenClaw as "The New Computer" at Annual AI Conference](https://nationaltoday.com/us/ca/san-jose/san-jose/news/2026/03/21/nvidia-unveils-openclaw-as-the-new-computer-at-annual-ai-conference/) | 🟢 Observed |
-| 4 | [NVIDIA Announces NemoClaw Enterprise AI Agent Platform](https://nvidianews.nvidia.com/news/nvidia-announces-nemoclaw) | 🟢 Observed |
-| 5 | [President Donald J. Trump Unveils National AI Legislative Framework](https://www.whitehouse.gov/articles/2026/03/president-donald-j-trump-unveils-national-ai-legislative-framework/) | 🟢 Observed |
-| 6 | [OpenAI and Google employees rush to Anthropic's defense in DOD lawsuit](https://techcrunch.com/2026/03/09/openai-and-google-employees-rush-to-anthropics-defense-in-dod-lawsuit/) | 🔵 Supported |
-| 7 | [The best AI investment might be in energy tech](https://techcrunch.com/2026/03/20/the-best-ai-investment-might-be-in-energy-tech/) | 🟡 Speculative |
-| 8 | [Meta's AI Infrastructure Contradictions](https://www.artificialintelligence-news.com/) | 🔵 Supported |
-| 9 | [Google's AI grew 258% while OpenAI and Anthropic fought in court](https://ucstrategies.com/news/googles-ai-grew-258-while-openai-and-anthropic-fought-in-court/) | 🔵 Supported |
-| 10 | [Cursor vs WindSurf vs Claude Code in 2026: The Honest Comparison](https://dev.to/pockit_tools/cursor-vs-windsurf-vs-claude-code-in-2026-the-honest-comparison-after-using-all-three-3gof) | 🟢 Observed |
-| 11 | [Announcing the Colab MCP Server](https://developers.googleblog.com/announcing-the-colab-mcp-server-connect-any-ai-agent-to-google-colab/) | 🟢 Observed |
-| 12 | [2026 MCP Roadmap](http://blog.modelcontextprotocol.io/posts/2026-mcp-roadmap/) | 🟢 Observed |
+| 2 | [NVIDIA Unveils OpenClaw as "The New Computer" at Annual AI Conference](https://nationaltoday.com/us/ca/san-jose/san-jose/news/2026/03/21/nvidia-unveils-openclaw-as-the-new-computer-at-annual-ai-conference/) | 🟢 Observed |
+| 3 | [NVIDIA Announces NemoClaw Enterprise AI Agent Platform](https://nvidianews.nvidia.com/news/nvidia-announces-nemoclaw) | 🟢 Observed |
+| 4 | [President Donald J. Trump Unveils National AI Legislative Framework](https://www.whitehouse.gov/articles/2026/03/president-donald-j-trump-unveils-national-ai-legislative-framework/) | 🟢 Observed |
+| 5 | [OpenAI and Google employees rush to Anthropic's defense in DOD lawsuit](https://techcrunch.com/2026/03/09/openai-and-google-employees-rush-to-anthropics-defense-in-dod-lawsuit/) | 🔵 Supported |
+| 6 | [The best AI investment might be in energy tech](https://techcrunch.com/2026/03/20/the-best-ai-investment-might-be-in-energy-tech/) | 🟡 Speculative |
+| 7 | [Meta's AI Infrastructure Contradictions](https://www.artificialintelligence-news.com/) | 🔵 Supported |
+| 8 | [Google's AI grew 258% while OpenAI and Anthropic fought in court](https://ucstrategies.com/news/googles-ai-grew-258-while-openai-and-anthropic-fought-in-court/) | 🔵 Supported |
+| 9 | [Cursor vs WindSurf vs Claude Code in 2026: The Honest Comparison](https://dev.to/pockit_tools/cursor-vs-windsurf-vs-claude-code-in-2026-the-honest-comparison-after-using-all-three-3gof) | 🟢 Observed |
+| 10 | [Announcing the Colab MCP Server](https://developers.googleblog.com/announcing-the-colab-mcp-server-connect-any-ai-agent-to-google-colab/) | 🟢 Observed |
+| 11 | [2026 MCP Roadmap](http://blog.modelcontextprotocol.io/posts/2026-mcp-roadmap/) | 🟢 Observed |
 
 **확신도 기준:**
 - 🟢 Observed: 직접 확인 가능한 사실 (공식 발표, 제품 페이지)
