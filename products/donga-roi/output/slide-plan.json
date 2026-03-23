@@ -1,0 +1,159 @@
+{
+  "meta": {
+    "project": "donga-roi",
+    "narrative_structure": "SCQA",
+    "slide_count": 12,
+    "theme": "navy-coral",
+    "generated": "2026-03-23"
+  },
+  "audience_mapping": {
+    "concerns": [
+      "C1: AI 교육이 동아일보 브랜드에 맞는가?",
+      "C2: 투자 대비 수익이 현실적인가? 초기 비용은?",
+      "C3: 경쟁사가 이미 하고 있지 않은가?",
+      "C4: 우리 조직이 운영할 역량이 있는가?",
+      "C5: 실패했을 때 브랜드 리스크는?"
+    ],
+    "questions": [
+      "Q1: 왜 지금? 타이밍의 근거는?",
+      "Q2: 매출이 언제부터? BEP는?",
+      "Q3: 파일럿 규모와 비용은?",
+      "Q4: 레퍼런스 사례가 있는가?",
+      "Q5: 동아일보만의 차별점은?"
+    ]
+  },
+  "slides": [
+    {
+      "id": "s01",
+      "scqa_phase": "COVER",
+      "action_title": "동아일보가 K-12 AI 교육 시장을 선점할 기회",
+      "layout": "cover",
+      "spec_sections": [1],
+      "content_notes": "Program name: Future AI Leader's Academy. Subtitle: '코딩하는 아이에서 AI를 지휘하는 아이로 — 부모와 함께 만드는 4시간의 관점 전환'. Partner: Filamentree × 동아일보. Date: 2026.03",
+      "images": ["logo"],
+      "addressesConcern": ["C1"],
+      "answersQuestion": []
+    },
+    {
+      "id": "s02",
+      "scqa_phase": "SITUATION",
+      "action_title": "AI 교육 시장은 2030년까지 6배 성장하고 학부모 93%가 필수로 인식한다",
+      "layout": "stat_cards",
+      "spec_sections": [2],
+      "content_notes": "3 stat cards: (1) 글로벌 $6.9B → $43B, CAGR 41% (2) 한국 1,500억 → 1.5조, 10배 성장 (3) 학부모 93% 필수 인식. Sources: Mordor Intelligence 2025, GII/교육부, 한국경제·입소스",
+      "images": [],
+      "addressesConcern": [],
+      "answersQuestion": ["Q1"]
+    },
+    {
+      "id": "s03",
+      "scqa_phase": "SITUATION",
+      "action_title": "2026년 AI 디지털교과서 전면 도입이 수요 폭발의 변곡점이다",
+      "layout": "timeline_highlight",
+      "spec_sections": [2],
+      "content_notes": "Timeline: 2019 코딩교육 시장 1,500억 → 2025 초중등 필수화(시수 2배) → 2026 AI 디지털교과서 전면 도입 → 2030 1.5조. Highlight 2026 as inflection point with callout. '왜 지금인가'에 대한 시각적 근거",
+      "images": [],
+      "addressesConcern": [],
+      "answersQuestion": ["Q1"]
+    },
+    {
+      "id": "s04",
+      "scqa_phase": "COMPLICATION",
+      "action_title": "조선일보는 이미 K-12 체험교육을 운영 중이나 동아일보는 공백이다",
+      "layout": "comparison_table",
+      "spec_sections": [2, 11],
+      "content_notes": "2-column comparison: 조선일보 (에듀조선/뉴지엄, 에버랜드 위탁, 에듀투어, 신한은행 캠프 — 운영 중) vs 동아일보 (K-12 AI 체험교육 = 공백). Bottom callout: '빈 칸을 먼저 채우는 언론사가 시장을 선점한다'",
+      "images": [],
+      "addressesConcern": ["C3"],
+      "answersQuestion": ["Q5"]
+    },
+    {
+      "id": "s05",
+      "scqa_phase": "COMPLICATION",
+      "action_title": "기존 코딩 교육은 AI 시대에 맞지 않고 부모 참여형은 전무하다",
+      "layout": "matrix",
+      "spec_sections": [11],
+      "content_notes": "Competitive matrix: rows = EBS AI단추, 코드잇, SW캠프(네이버), Roblox캠프. cols = AI 통합 / 오프라인 체험 / 부모 참여 / 4시간 완결. All competitors miss 2+ columns. Our position: 4개 모두 충족 (유일). Moat: Co-Founding 모델",
+      "images": [],
+      "addressesConcern": ["C3"],
+      "answersQuestion": ["Q5"]
+    },
+    {
+      "id": "s06",
+      "scqa_phase": "ANSWER",
+      "action_title": "부모-자녀 Co-Founding 모델로 4시간 만에 AI 게임을 완성한다",
+      "layout": "process_flow",
+      "spec_sections": [7],
+      "content_notes": "4-part flow: Part 1 관점의 전환(40min) → Part 2 협업과 조율(50min) → Part 3 AI 지휘(90min) → Part 4 성취 공유(60min). Role triangle: 자녀=Visionary, 부모=Integrator, AI=Executor. Tagline: '코딩은 AI가 합니다. 아이는 무엇을 할지 결정만 합니다.'",
+      "images": ["education"],
+      "addressesConcern": ["C1"],
+      "answersQuestion": ["Q5"]
+    },
+    {
+      "id": "s07",
+      "scqa_phase": "ANSWER",
+      "action_title": "Year 1은 3개 핵심 채널로 시작하고 Year 2에 10개로 확장한다",
+      "layout": "channel_cards",
+      "spec_sections": [3],
+      "content_notes": "3 primary cards: C01 직영 B2C (20만원/팀, 15-20팀, 마진 51-59%) / C03 기업 B2B (500-800만원/회, 마진 40-52%) / C08 지자체 B2G (300-500만원/회, 마진 35-45%). Below: Year 2 expansion strip — C02, C04-C07, C09, C10 with Year 2 매출 목표 3.73억",
+      "images": [],
+      "addressesConcern": ["C2"],
+      "answersQuestion": ["Q3"]
+    },
+    {
+      "id": "s08",
+      "scqa_phase": "ANSWER",
+      "action_title": "초기 투자 1,700만 원으로 목표 순이익률 57%를 달성한다",
+      "layout": "waterfall_chart",
+      "spec_sections": [4],
+      "content_notes": "Waterfall: 초기투자 1,700만 + 운영비 4,110만 = 총비용 5,810만 | 매출 1.34억 → 순이익 7,590만 (57%). Below: 3-scenario comparison — 보수적 27% / 목표 57% / 낙관적 62%. Callout: 초기 투자 50M 이하 검증 가능 (success_criteria 충족)",
+      "images": [],
+      "addressesConcern": ["C2"],
+      "answersQuestion": ["Q2", "Q3"]
+    },
+    {
+      "id": "s09",
+      "scqa_phase": "ANSWER",
+      "action_title": "착수 6개월 차인 8월에 BEP를 달성하고 이후 월 1,000만 원 이상 수익이 발생한다",
+      "layout": "bep_chart",
+      "spec_sections": [5],
+      "content_notes": "Dual-line chart: 월별 누적 매출 vs 누적 비용, 3월~2월(Year 1). Crossover at 8월 (매출 4,000만 > 비용 3,740만). BEP 전제 callout: (1) C01 NPS 85%+ → 정기화, (2) C03 기업 계약 2건+(Q2), (3) 초기투자 3월 집중 집행",
+      "images": [],
+      "addressesConcern": ["C2"],
+      "answersQuestion": ["Q2"]
+    },
+    {
+      "id": "s10",
+      "scqa_phase": "ANSWER",
+      "action_title": "동아일보는 신규 투자 0원으로 기존 자산만 활용하여 연 5,000만 원 이상 가치를 얻는다",
+      "layout": "two_column_table",
+      "spec_sections": [6, 9],
+      "content_notes": "Left: 동아가 제공하는 것 (실비용 0원) — 브랜드 사용(광고환산 5,000만+), 미디어센터(기존시설), 어린이동아 5.9만 DB, DBR에듀 영업망, 지역총국. Right: 동아가 얻는 것 — 수수료 Y1 1,340만/Y2 3,730만, 구독이탈방어 4,000만+, AI교육 브랜드, 콘텐츠 자산, 기업 고객 접점",
+      "images": [],
+      "addressesConcern": ["C1", "C2", "C5"],
+      "answersQuestion": []
+    },
+    {
+      "id": "s11",
+      "scqa_phase": "ANSWER",
+      "action_title": "실리콘밸리·CERN 출신 6인의 전문가 팀이 실행을 책임진다",
+      "layout": "team_grid",
+      "spec_sections": [10, 13],
+      "content_notes": "6-person grid: Jay Lee (Program Director, Sonatus PM/Founding Engineer), Ryan Kim (R&D Lead, CERN Ph.D/퀀트), JY Shin (Curriculum Lead, AI/ML Engineer), Kiwon Nam (Marketing, GWU 심리학), BH Tae (Research, CERN CMS), TJ Kang (Operations, 前 창업자). Bottom: 워크숍 실적 — 진행 완료, 학생 게임 4개 URL, 학부모 추천사",
+      "images": ["team"],
+      "addressesConcern": ["C4"],
+      "answersQuestion": ["Q4"]
+    },
+    {
+      "id": "s12",
+      "scqa_phase": "ANSWER",
+      "action_title": "3월 MOU 체결과 3/28 파일럿이 500만 원 이하로 검증하는 첫 단계이다",
+      "layout": "roadmap_ask",
+      "spec_sections": [8, 14],
+      "content_notes": "Top: 4-phase roadmap — Phase 1 파일럿 검증(Q2) → Phase 2 채널 다각화(Q3-Q4) → Phase 3 스케일링(2027 H1) → Phase 4 프리미엄(2027 H2). Bottom: 요청사항 — (1) MOU 3월 첫째주, (2) 미디어센터 대관 3/28, (3) 어린이동아 홍보, (4) 정기화 승인(4월 NPS 리뷰 후). Callout: 파일럿 비용 500만 원 이하, 리스크 최소화",
+      "images": ["logo"],
+      "addressesConcern": ["C5"],
+      "answersQuestion": ["Q3"]
+    }
+  ]
+}

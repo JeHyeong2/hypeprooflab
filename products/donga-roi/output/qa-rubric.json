@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "pass_threshold": 7,
+  "axes": [
+    {
+      "id": "text_fit",
+      "name": "Text Fit",
+      "description": "No text overflow, truncation, or bad line breaks. All text readable.",
+      "weight": 2
+    },
+    {
+      "id": "layout_balance",
+      "name": "Layout Balance",
+      "description": "Elements evenly spaced. No large empty areas or crowding. Visual hierarchy clear.",
+      "weight": 2
+    },
+    {
+      "id": "color_contrast",
+      "name": "Color & Contrast",
+      "description": "All text visible against background. No invisible text. Consistent palette.",
+      "weight": 2
+    },
+    {
+      "id": "image_quality",
+      "name": "Image Quality",
+      "description": "No white bounding boxes, stretched images, or missing placeholders. Photos clean.",
+      "weight": 1
+    },
+    {
+      "id": "data_accuracy",
+      "name": "Data Accuracy",
+      "description": "Numbers match SPEC. No placeholder text. Dates correct (TBD where needed).",
+      "weight": 1
+    },
+    {
+      "id": "professionalism",
+      "name": "Professionalism",
+      "description": "Would a 50s exec take this seriously? Clean, corporate, no amateur elements.",
+      "weight": 2
+    }
+  ],
+  "scoring": "1-10 per axis. Weighted average must >= pass_threshold. Any axis < 5 = auto-fail."
+}

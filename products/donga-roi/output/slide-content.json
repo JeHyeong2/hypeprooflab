@@ -1,0 +1,860 @@
+{
+  "meta": {
+    "project": "donga-roi",
+    "source": "slide-plan.json + SPEC.md",
+    "text_limits": {
+      "action_title": 40,
+      "subtitle": 30,
+      "stat_label": 10,
+      "bullet": 20,
+      "table_cell": 14,
+      "source": 60
+    },
+    "narrative_structure": "SCQA",
+    "generated": "2026-03-23"
+  },
+  "slides": [
+    {
+      "id": "s01",
+      "layout": "cover",
+      "action_title": "AI 교육의 빈 칸, 동아일보가 채운다",
+      "subtitle": "Future AI Leader's Academy",
+      "body": {
+        "tagline": "코딩하는 아이에서 AI를 지휘하는 아이로",
+        "sub_tagline": "부모와 함께 만드는 4시간의 관점 전환",
+        "partner": "Filamentree × 동아일보",
+        "date": "2026.03"
+      },
+      "images": [
+        "logo"
+      ],
+      "source": null,
+      "so_what": "조선은 이미 뛰고 있다 — 동아가 선점할 마지막 창이 열려 있다",
+      "addresses": [
+        "C1"
+      ]
+    },
+    {
+      "id": "s02",
+      "layout": "stat_cards",
+      "action_title": "AI 교육에 돈이 몰리고 학부모 지갑이 열린다",
+      "subtitle": null,
+      "body": {
+        "cards": [
+          {
+            "stat": "$7B → $43B",
+            "label": "글로벌 시장",
+            "detail": "CAGR 41%",
+            "so_what": "5년 내 6배 — 지금 진입해야 파도를 탄다"
+          },
+          {
+            "stat": "1500억→1.5조",
+            "label": "한국 시장",
+            "detail": "10배 성장",
+            "so_what": "국내만 1조 원이 새로 생긴다"
+          },
+          {
+            "stat": "93%",
+            "label": "학부모 인식",
+            "detail": "필수 역량",
+            "so_what": "수요가 아니라 지불 의사가 확인됐다"
+          }
+        ]
+      },
+      "images": [],
+      "source": "Mordor Intelligence 2025, GII/교육부, 한국경제·입소스",
+      "so_what": "시장과 수요가 동시 폭발 — 진입 타이밍만 남았다",
+      "addresses": [
+        "Q1"
+      ]
+    },
+    {
+      "id": "s03",
+      "layout": "timeline_highlight",
+      "action_title": "2026년 AI 교과서 도입이 수요 폭발의 방아쇠다",
+      "subtitle": null,
+      "body": {
+        "milestones": [
+          {
+            "year": "2019",
+            "event": "코딩교육 시장 1,500억",
+            "type": "past"
+          },
+          {
+            "year": "2025",
+            "event": "초중등 필수화, 시수 2배",
+            "type": "past"
+          },
+          {
+            "year": "2026",
+            "event": "AI 디지털교과서 전면 도입",
+            "type": "highlight",
+            "so_what": "학부모 불안이 구매 행동으로 바뀌는 해"
+          },
+          {
+            "year": "2030",
+            "event": "시장 규모 1.5조 원",
+            "type": "future"
+          }
+        ],
+        "callout": "1년 늦으면 경쟁사가 채운다 — 2026년이 진입 적기"
+      },
+      "images": [],
+      "source": "교육부 2025, GII",
+      "so_what": "교과서가 바뀌면 부모가 움직인다 — 올해가 변곡점이다",
+      "addresses": [
+        "Q1"
+      ]
+    },
+    {
+      "id": "s04",
+      "layout": "comparison_table",
+      "action_title": "조선일보는 이미 뛰고 있고 동아일보는 아직 공백이다",
+      "subtitle": null,
+      "body": {
+        "columns": [
+          {
+            "header": "조선일보",
+            "status": "운영 중",
+            "items": [
+              "에듀조선(뉴지엄)",
+              "에버랜드 위탁",
+              "에듀투어",
+              "신한은행 캠프"
+            ]
+          },
+          {
+            "header": "동아일보",
+            "status": "공백",
+            "items": [
+              "K-12 AI 체험교육 없음"
+            ]
+          }
+        ],
+        "callout": "빈 칸을 먼저 채우는 언론사가 시장을 선점한다",
+        "so_what": "조선은 4개를 굴린다 — 동아의 공백이 길어지면 격차가 된다"
+      },
+      "images": [],
+      "source": "에듀조선 공개 프로그램 기준 2025",
+      "so_what": "경쟁사가 하는데 우리가 안 하면, 안 한 것이 아니라 뒤처진 것이다",
+      "addresses": [
+        "C3",
+        "Q5"
+      ]
+    },
+    {
+      "id": "s05",
+      "layout": "matrix",
+      "action_title": "부모 참여형 AI 교육은 시장에 하나도 없다",
+      "subtitle": null,
+      "body": {
+        "row_header": "경쟁사",
+        "col_headers": [
+          "AI 통합",
+          "오프라인",
+          "부모 참여",
+          "단일 완결"
+        ],
+        "rows": [
+          {
+            "name": "EBS AI단추",
+            "cells": [
+              "X",
+              "X",
+              "X",
+              "X"
+            ],
+            "gap": "온라인 무료, 체험 없음"
+          },
+          {
+            "name": "코드잇",
+            "cells": [
+              "X",
+              "X",
+              "X",
+              "X"
+            ],
+            "gap": "코딩 강의, AI 미통합"
+          },
+          {
+            "name": "SW캠프(네이버)",
+            "cells": [
+              "X",
+              "O",
+              "X",
+              "O"
+            ],
+            "gap": "경쟁률 높음, 단발성"
+          },
+          {
+            "name": "Roblox캠프",
+            "cells": [
+              "X",
+              "O",
+              "X",
+              "X"
+            ],
+            "gap": "플랫폼 종속, AI 없음"
+          },
+          {
+            "name": "FALA (우리)",
+            "cells": [
+              "O",
+              "O",
+              "O",
+              "O"
+            ],
+            "gap": null
+          }
+        ],
+        "callout": "4축 모두 충족하는 프로그램은 우리뿐이다",
+        "so_what": "Co-Founding은 구조적 차별점 — 동아가 잡으면 후발 모방이 어렵다"
+      },
+      "images": [],
+      "source": "공개 프로그램 비교 분석 2025",
+      "so_what": "경쟁사가 없다는 것은 선점 기회이자 진입 장벽을 세울 기회다",
+      "addresses": [
+        "C3",
+        "Q5"
+      ]
+    },
+    {
+      "id": "s06",
+      "layout": "process_flow",
+      "action_title": "4시간 만에 부모-자녀가 AI 게임을 완성한다",
+      "subtitle": null,
+      "body": {
+        "steps": [
+          {
+            "part": "Part 1",
+            "title": "관점의 전환",
+            "duration": "40분",
+            "detail": "AI 데모, 토론",
+            "skill": "맥락 설계",
+            "so_what": "'코딩'이 아닌 '지휘'가 핵심임을 체감시킨다"
+          },
+          {
+            "part": "Part 2",
+            "title": "협업과 조율",
+            "duration": "50분",
+            "detail": "게임 분석, 기획서",
+            "skill": "의사결정",
+            "so_what": "부모-자녀가 공동 창업자로 역할을 나눈다"
+          },
+          {
+            "part": "Part 3",
+            "title": "AI 지휘",
+            "duration": "90분",
+            "detail": "실제 게임 제작",
+            "skill": "협업 리더십",
+            "so_what": "코딩 한 줄 없이 실제 플레이 가능한 게임이 나온다"
+          },
+          {
+            "part": "Part 4",
+            "title": "성취 공유",
+            "duration": "60분",
+            "detail": "시연회, 수료식",
+            "skill": "발표/소통",
+            "so_what": "성취감이 SNS 공유와 재구매로 직결된다"
+          }
+        ],
+        "roles": {
+          "child": "Visionary — 아이디어, AI 지휘",
+          "parent": "Integrator — 구조화, 현실 감각",
+          "ai": "Executor — 코드 작성"
+        },
+        "tagline": "코딩은 AI가 합니다. 아이는 결정만 합니다.",
+        "so_what": "'미래 리더 육성' — 동아 브랜드 방향과 정확히 부합한다"
+      },
+      "images": [
+        "education"
+      ],
+      "source": null,
+      "addresses": [
+        "C1",
+        "Q5"
+      ]
+    },
+    {
+      "id": "s07",
+      "layout": "channel_cards",
+      "action_title": "3개 채널로 시작해 10개로 확장하는 구조다",
+      "subtitle": null,
+      "body": {
+        "primary_channels": [
+          {
+            "code": "C01",
+            "name": "직영 B2C",
+            "model": "미디어센터 정기 워크숍",
+            "price": "20만 원/팀",
+            "capacity": "15~20팀",
+            "revenue": "300~400만/회",
+            "margin": "51~59%",
+            "so_what": "대관비 0원 → 첫 회부터 흑자 구조"
+          },
+          {
+            "code": "C03",
+            "name": "기업 B2B",
+            "model": "CSR 임직원 자녀 워크숍",
+            "price": "500~800만/회",
+            "capacity": "20~30팀",
+            "revenue": "500~800만/회",
+            "margin": "40~52%",
+            "so_what": "DBR에듀 기업망으로 영업 비용 0"
+          },
+          {
+            "code": "C08",
+            "name": "지자체 B2G",
+            "model": "AI 교육 위탁",
+            "price": "300~500만/회",
+            "capacity": "10~15팀",
+            "revenue": "300~500만/회",
+            "margin": "35~45%",
+            "so_what": "지역총국 공문 한 통으로 접촉 가능"
+          }
+        ],
+        "expansion_strip": {
+          "label": "Year 2 확장",
+          "channels": [
+            "C02 과학동아",
+            "C04 학교방문",
+            "C05 강사양성",
+            "C06 어린이동아",
+            "C07 테마파크",
+            "C09 IT프리미엄",
+            "C10 에듀투어"
+          ],
+          "year2_target": "3억 7,300만 원"
+        },
+        "so_what": "10개 채널 모두 동아 기존 자산과 연결 — 새로 만들 것이 없다"
+      },
+      "images": [],
+      "source": null,
+      "addresses": [
+        "C2",
+        "Q3"
+      ]
+    },
+    {
+      "id": "s08",
+      "layout": "case_scenarios",
+      "action_title": "케이스마다 동아 역할과 수익 구조가 다르다",
+      "subtitle": null,
+      "body": {
+        "cases": [
+          {
+            "name": "기업 CSR",
+            "icon": "B2B",
+            "target": "임직원 자녀 20~30팀",
+            "venue": "기업 연수원",
+            "cost_bearer": "기업 전액",
+            "donga_role": "DBR에듀 → 기업 소개",
+            "donga_revenue": "매출 10% (50~80만)",
+            "extra_value": "기업 고객 접점 확보"
+          },
+          {
+            "name": "소아암병동 봉사",
+            "icon": "ESG",
+            "target": "환아+보호자 8~10팀",
+            "venue": "병원 강당",
+            "cost_bearer": "동아+기업 후원",
+            "donga_role": "보도 + AI 나눔 브랜딩",
+            "donga_revenue": "브랜드 가치 (ESG)",
+            "extra_value": "'AI 교육=동아' 이미지"
+          },
+          {
+            "name": "지자체 위탁",
+            "icon": "B2G",
+            "target": "지역 초등생 10~15팀",
+            "venue": "구민회관·도서관",
+            "cost_bearer": "지자체 예산",
+            "donga_role": "총국 공문 발송 + 보도",
+            "donga_revenue": "매출 10% (30~50만)",
+            "extra_value": "지역 구독자 접점"
+          }
+        ],
+        "callout": "동아는 연결만 하면 된다 — 운영은 Filamentree가 전담한다",
+        "so_what": "기존 부서가 기존 업무 범위에서 연결만 해주면 매출이 생긴다"
+      },
+      "images": [],
+      "source": null,
+      "addresses": [
+        "C4",
+        "Q5"
+      ]
+    },
+    {
+      "id": "s09",
+      "layout": "donga_timetable",
+      "action_title": "동아는 월별로 이것만 하면 된다",
+      "subtitle": null,
+      "body": {
+        "timeline": [
+          {
+            "month": "3월",
+            "action": "MOU 체결 + 대관 확정",
+            "dept": "전략기획실",
+            "effort": "low"
+          },
+          {
+            "month": "4월",
+            "action": "어린이동아 홍보 게재",
+            "dept": "편집부",
+            "effort": "low"
+          },
+          {
+            "month": "4월",
+            "action": "NPS 리뷰 → 정기화 승인",
+            "dept": "전략기획실",
+            "effort": "low"
+          },
+          {
+            "month": "5월",
+            "action": "DBR에듀 기업 3곳 소개",
+            "dept": "DBR에듀",
+            "effort": "medium"
+          },
+          {
+            "month": "6월",
+            "action": "미디어센터 정기 대관",
+            "dept": "시설관리",
+            "effort": "low"
+          },
+          {
+            "month": "7월",
+            "action": "지역총국 지자체 공문",
+            "dept": "총국",
+            "effort": "low"
+          },
+          {
+            "month": "8월",
+            "action": "과학동아AiR 번들 협의",
+            "dept": "동아사이언스",
+            "effort": "medium"
+          },
+          {
+            "month": "하반기",
+            "action": "소아암병동 사회공헌 1회",
+            "dept": "사회공헌팀",
+            "effort": "medium"
+          }
+        ],
+        "callout": "새로 만드는 것 없이, 기존 부서가 기존 업무 안에서 처리 가능",
+        "so_what": "동아 전체 공수는 월 1~2건 연결 수준 — 전담 인력 불필요"
+      },
+      "images": [],
+      "source": null,
+      "addresses": [
+        "C4",
+        "Q1"
+      ]
+    },
+    {
+      "id": "s10",
+      "layout": "waterfall_chart",
+      "action_title": "1,700만 원 투자로 순이익률 57%를 만든다",
+      "subtitle": null,
+      "body": {
+        "waterfall": [
+          {
+            "label": "초기 투자",
+            "value": 1700,
+            "type": "cost",
+            "so_what": "성공 기준 5,000만 원의 1/3 수준"
+          },
+          {
+            "label": "운영비",
+            "value": 4110,
+            "type": "cost",
+            "so_what": "변동비 중심 — 매출 없으면 비용도 줄어든다"
+          },
+          {
+            "label": "총비용",
+            "value": 5810,
+            "type": "subtotal"
+          },
+          {
+            "label": "매출",
+            "value": 13400,
+            "type": "revenue",
+            "so_what": "8개 채널 가동 시 목표치"
+          },
+          {
+            "label": "순이익",
+            "value": 7590,
+            "type": "profit",
+            "so_what": "교육업 평균 마진 30%의 2배"
+          }
+        ],
+        "unit": "만 원",
+        "scenarios": [
+          {
+            "name": "보수적",
+            "revenue": "8,000만",
+            "margin": "27%",
+            "premise": "C01/C03만 운영",
+            "so_what": "최악에도 2,190만 순이익"
+          },
+          {
+            "name": "목표",
+            "revenue": "1.34억",
+            "margin": "57%",
+            "premise": "8개 채널 가동",
+            "so_what": "투자 대비 4.5배 회수"
+          },
+          {
+            "name": "낙관적",
+            "revenue": "1.7억",
+            "margin": "62%",
+            "premise": "만석+C09 조기가동",
+            "so_what": "Year 2 확장의 실탄 확보"
+          }
+        ],
+        "callout": "보수적으로 잡아도 흑자 — 손해 볼 구조가 아니다",
+        "so_what": "동아 투자분 0원 — 리스크는 전적으로 Filamentree가 진다"
+      },
+      "images": [],
+      "source": "SPEC 4.2~4.5 기준, 2026 예산안",
+      "addresses": [
+        "C2",
+        "Q2",
+        "Q3"
+      ]
+    },
+    {
+      "id": "s11",
+      "layout": "bep_chart",
+      "action_title": "8월에 BEP를 넘기고 월 1,000만 원씩 번다",
+      "subtitle": null,
+      "body": {
+        "chart_data": [
+          {
+            "month": "3월",
+            "cum_revenue": 400,
+            "cum_cost": 2340,
+            "cum_pnl": -1940,
+            "status": "투자기"
+          },
+          {
+            "month": "4월",
+            "cum_revenue": 800,
+            "cum_cost": 2560,
+            "cum_pnl": -1760,
+            "status": "투자기"
+          },
+          {
+            "month": "5월",
+            "cum_revenue": 1200,
+            "cum_cost": 2780,
+            "cum_pnl": -1580,
+            "status": "투자기"
+          },
+          {
+            "month": "6월",
+            "cum_revenue": 2000,
+            "cum_cost": 3100,
+            "cum_pnl": -1100,
+            "status": "투자기"
+          },
+          {
+            "month": "7월",
+            "cum_revenue": 2800,
+            "cum_cost": 3420,
+            "cum_pnl": -620,
+            "status": "회수기"
+          },
+          {
+            "month": "8월",
+            "cum_revenue": 4000,
+            "cum_cost": 3740,
+            "cum_pnl": 260,
+            "status": "BEP"
+          },
+          {
+            "month": "9월",
+            "cum_revenue": 5600,
+            "cum_cost": 4160,
+            "cum_pnl": 1440,
+            "status": "수익기"
+          },
+          {
+            "month": "12월",
+            "cum_revenue": 10000,
+            "cum_cost": 5400,
+            "cum_pnl": 4600,
+            "status": "수익기"
+          },
+          {
+            "month": "2월",
+            "cum_revenue": 13400,
+            "cum_cost": 5810,
+            "cum_pnl": 7590,
+            "status": "수익기"
+          }
+        ],
+        "unit": "만 원",
+        "bep_highlight": {
+          "month": "8월",
+          "revenue": 4000,
+          "cost": 3740,
+          "message": "누적 매출이 누적 비용을 넘는다",
+          "so_what": "6개월 BEP는 교육 사업 중 최단 수준이다"
+        },
+        "premises": [
+          "C01 NPS 85%+ → 정기화",
+          "C03 기업 2건+ (Q2)",
+          "초기투자 3월 집중 집행"
+        ],
+        "so_what": "BEP 이후 매월 순이익 누적 — 채널 추가 시 기울기가 가팔라진다"
+      },
+      "images": [],
+      "source": "목표 시나리오 기준 (8개 채널)",
+      "addresses": [
+        "C2",
+        "Q2"
+      ]
+    },
+    {
+      "id": "s12",
+      "layout": "two_column_table",
+      "action_title": "동아는 가진 것만 빌려주고 수익을 얻는다",
+      "subtitle": null,
+      "body": {
+        "left": {
+          "header": "동아가 제공하는 것",
+          "sub_header": "실비용 0원",
+          "rows": [
+            {
+              "item": "브랜드 사용",
+              "value": "환산 5,000만+",
+              "real_cost": "0원",
+              "so_what": "이미 가진 자산이다"
+            },
+            {
+              "item": "미디어센터",
+              "value": "연 200만 환산",
+              "real_cost": "0원",
+              "so_what": "유휴 시간을 수익화"
+            },
+            {
+              "item": "어린이동아 DB",
+              "value": "5.9만 가구",
+              "real_cost": "0원",
+              "so_what": "이탈 방어에도 쓰인다"
+            },
+            {
+              "item": "DBR에듀 영업망",
+              "value": "기업 접점",
+              "real_cost": "0원",
+              "so_what": "B2B 채널이 열린다"
+            },
+            {
+              "item": "지역총국",
+              "value": "지자체 접촉",
+              "real_cost": "0원",
+              "so_what": "B2G 채널이 열린다"
+            }
+          ]
+        },
+        "right": {
+          "header": "동아가 얻는 것",
+          "sub_header": "투자 없이 수익",
+          "rows": [
+            {
+              "item": "수익 배분",
+              "y1": "1,340만",
+              "y2": "3,730만",
+              "so_what": "매출 10% 자동 수익"
+            },
+            {
+              "item": "구독 방어",
+              "y1": "4,000만+",
+              "y2": "4,000만+",
+              "so_what": "어린이동아 이탈 차단"
+            },
+            {
+              "item": "AI 브랜드",
+              "y1": "선점",
+              "y2": "확대",
+              "so_what": "'AI 교육=동아' 각인"
+            },
+            {
+              "item": "콘텐츠",
+              "y1": "기사/영상",
+              "y2": "확대",
+              "so_what": "제작비 0원 확보"
+            },
+            {
+              "item": "기업 접점",
+              "y1": "CSR 파트너",
+              "y2": "확대",
+              "so_what": "DBR에듀 시너지"
+            }
+          ]
+        },
+        "callout": "유휴 자산을 수익으로 바꾸는 제로 리스크 구조",
+        "so_what": "새로 만들 것 없이, 가진 것만 빌려주면 돈이 들어온다"
+      },
+      "images": [],
+      "source": "동아일보 공개 자산 기준, 광고 단가 환산",
+      "addresses": [
+        "C1",
+        "C2",
+        "C5"
+      ]
+    },
+    {
+      "id": "s13",
+      "layout": "team_grid",
+      "action_title": "실리콘밸리·CERN 출신 6인이 실행한다",
+      "subtitle": null,
+      "body": {
+        "members": [
+          {
+            "name": "Jay Lee",
+            "role": "Program Director",
+            "org": "Sonatus (실리콘밸리)",
+            "credential": "Founding Engineer, PM",
+            "image": "team[0]",
+            "so_what": "유니콘 출신 — 0→1 실행력"
+          },
+          {
+            "name": "Ryan Kim",
+            "role": "R&D Lead",
+            "org": "현직 퀀트",
+            "credential": "CERN 물리학 박사",
+            "image": "team[1]",
+            "so_what": "데이터 기반 커리큘럼 설계"
+          },
+          {
+            "name": "JY Shin",
+            "role": "Curriculum Lead",
+            "org": "Remember (AI Startup)",
+            "credential": "AI/ML, Agentic AI",
+            "image": "team[2]",
+            "so_what": "AI 교육 콘텐츠 전문"
+          },
+          {
+            "name": "Kiwon Nam",
+            "role": "Marketing",
+            "org": "GWU 심리학",
+            "credential": "글로벌 마케팅, GTM",
+            "image": null,
+            "so_what": "학부모 심리 기반 마케팅"
+          },
+          {
+            "name": "BH Tae",
+            "role": "Research Lead",
+            "org": "CERN CMS",
+            "credential": "실험물리 박사과정",
+            "image": null,
+            "so_what": "STEM 교육 콘텐츠 검증"
+          },
+          {
+            "name": "TJ Kang",
+            "role": "Operations",
+            "org": "前 창업자",
+            "credential": "워크숍 운영, 강사 관리",
+            "image": null,
+            "so_what": "현장 운영 경험 보유"
+          }
+        ],
+        "proof_points": {
+          "label": "이미 검증됨",
+          "items": [
+            "워크숍 실제 진행 완료",
+            "학생 게임 4개+ 플레이 가능",
+            "'처음으로 함께 완성했다' — 학부모"
+          ]
+        },
+        "so_what": "글로벌 경력 + 실전 워크숍 증빙 — '할 수 있는가'에 대한 답이다"
+      },
+      "images": [
+        "team"
+      ],
+      "source": null,
+      "addresses": [
+        "C4",
+        "Q4"
+      ]
+    },
+    {
+      "id": "s14",
+      "layout": "roadmap_ask",
+      "action_title": "파일럿 하나로 500만 원 이하 검증이 된다",
+      "subtitle": null,
+      "body": {
+        "roadmap": [
+          {
+            "phase": "Phase 1",
+            "title": "파일럿 검증",
+            "period": "2026 Q2",
+            "key_action": "파일럿 1회, NPS 측정",
+            "cost": "500만 원 이하",
+            "highlight": true,
+            "so_what": "데이터로 판단 — 감이 아니라 숫자"
+          },
+          {
+            "phase": "Phase 2",
+            "title": "채널 다각화",
+            "period": "2026 Q3~Q4",
+            "key_action": "C02/C03/C05 가동",
+            "cost": null,
+            "highlight": false,
+            "so_what": "파일럿 성공 시에만 확장 — 조건부"
+          },
+          {
+            "phase": "Phase 3",
+            "title": "스케일링",
+            "period": "2027 H1",
+            "key_action": "학교 10곳, 지자체 3구",
+            "cost": null,
+            "highlight": false,
+            "so_what": "강사풀 확보로 동시 다발 운영"
+          },
+          {
+            "phase": "Phase 4",
+            "title": "프리미엄",
+            "period": "2027 H2+",
+            "key_action": "테마파크, 에듀투어",
+            "cost": null,
+            "highlight": false,
+            "so_what": "Year 2 매출 3.73억 고부가 채널"
+          }
+        ],
+        "asks": [
+          {
+            "request": "MOU 체결",
+            "timing": "3월 첫째 주",
+            "detail": "동아일보 × FALA"
+          },
+          {
+            "request": "미디어센터 대관",
+            "timing": "TBD",
+            "detail": "파일럿 1회, 반일"
+          },
+          {
+            "request": "어린이동아 홍보",
+            "timing": "파일럿 2주 전",
+            "detail": "배너 + 기사 1건"
+          },
+          {
+            "request": "정기화 승인",
+            "timing": "4월",
+            "detail": "NPS 리뷰 후 결정"
+          }
+        ],
+        "callout": "실패해도 500만 원 — 브랜드 리스크 없는 소규모 테스트",
+        "so_what": "동아는 잃을 것이 없다 — 결정의 문턱이 가장 낮은 제안이다"
+      },
+      "images": [
+        "logo"
+      ],
+      "source": null,
+      "addresses": [
+        "C5",
+        "Q3"
+      ]
+    }
+  ]
+}
