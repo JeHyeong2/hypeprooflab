@@ -117,11 +117,12 @@ Identity Compass가 하는 일은 결국 이겁니다: **당신의 무의식에 
 
 ---
 
-## Sources
+## 🧭 직접 사용해보세요
 
-| # | 출처 | URL |
+Identity Compass는 저자가 직접 만든 오픈소스 프로젝트입니다.
+
+| # | 링크 | URL |
 |---|------|-----|
-| 1 | Identity Compass — GitHub (오픈소스, MIT) | https://github.com/ico1036/identity-compass |
-| 2 | Identity Compass — ClawHub | https://clawhub.ai/ico1036/identity-compass |
-| 3 | 발표 슬라이드 (AI정기세션 세미나) | https://docs.google.com/presentation/d/1ZPp-1wvPBUymamLbavj8Zmg3gfQhFzn_YayvdomC_W4 |
-| 4 | Magnetization — Wikipedia | https://en.wikipedia.org/wiki/Magnetization |
+| 1 | GitHub (오픈소스, MIT 라이선스) | https://github.com/ico1036/identity-compass |
+| 2 | ClawHub | https://clawhub.ai/ico1036/identity-compass |
+| 3 | 발표 슬라이드 (AI정기세션 세미나, 150명) | https://docs.google.com/presentation/d/1ZPp-1wvPBUymamLbavj8Zmg3gfQhFzn_YayvdomC_W4 |

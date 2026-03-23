@@ -117,11 +117,12 @@ It shows you where you were already heading.
 
 ---
 
-## Sources
+## 🧭 Try It Yourself
 
-| # | Source | URL |
-|---|--------|-----|
-| 1 | Identity Compass — GitHub (Open Source, MIT) | https://github.com/ico1036/identity-compass |
-| 2 | Identity Compass — ClawHub | https://clawhub.ai/ico1036/identity-compass |
-| 3 | Presentation Slides (AI Regular Session Seminar) | https://docs.google.com/presentation/d/1ZPp-1wvPBUymamLbavj8Zmg3gfQhFzn_YayvdomC_W4 |
-| 4 | Magnetization — Wikipedia | https://en.wikipedia.org/wiki/Magnetization |
+Identity Compass is an open-source project built by the author.
+
+| # | Link | URL |
+|---|------|-----|
+| 1 | GitHub (Open Source, MIT License) | https://github.com/ico1036/identity-compass |
+| 2 | ClawHub | https://clawhub.ai/ico1036/identity-compass |
+| 3 | Presentation Slides (AI Seminar, 150 attendees) | https://docs.google.com/presentation/d/1ZPp-1wvPBUymamLbavj8Zmg3gfQhFzn_YayvdomC_W4 |
