@@ -24,7 +24,7 @@ Sam Altman이 백만 평방피트 오피스를 임대한 이유는 단순했다.
 
 ## Python의 배신
 
-같은 날, OpenAI는 [Astral 인수를 발표](https://finance.yahoo.com/sectors/technology/articles/ai-daily-openai-targets-developer-122339312.html)했다. Python 생태계에서 떠오르는 스타 스타트업을 품에 안은 것이다. 표면적으로는 개발자 도구 강화 전략으로 보이지만, 실상은 달랐다.
+같은 날, OpenAI는 [Astral 인수를 발표](https://astral.sh/blog/openai)했다. Python 생태계에서 떠오르는 스타 스타트업을 품에 안은 것이다. 표면적으로는 개발자 도구 강화 전략으로 보이지만, 실상은 달랐다.
 
 Astral의 엔지니어들이 OpenAI Codex 부문으로 통합된다는 소식은 곧 GitHub Copilot과의 직접적인 경쟁을 의미한다. 하지만 더 주목할 점은 타이밍이다. 왜 하필 지금인가?
 
@@ -66,7 +66,7 @@ GlassWorm 공격과 함께 생각해보면 패턴이 보인다. AI 도구에 대
 |---|------|--------|
 | 1 | [OpenAI Beefs Up Staff to Take On Claude](https://www.pymnts.com/artificial-intelligence-2/2026/openai-beefs-up-staff-to-take-on-claude) (2026-03-21) | 🟢 Observed |
 | 2 | [LLM Performance Updates](https://llm-stats.com/llm-updates) | 🔵 Supported |
-| 3 | [OpenAI Targets Developer with Astral Acquisition](https://finance.yahoo.com/sectors/technology/articles/ai-daily-openai-targets-developer-122339312.html) (2026-03-21) | 🟢 Observed |
+| 3 | [Astral to Join OpenAI](https://astral.sh/blog/openai) (2026-03-21) | 🟢 Observed |
 | 4 | [GlassWorm Attack Uses Stolen GitHub Tokens](https://thehackernews.com/2026/03/glassworm-attack-uses-stolen-github.html) | 🟢 Observed |
 | 5 | [OpenClaw ChatGPT Moment Sparks AI Commoditization Concern](https://www.cnbc.com/2026/03/21/openclaw-chatgpt-moment-sparks-concern-ai-models-becoming-commodities.html) (2026-03-21) | 🟢 Observed |
 | 6 | [CISA Known Exploited Vulnerabilities Catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) | 🟢 Observed |

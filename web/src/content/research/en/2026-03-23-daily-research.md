@@ -24,7 +24,7 @@ But their miscalculation wasn't just about staffing shortages. The real problem 
 
 ## Python's Betrayal
 
-That same day, OpenAI announced the [acquisition of Astral](https://finance.yahoo.com/sectors/technology/articles/ai-daily-openai-targets-developer-122339312.html), a rising star in the Python ecosystem. On the surface, it looks like a developer tools play. In reality, it's damage control.
+That same day, OpenAI announced the [acquisition of Astral](https://astral.sh/blog/openai), a rising star in the Python ecosystem. On the surface, it looks like a developer tools play. In reality, it's damage control.
 
 Integrating Astral's engineers into the OpenAI Codex division signals a direct assault on GitHub Copilot's territory. But the timing reveals the true motivation. Why now?
 
@@ -66,7 +66,7 @@ The war has just begun.
 |---|--------|------------|
 | 1 | [OpenAI Beefs Up Staff to Take On Claude](https://www.pymnts.com/artificial-intelligence-2/2026/openai-beefs-up-staff-to-take-on-claude) (2026-03-21) | 🟢 Observed |
 | 2 | [LLM Performance Updates](https://llm-stats.com/llm-updates) | 🔵 Supported |
-| 3 | [OpenAI Targets Developer with Astral Acquisition](https://finance.yahoo.com/sectors/technology/articles/ai-daily-openai-targets-developer-122339312.html) (2026-03-21) | 🟢 Observed |
+| 3 | [Astral to Join OpenAI](https://astral.sh/blog/openai) (2026-03-21) | 🟢 Observed |
 | 4 | [GlassWorm Attack Uses Stolen GitHub Tokens](https://thehackernews.com/2026/03/glassworm-attack-uses-stolen-github.html) | 🟢 Observed |
 | 5 | [OpenClaw ChatGPT Moment Sparks AI Commoditization Concern](https://www.cnbc.com/2026/03/21/openclaw-chatgpt-moment-sparks-concern-ai-models-becoming-commodities.html) (2026-03-21) | 🟢 Observed |
 | 6 | [CISA Known Exploited Vulnerabilities Catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) | 🟢 Observed |
