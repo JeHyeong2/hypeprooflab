@@ -1,6 +1,6 @@
 # HypeProof Lab — 2026 Q2 Operational Workflow
 
-> **Version**: 3.0
+> **Version**: 4.0
 > **Created**: 2026-03-23
 > **Updated**: 2026-03-24
 > **Scope**: April 1 - June 30, 2026
@@ -27,10 +27,14 @@
 15. [KPIs per Channel](#15-kpis-per-channel)
 16. [UTM & Attribution System](#16-utm--attribution-system)
 17. [Google Calendar Integration](#17-google-calendar-integration)
-18. [First 4 Weeks Launch Plan](#18-first-4-weeks-launch-plan)
-19. [Day in the Life](#19-day-in-the-life)
-20. [Step Registry (Master List)](#20-step-registry)
-21. [Next Iteration TODO](#21-next-iteration-todo)
+18. [Offline Event Playbook](#18-offline-event-playbook)
+19. [Podcast Production Playbook](#19-podcast-production-playbook)
+20. [SANS Network CRM](#20-sans-network-crm)
+21. [Naver/Daum SEO Checklist](#21-naverdaum-seo-checklist)
+22. [First 4 Weeks Launch Plan](#22-first-4-weeks-launch-plan)
+23. [Day in the Life](#23-day-in-the-life)
+24. [Step Registry (Master List)](#24-step-registry)
+25. [Next Iteration TODO](#25-next-iteration-todo)
 
 ---
 
@@ -408,6 +412,42 @@ pie title Weekly Hours by Member (total ~44h team capacity)
     "Ryan (3-5h)" : 4
 ```
 
+### D-8: Monthly Cadence Timeline
+
+```mermaid
+gantt
+    title Monthly Cadence — HypeProof Lab Q2 2026
+    dateFormat  YYYY-MM-DD
+    axisFormat  %d
+
+    section Sprint
+    Sprint start + goal setting         :w1, 2026-04-01, 7d
+
+    section Content Push
+    Content production peak             :w2, 2026-04-08, 7d
+
+    section Feedback
+    Feedback analysis + metric review   :w3, 2026-04-15, 7d
+
+    section Review
+    Monthly review + plan next month    :w4, 2026-04-22, 7d
+
+    section Key Milestones
+    Monday: set monthly goals           :milestone, 2026-04-01, 0d
+    Mid-month KPI check (Jay)           :milestone, 2026-04-15, 0d
+    Monthly review meeting (Sun)        :milestone, 2026-04-27, 0d
+    Next month sprint starts            :milestone, 2026-04-29, 0d
+```
+
+**Monthly Rhythm Summary:**
+
+| Week | Focus | Key Activities |
+|------|-------|---------------|
+| Week 1 | Sprint Start | Set monthly goals, assign topics, calibrate channel targets. Members front-load ideation and research. |
+| Week 2 | Content Push | Peak production week. Columns, videos, podcasts, events concentrate here. Mother runs at full automation. |
+| Week 3 | Feedback Analysis | Ryan compiles mid-month metrics. Jay reviews what is working. JUNGWOO delivers domain findings. Kiwon runs post-event analysis. |
+| Week 4 | Review + Plan | Monthly review meeting (90 min, last Sunday). Set next month's 3 priorities. Update roadmap. Distribute Mirror Reports. |
+
 ---
 
 ## 1. Member Domain Map
@@ -423,6 +463,120 @@ pie title Weekly Hours by Member (total ~44h team capacity)
 | **BH** | Discord community operations | Content curation | Discord | Ph.D. Candidate, CERN |
 | **JUNGWOO** | Domain-specific AI opportunity research | Critical review ("devil's advocate") on major decisions | Research (domain), Strategic feedback | (Full-time employed) |
 | **Ryan** | Data analysis, Performance tracking, KPI dashboard | Research methodology | Analytics, Dashboard | Quant Researcher (AssetPlus) |
+
+### Member Quick Cards
+
+These cards give each member a single-glance summary of their HypeProof responsibilities. Read your card -- it is your contract with the team.
+
+#### Jay -- Quick Card
+- **Domain**: Framework + Mother ops + initiative provider
+- **Weekly hours**: 8-10h
+- **Peak days**: Mon (planning), Sun (review meeting)
+- **Key steps**: S-004, S-005, S-015, S-040, S-043, S-055, S-088, S-089, S-119, S-121, S-176-S-180, S-251-S-253
+- **Weekly deliverables**: 1 weekly focus memo, daily Mother pipeline check, content approval queue
+- **KPI I own**: overall pipeline health, member activation rate, Mother uptime (95%+)
+- **My calendar**: Mon 08:00 planning block, Sun 21:00 weekly meeting (host)
+- **If I can't deliver**: Mother auto-maintains research + deploy; post "Jay offline today" in #daily-research, escalations queue until next day
+- **My Mirror focus**: leadership patterns, decision-making style, delegation vs. control balance
+
+#### Kiwon -- Quick Card
+- **Domain**: Offline events + marketing + seed member outreach
+- **Weekly hours**: 3-5h (spikes on event weeks)
+- **Peak days**: Mon (review feedback), Sat (event days)
+- **Key steps**: S-008, S-027, S-048, S-067, S-083, S-128, S-144, S-158, S-166, S-256-S-268
+- **Weekly deliverables**: 5-10 outreach DMs, marketing copy draft, event logistics update
+- **KPI I own**: events held per month (3-4), event NPS (>40), seed members acquired via events (10)
+- **My calendar**: Mon 12:00 feedback review, Sat 10:00 event execution (when scheduled)
+- **If I can't deliver**: postpone event (never rush); outreach DMs can slip 2-3 days without impact
+- **My Mirror focus**: persuasion style, community-building instincts, marketing-psychology patterns
+
+#### JiWoong -- Quick Card
+- **Domain**: LinkedIn + SANS network + strategic consulting
+- **Weekly hours**: 3-4h
+- **Peak days**: Mon (calendar check), Thu (SANS touchpoint)
+- **Key steps**: S-009, S-030, S-049, S-062, S-080, S-084, S-129, S-138, S-145, S-153, S-159, S-279-S-283
+- **Weekly deliverables**: 2 LinkedIn posts, 1 SANS touchpoint, strategic insight memo
+- **KPI I own**: LinkedIn engagement rate (>3%), SANS active contacts (10), inbound inquiries (2/month)
+- **My calendar**: Tue 14:00 LinkedIn post #1, Thu 14:00 LinkedIn post #2 + SANS
+- **If I can't deliver**: Mother drafts LinkedIn post; SANS relationship pauses (no damage if 1-week gap)
+- **My Mirror focus**: professional positioning voice, strategic framing evolution
+
+#### JY -- Quick Card
+- **Domain**: YouTube (Vibe Coding) + tech columns
+- **Weekly hours**: 5-7h
+- **Peak days**: Mon-Wed (research + script + record)
+- **Key steps**: S-006, S-018, S-023, S-037, S-060, S-079, S-143
+- **Weekly deliverables**: 1 YouTube episode (raw recording), tech column (every other week)
+- **KPI I own**: YouTube subscribers (100 by Q2 end), avg views per video (50), CTR (>5%)
+- **My calendar**: Mon 09:30 topic research, Tue 09:00 script, Wed 09:00 record
+- **If I can't deliver**: post YouTube Short instead (lower effort); column shifts to next week
+- **My Mirror focus**: teaching style, technical communication depth, audience adaptation
+
+#### TJ -- Quick Card
+- **Domain**: Video production + podcast pipeline
+- **Weekly hours**: 5-7h
+- **Peak days**: Tue-Thu (edit + record)
+- **Key steps**: S-010, S-019, S-024-S-026, S-039, S-047, S-060-S-061, S-066, S-130, S-148, S-269-S-278
+- **Weekly deliverables**: 1 edited video, podcast episode (bi-weekly), 3-5 YouTube Shorts
+- **KPI I own**: videos published (12 in Q2), podcast episodes (6 in Q2), Shorts published (30 in Q2)
+- **My calendar**: Tue-Wed editing, Thu 14:00 podcast recording (bi-weekly), Fri 14:00 publish
+- **If I can't deliver**: skip week's video (never rush-publish); Shorts can batch on any day
+- **My Mirror focus**: storytelling patterns, production craftsmanship, editorial voice
+
+#### JeHyeong -- Quick Card
+- **Domain**: Website + SEO + Reddit + frontend development
+- **Weekly hours**: 5-7h
+- **Peak days**: Tue-Wed (sprint), Sat (deploy)
+- **Key steps**: S-020, S-028, S-031, S-045, S-054, S-063, S-069, S-075, S-082, S-095, S-131, S-140, S-147, S-157, S-160, S-246-S-247, S-284-S-290
+- **Weekly deliverables**: 3-5 sprint tasks, 1 deploy, 1 Reddit post, SEO audit
+- **KPI I own**: daily page views (50 by June), bounce rate (<60%), SEO indexed pages (100%), Naver indexing
+- **My calendar**: Mon 09:00 SEO audit, Tue-Wed sprint, Sat 12:00 deploy
+- **If I can't deliver**: Mother handles deploy; Reddit can go monthly if overloaded
+- **My Mirror focus**: builder patterns, UX sensibility, technical problem-solving approach
+
+#### BH -- Quick Card
+- **Domain**: Discord community operations
+- **Weekly hours**: 3-5h
+- **Peak days**: Mon (recap), Thu (mini-event)
+- **Key steps**: S-012, S-029, S-064, S-076, S-141, S-150, S-155, S-162-S-163, S-165
+- **Weekly deliverables**: daily Discord check-in (15-20 min), 1 discussion thread, 1 mini-event, weekly recap
+- **KPI I own**: Discord messages/week (50+), active members (15+), discussion threads/week (5+)
+- **My calendar**: Mon 08:00 + 19:00 moderation, Tue 19:00 discussion, Thu 19:00 mini-event
+- **If I can't deliver**: Discord self-moderates for 1-2 days; Jay monitors for emergencies
+- **My Mirror focus**: community facilitation style, curation instincts, engagement patterns
+
+#### JUNGWOO -- Quick Card
+- **Domain**: Domain-specific AI opportunity research + critical review
+- **Weekly hours**: 3-5h
+- **Peak days**: Tue-Wed (research), Thu (reviews)
+- **Key steps**: S-007, S-013, S-035, S-052, S-125, S-154, S-213-S-225
+- **Weekly deliverables**: 1 domain research question, research notes (3-5 pages), devil's advocate feedback (Thu)
+- **KPI I own**: domain briefs published (6 in Q2), column submissions (3 in Q2), peer reviews (1-2/week)
+- **My calendar**: Mon 10:00 topic selection, Tue-Wed research, Thu 10:00 reviews
+- **If I can't deliver**: post "dead end" brief (negative findings are still valuable); reviews can be async next day
+- **My Mirror focus**: analytical depth, contrarian thinking patterns, domain expertise evolution
+
+#### Ryan -- Quick Card
+- **Domain**: Data analysis + performance tracking + KPI dashboard
+- **Weekly hours**: 3-5h
+- **Peak days**: Mon (pull data), Sat (report)
+- **Key steps**: S-011, S-014, S-034, S-051, S-070, S-073, S-077, S-081, S-085-S-087, S-093, S-116, S-122, S-151, S-248-S-249
+- **Weekly deliverables**: weekly KPI snapshot, 1 data analysis deep-dive, UTM attribution report
+- **KPI I own**: dashboard completeness, reporting cadence (weekly without fail), data accuracy
+- **My calendar**: Mon 09:00 data pull, Wed 20:00 deep-dive, Sat 20:00 finalize report, Sun 21:25 present
+- **If I can't deliver**: Jay pulls basic metrics from Vercel/YouTube dashboards; Mother auto-collected data fills the gap
+- **My Mirror focus**: analytical rigor, data storytelling, pattern recognition
+
+#### Sebastian -- Quick Card (Pending Activation)
+- **Domain**: Architecture decisions, scalability, engineering process
+- **Weekly hours**: TBD (not yet active)
+- **Peak days**: TBD
+- **Key steps**: None assigned yet
+- **Weekly deliverables**: TBD -- expected: architecture review on major tech decisions, eng process guidance
+- **KPI I own**: TBD
+- **My calendar**: TBD
+- **If not activated**: Jay and JeHyeong cover architecture decisions; no impact on current pipeline
+- **Activation trigger**: Sebastian joins Discord; Jay assigns initial scope at next weekly meeting
 
 ---
 
@@ -638,7 +792,7 @@ Everyone has a full-time job. These budgets reflect realistic side-project hours
 | S-058 | Publish | Mother | Successful build | Run `cd web && vercel --prod --yes` | Live deployment | Automate | Per deploy |
 | S-059 | Publish | Mother | Live deployment | Verify live URL returns 200, content renders | Deployment verification | Automate | Per deploy |
 | S-060 | Publish | TJ | Approved video | Upload to YouTube with metadata | Published YouTube video | None | Per video |
-| S-061 | Publish | TJ | Approved podcast | Upload to podcast platform | Published podcast episode | None | Per episode |
+| S-061 | Publish | TJ | Approved podcast | Upload to Spotify for Podcasters | Published podcast episode | None | Per episode |
 | S-062 | Publish | JiWoong | Approved LinkedIn post | Post to LinkedIn | Published LinkedIn post | None | 2x/week |
 | S-063 | Publish | JeHyeong | Approved Reddit post | Post to target subreddits | Published Reddit post | None | 1-2x/week |
 | S-064 | Publish | BH | Published content (any channel) | Share in Discord #daily-research with discussion prompt | Discord distribution | None | Per publish |
@@ -674,6 +828,7 @@ Everyone has a full-time job. These budgets reflect realistic side-project hours
 | Reddit | JeHyeong | JY | 1-2x/week |
 | Offline Events | Kiwon | TJ | 1-2x/month |
 | SANS Network | JiWoong | Jay | Ongoing (relationship) |
+| Podcast | TJ | JY (guest host) | Bi-weekly |
 
 ---
 
@@ -984,7 +1139,7 @@ For each content type, this section specifies WHO adapts, WHEN it posts, and WHE
 | | YouTube Shorts | TJ | +2-3 days | 3-5 clips (60 sec each) | Mother suggests timestamps |
 | | Website | JeHyeong | +3 days | Embed + transcript summary page | SEO-optimized |
 | | Reddit | JeHyeong | +1 day | Post in r/vibe_coding, r/ClaudeAI | Adapt title for subreddit |
-| **Podcast Episode** | Podcast platform | TJ (upload) | Thursday 14:00 | Full audio | Spotify/Apple |
+| **Podcast Episode** | Spotify/Apple/YouTube | TJ (upload) | Thursday 14:00 | Full audio + show notes | Via Spotify for Podcasters |
 | | Discord | BH | Same day | Episode discussion thread | Include guest intro + 3 discussion Qs |
 | | Website | JeHyeong | +2 days | Summary article (800 words) | Mother drafts summary |
 | | LinkedIn | JiWoong | +1 day | Guest highlight + key quote | Tag guest if on LinkedIn |
@@ -1198,6 +1353,15 @@ If Discord is down for >1h during active work hours, all coordination moves to K
 | Conversion to paid (when available) | N/A | Track for future | Manual tracking |
 | Seed members acquired via events | 0 | 10 | Manual tracking |
 
+### Podcast (Owner: TJ)
+
+| KPI | Current | Q2 Target | Measurement |
+|-----|---------|-----------|-------------|
+| Episodes published | 0 | 6 (bi-weekly) | Manual count |
+| Avg downloads per episode | 0 | 30 | Spotify for Podcasters analytics |
+| Platform distribution | 0 | 3+ (Spotify, Apple, YouTube) | Manual verification |
+| Website embed page views | 0 | 20/episode | Vercel Analytics |
+
 ### SANS Network (Owner: JiWoong)
 
 | KPI | Current | Q2 Target | Measurement |
@@ -1273,7 +1437,7 @@ https://hypeproof-ai.xyz/<path>?utm_source=<source>&utm_medium=<medium>&utm_camp
 ### Ryan's Weekly Attribution Report Format
 
 ```
-## Weekly Attribution Report — Week of [date]
+## Weekly Attribution Report -- Week of [date]
 
 ### Traffic by Source
 | Source | Visits | % of Total | Avg Time on Site | Pages/Visit |
@@ -1285,8 +1449,8 @@ https://hypeproof-ai.xyz/<path>?utm_source=<source>&utm_medium=<medium>&utm_camp
 | direct | XX | XX% | X:XX | X.X |
 
 ### Top 5 Campaigns This Week
-1. daily-research-0401 — XX visits
-2. column-ai-agents — XX visits
+1. daily-research-0401 -- XX visits
+2. column-ai-agents -- XX visits
 3. ...
 
 ### Insight
@@ -1310,14 +1474,14 @@ https://hypeproof-ai.xyz/<path>?utm_source=<source>&utm_medium=<medium>&utm_camp
 ### Calendar Event Format
 
 ```
-[Member] Action — Expected Output
+[Member] Action -- Expected Output
 ```
 
 Examples:
-- `[JY] Record Vibe Coding demo — Raw video footage`
-- `[Kiwon] Outreach DMs — 5-10 personalized DMs sent`
-- `[Ryan] Pull weekly analytics — Raw data into tracking sheet`
-- `[ALL] Weekly Meeting — Meeting notes + next week assignments`
+- `[JY] Record Vibe Coding demo -- Raw video footage`
+- `[Kiwon] Outreach DMs -- 5-10 personalized DMs sent`
+- `[Ryan] Pull weekly analytics -- Raw data into tracking sheet`
+- `[ALL] Weekly Meeting -- Meeting notes + next week assignments`
 
 ### Sub-Calendar Structure
 
@@ -1339,10 +1503,10 @@ Examples:
 ```
 Hi [Member], here's your HypeProof week ahead:
 
-Mon: [Action] — [Expected output]
-Tue: [Action] — [Expected output]
+Mon: [Action] -- [Expected output]
+Tue: [Action] -- [Expected output]
 Wed: (no HypeProof tasks)
-Thu: [Action] — [Expected output]
+Thu: [Action] -- [Expected output]
 Fri: (no HypeProof tasks)
 Sat: (flex)
 Sun 21:00: Weekly meeting
@@ -1352,7 +1516,196 @@ Reminder: [Any upcoming deadline or event this week]
 
 ---
 
-## 18. First 4 Weeks Launch Plan
+## 18. Offline Event Playbook
+
+Kiwon's repeatable template for every offline event. Follow this checklist exactly so events scale without reinventing each time.
+
+### Offline Event Steps (S-256 to S-268)
+
+| Step | Phase | Owner | Input | Action | Output | AI Role | Frequency |
+|------|-------|-------|-------|--------|--------|---------|-----------|
+| S-256 | T-14 | Kiwon | Event concept + date | Confirm venue booking, finalize topic and format (workshop, meetup, roundtable) | Venue contract signed, event brief (1-page) | None | Per event |
+| S-257 | T-14 | Kiwon | Seed member list + SANS contacts | Build invite list (30-50 names, prioritized by likelihood to attend and seed quality) | Invite list spreadsheet with priority tiers | None | Per event |
+| S-258 | T-14 | Kiwon + Mother | Event brief | Create event marketing materials: flyer (digital), invitation message (3 variants), social teaser | Marketing asset package | Assist | Per event |
+| S-259 | T-7 | Kiwon | Invite list | Send personalized invitations (DM, not blast) to Tier 1 (top 15 names) | Invitations sent, RSVP tracking started | None | Per event |
+| S-260 | T-7 | Kiwon | Venue specs | Equipment check: projector, mic, whiteboard, wifi, power strips, adapters | Equipment checklist (pass/fail per item) | None | Per event |
+| S-261 | T-7 | Kiwon + Jay | Event brief | Draft run-of-show: minute-by-minute schedule, speaker assignments, Q&A timing | Run-of-show document (1-page) | None | Per event |
+| S-262 | T-3 | Kiwon | RSVP tracker | Final headcount confirmation; order catering if applicable (coffee, snacks minimum) | Headcount locked, catering ordered | None | Per event |
+| S-263 | T-3 | Kiwon | Headcount | Prepare name tags (printed or handwritten), print handout materials (top columns with QR codes) | Name tags + handouts ready | Assist | Per event |
+| S-264 | T-3 | Kiwon | Weather + transit info | Draft backup plan: if venue fails, backup location or convert to online (Zoom/Google Meet link ready) | Backup plan document | None | Per event |
+| S-265 | T-1 | Kiwon + TJ | Venue access | Venue setup test: projector works, mic check, seating arrangement, signage placement | Setup verified (photo proof) | None | Per event |
+| S-266 | T-1 | Kiwon | Run-of-show | Dry run: walk through the full schedule, test demos, rehearse transitions | Dry run complete, last-minute adjustments noted | None | Per event |
+| S-267 | D-Day | Kiwon + TJ | Run-of-show + materials | Execute event: arrival checklist (signage, registration table, name tags), MC script cues, photo/video protocol (TJ captures), distribute feedback forms (paper or QR to Google Form) | Event executed, raw photos/video collected, feedback forms collected | None | Per event |
+| S-268 | D+1 to D+7 | Kiwon + Mother | Feedback forms, photos, attendance | Post-event sequence: D+1 send NPS survey (Google Form, 5 questions max). D+3 publish recap (Discord + LinkedIn + Website via S-036). D+7 follow-up DMs to all attendees (thank you + Discord invite + "what do you want next?"), conversion tracking in Ryan's dashboard | NPS results, recap article published, follow-up DMs sent, conversion data logged | Assist | Per event |
+
+### D-Day Arrival Checklist (Kiwon prints and brings)
+
+```
+[ ] Arrive 60 min before start
+[ ] Signage at building entrance + room door
+[ ] Registration table: name tags, sign-in sheet, QR code for Discord
+[ ] Projector + laptop connected, slides loaded, backup on USB
+[ ] Mic tested (if >15 people)
+[ ] Wifi password written on whiteboard
+[ ] Water/coffee station set up
+[ ] Photographer briefed (TJ or designated person): key moments, group photo, candid shots
+[ ] Feedback form QR code printed and placed on every seat
+[ ] Run-of-show printed for MC (Kiwon or Jay)
+[ ] Phone on silent, backup MC identified (Jay or TJ)
+```
+
+### Post-Event NPS Survey (5 Questions)
+
+1. On a scale of 0-10, how likely are you to recommend this event to a colleague? (NPS)
+2. What was the most valuable part of today's event? (open text)
+3. What could we improve for next time? (open text)
+4. Would you attend another HypeProof event? (Yes / Maybe / No)
+5. Would you like to join our Discord community for ongoing discussions? (Yes + email / No thanks)
+
+### Event Format Templates
+
+| Format | Duration | Size | Best For |
+|--------|----------|------|----------|
+| Workshop | 2-3h | 10-20 | Hands-on learning (Vibe Coding, AI tools) |
+| Meetup | 1.5-2h | 15-30 | Networking + 2-3 short talks |
+| Roundtable | 1-1.5h | 5-10 | Deep discussion on specific topic |
+| Fireside chat | 1h | 10-25 | Guest speaker Q&A format |
+
+---
+
+## 19. Podcast Production Playbook
+
+TJ's end-to-end podcast pipeline. Platform: **Spotify for Podcasters** (free, widest automatic distribution to Spotify, Apple Podcasts, Google Podcasts, and 10+ other platforms).
+
+### Podcast Production Steps (S-269 to S-278)
+
+| Step | Phase | Owner | Input | Action | Output | AI Role | Frequency |
+|------|-------|-------|-------|--------|--------|---------|-----------|
+| S-269 | Pre-prod | TJ + Jay | Week's published columns, Discord discussions | Select podcast topic: pick the week's best-performing or most debated column as discussion seed | Topic selected, episode title drafted | None | Bi-weekly (Mon of recording week) |
+| S-270 | Pre-prod | TJ | Selected topic | Identify and invite guest: 1 HypeProof member whose expertise matches the topic (rotate; no same guest 2x in a row) | Guest confirmed, recording slot booked | None | Bi-weekly |
+| S-271 | Pre-prod | TJ | Topic + guest expertise | Write episode outline: 3-4 segment structure (intro, deep-dive, hot take, wrap-up), 5-7 discussion questions | Episode outline (1-page) | Assist | Bi-weekly |
+| S-272 | Record | TJ + Guest | Episode outline | Record episode via Riverside.fm (free tier: 2h/month, separate audio tracks per speaker). Backup: Zencastr (free tier). Target: 15-20 min final length, record 25-30 min raw. | Raw audio files (separate tracks per speaker) | None | Bi-weekly (Thu 14:00) |
+| S-273 | Post-prod | Mother | Raw audio | Auto-transcribe episode using Riverside's built-in transcription (or Whisper API fallback) | Full transcript (text file) | Automate | Per episode |
+| S-274 | Post-prod | TJ | Raw audio tracks + transcript | Edit episode: normalize levels, remove ums/dead air, add intro jingle (15s) and outro (10s), insert chapter markers | Edited audio file (MP3, 128kbps) | None | Per episode |
+| S-275 | Post-prod | Mother | Transcript + episode outline | Generate show notes: episode summary (150 words), key takeaways (3-5 bullets), timestamps, guest bio, links mentioned | Show notes (markdown) | Assist | Per episode |
+| S-276 | Publish | TJ | Edited audio + show notes | Upload to Spotify for Podcasters with title, description, show notes, episode art. Spotify auto-distributes to Apple Podcasts, Google Podcasts, Amazon Music, etc. | Published episode on 10+ platforms | None | Bi-weekly (Thu 14:00 or Fri) |
+| S-277 | Distribute | TJ + BH + JiWoong | Published episode | Multi-channel distribution: Discord announcement (BH, same day), LinkedIn clip -- 60s best moment (JiWoong, +1 day), YouTube audio-with-thumbnail upload (TJ, +3 days), website embed page (JeHyeong, +2 days), Reddit thread if topic fits (JeHyeong) | Content distributed across 4-5 channels | Assist | Per episode |
+| S-278 | Analyze | Ryan | Podcast analytics (Spotify for Podcasters dashboard) | Track downloads per episode, listener retention, geographic breakdown, platform split | Podcast performance data added to KPI dashboard | Assist | Per episode |
+
+### Podcast Brand Spec
+
+| Element | Value |
+|---------|-------|
+| Show name | "HypeProof Lab Podcast" (working title, TJ finalizes) |
+| Tagline | "AI perspectives from the lab" |
+| Format | Conversational -- 2 members discuss a column topic |
+| Length | 15-20 min (hard cap: 25 min) |
+| Frequency | Bi-weekly (every other Thursday) |
+| Language | Korean (primary), English episodes when guest warrants |
+| Intro jingle | 15s, created by TJ (royalty-free music + voiceover) |
+| Cover art | 1400x1400px, consistent with HypeProof branding |
+| Recording tool | Riverside.fm (primary) or Zencastr (backup) |
+| Hosting | Spotify for Podcasters (free, auto-distributes everywhere) |
+
+### Guest Rotation Schedule
+
+To ensure variety and prevent fatigue, follow this rotation:
+
+| Episode | Primary Guest | Backup Guest | Topic Area |
+|---------|--------------|-------------|------------|
+| Ep 1 | JY | Ryan | AI coding / vibe coding |
+| Ep 2 | JUNGWOO | Kiwon | Domain AI opportunities |
+| Ep 3 | JiWoong | Jay | Strategy / SANS insights |
+| Ep 4 | BH | Ryan | Physics / data / community |
+| Ep 5 | Jay | JY | Philosophy / framework |
+| Ep 6 | Kiwon | JUNGWOO | Marketing / GTM |
+| (repeat cycle) | | | |
+
+Rule: No member appears as guest in consecutive episodes. TJ hosts all episodes.
+
+---
+
+## 20. SANS Network CRM
+
+JiWoong's lightweight relationship tracking system for the SANS network. Keep it simple -- a Google Sheet is enough for Q2.
+
+### SANS CRM Steps (S-279 to S-283)
+
+| Step | Phase | Owner | Input | Action | Output | AI Role | Frequency |
+|------|-------|-------|-------|--------|--------|---------|-----------|
+| S-279 | Setup | JiWoong | SANS contacts + professional network | Create Google Sheets CRM with columns: Name, Company, Role, Last Contact Date, Next Action, HypeProof Interest Level (Cold/Warm/Hot), Notes, Source (SANS/LinkedIn/Event) | CRM spreadsheet live, shared with Jay (view-only) | None | Week 1 (one-time) |
+| S-280 | Maintain | JiWoong | SANS interactions, LinkedIn conversations | Add 2-3 new contacts per week from SANS interactions, conferences, LinkedIn connections | CRM grows by 8-12 contacts/month | None | Weekly |
+| S-281 | Follow-up | JiWoong | CRM "Next Action" column | Follow up with top 5 warm/hot contacts bi-weekly: share relevant HypeProof content, invite to events, ask for referrals | Follow-up messages sent, CRM updated with outcomes | None | Bi-weekly |
+| S-282 | Report | JiWoong | CRM data | Share monthly CRM summary at monthly review meeting: total contacts, new additions, warm/hot pipeline, referrals generated, notable conversations | CRM summary slide (1-page) for monthly meeting | None | Monthly |
+| S-283 | Automate | Mother | CRM "Next Action" dates | Auto-remind JiWoong of follow-up dates via Discord DM (every Monday: "You have X follow-ups due this week") | Follow-up reminder DM | Assist | Weekly (Mon) |
+
+### CRM Template (Google Sheets)
+
+| Name | Company | Role | Last Contact | Next Action | Due Date | Interest | Notes | Source |
+|------|---------|------|-------------|-------------|----------|----------|-------|--------|
+| Kim Minsoo | Samsung SDS | AI Lead | 2026-04-05 | Share vibe coding column | 2026-04-12 | Warm | Met at SANS Korea, interested in AI education | SANS |
+| Park Jihye | Naver | ML Engineer | 2026-04-03 | Invite to workshop | 2026-04-10 | Hot | Wants to join Discord, asked about academy | LinkedIn |
+| (example rows) | | | | | | | | |
+
+### CRM Rules
+
+- **JiWoong owns all entries** -- only he adds/edits contacts
+- **Jay has view-only access** -- for strategic oversight
+- **Never share the CRM externally** -- these are private professional relationships
+- **Interest levels**: Cold (aware of HypeProof), Warm (engaged in conversation), Hot (wants to participate/join)
+- **Stale contacts**: If no interaction for 60 days, move to "Archive" tab, not delete
+
+---
+
+## 21. Naver/Daum SEO Checklist
+
+Korean search engines require separate optimization from Google. JeHyeong owns this; target completion by April Week 2.
+
+### Naver/Daum SEO Steps (S-284 to S-290)
+
+| Step | Phase | Owner | Input | Action | Output | AI Role | Frequency |
+|------|-------|-------|-------|--------|--------|---------|-----------|
+| S-284 | Setup | JeHyeong | hypeproof-ai.xyz domain | Register site with Naver Webmaster Tools (https://searchadvisor.naver.com/) | Site verified, Naver Webmaster dashboard accessible | None | Week 1 (one-time) |
+| S-285 | Setup | JeHyeong | Naver Webmaster access | Submit XML sitemap to Naver Search Advisor (same sitemap as Google, but submitted separately) | Sitemap accepted, crawl requested | None | Week 1 (one-time) |
+| S-286 | Setup | JeHyeong | Naver Webmaster access | Submit RSS feed URL to Naver for real-time content indexing (Naver prefers RSS for blogs/articles) | RSS feed registered | None | Week 1 (one-time) |
+| S-287 | Decide | Jay + JeHyeong | Naver Blog ecosystem analysis | Decide Naver Blog cross-posting strategy: Option A (no cross-post, drive all traffic to main site) vs. Option B (mirror top columns to Naver Blog for discovery, link back to main site). Recommendation: Option A for Q2 (focus), revisit in Q3 if Naver traffic is low. | Decision documented | None | Week 1 (one-time) |
+| S-288 | Implement | JeHyeong | Website templates | Add Korean-specific meta tags to all pages: `<meta name="naver-site-verification" content="...">`, Korean Open Graph tags (`og:locale` = `ko_KR`), proper `lang="ko"` attribute on KO pages, `hreflang` tags for KO/EN | Updated HTML templates deployed | None | Week 1-2 (one-time) |
+| S-289 | Implement | JeHyeong | Daum/Kakao search docs | Register site with Daum Search (https://register.search.daum.net/). Submit sitemap. Verify Kakao search integration (Daum and Kakao share search infrastructure). | Daum registration confirmed | None | Week 2 (one-time) |
+| S-290 | Monitor | JeHyeong + Ryan | Naver Webmaster + Daum stats | Monthly check: pages indexed on Naver (target: 100% of KO content), search impressions, CTR, top queries. Compare with Google Search Console data. Add to Ryan's KPI dashboard. | Naver/Daum SEO metrics in monthly report | Assist | Monthly |
+
+### Korean SEO Quick Reference
+
+| Search Engine | Market Share (KR) | Key Differences from Google |
+|--------------|------------------|---------------------------|
+| Naver | ~55% | Prefers Naver Blog content; has its own "Knowledge" panels; RSS-friendly; slower to index external sites |
+| Google | ~35% | Standard SEO; faster to index; prefers structured data |
+| Daum/Kakao | ~5% | Shares infra with Kakao; low effort to register; piggybacks on Naver optimization |
+
+### Meta Tag Checklist (JeHyeong implements once)
+
+```html
+<!-- Naver verification -->
+<meta name="naver-site-verification" content="[verification_code]" />
+
+<!-- Korean Open Graph -->
+<meta property="og:locale" content="ko_KR" />
+<meta property="og:locale:alternate" content="en_US" />
+
+<!-- Language tags (per page) -->
+<html lang="ko"> <!-- for KO pages -->
+<html lang="en"> <!-- for EN pages -->
+
+<!-- Hreflang (in <head>) -->
+<link rel="alternate" hreflang="ko" href="https://hypeproof-ai.xyz/columns/ko/slug" />
+<link rel="alternate" hreflang="en" href="https://hypeproof-ai.xyz/columns/en/slug" />
+
+<!-- Canonical (prevent duplicate content) -->
+<link rel="canonical" href="https://hypeproof-ai.xyz/columns/ko/slug" />
+```
+
+---
+
+## 22. First 4 Weeks Launch Plan
 
 Based on Kiwon's Closed-First GTM strategy and the 2026-03-23 weekly meeting decisions.
 
@@ -1369,15 +1722,16 @@ Based on Kiwon's Closed-First GTM strategy and the 2026-03-23 weekly meeting dec
 | Tue 4/1 | Jay | Mother pipeline health check, ensure daily research runs | Pipeline health report | 09:00 |
 | Tue 4/1 | Jay | Populate recurring calendar events from Weekly Rhythm (S-253) | All time blocks live in calendar | 10:00 |
 | Tue 4/1 | BH | Set up Discord welcome bot, role assignment, rules | Discord onboarding flow live | 10:00 |
-| Tue 4/1 | JeHyeong | Website SEO audit + Naver Webmaster Tools setup + GA4 setup (S-246, S-247) | SEO baseline report + GA4 live | 10:00 |
+| Tue 4/1 | JeHyeong | Website SEO audit + Naver Webmaster Tools setup + GA4 setup (S-246, S-247, S-284, S-285) | SEO baseline report + GA4 live + Naver registered | 10:00 |
 | Wed 4/2 | JY + TJ | Create YouTube channel, establish branding (banner, profile, intro template) | YouTube channel live | 09:00 |
 | Wed 4/2 | Kiwon | Draft positioning copy: "Closed AI Hub" messaging for DMs | Invitation message templates (3 variants) | 12:00 |
-| Wed 4/2 | JiWoong | Set up SANS network CRM (spreadsheet: contact, last interaction, next action) | CRM spreadsheet live | 14:00 |
+| Wed 4/2 | JiWoong | Set up SANS network CRM (S-279) | CRM spreadsheet live | 14:00 |
 | Thu 4/3 | Jay | Academy curriculum: finalize first workshop outline for Donga pilot | Workshop outline v1 | 09:00 |
 | Thu 4/3 | JUNGWOO | Identify first domain research focus area (based on meeting: commerce/professional AI adoption) | Domain focus memo posted in #daily-research | 10:00 |
 | Thu 4/3 | Ryan | Set up KPI tracking tool (Google Sheets dashboard with all channel tabs) | KPI dashboard v1 | 10:00 |
 | Fri 4/4 | All | First real daily rhythm: everyone follows Monday schedule from Section 3 | Compliance check | All day |
 | Fri 4/4 | Jay | Review week's output, adjust workflow doc if needed | Adjustment notes | 20:00 |
+| Fri 4/4 | JeHyeong | Complete Naver RSS submission + Daum registration (S-286, S-289) | Korean search engines registered | 10:00 |
 
 **Week 1 Success Criteria:**
 - Discord onboarding flow is live and tested
@@ -1388,6 +1742,8 @@ Based on Kiwon's Closed-First GTM strategy and the 2026-03-23 weekly meeting dec
 - All members have read this workflow doc
 - Google Calendar set up with all recurring events
 - GA4 tracking live on website
+- Naver Webmaster Tools registered + sitemap submitted
+- SANS CRM spreadsheet created
 
 ### Week 2: Seed Members (Apr 7 - Apr 11)
 
@@ -1399,6 +1755,7 @@ Based on Kiwon's Closed-First GTM strategy and the 2026-03-23 weekly meeting dec
 | Mon 4/7 | JiWoong | LinkedIn post #1: signal HypeProof's existence (teaser, not hard sell) | Published LinkedIn post | 14:00 |
 | Tue 4/8 | JY | Record first Vibe Coding episode (pilot, can be rough) | Raw recording | 09:00 |
 | Tue 4/8 | JUNGWOO | Complete first domain research brief (2-page) | Domain brief posted in Discord | 10:00 |
+| Tue 4/8 | JeHyeong | Implement Korean meta tags + hreflang (S-288) | Updated templates deployed | 10:00 |
 | Wed 4/9 | JeHyeong | Publish first Reddit post in target subreddit (test the waters) | Reddit post live | 10:00 |
 | Wed 4/9 | Jay | Review all seed outreach messages before Kiwon sends batch 2 | Approved message variants | 09:00 |
 | Thu 4/10 | TJ | Edit first YouTube episode, prepare for upload | Edited video ready | 14:00 |
@@ -1414,6 +1771,7 @@ Based on Kiwon's Closed-First GTM strategy and the 2026-03-23 weekly meeting dec
 - First Reddit post published
 - JUNGWOO's first domain brief completed
 - 2+ new Discord members from seed outreach
+- Korean meta tags deployed on website
 
 ### Week 3: First Pilot + Paid Conversion (Apr 14 - Apr 18)
 
@@ -1422,12 +1780,13 @@ Based on Kiwon's Closed-First GTM strategy and the 2026-03-23 weekly meeting dec
 | Day | Who | Action | Deliverable | Time |
 |-----|-----|--------|------------|------|
 | Mon 4/14 | Jay | Finalize Donga academy pilot logistics (date, venue, curriculum) | Pilot logistics confirmed | 09:00 |
-| Mon 4/14 | Kiwon | Plan first free workshop/meetup event (small, 10-15 people) | Event plan + venue | 12:00 |
+| Mon 4/14 | Kiwon | Plan first free workshop/meetup event (small, 10-15 people), begin T-14 playbook (S-256) | Event plan + venue booked | 12:00 |
 | Tue 4/15 | JY | Record second Vibe Coding episode | Raw recording | 09:00 |
 | Tue 4/15 | JUNGWOO | Write first column draft from domain research (domain-AI opportunity angle) | Column draft for review | 10:00 |
-| Wed 4/16 | Kiwon | Send event invitations to seed members + qualified contacts | Invitations sent | 12:00 |
+| Wed 4/16 | Kiwon | Send event invitations to seed members + qualified contacts (S-259) | Invitations sent | 12:00 |
 | Wed 4/16 | JiWoong | LinkedIn post about upcoming event (FOMO angle, limited seats) | Published LinkedIn post | 14:00 |
 | Thu 4/17 | Jay + JY | Dry-run academy workshop content (internal team) | Dry-run feedback | 14:00 |
+| Thu 4/17 | TJ | Record first podcast episode pilot (S-272) -- roundtable with JY | Raw podcast audio | 14:00 |
 | Fri 4/18 | TJ | Publish second YouTube video | Video live | 14:00 |
 | Fri 4/18 | Jay | Review Week 3 progress against GTM milestones | Progress report | 20:00 |
 
@@ -1438,6 +1797,7 @@ Based on Kiwon's Closed-First GTM strategy and the 2026-03-23 weekly meeting dec
 - 2 YouTube videos published
 - JUNGWOO's first column submitted for review
 - Discord has 10+ members
+- First podcast episode recorded
 
 ### Week 4: Scale Design (Apr 21 - Apr 25)
 
@@ -1447,13 +1807,14 @@ Based on Kiwon's Closed-First GTM strategy and the 2026-03-23 weekly meeting dec
 |-----|-----|--------|------------|------|
 | Mon 4/21 | Jay | Review 4 weeks of data: what worked, what didn't | Month-1 retrospective memo | 09:00 |
 | Mon 4/21 | Ryan | Compile first monthly KPI report with 4 weeks of data | Monthly KPI report v1 | 10:00 |
-| Tue 4/22 | Kiwon | Post-event feedback collection (if event happened Week 3-4) | Event NPS report | 12:00 |
+| Tue 4/22 | Kiwon | Post-event feedback collection (if event happened Week 3-4), run D+1 to D+7 sequence (S-268) | Event NPS report | 12:00 |
 | Tue 4/22 | Jay | Design monthly workshop calendar (May-June) | Workshop calendar | 09:00 |
-| Wed 4/23 | JiWoong | SANS network month-1 activity report | SANS report | 14:00 |
+| Tue 4/22 | TJ | Edit and publish first podcast episode (S-274, S-276) | Podcast episode live on Spotify | 14:00 |
+| Wed 4/23 | JiWoong | SANS network month-1 activity report (S-282) | SANS CRM summary | 14:00 |
 | Wed 4/23 | JUNGWOO | Present domain findings at ad-hoc review (or prep for Sunday) | Domain presentation | 10:00 |
 | Thu 4/24 | Jay + Kiwon | Design paid workshop pricing and registration flow | Pricing model + registration page | 09:00 |
 | Thu 4/24 | JeHyeong | Website updates: event page, member showcase, CTA improvements | Deployed changes | 10:00 |
-| Fri 4/25 | TJ | Review video pipeline: is 1/week sustainable? Adjust if needed | Media cadence plan | 14:00 |
+| Fri 4/25 | TJ | Review video + podcast pipeline: is current cadence sustainable? Adjust if needed | Media cadence plan | 14:00 |
 | Fri 4/25 | All | Prepare for first monthly review meeting | Individual reports | 20:00 |
 | Sun 4/27 | All | Monthly review meeting (90 min) | Month-1 assessment, May priorities | 21:00 |
 
@@ -1466,10 +1827,12 @@ Based on Kiwon's Closed-First GTM strategy and the 2026-03-23 weekly meeting dec
 - Event NPS collected (if event held)
 - Clear May priorities set
 - First UTM attribution report reviewed
+- First podcast episode published
+- Naver indexing verified (S-290 first check)
 
 ---
 
-## 19. Day in the Life
+## 23. Day in the Life
 
 Concrete examples of what a typical Monday looks like for 3 key members. These narratives make the workflow tangible and testable.
 
@@ -1574,7 +1937,7 @@ BH is a Ph.D. candidate at CERN. Discord moderation fits into breaks between res
 
 ---
 
-## 20. Step Registry
+## 24. Step Registry
 
 ### JUNGWOO Expanded Steps (S-213 to S-225)
 
@@ -1594,7 +1957,7 @@ BH is a Ph.D. candidate at CERN. Discord moderation fits into breaks between res
 | S-224 | Amplify | JUNGWOO | Published domain analysis | Create debate prompt with counter-arguments for Discord discussion | Debate prompt | None | Bi-weekly |
 | S-225 | Reflect | JUNGWOO | Mirror Report | Reflect on how domain expertise connects to personal growth trajectory | Reflection notes (optional) | None | Monthly |
 
-### Master Step List (S-001 to S-255)
+### Master Step List (S-001 to S-290)
 
 | Range | Section | Count |
 |-------|---------|-------|
@@ -1612,27 +1975,43 @@ BH is a Ph.D. candidate at CERN. Discord moderation fits into breaks between res
 | S-226 to S-245 | Failure & Contingency Handling | 20 |
 | S-246 to S-250 | UTM & Attribution System | 5 |
 | S-251 to S-255 | Google Calendar Integration | 5 |
-| **Total** | | **223 numbered + 55 launch-plan actions = 278 total** |
+| S-256 to S-268 | Offline Event Playbook | 13 |
+| S-269 to S-278 | Podcast Production Playbook | 10 |
+| S-279 to S-283 | SANS Network CRM | 5 |
+| S-284 to S-290 | Naver/Daum SEO Checklist | 7 |
+| **Total** | | **258 numbered + 68 launch-plan actions = 326 total** |
 
 ### Steps by Owner
 
 | Owner | Steps Owned | Count | Primary Steps |
 |-------|-------------|-------|---------------|
-| **Jay** | 27 | 27 | S-004, S-005, S-015, S-040, S-043, S-055, S-088, S-089, S-094, S-119, S-121, S-124, S-126, S-127, S-133, S-135, S-167, S-168, S-170, S-176-S-180, S-251-S-253, S-255 |
-| **Mother (AI)** | 58 | 58 | S-001-S-003, S-016-S-017, S-022, S-032-S-033, S-036, S-038, S-041-S-042, S-044, S-046, S-050, S-053, S-056-S-059, S-065, S-068, S-071-S-072, S-074, S-078, S-091, S-096-S-110, S-113-S-115, S-117-S-118, S-120, S-132, S-134, S-137, S-139, S-142, S-146, S-149, S-152, S-161, S-164, S-169, S-171-S-172, S-250, S-254 |
-| **Kiwon** | 11 | 11 | S-008, S-027, S-048, S-067, S-083, S-094, S-128, S-144, S-158, S-166 |
-| **JiWoong** | 13 | 13 | S-009, S-030, S-049, S-062, S-080, S-084, S-129, S-138, S-145, S-153, S-159 |
+| **Jay** | 27 | 27 | S-004, S-005, S-015, S-040, S-043, S-055, S-088, S-089, S-094, S-119, S-121, S-124, S-126, S-127, S-133, S-135, S-167, S-168, S-170, S-176-S-180, S-251-S-253, S-255, S-261(co), S-266(co), S-287(co) |
+| **Mother (AI)** | 60 | 60 | S-001-S-003, S-016-S-017, S-022, S-032-S-033, S-036, S-038, S-041-S-042, S-044, S-046, S-050, S-053, S-056-S-059, S-065, S-068, S-071-S-072, S-074, S-078, S-091, S-096-S-110, S-113-S-115, S-117-S-118, S-120, S-132, S-134, S-137, S-139, S-142, S-146, S-149, S-152, S-161, S-164, S-169, S-171-S-172, S-250, S-254, S-258(co), S-273, S-275, S-283 |
+| **Kiwon** | 24 | 24 | S-008, S-027, S-048, S-067, S-083, S-094, S-128, S-144, S-158, S-166, S-256-S-268 |
+| **JiWoong** | 18 | 18 | S-009, S-030, S-049, S-062, S-080, S-084, S-129, S-138, S-145, S-153, S-159, S-279-S-283 |
 | **JY** | 10 | 10 | S-006, S-018, S-023, S-037, S-079, S-143, S-060 (shared with TJ) |
-| **TJ** | 12 | 12 | S-010, S-019, S-024-S-026, S-039, S-047, S-060-S-061, S-066, S-130, S-148 |
-| **JeHyeong** | 17 | 17 | S-020, S-028, S-031, S-045, S-054, S-063, S-069, S-075, S-082, S-095, S-131, S-140, S-147, S-157, S-160, S-246, S-247 |
+| **TJ** | 22 | 22 | S-010, S-019, S-024-S-026, S-039, S-047, S-060-S-061, S-066, S-130, S-148, S-265(co), S-267(co), S-269-S-278 |
+| **JeHyeong** | 24 | 24 | S-020, S-028, S-031, S-045, S-054, S-063, S-069, S-075, S-082, S-095, S-131, S-140, S-147, S-157, S-160, S-246, S-247, S-284-S-290 |
 | **BH** | 12 | 12 | S-012, S-029, S-064, S-076, S-141, S-150, S-155, S-162-S-163, S-165 |
 | **JUNGWOO** | 19 | 19 | S-007, S-013, S-035, S-052, S-125, S-154, S-213-S-225 |
-| **Ryan** | 18 | 18 | S-011, S-014, S-034, S-051, S-070, S-073, S-077, S-081, S-085-S-087, S-093, S-116, S-122, S-151, S-248, S-249 |
+| **Ryan** | 19 | 19 | S-011, S-014, S-034, S-051, S-070, S-073, S-077, S-081, S-085-S-087, S-093, S-116, S-122, S-151, S-248, S-249, S-278(co), S-290(co) |
 | **All** | 5 | 5 | S-090, S-123, S-136, S-156 |
 
 ---
 
-## 21. Next Iteration TODO
+## 25. Next Iteration TODO
+
+### Resolved (v3 -> v4)
+
+- [x] Add Kiwon's Offline Event Playbook with repeatable template (Section 18, S-256 to S-268)
+- [x] Add TJ's Podcast Production Playbook with platform spec (Section 19, S-269 to S-278)
+- [x] Add JiWoong's SANS Network CRM spec (Section 20, S-279 to S-283)
+- [x] Add Naver/Daum SEO Checklist for Korean search engines (Section 21, S-284 to S-290)
+- [x] Add "My Section" Quick-Reference Cards for all 9 members + Sebastian (Section 1)
+- [x] Add D-8: Monthly Cadence Timeline (gantt chart + rhythm table)
+- [x] Update Step Registry with new sections (258 numbered + 68 launch actions = 326 total)
+- [x] Add Podcast KPI section to Section 15
+- [x] Integrate new playbooks into Launch Plan timeline (Week 1-4 cross-references)
 
 ### Resolved (v2 -> v3)
 
@@ -1640,7 +2019,7 @@ BH is a Ph.D. candidate at CERN. Discord moderation fits into breaks between res
 - [x] Add failure & contingency handling for all critical paths (Section 14, S-226 to S-245)
 - [x] Add UTM & attribution system with concrete parameter conventions (Section 16, S-246 to S-250)
 - [x] Add Google Calendar integration spec (Section 17, S-251 to S-255)
-- [x] Add "Day in the Life" examples for Jay, JeHyeong, BH (Section 19)
+- [x] Add "Day in the Life" examples for Jay, JeHyeong, BH (Section 23)
 - [x] Add D-7 member time allocation diagram
 - [x] Reduce v1 member weekly hour estimates to realistic side-project levels
 - [x] Clean up TODO list: mark completed items, update remaining targets
@@ -1651,16 +2030,18 @@ BH is a Ph.D. candidate at CERN. Discord moderation fits into breaks between res
 - [x] Expand JUNGWOO's role (S-213 to S-225, domain research + devil's advocate + monthly presentation)
 - [x] Detail cross-channel content routing (Section 11 + expanded Section 10)
 - [x] Add Mother automation specs (Section 6.1 with agent, command, success criteria, failure handling)
-- [x] Add "First 4 Weeks" launch plan (Section 18)
+- [x] Add "First 4 Weeks" launch plan (Section 22)
 - [x] Add D-6 content routing mermaid diagram
 - [x] Add JUNGWOO to D-2 weekly Gantt chart and D-1 overview
 
 ### Previously Open -- Now Addressed
 
-- [x] ~~Member time tracking (TODO #7)~~: Addressed by Section 2 (Per-Member Weekly Time Budget). Actual tracking deferred to lightweight time-log starting Week 2.
-- [x] ~~Content calendar tool (TODO #8)~~: Addressed by Section 17 (Google Calendar Integration). Master + sub-calendars with Mother digest.
-- [x] ~~Cross-channel attribution (TODO #10)~~: Addressed by Section 16 (UTM & Attribution System). GA4 + UTM parameters + Ryan's weekly report.
-- [x] ~~Emergency playbook (TODO #18)~~: Addressed by Section 14 (Failure & Contingency Handling). 20 scenarios with response protocols.
+- [x] ~~Offline event playbook (TODO #7)~~: Addressed by Section 18 (S-256 to S-268). Full T-14 to D+7 checklist.
+- [x] ~~Podcast platform selection (TODO #8)~~: Addressed by Section 19 (S-269 to S-278). Spotify for Podcasters, Riverside.fm recording.
+- [x] ~~SANS network CRM (TODO #6)~~: Addressed by Section 20 (S-279 to S-283). Google Sheets template with auto-reminders.
+- [x] ~~Naver/Daum SEO (TODO #5)~~: Addressed by Section 21 (S-284 to S-290). Registration, sitemap, meta tags, monitoring.
+- [x] ~~Sebastian integration (TODO #14)~~: Quick Card added (pending activation). Trigger: Discord join.
+- [x] ~~EN strategy (TODO #13)~~: Quick Cards reference EN content; hreflang tags in SEO checklist. Full EN distribution strategy deferred to Q3.
 
 ### Remaining -- High Priority
 
@@ -1668,23 +2049,21 @@ BH is a Ph.D. candidate at CERN. Discord moderation fits into breaks between res
 2. **YouTube channel setup**: JY + TJ need to create the channel, establish branding, record first 2 episodes before the weekly cadence starts. **Target: Week 1 (Apr 2)**.
 3. **Discord onboarding flow**: BH needs to build #start-here channel, welcome bot, role assignment, and first-week engagement sequence. **Target: Week 1 (Apr 1-2)**.
 4. **Reddit strategy**: JeHyeong needs to identify 3-5 target subreddits and understand each sub's rules and culture. **Target: Week 2 (Apr 9)**.
-5. **Naver/Daum SEO**: Korean search engines need separate optimization. **Target: Week 1 start (Apr 1), full setup by May**.
 
 ### Remaining -- Medium Priority
 
-6. **SANS network CRM**: JiWoong's relationship tracking. **Target: Week 1 (Apr 2)** -- simple spreadsheet.
-7. **Offline event playbook**: Kiwon needs a repeatable event template (checklist, materials, follow-up sequence) so events scale without reinventing each time.
-8. **Podcast platform selection**: TJ needs to decide on hosting (Spotify for Podcasters, Anchor, etc.) and establish the podcast brand before first episode.
-9. **JUNGWOO domain focus refinement**: After Week 1 domain focus memo, iterate on which specific industry vertical to prioritize first.
-10. **KPI dashboard tooling**: Ryan needs a concrete tool (Google Sheets recommended per Week 1 plan) to track all KPIs. **Target: Week 1 (Apr 3)**.
+5. **JUNGWOO domain focus refinement**: After Week 1 domain focus memo, iterate on which specific industry vertical to prioritize first.
+6. **KPI dashboard tooling**: Ryan needs a concrete tool (Google Sheets recommended per Week 1 plan) to track all KPIs. **Target: Week 1 (Apr 3)**.
+7. **Podcast intro jingle**: TJ needs to create or source a 15s royalty-free intro jingle. **Target: before Ep 1 publish (Week 4)**.
 
 ### Remaining -- Low Priority / Future
 
-11. **Mother automation for LinkedIn/Reddit adaptation**: Currently "Assist" -- could become "Automate" once tone/format validated over 10+ posts.
-12. **Member contribution scoring**: For future incentive/revenue sharing. Not urgent until revenue exists.
-13. **Multilingual content strategy**: EN columns exist but have no distribution channel. Need to decide if EN targets international audience or is just for SEO.
-14. **Sebastian integration**: Currently not assigned any steps (Discord TBD). Re-evaluate when he joins Discord.
+8. **Mother automation for LinkedIn/Reddit adaptation**: Currently "Assist" -- could become "Automate" once tone/format validated over 10+ posts.
+9. **Member contribution scoring**: For future incentive/revenue sharing. Not urgent until revenue exists.
+10. **Multilingual content strategy (full)**: EN columns exist but have no dedicated distribution channel. Need to decide if EN targets international audience or is just for SEO. Quick Cards and hreflang tags are in place; full strategy deferred to Q3.
+11. **Sebastian full integration**: Assign steps and domain once he joins Discord. Architecture review role is ready.
+12. **Naver Blog cross-posting**: Revisit in Q3 if Naver organic traffic is below target (S-287 decision: skip for Q2).
 
 ---
 
-*Last updated: 2026-03-24 (v3.0)*
+*Last updated: 2026-03-24 (v4.0)*
