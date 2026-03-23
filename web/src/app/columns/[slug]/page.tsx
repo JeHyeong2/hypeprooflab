@@ -9,6 +9,8 @@ import { Footer } from '@/components/layout/Footer';
 import ViewCounter from '@/components/ViewCounter';
 import AuthButton from '@/components/auth/AuthButton';
 import ShareButtons from '@/components/ShareButtons';
+import CreatorProfileCard from '@/components/CreatorProfileCard';
+import RelatedColumns from '@/components/RelatedColumns';
 import { generateArticleJsonLd } from '@/lib/jsonld';
 
 interface Props {
@@ -80,6 +82,51 @@ export default async function ColumnPage({ params, searchParams }: Props) {
   const currentLocale = column.locale;
 
   const articleJsonLd = generateArticleJsonLd(column, availableLocales);
+
+  // Creator profile card data
+  const creatorName = frontmatter.creator || '';
+  const creatorSlug = creatorName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  const allColumnsForLocale = getAllColumns(currentLocale);
+  const creatorColumnCount = allColumnsForLocale.filter(
+    (c) => (c.frontmatter.creator || '').toLowerCase() === creatorName.toLowerCase()
+  ).length;
+
+  // Related columns: tag overlap, exclude current, max 3
+  const currentTags = frontmatter.tags || [];
+  const otherColumns = allColumnsForLocale.filter((c) => c.frontmatter.slug !== slug);
+  let relatedColumns: { slug: string; title: string; creator: string; date: string }[];
+
+  if (currentTags.length > 0) {
+    const scored = otherColumns.map((c) => {
+      const tags = c.frontmatter.tags || [];
+      const overlap = currentTags.filter((t: string) => tags.includes(t)).length;
+      return { col: c, overlap };
+    });
+    scored.sort((a, b) => b.overlap - a.overlap);
+    const withOverlap = scored.filter((s) => s.overlap > 0).slice(0, 3);
+    if (withOverlap.length > 0) {
+      relatedColumns = withOverlap.map((s) => ({
+        slug: s.col.frontmatter.slug,
+        title: s.col.frontmatter.title,
+        creator: s.col.frontmatter.creator,
+        date: s.col.frontmatter.date,
+      }));
+    } else {
+      relatedColumns = otherColumns.slice(0, 3).map((c) => ({
+        slug: c.frontmatter.slug,
+        title: c.frontmatter.title,
+        creator: c.frontmatter.creator,
+        date: c.frontmatter.date,
+      }));
+    }
+  } else {
+    relatedColumns = otherColumns.slice(0, 3).map((c) => ({
+      slug: c.frontmatter.slug,
+      title: c.frontmatter.title,
+      creator: c.frontmatter.creator,
+      date: c.frontmatter.date,
+    }));
+  }
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-300" style={{ scrollBehavior: 'smooth' }}>
@@ -218,6 +265,20 @@ export default async function ColumnPage({ params, searchParams }: Props) {
             </ul>
           </section>
         )}
+
+        {/* Creator profile card */}
+        {creatorName && (
+          <CreatorProfileCard
+            creatorName={creatorName}
+            creatorImage={frontmatter.creatorImage}
+            creatorSlug={creatorSlug}
+            columnCount={creatorColumnCount}
+            locale={currentLocale}
+          />
+        )}
+
+        {/* Related columns */}
+        <RelatedColumns columns={relatedColumns} locale={currentLocale} />
 
         {/* Share buttons */}
         <ShareButtons
