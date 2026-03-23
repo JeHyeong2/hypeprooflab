@@ -18,6 +18,10 @@ const FALLBACK_MEMBERS: { displayName: string; role: MemberRole }[] = [
   { displayName: 'JY', role: 'creator' },
   { displayName: 'BH', role: 'creator' },
   { displayName: 'Sebastian', role: 'creator' },
+
+  { displayName: '재형', role: 'creator' },
+
+  { displayName: '정우', role: 'creator' },
 ];
 
 // Cache — keyed by displayName (lowercased) for lookup, stores full list

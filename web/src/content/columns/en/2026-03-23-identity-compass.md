@@ -126,3 +126,4 @@ Identity Compass is an open-source project built by the author.
 | 1 | GitHub (Open Source, MIT License) | https://github.com/ico1036/identity-compass |
 | 2 | ClawHub | https://clawhub.ai/ico1036/identity-compass |
 | 3 | Presentation Slides (AI Seminar, 150 attendees) | https://docs.google.com/presentation/d/1ZPp-1wvPBUymamLbavj8Zmg3gfQhFzn_YayvdomC_W4 |
+| 4 | LinkedIn Post | https://www.linkedin.com/posts/jiwoong-kim-b9934417a_github-ico1036identity-compass-activity-7441864517115912192-W66a |
