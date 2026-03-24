@@ -1,5 +1,12 @@
 # Diagram QA Criteria
 
+## Pre-QA Validation
+
+Before scoring visuals, validate data integrity:
+- **Member name consistency**: Cross-check member names in diagrams against `members.md`. Flag any name that appears in diagrams but not in members.md (phantom member).
+- **Member count**: Count unique member names in diagram. Must match `members.md` active count.
+- **Color assignment**: Each member must have exactly one color. No member should appear with two different colors.
+
 ## Scoring Axes (each 1-10)
 
 ### Readability
