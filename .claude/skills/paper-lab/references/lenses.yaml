@@ -1,0 +1,59 @@
+# HypeProof Philosophical Lenses
+# Source: products/hypeproof-roadmap-2026Q2.md core values
+# Used by: paper-scout for lens x phenomenon matching
+
+- id: mirror-loop
+  name: "Mirror, Not Judge"
+  frame: "AI that reflects without judging"
+  references:
+    - "Arendt, H. (1958). The Human Condition."
+    - "Rogers, C. (1961). On Becoming a Person."
+  keywords: [reflection, self-awareness, agent drift, alignment, feedback]
+
+- id: doing-is-learning
+  name: "Doing Is Learning"
+  frame: "Execution itself is the curriculum"
+  references:
+    - "Papert, S. (1980). Mindstorms."
+    - "Bandura, A. (1997). Self-Efficacy."
+  keywords: [education, learning, constructionism, co-creation, workshop]
+
+- id: initiative-gap
+  name: "The Initiative Gap"
+  frame: "Deciding WHAT to make is the last human edge"
+  references:
+    - "Arendt, H. (1958). The Human Condition."
+    - "Csikszentmihalyi, M. (1990). Flow."
+  keywords: [creativity, agency, initiative, decision, autonomy]
+
+- id: margin-eraser
+  name: "The Margin Eraser"
+  frame: "Agent removes friction = removes margin"
+  references:
+    - "Christensen, C. (1997). The Innovator's Dilemma."
+    - "Coase, R. (1937). The Nature of the Firm."
+  keywords: [economics, disruption, intermediary, automation, labor]
+
+- id: vanilla-wins
+  name: "Vanilla Beats Framework"
+  frame: "Simple composition beats complex frameworks"
+  references:
+    - "Brooks, F. (1986). No Silver Bullet."
+    - "Gall, J. (1975). Systemantics."
+  keywords: [architecture, reliability, complexity, framework, production]
+
+- id: re-bundle
+  name: "The Re-Bundler"
+  frame: "New media unbundles, then a new leader re-bundles"
+  references:
+    - "Thompson, B. Aggregation Theory."
+    - "McLuhan, M. (1964). Understanding Media."
+  keywords: [platform, media, bundling, aggregation, content]
+
+- id: humanities-hypothesis
+  name: "The Humanities Hypothesis"
+  frame: "AI alignment needs humanities, not just STEM"
+  references:
+    - "Heidegger, M. (1954). The Question Concerning Technology."
+    - "Arendt, H. (1958). The Human Condition."
+  keywords: [alignment, safety, ethics, philosophy, humanities]

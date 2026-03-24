@@ -8,7 +8,7 @@
   "outputStyle": "Mr.Alfred",
   "cleanupPeriodDays": 30,
   "env": {
-    "PATH": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.local/bin:$HOME/.cargo/bin:/opt/homebrew/bin",
+    "PATH": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/jaylee/.local/bin:/Users/jaylee/.cargo/bin:/opt/homebrew/bin:/Users/jaylee/.bun/bin",
     "MOAI_CONFIG_SOURCE": "sections",
     "ENABLE_TOOL_SEARCH": "1",
     "MAX_THINKING_TOKENS": "31999",
@@ -132,6 +132,8 @@
       "WebFetch",
       "WebSearch",
       "Write",
+      "Write(.claude/**)",
+      "Edit(.claude/**)",
       "mcp__context7__get-library-docs",
       "mcp__context7__resolve-library-id",
       "mcp__sequential-thinking__*"
