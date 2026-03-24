@@ -1,0 +1,30 @@
+flowchart TB
+    classDef ryan fill:#95a5a6,stroke:#bdc3c7,color:#000,font-weight:bold,font-size:14px
+    classDef dim fill:#30363d,stroke:#484f58,color:#8b949e
+
+    subgraph WEEK["⚪ Ryan — Weekly Rhythm"]
+        MON["Mon 08:00<br/>Pull weekly<br/>analytics"]
+        TUE["Tue 20:00<br/>Dashboard<br/>update"]
+        WED["Wed 12:00<br/>Data analysis<br/>deep-dive"]
+        THU["Thu 19:00<br/>Cross-reference<br/>metrics"]
+        FRI["Fri 20:00<br/>KPI snapshot<br/>compilation"]
+        SAT["Sat 15:00<br/>Finalize<br/>KPI report"]
+        SUN["Sun 21:00<br/>Weekly meeting<br/>Present data"]
+    end
+
+    subgraph OUT["Outputs"]
+        O1["KPI dashboard"]
+        O2["Weekly report"]
+        O3["Attribution analysis"]
+    end
+
+    subgraph KPI["KPIs I Own"]
+        K1["Data freshness"]
+        K2["Report accuracy"]
+        K3["Insight actionability"]
+    end
+
+    MON --> TUE --> WED --> THU --> FRI --> SAT --> SUN
+    SUN --> OUT
+
+    class MON,TUE,WED,THU,FRI,SAT,SUN,O1,O2,O3,K1,K2,K3 ryan

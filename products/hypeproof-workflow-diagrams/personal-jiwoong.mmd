@@ -1,0 +1,30 @@
+flowchart TB
+    classDef jiwoong fill:#f1c40f,stroke:#f7dc6f,color:#000,font-weight:bold,font-size:14px
+    classDef dim fill:#30363d,stroke:#484f58,color:#8b949e
+
+    subgraph WEEK["🟡 JiWoong — Weekly Rhythm"]
+        MON["Mon 09:00<br/>LinkedIn post<br/>from research"]
+        TUE["Tue 20:00<br/>SANS network<br/>outreach"]
+        WED["Wed 12:00<br/>Strategy memo<br/>draft"]
+        THU["Thu 19:00<br/>CRM follow-up<br/>Top 5 contacts"]
+        FRI["Fri 20:00<br/>LinkedIn article<br/>from column"]
+        SUN["Sun 21:00<br/>Weekly meeting"]
+    end
+
+    subgraph OUT["Outputs"]
+        O1["LinkedIn posts"]
+        O2["Strategy memos"]
+        O3["SANS CRM updates"]
+        O4["GTM analysis"]
+    end
+
+    subgraph KPI["KPIs I Own"]
+        K1["LinkedIn impressions"]
+        K2["SANS referrals"]
+        K3["Network growth"]
+    end
+
+    MON --> TUE --> WED --> THU --> FRI --> SUN
+    SUN --> OUT
+
+    class MON,TUE,WED,THU,FRI,SUN,O1,O2,O3,O4,K1,K2,K3 jiwoong

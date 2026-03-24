@@ -1,0 +1,66 @@
+flowchart TB
+    subgraph INPUT["Input Layer"]
+        R["Daily Research<br/>🤖 Mother"]
+        MI["Member Ideas<br/>👥 Weekly meeting"]
+        EXT["External Signals<br/>Trends, events"]
+    end
+
+    subgraph PRODUCE["Production Layer"]
+        CP["Content Pipeline<br/>🤖 Mother + Members"]
+        EP["Event Production<br/>🟠 Kiwon + 🟤 TJ"]
+        WD["Web Development<br/>🟣 JeHyeong"]
+        YT["YouTube Production<br/>🔴 JY + 🟤 TJ"]
+        DC["Discord Community<br/>🟢 BH"]
+        DR["Domain Research<br/>🔵 JUNGWOO"]
+    end
+
+    subgraph DISTRIBUTE["Distribution Layer"]
+        WEB["Website<br/>🟣 JeHyeong"]
+        DIS["Discord<br/>🟢 BH"]
+        YTC["YouTube<br/>🔴 JY"]
+        LI["LinkedIn<br/>🟡 JiWoong"]
+        RD["Reddit<br/>🟣 JeHyeong"]
+        OFL["Offline Events<br/>🟠 Kiwon"]
+        SANS_N["SANS Network<br/>🟡 JiWoong"]
+    end
+
+    subgraph FEEDBACK["Feedback Layer"]
+        MET["Metrics Collection<br/>⚪ Ryan"]
+        MIR["Mother Mirror<br/>🤖 Pattern Detection"]
+        REV["Weekly Review<br/>🔷 Jay"]
+    end
+
+    INPUT --> CP
+    INPUT --> EP
+    INPUT --> DR
+    CP --> DISTRIBUTE
+    EP --> OFL
+    WD --> WEB
+    YT --> YTC
+    DR --> CP
+
+    DISTRIBUTE --> MET
+    MET --> MIR
+    MIR --> REV
+    REV -->|"Next cycle"| INPUT
+
+    classDef jay fill:#1f6feb,stroke:#388bfd,color:#fff,font-weight:bold
+    classDef kiwon fill:#e8734a,stroke:#f78166,color:#fff,font-weight:bold
+    classDef jiwoong fill:#f1c40f,stroke:#f7dc6f,color:#000,font-weight:bold
+    classDef jy fill:#e74c3c,stroke:#f1948a,color:#fff,font-weight:bold
+    classDef tj fill:#8b4513,stroke:#cd853f,color:#fff,font-weight:bold
+    classDef jehyeong fill:#9b59b6,stroke:#bb8fce,color:#fff,font-weight:bold
+    classDef bh fill:#27ae60,stroke:#58d68d,color:#fff,font-weight:bold
+    classDef jungwoo fill:#3498db,stroke:#85c1e9,color:#fff,font-weight:bold
+    classDef ryan fill:#95a5a6,stroke:#bdc3c7,color:#000,font-weight:bold
+    classDef mother fill:#0d1117,stroke:#58a6ff,color:#58a6ff,font-weight:bold,stroke-width:2px
+
+    class REV jay
+    class EP,OFL kiwon
+    class LI,SANS_N jiwoong
+    class YT,YTC jy
+    class DC,DIS bh
+    class WD,WEB,RD jehyeong
+    class DR jungwoo
+    class MET ryan
+    class R,MIR,CP mother

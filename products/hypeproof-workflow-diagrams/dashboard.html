@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HypeProof Lab — Workflow Dashboard</title>
+<style>
+  :root { --bg:#0d1117; --card:#161b22; --border:#30363d; --text:#e6edf3; --muted:#8b949e; --accent:#58a6ff; --green:#7ee787; --orange:#f78166; --purple:#d2a8ff; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+  .header { background:linear-gradient(135deg,#1a1e2e,#0d1117); border-bottom:1px solid var(--border); padding:2rem; text-align:center; }
+  .header h1 { font-size:1.8rem; } .header h1 span { color:var(--accent); }
+  .header .sub { color:var(--muted); font-size:0.9rem; margin-top:0.25rem; }
+  .stats { display:flex; justify-content:center; gap:2rem; margin-top:1rem; flex-wrap:wrap; }
+  .stat-v { font-size:1.4rem; font-weight:700; color:var(--green); }
+  .stat-l { font-size:0.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em; }
+  .nav { display:flex; justify-content:center; gap:0.4rem; padding:0.8rem 1rem; border-bottom:1px solid var(--border); background:var(--card); flex-wrap:wrap; position:sticky; top:0; z-index:100; }
+  .nav button { background:transparent; border:1px solid var(--border); color:var(--muted); padding:0.35rem 0.8rem; border-radius:6px; cursor:pointer; font-size:0.8rem; transition:all 0.2s; }
+  .nav button:hover { border-color:var(--accent); color:var(--text); }
+  .nav button.active { background:var(--accent); color:#000; border-color:var(--accent); font-weight:600; }
+  .member-btn { border-left:3px solid !important; }
+  .container { max-width:1400px; margin:0 auto; padding:1.5rem; }
+  .section { display:none; animation:fadeIn 0.3s ease; } .section.active { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem; }
+  .card h2 { font-size:1.1rem; margin-bottom:0.2rem; display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; }
+  .card .desc { color:var(--muted); font-size:0.82rem; margin-bottom:1rem; }
+  .badge { display:inline-block; font-size:0.65rem; padding:0.12rem 0.45rem; border-radius:10px; font-weight:600; text-transform:uppercase; }
+  .badge-pass { background:rgba(126,231,135,0.15); color:var(--green); }
+  .badge-fail { background:rgba(247,129,102,0.15); color:var(--orange); }
+  .badge-fixed { background:rgba(210,168,255,0.15); color:var(--purple); }
+  .badge-flow { background:rgba(88,166,255,0.15); color:var(--accent); }
+  .badge-gantt { background:rgba(126,231,135,0.15); color:var(--green); }
+  .badge-pie { background:rgba(210,168,255,0.15); color:var(--purple); }
+  .img-wrap { text-align:center; overflow-x:auto; padding:0.5rem 0; }
+  .img-wrap img { max-width:100%; height:auto; border-radius:8px; border:1px solid var(--border); }
+  .split-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  @media(max-width:900px) { .split-row { grid-template-columns:1fr; } }
+  .legend { display:flex; flex-wrap:wrap; gap:0.6rem; margin:1rem 0; justify-content:center; }
+  .legend-item { display:flex; align-items:center; gap:0.3rem; font-size:0.8rem; }
+  .legend-dot { width:12px; height:12px; border-radius:3px; }
+  .qa-table { width:100%; border-collapse:collapse; margin-top:1rem; font-size:0.85rem; }
+  .qa-table th,.qa-table td { padding:0.5rem 0.75rem; border:1px solid var(--border); text-align:left; }
+  .qa-table th { background:var(--bg); color:var(--muted); font-weight:600; }
+  .footer { text-align:center; padding:1.5rem; color:var(--muted); font-size:0.75rem; border-top:1px solid var(--border); margin-top:2rem; }
+  .personal-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:1rem; }
+  .personal-card { background:var(--bg); border:1px solid var(--border); border-radius:8px; overflow:hidden; cursor:pointer; transition:border-color 0.2s; }
+  .personal-card:hover { border-color:var(--accent); }
+  .personal-card img { width:100%; height:auto; }
+  .personal-card .label { padding:0.5rem 0.75rem; font-size:0.85rem; font-weight:600; display:flex; align-items:center; gap:0.4rem; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>HypeProof <span>Lab</span> — Workflow Dashboard</h1>
+  <p class="sub">Q2 2026 Operations &middot; 9 Members &middot; Color-Coded &middot; AI-Powered by Mother</p>
+  <div class="stats">
+    <div><div class="stat-v">303</div><div class="stat-l">Steps</div></div>
+    <div><div class="stat-v">9</div><div class="stat-l">Members</div></div>
+    <div><div class="stat-v">8</div><div class="stat-l">Channels</div></div>
+    <div><div class="stat-v">44h</div><div class="stat-l">Weekly Cap</div></div>
+    <div><div class="stat-v">8.8</div><div class="stat-l">QA Score</div></div>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#1f6feb"></div>Jay</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e8734a"></div>Kiwon</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f1c40f"></div>JiWoong</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e74c3c"></div>JY</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#8b4513"></div>TJ</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#9b59b6"></div>JeHyeong</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#27ae60"></div>BH</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#3498db"></div>JUNGWOO</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#95a5a6"></div>Ryan</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#0d1117;border:2px solid #58a6ff"></div>Mother</div>
+  </div>
+</div>
+
+<div class="nav" id="nav">
+  <button class="active" onclick="show('d1')">Overview</button>
+  <button onclick="show('d2')">Weekly</button>
+  <button onclick="show('d3')">Content Flow</button>
+  <button onclick="show('d4')">Mother AI</button>
+  <button onclick="show('d5')">Feedback</button>
+  <button onclick="show('d6')">Routing</button>
+  <button onclick="show('d7')">Time</button>
+  <button onclick="show('d8')">Monthly</button>
+  <button onclick="show('personal')" style="border-left:3px solid var(--accent)">My Workflow</button>
+  <button onclick="show('qa')">QA</button>
+</div>
+
+<div class="container">
+
+  <div id="d1" class="section active">
+    <div class="card">
+      <h2>D-1: Overall Workflow <span class="badge badge-flow">flowchart</span> <span class="badge badge-pass">9/10</span></h2>
+      <p class="desc">Input → Production → Distribution → Feedback → Next Cycle. Color = owner.</p>
+      <div class="img-wrap"><img src="d1-color.png" alt="D1"></div>
+    </div>
+  </div>
+
+  <div id="d2" class="section">
+    <div class="card">
+      <h2>D-2: Weekly Rhythm <span class="badge badge-gantt">gantt</span> <span class="badge badge-pass">8/10</span></h2>
+      <p class="desc">Mon–Sun per member</p>
+      <div class="img-wrap"><img src="d2-color.png" alt="D2"></div>
+    </div>
+  </div>
+
+  <div id="d3" class="section">
+    <div class="card">
+      <h2>D-3: Content Flow <span class="badge badge-flow">flowchart</span> <span class="badge badge-pass">9/10</span></h2>
+      <p class="desc">Sources → Transform → Channels</p>
+      <div class="img-wrap"><img src="d3-color.png" alt="D3"></div>
+    </div>
+  </div>
+
+  <div id="d4" class="section">
+    <div class="card">
+      <h2>D-4: Mother AI <span class="badge badge-flow">flowchart</span> <span class="badge badge-pass">9/10</span></h2>
+      <p class="desc">Automate / Assist / Mirror / None</p>
+      <div class="img-wrap"><img src="d4-color.png" alt="D4"></div>
+    </div>
+  </div>
+
+  <div id="d5" class="section">
+    <div class="card">
+      <h2>D-5: Feedback Loop <span class="badge badge-flow">flowchart</span> <span class="badge badge-pass">8/10</span></h2>
+      <p class="desc">Execute → Collect → Analyze → Decide + Mirror Loop</p>
+      <div class="img-wrap"><img src="d5-color.png" alt="D5"></div>
+    </div>
+  </div>
+
+  <div id="d6" class="section">
+    <div class="card">
+      <h2>D-6: Content Routing <span class="badge badge-fixed">SPLIT</span></h2>
+      <p class="desc">Daily Content + Periodic Content routing to all channels</p>
+      <div class="split-row">
+        <div>
+          <h3 style="font-size:0.9rem;margin-bottom:0.5rem;color:var(--accent)">D-6a: Daily Content</h3>
+          <div class="img-wrap"><img src="d6a-color.png" alt="D6a"></div>
+        </div>
+        <div>
+          <h3 style="font-size:0.9rem;margin-bottom:0.5rem;color:var(--accent)">D-6b: Periodic Content</h3>
+          <div class="img-wrap"><img src="d6b-color.png" alt="D6b"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="d7" class="section">
+    <div class="card">
+      <h2>D-7: Time Allocation <span class="badge badge-pie">pie</span> <span class="badge badge-pass">10/10</span></h2>
+      <p class="desc">Weekly hours per member (~44h total)</p>
+      <div class="img-wrap"><img src="d7-color.png" alt="D7"></div>
+    </div>
+  </div>
+
+  <div id="d8" class="section">
+    <div class="card">
+      <h2>D-8: Monthly Cadence <span class="badge badge-gantt">gantt</span> <span class="badge badge-pass">9/10</span></h2>
+      <p class="desc">4-week sprint cycle</p>
+      <div class="img-wrap"><img src="d8-color.png" alt="D8"></div>
+    </div>
+  </div>
+
+  <!-- Personal Workflows -->
+  <div id="personal" class="section">
+    <div class="card">
+      <h2>My Workflow — Personal View</h2>
+      <p class="desc">Click your name to see your weekly rhythm, inputs, outputs, and KPIs.</p>
+      <div class="personal-grid">
+        <div class="personal-card" onclick="show('p-jay')" style="border-left:4px solid #1f6feb">
+          <img src="personal-jay.png" alt="Jay"><div class="label"><div class="legend-dot" style="background:#1f6feb"></div> Jay — Initiative + Mother</div>
+        </div>
+        <div class="personal-card" onclick="show('p-kiwon')" style="border-left:4px solid #e8734a">
+          <img src="personal-kiwon.png" alt="Kiwon"><div class="label"><div class="legend-dot" style="background:#e8734a"></div> Kiwon — GTM + Events</div>
+        </div>
+        <div class="personal-card" onclick="show('p-jiwoong')" style="border-left:4px solid #f1c40f">
+          <img src="personal-jiwoong.png" alt="JiWoong"><div class="label"><div class="legend-dot" style="background:#f1c40f"></div> JiWoong — Strategy + LinkedIn</div>
+        </div>
+        <div class="personal-card" onclick="show('p-jy')" style="border-left:4px solid #e74c3c">
+          <img src="personal-jy.png" alt="JY"><div class="label"><div class="legend-dot" style="background:#e74c3c"></div> JY — YouTube + Vibe Coding</div>
+        </div>
+        <div class="personal-card" onclick="show('p-tj')" style="border-left:4px solid #8b4513">
+          <img src="personal-tj.png" alt="TJ"><div class="label"><div class="legend-dot" style="background:#8b4513"></div> TJ — Video + Podcast</div>
+        </div>
+        <div class="personal-card" onclick="show('p-jehyeong')" style="border-left:4px solid #9b59b6">
+          <img src="personal-jehyeong.png" alt="JeHyeong"><div class="label"><div class="legend-dot" style="background:#9b59b6"></div> JeHyeong — Web + SEO + Reddit</div>
+        </div>
+        <div class="personal-card" onclick="show('p-bh')" style="border-left:4px solid #27ae60">
+          <img src="personal-bh.png" alt="BH"><div class="label"><div class="legend-dot" style="background:#27ae60"></div> BH — Discord Community</div>
+        </div>
+        <div class="personal-card" onclick="show('p-jungwoo')" style="border-left:4px solid #3498db">
+          <img src="personal-jungwoo.png" alt="JUNGWOO"><div class="label"><div class="legend-dot" style="background:#3498db"></div> JUNGWOO — Domain Research</div>
+        </div>
+        <div class="personal-card" onclick="show('p-ryan')" style="border-left:4px solid #95a5a6">
+          <img src="personal-ryan.png" alt="Ryan"><div class="label"><div class="legend-dot" style="background:#95a5a6"></div> Ryan — Data + KPI</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Individual personal views -->
+  <div id="p-jay" class="section"><div class="card"><h2 style="color:#1f6feb">Jay — My Workflow</h2><p class="desc">8-10h/week &middot; Peak: Mon, Sun &middot; Initiative Provider + Mother Ops</p><div class="img-wrap"><img src="personal-jay.png" alt="Jay"></div><button onclick="show('personal')" style="margin-top:1rem;padding:0.4rem 1rem;background:#1f6feb;color:#fff;border:none;border-radius:6px;cursor:pointer">Back to All Members</button></div></div>
+  <div id="p-kiwon" class="section"><div class="card"><h2 style="color:#e8734a">Kiwon — My Workflow</h2><p class="desc">3-5h/week &middot; Peak: Tue, Sat &middot; GTM + Offline Events</p><div class="img-wrap"><img src="personal-kiwon.png" alt="Kiwon"></div><button onclick="show('personal')" style="margin-top:1rem;padding:0.4rem 1rem;background:#e8734a;color:#fff;border:none;border-radius:6px;cursor:pointer">Back to All Members</button></div></div>
+  <div id="p-jiwoong" class="section"><div class="card"><h2 style="color:#f1c40f">JiWoong — My Workflow</h2><p class="desc">3-4h/week &middot; Peak: Mon, Thu &middot; Strategy + SANS</p><div class="img-wrap"><img src="personal-jiwoong.png" alt="JiWoong"></div><button onclick="show('personal')" style="margin-top:1rem;padding:0.4rem 1rem;background:#f1c40f;color:#000;border:none;border-radius:6px;cursor:pointer">Back to All Members</button></div></div>
+  <div id="p-jy" class="section"><div class="card"><h2 style="color:#e74c3c">JY (신진용) — My Workflow</h2><p class="desc">5-7h/week &middot; Peak: Mon-Wed &middot; YouTube + Vibe Coding</p><div class="img-wrap"><img src="personal-jy.png" alt="JY"></div><button onclick="show('personal')" style="margin-top:1rem;padding:0.4rem 1rem;background:#e74c3c;color:#fff;border:none;border-radius:6px;cursor:pointer">Back to All Members</button></div></div>
+  <div id="p-tj" class="section"><div class="card"><h2 style="color:#8b4513">TJ — My Workflow</h2><p class="desc">5-7h/week &middot; Peak: Tue-Thu &middot; Video + Podcast</p><div class="img-wrap"><img src="personal-tj.png" alt="TJ"></div><button onclick="show('personal')" style="margin-top:1rem;padding:0.4rem 1rem;background:#8b4513;color:#fff;border:none;border-radius:6px;cursor:pointer">Back to All Members</button></div></div>
+  <div id="p-jehyeong" class="section"><div class="card"><h2 style="color:#9b59b6">JeHyeong (재형) — My Workflow</h2><p class="desc">5-7h/week &middot; Peak: Mon, Tue, Sat &middot; Web Lead + SEO + Reddit</p><div class="img-wrap"><img src="personal-jehyeong.png" alt="JeHyeong"></div><button onclick="show('personal')" style="margin-top:1rem;padding:0.4rem 1rem;background:#9b59b6;color:#fff;border:none;border-radius:6px;cursor:pointer">Back to All Members</button></div></div>
+  <div id="p-bh" class="section"><div class="card"><h2 style="color:#27ae60">BH (봉호) — My Workflow</h2><p class="desc">3-5h/week &middot; Peak: Mon, Wed &middot; Discord Community</p><div class="img-wrap"><img src="personal-bh.png" alt="BH"></div><button onclick="show('personal')" style="margin-top:1rem;padding:0.4rem 1rem;background:#27ae60;color:#fff;border:none;border-radius:6px;cursor:pointer">Back to All Members</button></div></div>
+  <div id="p-jungwoo" class="section"><div class="card"><h2 style="color:#3498db">JUNGWOO (정우) — My Workflow</h2><p class="desc">3-5h/week &middot; Peak: Tue-Thu &middot; Domain Research + Critical Review</p><div class="img-wrap"><img src="personal-jungwoo.png" alt="JUNGWOO"></div><button onclick="show('personal')" style="margin-top:1rem;padding:0.4rem 1rem;background:#3498db;color:#fff;border:none;border-radius:6px;cursor:pointer">Back to All Members</button></div></div>
+  <div id="p-ryan" class="section"><div class="card"><h2 style="color:#95a5a6">Ryan — My Workflow</h2><p class="desc">3-5h/week &middot; Peak: Mon, Fri-Sat &middot; Data Analysis + KPI</p><div class="img-wrap"><img src="personal-ryan.png" alt="Ryan"></div><button onclick="show('personal')" style="margin-top:1rem;padding:0.4rem 1rem;background:#95a5a6;color:#000;border:none;border-radius:6px;cursor:pointer">Back to All Members</button></div></div>
+
+  <!-- QA Report -->
+  <div id="qa" class="section">
+    <div class="card">
+      <h2>QA Report</h2>
+      <table class="qa-table">
+        <thead><tr><th>Diagram</th><th>Type</th><th>Read</th><th>Comp</th><th>Layout</th><th>Score</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>D-1</td><td>flowchart</td><td>9</td><td>9</td><td>9</td><td><b>9</b></td><td><span class="badge badge-pass">PASS</span></td></tr>
+          <tr><td>D-2</td><td>gantt</td><td>8</td><td>9</td><td>8</td><td><b>8</b></td><td><span class="badge badge-pass">PASS</span></td></tr>
+          <tr><td>D-3</td><td>flowchart</td><td>8</td><td>10</td><td>8</td><td><b>9</b></td><td><span class="badge badge-pass">PASS</span></td></tr>
+          <tr><td>D-4</td><td>flowchart</td><td>8</td><td>10</td><td>8</td><td><b>9</b></td><td><span class="badge badge-pass">PASS</span></td></tr>
+          <tr><td>D-5</td><td>flowchart</td><td>8</td><td>9</td><td>7</td><td><b>8</b></td><td><span class="badge badge-pass">PASS</span></td></tr>
+          <tr><td>D-6</td><td>flowchart</td><td>3</td><td>8</td><td>3</td><td><b>5</b></td><td><span class="badge badge-fail">FAIL</span></td></tr>
+          <tr><td>D-6a</td><td>flowchart</td><td>9</td><td>10</td><td>9</td><td><b>9</b></td><td><span class="badge badge-fixed">FIXED</span></td></tr>
+          <tr><td>D-6b</td><td>flowchart</td><td>9</td><td>10</td><td>8</td><td><b>9</b></td><td><span class="badge badge-fixed">FIXED</span></td></tr>
+          <tr><td>D-7</td><td>pie</td><td>9</td><td>10</td><td>10</td><td><b>10</b></td><td><span class="badge badge-pass">PASS</span></td></tr>
+          <tr><td>D-8</td><td>gantt</td><td>9</td><td>9</td><td>9</td><td><b>9</b></td><td><span class="badge badge-pass">PASS</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">HypeProof Lab Workflow Dashboard v3.0 — Color-coded + Personal Views — 2026-03-24</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(event && event.target.tagName === 'BUTTON' && event.target.parentElement.classList.contains('nav'))
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+flowchart TB
+    classDef bh fill:#27ae60,stroke:#58d68d,color:#fff,font-weight:bold,font-size:14px
+    classDef dim fill:#30363d,stroke:#484f58,color:#8b949e
+
+    subgraph WEEK["🟢 BH — Weekly Rhythm"]
+        MON["Mon 08:00<br/>Discord moderation<br/>+ recap"]
+        TUE["Tue 12:00<br/>Curate discussion<br/>topic"]
+        WED["Wed 19:00<br/>Engagement<br/>+ welcome newbies"]
+        THU["Thu 12:00<br/>Mini-event<br/>poll or challenge"]
+        FRI["Fri 19:00<br/>Share published<br/>content"]
+        SAT["Sat 10:00<br/>Weekend<br/>engagement"]
+        SUN["Sun 21:00<br/>Weekly meeting"]
+    end
+
+    subgraph OUT["Outputs"]
+        O1["Daily prompts"]
+        O2["Discussion threads"]
+        O3["Welcome flow"]
+        O4["Event recaps"]
+    end
+
+    subgraph KPI["KPIs I Own"]
+        K1["Active members"]
+        K2["Messages/week"]
+        K3["Retention rate"]
+    end
+
+    MON --> TUE --> WED --> THU --> FRI --> SAT --> SUN
+    SUN --> OUT
+
+    class MON,TUE,WED,THU,FRI,SAT,SUN,O1,O2,O3,O4,K1,K2,K3 bh

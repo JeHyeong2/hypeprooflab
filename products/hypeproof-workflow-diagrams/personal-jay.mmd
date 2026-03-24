@@ -1,0 +1,40 @@
+flowchart TB
+    classDef jay fill:#1f6feb,stroke:#388bfd,color:#fff,font-weight:bold,font-size:14px
+    classDef dim fill:#30363d,stroke:#484f58,color:#8b949e
+    classDef mother fill:#0d1117,stroke:#58a6ff,color:#58a6ff,stroke-width:2px
+
+    subgraph WEEK["🔷 Jay — Weekly Rhythm"]
+        MON["Mon 07:30<br/>Review metrics<br/>Set weekly focus"]
+        TUE["Tue 08:00<br/>Initiative planning<br/>Direction setting"]
+        WED["Wed 12:00<br/>Content review<br/>& approval"]
+        THU["Thu 21:00<br/>Mother pipeline<br/>health check"]
+        FRI["Fri 19:00<br/>Academy prep<br/>Pilot work"]
+        SAT["Sat 20:00<br/>Weekly meeting<br/>prep"]
+        SUN["Sun 21:00<br/>Weekly meeting<br/>+ retrospective"]
+    end
+
+    subgraph IN["Inputs"]
+        I1["Mother metrics"]
+        I2["Member outputs"]
+        I3["External signals"]
+    end
+
+    subgraph OUT["Outputs"]
+        O1["Weekly direction"]
+        O2["Content approvals"]
+        O3["Mirror Loop config"]
+        O4["Roadmap updates"]
+    end
+
+    subgraph KPI["KPIs I Own"]
+        K1["Pipeline health"]
+        K2["Member activation"]
+        K3["Overall strategy"]
+    end
+
+    IN --> MON
+    MON --> TUE --> WED --> THU --> FRI --> SAT --> SUN
+    SUN --> OUT
+
+    class MON,TUE,WED,THU,FRI,SAT,SUN,O1,O2,O3,O4,K1,K2,K3 jay
+    class I1,I2,I3 dim

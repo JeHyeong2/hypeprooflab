@@ -1,0 +1,32 @@
+flowchart TB
+    classDef kiwon fill:#e8734a,stroke:#f78166,color:#fff,font-weight:bold,font-size:14px
+    classDef dim fill:#30363d,stroke:#484f58,color:#8b949e
+
+    subgraph WEEK["🟠 Kiwon — Weekly Rhythm"]
+        MON["Mon 09:00<br/>Review weekend<br/>event feedback"]
+        TUE["Tue 20:00<br/>Outreach DMs<br/>Seed members"]
+        WED["Wed 12:00<br/>Marketing copy<br/>draft"]
+        THU["Thu 19:00<br/>Event logistics<br/>prep"]
+        FRI["Fri 20:00<br/>GTM strategy<br/>iteration"]
+        SAT["Sat 10:00<br/>Offline event<br/>execution"]
+        SUN["Sun 21:00<br/>Weekly meeting"]
+    end
+
+    subgraph OUT["Outputs"]
+        O1["Seed member list"]
+        O2["Event playbook"]
+        O3["Marketing materials"]
+        O4["NPS data"]
+    end
+
+    subgraph KPI["KPIs I Own"]
+        K1["Event attendance"]
+        K2["NPS score"]
+        K3["Seed member count"]
+        K4["Conversion rate"]
+    end
+
+    MON --> TUE --> WED --> THU --> FRI --> SAT --> SUN
+    SUN --> OUT
+
+    class MON,TUE,WED,THU,FRI,SAT,SUN,O1,O2,O3,O4,K1,K2,K3,K4 kiwon

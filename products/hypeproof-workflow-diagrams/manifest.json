@@ -1,0 +1,82 @@
+[
+  {
+    "index": 1,
+    "type": "flowchart",
+    "label": "D-1: Overall Workflow Overview",
+    "desc": "",
+    "file": "products/hypeproof-workflow-diagrams/d1.mmd",
+    "lines": 45,
+    "node_count": 23,
+    "first_line": "flowchart TB"
+  },
+  {
+    "index": 2,
+    "type": "gantt",
+    "label": "D-2: Weekly Rhythm",
+    "desc": "",
+    "file": "products/hypeproof-workflow-diagrams/d2.mmd",
+    "lines": 73,
+    "node_count": 0,
+    "first_line": "gantt"
+  },
+  {
+    "index": 3,
+    "type": "flowchart",
+    "label": "D-3: Content Flow Across Channels",
+    "desc": "",
+    "file": "products/hypeproof-workflow-diagrams/d3.mmd",
+    "lines": 47,
+    "node_count": 22,
+    "first_line": "flowchart LR"
+  },
+  {
+    "index": 4,
+    "type": "flowchart",
+    "label": "D-4: Mother AI Integration Points",
+    "desc": "",
+    "file": "products/hypeproof-workflow-diagrams/d4.mmd",
+    "lines": 35,
+    "node_count": 27,
+    "first_line": "flowchart TB"
+  },
+  {
+    "index": 5,
+    "type": "flowchart",
+    "label": "D-5: Feedback & Mirror Loop",
+    "desc": "",
+    "file": "products/hypeproof-workflow-diagrams/d5.mmd",
+    "lines": 45,
+    "node_count": 27,
+    "first_line": "flowchart TB"
+  },
+  {
+    "index": 6,
+    "type": "flowchart",
+    "label": "D-6: Content Routing Map",
+    "desc": "",
+    "file": "products/hypeproof-workflow-diagrams/d6.mmd",
+    "lines": 81,
+    "node_count": 37,
+    "first_line": "flowchart TB"
+  },
+  {
+    "index": 7,
+    "type": "unknown",
+    "label": "D-7: Member Weekly Time Allocation",
+    "desc": "",
+    "file": "products/hypeproof-workflow-diagrams/d7.mmd",
+    "lines": 11,
+    "node_count": 0,
+    "first_line": "%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#4A90D9', 'pie2': '#E8734"
+  },
+  {
+    "index": 8,
+    "type": "gantt",
+    "label": "D-8: Monthly Cadence Timeline",
+    "desc": "",
+    "file": "products/hypeproof-workflow-diagrams/d8.mmd",
+    "lines": 22,
+    "node_count": 0,
+    "first_line": "gantt"
+  }
+]

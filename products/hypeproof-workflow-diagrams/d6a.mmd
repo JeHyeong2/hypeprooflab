@@ -1,0 +1,41 @@
+flowchart LR
+    subgraph SRC["Daily Content"]
+        C1["Daily Research<br/>Mother 06:00"]
+        C2["Column<br/>Member + QA"]
+        C7["Discord Discussion<br/>BH daily"]
+    end
+
+    subgraph WEB["Website"]
+        W1["Full article<br/>immediate"]
+        W2["Full article<br/>same day"]
+    end
+
+    subgraph DISC["Discord"]
+        D1["#daily-research<br/>within 1h"]
+        D2["#content-pipeline<br/>same day"]
+    end
+
+    subgraph LI["LinkedIn"]
+        L1["Summary adapt<br/>same day"]
+        L2["Professional take<br/>+1 day"]
+    end
+
+    subgraph RD["Reddit"]
+        R2["Community angle<br/>+1-2 days"]
+    end
+
+    subgraph OTH["Other"]
+        O7["Podcast script<br/>bi-weekly"]
+    end
+
+    C1 --> W1
+    C1 --> D1
+    C1 --> L1
+
+    C2 --> W2
+    C2 --> D2
+    C2 --> L2
+    C2 --> R2
+    C2 --> O7
+
+    C7 --> O7

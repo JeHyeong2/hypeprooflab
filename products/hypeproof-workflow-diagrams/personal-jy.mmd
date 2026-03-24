@@ -1,0 +1,30 @@
+flowchart TB
+    classDef jy fill:#e74c3c,stroke:#f1948a,color:#fff,font-weight:bold,font-size:14px
+    classDef dim fill:#30363d,stroke:#484f58,color:#8b949e
+
+    subgraph WEEK["🔴 JY — Weekly Rhythm"]
+        MON["Mon 09:30<br/>Research topic<br/>Vibe coding"]
+        TUE["Tue 20:00<br/>Script writing<br/>Episode outline"]
+        WED["Wed 20:00<br/>Record demo<br/>session"]
+        THU["Thu 21:00<br/>Edit review<br/>with TJ"]
+        FRI["Fri 20:00<br/>Tech column<br/>writing"]
+        SAT["Sat 15:00<br/>Content publish<br/>YouTube upload"]
+        SUN["Sun 21:00<br/>Weekly meeting"]
+    end
+
+    subgraph OUT["Outputs"]
+        O1["YouTube episodes"]
+        O2["Tech columns"]
+        O3["Vibe coding series"]
+    end
+
+    subgraph KPI["KPIs I Own"]
+        K1["YouTube views"]
+        K2["Subscribers"]
+        K3["Watch time"]
+    end
+
+    MON --> TUE --> WED --> THU --> FRI --> SAT --> SUN
+    SUN --> OUT
+
+    class MON,TUE,WED,THU,FRI,SAT,SUN,O1,O2,O3,K1,K2,K3 jy

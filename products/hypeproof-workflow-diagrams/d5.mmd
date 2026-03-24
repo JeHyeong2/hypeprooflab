@@ -1,0 +1,45 @@
+flowchart TB
+    subgraph EXECUTE["Member Execution"]
+        E1[Write column]
+        E2[Produce video]
+        E3[Run event]
+        E4[Post on LinkedIn]
+        E5[Engage on Discord]
+        E6[Domain research]
+    end
+
+    subgraph COLLECT["Metrics Collection (Ryan)"]
+        M1[Page views / bounce rate]
+        M2[YouTube analytics]
+        M3[Discord activity]
+        M4[LinkedIn impressions]
+        M5[Event NPS]
+    end
+
+    subgraph ANALYZE["Mother Analysis"]
+        AN1[Content performance ranking]
+        AN2[Topic heat map]
+        AN3[Member activity patterns]
+        AN4[Channel ROI comparison]
+    end
+
+    subgraph MIRROR_LOOP["Mirror Loop"]
+        ML1[Pattern detection in member output]
+        ML2[Cross-reference with philosophy]
+        ML3[Personal growth report per member]
+        ML4[Suggested reading / reflection]
+    end
+
+    subgraph DECIDE["Weekly Review (Jay)"]
+        DEC1[Adjust content mix]
+        DEC2[Reallocate channel effort]
+        DEC3[Set next week focus]
+    end
+
+    EXECUTE --> COLLECT
+    COLLECT --> ANALYZE
+    ANALYZE --> DECIDE
+    DECIDE -->|Next cycle| EXECUTE
+
+    EXECUTE --> MIRROR_LOOP
+    MIRROR_LOOP -->|Private DM to member| EXECUTE

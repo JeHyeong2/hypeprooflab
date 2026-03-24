@@ -1,0 +1,47 @@
+flowchart LR
+    subgraph SOURCE["Content Sources"]
+        DR[Daily Research<br/>Mother auto]
+        MC[Member Columns<br/>Manual + Mother assist]
+        YV[YouTube Video<br/>JY + TJ]
+        PE[Podcast Episode<br/>TJ]
+        EV[Event Recap<br/>Kiwon]
+        DA[Domain Analysis<br/>JUNGWOO]
+    end
+
+    subgraph TRANSFORM["Transform"]
+        T1[Full article<br/>Website]
+        T2[Thread / summary<br/>LinkedIn]
+        T3[Discussion post<br/>Discord]
+        T4[Short clip<br/>YouTube Shorts]
+        T5[Reddit post<br/>r/artificial etc]
+        T6[Teaser / CTA<br/>Offline handout]
+        T7[Podcast script<br/>TJ converts]
+    end
+
+    subgraph CHANNELS["Channels"]
+        W[Website]
+        D[Discord]
+        Y[YouTube]
+        L[LinkedIn]
+        RR[Reddit]
+        O[Offline]
+    end
+
+    DR --> T1 --> W
+    DR --> T3 --> D
+    DR --> T2 --> L
+    MC --> T1
+    MC --> T2
+    MC --> T5 --> RR
+    MC --> T7
+    YV --> Y
+    YV --> T4 --> Y
+    YV --> T3
+    PE --> D
+    PE --> T2
+    EV --> T1
+    EV --> T3
+    EV --> T6 --> O
+    DA --> T1
+    DA --> T3
+    DA --> T5

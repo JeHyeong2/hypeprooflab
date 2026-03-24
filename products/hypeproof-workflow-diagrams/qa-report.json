@@ -1,0 +1,10 @@
+[
+  {"diagram":"d1","type":"flowchart","readability":9,"completeness":9,"layout":9,"score":9,"pass":true,"issues":null,"high_node_count":false},
+  {"diagram":"d2","type":"gantt","readability":8,"completeness":9,"layout":8,"score":8,"pass":true,"issues":null,"high_node_count":false},
+  {"diagram":"d3","type":"flowchart","readability":8,"completeness":10,"layout":8,"score":9,"pass":true,"issues":null,"high_node_count":false},
+  {"diagram":"d4","type":"flowchart","readability":8,"completeness":10,"layout":8,"score":9,"pass":true,"issues":null,"high_node_count":true},
+  {"diagram":"d5","type":"flowchart","readability":8,"completeness":9,"layout":7,"score":8,"pass":true,"issues":null,"high_node_count":true},
+  {"diagram":"d6","type":"flowchart","readability":3,"completeness":8,"layout":3,"score":5,"pass":false,"issues":"37 nodes in horizontal grid, text unreadable","high_node_count":true},
+  {"diagram":"d7","type":"pie","readability":9,"completeness":10,"layout":10,"score":10,"pass":true,"issues":null,"high_node_count":false},
+  {"diagram":"d8","type":"gantt","readability":9,"completeness":9,"layout":9,"score":9,"pass":true,"issues":null,"high_node_count":false}
+]

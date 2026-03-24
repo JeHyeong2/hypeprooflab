@@ -1,0 +1,45 @@
+flowchart TB
+    subgraph INPUT["Input Layer"]
+        R[Daily Research<br/>Mother automated]
+        MI[Member Ideas<br/>Weekly meeting]
+        EXT[External Signals<br/>Trends, events, feedback]
+    end
+
+    subgraph PRODUCE["Production Layer"]
+        CP[Content Production<br/>Pipeline]
+        EP[Event Production<br/>Kiwon + TJ]
+        WD[Web Development<br/>JeHyeong]
+        YT[YouTube Production<br/>JY + TJ]
+        DC[Discord Community<br/>BH]
+        DR[Domain Research<br/>JUNGWOO]
+    end
+
+    subgraph DISTRIBUTE["Distribution Layer"]
+        WEB[Website<br/>JeHyeong]
+        DIS[Discord<br/>BH]
+        YTC[YouTube<br/>JY]
+        LI[LinkedIn<br/>JiWoong]
+        RD[Reddit<br/>JeHyeong]
+        OFL[Offline Events<br/>Kiwon]
+        SANS[SANS Network<br/>JiWoong]
+    end
+
+    subgraph FEEDBACK["Feedback Layer"]
+        MET[Metrics Collection<br/>Ryan]
+        MIR[Mother Mirror<br/>Pattern Detection]
+        REV[Weekly Review<br/>Jay]
+    end
+
+    INPUT --> CP
+    INPUT --> EP
+    INPUT --> DR
+    CP --> DISTRIBUTE
+    EP --> OFL
+    WD --> WEB
+    YT --> YTC
+    DR --> CP
+
+    DISTRIBUTE --> MET
+    MET --> MIR
+    MIR --> REV
+    REV -->|Next cycle| INPUT

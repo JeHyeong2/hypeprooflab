@@ -1,0 +1,30 @@
+flowchart TB
+    classDef jungwoo fill:#3498db,stroke:#85c1e9,color:#fff,font-weight:bold,font-size:14px
+    classDef dim fill:#30363d,stroke:#484f58,color:#8b949e
+
+    subgraph WEEK["🔵 JUNGWOO — Weekly Rhythm"]
+        MON["Mon 09:00<br/>Domain research<br/>topic selection"]
+        TUE["Tue 20:00<br/>Deep domain<br/>research"]
+        WED["Wed 20:00<br/>Research<br/>continued"]
+        THU["Thu 19:00<br/>Critical analysis<br/>writing"]
+        FRI["Fri 20:00<br/>Devil advocate<br/>review"]
+        SAT["Sat 15:00<br/>Refine + share<br/>findings"]
+        SUN["Sun 21:00<br/>Weekly meeting"]
+    end
+
+    subgraph OUT["Outputs"]
+        O1["Domain analysis briefs"]
+        O2["Critical reviews"]
+        O3["Industry insights"]
+    end
+
+    subgraph KPI["KPIs I Own"]
+        K1["Briefs published"]
+        K2["Review quality"]
+        K3["Domain coverage"]
+    end
+
+    MON --> TUE --> WED --> THU --> FRI --> SAT --> SUN
+    SUN --> OUT
+
+    class MON,TUE,WED,THU,FRI,SAT,SUN,O1,O2,O3,K1,K2,K3 jungwoo
