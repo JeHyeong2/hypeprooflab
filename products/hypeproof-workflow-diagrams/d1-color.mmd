@@ -1,33 +1,33 @@
 flowchart TB
-    subgraph INPUT["Input Layer"]
-        R["Daily Research<br/>🤖 Mother"]
-        MI["Member Ideas<br/>👥 Weekly meeting"]
-        EXT["External Signals<br/>Trends, events"]
+    subgraph INPUT["입력 계층"]
+        R["일일 리서치<br/>Mother 자동"]
+        MI["멤버 아이디어<br/>주간 미팅"]
+        EXT["외부 시그널<br/>트렌드, 이벤트"]
     end
 
-    subgraph PRODUCE["Production Layer"]
-        CP["Content Pipeline<br/>🤖 Mother + Members"]
-        EP["Event Production<br/>🟠 Kiwon + 🟤 TJ"]
-        WD["Web Development<br/>🟣 JeHyeong"]
-        YT["YouTube Production<br/>🔴 JY + 🟤 TJ"]
-        DC["Discord Community<br/>🟢 BH"]
-        DR["Domain Research<br/>🔵 JUNGWOO"]
+    subgraph PRODUCE["제작 계층"]
+        CP["콘텐츠 제작<br/>파이프라인"]
+        EP["이벤트 제작<br/>Kiwon + TJ"]
+        WD["웹 개발<br/>JeHyeong"]
+        YT["YouTube 제작<br/>JY + TJ"]
+        DC["Discord 커뮤니티<br/>BH"]
+        DR["도메인 리서치<br/>JUNGWOO"]
     end
 
-    subgraph DISTRIBUTE["Distribution Layer"]
-        WEB["Website<br/>🟣 JeHyeong"]
-        DIS["Discord<br/>🟢 BH"]
-        YTC["YouTube<br/>🔴 JY"]
-        LI["LinkedIn<br/>🟡 JiWoong"]
-        RD["Reddit<br/>🟣 JeHyeong"]
-        OFL["Offline Events<br/>🟠 Kiwon"]
-        SANS_N["SANS Network<br/>🟡 JiWoong"]
+    subgraph DISTRIBUTE["배포 계층"]
+        WEB["웹사이트<br/>JeHyeong"]
+        DIS["Discord<br/>BH"]
+        YTC["YouTube<br/>JY"]
+        LI["LinkedIn<br/>JiWoong"]
+        RD["Reddit<br/>JeHyeong"]
+        OFL["오프라인 이벤트<br/>Kiwon"]
+        SANS_N["SANS 네트워크<br/>JiWoong"]
     end
 
-    subgraph FEEDBACK["Feedback Layer"]
-        MET["Metrics Collection<br/>⚪ Ryan"]
-        MIR["Mother Mirror<br/>🤖 Pattern Detection"]
-        REV["Weekly Review<br/>🔷 Jay"]
+    subgraph FEEDBACK["피드백 계층"]
+        MET["성과 수집<br/>Ryan"]
+        MIR["Mother Mirror<br/>패턴 감지"]
+        REV["주간 리뷰<br/>Jay"]
     end
 
     INPUT --> CP
@@ -42,7 +42,7 @@ flowchart TB
     DISTRIBUTE --> MET
     MET --> MIR
     MIR --> REV
-    REV -->|"Next cycle"| INPUT
+    REV -->|"다음 사이클"| INPUT
 
     classDef jay fill:#1f6feb,stroke:#388bfd,color:#fff,font-weight:bold
     classDef kiwon fill:#e8734a,stroke:#f78166,color:#fff,font-weight:bold

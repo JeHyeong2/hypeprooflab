@@ -1,31 +1,31 @@
 flowchart LR
-    subgraph SRC["Daily Content"]
-        C1["🤖 Daily Research<br/>Mother 06:00"]
-        C2["✍️ Column<br/>Member + 🤖 QA"]
-        C7["🟢 Discord Discussion<br/>BH daily"]
+    subgraph SRC["일일 콘텐츠"]
+        C1["일일 리서치<br/>Mother 06:00"]
+        C2["칼럼<br/>멤버 + Mother QA"]
+        C7["Discord 토론<br/>BH 매일"]
     end
 
-    subgraph WEB["🟣 Website (JeHyeong)"]
-        W1["Full article<br/>immediate"]
-        W2["Full article<br/>same day"]
+    subgraph WEB["웹사이트 (JeHyeong)"]
+        W1["전문 기사<br/>즉시"]
+        W2["전문 기사<br/>당일"]
     end
 
-    subgraph DISC["🟢 Discord (BH)"]
-        D1["#daily-research<br/>within 1h"]
-        D2["#content-pipeline<br/>same day"]
+    subgraph DISC["Discord (BH)"]
+        D1["#daily-research<br/>1시간 내"]
+        D2["#content-pipeline<br/>당일"]
     end
 
-    subgraph LI["🟡 LinkedIn (JiWoong)"]
-        L1["Summary adapt<br/>same day"]
-        L2["Professional take<br/>+1 day"]
+    subgraph LI["LinkedIn (JiWoong)"]
+        L1["요약 적용<br/>당일"]
+        L2["전문가 의견<br/>+1일"]
     end
 
-    subgraph RD["🟣 Reddit (JeHyeong)"]
-        R2["Community angle<br/>+1-2 days"]
+    subgraph RD["Reddit (JeHyeong)"]
+        R2["커뮤니티 관점<br/>+1~2일"]
     end
 
-    subgraph OTH["Other"]
-        O7["🟤 Podcast script<br/>bi-weekly"]
+    subgraph OTH["기타"]
+        O7["팟캐스트 스크립트<br/>격주"]
     end
 
     C1 --> W1

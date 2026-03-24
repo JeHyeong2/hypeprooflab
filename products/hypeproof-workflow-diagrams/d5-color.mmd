@@ -1,48 +1,48 @@
 flowchart TB
-    subgraph EXECUTE["Member Execution"]
-        E1["✍️ Write column"]
-        E2["🔴 Produce video<br/>JY"]
-        E3["🟠 Run event<br/>Kiwon"]
-        E4["🟡 Post on LinkedIn<br/>JiWoong"]
-        E5["🟢 Engage on Discord<br/>BH"]
-        E6["🔵 Domain research<br/>JUNGWOO"]
+    subgraph EXECUTE["멤버 실행"]
+        E1["칼럼 작성"]
+        E2["영상 제작<br/>JY"]
+        E3["이벤트 운영<br/>Kiwon"]
+        E4["LinkedIn 포스팅<br/>JiWoong"]
+        E5["Discord 참여<br/>BH"]
+        E6["도메인 리서치<br/>JUNGWOO"]
     end
 
-    subgraph COLLECT["⚪ Metrics Collection (Ryan)"]
-        M1["Page views / bounce rate"]
-        M2["YouTube analytics"]
-        M3["Discord activity"]
-        M4["LinkedIn impressions"]
-        M5["Event NPS"]
+    subgraph COLLECT["성과 수집 (Ryan)"]
+        M1["페이지뷰 / 이탈률"]
+        M2["YouTube 분석"]
+        M3["Discord 활동"]
+        M4["LinkedIn 노출수"]
+        M5["이벤트 NPS"]
     end
 
-    subgraph ANALYZE["🤖 Mother Analysis"]
-        AN1["Content performance ranking"]
-        AN2["Topic heat map"]
-        AN3["Member activity patterns"]
-        AN4["Channel ROI comparison"]
+    subgraph ANALYZE["Mother 분석"]
+        AN1["콘텐츠 성과 순위"]
+        AN2["토픽 히트맵"]
+        AN3["멤버 활동 패턴"]
+        AN4["채널 ROI 비교"]
     end
 
-    subgraph MIRROR_LOOP["🤖 Mirror Loop"]
-        ML1["Pattern detection in member output"]
-        ML2["Cross-reference with philosophy"]
-        ML3["Personal growth report per member"]
-        ML4["Suggested reading / reflection"]
+    subgraph MIRROR_LOOP["Mirror Loop"]
+        ML1["멤버 산출물<br/>패턴 감지"]
+        ML2["철학과 교차 참조"]
+        ML3["멤버별 성장 리포트"]
+        ML4["추천 리딩 / 성찰"]
     end
 
-    subgraph DECIDE["🔷 Weekly Review (Jay)"]
-        DEC1["Adjust content mix"]
-        DEC2["Reallocate channel effort"]
-        DEC3["Set next week focus"]
+    subgraph DECIDE["주간 리뷰 (Jay)"]
+        DEC1["콘텐츠 비율 조정"]
+        DEC2["채널 투입 재배치"]
+        DEC3["다음 주 포커스 설정"]
     end
 
     EXECUTE --> COLLECT
     COLLECT --> ANALYZE
     ANALYZE --> DECIDE
-    DECIDE -->|"Next cycle"| EXECUTE
+    DECIDE -->|"다음 사이클"| EXECUTE
 
     EXECUTE --> MIRROR_LOOP
-    MIRROR_LOOP -->|"Private DM to member"| EXECUTE
+    MIRROR_LOOP -->|"멤버에게 개인 DM"| EXECUTE
 
     classDef jay fill:#1f6feb,stroke:#388bfd,color:#fff,font-weight:bold
     classDef kiwon fill:#e8734a,stroke:#f78166,color:#fff,font-weight:bold

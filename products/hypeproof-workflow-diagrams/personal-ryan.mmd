@@ -2,26 +2,26 @@ flowchart TB
     classDef ryan fill:#95a5a6,stroke:#bdc3c7,color:#000,font-weight:bold,font-size:14px
     classDef dim fill:#30363d,stroke:#484f58,color:#8b949e
 
-    subgraph WEEK["⚪ Ryan — Weekly Rhythm"]
-        MON["Mon 08:00<br/>Pull weekly<br/>analytics"]
-        TUE["Tue 20:00<br/>Dashboard<br/>update"]
-        WED["Wed 12:00<br/>Data analysis<br/>deep-dive"]
-        THU["Thu 19:00<br/>Cross-reference<br/>metrics"]
-        FRI["Fri 20:00<br/>KPI snapshot<br/>compilation"]
-        SAT["Sat 15:00<br/>Finalize<br/>KPI report"]
-        SUN["Sun 21:00<br/>Weekly meeting<br/>Present data"]
+    subgraph WEEK["Ryan — 주간 리듬"]
+        MON["월 08:00<br/>주간 분석<br/>데이터 수집"]
+        TUE["화 20:00<br/>대시보드<br/>업데이트"]
+        WED["수 12:00<br/>데이터 분석<br/>심층"]
+        THU["목 19:00<br/>교차 지표<br/>확인"]
+        FRI["금 20:00<br/>KPI 스냅샷<br/>정리"]
+        SAT["토 15:00<br/>KPI 리포트<br/>확정"]
+        SUN["일 21:00<br/>주간 미팅<br/>데이터 발표"]
     end
 
-    subgraph OUT["Outputs"]
-        O1["KPI dashboard"]
-        O2["Weekly report"]
-        O3["Attribution analysis"]
+    subgraph OUT["산출물"]
+        O1["KPI 대시보드"]
+        O2["주간 리포트"]
+        O3["기여도 분석"]
     end
 
-    subgraph KPI["KPIs I Own"]
-        K1["Data freshness"]
-        K2["Report accuracy"]
-        K3["Insight actionability"]
+    subgraph KPI["내가 담당하는 KPI"]
+        K1["데이터 신선도"]
+        K2["리포트 정확도"]
+        K3["인사이트 실행 가능성"]
     end
 
     MON --> TUE --> WED --> THU --> FRI --> SAT --> SUN
