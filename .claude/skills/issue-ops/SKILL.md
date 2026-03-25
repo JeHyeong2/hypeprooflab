@@ -108,3 +108,48 @@ gh issue list --repo jayleekr/hypeprooflab --label "priority:high"
 # 이슈에 코멘트
 gh issue comment N --repo jayleekr/hypeprooflab --body "진행 상황"
 ```
+
+## 자동화 연동 (issue-solver / issue-filer)
+
+issue-ops는 수동 이슈 운영 규칙을 정의한다. 자동화 스킬은 이 규칙을 따른다:
+
+### issue-filer (`.claude/skills/issue-filer/SKILL.md`)
+- **역할**: 리뷰/QA/크론 실패를 스캔 → GitHub Issue 자동 생성
+- **라벨**: 위 라벨 체계를 따름 (type + area + priority + agent)
+- **Dedup**: 기존 오픈 이슈와 중복 체크 후 생성
+- **실행**: `cron-prompts/run-job.sh issue-filer` 또는 `/issue-filer`
+
+### issue-solver (`.claude/skills/issue-solver/SKILL.md`)
+- **역할**: 오픈 이슈를 가져와 자동 해결 → 커밋
+- **대상**: `priority:high`, `priority:medium` 라벨 이슈
+- **스킵**: `blocked`, `no-auto-fix`, `needs-human` 라벨
+- **검증**: `cd web && npm run build` 필수 통과
+- **실행**: `cron-prompts/run-job-parallel.sh issue-solver` (병렬) 또는 `/issue-solver`
+
+### 파이프라인 흐름
+
+```
+issue-filer (크론) → 이슈 자동 생성
+  → Jay 확인 (라벨 조정, assign)
+  → issue-solver (크론) → worktree에서 병렬 해결
+  → main 머지 + 이슈 close
+```
+
+### 크론 실행 (OpenClaw or launchd)
+
+```bash
+# 개인 계정으로 실행 (cc alias)
+source ~/.shell_common
+cd ~/CodeWorkspace/hypeproof
+
+# issue-filer: 주 1회 (문제 스캔 → 이슈 생성)
+cron-prompts/run-job.sh issue-filer
+
+# issue-solver: 주 2~3회 (이슈 해결 → 머지)
+cron-prompts/run-job-parallel.sh issue-solver
+```
+
+### 설정
+- Config: `.claude/skills/config/config.yaml`
+- 크론 스크립트: `cron-prompts/run-job.sh`, `cron-prompts/run-job-parallel.sh`
+- 프롬프트: `cron-prompts/issue-solver.md`, `cron-prompts/issue-filer.md`

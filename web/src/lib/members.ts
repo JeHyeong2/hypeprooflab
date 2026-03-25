@@ -1,3 +1,6 @@
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
 export type MemberRole = 'admin' | 'creator' | 'spectator';
 
 export interface MemberInfo {
@@ -9,22 +12,39 @@ export interface MemberInfo {
   totalPoints?: number;
 }
 
-// Fallback list (no emails for security — Notion is source of truth)
-const FALLBACK_MEMBERS: { displayName: string; role: MemberRole }[] = [
-  { displayName: 'Jay', role: 'admin' },
-  { displayName: 'Kiwon', role: 'creator' },
-  { displayName: 'TJ', role: 'creator' },
-  { displayName: 'Ryan', role: 'creator' },
-  { displayName: 'JY', role: 'creator' },
-  { displayName: 'BH', role: 'creator' },
-  { displayName: 'Sebastian', role: 'creator' },
+interface MembersJsonEntry {
+  displayName: string;
+  role: MemberRole;
+  [key: string]: unknown;
+}
 
-  { displayName: '재형', role: 'creator' },
+// Load fallback members from data/members.json (SSOT)
+function loadFallbackMembers(): { displayName: string; role: MemberRole }[] {
+  try {
+    const jsonPath = join(process.cwd(), '..', 'data', 'members.json');
+    const raw = readFileSync(jsonPath, 'utf-8');
+    const data = JSON.parse(raw);
+    return (data.members as MembersJsonEntry[])
+      .filter((m) => m.status === 'active')
+      .map((m) => ({ displayName: m.displayName, role: m.role as MemberRole }));
+  } catch {
+    // Hardcoded fallback if JSON file is unavailable (e.g. standalone build)
+    return [
+      { displayName: 'Jay', role: 'admin' },
+      { displayName: 'Kiwon', role: 'creator' },
+      { displayName: 'TJ', role: 'creator' },
+      { displayName: 'Ryan', role: 'creator' },
+      { displayName: 'JY', role: 'creator' },
+      { displayName: 'BH', role: 'creator' },
+      { displayName: 'Sebastian', role: 'creator' },
+      { displayName: '재형', role: 'creator' },
+      { displayName: '정우', role: 'creator' },
+      { displayName: 'Simon', role: 'creator' },
+    ];
+  }
+}
 
-  { displayName: '정우', role: 'creator' },
-
-  { displayName: 'Simon', role: 'creator' },
-];
+const FALLBACK_MEMBERS = loadFallbackMembers();
 
 // Cache — keyed by displayName (lowercased) for lookup, stores full list
 let memberList: MemberInfo[] = [];

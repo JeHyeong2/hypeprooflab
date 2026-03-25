@@ -25,6 +25,8 @@ case "$COMMAND" in
   research)      TIMEOUT="${_USER_TIMEOUT:-600}";  BUDGET="${_USER_BUDGET:-2.00}" ;;
   deploy)        TIMEOUT="${_USER_TIMEOUT:-600}";  BUDGET="${_USER_BUDGET:-2.00}" ;;
   announce)      TIMEOUT="${_USER_TIMEOUT:-180}";  BUDGET="${_USER_BUDGET:-0.50}" ;;
+  onboard)       TIMEOUT="${_USER_TIMEOUT:-300}";  BUDGET="${_USER_BUDGET:-1.00}" ;;
+  update-member) TIMEOUT="${_USER_TIMEOUT:-300}";  BUDGET="${_USER_BUDGET:-1.00}" ;;
   healthcheck)   TIMEOUT="${_USER_TIMEOUT:-600}";  BUDGET="${_USER_BUDGET:-3.00}" ;;
   academy-casegen) TIMEOUT="${_USER_TIMEOUT:-1800}"; BUDGET="${_USER_BUDGET:-5.00}" ;;
   *)             TIMEOUT="${_USER_TIMEOUT:-600}";  BUDGET="${_USER_BUDGET:-1.00}" ;;

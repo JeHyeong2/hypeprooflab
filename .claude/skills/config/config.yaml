@@ -1,0 +1,22 @@
+# =============================================================================
+# HypeProof Shared Configuration
+# =============================================================================
+
+# --- GitHub Repos (issue routing) -------------------------------------------
+github:
+  repos:
+    hypeprooflab:
+      full_name: jayleekr/hypeprooflab
+      auto_fix_labels:
+        - priority:high
+        - priority:medium
+      max_issues_per_run: 3
+  skip_labels:
+    - blocked
+    - no-auto-fix
+    - needs-human
+
+# --- Features (toggle skills on/off) ----------------------------------------
+features:
+  issue_solver: true
+  issue_filer: true
