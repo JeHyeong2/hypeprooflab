@@ -17,7 +17,7 @@ WORKTREE_BASE="$WORKSPACE/.claude/worktrees"
 # Safety limits
 MAX_CONCURRENT="${MAX_CONCURRENT_OVERRIDE:-3}"
 GLOBAL_TIMEOUT=1800  # 30 minutes
-CLAUDE_BIN="${CLAUDE_BIN:-$HOME/.local/bin/claude}"
+export CLAUDE_BIN="${CLAUDE_BIN:-$HOME/.local/bin/claude}"
 
 DRY_RUN=false
 MODE="${1:-help}"
