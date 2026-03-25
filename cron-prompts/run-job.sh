@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 # run-job.sh — Cron wrapper for Claude Code headless execution
 # Usage: run-job.sh <prompt-name>  (e.g., issue-solver, issue-filer)
 # Called by launchd or manually.
@@ -93,11 +93,9 @@ unset ${(k)parameters[(R)*OTEL*]} 2>/dev/null || true
 [[ -n "$SAVE_BUDGET" ]] && export CLAUDE_BUDGET_USD="$SAVE_BUDGET"
 
 # Find Claude binary
-# Source shell aliases (cc = personal Claude Code account)
-[[ -f "$HOME/.shell_common" ]] && source "$HOME/.shell_common"
-CLAUDE_BIN="${CLAUDE_BIN:-$(command -v cc 2>/dev/null || command -v claude 2>/dev/null || echo "$HOME/.local/bin/claude")}"
-if [[ ! -x "$CLAUDE_BIN" ]] && ! type "$CLAUDE_BIN" &>/dev/null; then
-  echo "FATAL: claude/cc not found" >&2
+CLAUDE_BIN="${CLAUDE_BIN:-$HOME/.local/bin/claude}"
+if [[ ! -x "$CLAUDE_BIN" ]]; then
+  echo "FATAL: claude not found at $CLAUDE_BIN" >&2
   exit 1
 fi
 
@@ -108,11 +106,12 @@ echo "Timeout: ${TIMEOUT_SEC}s | MaxTurns: ${MAX_TURNS}" | tee -a "$LOG_FILE"
 set +e
 perl -e "alarm ${TIMEOUT_SEC}; exec @ARGV" -- \
   "$CLAUDE_BIN" -p "$WORKSPACE" \
+  --dangerously-skip-permissions \
   --print \
-  ${=TOOL_SCOPE} \
+  ${TOOL_SCOPE} \
   --max-turns "$MAX_TURNS" \
   <<< "$PROMPT_CONTENT" 2>&1 | tee -a "$LOG_FILE"
-EXIT_CODE=${pipestatus[1]}
+EXIT_CODE=${PIPESTATUS[0]}
 
 # Retry once on connection error
 if [[ "$EXIT_CODE" -ne 0 ]] && grep -q "ConnectionRefused\|ECONNREFUSED\|Unable to connect" "$LOG_FILE" 2>/dev/null; then
@@ -120,11 +119,12 @@ if [[ "$EXIT_CODE" -ne 0 ]] && grep -q "ConnectionRefused\|ECONNREFUSED\|Unable 
   sleep 60
   perl -e "alarm ${TIMEOUT_SEC}; exec @ARGV" -- \
     "$CLAUDE_BIN" -p "$WORKSPACE" \
+    --dangerously-skip-permissions \
     --print \
-    ${=TOOL_SCOPE} \
+    ${TOOL_SCOPE} \
     --max-turns "$MAX_TURNS" \
     <<< "$PROMPT_CONTENT" 2>&1 | tee -a "$LOG_FILE"
-  EXIT_CODE=${pipestatus[1]}
+  EXIT_CODE=${PIPESTATUS[0]}
 fi
 set -e
 

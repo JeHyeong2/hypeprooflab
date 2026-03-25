@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 # run-job-parallel.sh — Parallel issue-solver with worktree isolation
 # Usage: run-job-parallel.sh issue-solver [--dry-run]
 #
@@ -7,6 +7,7 @@
 
 set -euo pipefail
 
+BG_PIDS=()
 WORKSPACE="${HYPEPROOF_WORKSPACE:-$(cd "$(dirname "$0")/.." && pwd)}"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPORT_DIR="$WORKSPACE/cron-reports"
@@ -16,9 +17,7 @@ WORKTREE_BASE="$WORKSPACE/.claude/worktrees"
 # Safety limits
 MAX_CONCURRENT="${MAX_CONCURRENT_OVERRIDE:-3}"
 GLOBAL_TIMEOUT=1800  # 30 minutes
-# Source shell aliases (cc = personal Claude Code account)
-[[ -f "$HOME/.shell_common" ]] && source "$HOME/.shell_common"
-CLAUDE_BIN="${CLAUDE_BIN:-$(command -v cc 2>/dev/null || command -v claude 2>/dev/null || echo "$HOME/.local/bin/claude")}"
+CLAUDE_BIN="${CLAUDE_BIN:-$HOME/.local/bin/claude}"
 
 DRY_RUN=false
 MODE="${1:-help}"
@@ -155,8 +154,8 @@ for i in issues:
   fi
 
   # Unset CLAUDE* env vars to prevent nested session detection
-  unset ${(k)parameters[(R)*CLAUDE*]} 2>/dev/null || true
-  unset ${(k)parameters[(R)*OTEL*]} 2>/dev/null || true
+  for v in $(env | grep -oE '^CLAUDE[^=]*'); do unset "$v"; done 2>/dev/null || true
+  for v in $(env | grep -oE '^OTEL[^=]*'); do unset "$v"; done 2>/dev/null || true
 
   # ===== PHASE 1: Parallel solve in worktrees =====
   local pids=()
@@ -193,6 +192,7 @@ for i in issues:
       cd "$wt_path"
       perl -e "alarm 600; exec @ARGV" -- \
         "$CLAUDE_BIN" -p "$wt_path" \
+        --dangerously-skip-permissions \
         --print \
         --allowedTools Read,Glob,Grep,Write,Edit,Bash \
         --max-turns "$turns" \
@@ -215,7 +215,7 @@ for iss in issues:
 
   # Wait for all parallel solvers
   local solve_results=()
-  local i=0
+  local i=-1
   for pid in "${pids[@]}"; do
     i=$((i + 1))
     local num="${issue_numbers[$i]}"
@@ -278,7 +278,7 @@ for iss in issues:
 
   local merged=0 failed=0 skipped=0
 
-  i=0
+  i=-1
   for result in "${solve_results[@]}"; do
     i=$((i + 1))
     local num="${issue_numbers[$i]}"
@@ -378,7 +378,7 @@ for iss in issues:
   local notify="$SCRIPT_DIR/notify-discord.sh"
   if [[ -x "$notify" ]] && [[ ${#solve_results[@]} -gt 0 ]]; then
     local dm_lines="🔧 **Issue Solver** ($(date +%H:%M))\nIssue Solver Done: ${total_success}/${#solve_results[@]} resolved (${merged} merged, ${failed} failed)\n"
-    local idx=0
+    local idx=-1
     for result in "${solve_results[@]}"; do
       idx=$((idx + 1))
       local num="${issue_numbers[$idx]}"
