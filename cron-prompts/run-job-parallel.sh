@@ -54,9 +54,20 @@ create_worktree() {
     return
   fi
 
+  # Prune stale worktree metadata before creating new ones
+  git -C "$WORKSPACE" worktree prune 2>/dev/null || true
+
+  # Delete stale branch from previous runs if it exists
+  git -C "$WORKSPACE" branch -D "$branch" 2>/dev/null || true
+
   mkdir -p "$(dirname "$wt_path")"
+  # Remove stale directory if worktree remove didn't clean it
+  [[ -d "$wt_path" ]] && rm -rf "$wt_path"
+
   git -C "$WORKSPACE" worktree add -b "$branch" "$wt_path" HEAD >/dev/null 2>&1 || {
-    git -C "$WORKSPACE" branch -D "$branch" >/dev/null 2>&1 || true
+    # Last resort: force remove and retry
+    git -C "$WORKSPACE" worktree remove --force "$wt_path" 2>/dev/null || true
+    git -C "$WORKSPACE" branch -D "$branch" 2>/dev/null || true
     git -C "$WORKSPACE" worktree add -b "$branch" "$wt_path" HEAD >/dev/null 2>&1
   }
   echo "$wt_path"
@@ -82,6 +93,11 @@ cleanup_worktrees() {
     done
     rmdir "$batch_dir" 2>/dev/null || true
   fi
+  # Prune worktree metadata and delete stale batch branches
+  git -C "$WORKSPACE" worktree prune 2>/dev/null || true
+  for b in $(git -C "$WORKSPACE" branch --list "batch/${DATE}/*" 2>/dev/null); do
+    git -C "$WORKSPACE" branch -D "$b" 2>/dev/null || true
+  done
 }
 
 if ! $DRY_RUN; then
