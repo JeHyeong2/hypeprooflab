@@ -206,8 +206,9 @@ for i in issues:
 
     (
       cd "$wt_path"
+      local_claude="${CLAUDE_BIN:-$HOME/.local/bin/claude}"
       perl -e "alarm 600; exec @ARGV" -- \
-        "$CLAUDE_BIN" -p "$wt_path" \
+        "$local_claude" -p "$wt_path" \
         --dangerously-skip-permissions \
         --print \
         --allowedTools Read,Glob,Grep,Write,Edit,Bash \
