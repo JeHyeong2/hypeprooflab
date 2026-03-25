@@ -74,13 +74,13 @@ create_worktree() {
 }
 
 cleanup_worktrees() {
-  for pid in "${BG_PIDS[@]}"; do
+  for pid in "${BG_PIDS[@]+"${BG_PIDS[@]}"}"; do
     if kill -0 "$pid" 2>/dev/null; then
       log "Killing background process $pid"
       kill "$pid" 2>/dev/null || true
     fi
   done
-  for pid in "${BG_PIDS[@]}"; do
+  for pid in "${BG_PIDS[@]+"${BG_PIDS[@]}"}"; do
     wait "$pid" 2>/dev/null || true
   done
 
