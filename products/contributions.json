@@ -1,0 +1,246 @@
+{
+  "version": 1,
+  "updatedAt": "2026-03-25",
+  "contributions": [
+    {
+      "creator": "Jay",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-02-10-era-of-the-chairman",
+      "date": "2026-02-10",
+      "points": 0
+    },
+    {
+      "creator": "Jay",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-02-10-quiet-exit",
+      "date": "2026-02-10",
+      "points": 0
+    },
+    {
+      "creator": "TJ",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-02-11-ai-survival-guide",
+      "date": "2026-02-11",
+      "points": 0
+    },
+    {
+      "creator": "Kiwon",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-02-11-marketing-target-changes",
+      "date": "2026-02-11",
+      "points": 0
+    },
+    {
+      "creator": "JY",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-02-11-post-ai-human-question",
+      "date": "2026-02-11",
+      "points": 0
+    },
+    {
+      "creator": "Ryan",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-02-11-zero-blueprint-ai",
+      "date": "2026-02-11",
+      "points": 0
+    },
+    {
+      "creator": "Jay",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-02-12-electric-girl",
+      "date": "2026-02-12",
+      "points": 0
+    },
+    {
+      "creator": "BH",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-02-12-intent-designer",
+      "date": "2026-02-12",
+      "points": 0
+    },
+    {
+      "creator": "Jay",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-agentic-coding-trends",
+      "date": "2026-02-13",
+      "points": 0
+    },
+    {
+      "creator": "Jay",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "ai-scores-your-writing-geo-qa",
+      "date": "2026-02-15",
+      "points": 0
+    },
+    {
+      "creator": "Jay",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "building-ai-assistant-with-openclaw",
+      "date": "2026-02-15",
+      "points": 0
+    },
+    {
+      "creator": "Jay",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "building-ai-content-platform",
+      "date": "2026-02-15",
+      "points": 0
+    },
+    {
+      "creator": "Jay",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-02-23-gemini-31-pro-agent-architecture-inflection",
+      "date": "2026-02-23",
+      "points": 0
+    },
+    {
+      "creator": "JY",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "lawyer-beat-developer",
+      "date": "2026-02-23",
+      "points": 0
+    },
+    {
+      "creator": "JY",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-02-24-ai-agent-autonomy-trap",
+      "date": "2026-02-24",
+      "points": 0
+    },
+    {
+      "creator": "Ryan",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-02-25-ai-swallows-last-mile-of-finance",
+      "date": "2026-02-25",
+      "points": 0
+    },
+    {
+      "creator": "Jay",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-02-26-calculus-of-orchestration",
+      "date": "2026-02-26",
+      "points": 0
+    },
+    {
+      "creator": "Jay",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "ai-vault-for-customer-architect",
+      "date": "2026-02-27",
+      "points": 0
+    },
+    {
+      "creator": "Ryan",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-03-05-harness-engineering-arrives",
+      "date": "2026-03-05",
+      "points": 0
+    },
+    {
+      "creator": "TJ",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-03-09-storm-beyond-viewfinder",
+      "date": "2026-03-09",
+      "points": 0
+    },
+    {
+      "creator": "Jay",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-03-11-karpathy-autoresearch",
+      "date": "2026-03-11",
+      "points": 0
+    },
+    {
+      "creator": "Ryan",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-03-11-economics-of-annoyance",
+      "date": "2026-03-12",
+      "points": 0
+    },
+    {
+      "creator": "BH",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-03-12-ai-unlocking-universe",
+      "date": "2026-03-12",
+      "points": 0
+    },
+    {
+      "creator": "JY",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-03-13-swe-bench-illusion",
+      "date": "2026-03-13",
+      "points": 0
+    },
+    {
+      "creator": "TJ",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-03-16-moravecs-paradox-laundry",
+      "date": "2026-03-16",
+      "points": 0
+    },
+    {
+      "creator": "Ryan",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-03-17-agentic-alpha-factory",
+      "date": "2026-03-17",
+      "points": 0
+    },
+    {
+      "creator": "Jay",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-03-17-programming-the-program",
+      "date": "2026-03-17",
+      "points": 0
+    },
+    {
+      "creator": "TJ",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-03-19-depreciation-of-knowledge",
+      "date": "2026-03-19",
+      "points": 0
+    },
+    {
+      "creator": "Kiwon",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-03-23-ai-brain-fry",
+      "date": "2026-03-23",
+      "points": 0
+    },
+    {
+      "creator": "Ryan",
+      "type": "column",
+      "contribution": "wrote",
+      "slug": "2026-03-23-identity-compass",
+      "date": "2026-03-23",
+      "points": 0
+    }
+  ]
+}
