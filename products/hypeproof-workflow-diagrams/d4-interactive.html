@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mother AI — 개입 단계</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;overflow-x:hidden}
+  .header{text-align:center;padding:1.5rem 1rem 0.5rem}
+  .header h1{font-size:1.6rem}.header h1 span{color:#58a6ff}
+  .header p{color:#8b949e;font-size:0.85rem;margin-top:0.3rem}
+  .container{display:flex;gap:1.5rem;max-width:1400px;margin:1rem auto;padding:0 1rem;align-items:flex-start}
+  .left-panel{flex:1;min-width:0}
+  .right-panel{width:340px;flex-shrink:0;position:sticky;top:1rem}
+
+  /* 4 rows = 4 rings */
+  .ring-section{margin-bottom:1rem;border-radius:12px;padding:1rem 1.2rem;position:relative}
+  .ring-section h2{font-size:0.95rem;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem}
+  .ring-section h2 .dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+
+  .ring-auto{background:rgba(88,166,255,0.08);border:1px solid rgba(88,166,255,0.3)}
+  .ring-auto h2 .dot{background:#58a6ff}
+  .ring-mirror{background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3)}
+  .ring-mirror h2 .dot{background:#8b5cf6}
+  .ring-assist{background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.3)}
+  .ring-assist h2 .dot{background:#fbbf24}
+  .ring-human{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3)}
+  .ring-human h2 .dot{background:#ef4444}
+
+  .ring-desc{color:#8b949e;font-size:0.78rem;margin-bottom:0.75rem}
+
+  .items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.6rem}
+
+  .card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:0.6rem 0.75rem;cursor:pointer;transition:all 0.15s;position:relative}
+  .card:hover{border-color:#58a6ff;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.4)}
+  .card.selected{border-color:#58a6ff;box-shadow:0 0 0 1px #58a6ff}
+  .card-icon{font-size:1.1rem;float:left;margin-right:0.5rem;margin-top:0.1rem}
+  .card-title{font-size:0.82rem;font-weight:600;line-height:1.3}
+  .card-owner{color:#8b949e;font-size:0.7rem;margin-top:0.2rem}
+  .card-bar{position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:8px 0 0 8px}
+
+  .bar-auto{background:#58a6ff}
+  .bar-mirror{background:#8b5cf6}
+  .bar-assist{background:#fbbf24}
+  .bar-human{background:#ef4444}
+
+  /* Detail panel */
+  .detail{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:1.2rem}
+  .detail h3{font-size:1rem;margin-bottom:0.3rem}
+  .detail-level{font-size:0.75rem;font-weight:600;padding:0.15rem 0.5rem;border-radius:10px;display:inline-block;margin-bottom:0.6rem}
+  .level-auto{background:rgba(88,166,255,0.15);color:#58a6ff}
+  .level-mirror{background:rgba(139,92,246,0.15);color:#8b5cf6}
+  .level-assist{background:rgba(251,191,36,0.15);color:#fbbf24}
+  .level-human{background:rgba(239,68,68,0.15);color:#ef4444}
+  .detail-desc{font-size:0.85rem;line-height:1.6;margin-bottom:0.75rem}
+  .detail-why{color:#8b949e;font-size:0.8rem;line-height:1.5;padding:0.6rem;background:#0d1117;border-radius:8px;border-left:3px solid #30363d}
+  .detail-why strong{color:#e6edf3}
+  .detail-placeholder{color:#8b949e;font-size:0.85rem;text-align:center;padding:2rem 1rem}
+
+  /* Spectrum bar */
+  .spectrum{display:flex;margin:0.5rem 0 1.5rem;border-radius:8px;overflow:hidden;height:8px}
+  .spectrum div{flex:1;transition:flex 0.3s}
+  .spectrum .s-auto{background:#58a6ff}
+  .spectrum .s-mirror{background:#8b5cf6}
+  .spectrum .s-assist{background:#fbbf24}
+  .spectrum .s-human{background:#ef4444}
+
+  .spectrum-labels{display:flex;justify-content:space-between;font-size:0.7rem;color:#8b949e;margin-bottom:1rem}
+
+  @media(max-width:900px){
+    .container{flex-direction:column}
+    .right-panel{width:100%;position:static}
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Mother <span>AI</span> — 개입 단계</h1>
+  <p>Mother가 얼마나 개입하는가? 위 = AI가 알아서 · 아래 = 사람만 가능</p>
+</div>
+
+<div style="max-width:1400px;margin:0 auto;padding:0 1rem">
+  <div class="spectrum">
+    <div class="s-auto"></div>
+    <div class="s-mirror"></div>
+    <div class="s-assist"></div>
+    <div class="s-human"></div>
+  </div>
+  <div class="spectrum-labels">
+    <span>🤖 AI 자동</span>
+    <span>🪞 거울 (관찰)</span>
+    <span>🤝 보조 (사람 결정)</span>
+    <span>🧑 사람만</span>
+  </div>
+</div>
+
+<div class="container">
+<div class="left-panel">
+
+  <!-- RING 1: 자동 -->
+  <div class="ring-section ring-auto">
+    <h2><span class="dot"></span>🤖 자동 — Mother가 알아서 (사람 불필요)</h2>
+    <p class="ring-desc">파이프라인이 검증됨. 24시간 자동 운영. 사람이 개입하면 오히려 느려짐.</p>
+    <div class="items-grid">
+      <div class="card" onclick="detail(this)" data-title="일일 리서치 생성" data-level="auto" data-desc="매일 06:00에 Mother가 AI/테크 뉴스를 수집, 분석, HypeProof Lens 적용 후 리서치 리포트를 자동 생성한다." data-why="매일 반복되는 작업이고, 품질이 안정적이며, 새벽에도 작동해야 하기 때문. 사람이 매일 아침 뉴스를 직접 모으는 것보다 AI가 빠르고 일관적이다." data-owner="Mother (research-analyst agent)">
+        <div class="card-bar bar-auto"></div>
+        <span class="card-icon">📰</span>
+        <div class="card-title">일일 리서치 생성</div>
+        <div class="card-owner">Mother · 매일 06:00</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="리서치 → 웹 발행" data-level="auto" data-desc="생성된 리서치를 웹사이트에 자동 발행. 빌드, 배포, URL 생성까지 전부 자동." data-why="CI/CD 파이프라인이 이미 검증됨. 수동 배포는 실수 위험만 높임." data-owner="Mother (web-developer agent)">
+        <div class="card-bar bar-auto"></div>
+        <span class="card-icon">🌐</span>
+        <div class="card-title">리서치 → 웹 발행</div>
+        <div class="card-owner">Mother · 자동</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="SEO 메타데이터 생성" data-level="auto" data-desc="발행되는 모든 콘텐츠에 SEO 메타태그, Open Graph, 구조화 데이터를 자동 생성." data-why="규칙 기반. 매번 같은 패턴이라 자동화가 당연함." data-owner="Mother · 발행 시 자동">
+        <div class="card-bar bar-auto"></div>
+        <span class="card-icon">🏷️</span>
+        <div class="card-title">SEO 메타데이터</div>
+        <div class="card-owner">Mother · 발행 시</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="조회수 트래킹" data-level="auto" data-desc="Upstash Redis로 모든 페이지의 조회수를 실시간 추적. API가 자동 수집." data-why="완전 자동. 코드가 돌면 끝." data-owner="Mother · 실시간">
+        <div class="card-bar bar-auto"></div>
+        <span class="card-icon">📊</span>
+        <div class="card-title">조회수 트래킹</div>
+        <div class="card-owner">Mother · 실시간</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="빌드 & 배포" data-level="auto" data-desc="npm run build + vercel --prod. 코드 변경 시 자동 빌드, 테스트, 배포." data-why="CI/CD. 이미 돌아가는 파이프라인." data-owner="Mother · 코드 변경 시">
+        <div class="card-bar bar-auto"></div>
+        <span class="card-icon">🚀</span>
+        <div class="card-title">빌드 & 배포</div>
+        <div class="card-owner">Mother · 자동</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RING 2: 거울 -->
+  <div class="ring-section ring-mirror">
+    <h2><span class="dot"></span>🪞 거울 — Mother가 관찰하고 비춰줌</h2>
+    <p class="ring-desc">판단하지 않는다. 멤버의 산출물에서 패턴을 발견해서 보여줄 뿐. 성찰은 멤버의 몫.</p>
+    <div class="items-grid">
+      <div class="card" onclick="detail(this)" data-title="멤버 산출물 패턴 감지" data-level="mirror" data-desc="멤버가 쓴 칼럼, 리서치에서 반복 키워드, 관심 주제, 논조 변화를 자동 감지." data-why="멤버 스스로는 자기 글의 패턴을 못 봄. 3편 이상 쌓이면 AI가 패턴을 찾아서 '네 칼럼에서 이런 경향이 보여'라고 비춰줌." data-owner="Mother (Mirror Loop)">
+        <div class="card-bar bar-mirror"></div>
+        <span class="card-icon">🔍</span>
+        <div class="card-title">멤버 산출물 패턴 감지</div>
+        <div class="card-owner">Mother Mirror · 주간</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="멤버 간 인사이트 연결" data-level="mirror" data-desc="Ryan의 분석과 BH의 관점이 정반대일 때, 그 차이를 발견해서 양쪽에게 알려줌." data-why="교차 관점이 본질 가치 체득의 핵심. 같은 현상을 다르게 보는 것에서 배움이 나옴." data-owner="Mother Mirror · 감지 시">
+        <div class="card-bar bar-mirror"></div>
+        <span class="card-icon">🔗</span>
+        <div class="card-title">멤버 간 인사이트 연결</div>
+        <div class="card-owner">Mother Mirror · 감지 시</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="성장 궤적 추적" data-level="mirror" data-desc="지난 달 키워드: 효율, 자동화. 이번 달: 의미, 판단. 변화를 추적해서 보여줌." data-why="성장은 느려서 본인이 못 느낌. Mirror가 '1달 전이랑 관점이 바뀌었어'라고 비춰줌." data-owner="Mother Mirror · 월간">
+        <div class="card-bar bar-mirror"></div>
+        <span class="card-icon">📈</span>
+        <div class="card-title">성장 궤적 추적</div>
+        <div class="card-owner">Mother Mirror · 월간</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="철학적 연결 제안" data-level="mirror" data-desc="'네 글의 패턴은 한나 아렌트의 활동의 불확실성과 비슷해' 같은 연결을 제안." data-why="실행 → 성찰 → 본질 가치 체득 루프의 핵심. 인문학적 깊이를 자연스럽게 추가." data-owner="Mother Mirror · 제안">
+        <div class="card-bar bar-mirror"></div>
+        <span class="card-icon">📚</span>
+        <div class="card-title">철학적 연결 제안</div>
+        <div class="card-owner">Mother Mirror · 선택적</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RING 3: 보조 -->
+  <div class="ring-section ring-assist">
+    <h2><span class="dot"></span>🤝 보조 — 사람이 결정하면 AI가 실행</h2>
+    <p class="ring-desc">멤버가 "뭘 할지"를 정하면, Mother가 초안/변환/적용을 해줌. 최종 검토는 항상 사람.</p>
+    <div class="items-grid">
+      <div class="card" onclick="detail(this)" data-title="리서치 기반 칼럼 초안" data-level="assist" data-desc="멤버가 주제를 선택하면, Mother가 리서치 데이터를 기반으로 칼럼 초안을 작성." data-why="초안 작성은 AI가 빠르지만, 어떤 관점으로 쓸지는 사람만 결정할 수 있음." data-owner="멤버 결정 → Mother 작성">
+        <div class="card-bar bar-assist"></div>
+        <span class="card-icon">✏️</span>
+        <div class="card-title">리서치 기반 칼럼 초안</div>
+        <div class="card-owner">멤버 결정 → Mother 작성</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="칼럼 → LinkedIn 글" data-level="assist" data-desc="작성된 칼럼을 LinkedIn 전문가 톤으로 변환. 어떤 칼럼을 공유할지는 Ryan이 결정." data-why="톤 변환은 AI가 잘함. 하지만 무엇을 공유하고 어떤 네트워크에 노출할지는 전략적 판단." data-owner="Ryan 선택 → Mother 변환">
+        <div class="card-bar bar-assist"></div>
+        <span class="card-icon">💼</span>
+        <div class="card-title">칼럼 → LinkedIn 글</div>
+        <div class="card-owner">Ryan 선택 → Mother 변환</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="Discord 공지" data-level="assist" data-desc="새 콘텐츠 발행 시 Discord 공지 콘텐츠를 Mother가 생성. BH가 시점과 채널을 결정." data-why="공지 포맷은 자동화 가능. 언제, 어디에 올릴지는 커뮤니티 온도를 아는 BH가 판단." data-owner="BH 결정 → Mother 생성">
+        <div class="card-bar bar-assist"></div>
+        <span class="card-icon">💬</span>
+        <div class="card-title">Discord 공지</div>
+        <div class="card-owner">BH 결정 → Mother 생성</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="Reddit 글 적용" data-level="assist" data-desc="칼럼을 Reddit 커뮤니티 톤으로 변환. JeHyeong이 어떤 서브레딧에 올릴지 결정." data-why="서브레딧마다 문화가 다름. r/artificial과 r/MachineLearning의 톤이 완전 다름." data-owner="JeHyeong 결정 → Mother 적용">
+        <div class="card-bar bar-assist"></div>
+        <span class="card-icon">🔴</span>
+        <div class="card-title">Reddit 글 적용</div>
+        <div class="card-owner">JeHyeong 결정 → Mother 적용</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="YouTube 스크립트 개요" data-level="assist" data-desc="YouTube 에피소드의 스크립트 개요를 Mother가 작성. JY가 주제와 데모를 결정." data-why="구조(인트로-본론-아웃트로)는 AI, 실제 내용과 데모는 JY의 전문성." data-owner="JY 주제 선택 → Mother 개요">
+        <div class="card-bar bar-assist"></div>
+        <span class="card-icon">🎬</span>
+        <div class="card-title">YouTube 스크립트 개요</div>
+        <div class="card-owner">JY 주제 → Mother 개요</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="이벤트 마케팅 카피" data-level="assist" data-desc="오프라인 이벤트 마케팅 카피를 Mother가 초안. Kiwon이 타겟과 메시지 방향을 기획." data-why="카피라이팅은 AI가 빠름. 누구에게, 어떤 FOMO로 어필할지는 마케터의 판단." data-owner="Kiwon 기획 → Mother 카피">
+        <div class="card-bar bar-assist"></div>
+        <span class="card-icon">📣</span>
+        <div class="card-title">이벤트 마케팅 카피</div>
+        <div class="card-owner">Kiwon 기획 → Mother 카피</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="KPI 대시보드 업데이트" data-level="assist" data-desc="주간 KPI 데이터를 수집해서 대시보드 형태로 정리. Ryan이 해석하고 인사이트 도출." data-why="데이터 수집과 정리는 기계적. 하지만 '이 숫자가 뭘 의미하는가'는 사람의 해석." data-owner="Ryan 해석 → Mother 정리">
+        <div class="card-bar bar-assist"></div>
+        <span class="card-icon">📋</span>
+        <div class="card-title">KPI 대시보드 업데이트</div>
+        <div class="card-owner">Ryan 해석 → Mother 정리</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RING 4: 사람만 -->
+  <div class="ring-section ring-human">
+    <h2><span class="dot"></span>🧑 사람만 — Mother 대체 불가</h2>
+    <p class="ring-desc">인간 관계, 현장 존재, 직관적 판단이 필요한 영역. AI가 아무리 발전해도 대체 불가.</p>
+    <div class="items-grid">
+      <div class="card" onclick="detail(this)" data-title="주간 미팅 진행" data-level="human" data-desc="매주 일요일 21:00 주간 미팅. 방향 설정, 의사결정, 팀 분위기 읽기." data-why="리더십은 즉흥 판단과 팀 에너지 읽기가 핵심. AI는 '지금 이 사람이 지쳐있다'를 못 읽음." data-owner="🔷 Jay">
+        <div class="card-bar bar-human"></div>
+        <span class="card-icon">🔷</span>
+        <div class="card-title">주간 미팅 진행</div>
+        <div class="card-owner">Jay · 일 21:00</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="시드 멤버 1:1 접촉" data-level="human" data-desc="1:1 DM으로 '당신만 초대합니다' 메시지 발송. 30명의 시드 멤버 확보." data-why="신뢰는 사람 대 사람으로만 형성됨. AI가 보낸 DM은 스팸으로 느껴짐." data-owner="🟠 Kiwon">
+        <div class="card-bar bar-human"></div>
+        <span class="card-icon">🟠</span>
+        <div class="card-title">시드 멤버 1:1 접촉</div>
+        <div class="card-owner">Kiwon</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="오프라인 이벤트" data-level="human" data-desc="물리적 현장 존재. 참가자와 대면 소통, 분위기 조성, 즉석 대응." data-why="오프라인은 오프라인에서만 가능. 악수, 눈 맞춤, 현장 에너지는 디지털로 전달 불가." data-owner="🟠 Kiwon">
+        <div class="card-bar bar-human"></div>
+        <span class="card-icon">🟠</span>
+        <div class="card-title">오프라인 이벤트</div>
+        <div class="card-owner">Kiwon · 이벤트별</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="전략적 의사결정" data-level="human" data-desc="교육이냐 도메인이냐, 폐쇄냐 개방이냐, 어떤 멤버에게 뭘 맡길지 같은 근본 결정." data-why="방향 설정은 Initiative Provider만 가능. 이건 모델이 아니라 비전의 영역." data-owner="🔷 Jay">
+        <div class="card-bar bar-human"></div>
+        <span class="card-icon">🔷</span>
+        <div class="card-title">전략적 의사결정</div>
+        <div class="card-owner">Jay</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="SANS 네트워크 관계" data-level="human" data-desc="SANS 클럽 멤버들과의 관계 형성. 대면 미팅, 개인적 신뢰 구축." data-why="프로페셔널 네트워크는 사람이 직접 만나야 함. 소개, 추천, 신뢰는 대면에서 나옴." data-owner="🟡 Ryan">
+        <div class="card-bar bar-human"></div>
+        <span class="card-icon">🟡</span>
+        <div class="card-title">SANS 네트워크 관계</div>
+        <div class="card-owner">Ryan</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="팟캐스트 호스팅" data-level="human" data-desc="팟캐스트 녹음, 대화, 게스트 초대. 진짜 목소리와 화학반응." data-why="콘텐츠의 진정성은 사람의 목소리에서 나옴. AI 음성은 감정이 없음." data-owner="🟤 TJ">
+        <div class="card-bar bar-human"></div>
+        <span class="card-icon">🟤</span>
+        <div class="card-title">팟캐스트 호스팅</div>
+        <div class="card-owner">TJ · 격주</div>
+      </div>
+      <div class="card" onclick="detail(this)" data-title="도메인 리서치 심층" data-level="human" data-desc="특정 산업 도메인에 대한 깊은 리서치. 비판적 시각으로 팀의 방향을 검증." data-why="도메인 전문성과 '이게 정말 맞나?' 비판적 사고는 경험에서 나옴." data-owner="🔵 JUNGWOO">
+        <div class="card-bar bar-human"></div>
+        <span class="card-icon">🔵</span>
+        <div class="card-title">도메인 리서치 심층</div>
+        <div class="card-owner">JUNGWOO</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Right panel: detail -->
+<div class="right-panel">
+  <div class="detail" id="detail-panel">
+    <div class="detail-placeholder">← 항목을 클릭하면<br>상세 설명이 여기에 표시됩니다</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function detail(el) {
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  const p = document.getElementById('detail-panel');
+  const lvl = el.dataset.level;
+  const lvlName = {auto:'🤖 자동',mirror:'🪞 거울',assist:'🤝 보조',human:'🧑 사람만'}[lvl];
+  p.innerHTML = `
+    <h3>${el.dataset.title}</h3>
+    <div class="detail-level level-${lvl}">${lvlName}</div>
+    <div class="detail-desc">${el.dataset.desc}</div>
+    <div class="detail-why"><strong>왜 이 레벨인가?</strong><br>${el.dataset.why}</div>
+    <div style="margin-top:0.6rem;color:#8b949e;font-size:0.75rem">담당: ${el.dataset.owner}</div>
+  `;
+}
+</script>
+</body>
+</html>

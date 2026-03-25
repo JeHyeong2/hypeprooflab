@@ -1,5 +1,3 @@
-import { auth } from '@/lib/auth';
-import { redirect } from 'next/navigation';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -8,16 +6,14 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default async function DashboardPage() {
-  const session = await auth();
-  if (!session) redirect('/auth/signin');
-  if (session.user.role === 'spectator') redirect('/');
-
+export default function DashboardPage() {
   return (
-    <iframe
-      src="/dashboard-v3.html"
-      className="w-full h-screen border-0"
-      title="HypeProof Lab Dashboard"
-    />
+    <main className="w-full h-screen">
+      <iframe
+        src="/dashboard-v3.html"
+        className="w-full h-full border-0"
+        title="HypeProof Lab Dashboard"
+      />
+    </main>
   );
 }
