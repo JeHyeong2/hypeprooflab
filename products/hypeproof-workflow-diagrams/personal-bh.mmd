@@ -2,27 +2,27 @@ flowchart TB
     classDef bh fill:#27ae60,stroke:#58d68d,color:#fff,font-weight:bold,font-size:14px
     classDef dim fill:#30363d,stroke:#484f58,color:#8b949e
 
-    subgraph WEEK["🟢 BH — Weekly Rhythm"]
-        MON["Mon 08:00<br/>Discord moderation<br/>+ recap"]
-        TUE["Tue 12:00<br/>Curate discussion<br/>topic"]
-        WED["Wed 19:00<br/>Engagement<br/>+ welcome newbies"]
-        THU["Thu 12:00<br/>Mini-event<br/>poll or challenge"]
-        FRI["Fri 19:00<br/>Share published<br/>content"]
-        SAT["Sat 10:00<br/>Weekend<br/>engagement"]
-        SUN["Sun 21:00<br/>Weekly meeting"]
+    subgraph WEEK["BH — 주간 리듬"]
+        MON["월 08:00<br/>Discord 모더레이션<br/>+ 요약"]
+        TUE["화 12:00<br/>토론 주제<br/>큐레이션"]
+        WED["수 19:00<br/>참여 유도<br/>+ 신규 환영"]
+        THU["목 12:00<br/>미니이벤트<br/>투표 챌린지"]
+        FRI["금 19:00<br/>발행 콘텐츠<br/>공유"]
+        SAT["토 10:00<br/>주말 참여"]
+        SUN["일 21:00<br/>주간 미팅"]
     end
 
-    subgraph OUT["Outputs"]
-        O1["Daily prompts"]
-        O2["Discussion threads"]
-        O3["Welcome flow"]
-        O4["Event recaps"]
+    subgraph OUT["산출물"]
+        O1["일일 프롬프트"]
+        O2["토론 쓰레드"]
+        O3["환영 플로우"]
+        O4["이벤트 요약"]
     end
 
-    subgraph KPI["KPIs I Own"]
-        K1["Active members"]
-        K2["Messages/week"]
-        K3["Retention rate"]
+    subgraph KPI["내가 담당하는 KPI"]
+        K1["활성 멤버"]
+        K2["주간 메시지 수"]
+        K3["유지율"]
     end
 
     MON --> TUE --> WED --> THU --> FRI --> SAT --> SUN

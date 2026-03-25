@@ -10,7 +10,7 @@ allowed-tools: Read Grep Glob Bash Write Edit WebFetch AskUserQuestion
 # roadmap-review
 
 > HypeProof Roadmap review and adjustment skill
-> Version: 1.0 | Updated: 2026-03-23
+> Version: 2.0 | Updated: 2026-03-24
 
 ---
 
@@ -58,7 +58,19 @@ This is the single source of truth. All reviews read from and write back to this
    ├── Traffic vs targets — are we growing?
    ├── Member activity — who contributed since last review?
    ├── External dependencies — 동아일보 status, Filamentree status
-   └── Risks — did any materialize?
+   ├── Risks — did any materialize?
+   └── Member identity check — verify member names across docs match (no duplicates/aliases)
+
+4.5 Meeting Input Verification (if meeting notes exist)
+   ├── Read latest meeting notes (Weekly on HypeProof *.md)
+   ├── Extract each participant's key proposals/ideas
+   ├── Cross-check against roadmap + workflow: is every proposal either
+   │   ├── Reflected (adopted into roadmap/workflow)
+   │   ├── Explicitly rejected with reason
+   │   └── Or flagged as "pending decision"
+   ├── Check: are there phantom members? (same person with 2 names)
+   ├── Check: education pipeline present? (Academy is main revenue)
+   └── Report any gaps to user before proceeding
 
 5. Challenge & Adjust
    ├── Ask probing questions (AskUserQuestion)
@@ -134,6 +146,16 @@ When reviewing, always challenge with these lenses:
 ### 4. Dependency Check
 - "This item depends on [person/org]. Have we confirmed they're ready?"
 - "What happens if [dependency] falls through? Is there a Plan B?"
+
+### 5. Meeting Input Coverage
+- "Every member spoke in the last meeting. Is every proposal reflected or explicitly rejected?"
+- "Is the education pipeline (Academy) present in the workflow? It's the main revenue source."
+- "Are member names consistent across all docs? (No aliases, no phantom members)"
+
+### 6. Education Pipeline Check
+- "Does the workflow have Academy operations steps? (curriculum, instructor prep, event execution, post-event)"
+- "Is the student journey mapped? (discovery → registration → event → community → retention)"
+- "Are curriculum development cycles defined? (feedback → revision → next iteration)"
 
 ---
 

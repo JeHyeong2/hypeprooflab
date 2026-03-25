@@ -1,6 +1,6 @@
 # HypeProof Lab — 2026 Q2 Operational Workflow
 
-> **Version**: 4.0
+> **Version**: 5.0
 > **Created**: 2026-03-23
 > **Updated**: 2026-03-24
 > **Scope**: April 1 - June 30, 2026
@@ -33,8 +33,9 @@
 21. [Naver/Daum SEO Checklist](#21-naverdaum-seo-checklist)
 22. [First 4 Weeks Launch Plan](#22-first-4-weeks-launch-plan)
 23. [Day in the Life](#23-day-in-the-life)
-24. [Step Registry (Master List)](#24-step-registry)
-25. [Next Iteration TODO](#25-next-iteration-todo)
+24. [Academy Operations Pipeline](#24-academy-operations-pipeline)
+25. [Step Registry (Master List)](#25-step-registry)
+26. [Next Iteration TODO](#26-next-iteration-todo)
 
 ---
 
@@ -63,10 +64,10 @@ flowchart TB
         WEB[Website<br/>JeHyeong]
         DIS[Discord<br/>BH]
         YTC[YouTube<br/>JY]
-        LI[LinkedIn<br/>JiWoong]
+        LI[LinkedIn<br/>Ryan]
         RD[Reddit<br/>JeHyeong]
         OFL[Offline Events<br/>Kiwon]
-        SANS[SANS Network<br/>JiWoong]
+        SANS[SANS Network<br/>Ryan]
     end
 
     subgraph FEEDBACK["Feedback Layer"]
@@ -160,9 +161,9 @@ gantt
 
     section Ryan
     Pull weekly analytics                 :mon, 2026-04-06, 1d
-    Dashboard update                      :tue, 2026-04-07, 1d
+    LinkedIn post #1 + dashboard update   :tue, 2026-04-07, 1d
     Data analysis deep-dive               :wed, 2026-04-08, 1d
-    Cross-reference metrics               :thu, 2026-04-09, 1d
+    LinkedIn post #2 + SANS touchpoint    :thu, 2026-04-09, 1d
     KPI snapshot compilation              :fri, 2026-04-10, 1d
     Finalize KPI report                   :sat, 2026-04-11, 1d
     Weekly meeting + present data         :sun, 2026-04-12, 1d
@@ -399,17 +400,16 @@ flowchart TB
 ### D-7: Member Weekly Time Allocation
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#4A90D9', 'pie2': '#E8734A', 'pie3': '#50C878', 'pie4': '#9B59B6', 'pie5': '#F1C40F', 'pie6': '#E74C3C', 'pie7': '#1ABC9C', 'pie8': '#95A5A6', 'pie9': '#3498DB'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#4A90D9', 'pie2': '#E8734A', 'pie3': '#F1C40F', 'pie4': '#E74C3C', 'pie5': '#8B4513', 'pie6': '#9B59B6', 'pie7': '#27AE60', 'pie8': '#3498DB'}}}%%
 pie title Weekly Hours by Member (total ~44h team capacity)
     "Jay (8-10h)" : 9
     "Kiwon (3-5h)" : 4
-    "JiWoong (3-4h)" : 3.5
+    "Ryan (5-7h)" : 6
     "JY (5-7h)" : 6
     "TJ (5-7h)" : 6
     "JeHyeong (5-7h)" : 6
     "BH (3-5h)" : 4
     "JUNGWOO (3-5h)" : 4
-    "Ryan (3-5h)" : 4
 ```
 
 ### D-8: Monthly Cadence Timeline
@@ -456,13 +456,12 @@ gantt
 |--------|---------------|-----------------|----------------|---------------|
 | **Jay** | Overall framework, Mother ops, Initiative Provider | Academy pilot, pipeline | All (oversight) | Staff SWE, Silicon Valley |
 | **Kiwon** | Offline events, Marketing (GTM, seed, FOMO) | Community growth strategy | Offline, Marketing | Global Marketing Specialist |
-| **JiWoong** | SANS network, LinkedIn, Strategy consulting | Two-track GTM analysis | LinkedIn, SANS | Quant Researcher (AssetPlus) |
+| **Ryan (김지웅)** | Strategy consulting, LinkedIn, SANS network, Data analysis, KPI dashboard | Two-track GTM analysis, Research methodology | LinkedIn, SANS, Analytics, Dashboard | Quant Researcher (AssetPlus) |
 | **JY** | YouTube, Vibe Coding series, Tech content | Academy tech support | YouTube, Tech columns | AI/ML Engineer (Remember) |
 | **TJ** | Video production, Podcast pipeline | Community ops design | YouTube (production), Podcast | Media Specialist |
 | **JeHyeong** | Website, SEO, Reddit, Frontend | Design renewal | Website, Reddit | (Full-time employed) |
 | **BH** | Discord community operations | Content curation | Discord | Ph.D. Candidate, CERN |
 | **JUNGWOO** | Domain-specific AI opportunity research | Critical review ("devil's advocate") on major decisions | Research (domain), Strategic feedback | (Full-time employed) |
-| **Ryan** | Data analysis, Performance tracking, KPI dashboard | Research methodology | Analytics, Dashboard | Quant Researcher (AssetPlus) |
 
 ### Member Quick Cards
 
@@ -489,17 +488,6 @@ These cards give each member a single-glance summary of their HypeProof responsi
 - **My calendar**: Mon 12:00 feedback review, Sat 10:00 event execution (when scheduled)
 - **If I can't deliver**: postpone event (never rush); outreach DMs can slip 2-3 days without impact
 - **My Mirror focus**: persuasion style, community-building instincts, marketing-psychology patterns
-
-#### JiWoong -- Quick Card
-- **Domain**: LinkedIn + SANS network + strategic consulting
-- **Weekly hours**: 3-4h
-- **Peak days**: Mon (calendar check), Thu (SANS touchpoint)
-- **Key steps**: S-009, S-030, S-049, S-062, S-080, S-084, S-129, S-138, S-145, S-153, S-159, S-279-S-283
-- **Weekly deliverables**: 2 LinkedIn posts, 1 SANS touchpoint, strategic insight memo
-- **KPI I own**: LinkedIn engagement rate (>3%), SANS active contacts (10), inbound inquiries (2/month)
-- **My calendar**: Tue 14:00 LinkedIn post #1, Thu 14:00 LinkedIn post #2 + SANS
-- **If I can't deliver**: Mother drafts LinkedIn post; SANS relationship pauses (no damage if 1-week gap)
-- **My Mirror focus**: professional positioning voice, strategic framing evolution
 
 #### JY -- Quick Card
 - **Domain**: YouTube (Vibe Coding) + tech columns
@@ -556,16 +544,16 @@ These cards give each member a single-glance summary of their HypeProof responsi
 - **If I can't deliver**: post "dead end" brief (negative findings are still valuable); reviews can be async next day
 - **My Mirror focus**: analytical depth, contrarian thinking patterns, domain expertise evolution
 
-#### Ryan -- Quick Card
-- **Domain**: Data analysis + performance tracking + KPI dashboard
-- **Weekly hours**: 3-5h
-- **Peak days**: Mon (pull data), Sat (report)
-- **Key steps**: S-011, S-014, S-034, S-051, S-070, S-073, S-077, S-081, S-085-S-087, S-093, S-116, S-122, S-151, S-248-S-249
-- **Weekly deliverables**: weekly KPI snapshot, 1 data analysis deep-dive, UTM attribution report
-- **KPI I own**: dashboard completeness, reporting cadence (weekly without fail), data accuracy
-- **My calendar**: Mon 09:00 data pull, Wed 20:00 deep-dive, Sat 20:00 finalize report, Sun 21:25 present
-- **If I can't deliver**: Jay pulls basic metrics from Vercel/YouTube dashboards; Mother auto-collected data fills the gap
-- **My Mirror focus**: analytical rigor, data storytelling, pattern recognition
+#### Ryan (김지웅) -- Quick Card
+- **Domain**: Strategy consulting + LinkedIn + SANS network + Data analysis + KPI dashboard
+- **Weekly hours**: 5-7h (dual role: strategy + analytics)
+- **Peak days**: Mon (data pull + calendar check), Thu (SANS touchpoint), Sat (report)
+- **Key steps**: S-009, S-011, S-014, S-030, S-034, S-049, S-051, S-062, S-070, S-073, S-077, S-080, S-081, S-084, S-085-S-087, S-093, S-116, S-122, S-129, S-138, S-145, S-151, S-153, S-159, S-248-S-249, S-279-S-283
+- **Weekly deliverables**: 2 LinkedIn posts, 1 SANS touchpoint, strategic insight memo, weekly KPI snapshot, 1 data analysis deep-dive, UTM attribution report
+- **KPI I own**: LinkedIn engagement rate (>3%), SANS active contacts (10), inbound inquiries (2/month), dashboard completeness, reporting cadence (weekly without fail), data accuracy
+- **My calendar**: Mon 09:00 data pull, Tue 14:00 LinkedIn post #1, Wed 20:00 deep-dive, Thu 14:00 LinkedIn post #2 + SANS, Sat 20:00 finalize report, Sun 21:25 present
+- **If I can't deliver**: Mother drafts LinkedIn post; SANS pauses (no damage if 1-week gap); Jay pulls basic metrics from Vercel/YouTube dashboards
+- **My Mirror focus**: strategic framing evolution, analytical rigor, data storytelling, professional positioning voice
 
 #### Sebastian -- Quick Card (Pending Activation)
 - **Domain**: Architecture decisions, scalability, engineering process
@@ -588,15 +576,14 @@ Everyone has a full-time job. These budgets reflect realistic side-project hours
 |--------|------|-------------|-----------|-----------|----------|---------------|
 | **Jay** | Initiative + Mother Ops | 8-10h | ~1.5h | Mon, Sun | Tue-Thu (delegate to Mother) | OK -- Jay controls pipeline, can shed tasks to Mother |
 | **Kiwon** | Marketing + Events | 3-5h | ~0.5h | Mon, Sat (event days) | Tue-Thu | OK -- most weeks are DMs + planning; Sat spikes only on event weeks |
-| **JiWoong** | LinkedIn + SANS | 3-4h | ~0.5h | Mon, Thu | Tue, Wed, Sat | OK -- 2 LinkedIn posts + SANS touchpoint per week |
+| **Ryan** | Strategy + LinkedIn + SANS + Analytics | 5-7h | ~0.8h | Mon (data), Thu (SANS), Sat (report) | Tue, Wed | WATCH -- dual role (strategy + analytics) is heavy; LinkedIn posts can slip to weekly if overloaded |
 | **JY** | YouTube + Tech Columns | 5-7h | ~1h | Mon-Wed (record week) | Thu, Sat | WATCH -- recording + script + column in same week is tight; shift column to every other week if needed |
 | **TJ** | Video + Podcast Production | 5-7h | ~1h | Tue-Thu (edit week) | Mon, Sat | WATCH -- editing is time-elastic; 1 video/week may slip to bi-weekly |
 | **JeHyeong** | Web + SEO + Reddit | 5-7h | ~1h | Tue-Wed (sprint), Sat (deploy) | Thu | WATCH -- frontend sprint + Reddit + SEO is 3 jobs; Reddit can be monthly instead of weekly if overloaded |
 | **BH** | Discord Community | 3-5h | ~0.5h | Mon, Thu | Tue, Sat | OK -- daily check-ins are 15-20 min each; spikes only for mini-events |
 | **JUNGWOO** | Domain Research + Reviews | 3-5h | ~0.5h | Tue-Wed (research), Thu (reviews) | Mon, Fri, Sat | OK -- research is flexible; devil's advocate reviews are async |
-| **Ryan** | Analytics + Dashboard | 3-5h | ~0.5h | Mon (pull data), Sat (report) | Tue-Thu | OK -- mostly automated data pulls; analysis is batch work |
 
-**Team Total**: ~44h/week across 9 members (avg ~5h each)
+**Team Total**: ~44h/week across 8 members (avg ~5.5h each)
 
 **Overload Rules**:
 - If any member reports >7h/week for 2 consecutive weeks, Jay redistributes or drops a deliverable
@@ -631,7 +618,7 @@ Everyone has a full-time job. These budgets reflect realistic side-project hours
 | 10:00 | JeHyeong | SEO audit (Search Console data), plan dev sprint | Sprint items (3-5 tasks) |
 | 10:00 | JUNGWOO | Identify domain research topic for the week; scan daily research for domain-AI opportunities | Research question posted in #daily-research |
 | 12:00 | Kiwon | Review weekend event feedback, plan outreach targets | Outreach target list (5-10 names) |
-| 14:00 | JiWoong | LinkedIn content calendar check, SANS contact review | Week's LinkedIn post topics (2-3) |
+| 14:00 | Ryan | LinkedIn content calendar check, SANS contact review | Week's LinkedIn post topics (2-3) |
 | 14:00 | TJ | Review content backlog, prioritize editing queue | Editing priority list |
 | 19:00 | BH | Review Discord weekend activity, moderate, post weekly recap | Activity summary post in #content-pipeline |
 
@@ -646,7 +633,7 @@ Everyone has a full-time job. These budgets reflect realistic side-project hours
 | 10:00 | JeHyeong | Frontend development sprint | Code commits |
 | 10:00 | Ryan | Build/update KPI dashboard component | Dashboard update |
 | 12:00 | Kiwon | Send outreach DMs to seed member candidates | 5-10 personalized DMs sent |
-| 14:00 | JiWoong | Write LinkedIn post #1 (from research or column) | LinkedIn post draft |
+| 14:00 | Ryan | Write LinkedIn post #1 (from research or column) | LinkedIn post draft |
 | 14:00 | TJ | Video editing session (current project) | Edited segment |
 | 19:00 | BH | Curate and post discussion topic in Discord | 1 discussion thread |
 
@@ -660,7 +647,7 @@ Everyone has a full-time job. These budgets reflect realistic side-project hours
 | 10:00 | JeHyeong | Frontend sprint continues, Reddit engagement (1 post) | Code + Reddit post |
 | 10:00 | JUNGWOO | Write critical analysis memo on weekly domain topic | Analysis memo (internal, 2-page brief) |
 | 12:00 | Kiwon | Draft marketing copy (event promo, social posts) | Marketing copy for review |
-| 14:00 | JiWoong | Publish LinkedIn post #1, engage with comments | Published post |
+| 14:00 | Ryan | Publish LinkedIn post #1, engage with comments | Published post |
 | 14:00 | TJ | Continue video editing / podcast prep | Near-final cut |
 | 19:00 | BH | Discord engagement: respond to threads, welcome new members | Active moderation |
 | 20:00 | Ryan | Data analysis on specific metric deep-dive | Analysis report |
@@ -675,7 +662,7 @@ Everyone has a full-time job. These budgets reflect realistic side-project hours
 | 10:00 | JeHyeong | SEO optimization pass on new content | SEO-optimized pages |
 | 10:00 | JUNGWOO | Review all major proposals/decisions made this week; write devil's advocate feedback (risks, blind spots, counter-arguments) | Critical feedback memo posted in #content-pipeline |
 | 12:00 | Kiwon | Event logistics coordination (venue, materials, comms) | Event checklist updated |
-| 14:00 | JiWoong | Write LinkedIn post #2, SANS network touchpoint | LinkedIn post + 1 SANS interaction |
+| 14:00 | Ryan | Write LinkedIn post #2, SANS network touchpoint | LinkedIn post + 1 SANS interaction |
 | 14:00 | TJ | Finalize video edit, podcast recording session | Final cut / podcast raw audio |
 | 19:00 | BH | Discord: run mini-event (poll, challenge, or AMA topic) | Engagement event |
 | 20:00 | Ryan | Cross-reference metrics with content topics | Correlation report |
@@ -689,7 +676,7 @@ Everyone has a full-time job. These budgets reflect realistic side-project hours
 | 09:30 | JUNGWOO | Refine domain research into a publishable column pitch or domain brief | Column pitch or 2-page domain brief |
 | 10:00 | JeHyeong | Deploy website updates, test live | Deployed + verified |
 | 12:00 | Kiwon | Send event reminders, follow up on outreach responses | Outreach status update |
-| 14:00 | JiWoong | Publish LinkedIn post #2, respond to week's engagement | Published post |
+| 14:00 | Ryan | Publish LinkedIn post #2, respond to week's engagement | Published post |
 | 14:00 | JY | Column writing (tech perspective) | Column draft for review |
 | 14:00 | TJ | Publish video / podcast episode | Published media |
 | 19:00 | BH | Discord: share published content, facilitate discussion | Content distribution |
@@ -704,7 +691,7 @@ Everyone has a full-time job. These budgets reflect realistic side-project hours
 | 10:00 | JUNGWOO | Free research / reading; prepare domain findings for Sunday presentation | Presentation notes |
 | 12:00 | JY | Publish content (column or video), community engagement | Published content |
 | 12:00 | JeHyeong | Deploy pending changes, weekend SEO check | Deployed updates |
-| 14:00 | JiWoong | Network maintenance, async LinkedIn engagement | Relationship log |
+| 14:00 | Ryan | Network maintenance, async LinkedIn engagement | Relationship log |
 | 14:00 | TJ | Content polish, community ops iteration | Polished assets |
 | 19:00 | BH | Discord: weekend engagement, casual discussion facilitation | Active community |
 | 20:00 | Ryan | Finalize weekly KPI report for Sunday meeting | KPI report final |
@@ -725,7 +712,7 @@ Everyone has a full-time job. These budgets reflect realistic side-project hours
 | S-006 | Ideation | JY | AI/tech trends, Vibe Coding backlog | Propose YouTube episode topic | Topic brief | None | Weekly (Mon) |
 | S-007 | Ideation | JUNGWOO | Industry trends, domain signals | Propose domain-critical research question | Research question | None | Weekly (Mon) |
 | S-008 | Ideation | Kiwon | Marketing trends, competitor activity | Propose marketing-angle column topic | Topic suggestion | None | Bi-weekly |
-| S-009 | Ideation | JiWoong | SANS network conversations, LinkedIn trends | Surface strategic insights for content | Strategic insight memo | None | Weekly |
+| S-009 | Ideation | Ryan | SANS network conversations, LinkedIn trends | Surface strategic insights for content | Strategic insight memo | None | Weekly |
 | S-010 | Ideation | TJ | Community feedback, podcast listener questions | Propose podcast/video topic | Topic suggestion | None | Weekly |
 | S-011 | Ideation | Ryan | Data analysis results, metric anomalies | Propose data-driven content angle | Data insight | Assist | Weekly |
 | S-012 | Ideation | BH | Discord conversations, member questions | Surface community-driven content needs | Community pulse report | None | Weekly |
@@ -751,7 +738,7 @@ Everyone has a full-time job. These budgets reflect realistic side-project hours
 | S-027 | Draft | Kiwon | Event plan | Create event marketing materials | Flyer, social posts, email draft | Assist | Per event |
 | S-028 | Draft | JeHyeong | Design specs | Create/update website components | Frontend code | None | Weekly |
 | S-029 | Draft | BH | Discussion topic | Create Discord engagement content (polls, challenges) | Engagement content | None | 2x/week |
-| S-030 | Draft | JiWoong | Column or research output | Adapt content for LinkedIn post | LinkedIn post draft | Assist | 2x/week |
+| S-030 | Draft | Ryan | Column or research output | Adapt content for LinkedIn post | LinkedIn post draft | Assist | 2x/week |
 | S-031 | Draft | JeHyeong | Column or research output | Adapt content for Reddit post | Reddit post draft | Assist | 1-2x/week |
 | S-032 | Draft | Mother | Published video | Generate YouTube description, tags, chapters | Video metadata | Automate | Per video |
 | S-033 | Draft | Mother | Column content | Generate social media snippets (3 variations) | Social snippets | Assist | Per column |
@@ -775,7 +762,7 @@ Everyone has a full-time job. These budgets reflect realistic side-project hours
 | S-046 | QA | Mother | Video metadata | Verify description, tags, chapter markers | Metadata QA report | Automate | Per video |
 | S-047 | QA | TJ | Edited video | Final review: audio levels, visual quality, branding | Approved video | None | Per video |
 | S-048 | QA | Kiwon | Marketing copy | Review for GTM alignment, FOMO effectiveness | Approved marketing copy | None | Per piece |
-| S-049 | QA | JiWoong | LinkedIn post draft | Review for professional tone, strategic framing | Approved post | None | Per post |
+| S-049 | QA | Ryan | LinkedIn post draft | Review for professional tone, strategic framing | Approved post | None | Per post |
 | S-050 | QA | Mother | Column content | Cross-check with PHILOSOPHY.md (no fear-based marketing, etc.) | Philosophy compliance check | Automate | Per column |
 | S-051 | QA | Ryan | Data-backed content | Verify data accuracy, methodology | Data QA sign-off | None | Per analysis |
 | S-052 | QA | JUNGWOO | Critical analysis draft | Self-review for constructive tone (not destructive) | Reviewed draft | None | Per piece |
@@ -793,7 +780,7 @@ Everyone has a full-time job. These budgets reflect realistic side-project hours
 | S-059 | Publish | Mother | Live deployment | Verify live URL returns 200, content renders | Deployment verification | Automate | Per deploy |
 | S-060 | Publish | TJ | Approved video | Upload to YouTube with metadata | Published YouTube video | None | Per video |
 | S-061 | Publish | TJ | Approved podcast | Upload to Spotify for Podcasters | Published podcast episode | None | Per episode |
-| S-062 | Publish | JiWoong | Approved LinkedIn post | Post to LinkedIn | Published LinkedIn post | None | 2x/week |
+| S-062 | Publish | Ryan | Approved LinkedIn post | Post to LinkedIn | Published LinkedIn post | None | 2x/week |
 | S-063 | Publish | JeHyeong | Approved Reddit post | Post to target subreddits | Published Reddit post | None | 1-2x/week |
 | S-064 | Publish | BH | Published content (any channel) | Share in Discord #daily-research with discussion prompt | Discord distribution | None | Per publish |
 | S-065 | Publish | Mother | Published column | Generate Discord announcement text | Announcement draft | Assist | Per column |
@@ -824,10 +811,10 @@ Everyone has a full-time job. These budgets reflect realistic side-project hours
 | Website | JeHyeong | Jay (Mother deploy) | Daily (research), 2-3x/week (columns) |
 | Discord | BH | Jay | Daily |
 | YouTube | JY (content) + TJ (production) | - | 1x/week (long), 3x/week (shorts) |
-| LinkedIn | JiWoong | Kiwon | 2x/week |
+| LinkedIn | Ryan | Kiwon | 2x/week |
 | Reddit | JeHyeong | JY | 1-2x/week |
 | Offline Events | Kiwon | TJ | 1-2x/month |
-| SANS Network | JiWoong | Jay | Ongoing (relationship) |
+| SANS Network | Ryan | Jay | Ongoing (relationship) |
 | Podcast | TJ | JY (guest host) | Bi-weekly |
 
 ---
@@ -855,7 +842,7 @@ Everyone has a full-time job. These budgets reflect realistic side-project hours
 | Step | What Mother Does | Triggered By | Agent | Command | Human Decision |
 |------|-----------------|-------------|-------|---------|----------------|
 | S-022 | Translate column KO to EN | Author submits KO draft | `content-columnist` | `/write-column <topic> --translate` | Author reviews translation |
-| S-030 | Draft LinkedIn post from column | Author requests adaptation | `content-columnist` | `/write-column <topic> --format linkedin` | JiWoong edits and approves |
+| S-030 | Draft LinkedIn post from column | Author requests adaptation | `content-columnist` | `/write-column <topic> --format linkedin` | Ryan edits and approves |
 | S-031 | Draft Reddit post from column | Author requests adaptation | `content-columnist` | `/write-column <topic> --format reddit` | JeHyeong edits and approves |
 | S-032 | Generate YouTube metadata | TJ requests after upload | `community-manager` | `/announce <slug> --format youtube` | TJ reviews |
 | S-033 | Generate social snippets | Author requests | `community-manager` | `/announce <slug> --snippets` | Author selects best |
@@ -880,7 +867,7 @@ Everyone has a full-time job. These budgets reflect realistic side-project hours
 
 - Weekly meeting facilitation (Jay)
 - 1:1 seed member DMs (Kiwon)
-- SANS network relationship building (JiWoong)
+- SANS network relationship building (Ryan)
 - Offline event execution (Kiwon, TJ)
 - Strategic direction decisions (Jay)
 - Podcast hosting and recording (TJ)
@@ -906,11 +893,11 @@ Everyone has a full-time job. These budgets reflect realistic side-project hours
 | S-077 | Collect | Ryan | Discord metrics | Analyze retention, engagement patterns | Discord health report | Assist | Weekly |
 | S-078 | Collect | Mother | YouTube Studio API | Pull views, watch time, subscribers, CTR per video | YouTube metrics | Automate | Weekly |
 | S-079 | Collect | JY | YouTube metrics | Analyze which topics/formats perform, viewer retention curves | YouTube content analysis | None | Weekly |
-| S-080 | Collect | JiWoong | LinkedIn Analytics | Pull impressions, engagement rate, follower growth | LinkedIn metrics | None | Weekly |
+| S-080 | Collect | Ryan | LinkedIn Analytics | Pull impressions, engagement rate, follower growth | LinkedIn metrics | None | Weekly |
 | S-081 | Collect | Ryan | LinkedIn metrics | Compare post performance, identify winning formats | LinkedIn analysis | Assist | Weekly |
 | S-082 | Collect | JeHyeong | Reddit post stats | Pull karma, comments, cross-posts per post | Reddit metrics | None | Weekly |
 | S-083 | Collect | Kiwon | Event attendance, NPS surveys | Compile attendance, NPS scores, qualitative feedback | Event feedback report | None | Per event |
-| S-084 | Collect | JiWoong | SANS network interactions | Log referrals, cross-pollination instances | SANS activity log | None | Monthly |
+| S-084 | Collect | Ryan | SANS network interactions | Log referrals, cross-pollination instances | SANS activity log | None | Monthly |
 | S-085 | Analyze | Ryan | All channel metrics (S-071 to S-084) | Compile cross-channel dashboard | Unified KPI dashboard | Assist | Weekly |
 | S-086 | Analyze | Ryan | KPI dashboard | Identify trends, anomalies, correlations | Insights report | Assist | Weekly |
 | S-087 | Analyze | Ryan | Insights report | Rank content topics by cross-channel performance | Topic effectiveness ranking | Assist | Monthly |
@@ -1015,7 +1002,7 @@ Extended to 90 minutes. Replaces regular weekly meeting.
 | S-126 | Decide | Jay + All | All reports | Set next month's 3 priorities | Monthly priority list | None | Monthly |
 | S-127 | Decide | Jay | Member contribution + blockers | Adjust member assignments if needed | Updated assignments | None | Monthly |
 | S-128 | Decide | Kiwon | Event performance + pipeline | Set next month's event calendar | Event calendar | None | Monthly |
-| S-129 | Decide | JiWoong | LinkedIn + SANS performance | Adjust outreach strategy | Outreach plan update | None | Monthly |
+| S-129 | Decide | Ryan | LinkedIn + SANS performance | Adjust outreach strategy | Outreach plan update | None | Monthly |
 | S-130 | Decide | JY + TJ | Video + podcast performance | Adjust content format/frequency | Media plan update | None | Monthly |
 | S-131 | Decide | JeHyeong | SEO + web performance | Set next month's dev priorities | Web sprint plan | None | Monthly |
 | S-132 | Act | Mother | Updated assignments | Update internal tracking and dashboards | Updated systems | Automate | Monthly |
@@ -1036,23 +1023,23 @@ Every piece of content should touch at minimum 3 channels. The table below defin
 
 | Step | Phase | Owner | Input | Action | Output | AI Role | Frequency |
 |------|-------|-------|-------|--------|--------|---------|-----------|
-| S-137 | Amplify | Mother | Published column on website | Generate LinkedIn adaptation (professional angle) | LinkedIn draft for JiWoong | Assist | Per column |
-| S-138 | Amplify | JiWoong | LinkedIn draft | Review, personalize, publish on LinkedIn | LinkedIn post | None | Per column |
+| S-137 | Amplify | Mother | Published column on website | Generate LinkedIn adaptation (professional angle) | LinkedIn draft for Ryan | Assist | Per column |
+| S-138 | Amplify | Ryan | LinkedIn draft | Review, personalize, publish on LinkedIn | LinkedIn post | None | Per column |
 | S-139 | Amplify | Mother | Published column on website | Generate Reddit adaptation (community angle) | Reddit draft for JeHyeong | Assist | Per column |
 | S-140 | Amplify | JeHyeong | Reddit draft | Adapt to target subreddit rules, publish | Reddit post | None | Per suitable column |
 | S-141 | Amplify | BH | Published column/video/podcast | Create Discord discussion thread with specific question | Discord thread | None | Per publish |
 | S-142 | Amplify | Mother | Published YouTube video | Extract 3 best quotes for social cards | Social card text | Assist | Per video |
 | S-143 | Amplify | JY | Social card text | Create and post on relevant channels | Social posts | None | Per video |
 | S-144 | Amplify | Kiwon | High-performing column (top 20%) | Include in offline event materials as case study | Event handout | None | Per event |
-| S-145 | Amplify | JiWoong | Event recap | Share key takeaways with SANS network | SANS outreach | None | Per event |
+| S-145 | Amplify | Ryan | Event recap | Share key takeaways with SANS network | SANS outreach | None | Per event |
 | S-146 | Amplify | Mother | Podcast episode transcript | Generate blog-style summary for website | Summary article draft | Assist | Per episode |
 | S-147 | Amplify | JeHyeong | Summary article draft | Publish podcast summary on website | Published article | None | Per episode |
 | S-148 | Amplify | TJ | High-performing column | Create short video commentary (60-90 sec) | YouTube Short | None | 1x/week |
 | S-149 | Amplify | Mother | All channel posts for a topic | Generate unified thread linking all channel appearances | Thread map | Automate | Per topic |
 | S-150 | Amplify | BH | Thread map | Post "This Week in HypeProof" roundup in Discord | Weekly roundup | None | Weekly (Sat) |
 | S-151 | Amplify | Ryan | Cross-channel performance for same content | Analyze which channel amplification paths drive most engagement | Amplification ROI report | Assist | Monthly |
-| S-152 | Amplify | Mother | Daily research (top story) | Generate LinkedIn summary adaptation | LinkedIn research summary for JiWoong | Assist | 1x/week |
-| S-153 | Amplify | JiWoong | LinkedIn research summary | Review, add professional context, publish | LinkedIn research post | None | 1x/week |
+| S-152 | Amplify | Mother | Daily research (top story) | Generate LinkedIn summary adaptation | LinkedIn research summary for Ryan | Assist | 1x/week |
+| S-153 | Amplify | Ryan | LinkedIn research summary | Review, add professional context, publish | LinkedIn research post | None | 1x/week |
 | S-154 | Amplify | JUNGWOO | Published domain analysis | Adapt key findings for Discord debate thread | Debate prompt with counter-arguments | None | Bi-weekly |
 | S-155 | Amplify | BH | Debate prompt from JUNGWOO | Post domain debate thread, tag relevant members | Active debate thread | None | Bi-weekly |
 
@@ -1063,13 +1050,13 @@ Daily Research (Mother auto, 06:00 daily)
   |
   +---> Website: Full article (immediate, Mother auto-publish)
   +---> Discord #daily-research: Summary + link (BH posts within 1h, by 09:00)
-  +---> LinkedIn: Weekly best-of summary (JiWoong adapts, Monday)
+  +---> LinkedIn: Weekly best-of summary (Ryan adapts, Monday)
   +---> Reddit: Post if relevant subreddit match (JeHyeong, same day if applicable)
 
 Column Published (Website)
   |
   +---> Discord #content-pipeline: Announcement + discussion thread (BH, same day)
-  +---> LinkedIn: Professional take (JiWoong, +1 day)
+  +---> LinkedIn: Professional take (Ryan, +1 day)
   +---> Reddit: Community angle (JeHyeong, +1-2 days)
   +---> YouTube: Discussion seed for JY to pick 1/week for Vibe Coding angle
   +---> Podcast: TJ converts to podcast script (bi-weekly selection)
@@ -1078,7 +1065,7 @@ Column Published (Website)
 YouTube Video Published
   |
   +---> Discord: Watch party / discussion (BH, same day)
-  +---> LinkedIn: Key insight post (JiWoong, +1 day)
+  +---> LinkedIn: Key insight post (Ryan, +1 day)
   +---> YouTube Shorts: 3 clips (TJ, +2-3 days)
   +---> Website: Embed + transcript summary (JeHyeong, +3 days)
   +---> Reddit: Post in r/vibe_coding or relevant sub (JeHyeong, +1 day)
@@ -1087,29 +1074,29 @@ Podcast Episode Published
   |
   +---> Discord: Episode discussion (BH, same day)
   +---> Website: Summary article (JeHyeong, +2 days)
-  +---> LinkedIn: Guest highlight (JiWoong, +1 day)
+  +---> LinkedIn: Guest highlight (Ryan, +1 day)
   +---> YouTube: Audio-over-visual upload (TJ, +3 days, if no video version)
 
 Offline Event Completed
   |
   +---> Website: Event recap article (Mother draft + Kiwon, +3 days)
   +---> Discord: Photos + highlights (BH, +1 day)
-  +---> LinkedIn: Professional recap (JiWoong, +2 days)
-  +---> SANS: Debrief + referral ask (JiWoong, +1 week)
+  +---> LinkedIn: Professional recap (Ryan, +2 days)
+  +---> SANS: Debrief + referral ask (Ryan, +1 week)
   +---> Follow-up email: To attendees with Discord invite (Kiwon, +3 days)
 
 Domain Analysis Published (JUNGWOO)
   |
   +---> Website: Full analysis article (same day)
   +---> Discord: Debate thread with counter-arguments (BH, same day)
-  +---> LinkedIn: Provocative professional take (JiWoong, +2 days)
+  +---> LinkedIn: Provocative professional take (Ryan, +2 days)
   +---> Reddit: Discussion post in relevant sub (JeHyeong, +2 days)
 
 Discord Discussion (notable thread)
   |
   +---> Column pitch: If thread generates 10+ replies (BH flags to Jay)
   +---> Podcast topic: TJ picks for bi-weekly episode
-  +---> LinkedIn insight: JiWoong adapts if professionally relevant
+  +---> LinkedIn insight: Ryan adapts if professionally relevant
 ```
 
 ---
@@ -1124,37 +1111,37 @@ For each content type, this section specifies WHO adapts, WHEN it posts, and WHE
 |-------------|---------|-----------|--------|--------|-------|
 | **Daily Research** | Website | Mother (auto) | 08:00 KST daily | Full article KO+EN | Auto-published via `/research` |
 | | Discord #daily-research | BH | Within 1h of publish (by 09:00) | Summary (3-5 bullets) + link | BH adds discussion question |
-| | LinkedIn | JiWoong | Monday (weekly best-of) | 300-word summary of top 3 stories | Professional framing |
+| | LinkedIn | Ryan | Monday (weekly best-of) | 300-word summary of top 3 stories | Professional framing |
 | | Reddit | JeHyeong | Same day if relevant | Post in matching subreddit | Only if strong subreddit fit |
 | **Column** | Website | Mother (auto) | Same day as approval | Full article KO+EN | Via `/write-column` + `/deploy` |
 | | Discord #content-pipeline | BH | Same day | Announcement + specific discussion question | Tag 2-3 relevant members |
-| | LinkedIn | JiWoong | +1 day | Adapted professional post (500 words max) | Add personal commentary |
+| | LinkedIn | Ryan | +1 day | Adapted professional post (500 words max) | Add personal commentary |
 | | Reddit | JeHyeong | +1-2 days | Community-angle adaptation | Match subreddit tone |
 | | Podcast script seed | TJ | Bi-weekly selection | Extract key arguments for discussion | TJ picks best column of 2 weeks |
 | | YouTube topic seed | JY | Weekly selection | Pick 1 column/week for video angle | Only if tech-demo possible |
 | | Offline handout | Kiwon | Per event | Print excerpt with QR to full article | Only top-performing columns |
 | **YouTube Episode** | YouTube | TJ (upload) | Friday 14:00 | Full video + metadata | Mother generates description/tags |
 | | Discord | BH | Same day (within 2h) | Watch party thread + timestamp highlights | Pin for 48h |
-| | LinkedIn | JiWoong | +1 day | Key insight post with video link | 200-word teaser |
+| | LinkedIn | Ryan | +1 day | Key insight post with video link | 200-word teaser |
 | | YouTube Shorts | TJ | +2-3 days | 3-5 clips (60 sec each) | Mother suggests timestamps |
 | | Website | JeHyeong | +3 days | Embed + transcript summary page | SEO-optimized |
 | | Reddit | JeHyeong | +1 day | Post in r/vibe_coding, r/ClaudeAI | Adapt title for subreddit |
 | **Podcast Episode** | Spotify/Apple/YouTube | TJ (upload) | Thursday 14:00 | Full audio + show notes | Via Spotify for Podcasters |
 | | Discord | BH | Same day | Episode discussion thread | Include guest intro + 3 discussion Qs |
 | | Website | JeHyeong | +2 days | Summary article (800 words) | Mother drafts summary |
-| | LinkedIn | JiWoong | +1 day | Guest highlight + key quote | Tag guest if on LinkedIn |
+| | LinkedIn | Ryan | +1 day | Guest highlight + key quote | Tag guest if on LinkedIn |
 | **Event Recap** | Website | Mother draft + Kiwon edit | +3 days | Full article with photos | Via `/write-column --type recap` |
 | | Discord | BH | +1 day | Photo collage + 5 highlights | Create dedicated thread |
-| | LinkedIn | JiWoong | +2 days | Professional recap (300 words) | Include attendee testimonial |
-| | SANS | JiWoong | +1 week | Debrief summary + referral ask | Personal message, not blast |
+| | LinkedIn | Ryan | +2 days | Professional recap (300 words) | Include attendee testimonial |
+| | SANS | Ryan | +1 week | Debrief summary + referral ask | Personal message, not blast |
 | | Email | Kiwon | +3 days | Follow-up to attendees | Include Discord invite link |
 | **Domain Analysis** | Website | JUNGWOO + Mother | Same day | Full analysis article | Via column pipeline |
 | | Discord | BH | Same day | Debate thread with devil's advocate framing | Tag members with relevant expertise |
-| | LinkedIn | JiWoong | +2 days | Provocative professional take | Frame as industry question |
+| | LinkedIn | Ryan | +2 days | Provocative professional take | Frame as industry question |
 | | Reddit | JeHyeong | +2 days | Discussion post | r/artificial or domain-specific sub |
 | **Discord Discussion** | Column pitch | BH flags to Jay | If 10+ replies | Internal note | Jay decides if worth column |
 | | Podcast topic | TJ | Bi-weekly | Episode topic candidate | Pick most engaging thread |
-| | LinkedIn | JiWoong | If professionally relevant | Insight post | Attribute to community |
+| | LinkedIn | Ryan | If professionally relevant | Insight post | Attribute to community |
 
 ---
 
@@ -1178,7 +1165,7 @@ Stage 6: CORE         (regular contributor, assigned domain)
 | S-156 | Discover | All members | Personal networks | Share HypeProof content on personal channels | Impressions | None | Ongoing |
 | S-157 | Discover | JeHyeong | SEO optimization | Ensure website ranks for target keywords | Organic traffic | Assist | Ongoing |
 | S-158 | Discover | Kiwon | Seed member list | Send personalized invitation DMs (1:1, not blast) | Invitation sent | None | Ongoing |
-| S-159 | Discover | JiWoong | SANS network | Identify and refer potential members | Referral | None | Ongoing |
+| S-159 | Discover | Ryan | SANS network | Identify and refer potential members | Referral | None | Ongoing |
 | S-160 | Curious | JeHyeong | New visitor analytics | Ensure website has clear value prop and CTA on every page | Optimized landing pages | None | Monthly |
 | S-161 | Curious | Mother | Visitor reading 2+ articles | (Future) Trigger "Want more? Join our Discord" popup | CTA shown | Automate | Per visitor |
 | S-162 | Engage | BH | New Discord join | Welcome message within 24 hours, point to #start-here | Welcome sent | None | Per join |
@@ -1264,7 +1251,7 @@ Every critical workflow path has a failure mode. This section defines what happe
 | S-233 | **Member completely inactive (4+ weeks)** | Low | Mother check-in (S-114) + Ryan KPI | Jay | 1. Mother sends gentle check-in at 2 weeks. 2. Jay sends personal DM at 3 weeks. 3. At 4 weeks: Jay calls member directly. 4. If member wants to step back: reassign their channels, no judgment. 5. Keep door open for return. | Discussed at monthly review if needed | Reassignment within 1 week |
 | S-234 | **Build fails on deploy** | High | Mother (S-044, S-057) | JeHyeong | 1. Mother auto-blocks deployment. 2. JeHyeong checks error (see common errors in CLAUDE.md). 3. Fix and re-run `rm -rf .next && npm run build`. 4. If JeHyeong unavailable: Jay runs Mother deploy with `--clean`. | Jay as backup | 1-4 hours |
 | S-235 | **Content causes controversy / negative PR** | Critical | Any member or external report | Jay | 1. Temporarily unpublish the content (do not delete -- archive). 2. Jay reviews with JUNGWOO (devil's advocate perspective). 3. If genuinely problematic: revise and republish with correction note. 4. If misunderstood: post clarification on same channel. 5. Never engage in public arguments. | L3 -- Jay handles within 4h | 4-24 hours |
-| S-236 | **LinkedIn post gets zero engagement** | Low | JiWoong + Ryan's weekly report | JiWoong | 1. Analyze: wrong time? wrong format? wrong topic? 2. Try reposting with different hook (3-day gap minimum). 3. Ask 2-3 team members to engage with next post (bootstrap engagement). 4. After 4 weeks of low performance: shift strategy per Ryan's analysis. | Discussed at weekly meeting | Iterative (weekly adjustment) |
+| S-236 | **LinkedIn post gets zero engagement** | Low | Ryan + Ryan's weekly report | Ryan | 1. Analyze: wrong time? wrong format? wrong topic? 2. Try reposting with different hook (3-day gap minimum). 3. Ask 2-3 team members to engage with next post (bootstrap engagement). 4. After 4 weeks of low performance: shift strategy per Ryan's analysis. | Discussed at weekly meeting | Iterative (weekly adjustment) |
 | S-237 | **Ryan unavailable for KPI report** | Medium | Ryan flags in advance OR Sunday with no report | Jay | 1. If flagged in advance: Jay pulls basic metrics from Vercel/YouTube dashboards directly. 2. If surprise absence: skip detailed analysis, use Mother's auto-collected metrics (S-071, S-072, S-078). 3. Meeting proceeds with available data. | No escalation needed | Same day (basic report) |
 | S-238 | **Discord bot / welcome flow breaks** | Medium | BH spots manually | BH | 1. Manually welcome new members (personal touch is actually better). 2. Post in #content-pipeline asking JeHyeong for bot fix. 3. If bot needs code fix: file GitHub issue. | JeHyeong fixes bot; not urgent | 1-3 days |
 | S-239 | **Seed member outreach gets no responses** | Medium | Kiwon (after 1 week of outreach) | Kiwon | 1. Review message templates -- too salesy? too vague? 2. Switch channel: if DM fails, try warm intro via existing member. 3. Adjust target list: maybe wrong people. 4. Test different value prop messaging. 5. Share learnings at weekly meeting. | Kiwon + Jay discuss strategy at weekly | Iterative (2-week experiment cycles) |
@@ -1322,7 +1309,7 @@ If Discord is down for >1h during active work hours, all coordination moves to K
 | Shorts published | 0 | 30 (3/week approx) | YouTube Studio |
 | CTR on thumbnails | N/A | >5% | YouTube Studio |
 
-### LinkedIn (Owner: JiWoong)
+### LinkedIn (Owner: Ryan)
 
 | KPI | Current | Q2 Target | Measurement |
 |-----|---------|-----------|-------------|
@@ -1362,7 +1349,7 @@ If Discord is down for >1h during active work hours, all coordination moves to K
 | Platform distribution | 0 | 3+ (Spotify, Apple, YouTube) | Manual verification |
 | Website embed page views | 0 | 20/episode | Vercel Analytics |
 
-### SANS Network (Owner: JiWoong)
+### SANS Network (Owner: Ryan)
 
 | KPI | Current | Q2 Target | Measurement |
 |-----|---------|-----------|-------------|
@@ -1408,12 +1395,12 @@ https://hypeproof-ai.xyz/<path>?utm_source=<source>&utm_medium=<medium>&utm_camp
 | Channel | Who Adds UTM | Example URL |
 |---------|-------------|-------------|
 | Discord #daily-research | Mother (auto) | `?utm_source=discord&utm_medium=post&utm_campaign=daily-research-0401` |
-| LinkedIn post | JiWoong | `?utm_source=linkedin&utm_medium=post&utm_campaign=column-ai-security` |
+| LinkedIn post | Ryan | `?utm_source=linkedin&utm_medium=post&utm_campaign=column-ai-security` |
 | Reddit post | JeHyeong | `?utm_source=reddit&utm_medium=post&utm_campaign=column-ai-security` |
 | YouTube description | TJ (Mother generates) | `?utm_source=youtube&utm_medium=video-desc&utm_campaign=vibe-coding-ep03` |
 | Seed member DM | Kiwon | `?utm_source=discord&utm_medium=dm&utm_campaign=seed-outreach` |
 | Event handout QR | Kiwon | `?utm_source=offline&utm_medium=qr&utm_campaign=event-workshop-0412` |
-| SANS referral | JiWoong | `?utm_source=sans&utm_medium=referral&utm_campaign=sans-q2` |
+| SANS referral | Ryan | `?utm_source=sans&utm_medium=referral&utm_campaign=sans-q2` |
 
 ### Link Shortener
 
@@ -1496,7 +1483,7 @@ Examples:
 | BH Discord | Teal | BH | Moderation, discussion curation, mini-events |
 | JUNGWOO Research | Brown | JUNGWOO | Domain research, analysis writing, reviews |
 | Ryan Analytics | Gray | Ryan | Data pull, dashboard update, report compilation |
-| JiWoong LinkedIn | Yellow | JiWoong | Post writing, SANS touchpoints, LinkedIn publish |
+| Ryan LinkedIn | Yellow | Ryan | Post writing, SANS touchpoints, LinkedIn publish |
 
 ### Mother Sunday Digest Format
 
@@ -1589,7 +1576,7 @@ TJ's end-to-end podcast pipeline. Platform: **Spotify for Podcasters** (free, wi
 | S-274 | Post-prod | TJ | Raw audio tracks + transcript | Edit episode: normalize levels, remove ums/dead air, add intro jingle (15s) and outro (10s), insert chapter markers | Edited audio file (MP3, 128kbps) | None | Per episode |
 | S-275 | Post-prod | Mother | Transcript + episode outline | Generate show notes: episode summary (150 words), key takeaways (3-5 bullets), timestamps, guest bio, links mentioned | Show notes (markdown) | Assist | Per episode |
 | S-276 | Publish | TJ | Edited audio + show notes | Upload to Spotify for Podcasters with title, description, show notes, episode art. Spotify auto-distributes to Apple Podcasts, Google Podcasts, Amazon Music, etc. | Published episode on 10+ platforms | None | Bi-weekly (Thu 14:00 or Fri) |
-| S-277 | Distribute | TJ + BH + JiWoong | Published episode | Multi-channel distribution: Discord announcement (BH, same day), LinkedIn clip -- 60s best moment (JiWoong, +1 day), YouTube audio-with-thumbnail upload (TJ, +3 days), website embed page (JeHyeong, +2 days), Reddit thread if topic fits (JeHyeong) | Content distributed across 4-5 channels | Assist | Per episode |
+| S-277 | Distribute | TJ + BH + Ryan | Published episode | Multi-channel distribution: Discord announcement (BH, same day), LinkedIn clip -- 60s best moment (Ryan, +1 day), YouTube audio-with-thumbnail upload (TJ, +3 days), website embed page (JeHyeong, +2 days), Reddit thread if topic fits (JeHyeong) | Content distributed across 4-5 channels | Assist | Per episode |
 | S-278 | Analyze | Ryan | Podcast analytics (Spotify for Podcasters dashboard) | Track downloads per episode, listener retention, geographic breakdown, platform split | Podcast performance data added to KPI dashboard | Assist | Per episode |
 
 ### Podcast Brand Spec
@@ -1615,7 +1602,7 @@ To ensure variety and prevent fatigue, follow this rotation:
 |---------|--------------|-------------|------------|
 | Ep 1 | JY | Ryan | AI coding / vibe coding |
 | Ep 2 | JUNGWOO | Kiwon | Domain AI opportunities |
-| Ep 3 | JiWoong | Jay | Strategy / SANS insights |
+| Ep 3 | Ryan | Jay | Strategy / SANS insights |
 | Ep 4 | BH | Ryan | Physics / data / community |
 | Ep 5 | Jay | JY | Philosophy / framework |
 | Ep 6 | Kiwon | JUNGWOO | Marketing / GTM |
@@ -1627,17 +1614,17 @@ Rule: No member appears as guest in consecutive episodes. TJ hosts all episodes.
 
 ## 20. SANS Network CRM
 
-JiWoong's lightweight relationship tracking system for the SANS network. Keep it simple -- a Google Sheet is enough for Q2.
+Ryan's lightweight relationship tracking system for the SANS network. Keep it simple -- a Google Sheet is enough for Q2.
 
 ### SANS CRM Steps (S-279 to S-283)
 
 | Step | Phase | Owner | Input | Action | Output | AI Role | Frequency |
 |------|-------|-------|-------|--------|--------|---------|-----------|
-| S-279 | Setup | JiWoong | SANS contacts + professional network | Create Google Sheets CRM with columns: Name, Company, Role, Last Contact Date, Next Action, HypeProof Interest Level (Cold/Warm/Hot), Notes, Source (SANS/LinkedIn/Event) | CRM spreadsheet live, shared with Jay (view-only) | None | Week 1 (one-time) |
-| S-280 | Maintain | JiWoong | SANS interactions, LinkedIn conversations | Add 2-3 new contacts per week from SANS interactions, conferences, LinkedIn connections | CRM grows by 8-12 contacts/month | None | Weekly |
-| S-281 | Follow-up | JiWoong | CRM "Next Action" column | Follow up with top 5 warm/hot contacts bi-weekly: share relevant HypeProof content, invite to events, ask for referrals | Follow-up messages sent, CRM updated with outcomes | None | Bi-weekly |
-| S-282 | Report | JiWoong | CRM data | Share monthly CRM summary at monthly review meeting: total contacts, new additions, warm/hot pipeline, referrals generated, notable conversations | CRM summary slide (1-page) for monthly meeting | None | Monthly |
-| S-283 | Automate | Mother | CRM "Next Action" dates | Auto-remind JiWoong of follow-up dates via Discord DM (every Monday: "You have X follow-ups due this week") | Follow-up reminder DM | Assist | Weekly (Mon) |
+| S-279 | Setup | Ryan | SANS contacts + professional network | Create Google Sheets CRM with columns: Name, Company, Role, Last Contact Date, Next Action, HypeProof Interest Level (Cold/Warm/Hot), Notes, Source (SANS/LinkedIn/Event) | CRM spreadsheet live, shared with Jay (view-only) | None | Week 1 (one-time) |
+| S-280 | Maintain | Ryan | SANS interactions, LinkedIn conversations | Add 2-3 new contacts per week from SANS interactions, conferences, LinkedIn connections | CRM grows by 8-12 contacts/month | None | Weekly |
+| S-281 | Follow-up | Ryan | CRM "Next Action" column | Follow up with top 5 warm/hot contacts bi-weekly: share relevant HypeProof content, invite to events, ask for referrals | Follow-up messages sent, CRM updated with outcomes | None | Bi-weekly |
+| S-282 | Report | Ryan | CRM data | Share monthly CRM summary at monthly review meeting: total contacts, new additions, warm/hot pipeline, referrals generated, notable conversations | CRM summary slide (1-page) for monthly meeting | None | Monthly |
+| S-283 | Automate | Mother | CRM "Next Action" dates | Auto-remind Ryan of follow-up dates via Discord DM (every Monday: "You have X follow-ups due this week") | Follow-up reminder DM | Assist | Weekly (Mon) |
 
 ### CRM Template (Google Sheets)
 
@@ -1649,7 +1636,7 @@ JiWoong's lightweight relationship tracking system for the SANS network. Keep it
 
 ### CRM Rules
 
-- **JiWoong owns all entries** -- only he adds/edits contacts
+- **Ryan owns all entries** -- only he adds/edits contacts
 - **Jay has view-only access** -- for strategic oversight
 - **Never share the CRM externally** -- these are private professional relationships
 - **Interest levels**: Cold (aware of HypeProof), Warm (engaged in conversation), Hot (wants to participate/join)
@@ -1725,7 +1712,7 @@ Based on Kiwon's Closed-First GTM strategy and the 2026-03-23 weekly meeting dec
 | Tue 4/1 | JeHyeong | Website SEO audit + Naver Webmaster Tools setup + GA4 setup (S-246, S-247, S-284, S-285) | SEO baseline report + GA4 live + Naver registered | 10:00 |
 | Wed 4/2 | JY + TJ | Create YouTube channel, establish branding (banner, profile, intro template) | YouTube channel live | 09:00 |
 | Wed 4/2 | Kiwon | Draft positioning copy: "Closed AI Hub" messaging for DMs | Invitation message templates (3 variants) | 12:00 |
-| Wed 4/2 | JiWoong | Set up SANS network CRM (S-279) | CRM spreadsheet live | 14:00 |
+| Wed 4/2 | Ryan | Set up SANS network CRM (S-279) | CRM spreadsheet live | 14:00 |
 | Thu 4/3 | Jay | Academy curriculum: finalize first workshop outline for Donga pilot | Workshop outline v1 | 09:00 |
 | Thu 4/3 | JUNGWOO | Identify first domain research focus area (based on meeting: commerce/professional AI adoption) | Domain focus memo posted in #daily-research | 10:00 |
 | Thu 4/3 | Ryan | Set up KPI tracking tool (Google Sheets dashboard with all channel tabs) | KPI dashboard v1 | 10:00 |
@@ -1752,7 +1739,7 @@ Based on Kiwon's Closed-First GTM strategy and the 2026-03-23 weekly meeting dec
 | Day | Who | Action | Deliverable | Time |
 |-----|-----|--------|------------|------|
 | Mon 4/7 | Kiwon | Begin 1:1 outreach to top 10 seed candidates | 10 DMs sent | 12:00 |
-| Mon 4/7 | JiWoong | LinkedIn post #1: signal HypeProof's existence (teaser, not hard sell) | Published LinkedIn post | 14:00 |
+| Mon 4/7 | Ryan | LinkedIn post #1: signal HypeProof's existence (teaser, not hard sell) | Published LinkedIn post | 14:00 |
 | Tue 4/8 | JY | Record first Vibe Coding episode (pilot, can be rough) | Raw recording | 09:00 |
 | Tue 4/8 | JUNGWOO | Complete first domain research brief (2-page) | Domain brief posted in Discord | 10:00 |
 | Tue 4/8 | JeHyeong | Implement Korean meta tags + hreflang (S-288) | Updated templates deployed | 10:00 |
@@ -1784,7 +1771,7 @@ Based on Kiwon's Closed-First GTM strategy and the 2026-03-23 weekly meeting dec
 | Tue 4/15 | JY | Record second Vibe Coding episode | Raw recording | 09:00 |
 | Tue 4/15 | JUNGWOO | Write first column draft from domain research (domain-AI opportunity angle) | Column draft for review | 10:00 |
 | Wed 4/16 | Kiwon | Send event invitations to seed members + qualified contacts (S-259) | Invitations sent | 12:00 |
-| Wed 4/16 | JiWoong | LinkedIn post about upcoming event (FOMO angle, limited seats) | Published LinkedIn post | 14:00 |
+| Wed 4/16 | Ryan | LinkedIn post about upcoming event (FOMO angle, limited seats) | Published LinkedIn post | 14:00 |
 | Thu 4/17 | Jay + JY | Dry-run academy workshop content (internal team) | Dry-run feedback | 14:00 |
 | Thu 4/17 | TJ | Record first podcast episode pilot (S-272) -- roundtable with JY | Raw podcast audio | 14:00 |
 | Fri 4/18 | TJ | Publish second YouTube video | Video live | 14:00 |
@@ -1810,7 +1797,7 @@ Based on Kiwon's Closed-First GTM strategy and the 2026-03-23 weekly meeting dec
 | Tue 4/22 | Kiwon | Post-event feedback collection (if event happened Week 3-4), run D+1 to D+7 sequence (S-268) | Event NPS report | 12:00 |
 | Tue 4/22 | Jay | Design monthly workshop calendar (May-June) | Workshop calendar | 09:00 |
 | Tue 4/22 | TJ | Edit and publish first podcast episode (S-274, S-276) | Podcast episode live on Spotify | 14:00 |
-| Wed 4/23 | JiWoong | SANS network month-1 activity report (S-282) | SANS CRM summary | 14:00 |
+| Wed 4/23 | Ryan | SANS network month-1 activity report (S-282) | SANS CRM summary | 14:00 |
 | Wed 4/23 | JUNGWOO | Present domain findings at ad-hoc review (or prep for Sunday) | Domain presentation | 10:00 |
 | Thu 4/24 | Jay + Kiwon | Design paid workshop pricing and registration flow | Pricing model + registration page | 09:00 |
 | Thu 4/24 | JeHyeong | Website updates: event page, member showcase, CTA improvements | Deployed changes | 10:00 |
@@ -1937,7 +1924,104 @@ BH is a Ph.D. candidate at CERN. Discord moderation fits into breaks between res
 
 ---
 
-## 24. Step Registry
+## 24. Academy Operations Pipeline
+
+The roadmap says "Academy is the main revenue source" but the workflow had zero steps for education. This section fills that gap.
+
+### Pre-Event Pipeline (S-291 to S-298)
+
+| Step | Phase | Owner | Input | Action | Output | AI Role | Frequency |
+|------|-------|-------|-------|--------|--------|---------|-----------|
+| S-291 | T-14 | Jay + Ryan | Curriculum v(N), attendee feedback | Curriculum review + update: refresh content based on NPS trends, new AI tools, audience type (Kids/Adults/Enterprise) | Updated curriculum + instructor guide | Assist | Per event |
+| S-292 | T-12 | Jay | Updated curriculum | Instructor prep + rehearsal schedule: assign teaching sections, create rehearsal calendar | Rehearsal schedule + section assignments | None | Per event |
+| S-293 | T-10 | Kiwon + Ryan | Event brief + seed member list | Marketing launch: seed member DMs, 동아일보 channel promotion, LinkedIn event post | Marketing campaign active, registration open | Assist | Per event |
+| S-294 | T-7 | Kiwon | Registration list | Registration management: track RSVPs, manage waitlist, confirm attendees | Registration tracker (headcount confirmed) | None | Per event |
+| S-295 | T-5 | Jay + Mother | Curriculum | Materials prep: worksheets, role cards, prompt cards, printed handouts | Physical materials package ready | Assist | Per event |
+| S-296 | T-3 | Kiwon | Final headcount | Final logistics: catering order, name tags, venue confirmation, backup plan | Logistics checklist complete | None | Per event |
+| S-297 | T-2 | Jay + JY | AI environment specs | Tech rehearsal: test AI environments, demo games, projector + mic, internet stability | Tech checklist pass (all systems green) | None | Per event |
+| S-298 | T-1 | Team | Venue access + run-of-show | Venue setup test + dry run: full schedule walkthrough, transitions, timing | Dry run complete, last-minute adjustments | None | Per event |
+
+### D-Day Execution (S-299 to S-307)
+
+| Step | Phase | Owner | Input | Action | Output | AI Role | Frequency |
+|------|-------|-------|-------|--------|--------|---------|-----------|
+| S-299 | D 12:00 | Team | Venue | Staff arrival + final check: signage, registration table, tech setup, materials on seats | Venue ready | None | Per event |
+| S-300 | D 12:30 | Kiwon | Registration tracker | Registration open: name tags, sign-in sheet, QR code for Discord community | Attendees checked in | None | Per event |
+| S-301 | D 13:00 | Jay (teach) + JY (assist) | Curriculum Part 1 | Part 1 -- Mindset Shift: why AI changes everything, from tool-user to initiative-provider | Part 1 delivered (40 min) | None | Per event |
+| S-302 | D 13:40 | Jay + all assistants | Curriculum Part 2 | Part 2 -- Collaboration PRD: teams write a product requirements doc WITH AI, not FOR AI | Part 2 delivered (50 min) | None | Per event |
+| S-303 | D 14:30 | Jay (teach) + JY + BH (assist) | Curriculum Part 3 | Part 3 -- Directing AI: hands-on AI prompting, iteration, evaluation exercises | Part 3 delivered (90 min) | None | Per event |
+| S-304 | D 16:00 | Jay (MC) + TJ (video) | Team presentations | Part 4 -- Demo Day + Awards: teams present AI-assisted outputs, peer voting, awards | Part 4 delivered (60 min), recordings captured | None | Per event |
+| S-305 | D 17:00 | All | NPS survey (QR) | Closing + NPS survey: thank attendees, distribute survey, community pitch | NPS responses collected | None | Per event |
+| S-306 | D-Day | TJ | Camera + audio equipment | Record entire event: key moments, group shots, candid interactions, team presentations | Raw event footage + photos | None | Per event |
+| S-307 | D-Day | TJ | Event completion | Community appeal at closing: subtle, non-pushy invite to Discord community for ongoing learning | Community invite delivered during closing | None | Per event |
+
+### Post-Event Pipeline (S-308 to S-314)
+
+| Step | Phase | Owner | Input | Action | Output | AI Role | Frequency |
+|------|-------|-------|-------|--------|--------|---------|-----------|
+| S-308 | D+1 | Ryan | NPS survey responses | NPS survey analysis: score calculation, qualitative feedback themes, improvement areas | NPS analysis report | Assist | Per event |
+| S-309 | D+1 | TJ | Raw footage + photos | Photo/video collection: organize, select best shots, prepare for recap content | Organized media library | None | Per event |
+| S-310 | D+3 | Mother + JeHyeong + BH + Ryan | Event notes + photos + NPS | Event recap article: write and publish to website + Discord + LinkedIn | Recap article published on 3 channels | Assist | Per event |
+| S-311 | D+5 | Kiwon | Attendee contact list | Follow-up DM to attendees: thank you + Discord community invite + "what do you want next?" | Follow-up DMs sent, conversion tracking started | None | Per event |
+| S-312 | D+7 | Jay + Ryan | NPS report + attendee feedback | Curriculum feedback review + improvement plan: identify what worked, what to change | Improvement plan document | None | Per event |
+| S-313 | D+14 | Jay | Improvement plan | Curriculum v(N+1) draft: incorporate feedback, update exercises, refresh examples | Updated curriculum draft | Assist | Per event |
+| S-314 | D+14 | TJ | Organized media | Publish event highlight video (2-3 min) to YouTube + Discord | Event highlight video published | None | Per event |
+
+### Curriculum Development Sub-Pipeline (S-315 to S-320)
+
+| Step | Phase | Owner | Input | Action | Output | AI Role | Frequency |
+|------|-------|-------|-------|--------|--------|---------|-----------|
+| S-315 | Review | Ryan | Accumulated NPS data + attendee feedback | Monthly NPS trend analysis: identify recurring themes, satisfaction trajectory | Monthly NPS trend report | Assist | Monthly |
+| S-316 | Review | Jay | NPS trends + market analysis | Identify curriculum gaps: missing topics, outdated exercises, audience mismatch | Gap analysis document | None | Monthly |
+| S-317 | Research | JY + Mother | AI tool landscape | Research new AI tools/trends for education: what students should learn next | Tool/trend recommendation list | Assist | Monthly |
+| S-318 | Revise | Jay + Team | Quarterly accumulated feedback | Major curriculum revision: restructure modules, add new content, retire stale material | Curriculum v(N) major release | None | Quarterly |
+| S-319 | Localize | Jay | Audience profile (Kids/Adults/Enterprise) | Localize curriculum for audience: adjust language level, examples, difficulty, time allocation | Audience-specific curriculum variant | Assist | Per audience type |
+| S-320 | Track | Mother | All curriculum versions | Maintain curriculum version history and changelog | Curriculum changelog | Automate | Per revision |
+
+### Student Journey Map
+
+```
+Discovery (sees event ad / LinkedIn / word-of-mouth)
+    |
+    v
+Registration (signs up via link, pays if paid event)
+    |
+    v
+Pre-event Welcome (Kiwon sends welcome email/DM with prep instructions)
+    |
+    v
+Event Day (attends workshop, builds with AI, presents output)
+    |
+    v
+Post-event Survey (NPS + qualitative feedback, D+0)
+    |
+    v
+Community Invite (Kiwon follow-up DM with Discord link, D+5)
+    |
+    v
+Onboarding (BH welcomes in Discord, points to #start-here)
+    |
+    v
+Active Member (participates in discussions, reads content)
+    |
+    v
+Contributor (writes column, helps at next event, creates content)
+```
+
+### Meeting Input Integration
+
+The following inputs from the 2026-03-23 meeting are integrated into specific workflow sections:
+
+| Member | Input | Integrated Into |
+|--------|-------|----------------|
+| **BH** | AI usage archive concept -- curate how different professions use AI | Discord community: BH curates a weekly "AI Use Cases" thread in #daily-research, sourced from member experiences and external examples |
+| **TJ** | Column submission barrier too high + reward system needed | Onboarding Pipeline (Section 12): add "low-barrier first contribution" path -- 3-sentence Discord post counts as first output, not full column. Reward: contributor badge + name in monthly recap |
+| **JeHyeong** | Failure case archiving -- learn from what didn't work | Web content strategy: JeHyeong adds "Lessons Learned" section to website. Mother assists in collecting failed experiments, pivots, and what we learned. Published quarterly |
+| **TJ** | Subtly pitch community at end of education events | Academy D-Day (S-307): TJ handles community appeal at closing -- not a hard sell, but "if you want to keep learning with this group, here's where we hang out" |
+
+---
+
+## 25. Step Registry
 
 ### JUNGWOO Expanded Steps (S-213 to S-225)
 
@@ -1979,7 +2063,11 @@ BH is a Ph.D. candidate at CERN. Discord moderation fits into breaks between res
 | S-269 to S-278 | Podcast Production Playbook | 10 |
 | S-279 to S-283 | SANS Network CRM | 5 |
 | S-284 to S-290 | Naver/Daum SEO Checklist | 7 |
-| **Total** | | **258 numbered + 68 launch-plan actions = 326 total** |
+| S-291 to S-298 | Academy Pre-Event Pipeline | 8 |
+| S-299 to S-307 | Academy D-Day Execution | 9 |
+| S-308 to S-314 | Academy Post-Event Pipeline | 7 |
+| S-315 to S-320 | Curriculum Development Sub-Pipeline | 6 |
+| **Total** | | **288 numbered + 68 launch-plan actions = 356 total** |
 
 ### Steps by Owner
 
@@ -1988,24 +2076,23 @@ BH is a Ph.D. candidate at CERN. Discord moderation fits into breaks between res
 | **Jay** | 27 | 27 | S-004, S-005, S-015, S-040, S-043, S-055, S-088, S-089, S-094, S-119, S-121, S-124, S-126, S-127, S-133, S-135, S-167, S-168, S-170, S-176-S-180, S-251-S-253, S-255, S-261(co), S-266(co), S-287(co) |
 | **Mother (AI)** | 60 | 60 | S-001-S-003, S-016-S-017, S-022, S-032-S-033, S-036, S-038, S-041-S-042, S-044, S-046, S-050, S-053, S-056-S-059, S-065, S-068, S-071-S-072, S-074, S-078, S-091, S-096-S-110, S-113-S-115, S-117-S-118, S-120, S-132, S-134, S-137, S-139, S-142, S-146, S-149, S-152, S-161, S-164, S-169, S-171-S-172, S-250, S-254, S-258(co), S-273, S-275, S-283 |
 | **Kiwon** | 24 | 24 | S-008, S-027, S-048, S-067, S-083, S-094, S-128, S-144, S-158, S-166, S-256-S-268 |
-| **JiWoong** | 18 | 18 | S-009, S-030, S-049, S-062, S-080, S-084, S-129, S-138, S-145, S-153, S-159, S-279-S-283 |
+| **Ryan** | 37 | 37 | S-009, S-011, S-014, S-030, S-034, S-049, S-051, S-062, S-070, S-073, S-077, S-080, S-081, S-084, S-085-S-087, S-093, S-116, S-122, S-129, S-138, S-145, S-151, S-153, S-159, S-248, S-249, S-278(co), S-279-S-283, S-290(co) |
 | **JY** | 10 | 10 | S-006, S-018, S-023, S-037, S-079, S-143, S-060 (shared with TJ) |
 | **TJ** | 22 | 22 | S-010, S-019, S-024-S-026, S-039, S-047, S-060-S-061, S-066, S-130, S-148, S-265(co), S-267(co), S-269-S-278 |
 | **JeHyeong** | 24 | 24 | S-020, S-028, S-031, S-045, S-054, S-063, S-069, S-075, S-082, S-095, S-131, S-140, S-147, S-157, S-160, S-246, S-247, S-284-S-290 |
 | **BH** | 12 | 12 | S-012, S-029, S-064, S-076, S-141, S-150, S-155, S-162-S-163, S-165 |
 | **JUNGWOO** | 19 | 19 | S-007, S-013, S-035, S-052, S-125, S-154, S-213-S-225 |
-| **Ryan** | 19 | 19 | S-011, S-014, S-034, S-051, S-070, S-073, S-077, S-081, S-085-S-087, S-093, S-116, S-122, S-151, S-248, S-249, S-278(co), S-290(co) |
 | **All** | 5 | 5 | S-090, S-123, S-136, S-156 |
 
 ---
 
-## 25. Next Iteration TODO
+## 26. Next Iteration TODO
 
 ### Resolved (v3 -> v4)
 
 - [x] Add Kiwon's Offline Event Playbook with repeatable template (Section 18, S-256 to S-268)
 - [x] Add TJ's Podcast Production Playbook with platform spec (Section 19, S-269 to S-278)
-- [x] Add JiWoong's SANS Network CRM spec (Section 20, S-279 to S-283)
+- [x] Add Ryan's SANS Network CRM spec (Section 20, S-279 to S-283)
 - [x] Add Naver/Daum SEO Checklist for Korean search engines (Section 21, S-284 to S-290)
 - [x] Add "My Section" Quick-Reference Cards for all 9 members + Sebastian (Section 1)
 - [x] Add D-8: Monthly Cadence Timeline (gantt chart + rhythm table)
@@ -2066,4 +2153,4 @@ BH is a Ph.D. candidate at CERN. Discord moderation fits into breaks between res
 
 ---
 
-*Last updated: 2026-03-24 (v4.0)*
+*Last updated: 2026-03-24 (v5.0 -- merged JiWoong/Ryan, added Academy pipeline, 8 active members)*

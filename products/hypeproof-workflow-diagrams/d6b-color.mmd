@@ -1,37 +1,37 @@
 flowchart LR
-    subgraph SRC["Periodic Content"]
-        C3["🔴 YouTube Episode<br/>JY+🟤 TJ weekly"]
-        C4["🟤 Podcast Episode<br/>TJ bi-weekly"]
-        C5["🟠 Event Recap<br/>Kiwon per-event"]
-        C6["🔵 Domain Analysis<br/>JUNGWOO bi-weekly"]
+    subgraph SRC["정기 콘텐츠"]
+        C3["YouTube 에피소드<br/>JY+TJ 주간"]
+        C4["팟캐스트 에피소드<br/>TJ 격주"]
+        C5["이벤트 요약<br/>Kiwon 이벤트별"]
+        C6["도메인 분석<br/>JUNGWOO 격주"]
     end
 
-    subgraph WEB["🟣 Website (JeHyeong)"]
-        W3["Embed + transcript<br/>+3 days"]
-        W4["Summary article<br/>+2 days"]
-        W5["Recap article<br/>+3 days"]
-        W6["Full analysis<br/>same day"]
+    subgraph WEB["웹사이트 (JeHyeong)"]
+        W3["임베드 + 자막<br/>+3일"]
+        W4["요약 기사<br/>+2일"]
+        W5["요약 기사<br/>+3일"]
+        W6["전체 분석<br/>당일"]
     end
 
-    subgraph DISC["🟢 Discord (BH)"]
-        D3["Watch party<br/>same day"]
-        D4["Episode thread<br/>same day"]
-        D5["Photos + highlights<br/>+1 day"]
-        D6["Debate thread<br/>same day"]
+    subgraph DISC["Discord (BH)"]
+        D3["시청 파티<br/>당일"]
+        D4["에피소드 쓰레드<br/>당일"]
+        D5["사진 + 하이라이트<br/>+1일"]
+        D6["토론 쓰레드<br/>당일"]
     end
 
-    subgraph LI["🟡 LinkedIn (JiWoong)"]
-        L3["Key insight post<br/>+1 day"]
-        L4["Guest highlight<br/>+1 day"]
-        L5["Professional recap<br/>+2 days"]
-        L6["Provocative take<br/>+2 days"]
+    subgraph LI["LinkedIn (Ryan)"]
+        L3["핵심 인사이트<br/>+1일"]
+        L4["게스트 하이라이트<br/>+1일"]
+        L5["전문가 요약<br/>+2일"]
+        L6["도발적 의견<br/>+2일"]
     end
 
-    subgraph OTHER["Other"]
-        O3["🔴 YouTube Shorts<br/>+2-3 days"]
-        O5a["🟡 SANS debrief<br/>+1 week"]
-        O5b["🟠 Follow-up email<br/>+3 days"]
-        R6["🟣 Reddit discussion<br/>+2 days"]
+    subgraph OTHER["기타"]
+        O3["YouTube Shorts<br/>+2~3일"]
+        O5a["SANS 디브리핑<br/>+1주"]
+        O5b["팔로업 이메일<br/>+3일"]
+        R6["Reddit 토론<br/>+2일"]
     end
 
     C3 --> W3
@@ -56,13 +56,12 @@ flowchart LR
 
     classDef jay fill:#1f6feb,stroke:#388bfd,color:#fff,font-weight:bold
     classDef kiwon fill:#e8734a,stroke:#f78166,color:#fff,font-weight:bold
-    classDef jiwoong fill:#f1c40f,stroke:#f7dc6f,color:#000,font-weight:bold
+    classDef ryan fill:#f1c40f,stroke:#f7dc6f,color:#000,font-weight:bold
     classDef jy fill:#e74c3c,stroke:#f1948a,color:#fff,font-weight:bold
     classDef tj fill:#8b4513,stroke:#cd853f,color:#fff,font-weight:bold
     classDef jehyeong fill:#9b59b6,stroke:#bb8fce,color:#fff,font-weight:bold
     classDef bh fill:#27ae60,stroke:#58d68d,color:#fff,font-weight:bold
     classDef jungwoo fill:#3498db,stroke:#85c1e9,color:#fff,font-weight:bold
-    classDef ryan fill:#95a5a6,stroke:#bdc3c7,color:#000,font-weight:bold
     classDef mother fill:#0d1117,stroke:#58a6ff,color:#58a6ff,font-weight:bold,stroke-width:2px
 
     class C3,O3 jy
@@ -71,4 +70,4 @@ flowchart LR
     class C6 jungwoo
     class W3,W4,W5,W6,R6 jehyeong
     class D3,D4,D5,D6 bh
-    class L3,L4,L5,L6,O5a jiwoong
+    class L3,L4,L5,L6,O5a ryan

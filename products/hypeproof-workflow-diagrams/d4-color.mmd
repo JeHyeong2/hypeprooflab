@@ -1,48 +1,47 @@
 flowchart TB
-    subgraph AUTOMATE["🤖 Mother: Automate (no human needed)"]
-        A1["🤖 Daily Research generation"]
-        A2["🤖 Research -> Website publish"]
-        A3["🤖 SEO metadata generation"]
-        A4["🤖 View count tracking"]
-        A5["🤖 Build & deploy pipeline"]
+    subgraph AUTOMATE["자동: 사람 불필요"]
+        A1["일일 리서치 생성"]
+        A2["리서치 → 웹 발행"]
+        A3["SEO 메타데이터 생성"]
+        A4["조회수 트래킹"]
+        A5["빌드 & 배포"]
     end
 
-    subgraph ASSIST["🤖 Mother: Assist (human decides, AI executes)"]
-        B1["🤖 Column draft from research"]
-        B2["🤖 LinkedIn post from column"]
-        B3["🤖 Discord announcement from column"]
-        B4["🤖 Reddit post adaptation"]
-        B5["🤖 YouTube script outline"]
-        B6["🤖 Event marketing copy"]
-        B7["🤖 KPI dashboard update"]
+    subgraph ASSIST["보조: 사람 결정, AI 실행"]
+        B1["리서치 기반<br/>칼럼 초안"]
+        B2["칼럼 기반<br/>LinkedIn 글"]
+        B3["Discord 공지"]
+        B4["Reddit 글 적용"]
+        B5["YouTube 스크립트 개요"]
+        B6["이벤트 마케팅 카피"]
+        B7["KPI 대시보드 업데이트"]
     end
 
-    subgraph MIRROR["🤖 Mother: Mirror (observe & reflect)"]
-        C1["🤖 Member output pattern detection"]
-        C2["🤖 Cross-member insight linking"]
-        C3["🤖 Growth trajectory tracking"]
-        C4["🤖 Philosophical connection suggestions"]
+    subgraph MIRROR["거울: 관찰 & 성찰"]
+        C1["멤버 산출물<br/>패턴 감지"]
+        C2["멤버 간<br/>인사이트 연결"]
+        C3["성장 궤적 추적"]
+        C4["철학적 연결 제안"]
     end
 
-    subgraph NONE["👥 Mother: None (human only)"]
-        D1["🔷 Weekly meeting facilitation<br/>Jay"]
-        D2["🟠 1:1 seed member outreach<br/>Kiwon"]
-        D3["🟠 Offline event presence<br/>Kiwon"]
-        D4["🔷 Strategic decisions<br/>Jay"]
-        D5["🟡 SANS network relationship<br/>JiWoong"]
-        D6["🟤 Podcast hosting / recording<br/>TJ"]
-        D7["🔵 Domain research deep-dive<br/>JUNGWOO"]
+    subgraph NONE["사람만: Mother 없음"]
+        D1["주간 미팅 진행<br/>Jay"]
+        D2["시드 멤버 접촉<br/>Kiwon"]
+        D3["오프라인 이벤트<br/>Kiwon"]
+        D4["전략적 의사결정<br/>Jay"]
+        D5["SANS 네트워크<br/>Ryan"]
+        D6["팟캐스트 호스팅<br/>TJ"]
+        D7["도메인 리서치<br/>JUNGWOO"]
     end
 
     classDef jay fill:#1f6feb,stroke:#388bfd,color:#fff,font-weight:bold
     classDef kiwon fill:#e8734a,stroke:#f78166,color:#fff,font-weight:bold
-    classDef jiwoong fill:#f1c40f,stroke:#f7dc6f,color:#000,font-weight:bold
+    classDef ryan fill:#f1c40f,stroke:#f7dc6f,color:#000,font-weight:bold
     classDef jy fill:#e74c3c,stroke:#f1948a,color:#fff,font-weight:bold
     classDef tj fill:#8b4513,stroke:#cd853f,color:#fff,font-weight:bold
     classDef jehyeong fill:#9b59b6,stroke:#bb8fce,color:#fff,font-weight:bold
     classDef bh fill:#27ae60,stroke:#58d68d,color:#fff,font-weight:bold
     classDef jungwoo fill:#3498db,stroke:#85c1e9,color:#fff,font-weight:bold
-    classDef ryan fill:#95a5a6,stroke:#bdc3c7,color:#000,font-weight:bold
     classDef mother fill:#0d1117,stroke:#58a6ff,color:#58a6ff,font-weight:bold,stroke-width:2px
 
     class A1,A2,A3,A4,A5 mother
@@ -50,6 +49,6 @@ flowchart TB
     class C1,C2,C3,C4 mother
     class D1,D4 jay
     class D2,D3 kiwon
-    class D5 jiwoong
+    class D5 ryan
     class D6 tj
     class D7 jungwoo

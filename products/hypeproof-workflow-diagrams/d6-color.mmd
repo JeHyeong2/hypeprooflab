@@ -1,51 +1,53 @@
-flowchart TB
-    subgraph CONTENT["Content Types"]
-        C1["🤖 Daily Research<br/>(Mother, 06:00 daily)"]
-        C2["✍️ Column<br/>(member + 🤖 Mother QA)"]
-        C3["🔴 YouTube Episode<br/>(JY + 🟤 TJ, weekly)"]
-        C4["🟤 Podcast Episode<br/>(TJ, bi-weekly)"]
-        C5["🟠 Event Recap<br/>(Kiwon, per event)"]
-        C6["🔵 Domain Analysis<br/>(JUNGWOO, bi-weekly)"]
-        C7["🟢 Discord Discussion<br/>(BH, daily)"]
+flowchart LR
+    subgraph SRC["콘텐츠 유형"]
+        direction TB
+        C1["일일 리서치<br/>Mother 매일"]
+        C2["칼럼<br/>멤버+Mother QA"]
+        C3["YouTube 에피소드<br/>JY+TJ 주간"]
+        C4["팟캐스트<br/>TJ 격주"]
+        C5["이벤트 요약<br/>Kiwon"]
+        C6["도메인 분석<br/>JUNGWOO 격주"]
+        C7["Discord 토론<br/>BH 매일"]
     end
 
-    subgraph WEBSITE["🟣 Website (JeHyeong)"]
-        W1["Full article<br/>immediate"]
-        W2["Full article<br/>same day"]
-        W3["Embed + transcript<br/>+3 days"]
-        W4["Summary article<br/>+2 days"]
-        W5["Recap article<br/>+3 days"]
-        W6["Full analysis<br/>same day"]
+    subgraph WEB["웹사이트 JeHyeong"]
+        direction TB
+        W1["전문 기사 즉시"]
+        W2["전문 기사 당일"]
+        W3["임베드+자막 +3일"]
+        W4["요약 기사 +2일"]
+        W5["요약 기사 +3일"]
+        W6["전체 분석 당일"]
     end
 
-    subgraph DISCORD["🟢 Discord (BH)"]
-        D1["#daily-research<br/>within 1h"]
-        D2["#content-pipeline<br/>same day"]
-        D3["Watch party<br/>same day"]
-        D4["Episode thread<br/>same day"]
-        D5["Photos + highlights<br/>+1 day"]
-        D6["Debate thread<br/>same day"]
+    subgraph DISC["Discord BH"]
+        direction TB
+        D1["#daily-research<br/>1시간 내"]
+        D2["#content-pipeline<br/>당일"]
+        D3["시청 파티 당일"]
+        D4["에피소드 쓰레드"]
+        D5["사진+하이라이트<br/>+1일"]
+        D6["토론 쓰레드 당일"]
     end
 
-    subgraph LINKEDIN["🟡 LinkedIn (JiWoong)"]
-        L1["Summary adapt<br/>same day"]
-        L2["Professional take<br/>+1 day"]
-        L3["Key insight post<br/>+1 day"]
-        L4["Guest highlight<br/>+1 day"]
-        L5["Professional recap<br/>+2 days"]
-        L6["Provocative take<br/>+2 days"]
+    subgraph LIN["LinkedIn Ryan"]
+        direction TB
+        L1["요약 적용 당일"]
+        L2["전문가 의견 +1일"]
+        L3["핵심 인사이트 +1일"]
+        L4["게스트 하이라이트"]
+        L5["전문가 요약 +2일"]
+        L6["도발적 의견 +2일"]
     end
 
-    subgraph REDDIT["🟣 Reddit (JeHyeong)"]
-        R2["Community angle<br/>+1-2 days"]
-        R6["Discussion post<br/>+2 days"]
-    end
-
-    subgraph OTHER["Other"]
-        O3["🔴 YouTube Shorts<br/>+2-3 days"]
-        O5a["🟡 SANS debrief<br/>+1 week"]
-        O5b["🟠 Follow-up email<br/>+3 days"]
-        O7["🟤 Podcast script<br/>bi-weekly"]
+    subgraph ETC["기타 채널"]
+        direction TB
+        R2["Reddit +1~2일"]
+        R6["Reddit 토론 +2일"]
+        O3["YouTube Shorts"]
+        O5a["SANS 디브리핑"]
+        O5b["팔로업 이메일"]
+        O7["팟캐스트 스크립트"]
     end
 
     C1 --> W1
@@ -82,13 +84,12 @@ flowchart TB
 
     classDef jay fill:#1f6feb,stroke:#388bfd,color:#fff,font-weight:bold
     classDef kiwon fill:#e8734a,stroke:#f78166,color:#fff,font-weight:bold
-    classDef jiwoong fill:#f1c40f,stroke:#f7dc6f,color:#000,font-weight:bold
+    classDef ryan fill:#f1c40f,stroke:#f7dc6f,color:#000,font-weight:bold
     classDef jy fill:#e74c3c,stroke:#f1948a,color:#fff,font-weight:bold
     classDef tj fill:#8b4513,stroke:#cd853f,color:#fff,font-weight:bold
     classDef jehyeong fill:#9b59b6,stroke:#bb8fce,color:#fff,font-weight:bold
     classDef bh fill:#27ae60,stroke:#58d68d,color:#fff,font-weight:bold
     classDef jungwoo fill:#3498db,stroke:#85c1e9,color:#fff,font-weight:bold
-    classDef ryan fill:#95a5a6,stroke:#bdc3c7,color:#000,font-weight:bold
     classDef mother fill:#0d1117,stroke:#58a6ff,color:#58a6ff,font-weight:bold,stroke-width:2px
 
     class C1 mother
@@ -98,4 +99,4 @@ flowchart TB
     class C6 jungwoo
     class C7,D1,D2,D3,D4,D5,D6 bh
     class W1,W2,W3,W4,W5,W6,R2,R6 jehyeong
-    class L1,L2,L3,L4,L5,L6,O5a jiwoong
+    class L1,L2,L3,L4,L5,L6,O5a ryan

@@ -1,31 +1,31 @@
 flowchart LR
-    subgraph SRC["Daily Content"]
-        C1["🤖 Daily Research<br/>Mother 06:00"]
-        C2["✍️ Column<br/>Member + 🤖 QA"]
-        C7["🟢 Discord Discussion<br/>BH daily"]
+    subgraph SRC["일일 콘텐츠"]
+        C1["일일 리서치<br/>Mother 06:00"]
+        C2["칼럼<br/>멤버 + Mother QA"]
+        C7["Discord 토론<br/>BH 매일"]
     end
 
-    subgraph WEB["🟣 Website (JeHyeong)"]
-        W1["Full article<br/>immediate"]
-        W2["Full article<br/>same day"]
+    subgraph WEB["웹사이트 (JeHyeong)"]
+        W1["전문 기사<br/>즉시"]
+        W2["전문 기사<br/>당일"]
     end
 
-    subgraph DISC["🟢 Discord (BH)"]
-        D1["#daily-research<br/>within 1h"]
-        D2["#content-pipeline<br/>same day"]
+    subgraph DISC["Discord (BH)"]
+        D1["#daily-research<br/>1시간 내"]
+        D2["#content-pipeline<br/>당일"]
     end
 
-    subgraph LI["🟡 LinkedIn (JiWoong)"]
-        L1["Summary adapt<br/>same day"]
-        L2["Professional take<br/>+1 day"]
+    subgraph LI["LinkedIn (Ryan)"]
+        L1["요약 적용<br/>당일"]
+        L2["전문가 의견<br/>+1일"]
     end
 
-    subgraph RD["🟣 Reddit (JeHyeong)"]
-        R2["Community angle<br/>+1-2 days"]
+    subgraph RD["Reddit (JeHyeong)"]
+        R2["커뮤니티 관점<br/>+1~2일"]
     end
 
-    subgraph OTH["Other"]
-        O7["🟤 Podcast script<br/>bi-weekly"]
+    subgraph OTH["기타"]
+        O7["팟캐스트 스크립트<br/>격주"]
     end
 
     C1 --> W1
@@ -42,17 +42,16 @@ flowchart LR
 
     classDef jay fill:#1f6feb,stroke:#388bfd,color:#fff,font-weight:bold
     classDef kiwon fill:#e8734a,stroke:#f78166,color:#fff,font-weight:bold
-    classDef jiwoong fill:#f1c40f,stroke:#f7dc6f,color:#000,font-weight:bold
+    classDef ryan fill:#f1c40f,stroke:#f7dc6f,color:#000,font-weight:bold
     classDef jy fill:#e74c3c,stroke:#f1948a,color:#fff,font-weight:bold
     classDef tj fill:#8b4513,stroke:#cd853f,color:#fff,font-weight:bold
     classDef jehyeong fill:#9b59b6,stroke:#bb8fce,color:#fff,font-weight:bold
     classDef bh fill:#27ae60,stroke:#58d68d,color:#fff,font-weight:bold
     classDef jungwoo fill:#3498db,stroke:#85c1e9,color:#fff,font-weight:bold
-    classDef ryan fill:#95a5a6,stroke:#bdc3c7,color:#000,font-weight:bold
     classDef mother fill:#0d1117,stroke:#58a6ff,color:#58a6ff,font-weight:bold,stroke-width:2px
 
     class C1 mother
     class C7,D1,D2 bh
     class W1,W2,R2 jehyeong
-    class L1,L2 jiwoong
+    class L1,L2 ryan
     class O7 tj

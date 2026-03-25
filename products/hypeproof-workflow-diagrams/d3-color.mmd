@@ -1,30 +1,30 @@
 flowchart LR
-    subgraph SOURCE["Content Sources"]
-        DR["🤖 Daily Research<br/>Mother auto"]
-        MC["👥 Member Columns<br/>Manual + Mother assist"]
-        YV["🔴 YouTube Video<br/>JY + 🟤 TJ"]
-        PE["🟤 Podcast Episode<br/>TJ"]
-        EV["🟠 Event Recap<br/>Kiwon"]
-        DA["🔵 Domain Analysis<br/>JUNGWOO"]
+    subgraph SOURCE["콘텐츠 소스"]
+        DR["일일 리서치<br/>Mother 자동"]
+        MC["멤버 칼럼<br/>수동 + Mother 보조"]
+        YV["YouTube 영상<br/>JY + TJ"]
+        PE["팟캐스트 에피소드<br/>TJ"]
+        EV["이벤트 요약<br/>Kiwon"]
+        DA["도메인 분석<br/>JUNGWOO"]
     end
 
-    subgraph TRANSFORM["Transform"]
-        T1["Full article<br/>Website"]
-        T2["Thread / summary<br/>LinkedIn"]
-        T3["Discussion post<br/>Discord"]
-        T4["Short clip<br/>YouTube Shorts"]
-        T5["Reddit post<br/>r/artificial etc"]
-        T6["Teaser / CTA<br/>Offline handout"]
-        T7["Podcast script<br/>🟤 TJ converts"]
+    subgraph TRANSFORM["변환"]
+        T1["전문 기사<br/>웹사이트"]
+        T2["쓰레드 / 요약<br/>LinkedIn"]
+        T3["토론 글<br/>Discord"]
+        T4["숏클립<br/>YouTube Shorts"]
+        T5["Reddit 포스트<br/>r/artificial 등"]
+        T6["티저 / CTA<br/>오프라인 배포물"]
+        T7["팟캐스트 스크립트<br/>TJ 변환"]
     end
 
-    subgraph CHANNELS["Channels"]
-        W["🟣 Website<br/>JeHyeong"]
-        D["🟢 Discord<br/>BH"]
-        Y["🔴 YouTube<br/>JY"]
-        L["🟡 LinkedIn<br/>JiWoong"]
-        RR["🟣 Reddit<br/>JeHyeong"]
-        O["🟠 Offline<br/>Kiwon"]
+    subgraph CHANNELS["채널"]
+        W["웹사이트<br/>JeHyeong"]
+        D["Discord<br/>BH"]
+        Y["YouTube<br/>JY"]
+        L["LinkedIn<br/>Ryan"]
+        RR["Reddit<br/>JeHyeong"]
+        O["오프라인<br/>Kiwon"]
     end
 
     DR --> T1 --> W
@@ -48,13 +48,12 @@ flowchart LR
 
     classDef jay fill:#1f6feb,stroke:#388bfd,color:#fff,font-weight:bold
     classDef kiwon fill:#e8734a,stroke:#f78166,color:#fff,font-weight:bold
-    classDef jiwoong fill:#f1c40f,stroke:#f7dc6f,color:#000,font-weight:bold
+    classDef ryan fill:#f1c40f,stroke:#f7dc6f,color:#000,font-weight:bold
     classDef jy fill:#e74c3c,stroke:#f1948a,color:#fff,font-weight:bold
     classDef tj fill:#8b4513,stroke:#cd853f,color:#fff,font-weight:bold
     classDef jehyeong fill:#9b59b6,stroke:#bb8fce,color:#fff,font-weight:bold
     classDef bh fill:#27ae60,stroke:#58d68d,color:#fff,font-weight:bold
     classDef jungwoo fill:#3498db,stroke:#85c1e9,color:#fff,font-weight:bold
-    classDef ryan fill:#95a5a6,stroke:#bdc3c7,color:#000,font-weight:bold
     classDef mother fill:#0d1117,stroke:#58a6ff,color:#58a6ff,font-weight:bold,stroke-width:2px
 
     class DR mother
@@ -64,4 +63,4 @@ flowchart LR
     class DA jungwoo
     class W,RR jehyeong
     class D bh
-    class L jiwoong
+    class L ryan
