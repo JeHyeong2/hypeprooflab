@@ -20,6 +20,7 @@ CHANNEL=""
 SUMMARY=""
 DATE="$(date +%Y-%m-%d)"
 POINTS=0
+POINTS_EXPLICIT=false
 DRY_RUN=false
 
 usage() {
@@ -52,7 +53,7 @@ while [[ $# -gt 0 ]]; do
     --channel)       CHANNEL="$2"; shift 2 ;;
     --summary)       SUMMARY="$2"; shift 2 ;;
     --date)          DATE="$2"; shift 2 ;;
-    --points)        POINTS="$2"; shift 2 ;;
+    --points)        POINTS="$2"; POINTS_EXPLICIT=true; shift 2 ;;
     --dry-run)       DRY_RUN=true; shift ;;
     -h|--help)       usage ;;
     *)               echo "Unknown option: $1"; usage ;;
@@ -77,6 +78,19 @@ VALID_VERBS="wrote gave suggested commented attended proposed reviewed"
 if ! echo "$VALID_VERBS" | tr ' ' '\n' | grep -qx "$CONTRIBUTION"; then
   echo "Error: --contribution must be one of: $VALID_VERBS" >&2
   exit 1
+fi
+
+# Auto-calculate points if not explicitly set
+if [[ "$POINTS_EXPLICIT" == false ]]; then
+  case "$TYPE" in
+    column)   POINTS=10 ;;
+    feedback) POINTS=5 ;;
+    review)   POINTS=5 ;;
+    topic)    POINTS=3 ;;
+    meeting)  POINTS=3 ;;
+    idea)     POINTS=3 ;;
+    comment)  POINTS=2 ;;
+  esac
 fi
 
 # Validate date format
