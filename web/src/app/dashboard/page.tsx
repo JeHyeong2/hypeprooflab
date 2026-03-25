@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import DashboardClient from './DashboardClient';
 
 export const metadata: Metadata = {
   title: 'Dashboard | HypeProof AI',
@@ -7,13 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function DashboardPage() {
-  return (
-    <main className="w-full h-screen">
-      <iframe
-        src="/dashboard-v3.html"
-        className="w-full h-full border-0"
-        title="HypeProof Lab Dashboard"
-      />
-    </main>
-  );
+  return <DashboardClient />;
 }
