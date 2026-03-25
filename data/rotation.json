@@ -1,0 +1,18 @@
+{
+  "startDate": "2026-03-01",
+  "current": {
+    "index": 0,
+    "creator": "Jay",
+    "status": "idle",
+    "updatedAt": "2026-03-25T00:00:00Z"
+  },
+  "roster": [
+    { "index": 0, "name": "Jay",   "discordId": "1186944844401225808", "expertise": "AI agents, automotive SW, PM", "type": "admin" },
+    { "index": 1, "name": "JY",    "discordId": "390511709019832330",  "expertise": "AI/ML, quant, web frontend",   "type": "creator" },
+    { "index": 2, "name": "Ryan",  "discordId": "470486268069806090",  "expertise": "quant research, physics, CERN", "type": "creator" },
+    { "index": 3, "name": "Kiwon", "discordId": "1460845189793845420", "expertise": "global marketing, psychology",  "type": "creator" },
+    { "index": 4, "name": "TJ",    "discordId": "1458010195228758017", "expertise": "media production, content",     "type": "creator" },
+    { "index": 5, "name": "BH",    "discordId": "957957767992328213",  "expertise": "particle physics, CERN CMS",    "type": "creator" }
+  ],
+  "history": []
+}
