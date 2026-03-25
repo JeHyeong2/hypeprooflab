@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HypeProof Lab Dashboard v3</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;overflow-x:hidden;min-height:100vh}
+
+/* ── Header ── */
+.header{padding:1rem 1.5rem 0.6rem;border-bottom:1px solid #30363d}
+.header-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem}
+.header h1{font-size:1.4rem;font-weight:700}
+.header h1 span{color:#58a6ff}
+.stats-bar{display:flex;gap:1rem;flex-wrap:wrap}
+.stat{background:#161b22;border:1px solid #30363d;border-radius:6px;padding:0.25rem 0.6rem;font-size:0.72rem}
+.stat strong{color:#58a6ff}
+.legend{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:0.5rem;padding-bottom:0.2rem}
+.legend-item{display:flex;align-items:center;gap:0.3rem;font-size:0.68rem;color:#8b949e}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* ── Tabs ── */
+.tabs{position:sticky;top:0;z-index:100;background:#0d1117;border-bottom:1px solid #30363d;padding:0.4rem 1rem;display:flex;gap:0.35rem;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{height:3px}
+.tabs::-webkit-scrollbar-thumb{background:#30363d;border-radius:3px}
+.tab-btn{background:#161b22;border:1px solid #30363d;color:#8b949e;border-radius:6px;padding:0.35rem 0.7rem;font-size:0.72rem;cursor:pointer;white-space:nowrap;transition:all 0.15s;flex-shrink:0}
+.tab-btn:hover{border-color:#58a6ff;color:#e6edf3}
+.tab-btn.active{background:#1f6feb;border-color:#1f6feb;color:#fff;font-weight:600}
+.tab-btn.placeholder{opacity:0.6}
+
+/* ── Content Area ── */
+.content-area{display:flex;gap:1rem;max-width:1500px;margin:0.8rem auto;padding:0 1rem;align-items:flex-start}
+.left-panel{flex:1;min-width:0}
+.right-panel{width:340px;flex-shrink:0;position:sticky;top:3.5rem}
+.detail-box{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:1.2rem}
+.detail-placeholder{color:#8b949e;font-size:0.85rem;text-align:center;padding:2rem 1rem}
+
+/* ── Shared Card ── */
+.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:0.55rem 0.7rem;cursor:pointer;transition:all 0.15s;position:relative}
+.card:hover{border-color:#58a6ff;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.4)}
+.card.selected{border-color:#58a6ff;box-shadow:0 0 0 1px #58a6ff}
+.card-bar{position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:8px 0 0 8px}
+.card-title{font-size:0.8rem;font-weight:600;line-height:1.3}
+.card-sub{color:#8b949e;font-size:0.68rem;margin-top:0.15rem}
+.card-icon{font-size:1rem;float:left;margin-right:0.45rem;margin-top:0.1rem}
+
+/* ── Tab content ── */
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* ── ROADMAP ── */
+.roadmap-section{margin-bottom:1.2rem;border-radius:10px;padding:1rem;position:relative}
+.roadmap-section h2{font-size:0.9rem;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.4rem}
+.rm-short{background:rgba(31,111,235,0.08);border:1px solid rgba(31,111,235,0.25)}
+.rm-mid{background:rgba(241,196,15,0.08);border:1px solid rgba(241,196,15,0.25)}
+.rm-long{background:rgba(39,174,96,0.08);border:1px solid rgba(39,174,96,0.25)}
+.rm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:0.5rem}
+.badge{font-size:0.6rem;padding:0.1rem 0.4rem;border-radius:10px;font-weight:600;display:inline-block;margin-bottom:0.2rem}
+.badge-done{background:rgba(39,174,96,0.2);color:#27ae60}
+.badge-progress{background:rgba(31,111,235,0.2);color:#58a6ff}
+.badge-wait{background:rgba(139,148,158,0.2);color:#8b949e}
+.owner-tag{font-size:0.65rem;color:#8b949e;margin-top:0.15rem}
+
+/* Decisions */
+.decisions-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-top:0.8rem}
+.dec-col h3{font-size:0.82rem;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.3rem}
+.dec-item{background:#161b22;border:1px solid #30363d;border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;margin-bottom:0.35rem;display:flex;align-items:center;gap:0.4rem}
+.dec-check{color:#27ae60;font-weight:700;font-size:0.9rem}
+.dec-pending{color:#e8734a;font-weight:700;font-size:0.9rem}
+
+/* Two tracks */
+.tracks{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-top:0.8rem}
+.track-card{border-radius:10px;padding:0.8rem;font-size:0.78rem}
+.track-card h3{font-size:0.85rem;margin-bottom:0.3rem}
+.track1{background:rgba(232,115,74,0.1);border:1px solid rgba(232,115,74,0.3)}
+.track2{background:rgba(241,196,15,0.1);border:1px solid rgba(241,196,15,0.3)}
+
+/* ── D1 OVERVIEW ── */
+.layer-section{margin-bottom:0.8rem;border-radius:10px;padding:0.8rem 1rem;position:relative}
+.layer-section h2{font-size:0.85rem;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.4rem}
+.layer-input{background:rgba(88,166,255,0.06);border:1px solid rgba(88,166,255,0.2)}
+.layer-produce{background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.2)}
+.layer-dist{background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2)}
+.layer-feedback{background:rgba(39,174,96,0.06);border:1px solid rgba(39,174,96,0.2)}
+.layer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:0.5rem}
+.arrow-row{text-align:center;color:#30363d;font-size:1.2rem;margin:0.15rem 0;letter-spacing:0.3rem}
+
+/* ── D4 MOTHER ── */
+.ring-section{margin-bottom:0.8rem;border-radius:10px;padding:0.8rem 1rem;position:relative}
+.ring-section h2{font-size:0.85rem;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.4rem}
+.ring-section h2 .dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.ring-desc{color:#8b949e;font-size:0.73rem;margin-bottom:0.5rem}
+.ring-auto{background:rgba(88,166,255,0.08);border:1px solid rgba(88,166,255,0.3)}
+.ring-auto h2 .dot{background:#58a6ff}
+.ring-mirror{background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3)}
+.ring-mirror h2 .dot{background:#8b5cf6}
+.ring-assist{background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.3)}
+.ring-assist h2 .dot{background:#fbbf24}
+.ring-human{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3)}
+.ring-human h2 .dot{background:#ef4444}
+.items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:0.5rem}
+.bar-auto{background:#58a6ff}
+.bar-mirror{background:#8b5cf6}
+.bar-assist{background:#fbbf24}
+.bar-human{background:#ef4444}
+.detail-level{font-size:0.72rem;font-weight:600;padding:0.12rem 0.45rem;border-radius:10px;display:inline-block;margin-bottom:0.5rem}
+.level-auto{background:rgba(88,166,255,0.15);color:#58a6ff}
+.level-mirror{background:rgba(139,92,246,0.15);color:#8b5cf6}
+.level-assist{background:rgba(251,191,36,0.15);color:#fbbf24}
+.level-human{background:rgba(239,68,68,0.15);color:#ef4444}
+.detail-desc{font-size:0.82rem;line-height:1.6;margin-bottom:0.6rem}
+.detail-why{color:#8b949e;font-size:0.78rem;line-height:1.5;padding:0.5rem;background:#0d1117;border-radius:8px;border-left:3px solid #30363d}
+.detail-why strong{color:#e6edf3}
+
+/* Spectrum bar */
+.spectrum{display:flex;margin:0.4rem 0;border-radius:8px;overflow:hidden;height:6px}
+.spectrum div{flex:1}
+.s-auto{background:#58a6ff}.s-mirror{background:#8b5cf6}.s-assist{background:#fbbf24}.s-human{background:#ef4444}
+.spectrum-labels{display:flex;justify-content:space-between;font-size:0.65rem;color:#8b949e;margin-bottom:0.6rem}
+
+/* ── QA ── */
+.qa-table{width:100%;border-collapse:collapse;font-size:0.78rem}
+.qa-table th{background:#161b22;border:1px solid #30363d;padding:0.45rem 0.6rem;text-align:left;font-weight:600;color:#58a6ff}
+.qa-table td{border:1px solid #30363d;padding:0.4rem 0.6rem}
+.qa-table tr:hover{background:rgba(88,166,255,0.04)}
+.qa-done{color:#27ae60;font-weight:600}
+.qa-wip{color:#f1c40f;font-weight:600}
+.qa-wait{color:#8b949e}
+
+/* ── Placeholder ── */
+.placeholder-card{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:2rem;text-align:center}
+.placeholder-card .ph-icon{font-size:2rem;margin-bottom:0.5rem}
+.placeholder-card .ph-title{font-size:1rem;font-weight:600;margin-bottom:0.3rem}
+.placeholder-card .ph-desc{color:#8b949e;font-size:0.82rem}
+
+/* ── CONTENT PIPELINE (Tab 3) ── */
+.pipeline-flow{display:flex;gap:0;align-items:stretch;overflow-x:auto;padding-bottom:0.5rem}
+.pipeline-stage{flex:1;min-width:200px;border-radius:10px;padding:0.7rem}
+.pipeline-stage h3{font-size:0.82rem;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.3rem}
+.ps-source{background:rgba(88,166,255,0.06);border:1px solid rgba(88,166,255,0.2)}
+.ps-produce{background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.2)}
+.ps-dist{background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2)}
+.ps-feedback{background:rgba(39,174,96,0.06);border:1px solid rgba(39,174,96,0.2)}
+.pipe-cards{display:flex;flex-direction:column;gap:0.4rem}
+.pipe-arrow{display:flex;align-items:center;justify-content:center;color:#30363d;font-size:1.5rem;min-width:28px;flex-shrink:0}
+.pipe-timing{margin-top:0.8rem;background:#161b22;border:1px solid #30363d;border-radius:8px;padding:0.7rem;font-size:0.75rem;line-height:1.6}
+.pipe-timing strong{color:#58a6ff}
+
+/* ── ACADEMY (Tab 8) ── */
+.academy-section{margin-bottom:1rem;border-radius:10px;padding:0.8rem 1rem}
+.academy-section h3{font-size:0.85rem;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.4rem}
+.ac-pre{background:rgba(88,166,255,0.06);border:1px solid rgba(88,166,255,0.2)}
+.ac-dday{background:rgba(232,115,74,0.08);border:1px solid rgba(232,115,74,0.3)}
+.ac-post{background:rgba(39,174,96,0.06);border:1px solid rgba(39,174,96,0.2)}
+.ac-journey{background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.2)}
+.ac-timeline{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.5rem}
+.ac-flow{display:flex;gap:0;align-items:stretch;overflow-x:auto;padding-bottom:0.3rem}
+.ac-flow-card{flex:0 0 auto;min-width:100px;max-width:140px}
+.ac-flow-arrow{display:flex;align-items:center;color:#30363d;font-size:1.2rem;min-width:20px;flex-shrink:0;justify-content:center}
+
+/* ── MEMBER ROLES (Tab 4) ── */
+.member-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:0.6rem}
+.member-card{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:0.7rem 0.8rem;cursor:pointer;transition:all 0.15s;position:relative;border-top:3px solid #30363d}
+.member-card:hover{border-color:#58a6ff;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.4)}
+.member-card.selected{border-color:#58a6ff;box-shadow:0 0 0 1px #58a6ff}
+.mc-name{font-size:0.9rem;font-weight:700;margin-bottom:0.2rem}
+.mc-role{color:#8b949e;font-size:0.72rem;margin-bottom:0.4rem}
+.mc-row{display:flex;justify-content:space-between;font-size:0.7rem;margin-bottom:0.15rem}
+.mc-row span:first-child{color:#8b949e}
+.mc-tags{display:flex;flex-wrap:wrap;gap:0.2rem;margin-top:0.3rem}
+.mc-tag{font-size:0.6rem;padding:0.1rem 0.35rem;border-radius:8px;background:rgba(88,166,255,0.12);color:#58a6ff}
+
+/* ── CHANNEL (Tab 6) ── */
+.channel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.6rem}
+.ch-card{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:0.7rem 0.8rem;border-top:3px solid #30363d}
+.ch-card h4{font-size:0.82rem;margin-bottom:0.3rem}
+.ch-detail{font-size:0.7rem;line-height:1.5;color:#c9d1d9}
+.ch-detail strong{color:#58a6ff}
+
+/* ── FEEDBACK LOOP (Tab 7) ── */
+.fb-flow{display:flex;flex-direction:column;gap:0;align-items:center;max-width:600px;margin:0 auto}
+.fb-step{width:100%;border-radius:10px;padding:0.7rem 1rem;position:relative}
+.fb-step h4{font-size:0.82rem;margin-bottom:0.2rem}
+.fb-step p{font-size:0.72rem;color:#c9d1d9;line-height:1.4}
+.fb-arrow{color:#30363d;font-size:1.2rem;text-align:center;padding:0.1rem 0}
+.fb-mirror{background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.35);border-radius:10px;padding:0.8rem 1rem;width:100%}
+.fb-mirror h4{color:#8b5cf6}
+.mirror-funcs{display:grid;grid-template-columns:1fr 1fr;gap:0.3rem;margin-top:0.3rem}
+.mirror-func{font-size:0.68rem;padding:0.25rem 0.4rem;background:rgba(139,92,246,0.15);border-radius:6px;color:#c4b5fd}
+
+/* ── REVENUE (Tab 9) ── */
+.rev-flow{display:flex;gap:0;align-items:stretch;overflow-x:auto;padding-bottom:0.5rem;margin-bottom:0.8rem}
+.rev-card{flex:1;min-width:140px;border-radius:10px;padding:0.6rem;text-align:center}
+.rev-card h4{font-size:0.78rem;margin-bottom:0.2rem}
+.rev-card p{font-size:0.68rem;color:#c9d1d9}
+.rev-arrow{display:flex;align-items:center;color:#30363d;font-size:1.3rem;min-width:24px;flex-shrink:0;justify-content:center}
+.rev-table{width:100%;border-collapse:collapse;font-size:0.75rem;margin-bottom:0.8rem}
+.rev-table th{background:#161b22;border:1px solid #30363d;padding:0.4rem 0.5rem;text-align:left;color:#58a6ff;font-weight:600}
+.rev-table td{border:1px solid #30363d;padding:0.35rem 0.5rem}
+.inc-section{margin-bottom:0.8rem}
+.inc-section h3{font-size:0.85rem;margin-bottom:0.4rem}
+.inc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:0.4rem}
+.inc-card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:0.5rem 0.6rem;font-size:0.72rem}
+.inc-card strong{color:#58a6ff;font-size:0.68rem}
+.inc-timeline{display:flex;gap:0;align-items:stretch;margin-top:0.6rem}
+.inc-phase{flex:1;border-radius:8px;padding:0.5rem 0.6rem;text-align:center;font-size:0.72rem}
+.inc-phase strong{display:block;margin-bottom:0.15rem}
+
+/* ── RISK (Tab 10) ── */
+.risk-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+.risk-card{border-radius:10px;padding:0.8rem 1rem}
+.risk-card h4{font-size:0.82rem;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.3rem}
+.risk-badge{font-size:0.6rem;padding:0.1rem 0.4rem;border-radius:10px;font-weight:600}
+.risk-desc{font-size:0.72rem;color:#c9d1d9;margin-bottom:0.4rem;line-height:1.4}
+.risk-response{font-size:0.72rem;padding:0.4rem;background:rgba(0,0,0,0.3);border-radius:6px;border-left:3px solid #30363d}
+.risk-response strong{color:#e6edf3}
+
+/* ── COMMUNITY (Tab 11) ── */
+.comm-timeline{display:flex;gap:0;align-items:stretch;overflow-x:auto;padding-bottom:0.5rem;margin-bottom:0.8rem}
+.comm-phase{flex:1;min-width:160px;border-radius:10px;padding:0.7rem;position:relative}
+.comm-phase h4{font-size:0.78rem;margin-bottom:0.2rem}
+.comm-phase p{font-size:0.68rem;color:#c9d1d9;line-height:1.3}
+.comm-phase .phase-tag{font-size:0.6rem;padding:0.1rem 0.35rem;border-radius:8px;display:inline-block;margin-bottom:0.3rem;font-weight:600}
+.comm-arrow{display:flex;align-items:center;color:#30363d;font-size:1.3rem;min-width:24px;flex-shrink:0;justify-content:center}
+.onboard-flow{margin-top:0.5rem}
+.onboard-flow h3{font-size:0.85rem;margin-bottom:0.5rem}
+
+@media(max-width:900px){
+  .content-area{flex-direction:column}
+  .right-panel{width:100%;position:static}
+  .decisions-grid,.tracks{grid-template-columns:1fr}
+  .rm-grid,.layer-grid,.items-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .rm-grid,.layer-grid,.items-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ════════ HEADER ════════ -->
+<div class="header">
+  <div class="header-top">
+    <h1>HypeProof <span>Lab</span> Dashboard</h1>
+    <div class="stats-bar">
+      <div class="stat">멤버 <strong>8</strong>명</div>
+      <div class="stat">에이전트 <strong>8</strong>개</div>
+      <div class="stat">칼럼 <strong>28</strong>편</div>
+      <div class="stat">리서치 <strong>43</strong>회</div>
+      <div class="stat">일 평균 <strong>~10</strong> views</div>
+    </div>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#1f6feb"></div>Jay</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e8734a"></div>Kiwon</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f1c40f"></div>Ryan</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e74c3c"></div>JY</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#8b4513"></div>TJ</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#9b59b6"></div>JeHyeong</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#27ae60"></div>BH</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#3498db"></div>JUNGWOO</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#58a6ff"></div>Mother</div>
+  </div>
+</div>
+
+<!-- ════════ TABS ════════ -->
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('roadmap')">1. 로드맵</button>
+  <button class="tab-btn" onclick="switchTab('d1')">2. 전체 워크플로우</button>
+  <button class="tab-btn" onclick="switchTab('d2')">3. 콘텐츠 파이프라인</button>
+  <button class="tab-btn" onclick="switchTab('d3')">4. 멤버 역할</button>
+  <button class="tab-btn" onclick="switchTab('d4')">5. Mother AI</button>
+  <button class="tab-btn" onclick="switchTab('d5')">6. 배포 채널</button>
+  <button class="tab-btn" onclick="switchTab('d6')">7. 피드백 루프</button>
+  <button class="tab-btn" onclick="switchTab('d7')">8. 교육 Academy</button>
+  <button class="tab-btn" onclick="switchTab('d8')">9. 수익 모델</button>
+  <button class="tab-btn" onclick="switchTab('d9')">10. 리스크 맵</button>
+  <button class="tab-btn" onclick="switchTab('d10')">11. 커뮤니티</button>
+  <button class="tab-btn" onclick="switchTab('qa')">12. QA 리포트</button>
+</div>
+
+<!-- ════════ CONTENT ════════ -->
+<div class="content-area">
+<div class="left-panel">
+
+<!-- ──── TAB 1: ROADMAP ──── -->
+<div class="tab-content active" id="tab-roadmap">
+  <div class="roadmap-section rm-short">
+    <h2><span style="color:#1f6feb">&#9632;</span> 단기 (Q2 2026) — 파일럿 실행 + 증거 확보</h2>
+    <div class="rm-grid">
+      <div class="card" onclick="detailShow(this)" data-title="S-1 멤버 의사 확인" data-desc="3/23 Weekly 미팅에서 전원 관점 공유 완료. 교육이 본질이라는 방향성 합의." data-owner="Jay | 3/23 완료"><div class="card-bar" style="background:#1f6feb"></div><div class="card-title"><span class="badge badge-done">Done</span> S-1 멤버 의사 확인</div><div class="card-sub">Jay | 3/23 완료</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="S-2 동아일보 임직원 교육" data-desc="사업계획서 제출 완료. 동아일보 첫 파일럿 일정 확정 대기 중." data-owner="Jay | 4월 중순"><div class="card-bar" style="background:#1f6feb"></div><div class="card-title"><span class="badge badge-progress">진행중</span> S-2 동아일보 임직원 교육</div><div class="card-sub">Jay | 4월 중순</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="S-3 무료 파일럿 1-2회" data-desc="후기, 영상, NPS 데이터 확보를 위한 무료 파일럿 실행." data-owner="Team | 4-5월"><div class="card-bar" style="background:#1f6feb"></div><div class="card-title"><span class="badge badge-wait">대기</span> S-3 무료 파일럿 1-2회</div><div class="card-sub">Team | 4-5월</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="S-4 기술 준비" data-desc="AI 환경 설정, 데모 게임 준비, 테스트 완료." data-owner="Jay + JY | 파일럿 2주 전"><div class="card-bar" style="background:#1f6feb"></div><div class="card-title"><span class="badge badge-wait">대기</span> S-4 기술 준비</div><div class="card-sub">Jay + JY | 파일럿 2주 전</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="S-5 웹 SEO + 디자인 리뉴얼" data-desc="트래픽 개선, 네이버 노출. JeHyeong에게 웹 전권 위임." data-owner="JeHyeong | 4-5월"><div class="card-bar" style="background:#1f6feb"></div><div class="card-title"><span class="badge badge-progress">진행중</span> S-5 웹 SEO + 디자인 리뉴얼</div><div class="card-sub">JeHyeong | 4-5월</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="S-6 콘텐츠 파이프라인 유지" data-desc="리서치/칼럼 자동 발행 유지. 8 에이전트 headless 운영." data-owner="Mother | Ongoing"><div class="card-bar" style="background:#1f6feb"></div><div class="card-title"><span class="badge badge-progress">진행중</span> S-6 콘텐츠 파이프라인 유지</div><div class="card-sub">Mother | Ongoing</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="S-7 개인 채널 홍보 시작" data-desc="LinkedIn, Reddit 등 개인 브랜딩. 각 멤버가 자기 네트워크에 콘텐츠 공유." data-owner="각자 | 4월~"><div class="card-bar" style="background:#1f6feb"></div><div class="card-title"><span class="badge badge-wait">대기</span> S-7 개인 채널 홍보 시작</div><div class="card-sub">각자 | 4월~</div></div>
+    </div>
+  </div>
+  <div class="roadmap-section rm-mid">
+    <h2><span style="color:#f1c40f">&#9632;</span> 중기 (Q3-Q4 2026) — 유료 전환 + 수익 발생</h2>
+    <div class="rm-grid">
+      <div class="card" onclick="detailShow(this)" data-title="M-1 유료 과정 전환" data-desc="파일럿 NPS/후기 기반 수강료 도입" data-owner="Jay"><div class="card-bar" style="background:#f1c40f"></div><div class="card-title"><span class="badge badge-wait">대기</span> M-1 유료 과정 전환</div><div class="card-sub">Jay</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="M-2 정기 과정화 (투 트랙)" data-desc="Track 1: Kids/학부모, Track 2: 전문직 성인" data-owner="Team"><div class="card-bar" style="background:#f1c40f"></div><div class="card-title"><span class="badge badge-wait">대기</span> M-2 정기 과정화 (투 트랙)</div><div class="card-sub">Team</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="M-3 멤버 -> 운영진 전환" data-desc="참여 멤버에게 강사비/조교비 지급 시작" data-owner="Jay"><div class="card-bar" style="background:#f1c40f"></div><div class="card-title"><span class="badge badge-wait">대기</span> M-3 멤버 -> 운영진 전환</div><div class="card-sub">Jay</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="M-4 기업 AX 워크숍" data-desc="B2B 과정 - 리더가 직접 프로토타입 만드는 워크숍" data-owner="Team"><div class="card-bar" style="background:#f1c40f"></div><div class="card-title"><span class="badge badge-wait">대기</span> M-4 기업 AX 워크숍</div><div class="card-sub">Team</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="M-5 9월 부산 AI 축제" data-desc="성공 사례 창출, 외부 노출 마일스톤" data-owner="Team"><div class="card-bar" style="background:#f1c40f"></div><div class="card-title"><span class="badge badge-wait">대기</span> M-5 9월 부산 AI 축제</div><div class="card-sub">Team</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="M-6 커뮤니티 점진적 개방" data-desc="코어 멤버 -> 선별 초대 -> 진입장벽 설계" data-owner="Kiwon"><div class="card-bar" style="background:#f1c40f"></div><div class="card-title"><span class="badge badge-wait">대기</span> M-6 커뮤니티 점진적 개방</div><div class="card-sub">Kiwon</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="M-7 Jay -> Initiative Provider" data-desc="운영은 멤버, Jay는 방향성과 파이프라인 설계에 집중" data-owner="Jay"><div class="card-bar" style="background:#f1c40f"></div><div class="card-title"><span class="badge badge-wait">대기</span> M-7 Jay -> Initiative Provider</div><div class="card-sub">Jay</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="M-8 콘텐츠 자동 운영" data-desc="Mother가 리서치/칼럼 자동 발행, 사람 개입 최소화" data-owner="Mother"><div class="card-bar" style="background:#f1c40f"></div><div class="card-title"><span class="badge badge-wait">대기</span> M-8 콘텐츠 자동 운영</div><div class="card-sub">Mother</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="M-9 Mother Mirror Loop" data-desc="멤버 산출물 분석 -> 패턴 발견 -> 성찰 유도" data-owner="Mother"><div class="card-bar" style="background:#f1c40f"></div><div class="card-title"><span class="badge badge-wait">대기</span> M-9 Mother Mirror Loop</div><div class="card-sub">Mother</div></div>
+    </div>
+  </div>
+  <div class="roadmap-section rm-long">
+    <h2><span style="color:#27ae60">&#9632;</span> 장기 (2027) — 커뮤니티/길드 플랫폼</h2>
+    <div class="rm-grid">
+      <div class="card" onclick="detailShow(this)" data-title="L-1 외부 강사 양성" data-desc="Academy 수료자 중 강사 후보 발굴" data-owner=""><div class="card-bar" style="background:#27ae60"></div><div class="card-title"><span class="badge badge-wait">대기</span> L-1 외부 강사 양성</div><div class="card-sub"></div></div>
+      <div class="card" onclick="detailShow(this)" data-title="L-2 기업 CSR 확장" data-desc="동아일보 DBR에듀 네트워크 활용 B2B" data-owner=""><div class="card-bar" style="background:#27ae60"></div><div class="card-title"><span class="badge badge-wait">대기</span> L-2 기업 CSR 확장</div><div class="card-sub"></div></div>
+      <div class="card" onclick="detailShow(this)" data-title="L-3 학교 제휴" data-desc="정규 교육 과정 편입" data-owner=""><div class="card-bar" style="background:#27ae60"></div><div class="card-title"><span class="badge badge-wait">대기</span> L-3 학교 제휴</div><div class="card-sub"></div></div>
+      <div class="card" onclick="detailShow(this)" data-title="L-4 해커톤/창작대회" data-desc="커뮤니티 성장 엔진" data-owner=""><div class="card-bar" style="background:#27ae60"></div><div class="card-title"><span class="badge badge-wait">대기</span> L-4 해커톤/창작대회</div><div class="card-sub"></div></div>
+      <div class="card" onclick="detailShow(this)" data-title="L-5 수익 분배 구조" data-desc="기여도 기반 지분/배당" data-owner=""><div class="card-bar" style="background:#27ae60"></div><div class="card-title"><span class="badge badge-wait">대기</span> L-5 수익 분배 구조</div><div class="card-sub"></div></div>
+      <div class="card" onclick="detailShow(this)" data-title="L-6 콘텐츠 IP 확장" data-desc="SIMULACRA 웹툰/영상, 칼럼 구독 모델" data-owner=""><div class="card-bar" style="background:#27ae60"></div><div class="card-title"><span class="badge badge-wait">대기</span> L-6 콘텐츠 IP 확장</div><div class="card-sub"></div></div>
+      <div class="card" onclick="detailShow(this)" data-title="L-7 에이전트 인프라 판매" data-desc="파이프라인 SaaS화 또는 컨설팅" data-owner=""><div class="card-bar" style="background:#27ae60"></div><div class="card-title"><span class="badge badge-wait">대기</span> L-7 에이전트 인프라 판매</div><div class="card-sub"></div></div>
+    </div>
+  </div>
+  <div class="tracks">
+    <div class="track-card track1">
+      <h3 style="color:#e8734a">Track 1: Kids/학부모</h3>
+      <div style="font-size:0.78rem;line-height:1.5">
+        <strong>타겟:</strong> 대치동 학원가<br>
+        <strong>전략:</strong> 동아일보 네임밸류 + 리뷰 축적<br>
+        <strong>드라이버:</strong> 공포(FOMO) + 신뢰(동아일보)
+      </div>
+    </div>
+    <div class="track-card track2">
+      <h3 style="color:#f1c40f">Track 2: 전문직 성인</h3>
+      <div style="font-size:0.78rem;line-height:1.5">
+        <strong>타겟:</strong> 치과의사, 변호사 등 고소득 전문직<br>
+        <strong>전략:</strong> AI 시대 위기감 활용<br>
+        <strong>드라이버:</strong> "뒤처지면 도태" 위기감
+      </div>
+    </div>
+  </div>
+  <div class="decisions-grid">
+    <div class="dec-col">
+      <h3><span class="dec-check">&#10003;</span> 확정 사항</h3>
+      <div class="dec-item"><span class="dec-check">&#10003;</span> 멤버 의사 확인 (3/23 미팅)</div>
+      <div class="dec-item"><span class="dec-check">&#10003;</span> 방향성: 교육이 본질</div>
+      <div class="dec-item"><span class="dec-check">&#10003;</span> 커뮤니티: 초기 폐쇄 -> 점진 개방</div>
+      <div class="dec-item"><span class="dec-check">&#10003;</span> JeHyeong 웹 리드 위임</div>
+    </div>
+    <div class="dec-col">
+      <h3><span class="dec-pending">?</span> 미결정 사항</h3>
+      <div class="dec-item"><span class="dec-pending">?</span> 법인 구조</div>
+      <div class="dec-item"><span class="dec-pending">?</span> 멤버 법적 지위</div>
+      <div class="dec-item"><span class="dec-pending">?</span> 수익 배분 기준</div>
+      <div class="dec-item"><span class="dec-pending">?</span> 첫 유료 과정 형태</div>
+    </div>
+  </div>
+</div>
+
+<!-- ──── TAB 2: D1 OVERVIEW ──── -->
+<div class="tab-content" id="tab-d1">
+  <div class="layer-section layer-input">
+    <h2><span style="color:#58a6ff">&#9650;</span> 입력 계층</h2>
+    <div class="layer-grid">
+      <div class="card" onclick="detailShow(this)" data-title="일일 리서치" data-desc="매일 06:00 AI/테크 뉴스 수집, 분석, 리포트 자동 생성" data-owner="Mother"><div class="card-bar" style="background:#58a6ff"></div><div class="card-title">일일 리서치</div><div class="card-sub">Mother</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="멤버 아이디어" data-desc="8명 멤버가 자기 전공/관점에서 제안하는 토픽과 인사이트" data-owner="전원"><div class="card-bar" style="background:#8b949e"></div><div class="card-title">멤버 아이디어</div><div class="card-sub">전원</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="외부 시그널" data-desc="SANS 네트워크, LinkedIn, 업계 트렌드 등 외부 정보 유입" data-owner="Ryan"><div class="card-bar" style="background:#f1c40f"></div><div class="card-title">외부 시그널</div><div class="card-sub">Ryan</div></div>
+    </div>
+  </div>
+  <div class="arrow-row">&#9660; &#9660; &#9660; &#9660; &#9660;</div>
+  <div class="layer-section layer-produce">
+    <h2><span style="color:#8b5cf6">&#9650;</span> 제작 계층</h2>
+    <div class="layer-grid">
+      <div class="card" onclick="detailShow(this)" data-title="콘텐츠 파이프라인" data-desc="리서치 -> 칼럼 -> KO/EN 자동 생성/발행 (8 에이전트)" data-owner="Mother"><div class="card-bar" style="background:#58a6ff"></div><div class="card-title">콘텐츠 파이프라인</div><div class="card-sub">Mother</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="이벤트 기획" data-desc="오프라인 이벤트, 세미나, 해커톤 기획 및 실행" data-owner="Kiwon + TJ"><div class="card-bar" style="background:#e8734a"></div><div class="card-title">이벤트 기획</div><div class="card-sub">Kiwon + TJ</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="웹 개발" data-desc="hypeproof-ai.xyz SEO, 디자인, 프론트엔드 개발" data-owner="JeHyeong"><div class="card-bar" style="background:#9b59b6"></div><div class="card-title">웹 개발</div><div class="card-sub">JeHyeong</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="YouTube/영상" data-desc="바이브코딩 시리즈, 교육 영상 제작" data-owner="JY + TJ"><div class="card-bar" style="background:#e74c3c"></div><div class="card-title">YouTube/영상</div><div class="card-sub">JY + TJ</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="Discord 운영" data-desc="커뮤니티 관리, 공지, 토론 촉진" data-owner="BH"><div class="card-bar" style="background:#27ae60"></div><div class="card-title">Discord 운영</div><div class="card-sub">BH</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="도메인 비평" data-desc="비판적 관점에서 팀 방향 검증, 도메인 리서치" data-owner="JUNGWOO"><div class="card-bar" style="background:#3498db"></div><div class="card-title">도메인 비평</div><div class="card-sub">JUNGWOO</div></div>
+    </div>
+  </div>
+  <div class="arrow-row">&#9660; &#9660; &#9660; &#9660; &#9660;</div>
+  <div class="layer-section layer-dist">
+    <h2><span style="color:#fbbf24">&#9650;</span> 배포 계층</h2>
+    <div class="layer-grid">
+      <div class="card" onclick="detailShow(this)" data-title="웹사이트" data-desc="hypeproof-ai.xyz - SEO 기반 유기적 트래픽" data-owner=""><div class="card-bar" style="background:#9b59b6"></div><div class="card-title">웹사이트</div><div class="card-sub"></div></div>
+      <div class="card" onclick="detailShow(this)" data-title="Discord" data-desc="커뮤니티 허브, 실시간 소통" data-owner=""><div class="card-bar" style="background:#27ae60"></div><div class="card-title">Discord</div><div class="card-sub"></div></div>
+      <div class="card" onclick="detailShow(this)" data-title="YouTube" data-desc="영상 콘텐츠, 바이브코딩 시리즈" data-owner=""><div class="card-bar" style="background:#e74c3c"></div><div class="card-title">YouTube</div><div class="card-sub"></div></div>
+      <div class="card" onclick="detailShow(this)" data-title="LinkedIn" data-desc="전문가 네트워크, B2B 접점" data-owner=""><div class="card-bar" style="background:#f1c40f"></div><div class="card-title">LinkedIn</div><div class="card-sub"></div></div>
+      <div class="card" onclick="detailShow(this)" data-title="Reddit" data-desc="AI 커뮤니티 노출, 글로벌 도달" data-owner=""><div class="card-bar" style="background:#9b59b6"></div><div class="card-title">Reddit</div><div class="card-sub"></div></div>
+      <div class="card" onclick="detailShow(this)" data-title="오프라인" data-desc="세미나, 해커톤, 대면 이벤트" data-owner=""><div class="card-bar" style="background:#e8734a"></div><div class="card-title">오프라인</div><div class="card-sub"></div></div>
+      <div class="card" onclick="detailShow(this)" data-title="SANS 네트워크" data-desc="Ryan의 전문가 네트워크 활용" data-owner=""><div class="card-bar" style="background:#f1c40f"></div><div class="card-title">SANS 네트워크</div><div class="card-sub"></div></div>
+    </div>
+  </div>
+  <div class="arrow-row">&#9660; &#9660; &#9660; &#9660; &#9660;</div>
+  <div class="layer-section layer-feedback">
+    <h2><span style="color:#27ae60">&#9650;</span> 피드백 계층</h2>
+    <div class="layer-grid">
+      <div class="card" onclick="detailShow(this)" data-title="성과 수집" data-desc="KPI 대시보드, 트래픽/NPS/전환률 정량 분석" data-owner="Ryan"><div class="card-bar" style="background:#f1c40f"></div><div class="card-title">성과 수집</div><div class="card-sub">Ryan</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="Mother Mirror" data-desc="멤버 산출물 패턴 분석, 성장 궤적 추적, 인사이트 연결" data-owner="Mother"><div class="card-bar" style="background:#58a6ff"></div><div class="card-title">Mother Mirror</div><div class="card-sub">Mother</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="주간 리뷰" data-desc="매주 일요일 21:00, 방향 설정/의사결정/리스크 점검" data-owner="Jay"><div class="card-bar" style="background:#1f6feb"></div><div class="card-title">주간 리뷰</div><div class="card-sub">Jay</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ──── TAB 3: D2 CONTENT PIPELINE ──── -->
+<div class="tab-content" id="tab-d2">
+  <div class="pipeline-flow">
+    <!-- Stage 1: Sources -->
+    <div class="pipeline-stage ps-source">
+      <h3>Stage 1: 소스 (Sources)</h3>
+      <div class="pipe-cards">
+        <div class="card" onclick="detailShow(this)" data-title="일일 리서치" data-desc="매일 06:00 KST, AI/테크 뉴스 자동 수집, 분석, 리포트 생성. RSS + API 기반." data-owner="Mother"><div class="card-bar" style="background:#58a6ff"></div><div class="card-title">일일 리서치</div><div class="card-sub">Mother</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="멤버 칼럼" data-desc="멤버가 주제 선택 후 Mother가 초안 보조. KO/EN 자동 번역." data-owner="멤버 + Mother"><div class="card-bar" style="background:#8b949e"></div><div class="card-title">멤버 칼럼</div><div class="card-sub">멤버 + Mother</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="YouTube 에피소드" data-desc="바이브코딩 시리즈. JY가 녹화, TJ가 편집. Shorts 3-5개 파생." data-owner="JY + TJ"><div class="card-bar" style="background:#e74c3c"></div><div class="card-title">YouTube 에피소드</div><div class="card-sub">JY + TJ</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="팟캐스트" data-desc="격주 에피소드. Riverside.fm 녹음, Spotify for Podcasters 배포." data-owner="TJ"><div class="card-bar" style="background:#8b4513"></div><div class="card-title">팟캐스트</div><div class="card-sub">TJ</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="이벤트 요약" data-desc="오프라인 이벤트 후 사진, NPS, 하이라이트 정리." data-owner="Kiwon"><div class="card-bar" style="background:#e8734a"></div><div class="card-title">이벤트 요약</div><div class="card-sub">Kiwon</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="도메인 분석" data-desc="특정 산업 도메인의 AI 기회 분석. 비판적 시각." data-owner="JUNGWOO"><div class="card-bar" style="background:#3498db"></div><div class="card-title">도메인 분석</div><div class="card-sub">JUNGWOO</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="Discord 토론" data-desc="커뮤니티 토론에서 발굴된 콘텐츠 시드. 10+ 리플시 칼럼 후보." data-owner="BH"><div class="card-bar" style="background:#27ae60"></div><div class="card-title">Discord 토론</div><div class="card-sub">BH</div></div>
+      </div>
+    </div>
+    <div class="pipe-arrow">&#9654;</div>
+    <!-- Stage 2: Production -->
+    <div class="pipeline-stage ps-produce">
+      <h3>Stage 2: 제작 (Production)</h3>
+      <div class="pipe-cards">
+        <div class="card" onclick="detailShow(this)" data-title="Mother 초안 작성" data-desc="리서치 패키지 기반 칼럼 초안 KO 생성. 8 에이전트 headless 파이프라인." data-owner="Mother"><div class="card-bar" style="background:#58a6ff"></div><div class="card-title">Mother 초안 작성</div><div class="card-sub">Mother</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="멤버 검토/수정" data-desc="Mother 초안을 멤버가 자기 관점으로 수정. 톤, 정확성, 깊이 조정." data-owner="해당 멤버"><div class="card-bar" style="background:#8b949e"></div><div class="card-title">멤버 검토/수정</div><div class="card-sub">해당 멤버</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="QA 검증" data-desc="자동 QA: frontmatter, slug, 포맷, 링크, CLAUDE.md 규칙 준수 확인." data-owner="Mother"><div class="card-bar" style="background:#58a6ff"></div><div class="card-title">QA 검증</div><div class="card-sub">Mother</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="빌드 + 배포" data-desc="npm run build + vercel --prod --yes. 클린빌드 후 라이브 URL 검증." data-owner="Mother"><div class="card-bar" style="background:#58a6ff"></div><div class="card-title">빌드 + 배포</div><div class="card-sub">Mother</div></div>
+      </div>
+    </div>
+    <div class="pipe-arrow">&#9654;</div>
+    <!-- Stage 3: Distribution -->
+    <div class="pipeline-stage ps-dist">
+      <h3>Stage 3: 배포 (Distribution)</h3>
+      <div class="pipe-cards">
+        <div class="card" onclick="detailShow(this)" data-title="웹사이트" data-desc="hypeproof-ai.xyz SEO 기반 발행. KO/EN 전문 아티클." data-owner="JeHyeong"><div class="card-bar" style="background:#9b59b6"></div><div class="card-title">웹사이트</div><div class="card-sub">JeHyeong</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="Discord" data-desc="#daily-research 요약 + 토론 질문. 신규 콘텐츠 공지." data-owner="BH"><div class="card-bar" style="background:#27ae60"></div><div class="card-title">Discord</div><div class="card-sub">BH</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="YouTube" data-desc="풀 영상 + Shorts. 바이브코딩 데모 중심." data-owner="JY"><div class="card-bar" style="background:#e74c3c"></div><div class="card-title">YouTube</div><div class="card-sub">JY</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="LinkedIn" data-desc="전문가 톤으로 칼럼 적용. 주 2회 포스트." data-owner="Ryan"><div class="card-bar" style="background:#f1c40f"></div><div class="card-title">LinkedIn</div><div class="card-sub">Ryan</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="Reddit" data-desc="서브레딧 톤에 맞춘 커뮤니티 앵글 적용." data-owner="JeHyeong"><div class="card-bar" style="background:#9b59b6"></div><div class="card-title">Reddit</div><div class="card-sub">JeHyeong</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="오프라인" data-desc="이벤트 핸드아웃, QR 코드. 상위 칼럼 활용." data-owner="Kiwon"><div class="card-bar" style="background:#e8734a"></div><div class="card-title">오프라인</div><div class="card-sub">Kiwon</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="SANS 네트워크" data-desc="Ryan의 전문가 네트워크에 관련 콘텐츠 공유." data-owner="Ryan"><div class="card-bar" style="background:#f1c40f"></div><div class="card-title">SANS 네트워크</div><div class="card-sub">Ryan</div></div>
+      </div>
+    </div>
+    <div class="pipe-arrow">&#9654;</div>
+    <!-- Stage 4: Feedback -->
+    <div class="pipeline-stage ps-feedback">
+      <h3>Stage 4: 피드백 (Feedback)</h3>
+      <div class="pipe-cards">
+        <div class="card" onclick="detailShow(this)" data-title="조회수 수집" data-desc="Upstash Redis + Vercel Analytics 실시간 추적. GA4 UTM 분석." data-owner="Mother"><div class="card-bar" style="background:#58a6ff"></div><div class="card-title">조회수 수집</div><div class="card-sub">Mother</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="KPI 분석" data-desc="주간 KPI 대시보드 업데이트. 채널별 성과 비교, 트렌드 분석." data-owner="Ryan"><div class="card-bar" style="background:#f1c40f"></div><div class="card-title">KPI 분석</div><div class="card-sub">Ryan</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="Mirror Loop" data-desc="멤버 산출물 패턴 감지. 성장 궤적 추적. 철학적 연결 제안." data-owner="Mother"><div class="card-bar" style="background:#58a6ff"></div><div class="card-title">Mirror Loop</div><div class="card-sub">Mother</div></div>
+        <div class="card" onclick="detailShow(this)" data-title="주간 리뷰" data-desc="일 21:00 주간 미팅. 방향 설정, 콘텐츠 믹스 조정, 리스크 점검." data-owner="Jay"><div class="card-bar" style="background:#1f6feb"></div><div class="card-title">주간 리뷰</div><div class="card-sub">Jay</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="pipe-timing">
+    <strong>타이밍 예시:</strong> 리서치 매일 06:00 자동 생성 &#8594; 웹 발행 즉시 &#8594; Discord 1시간 내 &#8594; LinkedIn 당일 &#8594; 조회수 실시간 수집 &#8594; 주간 리뷰 일요일 21:00
+  </div>
+</div>
+
+<!-- ──── TAB 4: D3 MEMBER ROLES ──── -->
+<div class="tab-content" id="tab-d3">
+  <h2 style="font-size:0.95rem;margin-bottom:0.6rem">멤버 역할 매트릭스</h2>
+  <div class="member-grid">
+    <div class="member-card" style="border-top-color:#1f6feb" onclick="detailShow(this)" data-title="&#x1F537; Jay — Initiative Provider, Mother ops" data-desc="&lt;strong&gt;주간 스케줄:&lt;/strong&gt;&lt;br&gt;Mon 08:00 planning, Sun 21:00 weekly meeting. 일과 전후 30-60분." data-owner="8-10h / 피크: Mon, Sun">
+      <div class="mc-name" style="color:#1f6feb">&#x1F537; Jay</div>
+      <div class="mc-role">Initiative Provider, Mother ops</div>
+      <div class="mc-row"><span>주간 투입</span><span>8-10h</span></div>
+      <div class="mc-row"><span>피크 요일</span><span>Mon, Sun</span></div>
+      <div class="mc-row"><span>담당 KPI</span></div>
+      <div style="font-size:0.68rem;color:#c9d1d9;margin-bottom:0.15rem">파이프라인 헬스, 멤버 활성율, Mother 가동률 95%+</div>
+      <div class="mc-row"><span>체득 가치</span><span style="color:#8b5cf6">리더십, 철학적 사고</span></div>
+      <div class="mc-tags"><span class="mc-tag">All (oversight)</span></div>
+    </div>
+    <div class="member-card" style="border-top-color:#e8734a" onclick="detailShow(this)" data-title="&#x1F7E0; Kiwon — GTM 전략 + 오프라인 이벤트" data-desc="&lt;strong&gt;주간 스케줄:&lt;/strong&gt;&lt;br&gt;Mon 12:00 피드백 리뷰, Sat 10:00 이벤트 실행. 이벤트 주간에 시간 급증." data-owner="3-5h / 피크: Mon, Sat">
+      <div class="mc-name" style="color:#e8734a">&#x1F7E0; Kiwon</div>
+      <div class="mc-role">GTM 전략 + 오프라인 이벤트</div>
+      <div class="mc-row"><span>주간 투입</span><span>3-5h</span></div>
+      <div class="mc-row"><span>피크 요일</span><span>Mon, Sat</span></div>
+      <div class="mc-row"><span>담당 KPI</span></div>
+      <div style="font-size:0.68rem;color:#c9d1d9;margin-bottom:0.15rem">이벤트 월 3-4회, NPS>40, 시드멤버 이벤트 10명 확보</div>
+      <div class="mc-row"><span>체득 가치</span><span style="color:#8b5cf6">마케팅 심리학, 커뮤니티 설계</span></div>
+      <div class="mc-tags"><span class="mc-tag">Offline</span><span class="mc-tag">Marketing</span></div>
+    </div>
+    <div class="member-card" style="border-top-color:#f1c40f" onclick="detailShow(this)" data-title="&#x1F7E1; Ryan — 전략 + LinkedIn + SANS + 데이터" data-desc="&lt;strong&gt;주간 스케줄:&lt;/strong&gt;&lt;br&gt;Mon 09:00 데이터, Tue/Thu 14:00 LinkedIn, Sat 20:00 KPI 리포트, Sun 21:25 발표." data-owner="5-7h / 피크: Mon, Thu, Sat">
+      <div class="mc-name" style="color:#f1c40f">&#x1F7E1; Ryan</div>
+      <div class="mc-role">전략 + LinkedIn + SANS + 데이터</div>
+      <div class="mc-row"><span>주간 투입</span><span>5-7h</span></div>
+      <div class="mc-row"><span>피크 요일</span><span>Mon, Thu, Sat</span></div>
+      <div class="mc-row"><span>담당 KPI</span></div>
+      <div style="font-size:0.68rem;color:#c9d1d9;margin-bottom:0.15rem">LinkedIn 인게이지먼트>3%, SANS 10명, 인바운드 월 2건</div>
+      <div class="mc-row"><span>체득 가치</span><span style="color:#8b5cf6">전략적 사고, 시장 분석, 정량적 판단</span></div>
+      <div class="mc-tags"><span class="mc-tag">LinkedIn</span><span class="mc-tag">SANS</span><span class="mc-tag">Analytics</span></div>
+    </div>
+    <div class="member-card" style="border-top-color:#e74c3c" onclick="detailShow(this)" data-title="&#x1F534; JY — YouTube + 바이브코딩 + 기술 칼럼" data-desc="&lt;strong&gt;주간 스케줄:&lt;/strong&gt;&lt;br&gt;Mon 09:30 토픽 리서치, Tue 09:00 스크립트, Wed 09:00 녹화." data-owner="5-7h / 피크: Mon-Wed">
+      <div class="mc-name" style="color:#e74c3c">&#x1F534; JY</div>
+      <div class="mc-role">YouTube + 바이브코딩 + 기술 칼럼</div>
+      <div class="mc-row"><span>주간 투입</span><span>5-7h</span></div>
+      <div class="mc-row"><span>피크 요일</span><span>Mon-Wed</span></div>
+      <div class="mc-row"><span>담당 KPI</span></div>
+      <div style="font-size:0.68rem;color:#c9d1d9;margin-bottom:0.15rem">구독자 100, 평균조회 50, CTR>5%</div>
+      <div class="mc-row"><span>체득 가치</span><span style="color:#8b5cf6">교육학, 지식 공유</span></div>
+      <div class="mc-tags"><span class="mc-tag">YouTube</span><span class="mc-tag">Tech columns</span></div>
+    </div>
+    <div class="member-card" style="border-top-color:#8b4513" onclick="detailShow(this)" data-title="&#x1F7E4; TJ — 영상 제작 + 팟캐스트" data-desc="&lt;strong&gt;주간 스케줄:&lt;/strong&gt;&lt;br&gt;Tue-Wed 편집, Thu 14:00 팟캐스트 녹음(격주), Fri 14:00 발행." data-owner="5-7h / 피크: Tue-Thu">
+      <div class="mc-name" style="color:#8b4513">&#x1F7E4; TJ</div>
+      <div class="mc-role">영상 제작 + 팟캐스트</div>
+      <div class="mc-row"><span>주간 투입</span><span>5-7h</span></div>
+      <div class="mc-row"><span>피크 요일</span><span>Tue-Thu</span></div>
+      <div class="mc-row"><span>담당 KPI</span></div>
+      <div style="font-size:0.68rem;color:#c9d1d9;margin-bottom:0.15rem">영상 12편, 팟캐스트 6편, Shorts 30편 (Q2)</div>
+      <div class="mc-row"><span>체득 가치</span><span style="color:#8b5cf6">스토리텔링, 내러티브 구조</span></div>
+      <div class="mc-tags"><span class="mc-tag">YouTube (production)</span><span class="mc-tag">Podcast</span></div>
+    </div>
+    <div class="member-card" style="border-top-color:#9b59b6" onclick="detailShow(this)" data-title="&#x1F7E3; JeHyeong — 웹 리드 (SEO, 디자인, 프론트)" data-desc="&lt;strong&gt;주간 스케줄:&lt;/strong&gt;&lt;br&gt;Mon 09:00 SEO 감사, Tue-Wed 스프린트, Sat 12:00 배포." data-owner="5-7h / 피크: Tue-Wed, Sat">
+      <div class="mc-name" style="color:#9b59b6">&#x1F7E3; JeHyeong</div>
+      <div class="mc-role">웹 리드 (SEO, 디자인, 프론트)</div>
+      <div class="mc-row"><span>주간 투입</span><span>5-7h</span></div>
+      <div class="mc-row"><span>피크 요일</span><span>Tue-Wed, Sat</span></div>
+      <div class="mc-row"><span>담당 KPI</span></div>
+      <div style="font-size:0.68rem;color:#c9d1d9;margin-bottom:0.15rem">일 50 PV, 이탈률&lt;60%, SEO 인덱싱 100%, 네이버 등록</div>
+      <div class="mc-row"><span>체득 가치</span><span style="color:#8b5cf6">제품 사고, UX</span></div>
+      <div class="mc-tags"><span class="mc-tag">Website</span><span class="mc-tag">Reddit</span></div>
+    </div>
+    <div class="member-card" style="border-top-color:#27ae60" onclick="detailShow(this)" data-title="&#x1F7E2; BH — Discord 커뮤니티 운영" data-desc="&lt;strong&gt;주간 스케줄:&lt;/strong&gt;&lt;br&gt;Mon 08:00+19:00 모더레이션, Tue 19:00 토론, Thu 19:00 미니이벤트." data-owner="3-5h / 피크: Mon, Thu">
+      <div class="mc-name" style="color:#27ae60">&#x1F7E2; BH</div>
+      <div class="mc-role">Discord 커뮤니티 운영</div>
+      <div class="mc-row"><span>주간 투입</span><span>3-5h</span></div>
+      <div class="mc-row"><span>피크 요일</span><span>Mon, Thu</span></div>
+      <div class="mc-row"><span>담당 KPI</span></div>
+      <div style="font-size:0.68rem;color:#c9d1d9;margin-bottom:0.15rem">주간 메시지 50+, 활성멤버 15+, 토론쓰레드 5+/주</div>
+      <div class="mc-row"><span>체득 가치</span><span style="color:#8b5cf6">현장 감각, 니즈 발견</span></div>
+      <div class="mc-tags"><span class="mc-tag">Discord</span></div>
+    </div>
+    <div class="member-card" style="border-top-color:#3498db" onclick="detailShow(this)" data-title="&#x1F535; JUNGWOO — 도메인 비평가 + 리서치" data-desc="&lt;strong&gt;주간 스케줄:&lt;/strong&gt;&lt;br&gt;Mon 10:00 토픽 선정, Tue-Wed 리서치, Thu 10:00 리뷰." data-owner="3-5h / 피크: Tue-Wed, Thu">
+      <div class="mc-name" style="color:#3498db">&#x1F535; JUNGWOO</div>
+      <div class="mc-role">도메인 비평가 + 리서치</div>
+      <div class="mc-row"><span>주간 투입</span><span>3-5h</span></div>
+      <div class="mc-row"><span>피크 요일</span><span>Tue-Wed, Thu</span></div>
+      <div class="mc-row"><span>담당 KPI</span></div>
+      <div style="font-size:0.68rem;color:#c9d1d9;margin-bottom:0.15rem">도메인 브리프 6편, 칼럼 3편, 피어리뷰 1-2/주 (Q2)</div>
+      <div class="mc-row"><span>체득 가치</span><span style="color:#8b5cf6">비판적 사고</span></div>
+      <div class="mc-tags"><span class="mc-tag">Research</span><span class="mc-tag">Strategic feedback</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ──── TAB 5: D4 MOTHER AI ──── -->
+<div class="tab-content" id="tab-d4">
+  <div style="max-width:100%;margin-bottom:0.6rem">
+    <div class="spectrum"><div class="s-auto"></div><div class="s-mirror"></div><div class="s-assist"></div><div class="s-human"></div></div>
+    <div class="spectrum-labels"><span>AI 자동</span><span>거울 (관찰)</span><span>보조 (사람 결정)</span><span>사람만</span></div>
+  </div>
+
+  <!-- Ring 1: Auto -->
+  <div class="ring-section ring-auto">
+    <h2><span class="dot"></span> 자동 -- Mother가 알아서 (사람 불필요)</h2>
+    <p class="ring-desc">파이프라인이 검증됨. 24시간 자동 운영.</p>
+    <div class="items-grid">
+      <div class="card" onclick="detailShow(this)" data-title="일일 리서치 생성" data-desc="매일 06:00에 Mother가 AI/테크 뉴스를 수집, 분석, HypeProof Lens 적용 후 리서치 리포트를 자동 생성한다." data-owner="Mother - 매일 06:00"><div class="card-bar" style="background:#58a6ff"></div><span class="card-icon">&#x1F4F0;</span><div class="card-title">일일 리서치 생성</div><div class="card-sub">Mother - 매일 06:00</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="리서치 -> 웹 발행" data-desc="생성된 리서치를 웹사이트에 자동 발행. 빌드, 배포, URL 생성까지 전부 자동." data-owner="Mother - 자동"><div class="card-bar" style="background:#58a6ff"></div><span class="card-icon">&#x1F310;</span><div class="card-title">리서치 -> 웹 발행</div><div class="card-sub">Mother - 자동</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="SEO 메타데이터" data-desc="발행되는 모든 콘텐츠에 SEO 메타태그, Open Graph, 구조화 데이터를 자동 생성." data-owner="Mother - 발행 시"><div class="card-bar" style="background:#58a6ff"></div><span class="card-icon">&#x1F3F7;</span><div class="card-title">SEO 메타데이터</div><div class="card-sub">Mother - 발행 시</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="조회수 트래킹" data-desc="Upstash Redis로 모든 페이지의 조회수를 실시간 추적." data-owner="Mother - 실시간"><div class="card-bar" style="background:#58a6ff"></div><span class="card-icon">&#x1F4CA;</span><div class="card-title">조회수 트래킹</div><div class="card-sub">Mother - 실시간</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="빌드 &amp; 배포" data-desc="npm run build + vercel --prod. 코드 변경 시 자동 빌드, 테스트, 배포." data-owner="Mother - 자동"><div class="card-bar" style="background:#58a6ff"></div><span class="card-icon">&#x1F680;</span><div class="card-title">빌드 &amp; 배포</div><div class="card-sub">Mother - 자동</div></div>
+    </div>
+  </div>
+
+  <!-- Ring 2: Mirror -->
+  <div class="ring-section ring-mirror">
+    <h2><span class="dot"></span> 거울 -- Mother가 관찰하고 비춰줌</h2>
+    <p class="ring-desc">판단하지 않는다. 멤버의 산출물에서 패턴을 발견해서 보여줄 뿐.</p>
+    <div class="items-grid">
+      <div class="card" onclick="detailShow(this)" data-title="멤버 산출물 패턴 감지" data-desc="멤버가 쓴 칼럼, 리서치에서 반복 키워드, 관심 주제, 논조 변화를 자동 감지." data-owner="Mother Mirror - 주간"><div class="card-bar" style="background:#8b5cf6"></div><span class="card-icon">&#x1F50D;</span><div class="card-title">멤버 산출물 패턴 감지</div><div class="card-sub">Mother Mirror - 주간</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="멤버 간 인사이트 연결" data-desc="Ryan의 분석과 BH의 관점이 정반대일 때, 그 차이를 발견해서 양쪽에게 알려줌." data-owner="Mother Mirror - 감지 시"><div class="card-bar" style="background:#8b5cf6"></div><span class="card-icon">&#x1F517;</span><div class="card-title">멤버 간 인사이트 연결</div><div class="card-sub">Mother Mirror - 감지 시</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="성장 궤적 추적" data-desc="지난 달 키워드 vs 이번 달 키워드. 변화를 추적해서 보여줌." data-owner="Mother Mirror - 월간"><div class="card-bar" style="background:#8b5cf6"></div><span class="card-icon">&#x1F4C8;</span><div class="card-title">성장 궤적 추적</div><div class="card-sub">Mother Mirror - 월간</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="철학적 연결 제안" data-desc="멤버 글의 패턴을 인문학/철학 개념과 연결 제안." data-owner="Mother Mirror - 선택적"><div class="card-bar" style="background:#8b5cf6"></div><span class="card-icon">&#x1F4DA;</span><div class="card-title">철학적 연결 제안</div><div class="card-sub">Mother Mirror - 선택적</div></div>
+    </div>
+  </div>
+
+  <!-- Ring 3: Assist -->
+  <div class="ring-section ring-assist">
+    <h2><span class="dot"></span> 보조 -- 사람이 결정하면 AI가 실행</h2>
+    <p class="ring-desc">멤버가 "뭘 할지"를 정하면, Mother가 초안/변환/적용을 해줌.</p>
+    <div class="items-grid">
+      <div class="card" onclick="detailShow(this)" data-title="리서치 기반 칼럼 초안" data-desc="멤버가 주제를 선택하면, Mother가 리서치 데이터를 기반으로 칼럼 초안을 작성." data-owner="멤버 결정 -> Mother 작성"><div class="card-bar" style="background:#fbbf24"></div><span class="card-icon">&#x270F;</span><div class="card-title">리서치 기반 칼럼 초안</div><div class="card-sub">멤버 결정 -> Mother 작성</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="칼럼 -> LinkedIn 글" data-desc="작성된 칼럼을 LinkedIn 전문가 톤으로 변환." data-owner="Ryan 선택 -> Mother 변환"><div class="card-bar" style="background:#fbbf24"></div><span class="card-icon">&#x1F4BC;</span><div class="card-title">칼럼 -> LinkedIn 글</div><div class="card-sub">Ryan 선택 -> Mother 변환</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="Discord 공지" data-desc="새 콘텐츠 발행 시 Discord 공지 콘텐츠를 Mother가 생성." data-owner="BH 결정 -> Mother 생성"><div class="card-bar" style="background:#fbbf24"></div><span class="card-icon">&#x1F4AC;</span><div class="card-title">Discord 공지</div><div class="card-sub">BH 결정 -> Mother 생성</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="Reddit 글 적용" data-desc="칼럼을 Reddit 커뮤니티 톤으로 변환." data-owner="JeHyeong 결정 -> Mother 적용"><div class="card-bar" style="background:#fbbf24"></div><span class="card-icon">&#x1F534;</span><div class="card-title">Reddit 글 적용</div><div class="card-sub">JeHyeong 결정 -> Mother 적용</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="YouTube 스크립트 개요" data-desc="YouTube 에피소드의 스크립트 개요를 Mother가 작성." data-owner="JY 주제 -> Mother 개요"><div class="card-bar" style="background:#fbbf24"></div><span class="card-icon">&#x1F3AC;</span><div class="card-title">YouTube 스크립트 개요</div><div class="card-sub">JY 주제 -> Mother 개요</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="이벤트 마케팅 카피" data-desc="오프라인 이벤트 마케팅 카피를 Mother가 초안." data-owner="Kiwon 기획 -> Mother 카피"><div class="card-bar" style="background:#fbbf24"></div><span class="card-icon">&#x1F4E3;</span><div class="card-title">이벤트 마케팅 카피</div><div class="card-sub">Kiwon 기획 -> Mother 카피</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="KPI 대시보드 업데이트" data-desc="주간 KPI 데이터를 수집해서 대시보드 형태로 정리." data-owner="Ryan 해석 -> Mother 정리"><div class="card-bar" style="background:#fbbf24"></div><span class="card-icon">&#x1F4CB;</span><div class="card-title">KPI 대시보드 업데이트</div><div class="card-sub">Ryan 해석 -> Mother 정리</div></div>
+    </div>
+  </div>
+
+  <!-- Ring 4: Human -->
+  <div class="ring-section ring-human">
+    <h2><span class="dot"></span> 사람만 -- Mother 대체 불가</h2>
+    <p class="ring-desc">인간 관계, 현장 존재, 직관적 판단이 필요한 영역.</p>
+    <div class="items-grid">
+      <div class="card" onclick="detailShow(this)" data-title="주간 미팅 진행" data-desc="매주 일요일 21:00 주간 미팅. 방향 설정, 의사결정, 팀 분위기 읽기." data-owner="Jay - 일 21:00"><div class="card-bar" style="background:#ef4444"></div><span class="card-icon">&#x1F537;</span><div class="card-title">주간 미팅 진행</div><div class="card-sub">Jay - 일 21:00</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="시드 멤버 1:1 접촉" data-desc="1:1 DM으로 '당신만 초대합니다' 메시지 발송. 30명의 시드 멤버 확보." data-owner="Kiwon"><div class="card-bar" style="background:#ef4444"></div><span class="card-icon">&#x1F7E0;</span><div class="card-title">시드 멤버 1:1 접촉</div><div class="card-sub">Kiwon</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="오프라인 이벤트" data-desc="물리적 현장 존재. 참가자와 대면 소통, 분위기 조성." data-owner="Kiwon - 이벤트별"><div class="card-bar" style="background:#ef4444"></div><span class="card-icon">&#x1F7E0;</span><div class="card-title">오프라인 이벤트</div><div class="card-sub">Kiwon - 이벤트별</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="전략적 의사결정" data-desc="교육이냐 도메인이냐, 폐쇄냐 개방이냐 같은 근본 결정." data-owner="Jay"><div class="card-bar" style="background:#ef4444"></div><span class="card-icon">&#x1F537;</span><div class="card-title">전략적 의사결정</div><div class="card-sub">Jay</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="SANS 네트워크 관계" data-desc="SANS 클럽 멤버들과의 관계 형성. 대면 미팅, 신뢰 구축." data-owner="Ryan"><div class="card-bar" style="background:#ef4444"></div><span class="card-icon">&#x1F7E1;</span><div class="card-title">SANS 네트워크 관계</div><div class="card-sub">Ryan</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="팟캐스트 호스팅" data-desc="팟캐스트 녹음, 대화, 게스트 초대." data-owner="TJ - 격주"><div class="card-bar" style="background:#ef4444"></div><span class="card-icon">&#x1F7E4;</span><div class="card-title">팟캐스트 호스팅</div><div class="card-sub">TJ - 격주</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="도메인 리서치 심층" data-desc="특정 산업 도메인에 대한 깊은 리서치. 비판적 시각." data-owner="JUNGWOO"><div class="card-bar" style="background:#ef4444"></div><span class="card-icon">&#x1F535;</span><div class="card-title">도메인 리서치 심층</div><div class="card-sub">JUNGWOO</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ──── TAB 6: D5 CHANNELS ──── -->
+<div class="tab-content" id="tab-d5">
+  <h2 style="font-size:0.95rem;margin-bottom:0.6rem">배포 채널 맵</h2>
+  <div class="channel-grid">
+    <div class="ch-card" style="border-top-color:#9b59b6">
+      <h4>&#x1F310; 웹사이트</h4>
+      <div class="ch-detail"><strong>담당:</strong> <span style="color:#9b59b6">JeHyeong</span><br><strong>KPI:</strong> 일 50 PV, 월 UV 1,000, 칼럼 평균 25뷰, 이탈률&lt;60%<br><strong>콘텐츠:</strong> Daily Research (매일), 칼럼 KO/EN (주 2-3편), 이벤트 리캡, 팟캐스트 요약<br><strong>발행 빈도:</strong> 매일 (리서치), 주 2-3회 (칼럼)</div>
+    </div>
+    <div class="ch-card" style="border-top-color:#27ae60">
+      <h4>&#x1F4AC; Discord</h4>
+      <div class="ch-detail"><strong>담당:</strong> <span style="color:#27ae60">BH</span><br><strong>KPI:</strong> 주간 메시지 50+, 활성멤버 15+, 신규가입 월 5-10, 리텐션>60%<br><strong>콘텐츠:</strong> 리서치 요약, 칼럼 공지, 토론 쓰레드, 미니이벤트, 주간 리캡<br><strong>발행 빈도:</strong> 매일</div>
+    </div>
+    <div class="ch-card" style="border-top-color:#e74c3c">
+      <h4>&#x1F3AC; YouTube</h4>
+      <div class="ch-detail"><strong>담당:</strong> <span style="color:#e74c3c">JY (콘텐츠) + TJ (제작)</span><br><strong>KPI:</strong> 구독자 100, 영상 12편, Shorts 30편, 평균조회 50<br><strong>콘텐츠:</strong> 바이브코딩 풀 영상 (주 1), Shorts (주 3), 팟캐스트 오디오 업로드<br><strong>발행 빈도:</strong> 주 1회 (Long), 주 3회 (Shorts)</div>
+    </div>
+    <div class="ch-card" style="border-top-color:#f1c40f">
+      <h4>&#x1F4BC; LinkedIn</h4>
+      <div class="ch-detail"><strong>담당:</strong> <span style="color:#f1c40f">Ryan</span><br><strong>KPI:</strong> 인게이지먼트>3%, 팔로워 200, 인바운드 월 2건<br><strong>콘텐츠:</strong> 칼럼 전문가 톤 적용, 리서치 주간 베스트, 이벤트 리캡, SANS 인사이트<br><strong>발행 빈도:</strong> 주 2회</div>
+    </div>
+    <div class="ch-card" style="border-top-color:#9b59b6">
+      <h4>&#x1F4E2; Reddit</h4>
+      <div class="ch-detail"><strong>담당:</strong> <span style="color:#9b59b6">JeHyeong</span><br><strong>KPI:</strong> 주 1-2 포스트, 평균 카르마 10+, 웹 유입 월 20건<br><strong>콘텐츠:</strong> 칼럼 커뮤니티 앵글, 도메인 분석 토론, 바이브코딩 r/vibe_coding<br><strong>발행 빈도:</strong> 주 1-2회</div>
+    </div>
+    <div class="ch-card" style="border-top-color:#e8734a">
+      <h4>&#x1F3E2; 오프라인</h4>
+      <div class="ch-detail"><strong>담당:</strong> <span style="color:#e8734a">Kiwon</span><br><strong>KPI:</strong> 이벤트 월 3-4회, 참석 15-20명, NPS>40, Discord 전환>30%<br><strong>콘텐츠:</strong> 워크숍, 밋업, 라운드테이블, 파이어사이드 챗<br><strong>발행 빈도:</strong> 월 1-2회</div>
+    </div>
+    <div class="ch-card" style="border-top-color:#f1c40f">
+      <h4>&#x1F91D; SANS 네트워크</h4>
+      <div class="ch-detail"><strong>담당:</strong> <span style="color:#f1c40f">Ryan</span><br><strong>KPI:</strong> 활성 컨택 10, 레퍼럴 3건, 크로스폴리네이션 2건<br><strong>콘텐츠:</strong> 관련 콘텐츠 공유, 이벤트 디브리프, 전략적 소개<br><strong>발행 빈도:</strong> 상시 (관계 기반)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ──── TAB 7: D6 FEEDBACK LOOP ──── -->
+<div class="tab-content" id="tab-d6">
+  <h2 style="font-size:0.95rem;margin-bottom:0.6rem">피드백 루프</h2>
+  <div class="fb-flow">
+    <div class="fb-step" style="background:rgba(88,166,255,0.08);border:1px solid rgba(88,166,255,0.25)">
+      <h4 style="color:#58a6ff">1. 멤버 실행</h4>
+      <p>칼럼 작성, 영상 제작, 이벤트 운영, LinkedIn 포스팅, Discord 참여, 도메인 리서치</p>
+    </div>
+    <div class="fb-arrow">&#9660;</div>
+    <div class="fb-step" style="background:rgba(241,196,15,0.08);border:1px solid rgba(241,196,15,0.25)">
+      <h4 style="color:#f1c40f">2. 성과 수집 (Ryan)</h4>
+      <p>Page views, YouTube analytics, Discord activity, LinkedIn impressions, Event NPS -- 모든 채널 메트릭 수집</p>
+    </div>
+    <div class="fb-arrow">&#9660;</div>
+    <div class="fb-step" style="background:rgba(88,166,255,0.08);border:1px solid rgba(88,166,255,0.25)">
+      <h4 style="color:#58a6ff">3. Mother 분석</h4>
+      <p>콘텐츠 성과 랭킹, 토픽 히트맵, 멤버 활동 패턴, 채널 ROI 비교</p>
+    </div>
+    <div class="fb-arrow">&#9660;</div>
+    <div class="fb-mirror">
+      <h4>4. Mirror Loop</h4>
+      <div class="mirror-funcs">
+        <div class="mirror-func">패턴 감지: 멤버 산출물에서 반복 키워드/논조 변화 발견</div>
+        <div class="mirror-func">교차 참조: 멤버 간 상반된 관점 연결</div>
+        <div class="mirror-func">성장 궤적: 지난달 vs 이번달 키워드 변화 추적</div>
+        <div class="mirror-func">철학 연결: 인문학/심리학 개념과 패턴 연결 제안</div>
+      </div>
+    </div>
+    <div class="fb-arrow">&#9660;</div>
+    <div class="fb-step" style="background:rgba(31,111,235,0.08);border:1px solid rgba(31,111,235,0.25)">
+      <h4 style="color:#1f6feb">5. 주간 리뷰 (Jay)</h4>
+      <p>매주 일 21:00. 콘텐츠 믹스 조정, 채널 노력 재배분, 다음 주 포커스 설정</p>
+    </div>
+    <div class="fb-arrow">&#9660;</div>
+    <div class="fb-step" style="background:rgba(39,174,96,0.08);border:1px solid rgba(39,174,96,0.25)">
+      <h4 style="color:#27ae60">6. 다음 사이클</h4>
+      <p>조정된 계획으로 멤버가 다시 실행. 피드백 루프 반복.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ──── TAB 8: D7 ACADEMY ──── -->
+<div class="tab-content" id="tab-d7">
+  <div class="academy-section ac-pre">
+    <h3><span style="color:#58a6ff">&#9650;</span> 사전 준비 (T-14 ~ T-1)</h3>
+    <div class="ac-timeline">
+      <div class="card" onclick="detailShow(this)" data-title="T-14 커리큘럼 리뷰" data-desc="NPS 트렌드, 신규 AI 도구, 대상(Kids/Adults/Enterprise)에 맞춰 커리큘럼 업데이트. 강사 가이드 갱신." data-owner="Jay + Ryan"><div class="card-bar" style="background:#1f6feb"></div><div class="card-title">T-14 커리큘럼 리뷰</div><div class="card-sub">Jay + Ryan</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="T-12 강사 준비" data-desc="교육 섹션별 강사 배정, 리허설 일정 생성. 조교 역할 확인." data-owner="Jay"><div class="card-bar" style="background:#1f6feb"></div><div class="card-title">T-12 강사 준비</div><div class="card-sub">Jay</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="T-10 마케팅 론칭" data-desc="시드 멤버 DM, 동아일보 채널 프로모션, LinkedIn 이벤트 포스트. 등록 오픈." data-owner="Kiwon + Ryan"><div class="card-bar" style="background:#e8734a"></div><div class="card-title">T-10 마케팅 론칭</div><div class="card-sub">Kiwon + Ryan</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="T-7 등록 관리" data-desc="RSVP 추적, 대기자 관리, 참가자 확인." data-owner="Kiwon"><div class="card-bar" style="background:#e8734a"></div><div class="card-title">T-7 등록 관리</div><div class="card-sub">Kiwon</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="T-5 교재 준비" data-desc="워크시트, 역할 카드, 프롬프트 카드, 인쇄 핸드아웃 제작." data-owner="Jay + Mother"><div class="card-bar" style="background:#1f6feb"></div><div class="card-title">T-5 교재 준비</div><div class="card-sub">Jay + Mother</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="T-3 최종 인원 확정" data-desc="최종 헤드카운트, 케이터링 주문, 이름표 준비, 백업 플랜 확정." data-owner="Kiwon"><div class="card-bar" style="background:#e8734a"></div><div class="card-title">T-3 최종 인원 확정</div><div class="card-sub">Kiwon</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="T-2 기술 리허설" data-desc="AI 환경 테스트, 데모 게임, 프로젝터+마이크, 인터넷 안정성 확인." data-owner="Jay + JY"><div class="card-bar" style="background:#e74c3c"></div><div class="card-title">T-2 기술 리허설</div><div class="card-sub">Jay + JY</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="T-1 현장 세팅" data-desc="장소 셋업 테스트 + 전체 일정 드라이런. 최종 조정." data-owner="Team"><div class="card-bar" style="background:#8b949e"></div><div class="card-title">T-1 현장 세팅</div><div class="card-sub">Team</div></div>
+    </div>
+  </div>
+  <div class="arrow-row">&#9660; &#9660; &#9660; D-Day &#9660; &#9660; &#9660;</div>
+  <div class="academy-section ac-dday">
+    <h3><span style="color:#e8734a">&#9650;</span> D-Day 실행</h3>
+    <div class="ac-timeline">
+      <div class="card" onclick="detailShow(this)" data-title="12:00 스태프 집합" data-desc="사인지, 등록 테이블, 기술 셋업, 좌석 자료 배치. 최종 체크리스트." data-owner="Team"><div class="card-bar" style="background:#8b949e"></div><div class="card-title">12:00 스태프 집합</div><div class="card-sub">Team</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="12:30 등록 시작" data-desc="이름표, 사인인 시트, Discord QR 코드 배부. 참석자 체크인." data-owner="Kiwon"><div class="card-bar" style="background:#e8734a"></div><div class="card-title">12:30 등록 시작</div><div class="card-sub">Kiwon</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="13:00 Part1 관점전환" data-desc="AI가 모든 것을 바꾸는 이유, 도구 사용자에서 이니셔티브 제공자로. 40분." data-owner="Jay"><div class="card-bar" style="background:#1f6feb"></div><div class="card-title">13:00 Part1 관점전환</div><div class="card-sub">Jay</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="13:40 Part2 협업 PRD" data-desc="팀이 AI와 함께(FOR가 아닌 WITH) PRD를 작성하는 실습. 50분." data-owner="Jay + 조교"><div class="card-bar" style="background:#1f6feb"></div><div class="card-title">13:40 Part2 협업 PRD</div><div class="card-sub">Jay + 조교</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="14:30 Part3 AI 지휘" data-desc="핸즈온 AI 프롬프팅, 반복, 평가 실습. 90분." data-owner="Jay + JY + BH"><div class="card-bar" style="background:#e74c3c"></div><div class="card-title">14:30 Part3 AI 지휘</div><div class="card-sub">Jay + JY + BH</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="16:00 Part4 발표+시상" data-desc="팀 발표, 동료 투표, 시상식. 60분. 전체 녹화." data-owner="Jay MC + TJ 촬영"><div class="card-bar" style="background:#8b4513"></div><div class="card-title">16:00 Part4 발표+시상</div><div class="card-sub">Jay MC + TJ 촬영</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="17:00 마감 + NPS" data-desc="감사 인사, NPS 설문 (QR), 커뮤니티 소개 (TJ의 소프트 피칭)." data-owner="All"><div class="card-bar" style="background:#8b949e"></div><div class="card-title">17:00 마감 + NPS</div><div class="card-sub">All</div></div>
+    </div>
+  </div>
+  <div class="arrow-row">&#9660; &#9660; &#9660; &#9660; &#9660;</div>
+  <div class="academy-section ac-post">
+    <h3><span style="color:#27ae60">&#9650;</span> 사후 관리 (D+1 ~ D+14)</h3>
+    <div class="ac-timeline">
+      <div class="card" onclick="detailShow(this)" data-title="D+1 NPS 분석" data-desc="NPS 점수 계산, 정성 피드백 테마 분류, 개선 영역 도출." data-owner="Ryan"><div class="card-bar" style="background:#f1c40f"></div><div class="card-title">D+1 NPS 분석</div><div class="card-sub">Ryan</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="D+1 영상 수집" data-desc="사진/영상 정리, 베스트 샷 선별, 리캡 콘텐츠 소스 준비." data-owner="TJ"><div class="card-bar" style="background:#8b4513"></div><div class="card-title">D+1 영상 수집</div><div class="card-sub">TJ</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="D+3 리캡 발행" data-desc="이벤트 리캡 아티클 작성 후 웹사이트 + Discord + LinkedIn 3채널 발행." data-owner="Mother + JeHyeong + BH + Ryan"><div class="card-bar" style="background:#9b59b6"></div><div class="card-title">D+3 리캡 발행</div><div class="card-sub">Mother + JeHyeong + BH + Ryan</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="D+5 커뮤니티 초대 DM" data-desc="참석자에게 감사 + Discord 초대 + '다음에 뭘 원하시나요?' DM 발송." data-owner="Kiwon"><div class="card-bar" style="background:#e8734a"></div><div class="card-title">D+5 커뮤니티 초대 DM</div><div class="card-sub">Kiwon</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="D+7 커리큘럼 피드백" data-desc="NPS 리포트 + 참석자 피드백 기반 개선 계획 수립." data-owner="Jay + Ryan"><div class="card-bar" style="background:#1f6feb"></div><div class="card-title">D+7 커리큘럼 피드백</div><div class="card-sub">Jay + Ryan</div></div>
+      <div class="card" onclick="detailShow(this)" data-title="D+14 커리큘럼 v2" data-desc="피드백 반영, 실습 업데이트, 예시 교체. 다음 이벤트용 개선판." data-owner="Jay"><div class="card-bar" style="background:#1f6feb"></div><div class="card-title">D+14 커리큘럼 v2</div><div class="card-sub">Jay</div></div>
+    </div>
+  </div>
+  <div style="margin-top:0.8rem"></div>
+  <div class="academy-section ac-journey">
+    <h3><span style="color:#8b5cf6">&#9650;</span> 수강생 여정</h3>
+    <div class="ac-flow">
+      <div class="card ac-flow-card" onclick="detailShow(this)" data-title="발견" data-desc="이벤트 광고, LinkedIn, 입소문으로 HypeProof Academy를 알게 됨." data-owner=""><div class="card-bar" style="background:#8b949e"></div><div class="card-title" style="font-size:0.75rem">발견</div></div>
+      <div class="ac-flow-arrow">&#9654;</div>
+      <div class="card ac-flow-card" onclick="detailShow(this)" data-title="등록" data-desc="링크로 등록 (유료 이벤트는 결제 포함). Kiwon이 확인." data-owner=""><div class="card-bar" style="background:#e8734a"></div><div class="card-title" style="font-size:0.75rem">등록</div></div>
+      <div class="ac-flow-arrow">&#9654;</div>
+      <div class="card ac-flow-card" onclick="detailShow(this)" data-title="사전 안내" data-desc="Kiwon이 환영 메시지 + 준비 안내 발송." data-owner=""><div class="card-bar" style="background:#e8734a"></div><div class="card-title" style="font-size:0.75rem">사전 안내</div></div>
+      <div class="ac-flow-arrow">&#9654;</div>
+      <div class="card ac-flow-card" onclick="detailShow(this)" data-title="수업" data-desc="워크숍 참여, AI와 함께 빌드, 팀 발표." data-owner=""><div class="card-bar" style="background:#1f6feb"></div><div class="card-title" style="font-size:0.75rem">수업</div></div>
+      <div class="ac-flow-arrow">&#9654;</div>
+      <div class="card ac-flow-card" onclick="detailShow(this)" data-title="NPS" data-desc="설문 참여 (D+0). 정량+정성 피드백." data-owner=""><div class="card-bar" style="background:#f1c40f"></div><div class="card-title" style="font-size:0.75rem">NPS</div></div>
+      <div class="ac-flow-arrow">&#9654;</div>
+      <div class="card ac-flow-card" onclick="detailShow(this)" data-title="커뮤니티 초대" data-desc="Kiwon의 1:1 DM으로 Discord 초대 (D+5)." data-owner=""><div class="card-bar" style="background:#e8734a"></div><div class="card-title" style="font-size:0.75rem">커뮤니티 초대</div></div>
+      <div class="ac-flow-arrow">&#9654;</div>
+      <div class="card ac-flow-card" onclick="detailShow(this)" data-title="온보딩" data-desc="BH가 Discord에서 환영, #start-here 안내." data-owner=""><div class="card-bar" style="background:#27ae60"></div><div class="card-title" style="font-size:0.75rem">온보딩</div></div>
+      <div class="ac-flow-arrow">&#9654;</div>
+      <div class="card ac-flow-card" onclick="detailShow(this)" data-title="활동" data-desc="토론 참여, 콘텐츠 읽기, 이벤트 재참석." data-owner=""><div class="card-bar" style="background:#27ae60"></div><div class="card-title" style="font-size:0.75rem">활동</div></div>
+      <div class="ac-flow-arrow">&#9654;</div>
+      <div class="card ac-flow-card" onclick="detailShow(this)" data-title="기여자" data-desc="칼럼 작성, 다음 이벤트 도움, 콘텐츠 생성." data-owner=""><div class="card-bar" style="background:#8b5cf6"></div><div class="card-title" style="font-size:0.75rem">기여자</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ──── TAB 9: D8 REVENUE ──── -->
+<div class="tab-content" id="tab-d8">
+  <h2 style="font-size:0.95rem;margin-bottom:0.6rem">수익 모델</h2>
+  <h3 style="font-size:0.82rem;margin-bottom:0.4rem;color:#58a6ff">수익화 순서</h3>
+  <div class="rev-flow">
+    <div class="rev-card" style="background:rgba(88,166,255,0.1);border:1px solid rgba(88,166,255,0.3)"><h4 style="color:#58a6ff">&#9312; 유료 강의/워크숍</h4><p>15-30만원</p></div>
+    <div class="rev-arrow">&#9654;</div>
+    <div class="rev-card" style="background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3)"><h4 style="color:#8b5cf6">&#9313; 세미나/오프라인</h4><p>브랜드 확장</p></div>
+    <div class="rev-arrow">&#9654;</div>
+    <div class="rev-card" style="background:rgba(241,196,15,0.1);border:1px solid rgba(241,196,15,0.3)"><h4 style="color:#f1c40f">&#9314; 기업 교육/컨설팅</h4><p>B2B 매출</p></div>
+    <div class="rev-arrow">&#9654;</div>
+    <div class="rev-card" style="background:rgba(39,174,96,0.1);border:1px solid rgba(39,174,96,0.3)"><h4 style="color:#27ae60">&#9315; 월 구독 멤버십</h4><p>5-10만원</p></div>
+  </div>
+  <h3 style="font-size:0.82rem;margin-bottom:0.4rem;color:#58a6ff">MOU 수익 시나리오 (Year 1)</h3>
+  <table class="rev-table"><thead><tr><th>시나리오</th><th>Year 1 매출</th><th>동아일보 (10%)</th><th>운영 법인 (90%)</th></tr></thead><tbody>
+    <tr><td style="color:#27ae60;font-weight:600">보수적</td><td>8,000만 원</td><td>800만 원</td><td>7,200만 원</td></tr>
+    <tr><td style="color:#f1c40f;font-weight:600">목표</td><td>1억 3,400만 원</td><td>1,340만 원</td><td>1억 2,060만 원</td></tr>
+    <tr><td style="color:#e74c3c;font-weight:600">낙관적</td><td>1억 7,000만 원</td><td>1,700만 원</td><td>1억 5,300만 원</td></tr>
+  </tbody></table>
+  <div class="inc-section">
+    <h3 style="font-size:0.82rem;margin-bottom:0.4rem;color:#58a6ff">인센티브 구조</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:0.6rem">
+      <div>
+        <h4 style="font-size:0.78rem;margin-bottom:0.3rem;color:#27ae60">돈 (금전적)</h4>
+        <div class="inc-grid"><div class="inc-card"><strong>강사비/조교비</strong><br>유료 전환 시 회차당 지급</div><div class="inc-card"><strong>마케팅 수수료</strong><br>모집 성과 기반</div><div class="inc-card"><strong>영상 제작비</strong><br>콘텐츠 제작 대가</div><div class="inc-card"><strong>수익 분배</strong><br>기여도 비례 배분</div></div>
+      </div>
+      <div>
+        <h4 style="font-size:0.78rem;margin-bottom:0.3rem;color:#8b5cf6">봉사 (비금전적)</h4>
+        <div class="inc-grid"><div class="inc-card"><strong>개인 브랜딩</strong><br>"동아일보 x HypeProof AI Academy 강사" 타이틀</div><div class="inc-card"><strong>포트폴리오</strong><br>LinkedIn/이력서 실적</div><div class="inc-card"><strong>자녀 교육</strong><br>가족 무료 참여</div></div>
+      </div>
+    </div>
+  </div>
+  <h3 style="font-size:0.82rem;margin-bottom:0.4rem;color:#58a6ff">인센티브 계층화 (시간축)</h3>
+  <div class="inc-timeline">
+    <div class="inc-phase" style="background:rgba(88,166,255,0.1);border:1px solid rgba(88,166,255,0.3)"><strong style="color:#58a6ff">단기 (파일럿)</strong>브랜딩 + 포트폴리오 (즉시)</div>
+    <div class="rev-arrow">&#9654;</div>
+    <div class="inc-phase" style="background:rgba(241,196,15,0.1);border:1px solid rgba(241,196,15,0.3)"><strong style="color:#f1c40f">중기 (유료 전환)</strong>강사비/조교비 지급 -- 용역 계약</div>
+    <div class="rev-arrow">&#9654;</div>
+    <div class="inc-phase" style="background:rgba(39,174,96,0.1);border:1px solid rgba(39,174,96,0.3)"><strong style="color:#27ae60">장기 (정기화)</strong>수익 분배 -- 법인 지분 or 배당</div>
+  </div>
+</div>
+
+<!-- ──── TAB 10: D9 RISK MAP ──── -->
+<div class="tab-content" id="tab-d9">
+  <h2 style="font-size:0.95rem;margin-bottom:0.6rem">리스크 맵</h2>
+  <div class="risk-grid">
+    <div class="risk-card" style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3)">
+      <h4><span class="risk-badge" style="background:rgba(0,0,0,0.3);color:#ef4444">HIGH</span> 멤버 전환 실패</h4>
+      <div class="risk-desc">모든 멤버는 본업이 있다. HypeProof는 사이드 프로젝트. 금전적 인센티브도, 명성 인센티브도 아직 약하다. "조직원들의 인센티브 구조상 실제 도입을 회피한다."</div>
+      <div class="risk-response" style="border-left-color:#ef4444"><strong>대응 전략:</strong><br>전원 참여를 기대하지 않는다. 2-3명 코어 + AI 자동화가 현실적 구조.</div>
+    </div>
+    <div class="risk-card" style="background:rgba(232,115,74,0.08);border:1px solid rgba(232,115,74,0.3)">
+      <h4><span class="risk-badge" style="background:rgba(0,0,0,0.3);color:#e8734a">HIGH</span> Jay 의존도</h4>
+      <div class="risk-desc">파이프라인, 콘텐츠, 교육, 인프라 전부 Jay 1인에 의존. Jay가 빠지면 모든 것이 멈춘다.</div>
+      <div class="risk-response" style="border-left-color:#e8734a"><strong>대응 전략:</strong><br>중기에 반드시 "Jay 없이 돌아가는" 영역을 1개 이상 만든다. 후보: 콘텐츠 파이프라인 (이미 자동화) -- 멤버가 QA/발행만 담당.</div>
+    </div>
+    <div class="risk-card" style="background:rgba(241,196,15,0.08);border:1px solid rgba(241,196,15,0.25)">
+      <h4><span class="risk-badge" style="background:rgba(0,0,0,0.3);color:#f1c40f">MED</span> 파일럿 미실행</h4>
+      <div class="risk-desc">커리큘럼, 제안서, MOU 초안까지 완성됐지만 29개 액션아이템이 전부 미착수 상태였다.</div>
+      <div class="risk-response" style="border-left-color:#f1c40f"><strong>대응 전략:</strong><br>사업계획서 제출 완료. 4월 중순 임직원 교육이 첫 실행. 시작됨.</div>
+    </div>
+    <div class="risk-card" style="background:rgba(88,166,255,0.08);border:1px solid rgba(88,166,255,0.25)">
+      <h4><span class="risk-badge" style="background:rgba(0,0,0,0.3);color:#58a6ff">LOW</span> 관점 분산</h4>
+      <div class="risk-desc">8명의 멤버가 각자 다른 방향을 제시 (교육/도메인 프로젝트/커머스/아카이브/MVP 빌더). 모든 걸 수용하면 아무것도 안 됨.</div>
+      <div class="risk-response" style="border-left-color:#58a6ff"><strong>대응 전략:</strong><br>Jay가 Initiative Provider로서 방향 확정. 교육이 본질. 나머지는 교육에서 파생. 멤버 아이디어는 입력이지, 명령이 아니다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ──── TAB 11: D10 COMMUNITY ──── -->
+<div class="tab-content" id="tab-d10">
+  <h2 style="font-size:0.95rem;margin-bottom:0.6rem">커뮤니티: Closed-First 모델</h2>
+  <div class="comm-timeline">
+    <div class="comm-phase" style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3);box-shadow:0 0 0 2px #ef4444">
+      <span class="phase-tag" style="background:rgba(0,0,0,0.3);color:#ef4444">CURRENT</span>
+      <h4>Phase 1: 폐쇄</h4>
+      <div style="font-size:0.72rem;color:#ef4444;margin-bottom:0.2rem">코어 멤버 8명</div>
+      <p>현재 단계. 콘텐츠는 내부 유통, 웹은 쇼케이스만. 밀도와 브랜드 구축.</p>
+    </div>
+    <div class="comm-arrow">&#9654;</div>
+    <div class="comm-phase" style="background:rgba(232,115,74,0.08);border:1px solid rgba(232,115,74,0.3)">
+      <span class="phase-tag" style="background:rgba(0,0,0,0.3);color:#e8734a">PLANNED</span>
+      <h4>Phase 2: 시드 30명</h4>
+      <div style="font-size:0.72rem;color:#e8734a;margin-bottom:0.2rem">1:1 DM 초대</div>
+      <p>"당신만 초대합니다." 시드 멤버 30명의 퀄리티가 이후 300명을 결정한다.</p>
+    </div>
+    <div class="comm-arrow">&#9654;</div>
+    <div class="comm-phase" style="background:rgba(241,196,15,0.08);border:1px solid rgba(241,196,15,0.25)">
+      <span class="phase-tag" style="background:rgba(0,0,0,0.3);color:#f1c40f">PLANNED</span>
+      <h4>Phase 3: 점진적 개방</h4>
+      <div style="font-size:0.72rem;color:#f1c40f;margin-bottom:0.2rem">칼럼 제출 진입장벽</div>
+      <p>칼럼 제출이 진입장벽. 강의 수강 후 실무적용 후 고민공유 순환 루프.</p>
+    </div>
+    <div class="comm-arrow">&#9654;</div>
+    <div class="comm-phase" style="background:rgba(39,174,96,0.08);border:1px solid rgba(39,174,96,0.25)">
+      <span class="phase-tag" style="background:rgba(0,0,0,0.3);color:#27ae60">PLANNED</span>
+      <h4>Phase 4: 길드</h4>
+      <div style="font-size:0.72rem;color:#27ae60;margin-bottom:0.2rem">탈중앙 플랫폼</div>
+      <p>멤버들이 각자 프로젝트 운영. HypeProof Lab은 플랫폼이 된다.</p>
+    </div>
+  </div>
+  <div class="onboard-flow">
+    <h3>온보딩 여정</h3>
+    <div class="ac-flow">
+      <div class="card ac-flow-card" onclick="detailShow(this)" data-title="발견" data-desc="LinkedIn, 입소문, 이벤트 광고로 HypeProof를 알게 됨" data-owner=""><div class="card-bar" style="background:#8b949e"></div><div class="card-title" style="font-size:0.75rem">발견</div></div>
+      <div class="ac-flow-arrow">&#9654;</div>
+      <div class="card ac-flow-card" onclick="detailShow(this)" data-title="관심" data-desc="웹사이트 방문, 2+ 아티클 읽기. '저기 뭐 있어?' 궁금증" data-owner=""><div class="card-bar" style="background:#58a6ff"></div><div class="card-title" style="font-size:0.75rem">관심</div></div>
+      <div class="ac-flow-arrow">&#9654;</div>
+      <div class="card ac-flow-card" onclick="detailShow(this)" data-title="참여" data-desc="Discord 가입, 이벤트 참석, 토론 참여" data-owner=""><div class="card-bar" style="background:#e8734a"></div><div class="card-title" style="font-size:0.75rem">참여</div></div>
+      <div class="ac-flow-arrow">&#9654;</div>
+      <div class="card ac-flow-card" onclick="detailShow(this)" data-title="기여" data-desc="칼럼 작성, 이벤트 도움, 콘텐츠 생성" data-owner=""><div class="card-bar" style="background:#8b5cf6"></div><div class="card-title" style="font-size:0.75rem">기여</div></div>
+      <div class="ac-flow-arrow">&#9654;</div>
+      <div class="card ac-flow-card" onclick="detailShow(this)" data-title="코어" data-desc="정기 기여자, 도메인 배정, 운영진 전환" data-owner=""><div class="card-bar" style="background:#27ae60"></div><div class="card-title" style="font-size:0.75rem">코어</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ──── TAB 12: QA REPORT ──── -->
+<div class="tab-content" id="tab-qa">
+  <h2 style="font-size:0.95rem;margin-bottom:0.8rem">QA 리포트 &mdash; Dashboard v3 Iteration 1</h2>
+  <table class="qa-table">
+    <thead><tr><th>#</th><th>탭 이름</th><th>구현 상태</th><th>QA 점수</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>로드맵</td><td class="qa-done">완료</td><td>--</td><td>단기/중기/장기 + 투 트랙 + 결정사항</td></tr>
+      <tr><td>2</td><td>전체 워크플로우 (D1)</td><td class="qa-done">완료</td><td>--</td><td>4계층 구조 + 화살표 + 클릭 상세</td></tr>
+      <tr><td>3</td><td>콘텐츠 파이프라인 (D2)</td><td class="qa-done">완료</td><td>--</td><td>4단계 수평 파이프라인 + 클릭 상세 + 타이밍</td></tr>
+      <tr><td>4</td><td>멤버 역할 (D3)</td><td class="qa-done">완료</td><td>--</td><td>8명 2x4 카드 그리드, 클릭 상세 스케줄</td></tr>
+      <tr><td>5</td><td>Mother AI (D4)</td><td class="qa-done">완료</td><td>--</td><td>4링 구조, d4-interactive.html 기반</td></tr>
+      <tr><td>6</td><td>배포 채널 (D5)</td><td class="qa-done">완료</td><td>--</td><td>7채널 카드 + KPI/콘텐츠/빈도 상세</td></tr>
+      <tr><td>7</td><td>피드백 루프 (D6)</td><td class="qa-done">완료</td><td>--</td><td>6단계 수직 플로우 + Mirror Loop 4기능 하이라이트</td></tr>
+      <tr><td>8</td><td>교육 Academy (D7)</td><td class="qa-done">완료</td><td>--</td><td>사전준비+D-Day+사후관리+수강생여정 4섹션</td></tr>
+      <tr><td>9</td><td>수익 모델 (D8)</td><td class="qa-done">완료</td><td>--</td><td>수익화 순서 + MOU 3시나리오 + 인센티브 구조/계층화</td></tr>
+      <tr><td>10</td><td>리스크 맵 (D9)</td><td class="qa-done">완료</td><td>--</td><td>4대 리스크 severity 카드 + 대응 전략</td></tr>
+      <tr><td>11</td><td>커뮤니티 (D10)</td><td class="qa-done">완료</td><td>--</td><td>Closed-First 4단계 타임라인 + 온보딩 여정</td></tr>
+      <tr><td>12</td><td>QA 리포트</td><td class="qa-done">완료</td><td>--</td><td>전체 탭 상태 테이블</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</div><!-- /left-panel -->
+
+<!-- ════════ RIGHT PANEL ════════ -->
+<div class="right-panel">
+  <div class="detail-box" id="detail-panel">
+    <div class="detail-placeholder">&#8592; 항목을 클릭하면<br>상세 설명이 여기에 표시됩니다</div>
+  </div>
+</div>
+
+</div><!-- /content-area -->
+
+<script>
+// ══════════════════════════════════════
+// MINIMAL JS: Tab switching + Detail panel only
+// ══════════════════════════════════════
+
+function switchTab(id) {
+  document.querySelectorAll('.tab-content').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  var el = document.getElementById('tab-' + id);
+  if (el) el.classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  var map = {roadmap:0,d1:1,d2:2,d3:3,d4:4,d5:5,d6:6,d7:7,d8:8,d9:9,d10:10,qa:11};
+  if (map[id] !== undefined && btns[map[id]]) btns[map[id]].classList.add('active');
+  document.getElementById('detail-panel').innerHTML = '<div class="detail-placeholder">&#8592; 항목을 클릭하면<br>상세 설명이 여기에 표시됩니다</div>';
+  document.querySelectorAll('.card.selected,.member-card.selected').forEach(function(c){ c.classList.remove('selected'); });
+}
+
+function detailShow(el) {
+  document.querySelectorAll('.card.selected,.member-card.selected').forEach(function(c){ c.classList.remove('selected'); });
+  el.classList.add('selected');
+  var title = el.getAttribute('data-title') || '';
+  var desc = el.getAttribute('data-desc') || '';
+  var owner = el.getAttribute('data-owner') || '';
+  var p = document.getElementById('detail-panel');
+  p.innerHTML =
+    '<h3 style="font-size:0.95rem;margin-bottom:0.3rem">' + title + '</h3>' +
+    '<div class="detail-desc">' + desc + '</div>' +
+    (owner ? '<div style="margin-top:0.5rem;color:#8b949e;font-size:0.72rem">담당: ' + owner + '</div>' : '');
+}
+
+// Hash-based tab navigation
+var tabHashMap = {
+  'content-pipeline':'d2','academy':'d7','roadmap':'roadmap',
+  'd1':'d1','d2':'d2','d3':'d3','d4':'d4','d5':'d5','d6':'d6','d7':'d7','d8':'d8','d9':'d9','d10':'d10','qa':'qa',
+  'tab-roadmap':'roadmap','tab-d1':'d1','tab-d2':'d2','tab-d3':'d3','tab-d4':'d4','tab-d5':'d5','tab-d6':'d6','tab-d7':'d7','tab-d8':'d8','tab-d9':'d9','tab-d10':'d10','tab-qa':'qa'
+};
+
+(function() {
+  var h = location.hash.replace('#','');
+  var mapped = tabHashMap[h] || h;
+  if (mapped && document.getElementById('tab-' + mapped)) switchTab(mapped);
+})();
+
+window.addEventListener('hashchange', function() {
+  var h = location.hash.replace('#','');
+  var mapped = tabHashMap[h] || h;
+  if (mapped && document.getElementById('tab-' + mapped)) switchTab(mapped);
+});
+</script>
+</body>
+</html>
