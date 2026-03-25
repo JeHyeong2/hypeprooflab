@@ -161,6 +161,7 @@ for i in issues:
   # ===== PHASE 1: Parallel solve in worktrees =====
   local pids=()
   local issue_numbers=()
+  local issue_titles=()
 
   while IFS=$'\t' read -r num title body; do
     [[ -z "$num" ]] && continue
@@ -201,6 +202,7 @@ for i in issues:
     pids+=($!)
     BG_PIDS+=($!)
     issue_numbers+=("$num")
+    issue_titles+=("$title")
   done < <(printf '%s' "$issues_json" | python3 -c "
 import sys, json
 issues = json.load(sys.stdin)[:$run_count]
@@ -371,6 +373,27 @@ for iss in issues:
 
   local total_success=$((merged + skipped))
   log "=== Issue Solver Done: ${total_success}/${#solve_results[@]} resolved (${merged} merged, ${skipped} closed, ${failed} failed) ==="
+
+  # --- Discord DM notification via HypeproofClaude bot ---
+  local notify="$SCRIPT_DIR/notify-discord.sh"
+  if [[ -x "$notify" ]] && [[ ${#solve_results[@]} -gt 0 ]]; then
+    local dm_lines="🔧 **Issue Solver** ($(date +%H:%M))\nIssue Solver Done: ${total_success}/${#solve_results[@]} resolved (${merged} merged, ${failed} failed)\n"
+    local idx=0
+    for result in "${solve_results[@]}"; do
+      idx=$((idx + 1))
+      local num="${issue_numbers[$idx]}"
+      local title="${issue_titles[$idx]:-issue}"
+      if [[ "$result" == "ok" ]]; then
+        dm_lines+="• #${num} ✅ ${title}\n"
+      elif [[ "$result" == "closed-no-changes" ]]; then
+        dm_lines+="• #${num} ⏭ ${title} (already done)\n"
+      else
+        dm_lines+="• #${num} ❌ ${title} (failed)\n"
+      fi
+    done
+    echo -e "$dm_lines" | "$notify" 2>/dev/null || log "WARN: Discord notification failed"
+  fi
+
   return $failed
 }
 

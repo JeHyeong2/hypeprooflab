@@ -154,4 +154,19 @@ fi
 find "$REPORT_DIR" -name "cron-*.log" -mtime +30 -delete 2>/dev/null || true
 find "$FAILURE_DIR" -name "*.md" -mtime +30 -delete 2>/dev/null || true
 
+# --- Discord DM notification via HypeproofClaude bot ---
+NOTIFY="$SCRIPT_DIR/notify-discord.sh"
+if [[ -x "$NOTIFY" ]]; then
+  if [[ "$EXIT_CODE" -eq 0 ]]; then
+    ICON="✅"
+  else
+    ICON="❌"
+  fi
+  CLAUDE_OUTPUT_SIZE=$(wc -c < "$LOG_FILE" 2>/dev/null || echo 0)
+  START_TS=$(grep '^Start:' "$LOG_FILE" | head -1 | grep -oE '[0-9]{2}:[0-9]{2}' || true)
+  END_TS=$(date +%H:%M)
+  "$NOTIFY" "${ICON} **${PROMPT_NAME}** (${START_TS}→${END_TS})
+exit=${EXIT_CODE}, output=${CLAUDE_OUTPUT_SIZE}B" 2>/dev/null || true
+fi
+
 exit $EXIT_CODE
