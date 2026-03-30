@@ -6,7 +6,7 @@ export const contentType = 'image/png';
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const column = getColumn(slug, 'ko') || getColumn(slug, 'en');
+  const column = getColumn(slug, 'en') || getColumn(slug, 'ko');
 
   const title = column?.frontmatter.title || slug;
   const author = column?.frontmatter.creator || '';

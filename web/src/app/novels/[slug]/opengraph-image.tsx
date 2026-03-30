@@ -6,7 +6,7 @@ export const contentType = 'image/png';
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const novel = getNovel(slug, 'ko') || getNovel(slug, 'en');
+  const novel = getNovel(slug, 'en') || getNovel(slug, 'ko');
 
   const title = novel?.frontmatter.title || slug;
   const author = novel?.frontmatter.author || '';

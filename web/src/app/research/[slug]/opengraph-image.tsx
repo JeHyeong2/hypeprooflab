@@ -6,7 +6,7 @@ export const contentType = 'image/png';
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const research = getResearch(slug, 'ko') || getResearch(slug, 'en');
+  const research = getResearch(slug, 'en') || getResearch(slug, 'ko');
 
   const title = research?.frontmatter.title || slug;
   const author = research?.frontmatter.creator || '';
