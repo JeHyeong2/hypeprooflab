@@ -53,9 +53,7 @@ The unbundling path also differs. In media, content separated from distribution.
 
 The automotive supply chain looks simple on the surface:
 
-```
-Tier-3 (Materials) → Tier-2 (Parts) → Tier-1 (Systems) → OEM (Brand)
-```
+**Tier-3 (Materials)** → **Tier-2 (Parts)** → **Tier-1 (Systems)** → **OEM (Brand)**
 
 Reading this chain as "who makes what" sees only half. **The real question is "who pays when a recall happens."**
 
@@ -137,11 +135,7 @@ The old bundle's axis was **component**. Brake ECU = HW + SW + diagnostics + dat
 
 The new bundle's axis is **data flow**:
 
-```
-Collect → Store → Analyze → Deploy → Monitor
- ↑                                      │
- └──────────────────────────────────────┘
-```
+**Collect** → **Store** → **Analyze** → **Deploy** → **Monitor** → *(back to Collect)*
 
 This flow crosses components, crosses programs, crosses markets. Buy individual stages separately: they're tools. Bundle into a loop: it's a **self-reinforcing system** — vehicle data feeds diagnostics, diagnostic results become predictive models deployed back to vehicles, deployed models collect new data. Replacing one loop piece breaks the whole, so the loop itself creates switching cost.
 
