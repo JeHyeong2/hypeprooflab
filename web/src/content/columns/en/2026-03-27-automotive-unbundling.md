@@ -129,19 +129,45 @@ Automotive's "distribution mechanism" change ultimately is this: **edge-to-cloud
 
 ## 6. Re-bundling — The New Bundle's Axis
 
-Unbundled pieces re-bundle along a different axis.
+Unbundled pieces re-bundle along a different axis. But to understand the mechanics of re-bundling, we first need to clarify what **"the moment a loop closes"** means.
+
+### Closed Loops Create Bundles
+
+In March 2026, Andrej Karpathy released [Autoresearch](https://github.com/karpathy/autoresearch). The concept is simple: give an AI agent a small LLM training codebase and let it experiment autonomously overnight. It modifies the code, trains for 5 minutes, checks if the result improved, keeps or discards, and repeats. The human just reviews the experiment log in the morning. The key is `program.md` — the researcher doesn't touch the code directly but only edits a Markdown file that sets the AI agent's research direction. Karpathy's phrase: **"you are programming the program."**
+
+The real significance of this project isn't the technology but the structure. **The moment evaluation (eval) can be automated, the loop closes, and closed loops run without humans.** `program.md → code modification → training → eval → keep/discard → repeat`. No human intervention needed at each step. Karpathy's darkly humorous preface compresses this: *"Research is now entirely the domain of autonomous swarms of AI agents... The agents claim the codebase is in its 10,205th generation, but the 'code' is now a self-modifying binary that has grown beyond human comprehension."*
+
+Applied to automotive: in the **Collect → Analyze → Deploy → Monitor** loop, the moment "was this analysis correct?" can be automatically evaluated, this loop also closes. Vehicles send data, AI diagnoses, results deploy via OTA, post-deployment vehicle behavior changes are measured and fed back to update models. Just as `program.md` sets the research direction in Autoresearch, in automotive **safety policies and regulatory requirements serve as the loop's `program.md`** — the loop runs autonomously, but humans define which direction it runs.
+
+**Re-bundling happens where loops close.** The reason is simple: a company providing only one piece of a closed loop becomes dependent on whoever owns the entire loop. If Bosch only handles "Collect," Continental only "Analyze," and a startup only "Deploy" — the integrator who closes the loop captures the value. In Evans' language: **the closed loop itself is the new bundle**, and this bundle's switching cost comes from the fact that breaking one piece breaks everything.
+
+### Old Axis vs New Axis
 
 The old bundle's axis was **component**. Brake ECU = HW + SW + diagnostics + data + liability → one team, one supplier. Everything integrated within the component, disconnected between components.
 
-The new bundle's axis is **data flow**:
+The new bundle's axis is the **data flow loop**:
 
 **Collect** → **Store** → **Analyze** → **Deploy** → **Monitor** → *(back to Collect)*
 
-This flow crosses components, crosses programs, crosses markets. Buy individual stages separately: they're tools. Bundle into a loop: it's a **self-reinforcing system** — vehicle data feeds diagnostics, diagnostic results become predictive models deployed back to vehicles, deployed models collect new data. Replacing one loop piece breaks the whole, so the loop itself creates switching cost.
+This flow crosses components, crosses programs, crosses markets. Buy individual stages separately: they're tools. Bundle into a loop: it's a **self-reinforcing system** — just as Autoresearch finds better models overnight, a closed vehicle data loop autonomously produces better diagnostics, predictions, and deployments.
+
+### What Frontier Models Can and Cannot Eat
+
+Where in this loop do Frontier Models (GPT-5, Claude, Gemini) sit?
+
+**What Frontier eats — commoditization of "Analyze."** With general reasoning capabilities, they generate log interpretation, anomaly detection, and natural language diagnostic reports. If an OEM can build a diagnostic system with "GPT-5 API + its own vehicle data," the rationale for specialized diagnostic AI platforms is shaken. In Karpathy's framework: Frontier Models **generalize the eval function**. Evaluation logic that had to be built per domain is now handled by a general model directly judging "is this result normal?"
+
+**What Frontier cannot eat — the loop's physical touchpoints.** Three areas. First, **Collect**: extracting real-time data from in-vehicle ECUs requires knowledge of CAN/Ethernet protocols, AUTOSAR interfaces, and OEM-specific proprietary signal definitions. API calls won't work. Second, **Deploy**: OTA updates require UNECE R156 certification, rollback mechanisms, and per-ECU compatibility verification. "Uploading a model to a server" and "uploading to an ASIL-D certified ECU" are entirely different worlds. Third, **Monitor**: tracking post-deployment vehicle behavior changes in real-time requires fleet-scale edge infrastructure. Cloud APIs can't cover this.
+
+**Structural implication**: Frontier Models commoditize the loop's **brain (analysis)**, but cannot commoditize the loop's **hands and feet (collection, deployment, monitoring)** due to physical and legal barriers. The analysis layer faces price competition → margin compression. Physical touchpoints + certification + fleet infrastructure form the real moat. Companies whose only strength is "good analysis" are most at risk, while **companies controlling physical touchpoints while plugging Frontier as the analysis engine** are best positioned.
+
+### Tier-0.5's Real Battleground
 
 In PC industry, Microsoft Windows sat as a horizontal layer above Dell/HP/Lenovo OEMs and below Intel components. The same position is forming in automotive — industry term "Tier-0.5". NVIDIA DRIVE, Qualcomm Digital Chassis, Google Android Automotive target this seat.
 
 But there's a critical difference. Microsoft bore no product liability when Windows bugs injured someone. In automotive, if a Tier-0.5 platform bug causes an accident, it enters the liability chain. **Technically a platform, legally a supplier.** So real-world Tier-0.5s place large partners as legal buffers in between, technically defining architecture while contractually remaining lower-tier.
+
+Tier-0.5's real battleground isn't "who has the smarter AI." It's **"who controls more of the loop's physical touchpoints while plugging Frontier Models as analysis engines to complete the closed loop."** Just as whoever writes `program.md` in Autoresearch determines the research direction, in automotive **whoever defines the loop's `program.md` — safety policies, certification requirements, fleet operation rules — determines the winner of re-bundling.**
 
 ---
 
@@ -258,3 +284,5 @@ Answers don't exist yet. But where the questions lie is starting to become visib
 | 20 | Aurora Innovation IR | https://ir.aurora.tech/ |
 | 21 | Waymo World Model (2026) | https://waymo.com/blog/2026/02/the-waymo-world-model-a-new-frontier-for-autonomous-driving-simulation/ |
 | 22 | Microsoft Azure SDV — CES 2026 | https://www.microsoft.com/en-us/industry/blog/manufacturing-and-mobility/2026/01/07/ces-2026-powering-the-next-frontier-in-automotive/ |
+| 23 | Andrej Karpathy — Autoresearch (2026.3) | https://github.com/karpathy/autoresearch |
+| 24 | Karpathy Autoresearch introductory tweet | https://x.com/karpathy/status/2029701092347630069 |
