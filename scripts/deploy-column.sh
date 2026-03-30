@@ -38,6 +38,24 @@ NC='\033[0m'
 PASS=0
 FAIL=0
 
+# ═══════════════════════════════════════════════
+# PRE-CHECK: QA Gate result must exist and PASS
+# ═══════════════════════════════════════════════
+QA_RESULT="$ROOT/scripts/.qa-results/$SLUG.json"
+if [[ -f "$QA_RESULT" ]]; then
+  QA_VERDICT=$(python3 -c "import json; print(json.load(open('$QA_RESULT'))['verdict'])" 2>/dev/null || echo "UNKNOWN")
+  if [[ "$QA_VERDICT" != "PASS" ]]; then
+    echo -e "${RED}❌ QA Gate verdict: $QA_VERDICT — run column-qa-gate.sh first${NC}"
+    echo -e "${RED}   bash scripts/column-qa-gate.sh $SLUG${NC}"
+    exit 1
+  fi
+  echo -e "${GREEN}✅ QA Gate: PASS (from $QA_RESULT)${NC}"
+else
+  echo -e "${RED}❌ No QA Gate result found at $QA_RESULT${NC}"
+  echo -e "${RED}   Run: bash scripts/column-qa-gate.sh $SLUG${NC}"
+  exit 1
+fi
+
 check() {
   local label="$1"
   shift
