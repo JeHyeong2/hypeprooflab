@@ -1,2 +1,4 @@
 /Users/jaylee/CodeWorkspace/hypeproof/cron-prompts/run-job.sh: line 74: declare: -A: invalid option
 declare: usage: declare [-afFirtx] [-p] [name[=value] ...]
+/Users/jaylee/CodeWorkspace/hypeproof/cron-prompts/run-job.sh: line 74: declare: -A: invalid option
+declare: usage: declare [-afFirtx] [-p] [name[=value] ...]

@@ -16,7 +16,7 @@ authorType: "creator"
 
 In March 2026, [three recalls hit the Hyundai Palisade simultaneously](https://www.hyundainews.com/releases/4724).
 
-Power seat defects affecting [69,000 units in US/Canada + 58,000 in Korea](https://www.edmunds.com/car-news/hyundai-palisade-kia-telluride-rear-seat-recall.html). [Instrument cluster display software bug](https://www.cars.com/articles/84000-plus-hyundais-kias-recalled-for-instrument-panel-displays-521035/). [Seatbelt buckle defects across 568,000 units](https://www.cars.com/research/hyundai-palisade/recalls/). One model, three recalls, three completely different teams.
+Power seat defects affecting [69,000 units in US/Canada + 58,000 in Korea](https://www.edmunds.com/car-news/hyundai-palisade-kia-telluride-rear-seat-recall.html). [Instrument cluster display software bug](https://www.nhtsa.gov/recalls). [Seatbelt buckle defects across 568,000 units](https://www.nhtsa.gov/vehicle/2023/HYUNDAI/PALISADE). One model, three recalls, three completely different teams.
 
 The seat team owns the seat. The electrical team owns the instrument cluster. The restraint team owns the seatbelt. Each has its own Tier-1 supplier, warranty reserve, and Type Approval documentation.
 
@@ -24,7 +24,7 @@ The power seat recall is a traditional component defect. The seat team handles i
 
 The deeper question: when dozens of ECUs are connected in a vehicle, and you OTA-update one ECU's software, what happens to the others? In today's component-centric silos, each ECU team only validates their own ECU. **Cross-ECU interaction validation is a structural blind spot.** The brake team owns the brake ECU's warranty, but whose warranty covers the impact of other domain updates on the brake ECU?
 
-Working in automotive middleware and AI platform supply to OEMs, I confront this question daily. The software we build handles data across the entire vehicle, crossing component boundaries. But the supply chain we must enter is carved into component-sized pieces. **Technology is horizontal; structure is vertical.** And the first thing I learned starting this work wasn't technical — it was **"who pays when a recall happens" determines every structure**.
+Having spent years in this industry — from early PoCs with OEMs through production hardening, post-SOP rollouts, and live OTA operations — everyone in automotive asks this question. But "so whose responsibility is it?" is the answer no one can say to each other's face. The software we build handles data across the entire vehicle, crossing component boundaries. But the supply chain we must enter is carved into component-sized pieces. **Technology is horizontal; structure is vertical.**
 
 One disclosure upfront. I work within this structure, and this analysis is written from that position. The conclusion that "whoever connects silos captures value" may be an analysis favorable to the position I occupy. I'm aware of this.
 
@@ -38,7 +38,7 @@ In [The Great Unbundling (2020)](https://www.ben-evans.com/presentations), his p
 
 Evans followed with [The New Gatekeepers (2022)](https://www.ben-evans.com/presentations) on who forms new monopolies post-unbundling, [Unbundling AI (2023)](https://www.ben-evans.com/benedictevans/2023/10/5/unbundling-ai) predicting LLMs would diverge from general tools like Excel into specialized ones, and [AI Eats the World (2025)](https://www.ben-evans.com/presentations) analyzing how "AI startups are unbundling Google, Excel, email, Oracle... and ChatGPT."
 
-In Korea, [Roh Jung-seok](https://www.syncly.kr/blog/251119seminar-bfactory) (CEO of B-Factory) applied this framework to AI-era business in [AI Frontier EP91 (2026.3.21)](https://aifrontier.kr/ko/episodes/ep91/). Two core theses:
+In Korea, [Roh Jung-seok](https://byline.network/2025/08/2-ai/) — serial entrepreneur who sold Tatter&Company to Google in Korea's first-ever Google acquisition — applied this framework to AI-era business on his podcast [AI Frontier EP91 (2026.3.21)](https://aifrontier.kr/ko/episodes/ep91/) at [B-Factory](https://www.bfactory.co). Two core theses:
 
 1. **"All problems converge to computational search"** — Problems humans solved directly, AI solves through computational search across solution spaces. The key is "owning an environment that can convert non-verifiable to verifiable."
 2. **"Not 1/10x efficiency but 10x new business"** — Most AI Transformation focuses on cutting costs from 100 to 10. The real opportunity is creating 900 of new value.
@@ -51,15 +51,55 @@ The unbundling path also differs. In media, content separated from distribution.
 
 ---
 
-## 3. The Tier Structure Is Not Technical Division but Liability Distribution
+## 3. How and Why the Tier Structure Became What It Is
 
 The automotive supply chain looks simple on the surface:
 
 **Tier-3 (Materials)** → **Tier-2 (Parts)** → **Tier-1 (Systems)** → **OEM (Brand)**
 
-Reading this chain as "who makes what" sees only half. **The real question is "who pays when a recall happens."**
+This structure didn't start this way. Six forces shaped it over a century.
 
-US strict liability, EU Product Liability Directive, Korea Product Liability Act — all attach liability to physical components. This is the first reason OEMs have "brake team," "powertrain team," "electronics team" silos. Org charts follow the BOM (Bill of Materials). Type Approval reinforces the same structure — UNECE R13H (braking), R48 (lighting), R155 (cybersecurity): one regulation, one responsible team.
+### It Started with Vertical Integration's Failure
+
+Henry Ford's [River Rouge plant (1928)](https://www.thehenryford.org/visit/ford-rouge-factory-tour/) was vertical integration taken to the extreme. Across 2,000 acres, iron ore, rubber, and coal went in; finished cars came out 41 hours later. Ford owned coal mines in Kentucky, iron mines in Michigan, rubber plantations in Brazil (Fordlandia), a fleet of ships, and railroads. The logic: control everything, control costs.
+
+Alfred Sloan's GM took the opposite path. Specialized outside firms could achieve greater scale and lower costs. Then the [Depression proved Sloan right](https://www.cambridge.org/core/journals/journal-of-economic-history/article/abs/explaining-vertical-integration-lessons-from-the-american-automobile-industry/9F45384CE2B021DFCB68579C03B9DC3E). Ford's massive fixed-cost structure couldn't absorb the demand shock; GM's outsourcing-based flexibility determined survival. The entire industry tilted toward supplier specialization.
+
+### Toyota Cemented the Hierarchy
+
+Through the 1950s-80s, while Western OEMs outsourced components, Japan built a different structure. Post-war dissolution of the zaibatsu conglomerates gave rise to [keiretsu (系列)](https://en.wikipedia.org/wiki/Keiretsu) — cross-held equity, long-term trading relationships, networks centered on a main bank — providing the template for tiered supply pyramids.
+
+[Taiichi Ohno](https://en.wikipedia.org/wiki/Taiichi_Ohno) and Eiji Toyoda developed the Toyota Production System (TPS) between 1948-1975, making Just-in-Time possible on the back of these long-term relationships. MIT's [International Motor Vehicle Program (IMVP)](https://dspace.mit.edu/handle/1721.1/1782) — a 14-country, $5M, 5-year study — proved this system's superiority. When published as Womack, Jones & Roos' *[The Machine That Changed the World](https://www.lean.org/store/book/the-machine-that-changed-the-world/) (1990)*, "lean production" went global. Western OEMs restructured their supplier hierarchies along the Toyota model.
+
+### Law Attached Liability to the Hierarchy
+
+Once the structure existed, law locked liability into it:
+
+- **[MacPherson v. Buick Motor Co. (1916)](https://law.justia.com/cases/new-york/court-of-appeals/1916/217-n-y-382-1916.html)** — Consumers could sue manufacturers they hadn't directly purchased from. OEMs now had legal grounds to police quality across the entire supply chain.
+- **[Greenman v. Yuba Power Products (1963)](https://supreme.justia.com/cases/california/1963/)** — Established strict product liability in the US. Nearly every state adopted it within 40 years.
+- **[EU Product Liability Directive 85/374/EEC (1985)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:31985L0374)** — Introduced strict liability across Europe. Critically: when the producer cannot be identified, each supplier in the chain is treated as the producer.
+
+This legal evolution created a liability cascade down the Tier structure. OEM = vehicle brand = defendant. To manage this risk, OEMs form contractual indemnification chains with Tier-1s, who repeat the pattern with Tier-2s. **Tier numbers don't indicate technical depth — they indicate distance from liability.** Org charts follow the BOM (Bill of Materials), and Type Approval reinforces the same structure — UNECE R13H (braking), R48 (lighting), R155 (cybersecurity): one regulation, one responsible team.
+
+### Standards and Regulations Hardened the Structure into Audit Systems
+
+[UNECE WP.29](https://unece.org/wp29-introduction) (World Forum for Harmonization of Vehicle Regulations) makes the OEM the type approval certificate holder, but compliance evidence cascades down the supply chain. Quality standards moved in the same direction. Starting with [QS-9000](https://www.omnex.com/iatf-16949-automotive-qms-history) created by the Big Three in 1994, through the harmonized ISO/TS 16949 (1999) merging US, German, French, and Italian standards, to today's IATF 16949 (2016) — each standard mandated supplier management requirements, institutionalizing the tier hierarchy as an auditable process.
+
+### Capital Efficiency Made It Rational
+
+No OEM can be world-class at stamping, electronics, glass, rubber, and interior trim simultaneously. Specialized suppliers serve multiple OEMs, achieving economies of scale no single OEM could match alone. Bosch supplies brake systems to nearly every OEM worldwide; Continental delivers ECUs to dozens.
+
+**In summary**: vertical integration's failure (Ford) → specialization's victory (Sloan/Toyota) → legal liability attachment (PLD) → regulatory/standards institutionalization (UNECE, IATF) → capital efficiency rationalization. Five layers stacked on top of each other to produce today's Tier structure.
+
+### Why Tesla Could Ignore All This
+
+Tesla [vertically integrates roughly 80% of its supply chain](https://supplychain360.io/teslas-vertical-integration-revolutionizes-supply-chains/). Battery cells (4680, dry electrode process), compute chips (FSD HW4, AI6), powertrain, full-stack software, charging infrastructure, even insurance. It's the OEM, the Tier-1, and the service provider all at once.
+
+This was possible because **there was no legacy.** No 5-7 year contracts with incumbent Tier-1s. No unions resisting layoffs (UAW, IG Metall). No sunk capital in ICE powertrain facilities. Starting from a blank sheet, Tesla could bypass a century of structural inertia and choose vertical integration.
+
+But vertical integration has its price. In August 2025, Tesla [scrapped its Dojo supercomputer project](https://digitalhabitats.global/blogs/tesla-1/exclusive-tesla-kills-dojo-for-ai6-here-s-why) after four years of in-house development — custom chips (D1), custom training tiles — because even for Tesla, cutting-edge semiconductor development proved too capital-intensive. Glass, tires, and semiconductor foundry services still come from outside.
+
+Traditional OEMs can't replicate Tesla's approach not because they lack technical capability, but because of **structural lock-in**. Decades of Tier-1 contracts, sunk NRE costs, union agreements, dual capital burden (ICE + EV in parallel), and 15-20 year aftermarket obligations stack on top of each other. **For most OEMs, the realistic path isn't vertical integration — it's redesigning the software layer within the existing Tier structure.** And in that redesign, they collide head-on with the five pillars.
 
 When a software company enters this chain, the first decision isn't technical architecture. It's **who bears unlimited liability (product liability).** Supplying directly to OEMs brings unlimited liability. A startup with $10M annual revenue entering a $4.8B recall liability chain faces existential risk. So most automotive software companies place a large corporation as a legal buffer in between. Revenue structure itself is built on this legal architecture.
 
@@ -75,7 +115,7 @@ OEM component-centric org structure isn't just inertia. Five structural pillars 
 
 Vehicle programs (e.g., Tucson NX4, Golf MQB-evo) involve $1-3B development investment and $2-5B production facility investment. When a "shared software platform" crosses multiple programs, a fundamental question arises: **Which program's budget pays for this?**
 
-VW's CARIAD is a [€50B lesson](https://www.autocar.co.uk/car-news/business-tech-development/vw-spent-over-%E2%82%AC50-billion-failed-cariad-software-unit). Internal transfer pricing never aligned. VW, Audi, Porsche, Škoda brands all asked "why should we subsidize other brands' SW costs," and no answer emerged. The CEO changed twice, strategic vehicle Trinity delayed 2+ years. VW ultimately [invested $5B in Rivian](https://www.volkswagen-group.com/en/press-releases/volkswagen-group-and-rivian-close-joint-venture-18658) to buy from outside — bypassing 5 years of internal failure through acquisition. Every multi-brand OEM group — Hyundai-Kia, Toyota, Stellantis (14 brands) — faces identical structural questions.
+VW's CARIAD is a [€50B lesson](https://insideevs.com/news/753673/vw-group-cariad-billions-losses-2024/). Internal transfer pricing never aligned. VW, Audi, Porsche, Škoda brands all asked "why should we subsidize other brands' SW costs," and no answer emerged. The CEO changed twice, strategic vehicle Trinity delayed 2+ years. VW ultimately [invested $5B in Rivian](https://www.volkswagen-group.com/en/press-releases/faster-leaner-more-efficient-rivian-and-volkswagen-group-announce-the-launch-of-their-joint-venture-18828) to buy from outside — bypassing 5 years of internal failure through acquisition. Every multi-brand OEM group — Hyundai-Kia, Toyota, Stellantis (14 brands) — faces identical structural questions.
 
 ### Pillar 2: Warranty — Change Itself Is Financial Risk
 
@@ -212,7 +252,7 @@ Frontier Labs descend from above, chip vendors ascend from below, OEMs attempt i
 
 ### So What's the Real Moat?
 
-Applying Roh's "environment that converts non-verifiable to verifiable" to automotive: **owning the data loop crossing component silos**. The loop that collects vehicle data, diagnoses, builds predictive models, deploys them back to vehicles. Replace one loop piece, the whole breaks.
+As discussed in Chapter 6, applying "an environment that converts non-verifiable to verifiable" to automotive: **owning the data loop crossing component silos**. The loop that collects vehicle data, diagnoses, builds predictive models, deploys them back to vehicles. Replace one loop piece, the whole breaks.
 
 What code can replicate isn't a moat:
 
@@ -271,12 +311,12 @@ One prediction. **By 2030, at least one traditional OEM will create a new Tier-0
 | 5 | Benedict Evans — Cars and Second Order Consequences (2017) | https://www.ben-evans.com/benedictevans/2017/3/20/cars-and-second-order-consequences |
 | 6 | AI Frontier EP91 — Roh Jung-seok, Choi Seung-jun (2026.3.21) | https://aifrontier.kr/ko/episodes/ep91/ |
 | 7 | Roh Jung-seok — B-Factory CEO (serial entrepreneur, Tatter&Company sold to Google) | https://byline.network/2025/08/2-ai/ |
-| 8 | VW CARIAD — €50B investment and failure | https://www.autocar.co.uk/car-news/business-tech-development/vw-spent-over-%E2%82%AC50-billion-failed-cariad-software-unit |
+| 8 | VW CARIAD — €50B investment and failure | https://insideevs.com/news/753673/vw-group-cariad-billions-losses-2024/ |
 | 9 | Hyundai Palisade recalls — Hyundai Newsroom (2026.3.13) | https://www.hyundainews.com/releases/4724 |
 | 10 | Palisade recall details — Consumer Reports | https://www.consumerreports.org/cars/car-recalls-defects/hyundai-palisade-recall-folding-seats-stop-sale-child-death-a6861032164/ |
 | 11 | Palisade recall scope — Edmunds | https://www.edmunds.com/car-news/hyundai-palisade-kia-telluride-rear-seat-recall.html |
-| 12 | Instrument cluster SW recall — Cars.com | https://www.cars.com/articles/84000-plus-hyundais-kias-recalled-for-instrument-panel-displays-521035/ |
-| 13 | Palisade full recall history — Cars.com | https://www.cars.com/research/hyundai-palisade/recalls/ |
+| 12 | Instrument cluster SW recall — Cars.com | https://www.nhtsa.gov/recalls |
+| 13 | Palisade full recall history — Cars.com | https://www.nhtsa.gov/vehicle/2023/HYUNDAI/PALISADE |
 | 14 | EU Data Act (Regulation 2023/2854) | https://eur-lex.europa.eu/eli/reg/2023/2854 |
 | 15 | EU Product Liability Directive revision (2024) | https://ec.europa.eu/commission/presscorner/detail/en/ip_22_5807 |
 | 16 | UNECE R155/R156 (Cybersecurity/Software Update) | https://unece.org/transport/documents/2021/03/standards/un-regulation-no-155 |
@@ -289,5 +329,14 @@ One prediction. **By 2030, at least one traditional OEM will create a new Tier-0
 | 23 | Andrej Karpathy — Autoresearch (2026.3) | https://github.com/karpathy/autoresearch |
 | 24 | Karpathy Autoresearch introductory tweet | https://x.com/karpathy/status/2029701092347630069 |
 | 25 | Ford Motor Company 10-K SEC Filing (warranty costs) | https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000037996&type=10-K |
-| 26 | VW Group + Rivian JV official announcement | https://www.volkswagen-group.com/en/press-releases/volkswagen-group-and-rivian-close-joint-venture-18658 |
+| 26 | VW Group + Rivian JV official announcement | https://www.volkswagen-group.com/en/press-releases/faster-leaner-more-efficient-rivian-and-volkswagen-group-announce-the-launch-of-their-joint-venture-18828 |
 | 27 | Hyundai-Kia quarterly report (DART) | https://dart.fss.or.kr/ |
+| 28 | Langlois & Robertson — "Explaining Vertical Integration: Lessons from the American Automobile Industry" (1989) | https://www.cambridge.org/core/journals/journal-of-economic-history/article/abs/explaining-vertical-integration-lessons-from-the-american-automobile-industry/9F45384CE2B021DFCB68579C03B9DC3E |
+| 29 | Womack, Jones & Roos — *The Machine That Changed the World* (1990) | https://www.lean.org/store/book/the-machine-that-changed-the-world/ |
+| 30 | MacPherson v. Buick Motor Co. (1916) | https://law.justia.com/cases/new-york/court-of-appeals/1916/217-n-y-382-1916.html |
+| 31 | Greenman v. Yuba Power Products (1963) | https://supreme.justia.com/cases/california/1963/ |
+| 32 | EU Product Liability Directive 85/374/EEC (1985) | https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:31985L0374 |
+| 33 | UNECE WP.29 — World Forum for Harmonization of Vehicle Regulations | https://unece.org/wp29-introduction |
+| 34 | IATF 16949 History (QS-9000 → TS 16949 → IATF 16949) | https://www.omnex.com/iatf-16949-automotive-qms-history |
+| 35 | Tesla Vertical Integration — SupplyChain360 (2025) | https://supplychain360.io/teslas-vertical-integration-revolutionizes-supply-chains/ |
+| 36 | Tesla Kills Dojo — Digital Habitats (2025) | https://digitalhabitats.global/blogs/tesla-1/exclusive-tesla-kills-dojo-for-ai6-here-s-why |
