@@ -6,8 +6,8 @@ date: 2026-03-27
 category: "Industry Analysis"
 tags: ["automotive", "SDV", "unbundling", "AI", "middleware", "regulation", "supply-chain", "OEM", "Tier-1"]
 slug: "2026-03-27-automotive-unbundling"
-readTime: "25 min"
-excerpt: "When a recall happens, who pays? — This question determines every structure in the automotive industry. Why Evans' bundle/unbundle framework is only half-right for automotive, and how AI is changing this structure."
+readTime: "30 min"
+excerpt: "On a century of structure built by law and money, technology is horizontal while structure is vertical. Why Evans' bundle/unbundle framework is only half-right for automotive, and how AI is reshaping the game."
 lang: "en"
 authorType: "creator"
 ---
@@ -115,7 +115,7 @@ OEM component-centric org structure isn't just inertia. Five structural pillars 
 
 Vehicle programs (e.g., Tucson NX4, Golf MQB-evo) involve $1-3B development investment and $2-5B production facility investment. When a "shared software platform" crosses multiple programs, a fundamental question arises: **Which program's budget pays for this?**
 
-VW's CARIAD is a [€50B lesson](https://insideevs.com/news/753673/vw-group-cariad-billions-losses-2024/). Internal transfer pricing never aligned. VW, Audi, Porsche, Škoda brands all asked "why should we subsidize other brands' SW costs," and no answer emerged. The CEO changed twice, strategic vehicle Trinity delayed 2+ years. VW ultimately [invested $5B in Rivian](https://www.volkswagen-group.com/en/press-releases/faster-leaner-more-efficient-rivian-and-volkswagen-group-announce-the-launch-of-their-joint-venture-18828) to buy from outside — bypassing 5 years of internal failure through acquisition. Every multi-brand OEM group — Hyundai-Kia, Toyota, Stellantis (14 brands) — faces identical structural questions.
+VW's CARIAD is a [lesson in €7.5B cumulative operating losses](https://insideevs.com/news/753673/vw-group-cariad-billions-losses-2024/). Internal transfer pricing never aligned. VW, Audi, Porsche, Škoda brands all asked "why should we subsidize other brands' SW costs," and no answer emerged. The CEO changed twice, strategic vehicle Trinity delayed 2+ years. VW ultimately [invested $5B in Rivian](https://www.volkswagen-group.com/en/press-releases/faster-leaner-more-efficient-rivian-and-volkswagen-group-announce-the-launch-of-their-joint-venture-18828) to buy from outside — bypassing 5 years of internal failure through acquisition. Every multi-brand OEM group — Hyundai-Kia, Toyota, Stellantis (14 brands) — faces identical structural questions.
 
 ### Pillar 2: Warranty — Change Itself Is Financial Risk
 
@@ -311,7 +311,7 @@ One prediction. **By 2030, at least one traditional OEM will create a new Tier-0
 | 5 | Benedict Evans — Cars and Second Order Consequences (2017) | https://www.ben-evans.com/benedictevans/2017/3/20/cars-and-second-order-consequences |
 | 6 | AI Frontier EP91 — Roh Jung-seok, Choi Seung-jun (2026.3.21) | https://aifrontier.kr/ko/episodes/ep91/ |
 | 7 | Roh Jung-seok — B-Factory CEO (serial entrepreneur, Tatter&Company sold to Google) | https://byline.network/2025/08/2-ai/ |
-| 8 | VW CARIAD — €50B investment and failure | https://insideevs.com/news/753673/vw-group-cariad-billions-losses-2024/ |
+| 8 | VW CARIAD — €7.5B cumulative operating losses | https://insideevs.com/news/753673/vw-group-cariad-billions-losses-2024/ |
 | 9 | Hyundai Palisade recalls — Hyundai Newsroom (2026.3.13) | https://www.hyundainews.com/releases/4724 |
 | 10 | Palisade recall details — Consumer Reports | https://www.consumerreports.org/cars/car-recalls-defects/hyundai-palisade-recall-folding-seats-stop-sale-child-death-a6861032164/ |
 | 11 | Palisade recall scope — Edmunds | https://www.edmunds.com/car-news/hyundai-palisade-kia-telluride-rear-seat-recall.html |
