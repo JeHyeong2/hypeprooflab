@@ -64,6 +64,18 @@ case "$PROMPT_NAME" in
   issue-solver)
     TOOL_SCOPE="--allowedTools Read,Glob,Grep,Write,Edit,Bash,Agent"
     ;;
+  daily-research)
+    TOOL_SCOPE="--allowedTools Read,Glob,Grep,Write,Edit,Bash,WebFetch,WebSearch,Agent"
+    ;;
+  morning-routine|evening-routine)
+    TOOL_SCOPE="--allowedTools Read,Glob,Grep,Bash"
+    ;;
+  weekly-purge|weekly-report)
+    TOOL_SCOPE="--allowedTools Read,Glob,Grep,Write,Edit,Bash"
+    ;;
+  column-nudge|column-deadline)
+    TOOL_SCOPE="--allowedTools Read,Glob,Grep,Bash"
+    ;;
   *)
     TOOL_SCOPE="--allowedTools Read,Glob,Grep,Write,Edit,Agent"
     ;;
@@ -74,12 +86,26 @@ set +u
 declare -A JOB_TIMEOUT=(
   [issue-filer]=300
   [issue-solver]=600
+  [daily-research]=900
+  [morning-routine]=300
+  [evening-routine]=300
+  [weekly-purge]=600
+  [weekly-report]=600
+  [column-nudge]=300
+  [column-deadline]=300
 )
 TIMEOUT_SEC="${JOB_TIMEOUT[$PROMPT_NAME]:-600}"
 
 declare -A JOB_MAX_TURNS=(
   [issue-filer]=40
   [issue-solver]=60
+  [daily-research]=25
+  [morning-routine]=15
+  [evening-routine]=10
+  [weekly-purge]=20
+  [weekly-report]=15
+  [column-nudge]=15
+  [column-deadline]=10
 )
 MAX_TURNS="${JOB_MAX_TURNS[$PROMPT_NAME]:-30}"
 set -u
