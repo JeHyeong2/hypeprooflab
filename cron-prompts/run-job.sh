@@ -76,6 +76,9 @@ case "$PROMPT_NAME" in
   column-nudge|column-deadline)
     TOOL_SCOPE="--allowedTools Read,Glob,Grep,Bash"
     ;;
+  evaluate)
+    TOOL_SCOPE="--allowedTools Read,Write,Glob,Grep,Bash,WebFetch"
+    ;;
   *)
     TOOL_SCOPE="--allowedTools Read,Glob,Grep,Write,Edit,Agent"
     ;;
@@ -93,6 +96,7 @@ declare -A JOB_TIMEOUT=(
   [weekly-report]=600
   [column-nudge]=300
   [column-deadline]=300
+  [evaluate]=600
 )
 TIMEOUT_SEC="${JOB_TIMEOUT[$PROMPT_NAME]:-600}"
 
@@ -106,6 +110,7 @@ declare -A JOB_MAX_TURNS=(
   [weekly-report]=15
   [column-nudge]=15
   [column-deadline]=10
+  [evaluate]=25
 )
 MAX_TURNS="${JOB_MAX_TURNS[$PROMPT_NAME]:-30}"
 set -u

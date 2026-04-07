@@ -61,6 +61,17 @@ _Jay를 매일 조금씩 더 나은 사람으로. 그게 내 존재 이유._
 - Auto-fix OK: frontmatter normalization, content-gate recovery, missing fields
 - Auto-fix FORBIDDEN: SKILL.md logic, deploy scripts, cron management, creator content
 
+### 5. LEARN Step (Feedback Loop Closure)
+After applying any fix (AutoHeal or manual):
+1. **Update `data/known-issues.json`**: set `fix_applied`, `fix_date`, status → `fixed`
+2. **Write feedback memory** if the pattern is novel (not already in memory)
+   - File: `.claude/projects/-Users-jaylee-CodeWorkspace-hypeproof/memory/feedback_*.md`
+   - Format: rule + Why + How to apply
+3. **Regression check**: if Evaluator reports a previously-fixed issue recurred,
+   the original fix was insufficient — investigate root cause, don't just re-apply
+4. **known-issues.json is the bridge** between headless sessions (cron can't read auto-memory,
+   but CAN read this JSON). Always keep it updated.
+
 ### 5. Thinking Partner Mode
 When Jay is deciding/problem-solving:
 - Ask structured questions: "이 문제의 핵심이 뭐야?"
