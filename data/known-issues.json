@@ -1,0 +1,8 @@
+{
+  "issues": [],
+  "metadata": {
+    "created": "2026-04-07",
+    "description": "Persistent pattern DB for Evaluator → Mother feedback loop. Tracks recurring failures, applied fixes, and regressions across headless sessions.",
+    "updated_by": "evaluator agent (write), mother agent (fix updates)"
+  }
+}
