@@ -1,6 +1,7 @@
 # Work Spec #002: Creator Publishing Guide & Submission Flow
 
 ## Assignee: JeHyeong
+## Depends on: Work Spec #001 (CI 빌드 체크)
 ## Priority: P1
 ## Due: 2026-04-25
 
@@ -16,77 +17,107 @@
 - 크리에이터 7명 (JY, Ryan, Kiwon, TJ, BH, JeHyeong, Simon)
 - 콘텐츠: 칼럼 (KO/EN), 리서치, 소설
 - 발행 경로: `web/src/content/columns/ko/<slug>.md` + `en/<slug>.md`
-- Frontmatter 규칙: `.claude/skills/content-standards/SKILL.md`
-- QA: Herald agent (GEO scoring)
+- QA: Herald agent (GEO scoring) — AI Editorial Director가 품질 판단
+- 멤버 이미지: `web/public/members/<name>.png`
 
 ## Spec
 
 ### 1. Creator Publishing Guide
 
-**파일**: `docs/creator-guide.md` (웹에서도 접근 가능하도록 향후 웹 페이지화)
+**파일**: `docs/creator-guide.md`
 
 **내용**:
-- 칼럼 작성법 (마크다운, frontmatter 필수 필드)
-- 카테고리 분류 (content-standards 참고)
-- 이미지 추가 방법 (`web/public/` 경로)
-- KO/EN 쌍 작성 규칙
-- 제출 방법 (아래 2번 참고)
-- 리뷰 프로세스 (AI Editorial Director → Herald QA → 발행)
-- 예시 칼럼 링크
 
-### 2. Submission Flow (MVP)
+#### 1.1 칼럼 작성법
+- 마크다운 형식, frontmatter 필수
+- 파일 위치: `web/src/content/columns/ko/<slug>.md`
+- slug = 파일명 (확장자 제외). 예: `my-first-column.md` → slug: `my-first-column`
+- EN 버전은 선택: `web/src/content/columns/en/<같은 slug>.md`
 
-**Phase 1 (GitHub PR 기반)**:
-```
-Creator가 마크다운 파일 작성
-  → web/src/content/columns/ko/<slug>.md 생성
-  → (선택) en/<slug>.md 생성
-  → GitHub PR 생성
-  → CI 빌드 체크 (Work Spec #001)
-  → Jay or AI 리뷰
-  → 머지 → 배포
-```
+#### 1.2 Frontmatter 필수 필드
 
-**가이드에 포함할 것**:
-- GitHub web editor로 파일 생성하는 방법 (IDE 없이)
-- frontmatter 템플릿 (복붙용)
-- PR 제목 컨벤션: `[content] <topic>`
-
-### 3. Frontmatter Template
-
-`docs/templates/column-template.md` 생성:
-```markdown
+```yaml
 ---
-title: ""
-creator: ""
-date: "YYYY-MM-DD"
-category: ""
-tags: []
-slug: ""
-readTime: ""
-excerpt: ""
-creatorImage: "/members/<name>.png"
+title: "제목"                              # 필수
+creator: "이름"                            # 필수 — displayName 기준 (Jay, JY, Ryan, Kiwon, TJ, BH, JeHyeong, Simon)
+date: "2026-04-15"                         # 필수 — YYYY-MM-DD
+category: "Column"                         # 필수 — Column, Opinion, Tutorial, Research, Essay 중 택1
+tags: ["tag1", "tag2"]                     # 필수 — 2~5개
+slug: "my-first-column"                    # 필수 — 파일명과 일치
+readTime: "8분"                            # 필수
+excerpt: "한 줄 요약"                       # 필수
+creatorImage: "/members/<name>.png"        # 필수 — 본인 이미지 경로
+lang: "ko"                                 # 필수 — "ko" 또는 "en"
+authorType: "human"                        # 필수 — "human" (직접 작성) 또는 "ai" (AI 도움)
 ---
-
-(본문)
 ```
+
+> 참고: 실제 칼럼 예시는 `web/src/content/columns/ko/` 디렉토리에서 확인
+
+#### 1.3 카테고리 정의
+
+| Category | 설명 | 예시 |
+|----------|------|------|
+| Column | 전문 분야 관점의 분석/의견 | AI 에이전트 자율성의 역설 |
+| Opinion | 개인 시각의 에세이 | 회장님의 시대가 열리다 |
+| Tutorial | 단계별 실습 가이드 | OpenClaw로 AI 비서 만들기 |
+| Research | 데이터 기반 분석 | LLM 벤치마크 비교 |
+| Essay | 자유 형식 글 | AI 시대의 인간 질문 |
+
+#### 1.4 이미지
+- 본문 이미지: `web/public/` 하위에 저장, 마크다운에서 `/images/my-image.png`로 참조
+- 크리에이터 이미지: `web/public/members/<name>.png` — 없으면 JeHyeong에게 요청
+
+#### 1.5 KO/EN 쌍 규칙
+- 한국어 먼저 작성, 영어는 번역이 아니라 재작성
+- 같은 slug 사용: `ko/my-column.md` + `en/my-column.md`
+- 영어 버전은 선택 사항
+
+### 2. Submission Flow
+
+```
+1. 크리에이터가 마크다운 파일 작성 (위 가이드 따라)
+2. GitHub에서 PR 생성:
+   - web/src/content/columns/ko/<slug>.md 추가
+   - (선택) en/<slug>.md 추가
+   - PR 제목: [content] <주제>
+3. CI 자동 빌드 체크 (Work Spec #001)
+4. 리뷰 (JeHyeong 또는 AI Herald)
+5. 머지 → 배포
+```
+
+**GitHub Web Editor 사용법도 가이드에 포함**:
+- github.com에서 파일 직접 생성하는 방법 (IDE 없는 크리에이터용)
+- 템플릿 복붙 → 내용 채우기 → PR 생성 3단계
+
+### 3. Frontmatter Template 파일
+
+**파일**: `docs/templates/column-template-ko.md`
+
+위 1.2의 frontmatter + 본문 뼈대 포함. 복붙용.
+
+**파일**: `docs/templates/column-template-en.md`
+
+영어 버전 템플릿.
 
 ### 4. (Stretch) Web Submission UI
 
 향후 웹에서 직접 제출할 수 있는 `/submit` 페이지.
-이번 스펙에서는 가이드 문서 + 템플릿만.
+이번 스펙에서는 가이드 문서 + 템플릿만. 웹 UI는 별도 스펙으로.
 
 ## Acceptance Criteria
 
 - [ ] `docs/creator-guide.md` 작성됨
-- [ ] `docs/templates/column-template.md` 작성됨
+- [ ] `docs/templates/column-template-ko.md` 작성됨
+- [ ] `docs/templates/column-template-en.md` 작성됨
+- [ ] frontmatter 필드가 실제 칼럼과 100% 일치 (lang, authorType 포함)
+- [ ] GitHub Web Editor 스크린샷 또는 단계별 설명 포함
 - [ ] 크리에이터가 가이드만 보고 PR을 올릴 수 있음 (JY에게 테스트 요청)
-- [ ] content-standards 스킬과 일관성 있음
 
 ## Reference
 
-- `.claude/skills/content-standards/SKILL.md` — frontmatter schema, categories
-- `.claude/skills/column-workflow/SKILL.md` — column pipeline rules
-- `web/src/content/columns/ko/` — existing columns (examples)
-- `novels/authors/editorial-director.yaml` — AI editorial standards
-- `ROLES.md` — role definitions
+- `.claude/skills/content-standards/SKILL.md` — 전체 콘텐츠 규칙
+- `.claude/skills/column-workflow/SKILL.md` — 칼럼 파이프라인 규칙
+- `web/src/content/columns/ko/` — 기존 칼럼 예시
+- `novels/authors/editorial-director.yaml` — AI 에디토리얼 기준
+- `ROLES.md` — 역할 정의
