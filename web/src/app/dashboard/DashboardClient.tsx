@@ -105,6 +105,10 @@ function TabRoadmap({ onDetail }: { onDetail: (t: string, d: string, o: string) 
     { title: 'S-5 \uC6F9 SEO + \uB514\uC790\uC778 \uB9AC\uB274\uC5BC', desc: '\uD2B8\uB798\uD53D \uAC1C\uC120, \uB124\uC774\uBC84 \uB178\uCD9C. JeHyeong\uC5D0\uAC8C \uC6F9 \uC804\uAD8C \uC704\uC784.', owner: 'JeHyeong | 4-5\uC6D4', status: 'progress' as const, color: '#1f6feb' },
     { title: 'S-6 \uCF58\uD150\uCE20 \uD30C\uC774\uD504\uB77C\uC778 \uC720\uC9C0', desc: '\uB9AC\uC11C\uCE58/\uCE7C\uB7FC \uC790\uB3D9 \uBC1C\uD589 \uC720\uC9C0. 8 \uC5D0\uC774\uC804\uD2B8 headless \uC6B4\uC601.', owner: 'Mother | Ongoing', status: 'progress' as const, color: '#1f6feb' },
     { title: 'S-7 \uAC1C\uC778 \uCC44\uB110 \uD64D\uBCF4 \uC2DC\uC791', desc: 'LinkedIn, Reddit \uB4F1 \uAC1C\uC778 \uBE0C\uB79C\uB529.', owner: '\uAC01\uC790 | 4\uC6D4~', status: 'wait' as const, color: '#1f6feb' },
+    { title: 'S-8 \uBA40\uD2F0 \uAC1C\uBC1C\uC790 \uC628\uBCF4\uB529', desc: 'ROLES.md, CONTRIBUTING.md, .env.example, SKILLS.md, \uC2A4\uD0AC 27\uAC1C, work specs 2\uAC74.', owner: 'Jay | 4/8 \uC644\uB8CC', status: 'done' as const, color: '#1f6feb' },
+    { title: 'S-9 CI/CD \uD30C\uC774\uD504\uB77C\uC778', desc: 'GitHub Actions \uBE4C\uB4DC \uCCB4\uD06C + branch protection. Work Spec #001.', owner: 'JeHyeong | 4/18', status: 'wait' as const, color: '#1f6feb' },
+    { title: 'S-10 \uD06C\uB9AC\uC5D0\uC774\uD130 \uC140\uD504\uC11C\uBE44\uC2A4 \uBC1C\uD589', desc: '\uAC00\uC774\uB4DC + \uD15C\uD50C\uB9BF + \uC81C\uCD9C \uD50C\uB85C\uC6B0. Work Spec #002.', owner: 'JeHyeong | 4/25', status: 'wait' as const, color: '#1f6feb' },
+    { title: 'S-11 Cron \uD30C\uC774\uD504\uB77C\uC778 \uBCF5\uAD6C', desc: 'run-job.sh \uBC84\uADF8 \uC218\uC815 \uC644\uB8CC. Discord \uC790\uB3D9 \uAC10\uC9C0 \uBBF8\uAD6C\uD604.', owner: 'Jay | 4/10', status: 'progress' as const, color: '#1f6feb' },
   ];
   const midItems = [
     { title: 'M-1 \uC720\uB8CC \uACFC\uC815 \uC804\uD658', desc: '\uD30C\uC77C\uB7FF NPS/\uD6C4\uAE30 \uAE30\uBC18 \uC218\uAC15\uB8CC \uB3C4\uC785', owner: 'Jay' },
