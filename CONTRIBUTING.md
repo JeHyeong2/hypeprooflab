@@ -28,8 +28,9 @@ You can run the dev server with **zero env vars** — pages that don't need exte
 
 | Feature | Required Vars |
 |---------|--------------|
-| Auth (login) | `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`, `NEXTAUTH_URL` |
-| Member data | `NOTION_API_KEY`, `NOTION_MEMBERS_DB_ID` |
+| Auth (login) | `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`, `AUTH_SECRET`, `NEXTAUTH_URL` |
+| Auth (GitHub, optional) | `AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET` |
+| Member data | `NOTION_API_KEY`, `NOTION_MEMBERS_DB_ID` (optional — falls back to `data/members.json`) |
 | Comments | `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` |
 | Rate limiting | `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` |
 

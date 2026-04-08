@@ -40,12 +40,16 @@ PR이 올라오면 자동으로 빌드 체크가 돌고, main 머지 시 Vercel 
 - Build 실패 시 PR에 빨간 체크
 - Build 성공 시 PR에 초록 체크
 
-### 2. Branch protection rule
+### 2. Branch protection rule (Jay handles this)
 
-**Settings** → Branches → main:
+> **Note**: Branch protection requires GitHub repo admin access. JeHyeong creates the workflow file; Jay configures the protection rule.
+
+**Jay will set** in Settings → Branches → main:
 - Require PR reviews: 1 (Jay)
 - Require status checks: CI build must pass
 - No direct push to main
+
+> **Note**: There is an existing `.github/workflows/verify-members.yml` workflow. The new `ci.yml` is separate and handles web build checks. They do not overlap.
 
 ### 3. Vercel Git integration (optional)
 
@@ -58,7 +62,7 @@ PR이 올라오면 자동으로 빌드 체크가 돌고, main 머지 시 Vercel 
 
 - [ ] PR 올리면 GitHub Actions에서 빌드 체크 실행됨
 - [ ] 빌드 실패 시 PR 머지 불가
-- [ ] main branch에 직접 push 불가
+- [ ] main branch에 직접 push 불가 (Jay가 설정)
 - [ ] `.github/workflows/ci.yml` 커밋됨
 
 ## Reference
