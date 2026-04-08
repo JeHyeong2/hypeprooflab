@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # run-job.sh — Cron wrapper for Claude Code headless execution
 # Usage: run-job.sh <prompt-name>  (e.g., issue-solver, issue-filer)
 # Called by launchd or manually.
@@ -142,7 +142,7 @@ perl -e "alarm ${TIMEOUT_SEC}; exec @ARGV" -- \
   ${TOOL_SCOPE} \
   --max-turns "$MAX_TURNS" \
   <<< "$PROMPT_CONTENT" 2>&1 | tee -a "$LOG_FILE"
-EXIT_CODE=${PIPESTATUS[0]}
+EXIT_CODE=${pipestatus[1]}
 
 # Retry once on connection error
 if [[ "$EXIT_CODE" -ne 0 ]] && grep -q "ConnectionRefused\|ECONNREFUSED\|Unable to connect" "$LOG_FILE" 2>/dev/null; then
@@ -155,7 +155,7 @@ if [[ "$EXIT_CODE" -ne 0 ]] && grep -q "ConnectionRefused\|ECONNREFUSED\|Unable 
     ${TOOL_SCOPE} \
     --max-turns "$MAX_TURNS" \
     <<< "$PROMPT_CONTENT" 2>&1 | tee -a "$LOG_FILE"
-  EXIT_CODE=${PIPESTATUS[0]}
+  EXIT_CODE=${pipestatus[1]}
 fi
 set -e
 
