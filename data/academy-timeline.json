@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "updatedAt": "2026-04-08",
+  "title": "5/5 소아암병동 Launch Timeline",
+  "subtitle": "Q2 2026 First Execution Preparation & Beyond",
+  "dday": "2026-05-05",
+  "milestones": [
+    { "date": "2026-04-20", "label": "치과 Prep", "color": "yellow" },
+    { "date": "2026-05-05", "label": "D-Day", "color": "red" }
+  ],
+  "members": [
+    { "id": "Jay", "name": "Jay (이재원)", "roleNow": "메인 강사 (1회차) + 총괄 PD", "roleFuture": "PD (감수), 강사 양성" },
+    { "id": "Ryan", "name": "Ryan (김지웅)", "roleNow": "소통 창구 (동아/병원) + 현장 코디", "roleFuture": "동아 오너 + 성인 트랙 강사" },
+    { "id": "JUNGWOO", "name": "JUNGWOO (김정우)", "roleNow": "보조 강사 (파트 1개 담당)", "roleFuture": "아이 트랙 메인 강사" },
+    { "id": "JY", "name": "JY (신진용)", "roleNow": "기술 — AI 환경 MVP + 디바이스", "roleFuture": "기술 리드 (교육 플랫폼)" },
+    { "id": "BH", "name": "BH (태봉호)", "roleNow": "커리큘럼 콘텐츠 (Essence 반영)", "roleFuture": "전문직 콘텐츠 기획" },
+    { "id": "TJ", "name": "TJ (강태진)", "roleNow": "GTM + 미디어 전략 + 촬영", "roleFuture": "GTM/미디어/YouTube 전략" },
+    { "id": "Kiwon", "name": "Kiwon (남기원)", "roleNow": "치과 GTM + 5/5 촬영 (TJ와)", "roleFuture": "Track 2 GTM 리드" },
+    { "id": "JeHyeong", "name": "JeHyeong (신제형)", "roleNow": "현장 교육보조 + 커리큘럼 참여 + 랜딩", "roleFuture": "웹/SEO/Academy 유입 경로" }
+  ],
+  "tasks": [
+    { "lane": "Jay", "start": "2026-04-08", "end": "2026-04-10", "label": "커리큘럼 초안 v0.1", "desc": "2h 소아암 맞춤 커리큘럼 설계", "output": "커리큘럼 문서 v0.1" },
+    { "lane": "Jay", "start": "2026-04-15", "end": "2026-04-15", "label": "HKMC Workshop", "desc": "본업 — Sonatus HKMC 워크숍", "output": "(별도)" },
+    { "lane": "Jay", "start": "2026-04-16", "end": "2026-04-18", "label": "커리큘럼 v1.0 확정", "desc": "JUNGWOO 파트 배정 포함", "output": "최종 커리큘럼 + 파트 분배" },
+    { "lane": "Jay", "start": "2026-04-20", "end": "2026-04-20", "label": "치과 Prep 참석", "desc": "가격/라이선스 구조 발표", "output": "가격 드래프트" },
+    { "lane": "Jay", "start": "2026-04-25", "end": "2026-04-27", "label": "리허설", "desc": "JUNGWOO와 커리큘럼 런스루", "output": "리허설 피드백" },
+    { "lane": "Jay", "start": "2026-04-28", "end": "2026-04-30", "label": "인쇄물 준비", "desc": "수료증, 명찰, 자료", "output": "인쇄물" },
+    { "lane": "Jay", "start": "2026-05-05", "end": "2026-05-05", "label": "★ D-Day 메인 강사", "desc": "소아암병동 강의 진행", "output": "첫 실행 완료" },
+
+    { "lane": "Ryan", "start": "2026-04-08", "end": "2026-04-09", "label": "문대표님 정보 요청", "desc": "병원명, 인원, 시간, 공간, 규정", "output": "현장 정보 수집" },
+    { "lane": "Ryan", "start": "2026-04-11", "end": "2026-04-13", "label": "응답 정리 + 공유", "desc": "받은 정보 팀에 공유", "output": "현장 스펙 문서" },
+    { "lane": "Ryan", "start": "2026-04-18", "end": "2026-04-19", "label": "치과 Prep 자료", "desc": "Kiwon과 공동 준비", "output": "제안 자료" },
+    { "lane": "Ryan", "start": "2026-04-20", "end": "2026-04-20", "label": "치과 Prep 참석", "desc": "레퍼런스 구조 발표", "output": "파일럿 합의" },
+    { "lane": "Ryan", "start": "2026-05-03", "end": "2026-05-04", "label": "물류 + 동선", "desc": "준비물 패킹, 병원 동선 확인", "output": "물류 체크리스트" },
+    { "lane": "Ryan", "start": "2026-05-05", "end": "2026-05-05", "label": "★ 현장 코디", "desc": "동아 측 대응 + 현장 관리", "output": "" },
+    { "lane": "Ryan", "start": "2026-05-08", "end": "2026-05-15", "label": "치과 파일럿 확정", "desc": "4/20 결과 기반 일정 확정", "output": "파일럿 일정" },
+
+    { "lane": "JUNGWOO", "start": "2026-04-14", "end": "2026-04-18", "label": "커리큘럼 숙지", "desc": "전체 흐름 파악 + 담당 파트 선정", "output": "파트 선정" },
+    { "lane": "JUNGWOO", "start": "2026-04-25", "end": "2026-04-27", "label": "리허설 (Jay와)", "desc": "담당 파트 실전 연습", "output": "리허설 피드백" },
+    { "lane": "JUNGWOO", "start": "2026-05-02", "end": "2026-05-04", "label": "최종 연습", "desc": "단독 파트 최종 점검", "output": "" },
+    { "lane": "JUNGWOO", "start": "2026-05-05", "end": "2026-05-05", "label": "★ 보조 강사", "desc": "파트 1개 직접 진행", "output": "강의 경험" },
+    { "lane": "JUNGWOO", "start": "2026-05-15", "end": "2026-05-20", "label": "2회차 준비 (메인)", "desc": "아이 트랙 메인 강사로 전환", "output": "2회차 커리큘럼" },
+
+    { "lane": "JY", "start": "2026-04-11", "end": "2026-04-13", "label": "디바이스 수량 확정", "desc": "현장 정보 기반 기술 요구사항", "output": "기술 요구사항 문서" },
+    { "lane": "JY", "start": "2026-04-14", "end": "2026-04-18", "label": "AI 교육환경 MVP", "desc": "웹 or 앱 기반 교육 런타임", "output": "동작하는 MVP" },
+    { "lane": "JY", "start": "2026-04-21", "end": "2026-04-21", "label": "MVP 테스트 완료", "desc": "S-4 데드라인", "output": "테스트 결과 리포트" },
+    { "lane": "JY", "start": "2026-04-22", "end": "2026-04-24", "label": "디바이스 세팅", "desc": "인원수분 사전 설치", "output": "세팅 완료 디바이스" },
+    { "lane": "JY", "start": "2026-05-01", "end": "2026-05-02", "label": "최종 점검 + 폴백", "desc": "디바이스 점검, 오프라인 폴백 테스트", "output": "체크리스트" },
+    { "lane": "JY", "start": "2026-05-05", "end": "2026-05-05", "label": "★ 기술 지원", "desc": "현장 기술 운영", "output": "" },
+
+    { "lane": "BH", "start": "2026-04-08", "end": "2026-04-10", "label": "Essence 항목 선별", "desc": "소아암 아이 맞춤 핵심 항목 선정", "output": "Essence 축약판" },
+    { "lane": "BH", "start": "2026-04-14", "end": "2026-04-18", "label": "커리큘럼 콘텐츠", "desc": "연령대 맞춤 활동 설계", "output": "활동 시나리오" },
+    { "lane": "BH", "start": "2026-04-20", "end": "2026-04-24", "label": "평가 루브릭", "desc": "Essence 기반 관찰 평가 기준", "output": "루브릭 문서" },
+
+    { "lane": "TJ", "start": "2026-04-10", "end": "2026-04-13", "label": "미디어 전략 수립", "desc": "5/5 촬영 + SNS + YouTube 연계 전략", "output": "미디어 전략 문서" },
+    { "lane": "TJ", "start": "2026-04-14", "end": "2026-04-19", "label": "GTM 콘텐츠 기획", "desc": "Academy 홍보 콘텐츠 포맷, 채널별 전략", "output": "GTM 콘텐츠 플랜" },
+    { "lane": "TJ", "start": "2026-04-21", "end": "2026-04-25", "label": "촬영 계획 + 동의서", "desc": "장비, 앵글, 동의서 양식, SNS 활용 계획", "output": "촬영 계획서 + 동의서" },
+    { "lane": "TJ", "start": "2026-05-05", "end": "2026-05-05", "label": "★ 촬영 + 현장 콘텐츠 (w/Kiwon)", "desc": "Kiwon과 공동 촬영 + 실시간 SNS", "output": "원본 영상 + 사진 + SNS" },
+    { "lane": "TJ", "start": "2026-05-06", "end": "2026-05-12", "label": "레퍼런스 영상 + GTM 배포", "desc": "홍보용/강사교본용 편집 + 채널 배포", "output": "레퍼런스 영상 + 배포" },
+    { "lane": "TJ", "start": "2026-05-13", "end": "2026-05-18", "label": "Academy 홍보 콘텐츠", "desc": "5/5 강의 하이라이트 → YouTube/Insta/SNS 배포", "output": "홍보 영상 + SNS 콘텐츠" },
+
+    { "lane": "Kiwon", "start": "2026-04-14", "end": "2026-04-19", "label": "치과 Prep 자료", "desc": "파일럿 제안서, 아웃리치 전략", "output": "제안서 + 가격표" },
+    { "lane": "Kiwon", "start": "2026-04-20", "end": "2026-04-20", "label": "치과 Prep 참석", "desc": "GTM 구조 + 포지셔닝 발표", "output": "파일럿 합의" },
+    { "lane": "Kiwon", "start": "2026-05-05", "end": "2026-05-05", "label": "★ 촬영 (TJ와 공동)", "desc": "TJ와 함께 현장 촬영 지원", "output": "촬영 보조" },
+    { "lane": "Kiwon", "start": "2026-05-08", "end": "2026-05-15", "label": "치과 아웃리치", "desc": "KR1 — 유료 파일럿 일정 확정", "output": "계약 or 일정 확정" },
+
+    { "lane": "JeHyeong", "start": "2026-04-14", "end": "2026-04-20", "label": "Academy 랜딩 페이지", "desc": "Academy 소개 + 신청 경로 웹페이지", "output": "랜딩 페이지 초안" },
+    { "lane": "JeHyeong", "start": "2026-04-21", "end": "2026-04-27", "label": "SEO 최적화", "desc": "Academy 키워드 SEO, 네이버 노출", "output": "SEO 적용" },
+    { "lane": "JeHyeong", "start": "2026-05-05", "end": "2026-05-05", "label": "★ 현장 교육보조", "desc": "아이들 1:1 도움 + 분위기 관리", "output": "" },
+    { "lane": "JeHyeong", "start": "2026-05-06", "end": "2026-05-12", "label": "레퍼런스 페이지", "desc": "5/5 결과 + 사진/영상 웹 반영", "output": "레퍼런스 페이지 라이브" },
+    { "lane": "JeHyeong", "start": "2026-05-13", "end": "2026-05-18", "label": "치과 파일럿 랜딩", "desc": "Track 2 전문직 대상 랜딩 페이지", "output": "치과용 랜딩" }
+  ],
+  "decisions": {
+    "dental_prep": {
+      "date": "2026-04-20",
+      "title": "치과협회 Prep 미팅 안건",
+      "items": [
+        "HypeProof 개론 1h + 실습 4h 상품 구조 소개",
+        "가격/라이선스 구조 (Jay 드래프트)",
+        "파일럿 일정 — 5월 중 후보 2~3개",
+        "무료 1회 → 유료 전환 vs 바로 유료",
+        "대상 인원 (원장 + 스태프 여부)",
+        "장소 확정",
+        "\"5/5에 소아암 첫 강의 예정\" — 신뢰도 부스트"
+      ]
+    },
+    "post_dday": {
+      "date": "2026-05-05",
+      "title": "D-Day 이후 Next Steps",
+      "items": [
+        "NPS 정리 + 레퍼런스 영상 편집 (5/6~7)",
+        "치과 파일럿 일정 확정 (4/20 결과 기반)",
+        "치과 유료 파일럿 1회 — 5월 중순 목표",
+        "아이 트랙 2회차 — JUNGWOO 메인 강사 전환",
+        "Kids vs 전문직 비교 GTM 데이터 축적 시작",
+        "동아 브랜딩 효과 평가 → 파트너십 방향 판단"
+      ]
+    }
+  },
+  "weeks": [
+    { "label": "W1: 정보수집 + 설계", "start": "2026-04-08", "end": "2026-04-13", "theme": "blue" },
+    { "label": "W2: Tech MVP + 치과 Prep", "start": "2026-04-14", "end": "2026-04-20", "theme": "yellow" },
+    { "label": "W3: 테스트 + 리허설", "start": "2026-04-21", "end": "2026-04-27", "theme": "green" },
+    { "label": "W4: 최종 준비", "start": "2026-04-28", "end": "2026-05-04", "theme": "red" },
+    { "label": "★ D-Day", "start": "2026-05-05", "end": "2026-05-05", "theme": "coral" },
+    { "label": "Post: 후속 조치", "start": "2026-05-06", "end": "2026-05-20", "theme": "purple" }
+  ]
+}

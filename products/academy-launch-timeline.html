@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>HypeProof Academy — 5/5 소아암병동 Launch Timeline</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Pretendard', -apple-system, 'Segoe UI', sans-serif;
+    background: #0f1117;
+    color: #e0e0e0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #1a1d2e 0%, #2d1f3d 100%);
+    padding: 32px 48px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  .header h1 span { color: #f07067; }
+  .header .subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-top: 6px;
+  }
+  .header .countdown {
+    display: inline-block;
+    margin-top: 12px;
+    background: rgba(240,112,103,0.15);
+    border: 1px solid rgba(240,112,103,0.3);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #f07067;
+  }
+  .header .countdown em { font-style: normal; font-size: 22px; }
+
+  .container { padding: 24px 48px 48px; }
+
+  /* ── Role Summary Panel ── */
+  .role-panel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .role-card {
+    background: #181b28;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 14px 16px;
+    transition: transform 0.15s, border-color 0.15s;
+    cursor: default;
+  }
+  .role-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255,255,255,0.15);
+  }
+  .role-card .name {
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .role-card .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .role-card .role-now {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+  .role-card .role-future {
+    font-size: 11px;
+    color: #666;
+    margin-top: 4px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    padding-top: 4px;
+  }
+
+  /* ── Gantt Chart ── */
+  .gantt-wrapper {
+    background: #181b28;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden;
+  }
+  .gantt-title {
+    padding: 16px 20px 12px;
+    font-size: 16px;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .gantt-title .legend {
+    display: flex;
+    gap: 14px;
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 400;
+    color: #888;
+  }
+  .gantt-title .legend .lg {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .gantt-title .legend .lg .ld {
+    width: 8px; height: 8px; border-radius: 2px;
+  }
+
+  .gantt-scroll { overflow-x: auto; }
+  .gantt {
+    display: grid;
+    min-width: 1100px;
+    grid-template-columns: 110px 1fr;
+  }
+
+  /* Swim lane labels */
+  .lane-labels {
+    background: #14172280;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+  .lane-label {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    gap: 8px;
+  }
+  .lane-label .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* Timeline area */
+  .timeline-area { position: relative; }
+
+  /* Date header */
+  .date-header {
+    display: flex;
+    height: 32px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    position: sticky;
+    top: 0;
+    background: #181b28;
+    z-index: 5;
+  }
+  .date-cell {
+    flex: 1;
+    text-align: center;
+    font-size: 10px;
+    color: #666;
+    line-height: 32px;
+    border-right: 1px solid rgba(255,255,255,0.03);
+    position: relative;
+  }
+  .date-cell.weekend { background: rgba(255,255,255,0.015); }
+  .date-cell.today { color: #7cc5ff; font-weight: 700; }
+  .date-cell.milestone { color: #f07067; font-weight: 700; }
+
+  /* Week labels */
+  .week-header {
+    display: flex;
+    height: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .week-cell {
+    text-align: center;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 24px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+  .week-cell.w1 { background: rgba(96,165,250,0.08); color: #60a5fa; }
+  .week-cell.w2 { background: rgba(251,191,36,0.08); color: #fbbf24; }
+  .week-cell.w3 { background: rgba(52,211,153,0.08); color: #34d399; }
+  .week-cell.w4 { background: rgba(248,113,113,0.08); color: #f87171; }
+  .week-cell.w5 { background: rgba(240,112,103,0.12); color: #f07067; }
+  .week-cell.w6 { background: rgba(167,139,250,0.08); color: #a78bfa; }
+
+  /* Swim lane rows */
+  .lane-row {
+    height: 48px;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .lane-row:hover { background: rgba(255,255,255,0.015); }
+
+  /* Task bars */
+  .task {
+    position: absolute;
+    height: 26px;
+    top: 11px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    cursor: pointer;
+    transition: filter 0.15s, transform 0.1s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 2;
+  }
+  .task:hover {
+    filter: brightness(1.25);
+    transform: scaleY(1.15);
+    z-index: 10;
+  }
+
+  /* Milestone markers */
+  .milestone-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .milestone-line.dday {
+    background: repeating-linear-gradient(to bottom, #f07067 0, #f07067 6px, transparent 6px, transparent 12px);
+  }
+  .milestone-line.dental {
+    background: repeating-linear-gradient(to bottom, #fbbf24 0, #fbbf24 6px, transparent 6px, transparent 12px);
+  }
+  .milestone-flag {
+    position: absolute;
+    top: -26px;
+    transform: translateX(-50%);
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 6;
+  }
+  .milestone-flag.dday { background: #f07067; color: #fff; }
+  .milestone-flag.dental { background: #fbbf24; color: #1a1a2e; }
+
+  /* Today marker */
+  .today-line {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: #7cc5ff;
+    z-index: 4;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  /* Tooltip */
+  .tooltip {
+    display: none;
+    position: fixed;
+    background: #242838;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 12px;
+    line-height: 1.6;
+    max-width: 320px;
+    z-index: 100;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    pointer-events: none;
+  }
+  .tooltip .tt-title { font-weight: 700; font-size: 13px; color: #fff; margin-bottom: 4px; }
+  .tooltip .tt-date { color: #888; font-size: 11px; }
+  .tooltip .tt-desc { color: #bbb; margin-top: 6px; }
+  .tooltip .tt-output { color: #7cc5ff; margin-top: 4px; font-size: 11px; }
+
+  /* ── Phase Section Headers ── */
+  .phase-header {
+    padding: 20px 20px 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .phase-header .phase-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+  }
+  .phase-header h3 { font-size: 15px; font-weight: 700; }
+  .phase-header .phase-dates { font-size: 12px; color: #666; margin-left: auto; }
+
+  /* ── Bottom: Key Decisions ── */
+  .decisions {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .decision-card {
+    background: #181b28;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 16px 20px;
+  }
+  .decision-card h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .decision-card ul {
+    list-style: none;
+    font-size: 12px;
+    color: #aaa;
+    line-height: 1.8;
+  }
+  .decision-card ul li::before {
+    content: '→';
+    margin-right: 6px;
+    color: #555;
+  }
+  .decision-card .date-badge {
+    display: inline-block;
+    background: rgba(240,112,103,0.15);
+    color: #f07067;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  @media print {
+    body { background: #fff; color: #1a1a2e; }
+    .gantt-wrapper, .role-card, .decision-card { border-color: #ddd; background: #fafafa; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>HypeProof Academy — <span>5/5 소아암병동</span> Launch Timeline</h1>
+  <div class="subtitle">Q2 2026 First Execution Preparation &amp; Beyond</div>
+  <div class="countdown">D-Day까지 <em id="dday-count"></em>일</div>
+</div>
+
+<div class="container">
+
+  <!-- Role Summary Panel -->
+  <div class="role-panel" id="role-panel"></div>
+
+  <!-- Gantt Chart -->
+  <div class="gantt-wrapper">
+    <div class="gantt-title">
+      <span>Execution Timeline</span>
+      <div class="legend">
+        <div class="lg"><div class="ld" style="background:#7cc5ff"></div> Today</div>
+        <div class="lg"><div class="ld" style="background:#fbbf24"></div> 4/20 치과 Prep</div>
+        <div class="lg"><div class="ld" style="background:#f07067"></div> 5/5 D-Day</div>
+      </div>
+    </div>
+    <div class="gantt-scroll">
+      <div class="gantt">
+        <div class="lane-labels">
+          <div style="height:24px"></div>
+          <div style="height:32px"></div>
+          <div id="lane-labels-body"></div>
+        </div>
+        <div class="timeline-area" id="timeline-area">
+          <div class="week-header" id="week-header"></div>
+          <div class="date-header" id="date-header"></div>
+          <div id="lanes-body" style="position:relative"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Decisions -->
+  <div class="decisions">
+    <div class="decision-card">
+      <h4><span class="date-badge">4/20</span> 치과협회 Prep 미팅 안건</h4>
+      <ul>
+        <li>HypeProof 개론 1h + 실습 4h 상품 구조 소개</li>
+        <li>가격/라이선스 구조 (Jay 드래프트)</li>
+        <li>파일럿 일정 — 5월 중 후보 2~3개</li>
+        <li>무료 1회 → 유료 전환 vs 바로 유료</li>
+        <li>대상 인원 (원장 + 스태프 여부)</li>
+        <li>장소 확정</li>
+        <li>"5/5에 소아암 첫 강의 예정" — 신뢰도 부스트</li>
+      </ul>
+    </div>
+    <div class="decision-card">
+      <h4><span class="date-badge">5/5</span> D-Day 이후 Next Steps</h4>
+      <ul>
+        <li>NPS 정리 + 레퍼런스 영상 편집 (5/6~7)</li>
+        <li>치과 파일럿 일정 확정 (4/20 결과 기반)</li>
+        <li>치과 유료 파일럿 1회 — 5월 중순 목표</li>
+        <li>아이 트랙 2회차 — JUNGWOO 메인 강사 전환</li>
+        <li>Kids vs 전문직 비교 GTM 데이터 축적 시작</li>
+        <li>동아 브랜딩 효과 평가 → 파트너십 방향 판단</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- Tooltip -->
+<div class="tooltip" id="tooltip">
+  <div class="tt-title"></div>
+  <div class="tt-date"></div>
+  <div class="tt-desc"></div>
+  <div class="tt-output"></div>
+</div>
+
+<script>
+// ── Data ──
+const COLORS = {
+  Jay:     { bg: '#1e3a5f', border: '#60a5fa', text: '#93c5fd' },
+  Ryan:    { bg: '#4a2028', border: '#f07067', text: '#fca5a1' },
+  JY:      { bg: '#1a3a2a', border: '#34d399', text: '#6ee7b7' },
+  JUNGWOO: { bg: '#2d2050', border: '#a78bfa', text: '#c4b5fd' },
+  Kiwon:   { bg: '#3d2e10', border: '#fbbf24', text: '#fcd34d' },
+  BH:      { bg: '#1a3035', border: '#2dd4bf', text: '#5eead4' },
+  TJ:      { bg: '#3d1a35', border: '#f472b6', text: '#f9a8d4' },
+  JeHyeong:{ bg: '#2a3020', border: '#a3e635', text: '#d9f99d' },
+  Team:    { bg: '#2a2a3a', border: '#888', text: '#bbb' },
+};
+
+const MEMBERS = [
+  { id: 'Jay', name: 'Jay (이재원)', roleNow: '메인 강사 (1회차) + 총괄 PD', roleFuture: '→ PD (감수), 강사 양성' },
+  { id: 'Ryan', name: 'Ryan (김지웅)', roleNow: '소통 창구 (동아/병원) + 현장 코디', roleFuture: '→ 동아 오너 + 성인 트랙 강사' },
+  { id: 'JUNGWOO', name: 'JUNGWOO (김정우)', roleNow: '보조 강사 (파트 1개 담당)', roleFuture: '→ 아이 트랙 메인 강사' },
+  { id: 'JY', name: 'JY (신진용)', roleNow: '기술 — AI 환경 MVP + 디바이스', roleFuture: '→ 기술 리드 (교육 플랫폼)' },
+  { id: 'BH', name: 'BH (태봉호)', roleNow: '커리큘럼 콘텐츠 (Essence 반영)', roleFuture: '→ 전문직 콘텐츠 기획' },
+  { id: 'TJ', name: 'TJ (강태진)', roleNow: 'GTM + 미디어 전략 + 촬영', roleFuture: '→ GTM/미디어/YouTube 전략' },
+  { id: 'Kiwon', name: 'Kiwon (남기원)', roleNow: '치과 GTM + 5/5 촬영 (TJ와)', roleFuture: '→ Track 2 GTM 리드' },
+  { id: 'JeHyeong', name: 'JeHyeong (신제형)', roleNow: '현장 교육보조 + 커리큘럼 참여 + 랜딩', roleFuture: '→ 웹/SEO/Academy 유입 경로' },
+];
+
+const LANES = ['Jay','Ryan','JUNGWOO','JY','BH','TJ','Kiwon','JeHyeong'];
+
+// date range: 4/8 ~ 5/20
+const START = new Date(2026, 3, 8); // Apr 8
+const END   = new Date(2026, 4, 20); // May 20
+const TOTAL_DAYS = Math.ceil((END - START) / 86400000);
+const TODAY = new Date(2026, 3, 8);
+
+function dayIndex(m, d) {
+  const dt = new Date(2026, m - 1, d);
+  return Math.floor((dt - START) / 86400000);
+}
+
+const TASKS = [
+  // Jay
+  { lane:'Jay', s:[4,8],  e:[4,10], label:'커리큘럼 초안 v0.1',         desc:'2h 소아암 맞춤 커리큘럼 설계', output:'커리큘럼 문서 v0.1' },
+  { lane:'Jay', s:[4,15], e:[4,15], label:'HKMC Workshop',              desc:'본업 — Sonatus HKMC 워크숍', output:'(별도)' },
+  { lane:'Jay', s:[4,16], e:[4,18], label:'커리큘럼 v1.0 확정',          desc:'JUNGWOO 파트 배정 포함', output:'최종 커리큘럼 + 파트 분배' },
+  { lane:'Jay', s:[4,20], e:[4,20], label:'치과 Prep 참석',              desc:'가격/라이선스 구조 발표', output:'가격 드래프트' },
+  { lane:'Jay', s:[4,25], e:[4,27], label:'리허설',                      desc:'JUNGWOO와 커리큘럼 런스루', output:'리허설 피드백' },
+  { lane:'Jay', s:[4,28], e:[4,30], label:'인쇄물 준비',                 desc:'수료증, 명찰, 자료', output:'인쇄물' },
+  { lane:'Jay', s:[5,5],  e:[5,5],  label:'★ D-Day 메인 강사',           desc:'소아암병동 강의 진행', output:'첫 실행 완료' },
+
+  // Ryan
+  { lane:'Ryan', s:[4,8],  e:[4,9],  label:'문대표님 정보 요청',         desc:'병원명, 인원, 시간, 공간, 규정', output:'현장 정보 수집' },
+  { lane:'Ryan', s:[4,11], e:[4,13], label:'응답 정리 + 공유',           desc:'받은 정보 팀에 공유', output:'현장 스펙 문서' },
+  { lane:'Ryan', s:[4,18], e:[4,19], label:'치과 Prep 자료',             desc:'Kiwon과 공동 준비', output:'제안 자료' },
+  { lane:'Ryan', s:[4,20], e:[4,20], label:'치과 Prep 참석',             desc:'레퍼런스 구조 발표', output:'파일럿 합의' },
+  { lane:'Ryan', s:[5,3],  e:[5,4],  label:'물류 + 동선',                desc:'준비물 패킹, 병원 동선 확인', output:'물류 체크리스트' },
+  { lane:'Ryan', s:[5,5],  e:[5,5],  label:'★ 현장 코디',                desc:'동아 측 대응 + 현장 관리', output:'' },
+  { lane:'Ryan', s:[5,8],  e:[5,15], label:'치과 파일럿 확정',           desc:'4/20 결과 기반 일정 확정', output:'파일럿 일정' },
+
+  // JUNGWOO
+  { lane:'JUNGWOO', s:[4,14], e:[4,18], label:'커리큘럼 숙지',           desc:'전체 흐름 파악 + 담당 파트 선정', output:'파트 선정' },
+  { lane:'JUNGWOO', s:[4,25], e:[4,27], label:'리허설 (Jay와)',           desc:'담당 파트 실전 연습', output:'리허설 피드백' },
+  { lane:'JUNGWOO', s:[5,2],  e:[5,4],  label:'최종 연습',               desc:'단독 파트 최종 점검', output:'' },
+  { lane:'JUNGWOO', s:[5,5],  e:[5,5],  label:'★ 보조 강사',             desc:'파트 1개 직접 진행', output:'강의 경험' },
+  { lane:'JUNGWOO', s:[5,15], e:[5,20], label:'2회차 준비 (메인)',        desc:'아이 트랙 메인 강사로 전환', output:'2회차 커리큘럼' },
+
+  // JY
+  { lane:'JY', s:[4,11], e:[4,13], label:'디바이스 수량 확정',           desc:'현장 정보 기반 기술 요구사항', output:'기술 요구사항 문서' },
+  { lane:'JY', s:[4,14], e:[4,18], label:'AI 교육환경 MVP',              desc:'웹 or 앱 기반 교육 런타임', output:'동작하는 MVP' },
+  { lane:'JY', s:[4,21], e:[4,21], label:'MVP 테스트 완료',              desc:'S-4 데드라인', output:'테스트 결과 리포트' },
+  { lane:'JY', s:[4,22], e:[4,24], label:'디바이스 세팅',                desc:'인원수분 사전 설치', output:'세팅 완료 디바이스' },
+  { lane:'JY', s:[5,1],  e:[5,2],  label:'최종 점검 + 폴백',            desc:'디바이스 점검, 오프라인 폴백 테스트', output:'체크리스트' },
+  { lane:'JY', s:[5,5],  e:[5,5],  label:'★ 기술 지원',                  desc:'현장 기술 운영', output:'' },
+
+  // BH
+  { lane:'BH', s:[4,8],  e:[4,10], label:'Essence 항목 선별',           desc:'소아암 아이 맞춤 핵심 항목 선정', output:'Essence 축약판' },
+  { lane:'BH', s:[4,14], e:[4,18], label:'커리큘럼 콘텐츠',              desc:'연령대 맞춤 활동 설계', output:'활동 시나리오' },
+  { lane:'BH', s:[4,20], e:[4,24], label:'평가 루브릭',                  desc:'Essence 기반 관찰 평가 기준', output:'루브릭 문서' },
+
+  // TJ
+  { lane:'TJ', s:[4,10], e:[4,13], label:'미디어 전략 수립',             desc:'5/5 촬영 + SNS + YouTube 연계 전략', output:'미디어 전략 문서' },
+  { lane:'TJ', s:[4,14], e:[4,19], label:'GTM 콘텐츠 기획',             desc:'Academy 홍보 콘텐츠 포맷, 채널별 전략', output:'GTM 콘텐츠 플랜' },
+  { lane:'TJ', s:[4,21], e:[4,25], label:'촬영 계획 + 동의서',          desc:'장비, 앵글, 동의서 양식, SNS 활용 계획', output:'촬영 계획서 + 동의서' },
+  { lane:'TJ', s:[5,5],  e:[5,5],  label:'★ 촬영 + 현장 콘텐츠 (w/Kiwon)', desc:'Kiwon과 공동 촬영 + 실시간 SNS', output:'원본 영상 + 사진 + SNS' },
+  { lane:'TJ', s:[5,6],  e:[5,12], label:'레퍼런스 영상 + GTM 배포',    desc:'홍보용/강사교본용 편집 + 채널 배포', output:'레퍼런스 영상 + 배포' },
+  { lane:'TJ', s:[5,13], e:[5,18], label:'Academy 홍보 콘텐츠',         desc:'5/5 강의 하이라이트 → YouTube/Insta/SNS 배포', output:'홍보 영상 + SNS 콘텐츠' },
+
+  // Kiwon
+  { lane:'Kiwon', s:[4,14], e:[4,19], label:'치과 Prep 자료',            desc:'파일럿 제안서, 아웃리치 전략', output:'제안서 + 가격표' },
+  { lane:'Kiwon', s:[4,20], e:[4,20], label:'치과 Prep 참석',            desc:'GTM 구조 + 포지셔닝 발표', output:'파일럿 합의' },
+  { lane:'Kiwon', s:[5,5],  e:[5,5],  label:'★ 촬영 (TJ와 공동)',        desc:'TJ와 함께 현장 촬영 지원', output:'촬영 보조' },
+  { lane:'Kiwon', s:[5,8],  e:[5,15], label:'치과 아웃리치',             desc:'KR1 — 유료 파일럿 일정 확정', output:'계약 or 일정 확정' },
+
+  // JeHyeong
+  { lane:'JeHyeong', s:[4,14], e:[4,20], label:'Academy 랜딩 페이지',   desc:'Academy 소개 + 신청 경로 웹페이지', output:'랜딩 페이지 초안' },
+  { lane:'JeHyeong', s:[4,21], e:[4,27], label:'SEO 최적화',            desc:'Academy 키워드 SEO, 네이버 노출', output:'SEO 적용' },
+  { lane:'JeHyeong', s:[5,6],  e:[5,12], label:'레퍼런스 페이지',       desc:'5/5 결과 + 사진/영상 웹 반영', output:'레퍼런스 페이지 라이브' },
+  { lane:'JeHyeong', s:[5,13], e:[5,18], label:'치과 파일럿 랜딩',      desc:'Track 2 전문직 대상 랜딩 페이지', output:'치과용 랜딩' },
+];
+
+// Week definitions
+const WEEKS = [
+  { label: 'W1: 정보수집 + 설계', cls: 'w1', start: [4,8], end: [4,13] },
+  { label: 'W2: Tech MVP + 치과 Prep', cls: 'w2', start: [4,14], end: [4,20] },
+  { label: 'W3: 테스트 + 리허설', cls: 'w3', start: [4,21], end: [4,27] },
+  { label: 'W4: 최종 준비', cls: 'w4', start: [4,28], end: [5,4] },
+  { label: '★ D-Day', cls: 'w5', start: [5,5], end: [5,5] },
+  { label: 'Post: 후속 조치', cls: 'w6', start: [5,6], end: [5,20] },
+];
+
+// ── Render ──
+const ddayDate = new Date(2026, 4, 5);
+const daysLeft = Math.ceil((ddayDate - TODAY) / 86400000);
+document.getElementById('dday-count').textContent = daysLeft;
+
+// Role panel
+const rpEl = document.getElementById('role-panel');
+MEMBERS.forEach(m => {
+  const c = COLORS[m.id];
+  rpEl.innerHTML += `
+    <div class="role-card">
+      <div class="name"><span class="dot" style="background:${c.border}"></span>${m.name}</div>
+      <div class="role-now">5/5: ${m.roleNow}</div>
+      <div class="role-future">${m.roleFuture}</div>
+    </div>`;
+});
+
+// Week header
+const whEl = document.getElementById('week-header');
+WEEKS.forEach(w => {
+  const si = dayIndex(...w.start), ei = dayIndex(...w.end);
+  const span = ei - si + 1;
+  const pct = (span / TOTAL_DAYS * 100);
+  whEl.innerHTML += `<div class="week-cell ${w.cls}" style="flex:0 0 ${pct}%">${w.label}</div>`;
+});
+
+// Date header
+const dhEl = document.getElementById('date-header');
+for (let i = 0; i < TOTAL_DAYS; i++) {
+  const dt = new Date(START.getTime() + i * 86400000);
+  const m = dt.getMonth() + 1, d = dt.getDate();
+  const dow = dt.getDay();
+  let cls = '';
+  if (dow === 0 || dow === 6) cls = 'weekend';
+  if (i === 0) cls += ' today';
+  if (m === 4 && d === 20) cls += ' milestone';
+  if (m === 5 && d === 5) cls += ' milestone';
+  dhEl.innerHTML += `<div class="date-cell ${cls}">${m}/${d}</div>`;
+}
+
+// Lane labels
+const llEl = document.getElementById('lane-labels-body');
+LANES.forEach(id => {
+  const c = COLORS[id];
+  llEl.innerHTML += `<div class="lane-label"><span class="dot" style="background:${c.border}"></span>${id}</div>`;
+});
+
+// Lanes body
+const lbEl = document.getElementById('lanes-body');
+const cellW = 100 / TOTAL_DAYS;
+
+// Add milestone lines
+const dentalIdx = dayIndex(4, 20);
+const ddayIdx = dayIndex(5, 5);
+const todayIdx = 0;
+
+lbEl.innerHTML += `<div class="today-line" style="left:${(todayIdx + 0.5) * cellW}%"></div>`;
+lbEl.innerHTML += `<div class="milestone-line dental" style="left:${(dentalIdx + 0.5) * cellW}%"></div>`;
+lbEl.innerHTML += `<div class="milestone-line dday" style="left:${(ddayIdx + 0.5) * cellW}%"></div>`;
+
+LANES.forEach((id, li) => {
+  const row = document.createElement('div');
+  row.className = 'lane-row';
+  row.style.position = 'relative';
+
+  const laneTasks = TASKS.filter(t => t.lane === id);
+  laneTasks.forEach(t => {
+    const si = dayIndex(...t.s);
+    const ei = dayIndex(...t.e);
+    const left = si * cellW;
+    const width = (ei - si + 1) * cellW;
+    const c = COLORS[id];
+    const bar = document.createElement('div');
+    bar.className = 'task';
+    bar.style.left = left + '%';
+    bar.style.width = Math.max(width, cellW) + '%';
+    bar.style.background = c.bg;
+    bar.style.border = `1.5px solid ${c.border}`;
+    bar.style.color = c.text;
+    bar.textContent = t.label;
+    bar.dataset.title = t.label;
+    bar.dataset.date = `${t.s[0]}/${t.s[1]}` + (t.s[0]!==t.e[0]||t.s[1]!==t.e[1] ? ` → ${t.e[0]}/${t.e[1]}` : '');
+    bar.dataset.desc = t.desc;
+    bar.dataset.output = t.output;
+    row.appendChild(bar);
+  });
+
+  lbEl.appendChild(row);
+});
+
+// Tooltip
+const tooltip = document.getElementById('tooltip');
+document.querySelectorAll('.task').forEach(el => {
+  el.addEventListener('mouseenter', e => {
+    tooltip.querySelector('.tt-title').textContent = el.dataset.title;
+    tooltip.querySelector('.tt-date').textContent = el.dataset.date;
+    tooltip.querySelector('.tt-desc').textContent = el.dataset.desc;
+    tooltip.querySelector('.tt-output').textContent = el.dataset.output ? '📦 ' + el.dataset.output : '';
+    tooltip.style.display = 'block';
+  });
+  el.addEventListener('mousemove', e => {
+    let x = e.clientX + 12;
+    let y = e.clientY + 12;
+    if (x + 320 > window.innerWidth) x = e.clientX - 330;
+    if (y + 150 > window.innerHeight) y = e.clientY - 150;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  });
+  el.addEventListener('mouseleave', () => {
+    tooltip.style.display = 'none';
+  });
+});
+</script>
+</body>
+</html>
