@@ -1,0 +1,16 @@
+# research post-execution checkpoints
+skill: research
+checks:
+  - name: competitors_dir_exists
+    type: file_exists
+    glob: "knowledge/competitors/*.md"
+    min_count: 1
+
+  - name: config_exists
+    type: file_exists
+    glob: ".claude/skills/config/config/config.yaml"
+
+  - name: index_has_competitors
+    type: index_field
+    field: competitors
+    min_count: 1

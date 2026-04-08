@@ -1,0 +1,1 @@
+Generate an AIT diagnostic escalation flow diagram for HKMC showing L0 through L4 tiers with AI intervention points. Include before/after comparison columns showing manual vs AI-assisted escalation paths.

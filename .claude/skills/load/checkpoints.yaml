@@ -1,0 +1,15 @@
+# load post-execution checkpoints
+skill: load
+checks:
+  - name: health_check_passes
+    type: script_exits_ok
+    command: "python3 .claude/skills/load/scripts/health_check.py"
+    timeout: 10
+
+  - name: index_exists
+    type: file_exists
+    glob: "knowledge/ontology-index.yaml"
+
+  - name: config_exists
+    type: file_exists
+    glob: ".claude/skills/config/config/config.yaml"

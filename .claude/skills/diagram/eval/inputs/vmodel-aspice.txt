@@ -1,0 +1,1 @@
+Draw an ASPICE V-Model diagram with AI traceability for HKMC CCU2 development. Show SWE.1 through SWE.6 on the left descending side, corresponding verification levels on the right, and brown dashed traceability lines connecting specification to verification pairs.

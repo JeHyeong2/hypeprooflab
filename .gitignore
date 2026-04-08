@@ -101,6 +101,7 @@ env/
 *-secret-key.*
 *.secret.*
 .env.*
+!.env.example
 *_token=*
 # Python Cache & Bytecode
 *.pyd
