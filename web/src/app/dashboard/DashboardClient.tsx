@@ -82,7 +82,7 @@ function DetailPanel({ title, desc, owner }: { title: string; desc: string; owne
   if (!title) {
     return (
       <div className="text-[#8b949e] text-sm text-center py-8">
-        &larr; \uD56D\uBAA9\uC744 \uD074\uB9AD\uD558\uBA74<br />\uC0C1\uC138 \uC124\uBA85\uC774 \uC5EC\uAE30\uC5D0 \uD45C\uC2DC\uB429\uB2C8\uB2E4
+  {'← 항목을 클릭하면'}<br />{'상세 설명이 여기에 표시됩니다'}
       </div>
     );
   }
@@ -90,45 +90,72 @@ function DetailPanel({ title, desc, owner }: { title: string; desc: string; owne
     <div>
       <h3 className="text-[0.95rem] font-semibold mb-1">{title}</h3>
       <div className="text-sm leading-relaxed mb-2" dangerouslySetInnerHTML={{ __html: desc }} />
-      {owner && <div className="text-[#8b949e] text-[0.72rem] mt-2">\uB2F4\uB2F9: {owner}</div>}
+      {owner && <div className="text-[#8b949e] text-[0.72rem] mt-2">{'담당: '}{owner}</div>}
     </div>
   );
 }
 
 // ── Tab 1: Roadmap ──
+function RoadmapTable({ items, color }: { items: { id: string; title: string; desc: string; owner: string; deadline: string; status: 'done' | 'progress' | 'wait' }[]; color: string }) {
+  return (
+    <table className="w-full text-[0.78rem] border-collapse">
+      <thead>
+        <tr className="text-left text-[#8b949e] text-[0.7rem] border-b border-[#30363d]">
+          <th className="py-1.5 px-2 w-[40px]"></th>
+          <th className="py-1.5 px-2">항목</th>
+          <th className="py-1.5 px-2 hidden md:table-cell">설명</th>
+          <th className="py-1.5 px-2 w-[120px]">담당</th>
+          <th className="py-1.5 px-2 w-[90px]">기한</th>
+        </tr>
+      </thead>
+      <tbody>
+        {items.map(item => (
+          <tr key={item.id} className="border-b border-[#21262d] hover:bg-[rgba(255,255,255,0.03)] transition-colors">
+            <td className="py-2 px-2"><Badge status={item.status} /></td>
+            <td className="py-2 px-2 font-medium">{item.id} {item.title}</td>
+            <td className="py-2 px-2 text-[#8b949e] hidden md:table-cell">{item.desc}</td>
+            <td className="py-2 px-2 text-[#8b949e]">{item.owner}</td>
+            <td className="py-2 px-2 text-[#8b949e]">{item.deadline}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
 function TabRoadmap({ onDetail }: { onDetail: (t: string, d: string, o: string) => void }) {
   const shortItems = [
-    { title: 'S-1 멤버 의사 확인', desc: '3/23 Weekly 미팅에서 전원 관점 공유 완료. 교육이 본질이라는 방향성 합의.', owner: 'Jay | 3/23 완료', status: 'done' as const, color: '#1f6feb' },
-    { title: 'S-2 동아일보 임직원 교육', desc: '사업계획서 제출 완료. 동아일보 첫 파일럿 일정 확정 대기 중.', owner: 'Jay | 4월 중순', status: 'progress' as const, color: '#1f6feb' },
-    { title: 'S-3 무료 파일럿 1-2회', desc: '후기, 영상, NPS 데이터 확보를 위한 무료 파일럿 실행.', owner: 'Team | 4-5월', status: 'wait' as const, color: '#1f6feb' },
-    { title: 'S-4 기술 준비', desc: 'AI 환경 설정, 데모 게임 준비, 테스트 완료.', owner: 'Jay + JY | 파일럿 2주 전', status: 'wait' as const, color: '#1f6feb' },
-    { title: 'S-5 웹 SEO + 디자인 리뉴얼', desc: '트래픽 개선, 네이버 노출. JeHyeong에게 웹 전권 위임.', owner: 'JeHyeong | 4-5월', status: 'progress' as const, color: '#1f6feb' },
-    { title: 'S-6 콘텐츠 파이프라인 유지', desc: '리서치/칼럼 자동 발행 유지. 8 에이전트 headless 운영.', owner: 'Mother | Ongoing', status: 'progress' as const, color: '#1f6feb' },
-    { title: 'S-7 개인 채널 홍보 시작', desc: 'LinkedIn, Reddit 등 개인 브랜딩.', owner: '각자 | 4월~', status: 'wait' as const, color: '#1f6feb' },
-    { title: 'S-8 멀티 개발자 온보딩', desc: 'ROLES.md, CONTRIBUTING.md, .env.example, SKILLS.md, 스킬 27개, work specs 2건.', owner: 'Jay | 4/8 완료', status: 'done' as const, color: '#1f6feb' },
-    { title: 'S-9 CI/CD 파이프라인', desc: 'GitHub Actions 빌드 체크 + branch protection. Work Spec #001.', owner: 'JeHyeong | 4/18', status: 'wait' as const, color: '#1f6feb' },
-    { title: 'S-10 크리에이터 셀프서비스 발행', desc: '가이드 + 템플릿 + 제출 플로우. Work Spec #002.', owner: 'JeHyeong | 4/25', status: 'wait' as const, color: '#1f6feb' },
-    { title: 'S-11 Cron 파이프라인 복구', desc: 'run-job.sh 버그 수정 완료. Discord 자동 감지 미구현.', owner: 'Jay | 4/10', status: 'progress' as const, color: '#1f6feb' },
+    { id: 'S-1', title: '멤버 의사 확인', desc: '3/23 미팅 전원 관점 공유 완료. 교육이 본질.', owner: 'Jay', deadline: '3/23 완료', status: 'done' as const },
+    { id: 'S-2', title: '동아일보 임직원 교육', desc: '사업계획서 제출 완료. 일정 확정 대기.', owner: 'Jay', deadline: '4월 중순', status: 'progress' as const },
+    { id: 'S-3', title: '무료 파일럿 1-2회', desc: '후기, 영상, NPS 데이터 확보.', owner: 'Team', deadline: '4-5월', status: 'wait' as const },
+    { id: 'S-4', title: '기술 준비', desc: 'AI 환경, 데모 게임, 테스트.', owner: 'Jay + JY', deadline: '파일럿 2주 전', status: 'wait' as const },
+    { id: 'S-5', title: '웹 SEO + 디자인 리뉴얼', desc: '트래픽 개선, 네이버 노출. JeHyeong 전권.', owner: 'JeHyeong', deadline: '4-5월', status: 'progress' as const },
+    { id: 'S-6', title: '콘텐츠 파이프라인 유지', desc: '리서치/칼럼 자동 발행. 8 에이전트 운영.', owner: 'Mother', deadline: 'Ongoing', status: 'progress' as const },
+    { id: 'S-7', title: '개인 채널 홍보', desc: 'LinkedIn, Reddit 개인 브랜딩.', owner: '각자', deadline: '4월~', status: 'wait' as const },
+    { id: 'S-8', title: '멀티 개발자 온보딩', desc: 'ROLES, CONTRIBUTING, 스킬 27개, work specs.', owner: 'Jay', deadline: '4/8 완료', status: 'done' as const },
+    { id: 'S-9', title: 'CI/CD 파이프라인', desc: 'GitHub Actions + branch protection.', owner: 'JeHyeong', deadline: '4/18', status: 'wait' as const },
+    { id: 'S-10', title: '크리에이터 셀프서비스', desc: '발행 가이드 + 템플릿 + 제출 플로우.', owner: 'JeHyeong', deadline: '4/25', status: 'wait' as const },
+    { id: 'S-11', title: 'Cron 파이프라인 복구', desc: 'run-job.sh 수정 완료. Discord 감지 미구현.', owner: 'Jay', deadline: '4/10', status: 'progress' as const },
   ];
   const midItems = [
-    { title: 'M-1 유료 과정 전환', desc: '파일럿 NPS/후기 기반 수강료 도입', owner: 'Jay' },
-    { title: 'M-2 정기 과정화 (투 트랙)', desc: 'Track 1: Kids/학부모, Track 2: 전문직 성인', owner: 'Team' },
-    { title: 'M-3 멤버 → 운영진 전환', desc: '참여 멤버에게 강사비/조교비 지급 시작', owner: 'Jay' },
-    { title: 'M-4 기업 AX 워크숍', desc: 'B2B 과정 — 리더가 직접 프로토타입 만드는 워크숍', owner: 'Team' },
-    { title: 'M-5 9월 부산 AI 축제', desc: '성공 사례 창출, 외부 노출 마일스톤', owner: 'Team' },
-    { title: 'M-6 커뮤니티 점진적 개방', desc: '코어 멤버 → 선별 초대 → 진입장벽 설계', owner: 'Kiwon' },
-    { title: 'M-7 Jay → Platform Architect', desc: '운영은 멤버, Jay는 시스템 설계와 전략에 집중', owner: 'Jay' },
-    { title: 'M-8 콘텐츠 자동 운영', desc: 'Mother가 리서치/칼럼 자동 발행, 사람 개입 최소화', owner: 'Mother' },
-    { title: 'M-9 Mother Mirror Loop', desc: '멤버 산출물 분석 → 패턴 발견 → 성찰 유도', owner: 'Mother' },
+    { id: 'M-1', title: '유료 과정 전환', desc: '파일럿 NPS/후기 기반 수강료 도입.', owner: 'Jay', deadline: 'Q3', status: 'wait' as const },
+    { id: 'M-2', title: '정기 과정화 (투 트랙)', desc: 'Track 1: Kids, Track 2: 전문직 성인.', owner: 'Team', deadline: 'Q3', status: 'wait' as const },
+    { id: 'M-3', title: '멤버 → 운영진 전환', desc: '강사비/조교비 지급 시작.', owner: 'Jay', deadline: 'Q3', status: 'wait' as const },
+    { id: 'M-4', title: '기업 AX 워크숍', desc: '리더가 직접 프로토타입 만드는 B2B 과정.', owner: 'Team', deadline: 'Q3-Q4', status: 'wait' as const },
+    { id: 'M-5', title: '9월 부산 AI 축제', desc: '성공 사례 창출, 외부 노출.', owner: 'Team', deadline: '9월', status: 'wait' as const },
+    { id: 'M-6', title: '커뮤니티 점진적 개방', desc: '코어 → 선별 초대 → 진입장벽 설계.', owner: 'Kiwon', deadline: 'Q3-Q4', status: 'wait' as const },
+    { id: 'M-7', title: 'Jay → Platform Architect', desc: '운영은 멤버, Jay는 시스템 설계/전략.', owner: 'Jay', deadline: 'Q4', status: 'wait' as const },
+    { id: 'M-8', title: '콘텐츠 자동 운영', desc: 'Mother 리서치/칼럼 자동 발행.', owner: 'Mother', deadline: 'Q3', status: 'wait' as const },
+    { id: 'M-9', title: 'Mother Mirror Loop', desc: '멤버 산출물 분석 → 패턴 → 성찰.', owner: 'Mother', deadline: 'Q4', status: 'wait' as const },
   ];
   const longItems = [
-    { title: 'L-1 외부 강사 양성', desc: 'Academy 수료자 중 강사 후보 발굴' },
-    { title: 'L-2 기업 CSR 확장', desc: '동아일보 DBR에듀 네트워크 활용 B2B' },
-    { title: 'L-3 학교 제휴', desc: '정규 교육 과정 편입' },
-    { title: 'L-4 해커톤/창작대회', desc: '커뮤니티 성장 엔진' },
-    { title: 'L-5 수익 분배 구조', desc: '기여도 기반 지분/배당' },
-    { title: 'L-6 콘텐츠 IP 확장', desc: 'SIMULACRA 웹툰/영상, 칼럼 구독 모델' },
-    { title: 'L-7 에이전트 인프라 판매', desc: '파이프라인 SaaS화 또는 컨설팅' },
+    { id: 'L-1', title: '외부 강사 양성', desc: 'Academy 수료자 중 강사 후보.', owner: 'Team', deadline: '2027', status: 'wait' as const },
+    { id: 'L-2', title: '기업 CSR 확장', desc: '동아일보 DBR에듀 B2B.', owner: 'Team', deadline: '2027', status: 'wait' as const },
+    { id: 'L-3', title: '학교 제휴', desc: '정규 교육 과정 편입.', owner: 'Team', deadline: '2027', status: 'wait' as const },
+    { id: 'L-4', title: '해커톤/창작대회', desc: '커뮤니티 성장 엔진.', owner: 'Team', deadline: '2027', status: 'wait' as const },
+    { id: 'L-5', title: '수익 분배 구조', desc: '기여도 기반 지분/배당.', owner: 'Team', deadline: '2027', status: 'wait' as const },
+    { id: 'L-6', title: '콘텐츠 IP 확장', desc: 'SIMULACRA 웹툰, 칼럼 구독.', owner: 'Team', deadline: '2027', status: 'wait' as const },
+    { id: 'L-7', title: '에이전트 인프라 판매', desc: '파이프라인 SaaS/컨설팅.', owner: 'Team', deadline: '2027', status: 'wait' as const },
   ];
 
   return (
@@ -137,38 +164,21 @@ function TabRoadmap({ onDetail }: { onDetail: (t: string, d: string, o: string) 
         <h2 className="text-[0.9rem] font-semibold mb-2 flex items-center gap-1.5">
           <span style={{ color: '#1f6feb' }}>&#9632;</span> {'단기 (Q2 2026) — 파일럿 실행 + 증거 확보'}
         </h2>
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-2">
-          {shortItems.map(item => (
-            <div key={item.title} className="bg-[#161b22] border border-[#30363d] rounded-lg px-3 py-2 cursor-pointer relative transition-all hover:border-[#58a6ff] hover:-translate-y-0.5"
-              onClick={() => onDetail(item.title, item.desc, item.owner)}>
-              <div className="absolute left-0 top-0 bottom-0 w-[3px] rounded-l-lg" style={{ background: item.color }} />
-              <div className="text-[0.8rem] font-semibold leading-snug"><Badge status={item.status} /> {item.title}</div>
-              <div className="text-[#8b949e] text-[0.68rem] mt-0.5">{item.owner}</div>
-            </div>
-          ))}
-        </div>
+        <RoadmapTable items={shortItems} color="#1f6feb" />
       </SectionBox>
 
       <SectionBox className="bg-[rgba(241,196,15,0.08)] border border-[rgba(241,196,15,0.25)]">
         <h2 className="text-[0.9rem] font-semibold mb-2 flex items-center gap-1.5">
           <span style={{ color: '#f1c40f' }}>&#9632;</span> {'중기 (Q3-Q4 2026) — 유료 전환 + 수익 발생'}
         </h2>
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-2">
-          {midItems.map(item => (
-            <Card key={item.title} title={item.title} sub={item.owner} barColor="#f1c40f" desc={item.desc} owner={item.owner} onClick={onDetail} />
-          ))}
-        </div>
+        <RoadmapTable items={midItems} color="#f1c40f" />
       </SectionBox>
 
       <SectionBox className="bg-[rgba(39,174,96,0.08)] border border-[rgba(39,174,96,0.25)]">
         <h2 className="text-[0.9rem] font-semibold mb-2 flex items-center gap-1.5">
           <span style={{ color: '#27ae60' }}>&#9632;</span> {'장기 (2027) — 커뮤니티/길드 플랫폼'}
         </h2>
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-2">
-          {longItems.map(item => (
-            <Card key={item.title} title={item.title} barColor="#27ae60" desc={item.desc} owner="" onClick={onDetail} />
-          ))}
-        </div>
+        <RoadmapTable items={longItems} color="#27ae60" />
       </SectionBox>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
@@ -193,19 +203,29 @@ function TabRoadmap({ onDetail }: { onDetail: (t: string, d: string, o: string) 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
         <div>
           <h3 className="text-[0.82rem] font-semibold mb-2 flex items-center gap-1"><span className="text-[#27ae60] font-bold">&#10003;</span> {'확정 사항'}</h3>
-          {['멤버 의사 확인 (3/23 미팅)', '방향성: 교육이 본질', '커뮤니티: 초기 폐쇄 → 점진 개방', 'JeHyeong 웹 리드 위임', '4-layer 역할 구조 확정', 'Jay: Platform Architect & PM', 'AI Editorial Director 정의', 'KO/EN 항상 필수', 'Cron 버그 수정 완료'].map(d => (
-            <div key={d} className="bg-[#161b22] border border-[#30363d] rounded-md px-2 py-1.5 text-[0.75rem] mb-1 flex items-center gap-1.5">
-              <span className="text-[#27ae60] font-bold">&#10003;</span> {d}
-            </div>
-          ))}
+          <table className="w-full text-[0.75rem]">
+            <tbody>
+              {['멤버 의사 확인 (3/23 미팅)', '방향성: 교육이 본질', '커뮤니티: 초기 폐쇄 → 점진 개방', 'JeHyeong 웹 리드 위임', '4-layer 역할 구조 확정', 'Jay: Platform Architect & PM', 'AI Editorial Director 정의', 'KO/EN 항상 필수', 'Cron 버그 수정 완료'].map(d => (
+                <tr key={d} className="border-b border-[#21262d]">
+                  <td className="py-1 px-2 w-5 text-[#27ae60]">&#10003;</td>
+                  <td className="py-1 px-2">{d}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
         <div>
           <h3 className="text-[0.82rem] font-semibold mb-2 flex items-center gap-1"><span className="text-[#e8734a] font-bold">?</span> {'미결정 사항'}</h3>
-          {['법인 구조', '멤버 법적 지위', '수익 배분 기준', '첫 유료 과정 형태', 'Discord 자동 감지 복구', 'Vercel 배포 권한', '역할 계층 확장 (Kiwon+TJ)'].map(d => (
-            <div key={d} className="bg-[#161b22] border border-[#30363d] rounded-md px-2 py-1.5 text-[0.75rem] mb-1 flex items-center gap-1.5">
-              <span className="text-[#e8734a] font-bold">?</span> {d}
-            </div>
-          ))}
+          <table className="w-full text-[0.75rem]">
+            <tbody>
+              {['법인 구조', '멤버 법적 지위', '수익 배분 기준', '첫 유료 과정 형태', 'Discord 자동 감지 복구', 'Vercel 배포 권한', '역할 계층 확장 (Kiwon+TJ)'].map(d => (
+                <tr key={d} className="border-b border-[#21262d]">
+                  <td className="py-1 px-2 w-5 text-[#e8734a]">?</td>
+                  <td className="py-1 px-2">{d}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
