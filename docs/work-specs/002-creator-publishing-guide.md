@@ -48,7 +48,7 @@ readTime: "8분"                            # 필수
 excerpt: "한 줄 요약"                       # 필수
 creatorImage: "/members/<name>.png"        # 필수 — 본인 이미지 경로
 lang: "ko"                                 # 필수 — "ko" 또는 "en"
-authorType: "human"                        # 필수 — "human" (직접 작성) 또는 "ai" (AI 도움)
+authorType: "human"                        # 필수 — "human" (직접 작성) 또는 "ai" (AI 보조). "creator"는 레거시, 사용 금지
 ---
 ```
 
@@ -56,22 +56,34 @@ authorType: "human"                        # 필수 — "human" (직접 작성) 
 
 #### 1.3 카테고리 정의
 
-| Category | 설명 | 예시 |
-|----------|------|------|
-| Column | 전문 분야 관점의 분석/의견 | AI 에이전트 자율성의 역설 |
-| Opinion | 개인 시각의 에세이 | 회장님의 시대가 열리다 |
-| Tutorial | 단계별 실습 가이드 | OpenClaw로 AI 비서 만들기 |
-| Research | 데이터 기반 분석 | LLM 벤치마크 비교 |
-| Essay | 자유 형식 글 | AI 시대의 인간 질문 |
+> Source of truth: `.claude/skills/content-standards/SKILL.md`
+
+| Category | 설명 |
+|----------|------|
+| `Opinion` | 개인 시각, 에디토리얼 |
+| `Column` | 일반 칼럼 형식 |
+| `Analysis` | 데이터 기반 분석 |
+| `Research` | 리서치 요약/딥다이브 |
+| `AI Engineering` | AI/ML 기술 구현 |
+| `AI × Society` | AI의 사회적 영향 |
+| `AI × Science` | 과학 분야 AI 적용 |
+| `AI × Philosophy` | AI와 철학적 질문 |
+| `AI × Psychology` | AI와 인지/행동 |
+| `AI × Finance` | AI와 금융/경제 |
+| `Tutorial` | 단계별 실습 가이드 |
+| `Use Case` | 실제 적용 사례 |
+
+새 도메인은 `AI × {Domain}` 패턴으로 추가 가능.
 
 #### 1.4 이미지
 - 본문 이미지: `web/public/` 하위에 저장, 마크다운에서 `/images/my-image.png`로 참조
 - 크리에이터 이미지: `web/public/members/<name>.png` — 없으면 JeHyeong에게 요청
 
 #### 1.5 KO/EN 쌍 규칙
+- **KO + EN 둘 다 필수**
 - 한국어 먼저 작성, 영어는 번역이 아니라 재작성
 - 같은 slug 사용: `ko/my-column.md` + `en/my-column.md`
-- 영어 버전은 선택 사항
+- `lang` 필드는 디렉토리와 일치: `ko/` → `lang: "ko"`, `en/` → `lang: "en"`
 
 ### 2. Submission Flow
 
@@ -79,7 +91,7 @@ authorType: "human"                        # 필수 — "human" (직접 작성) 
 1. 크리에이터가 마크다운 파일 작성 (위 가이드 따라)
 2. GitHub에서 PR 생성:
    - web/src/content/columns/ko/<slug>.md 추가
-   - (선택) en/<slug>.md 추가
+   - web/src/content/columns/en/<slug>.md 추가 (KO/EN 둘 다 필수)
    - PR 제목: [content] <주제>
 3. CI 자동 빌드 체크 (Work Spec #001)
 4. 리뷰 (JeHyeong 또는 AI Herald)
