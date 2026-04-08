@@ -139,7 +139,7 @@ perl -e "alarm ${TIMEOUT_SEC}; exec @ARGV" -- \
   "$CLAUDE_BIN" -p "$WORKSPACE" \
   --dangerously-skip-permissions \
   --print \
-  ${TOOL_SCOPE} \
+  ${=TOOL_SCOPE} \
   --max-turns "$MAX_TURNS" \
   <<< "$PROMPT_CONTENT" 2>&1 | tee -a "$LOG_FILE"
 EXIT_CODE=${pipestatus[1]}
@@ -152,7 +152,7 @@ if [[ "$EXIT_CODE" -ne 0 ]] && grep -q "ConnectionRefused\|ECONNREFUSED\|Unable 
     "$CLAUDE_BIN" -p "$WORKSPACE" \
     --dangerously-skip-permissions \
     --print \
-    ${TOOL_SCOPE} \
+    ${=TOOL_SCOPE} \
     --max-turns "$MAX_TURNS" \
     <<< "$PROMPT_CONTENT" 2>&1 | tee -a "$LOG_FILE"
   EXIT_CODE=${pipestatus[1]}
