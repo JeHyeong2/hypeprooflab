@@ -20,3 +20,84 @@ github:
 features:
   issue_solver: true
   issue_filer: true
+
+# --- Project metadata -------------------------------------------------------
+project:
+  name: hypeproof
+  domain: hypeproof-ai.xyz
+  key_dirs:
+    - web
+    - cron-prompts
+    - research
+    - novels
+    - education
+    - data
+
+# --- Health check config ----------------------------------------------------
+health_check:
+  required_dirs:
+    - web
+    - cron-prompts
+    - research
+    - novels
+    - data
+    - cron-reports
+  expected_plists:
+    - com.hypeproof.cron.morning-routine
+    - com.hypeproof.cron.evening-routine
+    - com.hypeproof.cron.daily-research
+    - com.hypeproof.cron.issue-solver
+    - com.hypeproof.cron.issue-filer
+    - com.hypeproof.cron.weekly-report
+    - com.hypeproof.cron.weekly-purge
+    - com.hypeproof.cron.column-nudge
+    - com.hypeproof.cron.column-deadline
+    - com.hypeproof.cron.evaluate
+  claude_bin: ~/.local/bin/claude
+
+# --- Cron config -------------------------------------------------------------
+cron:
+  log_dir: cron-reports
+  failure_dir: .claude/failures
+  failure_window_hours: 48
+  jobs:
+    morning-routine:
+      schedule: "daily 08:00"
+      recoverable: true
+      skill: /morning
+    evening-routine:
+      schedule: "daily 22:00"
+      recoverable: true
+      skill: /retro
+    daily-research:
+      schedule: "daily 10:00"
+      recoverable: true
+      skill: /research
+    issue-solver:
+      schedule: "daily 09:00"
+      recoverable: false
+      skill: null
+    issue-filer:
+      schedule: "weekly sun 20:00"
+      recoverable: true
+      skill: null
+    weekly-report:
+      schedule: "weekly sun 21:00"
+      recoverable: true
+      skill: /weekly
+    weekly-purge:
+      schedule: "weekly sat 23:00"
+      recoverable: false
+      skill: null
+    column-nudge:
+      schedule: "daily 14:00"
+      recoverable: false
+      skill: null
+    column-deadline:
+      schedule: "daily 09:00"
+      recoverable: false
+      skill: null
+    evaluate:
+      schedule: "weekly fri 18:00"
+      recoverable: true
+      skill: /evaluate
