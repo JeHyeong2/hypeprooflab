@@ -135,7 +135,7 @@ function TabRoadmap({ onDetail }: { onDetail: (t: string, d: string, o: string) 
     <div>
       <SectionBox className="bg-[rgba(31,111,235,0.08)] border border-[rgba(31,111,235,0.25)]">
         <h2 className="text-[0.9rem] font-semibold mb-2 flex items-center gap-1.5">
-          <span style={{ color: '#1f6feb' }}>&#9632;</span> \uB2E8\uAE30 (Q2 2026) &mdash; \uD30C\uC77C\uB7FF \uC2E4\uD589 + \uC99D\uAC70 \uD655\uBCF4
+          <span style={{ color: '#1f6feb' }}>&#9632;</span> {'단기 (Q2 2026) — 파일럿 실행 + 증거 확보'}
         </h2>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-2">
           {shortItems.map(item => (
@@ -151,7 +151,7 @@ function TabRoadmap({ onDetail }: { onDetail: (t: string, d: string, o: string) 
 
       <SectionBox className="bg-[rgba(241,196,15,0.08)] border border-[rgba(241,196,15,0.25)]">
         <h2 className="text-[0.9rem] font-semibold mb-2 flex items-center gap-1.5">
-          <span style={{ color: '#f1c40f' }}>&#9632;</span> \uC911\uAE30 (Q3-Q4 2026) &mdash; \uC720\uB8CC \uC804\uD658 + \uC218\uC775 \uBC1C\uC0DD
+          <span style={{ color: '#f1c40f' }}>&#9632;</span> {'중기 (Q3-Q4 2026) — 유료 전환 + 수익 발생'}
         </h2>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-2">
           {midItems.map(item => (
@@ -162,7 +162,7 @@ function TabRoadmap({ onDetail }: { onDetail: (t: string, d: string, o: string) 
 
       <SectionBox className="bg-[rgba(39,174,96,0.08)] border border-[rgba(39,174,96,0.25)]">
         <h2 className="text-[0.9rem] font-semibold mb-2 flex items-center gap-1.5">
-          <span style={{ color: '#27ae60' }}>&#9632;</span> \uC7A5\uAE30 (2027) &mdash; \uCEE4\uBBA4\uB2C8\uD2F0/\uAE38\uB4DC \uD50C\uB7AB\uD3FC
+          <span style={{ color: '#27ae60' }}>&#9632;</span> {'장기 (2027) — 커뮤니티/길드 플랫폼'}
         </h2>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-2">
           {longItems.map(item => (
@@ -173,35 +173,35 @@ function TabRoadmap({ onDetail }: { onDetail: (t: string, d: string, o: string) 
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
         <div className="rounded-xl p-3 bg-[rgba(232,115,74,0.1)] border border-[rgba(232,115,74,0.3)]">
-          <h3 className="text-[0.85rem] font-semibold mb-1" style={{ color: '#e8734a' }}>Track 1: Kids/\uD559\uBD80\uBAA8</h3>
+          <h3 className="text-[0.85rem] font-semibold mb-1" style={{ color: '#e8734a' }}>{'Track 1: Kids/학부모'}</h3>
           <div className="text-[0.78rem] leading-relaxed">
-            <strong>\uD0C0\uAC9F:</strong> \uB300\uCE58\uB3D9 \uD559\uC6D0\uAC00<br />
-            <strong>\uC804\uB7B5:</strong> \uB3D9\uC544\uC77C\uBCF4 \uB124\uC784\uBC38\uB958 + \uB9AC\uBDF0 \uCD95\uC801<br />
-            <strong>\uB4DC\uB77C\uC774\uBC84:</strong> \uACF5\uD3EC(FOMO) + \uC2E0\uB8B0(\uB3D9\uC544\uC77C\uBCF4)
+            <strong>{'타겟:'}</strong> {'대치동 학원가'}<br />
+            <strong>{'전략:'}</strong> {'동아일보 네임밸류 + 리뷰 축적'}<br />
+            <strong>{'드라이버:'}</strong> {'공포(FOMO) + 신뢰(동아일보)'}
           </div>
         </div>
         <div className="rounded-xl p-3 bg-[rgba(241,196,15,0.1)] border border-[rgba(241,196,15,0.3)]">
-          <h3 className="text-[0.85rem] font-semibold mb-1" style={{ color: '#f1c40f' }}>Track 2: \uC804\uBB38\uC9C1 \uC131\uC778</h3>
+          <h3 className="text-[0.85rem] font-semibold mb-1" style={{ color: '#f1c40f' }}>{'Track 2: 전문직 성인'}</h3>
           <div className="text-[0.78rem] leading-relaxed">
-            <strong>\uD0C0\uAC9F:</strong> \uCE58\uACFC\uC758\uC0AC, \uBCC0\uD638\uC0AC \uB4F1 \uACE0\uC18C\uB4DD \uC804\uBB38\uC9C1<br />
-            <strong>\uC804\uB7B5:</strong> AI \uC2DC\uB300 \uC704\uAE30\uAC10 \uD65C\uC6A9<br />
-            <strong>\uB4DC\uB77C\uC774\uBC84:</strong> &ldquo;\uB4A4\uCC98\uC9C0\uBA74 \uB3C4\uD0DC&rdquo; \uC704\uAE30\uAC10
+            <strong>{'타겟:'}</strong> {'치과의사, 변호사 등 고소득 전문직'}<br />
+            <strong>{'전략:'}</strong> {'AI 시대 위기감 활용'}<br />
+            <strong>{'드라이버:'}</strong> {'"뒤처지면 도태" 위기감'}
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
         <div>
-          <h3 className="text-[0.82rem] font-semibold mb-2 flex items-center gap-1"><span className="text-[#27ae60] font-bold">&#10003;</span> \uD655\uC815 \uC0AC\uD56D</h3>
-          {['\uBA64\uBC84 \uC758\uC0AC \uD655\uC778 (3/23 \uBBF8\uD305)', '\uBC29\uD5A5\uC131: \uAD50\uC721\uC774 \uBCF8\uC9C8', '\uCEE4\uBBA4\uB2C8\uD2F0: \uCD08\uAE30 \uD3D0\uC1C4 -> \uC810\uC9C4 \uAC1C\uBC29', 'JeHyeong \uC6F9 \uB9AC\uB4DC \uC704\uC784'].map(d => (
+          <h3 className="text-[0.82rem] font-semibold mb-2 flex items-center gap-1"><span className="text-[#27ae60] font-bold">&#10003;</span> {'확정 사항'}</h3>
+          {['멤버 의사 확인 (3/23 미팅)', '방향성: 교육이 본질', '커뮤니티: 초기 폐쇄 → 점진 개방', 'JeHyeong 웹 리드 위임', '4-layer 역할 구조 확정', 'Jay: Platform Architect & PM', 'AI Editorial Director 정의', 'KO/EN 항상 필수', 'Cron 버그 수정 완료'].map(d => (
             <div key={d} className="bg-[#161b22] border border-[#30363d] rounded-md px-2 py-1.5 text-[0.75rem] mb-1 flex items-center gap-1.5">
               <span className="text-[#27ae60] font-bold">&#10003;</span> {d}
             </div>
           ))}
         </div>
         <div>
-          <h3 className="text-[0.82rem] font-semibold mb-2 flex items-center gap-1"><span className="text-[#e8734a] font-bold">?</span> \uBBF8\uACB0\uC815 \uC0AC\uD56D</h3>
-          {['\uBC95\uC778 \uAD6C\uC870', '\uBA64\uBC84 \uBC95\uC801 \uC9C0\uC704', '\uC218\uC775 \uBC30\uBD84 \uAE30\uC900', '\uCCAB \uC720\uB8CC \uACFC\uC815 \uD615\uD0DC'].map(d => (
+          <h3 className="text-[0.82rem] font-semibold mb-2 flex items-center gap-1"><span className="text-[#e8734a] font-bold">?</span> {'미결정 사항'}</h3>
+          {['법인 구조', '멤버 법적 지위', '수익 배분 기준', '첫 유료 과정 형태', 'Discord 자동 감지 복구', 'Vercel 배포 권한', '역할 계층 확장 (Kiwon+TJ)'].map(d => (
             <div key={d} className="bg-[#161b22] border border-[#30363d] rounded-md px-2 py-1.5 text-[0.75rem] mb-1 flex items-center gap-1.5">
               <span className="text-[#e8734a] font-bold">?</span> {d}
             </div>
