@@ -1,0 +1,29 @@
+# ingest post-execution checkpoints
+skill: ingest
+checks:
+  - name: signals_appended
+    type: file_modified
+    glob: "workspace/signals/{month}.md"
+    within_minutes: 30
+    min_count: 1
+
+  - name: agenda_cards_updated
+    type: file_modified
+    glob: "workspace/agendas/uc-*.md"
+    within_minutes: 30
+    min_count: 1
+
+  - name: signals_file_has_content
+    type: file_min_lines
+    glob: "workspace/signals/{month}.md"
+    min_lines: 5
+
+  - name: index_has_products
+    type: index_field
+    field: products
+    min_count: 1
+
+  - name: index_has_signals
+    type: index_field
+    field: signals_summary.total_count
+    min_value: 1

@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HypeProof Web
 
-## Getting Started
+Next.js 15 website for [HypeProof Lab](https://hypeproof-ai.xyz) — an AI-focused content and research community.
 
-First, run the development server:
+## Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Framework**: Next.js 15 (App Router, Turbopack)
+- **Auth**: NextAuth.js (Google + GitHub OAuth, JWT sessions)
+- **Data**: Notion API (members, personas, points) with JSON fallback
+- **Database**: Supabase (comments, interactions)
+- **Cache**: Upstash Redis (rate limiting, session cache)
+- **Styling**: Tailwind CSS
+- **Deployment**: Vercel CLI (`vercel --prod --yes`)
+
+## Directory Structure
+
+```
+web/
+├── src/
+│   ├── app/                  # App Router pages
+│   │   ├── academy-timeline/ # AI Architect Academy dashboard
+│   │   ├── ai-personas/      # AI persona profiles
+│   │   ├── api/              # API routes
+│   │   ├── auth/             # Auth pages (signin, error)
+│   │   ├── columns/          # Bilingual columns (KO/EN)
+│   │   ├── creators/         # Creator profiles
+│   │   ├── dashboard/        # Member dashboard
+│   │   ├── glossary/         # AI glossary
+│   │   ├── novels/           # SIMULACRA novel series
+│   │   └── research/         # Daily research
+│   ├── components/           # React components
+│   ├── content/              # Markdown content (columns, novels, research)
+│   └── lib/                  # Core libraries
+│       ├── auth.ts           # NextAuth config + role callbacks
+│       ├── members.ts        # Notion → member lookup + JSON fallback
+│       ├── personas.ts       # AI persona data
+│       ├── points.ts         # Contribution points
+│       ├── redis.ts          # Upstash Redis client
+│       ├── supabase.ts       # Supabase client
+│       ├── columns.ts        # Column content loader
+│       ├── novels.ts         # Novel content loader
+│       └── research.ts       # Research content loader
+└── public/                   # Static assets (images, fonts)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Auth & Roles
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Three roles: `admin`, `creator`, `spectator`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. User signs in via Google or GitHub OAuth
+2. `getRoleForEmail()` in `lib/members.ts` looks up email in Notion DB
+3. Falls back to `data/members.json` if Notion is unavailable
+4. Unknown emails default to `spectator` (read-only)
 
-## Learn More
+To add a new member: update `data/members.json` and ask Jay to add them to Notion.
 
-To learn more about Next.js, take a look at the following resources:
+## Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm install
+cp .env.example .env.local   # Fill in credentials (ask Jay)
+npm run dev                   # http://localhost:3000
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+See `.env.example` for all required/optional environment variables.
 
-## Deploy on Vercel
+The app runs without env vars for basic content pages. Auth, comments, and member features require credentials.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Content
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Markdown files in `src/content/` with YAML frontmatter:
+
+- `columns/ko/`, `columns/en/` — bilingual columns
+- `novels/ko/` — SIMULACRA novel chapters
+- `research/` — daily research reports
+
+Content is managed via Claude Code skills (`/write-column`, `/write-novel`, `/research`).
+
+## Build & Deploy
+
+```bash
+npm run build     # Must pass before deploy
+```
+
+Deployment is via Vercel CLI (no git-push deploy):
+
+```bash
+vercel --prod --yes
+```
+
+See `CONTRIBUTING.md` in the project root for the full workflow.

@@ -1,0 +1,42 @@
+skill: diagram
+version: 1
+checks:
+  - id: E1
+    name: output_file_created
+    type: file_exists
+    glob: "jay/reports/*-diagram.html"
+
+  - id: E2
+    name: has_svg_element
+    type: output_contains
+    pattern: "<svg[^>]+viewBox"
+
+  - id: E3
+    name: no_text_overflow
+    type: script_check
+    command: "python3 .claude/skills/diagram-review/scripts/bounds_check.py {output_file}"
+
+  - id: E4
+    name: contrast_passes
+    type: script_check
+    command: "python3 .claude/skills/diagram-review/scripts/contrast_check.py {output_file}"
+
+  - id: E5
+    name: arrow_endpoints_valid
+    type: script_check
+    command: "python3 .claude/skills/diagram-review/scripts/validate_arrows.py {output_file}"
+
+  - id: E6
+    name: vault_alignment
+    type: script_check
+    command: "python3 .claude/skills/diagram-review/scripts/vault_check.py {output_file}"
+
+  - id: E7
+    name: bilingual_labels
+    type: output_contains
+    pattern: "font-size=\"12\"[^>]*>[가-힣]"
+
+inputs:
+  - file: eval/inputs/escalation-flow.txt
+  - file: eval/inputs/vmodel-aspice.txt
+  - file: eval/inputs/data-flow.txt

@@ -84,42 +84,41 @@ case "$PROMPT_NAME" in
     ;;
 esac
 
-# Per-job timeout (seconds)
-set +u
-declare -A JOB_TIMEOUT=(
-  [issue-filer]=300
-  [issue-solver]=600
-  [daily-research]=900
-  [morning-routine]=300
-  [evening-routine]=300
-  [weekly-purge]=600
-  [weekly-report]=600
-  [column-nudge]=300
-  [column-deadline]=300
-  [evaluate]=600
-)
-TIMEOUT_SEC="${JOB_TIMEOUT[$PROMPT_NAME]:-600}"
+# Per-job timeout (seconds) — bash 3.x compatible (no associative arrays)
+case "$PROMPT_NAME" in
+  issue-filer)     TIMEOUT_SEC=300 ;;
+  issue-solver)    TIMEOUT_SEC=600 ;;
+  daily-research)  TIMEOUT_SEC=900 ;;
+  morning-routine) TIMEOUT_SEC=300 ;;
+  evening-routine) TIMEOUT_SEC=300 ;;
+  weekly-purge)    TIMEOUT_SEC=600 ;;
+  weekly-report)   TIMEOUT_SEC=600 ;;
+  column-nudge)    TIMEOUT_SEC=300 ;;
+  column-deadline) TIMEOUT_SEC=300 ;;
+  evaluate)        TIMEOUT_SEC=600 ;;
+  *)               TIMEOUT_SEC=600 ;;
+esac
 
-declare -A JOB_MAX_TURNS=(
-  [issue-filer]=40
-  [issue-solver]=60
-  [daily-research]=25
-  [morning-routine]=15
-  [evening-routine]=10
-  [weekly-purge]=20
-  [weekly-report]=15
-  [column-nudge]=15
-  [column-deadline]=10
-  [evaluate]=25
-)
-MAX_TURNS="${JOB_MAX_TURNS[$PROMPT_NAME]:-30}"
-set -u
+case "$PROMPT_NAME" in
+  issue-filer)     MAX_TURNS=40 ;;
+  issue-solver)    MAX_TURNS=60 ;;
+  daily-research)  MAX_TURNS=25 ;;
+  morning-routine) MAX_TURNS=15 ;;
+  evening-routine) MAX_TURNS=10 ;;
+  weekly-purge)    MAX_TURNS=20 ;;
+  weekly-report)   MAX_TURNS=15 ;;
+  column-nudge)    MAX_TURNS=15 ;;
+  column-deadline) MAX_TURNS=10 ;;
+  evaluate)        MAX_TURNS=25 ;;
+  *)               MAX_TURNS=30 ;;
+esac
 
-# Unset CLAUDE* env vars to prevent nested session detection
+# Unset CLAUDE* env vars to prevent nested session detection (portable bash)
 SAVE_TIMEOUT="${CLAUDE_TIMEOUT:-}"
 SAVE_BUDGET="${CLAUDE_BUDGET_USD:-}"
-unset ${(k)parameters[(R)*CLAUDE*]} 2>/dev/null || true
-unset ${(k)parameters[(R)*OTEL*]} 2>/dev/null || true
+while IFS='=' read -r key _; do
+  case "$key" in CLAUDE*|OTEL*) unset "$key" ;; esac
+done < <(env)
 [[ -n "$SAVE_TIMEOUT" ]] && export CLAUDE_TIMEOUT="$SAVE_TIMEOUT"
 [[ -n "$SAVE_BUDGET" ]] && export CLAUDE_BUDGET_USD="$SAVE_BUDGET"
 

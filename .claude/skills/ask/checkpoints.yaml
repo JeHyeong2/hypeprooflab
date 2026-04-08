@@ -1,0 +1,11 @@
+# ask post-execution checkpoints (read-only skill)
+skill: ask
+checks:
+  - name: index_exists
+    type: file_exists
+    glob: "knowledge/ontology-index.yaml"
+
+  - name: index_has_entities
+    type: index_field
+    field: use_cases
+    min_count: 1

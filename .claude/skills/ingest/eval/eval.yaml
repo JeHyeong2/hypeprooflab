@@ -1,0 +1,54 @@
+skill: ingest
+version: 1
+checks:
+  - id: E1
+    name: signals_file_updated
+    type: file_exists
+    glob: "workspace/signals/*.md"
+  - id: E2
+    name: has_signal_types
+    type: output_contains
+    pattern: "signal_type|feature_request|pain_point"
+  - id: E3
+    name: json_has_signals
+    type: json_field
+    field: "signals"
+    check: "len > 0"
+  - id: E4
+    name: json_has_actions
+    type: json_field
+    field: "actions"
+    check: "is_list"
+  - id: E5
+    name: json_status_ok
+    type: json_field
+    field: "status"
+    expected: "ok"
+  - id: E6
+    name: has_update_markers
+    type: output_contains
+    pattern: "Updated:|New:|Appended"
+  # Demo state extraction checks (when demo-state-extractor runs)
+  - id: DS1
+    name: demo_state_has_topics
+    type: output_contains
+    pattern: "### Topic [0-9]"
+  - id: DS2
+    name: demo_state_has_confidence
+    type: output_contains
+    pattern: "\\[(confirmed|inferred|unknown)"
+  - id: DS3
+    name: demo_state_no_vault_hallucination
+    type: script_check
+    command: "python3 -c \"import re,sys; t=open(sys.argv[1]).read(); s=t[t.rfind('## Demo State'):] if '## Demo State' in t else t[t.rfind('## Summary'):] if '## Summary' in t else t[-3000:]; m=re.findall(r'(Ford case|Nissan Leaf|predictive maintenance|warranty cost|6-step pipeline)',s); sys.exit(1 if m else 0)\" {output_file}"
+  - id: DS4
+    name: demo_state_has_diff
+    type: output_contains
+    pattern: "\\[(NEW CONFIRMATION|UPDATE|RESOLVED)\\]"
+  - id: DS5
+    name: demo_state_blockers_have_owners
+    type: output_contains
+    pattern: "— [A-Z][a-z]+ "
+
+inputs:
+  - file: eval/inputs/sample-meeting-note.md

@@ -1,0 +1,8 @@
+# diagram post-execution checkpoints
+skill: diagram
+checks:
+  - name: output_exists
+    type: file_modified
+    glob: "workspace/reports/*.html"
+    within_minutes: 30
+    min_count: 1

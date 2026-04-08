@@ -1,0 +1,1 @@
+Create an AI Collector edge-to-cloud data flow diagram showing vehicle ECU data collection at the edge, local preprocessing and filtering, cloud upload via OTA channel, and cloud-side analytics pipeline with anomaly detection.
