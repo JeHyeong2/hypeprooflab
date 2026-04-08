@@ -26,26 +26,26 @@ https://hypeproof-ai.xyz/dashboard
 [JeHyeong DM]
 ========================================
 
-재형아, HypeProof 웹 플랫폼 리드로 본격 시작하자.
+재형님, HypeProof 웹 플랫폼 리드 시작하겠습니다.
 
-📌 먼저
-- GitHub 아이디 알려줘 — repo collaborator로 추가해야 push 가능
-- 레포: https://github.com/jayleekr/hypeprooflab (public이라 clone은 바로 됨)
+📌 먼저 부탁드릴 것
+- GitHub 아이디 알려주세요 — repo collaborator로 추가해드려야 push가 됩니다
+- 레포: https://github.com/jayleekr/hypeprooflab (public이라 clone은 바로 가능합니다)
 
-📌 시작하기
+📌 시작 방법
 1. git clone https://github.com/jayleekr/hypeprooflab.git
-2. CONTRIBUTING.md 읽고 로컬 세팅 (cd web && npm install)
-3. 환경변수는 나한테 DM 줘 (AUTH_GOOGLE_ID/SECRET + AUTH_SECRET + NEXTAUTH_URL)
+2. CONTRIBUTING.md 읽고 로컬 세팅해주세요 (cd web && npm install)
+3. 환경변수는 저한테 DM 주세요 (AUTH_GOOGLE_ID/SECRET + AUTH_SECRET + NEXTAUTH_URL 보내드리겠습니다)
 
 📌 작업 명세 3개
-docs/work-specs/ 폴더에 있어:
+docs/work-specs/ 폴더에 넣어뒀습니다:
 - 001: CI/CD 파이프라인 (GitHub Actions + branch protection) — 4/18까지
 - 002: 크리에이터 발행 가이드 + 제출 플로우 — 4/25까지
 - 003: 대시보드 데이터 싱크 + 정리 — 5/2까지
 
-001부터 시작해. 스펙에 목표/배경/요구사항/완료기준 다 적어놨으니 보고 진행하면 돼.
+001부터 시작해주세요. 스펙에 목표/배경/요구사항/완료기준 다 적어뒀으니 보시고 진행하시면 됩니다.
 
-📌 네 역할
+📌 역할
 - 웹 프론트엔드 (UI/UX, 버그, 성능)
 - CI/CD 구축
 - 크리에이터가 글 쓰고 발행할 수 있는 도구/가이드
@@ -57,13 +57,13 @@ docs/work-specs/ 폴더에 있어:
 - ROLES.md — 역할 정의 (4-layer 구조)
 - .claude/SKILLS.md — Claude Code 스킬 카탈로그
 - products/hypeproof-roadmap-2026Q2.md — Q2 로드맵
-- /dashboard → 탭 1에서 네 Work Spec (S-9, S-10) 확인
+- /dashboard → 탭 1에서 Work Spec (S-9, S-10) 확인 가능합니다
 
 📌 기타
-- 너는 admin 권한이야 — GitHub branch protection 등 직접 설정 가능
-- 사진 보내줘 — web/public/members/jehyeong.png 지금 placeholder
+- admin 권한 드렸습니다 — GitHub branch protection 등 직접 설정 가능합니다
+- 프로필 사진 하나 보내주세요 — web/public/members/jehyeong.png 지금 placeholder입니다
 
-궁금한 거 있으면 바로 물어봐.
+궁금한 거 있으시면 편하게 물어봐주세요.
 
 
 ========================================
