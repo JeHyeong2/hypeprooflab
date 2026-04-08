@@ -28,6 +28,10 @@ https://hypeproof-ai.xyz/dashboard
 
 재형아, HypeProof 웹 플랫폼 리드로 본격 시작하자.
 
+📌 먼저
+- GitHub 아이디 알려줘 — repo collaborator로 추가해야 push 가능
+- 레포: https://github.com/jayleekr/hypeprooflab (public이라 clone은 바로 됨)
+
 📌 시작하기
 1. git clone https://github.com/jayleekr/hypeprooflab.git
 2. CONTRIBUTING.md 읽고 로컬 세팅 (cd web && npm install)
