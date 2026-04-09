@@ -13,36 +13,29 @@ PR이 올라오면 자동으로 빌드 체크가 돌고, main 머지 시 Vercel 
 
 ## Background
 
-- 웹: Next.js 15, `web/` 디렉토리
-- 배포: Vercel CLI (`vercel --prod --yes`) — 프로덕션 배포는 수동
-- 현재 CI: 없음. GitHub Actions 미설정
-- Branch protection: 없음
+- 웹: Next.js (App Router), `web/` 디렉토리
+- **CI/CD workflow 이미 생성됨**: `.github/workflows/ci.yml` (Jay 4/9)
+- **GitHub Secrets 설정 완료**: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
+- **빌드 테스트 통과**: workflow_dispatch로 수동 실행, 37초 빌드 성공
+- Branch protection: 아직 미설정 → JeHyeong이 설정
 - 기존 workflow: `.github/workflows/verify-members.yml` (멤버 데이터 검증용, CI와 별개)
 - JeHyeong은 GitHub repo admin 권한 있음
 
 ## Spec
 
-### 1. GitHub Actions workflow
+### 1. GitHub Actions workflow — 이미 생성됨
 
-**파일**: `.github/workflows/ci.yml`
+**파일**: `.github/workflows/ci.yml` (Jay 4/9 생성)
 
-**Trigger**: PR to main, push to main
+**현재 동작**:
+- PR to main (`web/` 변경): build job 실행 (npm ci + npm run build)
+- Push to main (`web/` 변경): build + deploy job 실행 (Vercel 프로덕션 자동 배포)
+- workflow_dispatch: 수동 트리거 가능
 
-**Steps**:
-```
-1. Checkout
-2. Setup Node 20
-3. npm ci (web/)
-4. npm run build (web/)
-5. npm run lint (web/) — ESLint 설정 이미 있음, 포함할 것
-```
-
-**Requirements**:
-- `web/` 디렉토리 변경이 있을 때만 실행 (paths filter)
-- `data/`, `.claude/`, `cron-prompts/` 변경은 빌드 트리거 불필요
-- Build 실패 시 PR에 빨간 체크
-- Build 성공 시 PR에 초록 체크
-- 환경변수가 필요한 빌드 스텝이 있으면 GitHub Secrets에 직접 추가 (admin 권한)
+**JeHyeong 할 일**:
+- lint 스텝 추가 검토 (`npm run lint` — ESLint 설정 있으면 추가)
+- 배포 workflow가 실제 main push에서 정상 동작하는지 검증 (web/ 파일 수정 PR → 머지 → 자동 배포 확인)
+- 문제 있으면 ci.yml 수정
 
 ### 2. Branch protection rule
 

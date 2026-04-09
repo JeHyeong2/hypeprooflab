@@ -37,13 +37,19 @@ https://hypeproof-ai.xyz/dashboard
 2. CONTRIBUTING.md 읽고 로컬 세팅해주세요 (cd web && npm install)
 3. 환경변수는 저한테 DM 주세요 (AUTH_GOOGLE_ID/SECRET + AUTH_SECRET + NEXTAUTH_URL 보내드리겠습니다)
 
+📌 이미 해둔 것
+- CI/CD workflow 생성 완료: .github/workflows/ci.yml
+- GitHub Secrets 설정 완료: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
+- 빌드 테스트 통과 (37초)
+- web/ 변경 + main push 시 자동 빌드 + Vercel 프로덕션 배포됩니다
+
 📌 작업 명세 3개
 docs/work-specs/ 폴더에 넣어뒀습니다:
-- 001: CI/CD 파이프라인 (GitHub Actions + branch protection) — 4/18까지
+- 001: CI/CD 마무리 (branch protection + 자동배포 검증 + lint 추가) — 4/18까지
 - 002: 크리에이터 발행 가이드 + 제출 플로우 — 4/25까지
 - 003: 대시보드 데이터 싱크 + 정리 — 5/2까지
 
-001부터 시작해주세요. 스펙에 목표/배경/요구사항/완료기준 다 적어뒀으니 보시고 진행하시면 됩니다.
+001은 기반이 이미 깔려있으니 스펙 보시고 남은 부분만 진행하시면 됩니다.
 
 📌 역할
 - 웹 프론트엔드 (UI/UX, 버그, 성능)
