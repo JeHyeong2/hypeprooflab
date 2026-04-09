@@ -19,7 +19,7 @@ https://github.com/jayleekr/hypeprooflab/blob/main/docs/okr/collaboration-matrix
 
 4️⃣ Q2 주요 일정
 - 4/18: CI/CD 파이프라인 마무리 (JeHyeong)
-- 4/20: 치과 미팅 오프라인 (Jay) → 밤 10시 온라인 싱크업 (Kiwon + Jay)
+- 4/20: 치과 미팅 오프라인 (Jay) → 밤 10시 HypeProof 정기 싱크업에서 공유
 - 5/5: 동아일보 소아암병동 강의 (Team)
 - 5월: 치과 파일럿 실행
 - 6월: Kids vs 전문직 트랙 비교 리뷰
@@ -195,7 +195,7 @@ Kiwon님, Q2 OKR 확인했습니다.
 Track 2 GTM 리드 + 치과/전문직 유료 파일럿 성사가 핵심입니다.
 
 📌 일정
-- 4/20: 치과 미팅 — Jay 오프라인 진행 후 밤 10시 온라인 싱크업
+- 4/20: 치과 미팅 — Jay 오프라인 진행 후 밤 10시 HypeProof 정기 싱크업에서 공유
 - 4월 말: 유료 파일럿 1건 일정/계약 확정 목표
 - 5월: 치과 파일럿 실행 + 결제 3건+ 목표
 - 6월: Kids vs 전문직 트랙 비교 분석 → 우선 트랙 선정
