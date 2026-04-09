@@ -11,20 +11,20 @@
 - 크리에이터: 콘텐츠 생산에 집중
 
 2️⃣ Q2 개인 OKR 제출 현황
-JY, Ryan, TJ, BH, Kiwon — 제출 완료. 감사합니다.
-JUNGWOO — 미제출. 확인 부탁드립니다.
+전원 제출 완료. 감사합니다.
 전체 OKR은 레포 https://github.com/jayleekr/hypeprooflab/blob/main/docs/okr/2026-Q2-individual.md 에서 확인 가능합니다.
 
 3️⃣ 협업 매트릭스
 ```
-         Jay  JeHyeong  JY  Ryan  TJ  BH  Kiwon
-Jay       ─    spec     ↔    ·    ·   ↔    ↔
-JeHyeong  ·     ─       ·    ·    ·   ·     ·
-JY        ↔    ·        ─    ·    →   ↔     ·
-Ryan      ·    ·        ·    ─    ↔   ·     ↔
-TJ        ·    ·        ·    ↔    ─   ·     ↔
-BH        ↔    ·        ↔    ↔    ·   ─     ·
-Kiwon     ↔    ·        ·    ↔    ↔   ·     ─
+          Jay JeHyeong JY Ryan TJ  BH Kiwon JUNGWOO
+Jay        ─   spec    ↔   ·   ·  ↔   ↔     ·
+JeHyeong   ·    ─      ·   ·   ·   ·   ·     ·
+JY         ↔    ·      ─   ·   →  ↔   ·     ·
+Ryan       ·    ·      ·   ─   ↔   ·   ↔     ·
+TJ         ·    ·      ·   ↔   ─   ·   ↔    →
+BH         ↔    ·      ↔   ↔   ·   ─   ·    →
+Kiwon      ↔    ·      ·   ↔   ↔   ·   ─    ↔
+JUNGWOO    ·    ·      ·   ·   ·   ·   ↔     ─
 
 ↔ 상호 서포트  → 일방 서포트  spec Work Spec 관계
 ```
@@ -220,6 +220,35 @@ Track 2 GTM 리드 + 치과/전문직 유료 파일럿 성사가 핵심입니다
 📌 추가 과제
 역할 계층 확장 설계 (admin/creator/spectator → instructor/member/student 등) — TJ님과 함께 초안 부탁드립니다.
 파일럿 끝나고 유료 전환 전에 필요합니다. (로드맵 미결정 #16)
+
+📌 참고 문서
+- https://github.com/jayleekr/hypeprooflab/blob/main/docs/okr/2026-Q2-individual.md — 전체 OKR
+- https://github.com/jayleekr/hypeprooflab/blob/main/products/hypeproof-roadmap-2026Q2.md — 로드맵
+
+궁금한 거 있으시면 편하게 물어봐주세요.
+
+
+========================================
+[JUNGWOO DM]
+========================================
+
+JUNGWOO님, Q2 OKR 확인했습니다.
+파일럿 강의 진행 + 고객 커뮤니케이션이 핵심입니다.
+
+📌 일정
+- 5/5: 동아일보 소아암병동 강의 (첫 파일럿)
+- 5월: 치과 파일럿 진행 (Kiwon님과 협업)
+- Q2 내: 총 2회+ 파일럿 직접 진행
+
+📌 서포트
+- Kiwon님이 GTM/파일럿 일정 잡아주실 겁니다
+- BH님이 커리큘럼/실습 구조 설계 중입니다 — 연동 필요합니다
+- TJ님이 콘텐츠 구조화 지원해주실 겁니다
+
+📌 산출물
+- 파일럿 진행 기록 2회+
+- 수강생 설문 30명+ (만족도 4.0/5 목표)
+- 강의 진행 매뉴얼 + 운영 체크리스트
 
 📌 참고 문서
 - https://github.com/jayleekr/hypeprooflab/blob/main/docs/okr/2026-Q2-individual.md — 전체 OKR
