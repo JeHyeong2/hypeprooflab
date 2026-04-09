@@ -15,19 +15,7 @@
 전체 OKR은 레포 https://github.com/jayleekr/hypeprooflab/blob/main/docs/okr/2026-Q2-individual.md 에서 확인 가능합니다.
 
 3️⃣ 협업 매트릭스
-```
-          Jay JeHyeong JY Ryan TJ  BH Kiwon JUNGWOO
-Jay        ─   spec    ↔   ·   ·  ↔   ↔     ·
-JeHyeong   ·    ─      ·   ·   ·   ·   ·     ·
-JY         ↔    ·      ─   ·   →  ↔   ·     ·
-Ryan       ·    ·      ·   ─   ↔   ·   ↔     ·
-TJ         ·    ·      ·   ↔   ─   ·   ↔    →
-BH         ↔    ·      ↔   ↔   ·   ─   ·    →
-Kiwon      ↔    ·      ·   ↔   ↔   ·   ─    ↔
-JUNGWOO    ·    ·      ·   ·   ·   ·   ↔     ─
-
-↔ 상호 서포트  → 일방 서포트  spec Work Spec 관계
-```
+https://github.com/jayleekr/hypeprooflab/blob/main/docs/okr/collaboration-matrix.md
 
 4️⃣ Q2 주요 일정
 - 4/18: CI/CD 파이프라인 마무리 (JeHyeong)
