@@ -48,7 +48,12 @@ https://hypeproof-ai.xyz/dashboard
 📌 시작 방법
 1. git clone https://github.com/jayleekr/hypeprooflab.git
 2. https://github.com/jayleekr/hypeprooflab/blob/main/CONTRIBUTING.md 읽고 로컬 세팅해주세요 (cd web && npm install)
-3. 환경변수는 저한테 DM 주세요 (AUTH_GOOGLE_ID/SECRET + AUTH_SECRET + NEXTAUTH_URL 보내드리겠습니다)
+3. 환경변수 — web/.env.local 파일 만들고 아래 내용 넣어주세요:
+```
+AUTH_SECRET=T7T5csB4YQtqwJar/Ss4Uvv4KdCBr/PgoczeTksB+u8=
+AUTH_GOOGLE_ID=629327225405-pr66s0sbh2epqidsku5iu60asmeie288.apps.googleusercontent.com
+AUTH_GOOGLE_SECRET=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
+```
 
 📌 이미 해둔 것
 - CI/CD workflow 생성 완료: https://github.com/jayleekr/hypeprooflab/blob/main/.github/workflows/ci.yml
