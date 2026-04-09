@@ -78,6 +78,7 @@ The Editorial Director is an AI persona — no human makes editorial decisions. 
 | Kiwon (남기원) | Marketing, Psychology | AI social impact, audience perspective |
 | TJ (강태진) | Media, Startup | Content workflows, creator economy |
 | BH (태봉호) | Experimental Physics | Physics/quantum topics |
+| JUNGWOO (정우) | Domain critique | Pilot facilitation, customer-facing |
 
 **Creators do**:
 - Write content using tools JeHyeong builds
