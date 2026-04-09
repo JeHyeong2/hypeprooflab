@@ -72,10 +72,53 @@ Jay/Ryan/JY → BH (프레임/전략/실습 구현)
 
 ---
 
-## 미제출
+## Kiwon (남기원) — Track 2 GTM & 파트너십 리드
 
-| 멤버 | 상태 |
-|------|------|
-| Kiwon | 미제출 |
+**역할**: 치과 원장/전문직 시장 GTM 리드. 잠재 고객 언어로 HypeProof 가치 전달, 파일럿 제안→확정→결제 경로 설계
+**서포트**: Kiwon → Ryan (레퍼런스→대외 제안), Kiwon → TJ (콘텐츠→GTM 전환)
+Jay → Kiwon (상품/가격/라이선스), JUNGWOO → Kiwon (커스터머 페이싱/강의 운영), TJ → Kiwon (YouTube 실행)
+
+**Objective**: Q2 안에 치과/전문직 시장에서 첫 유료 수요를 실제 결제로 만들고, 반복 가능한 초기 GTM 경로 설계
+
+| KR | 내용 | 팀 KR |
+|----|------|-------|
+| KR1 | 치과 커뮤니티/협회에 파일럿 제안 → 유료 파일럿 1건 일정/계약 확정 | KR1 |
+| KR2 | Track 2에서 유료 파일럿 1건 성사 + 결제 3건+ | KR1 |
+| KR3 | Academy/콘텐츠 채널 결제/구독 전환 5건+ + 채널별 전환 데이터 문서화 | KR3 |
+| KR4 | Kids vs 전문직 트랙 유입/전환 비교 → 우선 집중 트랙 선정 근거 문서 | KR3 |
+
+**산출물**: 치과 파일럿 제안서/아웃리치 기록, 계약 증빙, 결제 내역, 채널별 전환 데이터, GTM 리뷰 문서
+
+---
+
+## 주요 일정
+
+| 날짜 | 이벤트 | 담당 | 관련 OKR |
+|------|--------|------|----------|
+| 4/18 | CI/CD 마무리 | JeHyeong | Work Spec #001 |
+| 4/20 | 치과 미팅 | Kiwon + Jay | Kiwon KR1 |
+| 4/25 | 크리에이터 셀프서비스 | JeHyeong | Work Spec #002 |
+| ~4월말 | 치과 파일럿 일정 확정 | Kiwon | Kiwon KR1 |
+| ~4월말 | 동아일보 파일럿 일정 확정 | Jay + Ryan | Ryan KR3, S-2 |
+| 5/2 | 대시보드 데이터 싱크 | JeHyeong | Work Spec #003 |
+| 5/5 전 | 동아일보 강의 준비 | Ryan + BH + JY | Ryan KR1, BH KR1, JY KR1 |
+| 5/5 | 동아일보 소아암병동 강의 | Team | S-2 |
+| 5/5 후 | 동아일보 case study 작성 | Ryan + TJ | Ryan KR2, TJ KR1 |
+| ~5월 | 치과 파일럿 실행 | Kiwon + BH + JY | Kiwon KR2, BH KR1, JY KR1-2 |
+| ~5월 | 치과 레퍼런스 영상 제작 | TJ | TJ KR1 |
+| 6월 | Kids vs 전문직 트랙 비교 | Kiwon | Kiwon KR4 |
+| Q2 말 | 전체 산출물 정리 | 각자 | 전체 |
+
+---
+
+## 상태
+
+| 멤버 | OKR 상태 |
+|------|---------|
+| JY | 제출 완료 |
+| Ryan | 제출 완료 |
+| TJ | 제출 완료 |
+| BH | 제출 완료 |
+| Kiwon | 제출 완료 |
 | JeHyeong | 별도 Work Specs (001-003) |
 | Jay | Platform Architect — 별도 |
