@@ -13,7 +13,7 @@
 2️⃣ Q2 개인 OKR 제출 현황
 JY, Ryan, TJ, BH, Kiwon — 제출 완료. 감사합니다.
 JUNGWOO — 미제출. 확인 부탁드립니다.
-전체 OKR은 레포 docs/okr/2026-Q2-individual.md 에서 확인 가능합니다.
+전체 OKR은 레포 https://github.com/jayleekr/hypeprooflab/blob/main/docs/okr/2026-Q2-individual.md 에서 확인 가능합니다.
 
 3️⃣ 협업 매트릭스
 ```
@@ -59,17 +59,17 @@ https://hypeproof-ai.xyz/dashboard
 
 📌 시작 방법
 1. git clone https://github.com/jayleekr/hypeprooflab.git
-2. CONTRIBUTING.md 읽고 로컬 세팅해주세요 (cd web && npm install)
+2. https://github.com/jayleekr/hypeprooflab/blob/main/CONTRIBUTING.md 읽고 로컬 세팅해주세요 (cd web && npm install)
 3. 환경변수는 저한테 DM 주세요 (AUTH_GOOGLE_ID/SECRET + AUTH_SECRET + NEXTAUTH_URL 보내드리겠습니다)
 
 📌 이미 해둔 것
-- CI/CD workflow 생성 완료: .github/workflows/ci.yml
+- CI/CD workflow 생성 완료: https://github.com/jayleekr/hypeprooflab/blob/main/.github/workflows/ci.yml
 - GitHub Secrets 설정 완료: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
 - 빌드 테스트 통과 (37초)
 - web/ 변경 + main push 시 자동 빌드 + Vercel 프로덕션 배포됩니다
 
 📌 작업 명세 3개
-docs/work-specs/ 폴더에 넣어뒀습니다:
+https://github.com/jayleekr/hypeprooflab/tree/main/docs/work-specs 폴더에 넣어뒀습니다:
 - 001: CI/CD 마무리 (branch protection + 자동배포 검증 + lint 추가) — 4/18까지
 - 002: 크리에이터 발행 가이드 + 제출 플로우 — 4/25까지
 - 003: 대시보드 데이터 싱크 + 정리 — 5/2까지
@@ -84,11 +84,11 @@ docs/work-specs/ 폴더에 넣어뒀습니다:
 - 다른 크리에이터들 서포트
 
 📌 주요 문서 위치
-- CONTRIBUTING.md — 개발 시작 가이드
-- ROLES.md — 역할 정의 (4-layer 구조)
-- .claude/SKILLS.md — Claude Code 스킬 카탈로그
-- products/hypeproof-roadmap-2026Q2.md — Q2 로드맵
-- docs/okr/2026-Q2-individual.md — 멤버별 OKR
+- https://github.com/jayleekr/hypeprooflab/blob/main/CONTRIBUTING.md — 개발 시작 가이드
+- https://github.com/jayleekr/hypeprooflab/blob/main/ROLES.md — 역할 정의 (4-layer 구조)
+- https://github.com/jayleekr/hypeprooflab/blob/main/.claude/SKILLS.md — Claude Code 스킬 카탈로그
+- https://github.com/jayleekr/hypeprooflab/blob/main/products/hypeproof-roadmap-2026Q2.md — Q2 로드맵
+- https://github.com/jayleekr/hypeprooflab/blob/main/docs/okr/2026-Q2-individual.md — 멤버별 OKR
 - /dashboard → 탭 1에서 Work Spec (S-9, S-10) 확인 가능합니다
 
 📌 기타
@@ -116,8 +116,8 @@ JY님, Q2 OKR 확인했습니다.
 - 기술 데모 요소는 TJ님이 콘텐츠화할 예정이니 공유 부탁드립니다
 
 📌 참고 문서
-- docs/okr/2026-Q2-individual.md — 전체 OKR
-- products/hypeproof-roadmap-2026Q2.md — 로드맵
+- https://github.com/jayleekr/hypeprooflab/blob/main/docs/okr/2026-Q2-individual.md — 전체 OKR
+- https://github.com/jayleekr/hypeprooflab/blob/main/products/hypeproof-roadmap-2026Q2.md — 로드맵
 
 궁금한 거 있으시면 편하게 물어봐주세요.
 
@@ -141,9 +141,9 @@ Ryan님, Q2 OKR 확인했습니다.
 - Kiwon님이 후속 제안/GTM 연결해주실 겁니다
 
 📌 참고 문서
-- docs/okr/2026-Q2-individual.md — 전체 OKR
-- products/hypeproof-roadmap-2026Q2.md — 로드맵
-- products/donga-roi/ — 동아일보 사업계획서/MOU
+- https://github.com/jayleekr/hypeprooflab/blob/main/docs/okr/2026-Q2-individual.md — 전체 OKR
+- https://github.com/jayleekr/hypeprooflab/blob/main/products/hypeproof-roadmap-2026Q2.md — 로드맵
+- https://github.com/jayleekr/hypeprooflab/tree/main/products/donga-roi — 동아일보 사업계획서/MOU
 
 궁금한 거 있으시면 편하게 물어봐주세요.
 
@@ -167,8 +167,8 @@ TJ님, Q2 OKR 확인했습니다.
 - JY님이 데모/기술 요소 제공 예정입니다
 
 📌 참고 문서
-- docs/okr/2026-Q2-individual.md — 전체 OKR
-- products/hypeproof-roadmap-2026Q2.md — 로드맵
+- https://github.com/jayleekr/hypeprooflab/blob/main/docs/okr/2026-Q2-individual.md — 전체 OKR
+- https://github.com/jayleekr/hypeprooflab/blob/main/products/hypeproof-roadmap-2026Q2.md — 로드맵
 
 궁금한 거 있으시면 편하게 물어봐주세요.
 
@@ -192,9 +192,9 @@ BH님, Q2 OKR 확인했습니다.
 - JY님이 실습 환경 구현 가능성 확인해주실 겁니다
 
 📌 참고 문서
-- docs/okr/2026-Q2-individual.md — 전체 OKR
-- products/hypeproof-roadmap-2026Q2.md — 로드맵
-- education/ — 교육 커리큘럼 자료
+- https://github.com/jayleekr/hypeprooflab/blob/main/docs/okr/2026-Q2-individual.md — 전체 OKR
+- https://github.com/jayleekr/hypeprooflab/blob/main/products/hypeproof-roadmap-2026Q2.md — 로드맵
+- https://github.com/jayleekr/hypeprooflab/tree/main/education — 교육 커리큘럼 자료
 
 궁금한 거 있으시면 편하게 물어봐주세요.
 
@@ -222,7 +222,7 @@ Track 2 GTM 리드 + 치과/전문직 유료 파일럿 성사가 핵심입니다
 파일럿 끝나고 유료 전환 전에 필요합니다. (로드맵 미결정 #16)
 
 📌 참고 문서
-- docs/okr/2026-Q2-individual.md — 전체 OKR
-- products/hypeproof-roadmap-2026Q2.md — 로드맵
+- https://github.com/jayleekr/hypeprooflab/blob/main/docs/okr/2026-Q2-individual.md — 전체 OKR
+- https://github.com/jayleekr/hypeprooflab/blob/main/products/hypeproof-roadmap-2026Q2.md — 로드맵
 
 궁금한 거 있으시면 편하게 물어봐주세요.
