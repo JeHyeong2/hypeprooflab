@@ -21,10 +21,10 @@ Layer 4: Creators — Content Producers
 | Cron job registration & monitoring | Guide creators on tooling |
 | Partnership management (Donga, Academy) | UI/UX decisions |
 | Write detailed work specs for JeHyeong | Fix web bugs |
-| Deploy approval & execution | Content production |
-| Roadmap & OKR setting | |
+| Roadmap & OKR setting | Content production |
+|  | Deploy (JeHyeong handles) |
 
-**Tools**: Claude Code skills (PM-level), cron-prompts/, agents/, Vercel CLI
+**Tools**: Claude Code skills (PM-level), cron-prompts/, agents/
 
 **Handoff pattern**: Jay writes work specs → JeHyeong implements
 
@@ -58,7 +58,7 @@ The Editorial Director is an AI persona — no human makes editorial decisions. 
 | **Web frontend** | UI/UX, components, pages, styling, performance, mobile |
 | **Creator tools** | Content submission UI, markdown editor, preview |
 | **Back-office** | Dashboard (publish status, contributions, points), member admin |
-| **CI/CD** | GitHub Actions build checks, PR preview automation |
+| **CI/CD & Deploy** | GitHub Actions build checks, PR preview, Vercel production deploy |
 | **Creator support** | Publishing guides, onboarding docs, FAQ, troubleshooting |
 | **Infrastructure** | Supabase/Redis stability, error monitoring |
 
