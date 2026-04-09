@@ -52,12 +52,29 @@ Settings → Branches → main:
 - No direct push to main
 - Admin도 예외 없음 (Include administrators 체크)
 
-### 3. Vercel Git integration
+### 3. Vercel 자동 배포 (GitHub Actions)
 
-Vercel Dashboard → Project → Settings → Git → Connect GitHub repo:
-- PR마다 preview URL 자동 생성
-- **프로덕션 auto-deploy는 끄기** — 프로덕션은 `vercel --prod --yes`로 수동 배포
-- Vercel 계정 접근 필요하면 Jay에게 요청
+main 머지 시 자동으로 Vercel production 배포. Vercel CLI를 GitHub Actions에서 실행.
+
+**GitHub Secrets 설정** (Settings → Secrets → Actions):
+- `VERCEL_TOKEN` — Jay가 https://vercel.com/account/tokens 에서 생성해서 전달
+- `VERCEL_ORG_ID` — `team_CfP9smWEfKRd9byEl6GATl8W`
+- `VERCEL_PROJECT_ID` — `prj_3SAcZNZIweNYNMWtvyGgbNnThLdN`
+
+**배포 workflow** (ci.yml에 포함 또는 별도 deploy.yml):
+```yaml
+- name: Install Vercel CLI
+  run: npm i -g vercel
+- name: Pull Vercel env
+  run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+- name: Build
+  run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+- name: Deploy
+  run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+```
+
+**조건**: `web/` 디렉토리 변경 + main push 시에만 배포
+**Hobby 플랜에서 동작 확인됨** — 추가 비용 없음
 
 ### 4. (Stretch) `.nvmrc` 추가
 
@@ -71,7 +88,8 @@ Vercel Dashboard → Project → Settings → Git → Connect GitHub repo:
 - [ ] main branch에 직접 push 불가
 - [ ] `.github/workflows/ci.yml` 커밋됨
 - [ ] Branch protection rule 활성화됨
-- [ ] (Stretch) Vercel preview URL이 PR에 자동으로 달림
+- [ ] main 머지 시 Vercel 프로덕션 자동 배포됨
+- [ ] GitHub Secrets에 VERCEL_TOKEN/ORG_ID/PROJECT_ID 설정됨
 - [ ] (Stretch) `.nvmrc` 추가됨
 
 ## Reference

@@ -461,7 +461,7 @@ Jay가 빠지면 모든 것이 멈춘다.
 | 12 | 수익 배분 기준 | 역할 가중치 / 시간 투입 / 균등 / 추후 결정 |
 | 13 | 첫 유료 과정 형태 | Track 1 (Kids) / Track 2 (전문직) / 둘 다 |
 | 14 | Discord 자동 감지 복구 | Cron 폴링 vs Bot webhook — 콘텐츠 파이프라인 자동화 전제조건 |
-| 15 | Vercel 배포 권한 | JeHyeong도 배포? Pro 전환 ($40/월) vs Jay만 |
+| ~~15~~ | ~~Vercel 배포 권한~~ | **확정** — JeHyeong이 배포. CI/CD에서 main 머지 시 자동 배포 (Work Spec #001) |
 | 16 | 역할 계층 확장 설계 | 현재 admin/creator/spectator 3개 → instructor/member/student 추가 필요. **Kiwon + TJ** 과제. 타이밍: 파일럿 후 유료 전환 시점 |
 
 ---
