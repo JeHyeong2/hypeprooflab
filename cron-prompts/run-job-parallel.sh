@@ -211,7 +211,6 @@ for i in issues:
         "$local_claude" -p "$wt_path" \
         --dangerously-skip-permissions \
         --print \
-        --allowedTools Read,Glob,Grep,Write,Edit,Bash \
         --max-turns "$turns" \
         <<< "$prompt_content" \
         2>&1 | tee "$REPORT_DIR/cron-issue-${num}-${DATE}.log"

@@ -68,34 +68,6 @@ echo "Start: $(date -Iseconds)" | tee -a "$LOG_FILE"
 echo "---" | tee -a "$LOG_FILE"
 echo "STARTED" | tee -a "$LOG_FILE"
 
-# Per-prompt tool scoping
-case "$PROMPT_NAME" in
-  issue-filer)
-    TOOL_SCOPE="--allowedTools Read,Glob,Grep,Bash"
-    ;;
-  issue-solver)
-    TOOL_SCOPE="--allowedTools Read,Glob,Grep,Write,Edit,Bash,Agent"
-    ;;
-  daily-research)
-    TOOL_SCOPE="--allowedTools Read,Glob,Grep,Write,Edit,Bash,WebFetch,WebSearch,Agent"
-    ;;
-  morning-routine|evening-routine)
-    TOOL_SCOPE="--allowedTools Read,Glob,Grep,Bash"
-    ;;
-  weekly-purge|weekly-report)
-    TOOL_SCOPE="--allowedTools Read,Glob,Grep,Write,Edit,Bash"
-    ;;
-  column-nudge|column-deadline)
-    TOOL_SCOPE="--allowedTools Read,Glob,Grep,Bash"
-    ;;
-  evaluate)
-    TOOL_SCOPE="--allowedTools Read,Write,Glob,Grep,Bash,WebFetch"
-    ;;
-  *)
-    TOOL_SCOPE="--allowedTools Read,Glob,Grep,Write,Edit,Agent"
-    ;;
-esac
-
 # Per-job timeout (seconds) — bash 3.x compatible (no associative arrays)
 case "$PROMPT_NAME" in
   issue-filer)     TIMEOUT_SEC=300 ;;
@@ -156,7 +128,6 @@ while true; do
     "$CLAUDE_BIN" -p "$WORKSPACE" \
     --dangerously-skip-permissions \
     --print \
-    ${=TOOL_SCOPE} \
     --max-turns "$MAX_TURNS" \
     <<< "$PROMPT_CONTENT" 2>&1 | tee -a "$LOG_FILE"
   EXIT_CODE=${pipestatus[1]}
