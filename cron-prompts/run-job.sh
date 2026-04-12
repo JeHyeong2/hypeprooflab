@@ -132,21 +132,14 @@ fi
 echo "Claude: $CLAUDE_BIN ($($CLAUDE_BIN --version 2>/dev/null || echo 'version unknown'))" | tee -a "$LOG_FILE"
 echo "Timeout: ${TIMEOUT_SEC}s | MaxTurns: ${MAX_TURNS}" | tee -a "$LOG_FILE"
 
-# Run Claude Code headless
-set +e
-perl -e "alarm ${TIMEOUT_SEC}; exec @ARGV" -- \
-  "$CLAUDE_BIN" -p "$WORKSPACE" \
-  --dangerously-skip-permissions \
-  --print \
-  ${=TOOL_SCOPE} \
-  --max-turns "$MAX_TURNS" \
-  <<< "$PROMPT_CONTENT" 2>&1 | tee -a "$LOG_FILE"
-EXIT_CODE=${pipestatus[1]}
+# Run Claude Code headless with exponential backoff retry
+RETRY_DELAYS=(30 60 120)
+MAX_ATTEMPTS=$(( ${#RETRY_DELAYS[@]} + 1 ))
+ATTEMPT=1
 
-# Retry once on connection error
-if [[ "$EXIT_CODE" -ne 0 ]] && grep -q "ConnectionRefused\|ECONNREFUSED\|Unable to connect" "$LOG_FILE" 2>/dev/null; then
-  echo "RETRY: Connection error — waiting 60s and retrying..." | tee -a "$LOG_FILE"
-  sleep 60
+set +e
+while true; do
+  echo "ATTEMPT $ATTEMPT/$MAX_ATTEMPTS" | tee -a "$LOG_FILE"
   perl -e "alarm ${TIMEOUT_SEC}; exec @ARGV" -- \
     "$CLAUDE_BIN" -p "$WORKSPACE" \
     --dangerously-skip-permissions \
@@ -155,7 +148,25 @@ if [[ "$EXIT_CODE" -ne 0 ]] && grep -q "ConnectionRefused\|ECONNREFUSED\|Unable 
     --max-turns "$MAX_TURNS" \
     <<< "$PROMPT_CONTENT" 2>&1 | tee -a "$LOG_FILE"
   EXIT_CODE=${pipestatus[1]}
-fi
+
+  if [[ "$EXIT_CODE" -eq 0 ]]; then
+    break
+  fi
+
+  if ! grep -q "ConnectionRefused\|ECONNREFUSED\|Unable to connect\|ETIMEDOUT\|socket hang up" "$LOG_FILE" 2>/dev/null; then
+    break
+  fi
+
+  if [[ "$ATTEMPT" -ge "$MAX_ATTEMPTS" ]]; then
+    echo "FATAL: All $MAX_ATTEMPTS attempts failed with connection errors" | tee -a "$LOG_FILE"
+    break
+  fi
+
+  DELAY=${RETRY_DELAYS[$ATTEMPT]}
+  echo "RETRY: Connection error on attempt $ATTEMPT — waiting ${DELAY}s before retry..." | tee -a "$LOG_FILE"
+  sleep "$DELAY"
+  ATTEMPT=$((ATTEMPT + 1))
+done
 set -e
 
 echo "---" | tee -a "$LOG_FILE"
