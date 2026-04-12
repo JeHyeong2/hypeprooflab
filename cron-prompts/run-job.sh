@@ -40,21 +40,33 @@ fi
 ( set -C; echo $$ > "$LOCK_FILE" ) 2>/dev/null || {
   echo "ERROR: $PROMPT_NAME lock race lost" >&2; exit 1
 }
-trap "rm -f '$LOCK_FILE'" EXIT
-
 # Ensure report directory exists
 mkdir -p "$REPORT_DIR"
 
+# Log file (defined early so trap handler can use it)
+LOG_FILE="$REPORT_DIR/cron-${PROMPT_NAME}-${DATE}.log"
+
+# EXIT trap — always writes termination status to log, even on crash/kill
+_cleanup() {
+  local rc=$?
+  if [[ -f "$LOG_FILE" ]] && ! grep -q '^COMPLETED$' "$LOG_FILE" 2>/dev/null; then
+    echo "---" >> "$LOG_FILE"
+    echo "INTERRUPTED (signal or crash)" >> "$LOG_FILE"
+    echo "Exit: $rc" >> "$LOG_FILE"
+    echo "End: $(date -Iseconds)" >> "$LOG_FILE"
+  fi
+  rm -f "$LOCK_FILE"
+}
+trap _cleanup EXIT INT TERM
+
 # Read prompt and replace {date} placeholder
 PROMPT_CONTENT=$(sed "s/{date}/$DATE/g" "$PROMPT_FILE")
-
-# Log file
-LOG_FILE="$REPORT_DIR/cron-${PROMPT_NAME}-${DATE}.log"
 
 echo "=== HypeProof Cron: $PROMPT_NAME ===" | tee "$LOG_FILE"
 echo "Date: $DATE" | tee -a "$LOG_FILE"
 echo "Start: $(date -Iseconds)" | tee -a "$LOG_FILE"
 echo "---" | tee -a "$LOG_FILE"
+echo "STARTED" | tee -a "$LOG_FILE"
 
 # Per-prompt tool scoping
 case "$PROMPT_NAME" in
@@ -169,6 +181,7 @@ while true; do
 done
 set -e
 
+echo "COMPLETED" | tee -a "$LOG_FILE"
 echo "---" | tee -a "$LOG_FILE"
 echo "Exit: $EXIT_CODE" | tee -a "$LOG_FILE"
 echo "End: $(date -Iseconds)" | tee -a "$LOG_FILE"
