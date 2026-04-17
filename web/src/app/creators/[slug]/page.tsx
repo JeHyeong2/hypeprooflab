@@ -38,11 +38,30 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   const creator = list.find(m => slugify(m.displayName) === slug);
   if (!creator) return {};
 
+  const baseUrl = 'https://hypeproof-ai.xyz';
+  const creatorUrl = `${baseUrl}/creators/${slug}`;
+
   return {
     title: `${creator.displayName} | Creators`,
     description: locale === 'ko'
       ? `${creator.displayName}의 HypeProof AI 크리에이터 프로필`
       : `${creator.displayName}'s HypeProof AI creator profile`,
+    alternates: {
+      canonical: creatorUrl,
+      languages: {
+        'ko': `${creatorUrl}?lang=ko`,
+        'en': `${creatorUrl}?lang=en`,
+        'x-default': creatorUrl,
+      },
+    },
+    openGraph: {
+      title: `${creator.displayName} | HypeProof AI`,
+      description: locale === 'ko'
+        ? `${creator.displayName}의 HypeProof AI 크리에이터 프로필`
+        : `${creator.displayName}'s HypeProof AI creator profile`,
+      url: creatorUrl,
+      type: 'profile',
+    },
   };
 }
 

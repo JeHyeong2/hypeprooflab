@@ -1,8 +1,10 @@
 import { Column, ColumnFrontmatter, Citation } from './columns';
+import { ResearchFrontmatter } from './research';
+import { NovelFrontmatter } from './novels';
 
 const SITE_URL = 'https://hypeproof-ai.xyz';
 const ORG_NAME = 'HypeProof AI Lab';
-const ORG_DESCRIPTION = 'AI 시대의 본질을 탐구하는 독립 리서치 랩';
+const ORG_DESCRIPTION = 'AI 빌더와 리서처가 함께 만드는 커뮤니티 리서치 랩';
 
 export function generateOrganizationJsonLd() {
   return {
@@ -82,6 +84,10 @@ export function generateArticleJsonLd(column: { frontmatter: ColumnFrontmatter; 
       url: SITE_URL,
       logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
     },
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['article h1', 'article > p:first-of-type'],
+    },
     ...(fm.citations && fm.citations.length > 0
       ? {
           citation: fm.citations.map((c: Citation) => ({
@@ -112,6 +118,151 @@ export function generateCollectionJsonLd(columns: { frontmatter: ColumnFrontmatt
         position: i + 1,
         url: `${SITE_URL}/columns/${col.slug}`,
         name: col.frontmatter.title,
+      })),
+    },
+  };
+}
+
+// ─── BreadcrumbList ────────────────────────────────────
+export function generateBreadcrumbJsonLd(crumbs: { name: string; url: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: crumbs.map((crumb, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: crumb.name,
+      item: crumb.url,
+    })),
+  };
+}
+
+// ─── Research TechArticle ──────────────────────────────
+export function generateResearchArticleJsonLd(
+  research: { frontmatter: ResearchFrontmatter; locale: string; slug: string },
+  availableLocales?: string[],
+) {
+  const fm = research.frontmatter;
+  const url = `${SITE_URL}/research/${research.slug}`;
+  const lang = research.locale === 'ko' ? 'ko-KR' : 'en-US';
+  const altLocale = research.locale === 'ko' ? 'en' : 'ko';
+  const hasTranslation = availableLocales ? availableLocales.includes(altLocale) : false;
+
+  const translationLinks: Record<string, unknown> = {};
+  if (hasTranslation) {
+    const altUrl = `${url}?lang=${altLocale}`;
+    const altLang = altLocale === 'ko' ? 'ko-KR' : 'en-US';
+    if (research.locale === 'ko') {
+      translationLinks.workTranslation = { '@type': 'TechArticle', '@id': altUrl, inLanguage: altLang, url: altUrl };
+    } else {
+      translationLinks.translationOfWork = { '@type': 'TechArticle', '@id': altUrl, inLanguage: altLang, url: altUrl };
+    }
+  }
+
+  return {
+    '@context': { '@vocab': 'https://schema.org/', '@language': lang },
+    '@type': 'TechArticle',
+    headline: fm.title,
+    description: fm.excerpt,
+    datePublished: fm.date,
+    inLanguage: lang,
+    url,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    keywords: fm.tags?.join(', '),
+    author: {
+      '@type': 'Person',
+      name: fm.creator,
+      ...(fm.creatorImage ? { image: `${SITE_URL}${fm.creatorImage}` } : {}),
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: ORG_NAME,
+      url: SITE_URL,
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
+    },
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['article h1', 'article > p:first-of-type'],
+    },
+    ...translationLinks,
+  };
+}
+
+// ─── Novel CreativeWork ────────────────────────────────
+export function generateNovelJsonLd(
+  novel: { frontmatter: NovelFrontmatter; locale: string; slug: string },
+  availableLocales?: string[],
+) {
+  const fm = novel.frontmatter;
+  const url = `${SITE_URL}/novels/${novel.slug}`;
+  const lang = novel.locale === 'ko' ? 'ko-KR' : 'en-US';
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: fm.title,
+    headline: fm.title,
+    description: fm.excerpt,
+    datePublished: fm.date,
+    inLanguage: lang,
+    url,
+    genre: 'Science Fiction',
+    isPartOf: {
+      '@type': 'CreativeWorkSeries',
+      name: fm.series,
+    },
+    position: `Vol.${fm.volume} Ch.${fm.chapter}`,
+    author: {
+      '@type': 'Person',
+      name: fm.author,
+      ...(fm.authorImage ? { image: `${SITE_URL}${fm.authorImage}` } : {}),
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: ORG_NAME,
+      url: SITE_URL,
+    },
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['article h1', 'article > p:first-of-type'],
+    },
+  };
+}
+
+// ─── FAQPage ───────────────────────────────────────────
+export function generateFAQJsonLd(faqs: { question: string; answer: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
+// ─── Research Collection ───────────────────────────────
+export function generateResearchCollectionJsonLd(
+  items: { frontmatter: { title: string; slug?: string }; slug: string }[],
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Research | HypeProof AI Lab',
+    description: 'AI-generated daily research — tech trends, industry analysis, and insights.',
+    url: `${SITE_URL}/research`,
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: items.length,
+      itemListElement: items.map((item, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: `${SITE_URL}/research/${item.slug}`,
+        name: item.frontmatter.title,
       })),
     },
   };

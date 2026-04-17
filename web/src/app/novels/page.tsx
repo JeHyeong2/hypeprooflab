@@ -14,9 +14,12 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   
   return {
     title: locale === 'ko' ? 'AI 웹소설' : 'AI Novels',
-    description: locale === 'ko' 
+    description: locale === 'ko'
       ? 'AI가 창작한 웹소설 시리즈. 철학적 탐구와 SF의 만남.'
       : 'AI-generated web novel series. Where philosophical exploration meets science fiction.',
+    alternates: {
+      canonical: 'https://hypeproof-ai.xyz/novels',
+    },
     openGraph: {
       title: locale === 'ko' ? 'AI 웹소설 | HypeProof AI' : 'AI Novels | HypeProof AI',
       description: locale === 'ko' 

@@ -34,6 +34,10 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: 'cohere-ai',
         allow: '/',
       },
+      {
+        userAgent: 'Yeti',
+        allow: '/',
+      },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
     host: baseUrl,

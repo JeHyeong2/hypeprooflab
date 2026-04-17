@@ -6,6 +6,9 @@ import { generateCollectionJsonLd } from '@/lib/jsonld';
 export const metadata: Metadata = {
   title: 'Columns',
   description: 'Deep analysis, research insights, and sharp takes on AI, technology, and the future.',
+  alternates: {
+    canonical: 'https://hypeproof-ai.xyz/columns',
+  },
   openGraph: {
     title: 'Columns | HypeProof AI',
     description: 'Deep analysis, research insights, and sharp takes on AI, technology, and the future.',

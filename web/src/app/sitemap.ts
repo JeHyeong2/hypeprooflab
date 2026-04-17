@@ -1,7 +1,8 @@
 import { MetadataRoute } from 'next'
 import { getAllColumns, getAvailableLocalesForSlug } from '@/lib/columns'
 import { getAllResearch, getAvailableLocalesForResearchSlug } from '@/lib/research'
-import { getAllNovels } from '@/lib/novels'
+import { getAllNovels, getAvailableLocalesForSlug as getNovelLocales } from '@/lib/novels'
+import { getAllMembers, FALLBACK_MEMBERS } from '@/lib/members'
 
 function safeDate(dateStr: string | undefined): Date {
   if (!dateStr) return new Date()
@@ -42,6 +43,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/creators`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/ai-personas`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.5,
     },
   ]
   
@@ -113,13 +126,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const slug = novel.frontmatter.slug
     if (seenNovelSlugs.has(slug)) continue
     seenNovelSlugs.add(slug)
+
+    const locales = getNovelLocales(slug)
+    const alternates: Record<string, string> = {}
+    if (locales.includes('ko')) alternates['ko'] = `${baseUrl}/novels/${slug}?lang=ko`
+    if (locales.includes('en')) alternates['en'] = `${baseUrl}/novels/${slug}?lang=en`
+
     novelPages.push({
       url: `${baseUrl}/novels/${slug}`,
       lastModified: safeDate(novel.frontmatter.date),
       changeFrequency: 'monthly',
       priority: 0.6,
+      ...(locales.length > 1 ? {
+        alternates: {
+          languages: alternates,
+        },
+      } : {}),
     })
   }
-  
-  return [...staticPages, ...columnPages, ...researchPages, ...novelPages]
+
+  // Creator pages
+  const members = getAllMembers()
+  const creatorList = (members.length > 0 ? members : FALLBACK_MEMBERS)
+    .filter(m => m.role === 'admin' || m.role === 'creator')
+  const creatorPages: MetadataRoute.Sitemap = creatorList.map(m => ({
+    url: `${baseUrl}/creators/${m.displayName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.5,
+  }))
+
+  return [...staticPages, ...columnPages, ...researchPages, ...novelPages, ...creatorPages]
 }

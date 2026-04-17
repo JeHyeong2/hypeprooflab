@@ -27,16 +27,25 @@ const notoSansMono = Noto_Sans_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://hypeproof-ai.xyz'),
   title: {
-    default: "HypeProof AI - We Don't Chase Hype. We Prove It.",
+    default: "HypeProof AI - AI 빌더 커뮤니티 | AI의 진짜 가치를 증명하다",
     template: "%s | HypeProof AI"
   },
-  description: "AI의 진짜 가치를 함께 탐구합니다. 심층 리서치, 칼럼, 그리고 AI 커뮤니티. Deep research, columns, and practical AI insights.",
+  description: "AI 빌더와 리서처가 함께 만드는 커뮤니티 리서치 랩. 에이전트 아키텍처, AI 코딩, 퀀트부터 AI 소설까지 — 현장 실무자의 심층 칼럼과 리서치.",
   applicationName: "HypeProof AI",
   keywords: [
-    "AI research", "artificial intelligence", "machine learning", 
-    "AI tools", "technology research", "AI insights", "AI validation", 
-    "AI agent", "multi-agent system", "에이전트 아키텍처", "AI 리서치",
-    "인공지능", "AI 커뮤니티", "HypeProof", "AI 분석"
+    // 커뮤니티 정체성
+    "AI 커뮤니티", "AI 빌더 커뮤니티", "AI 실무자 모임",
+    "AI 리서치 커뮤니티", "AI 크리에이터 그룹",
+    "AI 콘텐츠 커뮤니티", "AI 칼럼 커뮤니티",
+    "인공지능 연구 모임", "AI 스터디 그룹",
+    // 니치 실무 키워드
+    "AI 에이전트 아키텍처", "에이전틱 코딩", "클로드 코드 활용",
+    "AI 코딩 자동화", "멀티에이전트 시스템 실무",
+    "AI 퀀트 트레이딩", "AI 소설 SIMULACRA",
+    "AI 에이전트 개발 커뮤니티", "AI 실무 인사이트",
+    "GEO 최적화", "AI 검색엔진 최적화", "AI 트렌드 분석",
+    // 영문 (최소한)
+    "HypeProof", "AI research community", "AI agent",
   ],
   authors: [
     { name: "Jay Lee", url: "https://hypeproof-ai.xyz/team/jay" },
@@ -61,8 +70,8 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   openGraph: {
-    title: "HypeProof AI - We Don't Chase Hype. We Prove It.",
-    description: "Deep research, columns, and practical AI insights for builders and skeptics alike. Exploring the real impact of AI.",
+    title: "HypeProof AI - AI 빌더 커뮤니티 | AI의 진짜 가치를 증명하다",
+    description: "AI 빌더와 리서처가 함께 만드는 커뮤니티 리서치 랩. 에이전트 아키텍처, AI 코딩, 퀀트부터 AI 소설까지.",
     url: "https://hypeproof-ai.xyz",
     siteName: "HypeProof AI",
     images: [
@@ -70,24 +79,25 @@ export const metadata: Metadata = {
         url: "https://hypeproof-ai.xyz/og-image.png",
         width: 1200,
         height: 630,
-        alt: "HypeProof AI - Research Lab for AI Builders and Skeptics",
+        alt: "HypeProof AI - AI 빌더와 리서처를 위한 커뮤니티 리서치 랩",
       },
       {
-        url: "https://hypeproof-ai.xyz/og-image-square.png", 
+        url: "https://hypeproof-ai.xyz/og-image-square.png",
         width: 1200,
         height: 1200,
         alt: "HypeProof AI Logo",
       }
     ],
-    locale: "en_US",
+    locale: "ko_KR",
+    alternateLocale: ["en_US"],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     site: "@hypeproofai",
     creator: "@hypeproofai",
-    title: "HypeProof AI - We Don't Chase Hype. We Prove It.",
-    description: "Deep research, honest conversations, and practical AI insights for builders and skeptics alike.",
+    title: "HypeProof AI - AI 빌더 커뮤니티",
+    description: "AI 빌더와 리서처가 함께 만드는 커뮤니티 리서치 랩. 심층 칼럼, 리서치, AI 소설.",
     images: {
       url: "https://hypeproof-ai.xyz/og-image.png",
       alt: "HypeProof AI - Research Lab"
@@ -106,7 +116,12 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  // verification: add real codes when available
+  verification: {
+    google: 'PLACEHOLDER_GOOGLE_VERIFICATION',
+    other: {
+      'naver-site-verification': 'PLACEHOLDER_NAVER_VERIFICATION',
+    },
+  },
   category: "Technology",
   classification: "AI Research",
   referrer: "origin-when-cross-origin",
@@ -219,6 +234,7 @@ export default function RootLayout({
           }}
         />
         <link rel="canonical" href="https://hypeproof-ai.xyz" />
+        <link rel="alternate" type="application/rss+xml" title="HypeProof AI (KO)" href="/feed.xml" />
         <meta name="theme-color" content="#7c3aed" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
