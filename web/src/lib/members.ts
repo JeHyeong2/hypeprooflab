@@ -37,7 +37,7 @@ function loadFallbackMembers(): { displayName: string; role: MemberRole }[] {
       { displayName: 'JY', role: 'creator' },
       { displayName: 'BH', role: 'creator' },
       { displayName: 'Sebastian', role: 'creator' },
-      { displayName: '재형', role: 'creator' },
+      { displayName: '제형', role: 'creator' },
       { displayName: '정우', role: 'creator' },
       { displayName: 'Simon', role: 'creator' },
     ];
