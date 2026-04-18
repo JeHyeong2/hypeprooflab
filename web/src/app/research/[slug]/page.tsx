@@ -9,6 +9,7 @@ import ViewCounter from '@/components/ViewCounter';
 import AuthButton from '@/components/auth/AuthButton';
 import ShareButtons from '@/components/ShareButtons';
 import ResearchInteractive from './ResearchInteractive';
+import { generateResearchArticleJsonLd, generateBreadcrumbJsonLd } from '@/lib/jsonld';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -74,8 +75,20 @@ export default async function ResearchDetailPage({ params, searchParams }: Props
   const { frontmatter, content } = research;
   const currentLocale = research.locale;
 
+  const baseUrl = 'https://hypeproof-ai.xyz';
+  const articleJsonLd = generateResearchArticleJsonLd(research, availableLocales);
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+    { name: 'HypeProof AI', url: baseUrl },
+    { name: currentLocale === 'ko' ? '리서치' : 'Research', url: `${baseUrl}/research` },
+    { name: frontmatter.title, url: `${baseUrl}/research/${slug}` },
+  ]);
+
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-300" style={{ scrollBehavior: 'smooth' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([articleJsonLd, breadcrumbJsonLd]) }}
+      />
       {/* Interactive reading progress + locale switcher */}
       <ResearchInteractive slug={slug} availableLocales={availableLocales} currentLocale={currentLocale} />
 
