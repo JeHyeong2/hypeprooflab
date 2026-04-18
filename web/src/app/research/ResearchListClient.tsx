@@ -59,7 +59,7 @@ export default function ResearchListClient({ koResearch, enResearch }: Props) {
         </div>
       </nav>
 
-      <main className="max-w-[960px] mx-auto px-4 sm:px-6 py-10 sm:py-16">
+      <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-10 sm:py-16">
         <div className="text-center mb-16">
           {/* AI Generated badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-6">
@@ -141,7 +141,7 @@ export default function ResearchListClient({ koResearch, enResearch }: Props) {
             </p>
           </div>
         )}
-      </main>
+      </div>
       <Footer />
     </div>
   );

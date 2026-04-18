@@ -38,6 +38,18 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: 'Yeti',
         allow: '/',
       },
+      {
+        userAgent: 'Yetibot',
+        allow: '/',
+      },
+      {
+        userAgent: 'Naverbot',
+        allow: '/',
+      },
+      {
+        userAgent: 'Cowbot',
+        allow: '/',
+      },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
     host: baseUrl,

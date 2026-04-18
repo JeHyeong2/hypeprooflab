@@ -11,7 +11,8 @@ import AuthButton from '@/components/auth/AuthButton';
 import ShareButtons from '@/components/ShareButtons';
 import CreatorProfileCard from '@/components/CreatorProfileCard';
 import RelatedColumns from '@/components/RelatedColumns';
-import { generateArticleJsonLd, generateBreadcrumbJsonLd } from '@/lib/jsonld';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import { generateArticleJsonLd, generateBreadcrumbJsonLd, generateHowToJsonLd } from '@/lib/jsonld';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -87,6 +88,10 @@ export default async function ColumnPage({ params, searchParams }: Props) {
     { name: currentLocale === 'ko' ? '칼럼' : 'Columns', url: 'https://hypeproof-ai.xyz/columns' },
     { name: frontmatter.title, url: `https://hypeproof-ai.xyz/columns/${slug}` },
   ]);
+  const howToJsonLd =
+    frontmatter.howto && frontmatter.howto.steps?.length > 0
+      ? generateHowToJsonLd(frontmatter.howto)
+      : null;
 
   // Creator profile card data
   const creatorName = frontmatter.creator || '';
@@ -137,7 +142,13 @@ export default async function ColumnPage({ params, searchParams }: Props) {
     <div className="min-h-screen bg-zinc-950 text-zinc-300" style={{ scrollBehavior: 'smooth' }}>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([articleJsonLd, breadcrumbJsonLd]) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            howToJsonLd
+              ? [articleJsonLd, breadcrumbJsonLd, howToJsonLd]
+              : [articleJsonLd, breadcrumbJsonLd],
+          ),
+        }}
       />
 
       {/* Interactive reading progress + locale switcher */}
@@ -175,6 +186,14 @@ export default async function ColumnPage({ params, searchParams }: Props) {
 
       {/* Article - server rendered */}
       <article className="max-w-[680px] mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <Breadcrumbs
+          className="mb-6"
+          crumbs={[
+            { name: 'Home', href: '/' },
+            { name: currentLocale === 'ko' ? '칼럼' : 'Columns', href: '/columns' },
+            { name: frontmatter.title },
+          ]}
+        />
         <div className="mb-6">
           <span className="text-sm text-purple-400 uppercase tracking-wider font-medium">
             {frontmatter.category}

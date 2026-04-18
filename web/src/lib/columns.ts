@@ -12,6 +12,7 @@ export interface ColumnFrontmatter {
   title: string;
   creator: string;
   date: string;
+  updated?: string;
   category: string;
   tags: string[];
   slug: string;
@@ -20,6 +21,13 @@ export interface ColumnFrontmatter {
   creatorImage?: string;
   citations?: Citation[];
   references?: string[];
+  articleType?: 'scholarly' | 'news' | 'opinion';
+  howto?: {
+    name: string;
+    description?: string;
+    totalTime?: string;
+    steps: { name: string; text: string; url?: string }[];
+  };
 }
 
 export interface Column {

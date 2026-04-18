@@ -5,6 +5,7 @@ export interface ResearchFrontmatter {
   title: string;
   creator: string;
   date: string;
+  updated?: string;
   category: string;
   tags: string[];
   slug: string;

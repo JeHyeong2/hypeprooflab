@@ -59,7 +59,7 @@ export default function ColumnsListClient({ koColumns, enColumns }: Props) {
         </div>
       </nav>
 
-      <main className="max-w-[960px] mx-auto px-4 sm:px-6 py-10 sm:py-16">
+      <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-10 sm:py-16">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             {locale === 'ko' ? '칼럼' : 'Columns'}
@@ -122,7 +122,7 @@ export default function ColumnsListClient({ koColumns, enColumns }: Props) {
             </p>
           </div>
         )}
-      </main>
+      </div>
       <Footer />
     </div>
   );

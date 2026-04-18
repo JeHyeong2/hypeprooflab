@@ -37,11 +37,7 @@ export function generateWebSiteJsonLd() {
       name: ORG_NAME,
       url: SITE_URL,
     },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${SITE_URL}/search?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
-    },
+    // TODO: /search 라우트 구현 시 SearchAction 복구 (현재는 엔드포인트 없음)
   };
 }
 
@@ -63,12 +59,16 @@ export function generateArticleJsonLd(column: { frontmatter: ColumnFrontmatter; 
     }
   }
 
+  const schemaType = fm.articleType === 'news' ? 'NewsArticle' : 'ScholarlyArticle';
+
   return {
     '@context': { '@vocab': 'https://schema.org/', '@language': lang },
-    '@type': 'ScholarlyArticle',
+    '@type': schemaType,
     headline: fm.title,
     description: fm.excerpt,
     datePublished: fm.date,
+    ...(fm.updated ? { dateModified: fm.updated } : {}),
+    ...(fm.articleType === 'news' && fm.category ? { articleSection: fm.category } : {}),
     inLanguage: lang,
     url,
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
@@ -165,6 +165,7 @@ export function generateResearchArticleJsonLd(
     headline: fm.title,
     description: fm.excerpt,
     datePublished: fm.date,
+    ...(fm.updated ? { dateModified: fm.updated } : {}),
     inLanguage: lang,
     url,
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
@@ -242,6 +243,63 @@ export function generateFAQJsonLd(faqs: { question: string; answer: string }[]) 
         text: faq.answer,
       },
     })),
+  };
+}
+
+// ─── HowTo ─────────────────────────────────────────────
+export interface HowToSpec {
+  name: string;
+  description?: string;
+  totalTime?: string; // ISO 8601 duration, e.g. "PT30M"
+  steps: { name: string; text: string; url?: string }[];
+}
+
+export function generateHowToJsonLd(spec: HowToSpec) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: spec.name,
+    ...(spec.description ? { description: spec.description } : {}),
+    ...(spec.totalTime ? { totalTime: spec.totalTime } : {}),
+    step: spec.steps.map((s, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: s.name,
+      text: s.text,
+      ...(s.url ? { url: s.url } : {}),
+    })),
+  };
+}
+
+// ─── QAPage ────────────────────────────────────────────
+export interface QAPair {
+  question: string;
+  answer: string;
+  answerAuthor?: string;
+  upvoteCount?: number;
+}
+
+export function generateQAPageJsonLd(primary: QAPair, url: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'QAPage',
+    mainEntity: {
+      '@type': 'Question',
+      name: primary.question,
+      text: primary.question,
+      url,
+      answerCount: 1,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: primary.answer,
+        ...(primary.answerAuthor
+          ? { author: { '@type': 'Person', name: primary.answerAuthor } }
+          : {}),
+        ...(primary.upvoteCount !== undefined
+          ? { upvoteCount: primary.upvoteCount }
+          : {}),
+      },
+    },
   };
 }
 
