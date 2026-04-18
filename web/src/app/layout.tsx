@@ -27,10 +27,10 @@ const notoSansMono = Noto_Sans_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://hypeproof-ai.xyz'),
   title: {
-    default: "HypeProof AI - AI 빌더 커뮤니티 | AI의 진짜 가치를 증명하다",
+    default: "HypeProof AI — AI 빌더·리서처 커뮤니티 리서치 랩",
     template: "%s | HypeProof AI"
   },
-  description: "AI 빌더와 리서처가 함께 만드는 커뮤니티 리서치 랩. 에이전트 아키텍처, AI 코딩, 퀀트부터 AI 소설까지 — 현장 실무자의 심층 칼럼과 리서치.",
+  description: "AI 빌더·리서처가 만드는 커뮤니티 리서치 랩. 에이전트 아키텍처, AI 코딩, 퀀트, AI 소설 심층 칼럼.",
   applicationName: "HypeProof AI",
   keywords: [
     // 커뮤니티 정체성
@@ -70,8 +70,8 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   openGraph: {
-    title: "HypeProof AI - AI 빌더 커뮤니티 | AI의 진짜 가치를 증명하다",
-    description: "AI 빌더와 리서처가 함께 만드는 커뮤니티 리서치 랩. 에이전트 아키텍처, AI 코딩, 퀀트부터 AI 소설까지.",
+    title: "HypeProof AI — AI 빌더·리서처 커뮤니티 리서치 랩",
+    description: "AI 빌더·리서처가 만드는 커뮤니티 리서치 랩. 에이전트 아키텍처, AI 코딩, 퀀트, AI 소설 심층 칼럼.",
     url: "https://hypeproof-ai.xyz",
     siteName: "HypeProof AI",
     images: [
@@ -96,8 +96,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@hypeproofai",
     creator: "@hypeproofai",
-    title: "HypeProof AI - AI 빌더 커뮤니티",
-    description: "AI 빌더와 리서처가 함께 만드는 커뮤니티 리서치 랩. 심층 칼럼, 리서치, AI 소설.",
+    title: "HypeProof AI — AI 빌더·리서처 커뮤니티 랩",
+    description: "AI 빌더·리서처가 만드는 커뮤니티 리서치 랩. 에이전트, AI 코딩, 퀀트, AI 소설 심층 칼럼.",
     images: {
       url: "https://hypeproof-ai.xyz/og-image.png",
       alt: "HypeProof AI - Research Lab"
