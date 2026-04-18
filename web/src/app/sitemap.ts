@@ -4,55 +4,82 @@ import { getAllResearch, getAvailableLocalesForResearchSlug } from '@/lib/resear
 import { getAllNovels, getAvailableLocalesForSlug as getNovelLocales } from '@/lib/novels'
 import { getAllMembers, FALLBACK_MEMBERS } from '@/lib/members'
 
-function safeDate(dateStr: string | undefined): Date {
-  if (!dateStr) return new Date()
-  const d = new Date(dateStr)
-  return isNaN(d.getTime()) ? new Date() : d
+// Google prefers W3C Datetime — date-only (YYYY-MM-DD) is the simplest
+// valid form and avoids milliseconds that some parsers reject.
+function toDateString(input: string | Date | undefined): string {
+  const today = new Date().toISOString().slice(0, 10)
+  if (!input) return today
+  if (typeof input === 'string') {
+    const m = input.match(/^\d{4}-\d{2}-\d{2}/)
+    return m ? m[0] : today
+  }
+  return isNaN(input.getTime()) ? today : input.toISOString().slice(0, 10)
+}
+
+// Stable "last modified" for static pages: picks the most recent content
+// date so the value only changes when content actually changes (vs the
+// previous per-request new Date() which moved on every crawl).
+function latestContentDate(dates: (string | undefined)[]): string {
+  const valid = dates
+    .map(d => (typeof d === 'string' && /^\d{4}-\d{2}-\d{2}/.test(d) ? d.slice(0, 10) : null))
+    .filter((d): d is string => d !== null)
+    .sort()
+  return valid.length > 0 ? valid[valid.length - 1] : new Date().toISOString().slice(0, 10)
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://hypeproof-ai.xyz'
-  
+
+  // Use latest content date as lastModified anchor for static pages so the
+  // value is stable across requests (Google penalises "always changing" lastmod).
+  const columnsForAnchor = [...getAllColumns('ko'), ...getAllColumns('en')]
+  const researchForAnchor = [...getAllResearch('ko'), ...getAllResearch('en')]
+  const novelsForAnchor = [...getAllNovels('ko'), ...getAllNovels('en')]
+  const latestColumnDate = latestContentDate(columnsForAnchor.map(c => c.frontmatter.date))
+  const latestResearchDate = latestContentDate(researchForAnchor.map(r => r.frontmatter.date))
+  const latestNovelDate = latestContentDate(novelsForAnchor.map(n => n.frontmatter.date))
+  const latestAnyDate = latestContentDate([latestColumnDate, latestResearchDate, latestNovelDate])
+
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: latestAnyDate,
       changeFrequency: 'daily',
       priority: 1,
     },
     {
       url: `${baseUrl}/columns`,
-      lastModified: new Date(),
+      lastModified: latestColumnDate,
       changeFrequency: 'daily',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/novels`,
-      lastModified: new Date(),
+      lastModified: latestNovelDate,
       changeFrequency: 'daily',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/research`,
-      lastModified: new Date(),
+      lastModified: latestResearchDate,
       changeFrequency: 'daily',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/glossary`,
-      lastModified: new Date(),
+      lastModified: latestAnyDate,
       changeFrequency: 'weekly',
       priority: 0.6,
     },
     {
       url: `${baseUrl}/creators`,
-      lastModified: new Date(),
+      lastModified: latestAnyDate,
       changeFrequency: 'weekly',
       priority: 0.6,
     },
     {
       url: `${baseUrl}/ai-personas`,
-      lastModified: new Date(),
+      lastModified: latestAnyDate,
       changeFrequency: 'weekly',
       priority: 0.5,
     },
@@ -76,7 +103,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     columnPages.push({
       url: `${baseUrl}/columns/${slug}`,
-      lastModified: safeDate(col.frontmatter.date),
+      lastModified: toDateString(col.frontmatter.date),
       changeFrequency: 'monthly',
       priority: 0.7,
       ...(locales.length > 1 ? {
@@ -105,7 +132,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     researchPages.push({
       url: `${baseUrl}/research/${slug}`,
-      lastModified: safeDate(res.frontmatter.date),
+      lastModified: toDateString(res.frontmatter.date),
       changeFrequency: 'monthly',
       priority: 0.7,
       ...(locales.length > 1 ? {
@@ -134,7 +161,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     novelPages.push({
       url: `${baseUrl}/novels/${slug}`,
-      lastModified: safeDate(novel.frontmatter.date),
+      lastModified: toDateString(novel.frontmatter.date),
       changeFrequency: 'monthly',
       priority: 0.6,
       ...(locales.length > 1 ? {
@@ -156,7 +183,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter(slug => slug.length > 0)
     .map(slug => ({
       url: `${baseUrl}/creators/${slug}`,
-      lastModified: new Date(),
+      lastModified: latestAnyDate,
       changeFrequency: 'monthly' as const,
       priority: 0.5,
     }))
