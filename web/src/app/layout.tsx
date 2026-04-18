@@ -106,7 +106,6 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    nocache: true,
     googleBot: {
       index: true,
       follow: true,
@@ -117,9 +116,13 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'PLACEHOLDER_GOOGLE_VERIFICATION',
+    google:
+      process.env.GOOGLE_SITE_VERIFICATION ||
+      'OmETygK01wzNq_Gb222kI591akmWG3m6fQ6aBA4QcOk',
     other: {
-      'naver-site-verification': 'PLACEHOLDER_NAVER_VERIFICATION',
+      'naver-site-verification':
+        process.env.NAVER_SITE_VERIFICATION ||
+        '5062a8c80f94dc1462bed16c701189a7a652fda2',
     },
   },
   category: "Technology",
@@ -249,7 +252,7 @@ export default function RootLayout({
           <I18nProvider>
             <AnalyticsProvider>
               <ErrorBoundary>
-                {children}
+                <main id="main">{children}</main>
                 <CookieConsent />
               </ErrorBoundary>
             </AnalyticsProvider>

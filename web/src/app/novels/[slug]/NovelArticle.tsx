@@ -12,6 +12,8 @@ import { Footer } from '@/components/layout/Footer';
 import LikeButton from '@/components/LikeButton';
 import BookmarkButton from '@/components/BookmarkButton';
 import ShareButtons from '@/components/ShareButtons';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import RelatedNovels from '@/components/RelatedNovels';
 import { trackContentView } from '@/lib/analytics';
 
 interface Props {
@@ -185,9 +187,18 @@ export default function NovelArticle({
       
       {/* Article */}
       <article className="max-w-[800px] mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <Breadcrumbs
+          className="mb-6"
+          crumbs={[
+            { name: 'Home', href: '/' },
+            { name: isKo ? '소설' : 'Novels', href: '/novels' },
+            { name: frontmatter.series, href: '/novels' },
+            { name: frontmatter.title },
+          ]}
+        />
         {/* Series Badge */}
         <div className="mb-6">
-          <Link 
+          <Link
             href={`/novels/authors/${frontmatter.author.toLowerCase()}`}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-600/20 border border-purple-500/30 text-purple-300 hover:bg-purple-600/30 transition-colors"
           >
@@ -270,6 +281,21 @@ export default function NovelArticle({
           <LikeButton slug={slug} />
           <BookmarkButton slug={slug} />
         </div>
+
+        {/* Related (same series, other chapters) */}
+        <RelatedNovels
+          locale={currentLocale}
+          seriesName={frontmatter.series}
+          items={seriesNovels
+            .filter((n) => n.slug !== slug)
+            .slice(0, 4)
+            .map((n) => ({
+              slug: n.slug,
+              title: n.frontmatter.title,
+              volume: n.frontmatter.volume,
+              chapter: n.frontmatter.chapter,
+            }))}
+        />
 
         {/* Share */}
         <ShareButtons

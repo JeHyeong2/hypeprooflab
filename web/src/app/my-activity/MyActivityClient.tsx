@@ -110,7 +110,7 @@ export default function MyActivityClient() {
         </div>
       </nav>
 
-      <main className="max-w-[680px] mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-1 w-full">
+      <div className="max-w-[680px] mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-1 w-full">
         <h1 className="text-2xl font-bold text-white mb-8">내 활동 / My Activity</h1>
 
         {/* Tabs */}
@@ -170,7 +170,7 @@ export default function MyActivityClient() {
             ))}
           </div>
         )}
-      </main>
+      </div>
       <Footer />
     </div>
   );

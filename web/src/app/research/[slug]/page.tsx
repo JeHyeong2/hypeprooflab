@@ -9,6 +9,8 @@ import ViewCounter from '@/components/ViewCounter';
 import AuthButton from '@/components/auth/AuthButton';
 import ShareButtons from '@/components/ShareButtons';
 import ResearchInteractive from './ResearchInteractive';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import RelatedResearch from '@/components/RelatedResearch';
 import { generateResearchArticleJsonLd, generateBreadcrumbJsonLd } from '@/lib/jsonld';
 
 interface Props {
@@ -75,6 +77,33 @@ export default async function ResearchDetailPage({ params, searchParams }: Props
   const { frontmatter, content } = research;
   const currentLocale = research.locale;
 
+  const allResearchForLocale = getAllResearch(currentLocale);
+  const currentTags = frontmatter.tags || [];
+  const otherResearch = allResearchForLocale.filter((r) => r.slug !== slug);
+  let relatedResearch: { slug: string; title: string; creator: string; date: string }[] = [];
+  if (currentTags.length > 0) {
+    const scored = otherResearch.map((r) => {
+      const tags = r.frontmatter.tags || [];
+      const overlap = currentTags.filter((t: string) => tags.includes(t)).length;
+      return { r, overlap };
+    });
+    scored.sort((a, b) => b.overlap - a.overlap);
+    const withOverlap = scored.filter((s) => s.overlap > 0).slice(0, 3);
+    relatedResearch = (withOverlap.length > 0 ? withOverlap : scored.slice(0, 3)).map((s) => ({
+      slug: s.r.slug,
+      title: s.r.frontmatter.title,
+      creator: s.r.frontmatter.creator,
+      date: s.r.frontmatter.date,
+    }));
+  } else {
+    relatedResearch = otherResearch.slice(0, 3).map((r) => ({
+      slug: r.slug,
+      title: r.frontmatter.title,
+      creator: r.frontmatter.creator,
+      date: r.frontmatter.date,
+    }));
+  }
+
   const baseUrl = 'https://hypeproof-ai.xyz';
   const articleJsonLd = generateResearchArticleJsonLd(research, availableLocales);
   const breadcrumbJsonLd = generateBreadcrumbJsonLd([
@@ -124,6 +153,14 @@ export default async function ResearchDetailPage({ params, searchParams }: Props
 
       {/* Article */}
       <article className="max-w-[680px] mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <Breadcrumbs
+          className="mb-6"
+          crumbs={[
+            { name: 'Home', href: '/' },
+            { name: currentLocale === 'ko' ? '리서치' : 'Research', href: '/research' },
+            { name: frontmatter.title },
+          ]}
+        />
         {/* Category + AI badge */}
         <div className="flex items-center gap-3 mb-6">
           <span className="text-sm text-cyan-400 uppercase tracking-wider font-medium">
@@ -190,6 +227,9 @@ export default async function ResearchDetailPage({ params, searchParams }: Props
 
         {/* Reuse ColumnContent for markdown rendering */}
         <ColumnContent content={content} locale={currentLocale} />
+
+        {/* Related research */}
+        <RelatedResearch items={relatedResearch} locale={currentLocale} />
 
         {/* Share buttons */}
         <ShareButtons

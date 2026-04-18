@@ -57,7 +57,7 @@ export default function GlossaryPage() {
         </div>
       </nav>
 
-      <main className="max-w-3xl mx-auto px-6 py-12">
+      <div className="max-w-3xl mx-auto px-6 py-12">
         <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">Glossary</h1>
         <p className="text-zinc-400 mb-10 text-lg">
           Key terms and frameworks from HypeProof AI Lab.
@@ -92,7 +92,7 @@ export default function GlossaryPage() {
             </section>
           ))}
         </div>
-      </main>
+      </div>
 
       <Footer />
     </div>
