@@ -255,7 +255,7 @@ Layer 4: Creators — Content Producers
 | Member | 역할 | 핵심 미션 | 체득하는 본질 가치 |
 |--------|------|----------|------------------|
 | **Jay** | Platform Architect & PM | 시스템 설계, 에이전트/스킬 유지, 전략, 파트너십, 작업 명세 | 리더십, 철학적 사고 |
-| **JeHyeong (재형)** | **Platform Lead** (admin) | 웹 프론트, CI/CD, 크리에이터 도구, 백오피스, 크리에이터 서포트 | 제품 사고, UX |
+| **JeHyeong (제형)** | **Platform Lead** (admin) | 웹 프론트, CI/CD, 크리에이터 도구, 백오피스, 크리에이터 서포트 | 제품 사고, UX |
 | **Kiwon** | Track 2 GTM & 파트너십 리드 | 치과/전문직 유료 파일럿 성사, 결제 3건+, GTM 경로 설계 | 마케팅 심리학, 세일즈 |
 | **Ryan (김지웅)** | 레퍼런스 설계 + 세일즈 연결 | 동아일보 wow 포인트 설계, case study, 후속 제안 미팅 | 전략적 사고, 정량적 판단 |
 | **JY (신진용)** | 교육용 실행환경 구축 | OAuth 기반 실습 환경 MVP, 수강생 5명+ 운영, 운영자 가이드 | 교육학, 지식 공유 |
@@ -449,7 +449,7 @@ Jay가 빠지면 모든 것이 멈춘다.
 | 1 | 멤버 의사 확인 | **Done** — 3/23 미팅에서 전원 관점 공유 |
 | 2 | 방향성: 교육 vs 도메인 | **확정** — 교육이 본질, 도메인은 교육에서 파생 |
 | 3 | 커뮤니티 모델 | **확정** — 초기 폐쇄 → 점진적 개방 |
-| 4 | 재형 웹 리드 위임 | **확정+실행** — admin 권한, work specs 2건, 온보딩 문서 완비 |
+| 4 | 제형 웹 리드 위임 | **확정+실행** — admin 권한, work specs 2건, 온보딩 문서 완비 |
 | 5 | 역할 구조 재정비 | **확정** — 4-layer: Jay(Architect)/AI(Editorial)/JeHyeong(Platform)/Creators |
 | 6 | Jay 역할 재정의 | **확정** — Content Owner → Platform Architect & PM |
 | 7 | AI Editorial Director | **확정** — editorial-director.yaml, Herald/Mother 연동 |
