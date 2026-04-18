@@ -27,7 +27,9 @@ function getCreatorList() {
 
 export function generateStaticParams() {
   const list = getCreatorList();
-  return list.map(m => ({ slug: slugify(m.displayName) }));
+  return list
+    .map(m => ({ slug: slugify(m.displayName) }))
+    .filter(p => p.slug.length > 0);
 }
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {

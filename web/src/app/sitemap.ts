@@ -145,16 +145,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   }
 
-  // Creator pages
+  // Creator pages — skip members whose displayName has no ASCII alphanumerics
+  // (e.g. Korean-only names slugify to empty), which would otherwise create
+  // duplicate /creators/ entries in the sitemap.
   const members = getAllMembers()
   const creatorList = (members.length > 0 ? members : FALLBACK_MEMBERS)
     .filter(m => m.role === 'admin' || m.role === 'creator')
-  const creatorPages: MetadataRoute.Sitemap = creatorList.map(m => ({
-    url: `${baseUrl}/creators/${m.displayName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.5,
-  }))
+  const creatorPages: MetadataRoute.Sitemap = creatorList
+    .map(m => m.displayName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''))
+    .filter(slug => slug.length > 0)
+    .map(slug => ({
+      url: `${baseUrl}/creators/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    }))
 
   return [...staticPages, ...columnPages, ...researchPages, ...novelPages, ...creatorPages]
 }
