@@ -116,8 +116,38 @@ fi
 echo "Claude: $CLAUDE_BIN ($($CLAUDE_BIN --version 2>/dev/null || echo 'version unknown'))" | tee -a "$LOG_FILE"
 echo "Timeout: ${TIMEOUT_SEC}s | MaxTurns: ${MAX_TURNS}" | tee -a "$LOG_FILE"
 
-# Run Claude Code headless with exponential backoff retry
-RETRY_DELAYS=(30 60 120)
+# Pre-flight API health check — skip run if API is unreachable
+API_STATUS=$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 \
+  -H "x-api-key: ${ANTHROPIC_API_KEY:-dummy}" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d '{"model":"claude-sonnet-4-20250514","max_tokens":1,"messages":[{"role":"user","content":"ping"}]}' \
+  https://api.anthropic.com/v1/messages 2>/dev/null || echo "000")
+
+if [[ "$API_STATUS" == "000" ]]; then
+  echo "SKIP: Anthropic API unreachable (pre-flight check failed)" | tee -a "$LOG_FILE"
+  EXIT_CODE=2
+  echo "COMPLETED" | tee -a "$LOG_FILE"
+  echo "---" | tee -a "$LOG_FILE"
+  echo "Exit: $EXIT_CODE" | tee -a "$LOG_FILE"
+  echo "End: $(date -Iseconds)" | tee -a "$LOG_FILE"
+  # Log failure
+  FAILURE_DIR="$WORKSPACE/.claude/failures"
+  mkdir -p "$FAILURE_DIR"
+  cat > "$FAILURE_DIR/${DATE}-${PROMPT_NAME}.md" <<FAIL
+# Cron Failure: $PROMPT_NAME
+- **Date**: $DATE
+- **Exit Code**: $EXIT_CODE
+- **Reason**: API unreachable (pre-flight health check)
+- **Log**: $LOG_FILE
+FAIL
+  rm -f "$LOCK_FILE"
+  exit $EXIT_CODE
+fi
+echo "Pre-flight: API reachable (HTTP $API_STATUS)" | tee -a "$LOG_FILE"
+
+# Run Claude Code headless with exponential backoff retry + jitter
+RETRY_DELAYS=(30 60 120 180 300)
 MAX_ATTEMPTS=$(( ${#RETRY_DELAYS[@]} + 1 ))
 ATTEMPT=1
 
@@ -136,6 +166,12 @@ while true; do
     break
   fi
 
+  # 401 auth errors: do not retry, alert immediately
+  if grep -q "401\|authentication_error\|Invalid authentication" "$LOG_FILE" 2>/dev/null; then
+    echo "FATAL: Authentication error (401) — not retrying. Check ANTHROPIC_API_KEY." | tee -a "$LOG_FILE"
+    break
+  fi
+
   if ! grep -q "ConnectionRefused\|ECONNREFUSED\|Unable to connect\|ETIMEDOUT\|socket hang up" "$LOG_FILE" 2>/dev/null; then
     break
   fi
@@ -146,6 +182,10 @@ while true; do
   fi
 
   DELAY=${RETRY_DELAYS[$ATTEMPT]}
+  # Add jitter: +/- 20% randomness to prevent thundering herd
+  JITTER=$(( (RANDOM % (DELAY / 5 + 1)) - DELAY / 10 ))
+  DELAY=$(( DELAY + JITTER ))
+  [[ "$DELAY" -lt 10 ]] && DELAY=10
   echo "RETRY: Connection error on attempt $ATTEMPT — waiting ${DELAY}s before retry..." | tee -a "$LOG_FILE"
   sleep "$DELAY"
   ATTEMPT=$((ATTEMPT + 1))
