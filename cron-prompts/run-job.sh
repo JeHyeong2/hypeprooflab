@@ -232,6 +232,27 @@ if [[ -x "$NOTIFY" ]]; then
   END_TS=$(date +%H:%M)
   "$NOTIFY" "${ICON} **${PROMPT_NAME}** (${START_TS}→${END_TS})
 exit=${EXIT_CODE}, output=${CLAUDE_OUTPUT_SIZE}B" 2>/dev/null || true
+
+  # --- Channel alert on failure (#content-pipeline) ---
+  if [[ "$EXIT_CODE" -ne 0 ]]; then
+    CONTENT_PIPELINE_CHANNEL="1471863670718857247"
+    LAST_LINES=$(tail -5 "$LOG_FILE" 2>/dev/null | head -3 || true)
+    ALERT_MSG="🚨 **Cron failure: ${PROMPT_NAME}**
+• Date: ${DATE}  Time: ${START_TS:-?}→${END_TS}
+• Exit code: ${EXIT_CODE}
+\`\`\`
+${LAST_LINES}
+\`\`\`"
+
+    # Escalation: count today's failures — if 3+, tag Jay
+    TODAY_FAILURES=$(find "$FAILURE_DIR" -name "${DATE}-*.md" 2>/dev/null | wc -l | tr -d ' ')
+    if [[ "$TODAY_FAILURES" -ge 3 ]]; then
+      ALERT_MSG="${ALERT_MSG}
+⚠️ **Escalation**: ${TODAY_FAILURES} failures today — <@1186944844401225808> please check"
+    fi
+
+    "$NOTIFY" --channel "$CONTENT_PIPELINE_CHANNEL" "$ALERT_MSG" 2>/dev/null || true
+  fi
 fi
 
 exit $EXIT_CODE
