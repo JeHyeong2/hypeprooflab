@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next'
 import { getAllColumns } from '@/lib/columns'
 import { getAllResearch } from '@/lib/research'
 import { getAllNovels } from '@/lib/novels'
@@ -25,72 +25,44 @@ function latestContentDate(dates: (string | undefined)[]): string {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://hypeproof-ai.xyz'
+  const siteUrl = process.env.SITE_URL || 'https://hypeproof-ai.xyz'
 
-  // We intentionally list only main routes. Individual columns / research /
-  // novels / creators are discovered via in-page internal links (list pages,
-  // Related* components, breadcrumbs, footer). This keeps the sitemap small,
-  // strictly XSD-compliant, and easy for Search Console to consume.
-  const columnDates = [
+  // Main routes only. Individual columns / research / novels / creators are
+  // discovered via in-page internal links (list pages, Related* components,
+  // breadcrumbs, footer). Keeps the sitemap small and strictly XSD-compliant.
+  const latestColumnDate = latestContentDate([
     ...getAllColumns('ko').map(c => c.frontmatter.date),
     ...getAllColumns('en').map(c => c.frontmatter.date),
-  ]
-  const researchDates = [
+  ])
+  const latestResearchDate = latestContentDate([
     ...getAllResearch('ko').map(r => r.frontmatter.date),
     ...getAllResearch('en').map(r => r.frontmatter.date),
-  ]
-  const novelDates = [
+  ])
+  const latestNovelDate = latestContentDate([
     ...getAllNovels('ko').map(n => n.frontmatter.date),
     ...getAllNovels('en').map(n => n.frontmatter.date),
-  ]
-
-  const latestColumnDate = latestContentDate(columnDates)
-  const latestResearchDate = latestContentDate(researchDates)
-  const latestNovelDate = latestContentDate(novelDates)
+  ])
   const latestAnyDate = latestContentDate([latestColumnDate, latestResearchDate, latestNovelDate])
 
-  return [
-    {
-      url: baseUrl,
-      lastModified: toDateString(latestAnyDate),
-      changeFrequency: 'daily',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/columns`,
-      lastModified: toDateString(latestColumnDate),
-      changeFrequency: 'daily',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/research`,
-      lastModified: toDateString(latestResearchDate),
-      changeFrequency: 'daily',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/novels`,
-      lastModified: toDateString(latestNovelDate),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/creators`,
-      lastModified: toDateString(latestAnyDate),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/glossary`,
-      lastModified: toDateString(latestAnyDate),
-      changeFrequency: 'weekly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/ai-personas`,
-      lastModified: toDateString(latestAnyDate),
-      changeFrequency: 'weekly',
-      priority: 0.5,
-    },
+  const staticRoutes: Array<{
+    path: string
+    lastModified: string
+    changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency']
+    priority: number
+  }> = [
+    { path: '',              lastModified: latestAnyDate,      changeFrequency: 'daily',   priority: 1.0 },
+    { path: '/columns',      lastModified: latestColumnDate,   changeFrequency: 'daily',   priority: 0.9 },
+    { path: '/research',     lastModified: latestResearchDate, changeFrequency: 'daily',   priority: 0.9 },
+    { path: '/novels',       lastModified: latestNovelDate,    changeFrequency: 'weekly',  priority: 0.8 },
+    { path: '/creators',     lastModified: latestAnyDate,      changeFrequency: 'weekly',  priority: 0.7 },
+    { path: '/glossary',     lastModified: latestAnyDate,      changeFrequency: 'weekly',  priority: 0.6 },
+    { path: '/ai-personas',  lastModified: latestAnyDate,      changeFrequency: 'weekly',  priority: 0.5 },
   ]
+
+  return staticRoutes.map(r => ({
+    url: `${siteUrl}${r.path}`,
+    lastModified: toDateString(r.lastModified),
+    changeFrequency: r.changeFrequency,
+    priority: r.priority,
+  }))
 }
