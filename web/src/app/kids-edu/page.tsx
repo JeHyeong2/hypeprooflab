@@ -106,8 +106,8 @@ export default function KidsEduLandingPage() {
   return (
     <main>
       {/* 1. Hero */}
-      <section className="bg-white">
-        <div className="mx-auto max-w-5xl px-6 pt-28 pb-24 md:pt-40 md:pb-32 text-center">
+      <section className="relative bg-white">
+        <div className="mx-auto max-w-5xl px-6 pt-28 pb-32 md:pt-40 md:pb-40 text-center">
           <Reveal as="p" className="mb-5 text-xs uppercase tracking-[0.2em] text-[color:var(--kf-muted)]">
             Future AI Leader&apos;s Academy
           </Reveal>
@@ -137,6 +137,26 @@ export default function KidsEduLandingPage() {
               <span aria-hidden>→</span>
             </Link>
           </Reveal>
+        </div>
+        {/* Scroll-down hint */}
+        <div
+          aria-hidden
+          className="absolute bottom-14 md:bottom-16 left-1/2 -translate-x-1/2 pointer-events-none"
+        >
+          <div className="scroll-hint">
+            <svg
+              width="22"
+              height="13"
+              viewBox="0 0 22 13"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M1 1 L11 11 L21 1" />
+            </svg>
+          </div>
         </div>
       </section>
 
