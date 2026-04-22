@@ -24,7 +24,7 @@ const eventInfo = [
   {
     label: "함께하는 친구들",
     value: "40명의 지휘관",
-    detail: "가족 · 아카데미 크리에이터팀 동행",
+    detail: "가족 · 아카데미 Hype크리에이터팀 동행",
   },
 ];
 

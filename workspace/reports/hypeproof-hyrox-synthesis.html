@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HypeProof × Hyrox — 커뮤니티 철학 통합</title>
+<style>
+  :root {
+    --bg: #f5f5f7;
+    --surface: #ffffff;
+    --surface-alt: #fbfbfd;
+    --fg: #1d1d1f;
+    --fg-soft: #2b2b2e;
+    --muted: #6e6e73;
+    --divider: #d2d2d7;
+    --accent: #0071e3;
+    --accent-soft: #e8f1fd;
+    --amber: #fbbf24;
+    --violet: #8b5cf6;
+    --green: #22c55e;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+      "Helvetica Neue", "Noto Sans KR", system-ui, sans-serif;
+    letter-spacing: -0.01em;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    font-weight: 600;
+    margin: 0 0 0.5em;
+  }
+  p { margin: 0 0 1em; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  section { padding: 96px 24px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .narrow { max-width: 820px; margin: 0 auto; }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .accent-eyebrow { color: var(--accent); }
+
+  /* Hero */
+  .hero {
+    background: var(--surface);
+    padding: 140px 24px 96px;
+    text-align: center;
+    border-bottom: 1px solid var(--divider);
+  }
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 64px);
+    margin-bottom: 24px;
+  }
+  .hero .thesis {
+    font-size: clamp(18px, 2vw, 22px);
+    max-width: 720px;
+    margin: 0 auto 12px;
+    color: var(--fg-soft);
+  }
+  .hero .sub {
+    color: var(--muted);
+    max-width: 620px;
+    margin: 0 auto;
+  }
+  .hero .chip {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  /* Alignment table */
+  .alignment {
+    background: var(--bg);
+  }
+  .align-grid {
+    display: grid;
+    gap: 12px;
+  }
+  .align-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.3fr;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--divider);
+    border-radius: 16px;
+    padding: 18px 22px;
+    align-items: start;
+  }
+  .align-row .col .lbl {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .align-row .col {
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  .align-row:hover {
+    border-color: var(--accent);
+    transition: border-color 0.3s;
+  }
+  @media (max-width: 720px) {
+    .align-row { grid-template-columns: 1fr; gap: 14px; }
+  }
+
+  /* Hypothesis cards */
+  .hypotheses {
+    background: var(--surface);
+  }
+  .hypo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 900px) { .hypo-grid { grid-template-columns: 1fr; } }
+  .hypo-card {
+    background: var(--bg);
+    border: 1px solid var(--divider);
+    border-radius: 24px;
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hypo-card .num {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-size: 72px;
+    font-weight: 700;
+    color: var(--divider);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    pointer-events: none;
+  }
+  .hypo-card h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+  .hypo-card .tagline {
+    color: var(--accent);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+  .hypo-card p {
+    color: var(--fg-soft);
+    font-size: 14.5px;
+    line-height: 1.65;
+    position: relative;
+    z-index: 1;
+  }
+  .hypo-card .apply {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--divider);
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .hypo-card .apply strong { color: var(--fg); }
+
+  /* Arc */
+  .arc { background: var(--bg); }
+  .arc-timeline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    position: relative;
+  }
+  @media (max-width: 900px) { .arc-timeline { grid-template-columns: 1fr; } }
+  .arc-phase {
+    background: var(--surface);
+    border-radius: 24px;
+    border: 1px solid var(--divider);
+    padding: 28px;
+    position: relative;
+  }
+  .arc-phase .phase-no {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .arc-phase h3 { font-size: 24px; margin-bottom: 6px; }
+  .arc-phase .years {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+  .arc-phase .hy-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 18px;
+    margin-bottom: 4px;
+  }
+  .arc-phase .hy {
+    font-size: 13.5px;
+    color: var(--fg-soft);
+    padding: 12px 14px;
+    background: var(--bg);
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  .arc-phase .hy strong { color: var(--fg); font-weight: 600; }
+  .arc-phase ul {
+    margin: 10px 0 0;
+    padding-left: 0;
+    list-style: none;
+  }
+  .arc-phase ul li {
+    padding-left: 16px;
+    position: relative;
+    font-size: 14px;
+    color: var(--fg-soft);
+    margin-bottom: 8px;
+    line-height: 1.55;
+  }
+  .arc-phase ul li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  /* Community LOOP */
+  .loop { background: var(--surface); }
+  .loop-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 900px) { .loop-list { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .loop-list { grid-template-columns: 1fr; } }
+  .loop-step {
+    background: var(--bg);
+    border: 1px solid var(--divider);
+    border-radius: 16px;
+    padding: 20px 18px;
+    position: relative;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .loop-step:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+  .loop-step .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--fg);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .loop-step h4 {
+    font-size: 15px;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .loop-step p {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .loop-hint {
+    margin-top: 32px;
+    padding: 20px 24px;
+    background: var(--accent-soft);
+    border-radius: 16px;
+    font-size: 14px;
+    color: var(--fg-soft);
+  }
+  .loop-hint strong { color: var(--accent); }
+
+  /* Identity Ladder */
+  .ladder { background: var(--bg); }
+  .tier-list {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .tier {
+    display: grid;
+    grid-template-columns: 60px 1fr 220px;
+    gap: 16px;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--divider);
+    border-radius: 16px;
+    padding: 18px 24px;
+    margin-bottom: 10px;
+    position: relative;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .tier:hover { transform: translateX(4px); border-color: var(--accent); }
+  @media (max-width: 720px) {
+    .tier { grid-template-columns: 48px 1fr; }
+    .tier .signal { grid-column: 1 / -1; padding-left: 0; border-left: 0; padding-top: 8px; border-top: 1px solid var(--divider); }
+  }
+  .tier .tier-no {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--divider);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-align: center;
+  }
+  .tier.t4 .tier-no, .tier.t5 .tier-no { color: var(--accent); }
+  .tier .body h4 {
+    font-size: 17px;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .tier .body .req {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .tier .signal {
+    font-size: 13px;
+    color: var(--fg-soft);
+    padding-left: 16px;
+    border-left: 1px solid var(--divider);
+  }
+
+  /* Tensions */
+  .tensions { background: var(--surface); }
+  .t-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 800px) { .t-grid { grid-template-columns: 1fr; } }
+  .t-card {
+    background: var(--bg);
+    border: 1px solid var(--divider);
+    border-radius: 20px;
+    padding: 22px 24px;
+  }
+  .t-card h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: var(--fg);
+  }
+  .t-vs {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .t-vs .side {
+    flex: 1;
+    padding: 8px 12px;
+    background: var(--surface);
+    border-radius: 10px;
+    border: 1px solid var(--divider);
+    text-align: center;
+  }
+  .t-vs .center {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .t-card .resolve {
+    font-size: 13.5px;
+    color: var(--fg-soft);
+    line-height: 1.55;
+    padding-top: 12px;
+    border-top: 1px dashed var(--divider);
+  }
+  .t-card .resolve strong { color: var(--accent); }
+
+  /* Roadmap */
+  .roadmap { background: var(--bg); }
+  .rm-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 900px) { .rm-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .rm-grid { grid-template-columns: 1fr; } }
+  .rm-card {
+    background: var(--surface);
+    border: 1px solid var(--divider);
+    border-radius: 16px;
+    padding: 22px 20px;
+  }
+  .rm-card .q {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--fg);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .rm-card h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .rm-card ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .rm-card ul li {
+    font-size: 13px;
+    color: var(--fg-soft);
+    padding-left: 18px;
+    position: relative;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  .rm-card ul li::before {
+    content: "□";
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+  }
+
+  /* Closing */
+  .closing {
+    background: var(--fg);
+    color: #fff;
+    text-align: center;
+    padding: 120px 24px;
+  }
+  .closing h2 {
+    font-size: clamp(26px, 4vw, 42px);
+    margin-bottom: 20px;
+  }
+  .closing p {
+    color: rgba(255,255,255,0.7);
+    max-width: 680px;
+    margin: 0 auto 28px;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  .closing .accent {
+    color: #7fb7ff;
+    font-weight: 600;
+  }
+
+  footer {
+    background: var(--bg);
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    border-top: 1px solid var(--divider);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="chip">HypeProof × Hyrox Synthesis · 2026-04-22</div>
+  <h1>AI 커뮤니티는<br />소비자를 창작자로 바꾸는 <br />반복 의식(ritual)이다.</h1>
+  <p class="thesis">
+    Hyrox가 "체육관 가는 사람"을 "Hybrid Athlete"로 바꿨듯,
+    HypeProof는 "AI 쓰는 사람"을 "<b>Hype크리에이터</b>"로 바꾼다.
+  </p>
+  <p class="sub">
+    그리고 이 전환은 콘텐츠가 아니라 <b>반복되는 포맷</b>을 중심으로 일어난다.
+    이 문서는 Hyrox의 발생 → 성장 → 확장 패턴을 HypeProof 철학에 녹여넣기 위한 통합 초안이다.
+  </p>
+</div>
+
+<!-- ALIGNMENT -->
+<section class="alignment">
+  <div class="container">
+    <div class="narrow" style="text-align:center; margin-bottom:48px;">
+      <p class="eyebrow">Alignment</p>
+      <h2>기존 철학 × Hyrox 증거</h2>
+      <p style="color:var(--muted)">PHILOSOPHY.md의 뼈대는 이미 맞다. Hyrox는 그것을 증명하고 확장하는 렌즈다.</p>
+    </div>
+
+    <div class="align-grid">
+      <div class="align-row">
+        <div class="col"><div class="lbl">기존 철학</div>"AI를 잘 쓰는 사람이 더 멀리 간다"</div>
+        <div class="col"><div class="lbl">Hyrox 증명</div>"Hybrid Athlete"라는 portable identity가 기존 fitness label을 대체하며 시장을 열었음</div>
+        <div class="col"><div class="lbl">통합 해석</div><b>"Hype크리에이터"</b> 가 AI 소비자·빌더·연구자·교육자를 아우르는 상위 정체성이 되어야 함</div>
+      </div>
+      <div class="align-row">
+        <div class="col"><div class="lbl">기존 철학</div>"과정 자체를 쌓아간다" (workflow·토큰·실패 공개)</div>
+        <div class="col"><div class="lbl">Hyrox 증명</div>Sportograf 프로포토 <b>70% attach rate</b> — 사람들은 자기 documentation에 돈을 낸다</div>
+        <div class="col"><div class="lbl">통합 해석</div>프로세스 아티팩트가 커뮤니티의 <b>1차 생산물</b>. 최종 창작물은 2차</div>
+      </div>
+      <div class="align-row">
+        <div class="col"><div class="lbl">기존 철학</div>"메달과 순위" (레벨제 언급)</div>
+        <div class="col"><div class="lbl">Hyrox 증명</div>표준화된 8 exercises × 1km → PR 측정 가능성 → 레벨 체계의 전제</div>
+        <div class="col"><div class="lbl">통합 해석</div>측정 가능한 <b>단일 챌린지 포맷</b>이 먼저, 그 위에 레벨이 얹힘</div>
+      </div>
+      <div class="align-row">
+        <div class="col"><div class="lbl">기존 철학</div>"해커톤, 창작대회"</div>
+        <div class="col"><div class="lbl">Hyrox 증명</div>레이스 = 연 'Super Bowl', 짐 트레이닝 = 매주 NFL 시즌</div>
+        <div class="col"><div class="lbl">통합 해석</div>대회는 <b>하이라이트</b>, 평일 창작/리서치가 <b>시즌</b></div>
+      </div>
+      <div class="align-row">
+        <div class="col"><div class="lbl">기존 철학</div>4개의 축 (Research/Creation/Education/Community)</div>
+        <div class="col"><div class="lbl">Hyrox 증명</div>4-tier affiliate + 레이스 + 코치 인증이 <b>하나의 플라이휠</b></div>
+        <div class="col"><div class="lbl">통합 해석</div>4축이 <b>선형 병렬</b>이 아니라 <b>순환 flywheel</b>로 재해석되어야 함</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HYPOTHESES -->
+<section class="hypotheses">
+  <div class="container">
+    <div class="narrow" style="text-align:center; margin-bottom:48px;">
+      <p class="eyebrow accent-eyebrow">Three Core Hypotheses</p>
+      <h2>핵심 가설 3개</h2>
+      <p style="color:var(--muted)">Hyrox가 증명했고, HypeProof가 채택해야 할 역직관적 주장들.</p>
+    </div>
+    <div class="hypo-grid">
+      <div class="hypo-card">
+        <div class="num">01</div>
+        <div class="tagline">Liberation</div>
+        <h3>표준화가 해방이다</h3>
+        <p>
+          "창작 커뮤니티는 무한한 자유가 핵심" 이라는 직관을 Hyrox는 반증한다.
+          8개 고정 동작 × 같은 순서 × 모든 도시 동일 포맷 — 이 <b>제약</b>이
+          훈련·비교·소속을 동시에 가능하게 했다.
+        </p>
+        <div class="apply">
+          <strong>HypeProof 적용:</strong> 반복 가능한 단일 AI 챌린지 포맷(eval harness · 인풋 스키마 · 제출 규칙)을 먼저 세운 뒤, 그 위에서 창작성이 자라게 한다.
+        </div>
+      </div>
+      <div class="hypo-card">
+        <div class="num">02</div>
+        <div class="tagline">Process</div>
+        <h3>과정이 결과다</h3>
+        <p>
+          Sportograf 프로포토 70% attach rate. 사람들은 결과물 다음에 <b>자기 documentation</b>에 추가로 지갑을 연다.
+          AI 시대의 희소 자원은 결과물 자체가 아니라 <b>결과물에 도달한 구체적 사고 흔적</b>이다.
+        </p>
+        <div class="apply">
+          <strong>HypeProof 적용:</strong> 기존 "과정 공개" 철학을 <b>프로 퀄리티 아티팩트</b>(스크린 리코딩, 토큰 히트맵, 실패 타임라인)로 포장. 이것이 커뮤니티의 1차 콘텐츠.
+        </div>
+      </div>
+      <div class="hypo-card">
+        <div class="num">03</div>
+        <div class="tagline">Leverage</div>
+        <h3>중간자가 레버리지다</h3>
+        <p>
+          Hyrox는 개인 athlete가 아닌 <b>코치</b>를 인증해 짐을 끌어왔다.
+          5K → 10K+ 짐, 260% YoY. 커뮤니티는 개인이 아니라 "자신의 사람들을 이미 가진 사람"의 합이다.
+        </p>
+        <div class="apply">
+          <strong>HypeProof 적용:</strong> 동아리 리더·부트캠프 강사·기업 AI 리드·교사를 인증. HypeProof의 성장 지표는 크리에이터 수가 아니라 <b>인증된 Hype Lead 수</b>.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARC -->
+<section class="arc">
+  <div class="container">
+    <div class="narrow" style="text-align:center; margin-bottom:48px;">
+      <p class="eyebrow">The Arc</p>
+      <h2>발생 → 성장 → 확장</h2>
+      <p style="color:var(--muted)">Hyrox의 7년 arc를 HypeProof 4분기 로드맵으로 번역한다.</p>
+    </div>
+
+    <div class="arc-timeline">
+      <div class="arc-phase">
+        <div class="phase-no">PHASE 01</div>
+        <h3>발생 (Emergence)</h3>
+        <div class="years">~1분기</div>
+
+        <div class="hy-label">Hyrox reference</div>
+        <div class="hy">2017–2019 · Hamburg 첫 레이스 <strong>650명</strong> · 표준화된 단일 SKU</div>
+
+        <div class="hy-label">HypeProof translation</div>
+        <ul>
+          <li>단일 표준 챌린지 포맷 정의</li>
+          <li>30–50명 시즌 1 자발 참여자</li>
+          <li>Discord + 1회 공개 showcase</li>
+          <li>"첫 Hype크리에이터" 공동 경험</li>
+        </ul>
+      </div>
+
+      <div class="arc-phase">
+        <div class="phase-no">PHASE 02</div>
+        <h3>성장 (Growth)</h3>
+        <div class="years">~2–3분기</div>
+
+        <div class="hy-label">Hyrox reference</div>
+        <div class="hy">2020–2022 · UK London <strong>679 → 4,003 in 7 months</strong> · 제휴 짐 파이프라인</div>
+
+        <div class="hy-label">HypeProof translation</div>
+        <ul>
+          <li>Hype Lead 인증 프로그램 출시</li>
+          <li>지역·조직 노드 10–30개 확보</li>
+          <li>2·3 시즌 반복 → 포맷 안정화</li>
+          <li>파트너 ecosystem 3–5개 합류</li>
+        </ul>
+      </div>
+
+      <div class="arc-phase">
+        <div class="phase-no">PHASE 03</div>
+        <h3>확장 (Expansion)</h3>
+        <div class="years">~4분기+</div>
+
+        <div class="hy-label">Hyrox reference</div>
+        <div class="hy">2023+ · <strong>5K → 10K+ 짐</strong> · 650K+ 참가자 · 플라이휠 자율 회전</div>
+
+        <div class="hy-label">HypeProof translation</div>
+        <ul>
+          <li>Lead가 다음 Lead를 양성</li>
+          <li>계절 챌린지 캘린더 (Q1–Q4 트랙)</li>
+          <li>글로벌 / 세그먼트 분화</li>
+          <li>커뮤니티가 커뮤니티를 마케팅</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOOP -->
+<section class="loop">
+  <div class="container">
+    <div class="narrow" style="text-align:center; margin-bottom:48px;">
+      <p class="eyebrow accent-eyebrow">Community LOOP</p>
+      <h2>신규 Hype크리에이터가 전도사가 되는 10단계</h2>
+      <p style="color:var(--muted)">Hyrox 루프를 그대로 번역. 각 단계가 다음 단계의 조건.</p>
+    </div>
+
+    <div class="loop-list">
+      <div class="loop-step"><div class="step-num">1</div><h4>발견</h4><p>Lead/친구 포스트 노출. 프로 퀄리티 아티팩트 시야에 들어옴.</p></div>
+      <div class="loop-step"><div class="step-num">2</div><h4>낮은 진입</h4><p>cohort 등록 / 대기명단. 완성 전 먼저 "I'm in" status event.</p></div>
+      <div class="loop-step"><div class="step-num">3</div><h4>공개 선언</h4><p>스크린샷 공유. 3–6개월 accountability 시작.</p></div>
+      <div class="loop-step"><div class="step-num">4</div><h4>지역 노드 참여</h4><p>대학 동아리·부트캠프·Discord 지역 채널. 팀 훈련.</p></div>
+      <div class="loop-step"><div class="step-num">5</div><h4>시즌 챌린지 진행</h4><p>매주 공개 로그. documentation 자동 생성.</p></div>
+      <div class="loop-step"><div class="step-num">6</div><h4>시즌 피날레</h4><p>완주율 95%+ 설계. 모두 postable 아티팩트 획득.</p></div>
+      <div class="loop-step"><div class="step-num">7</div><h4>Hype크리에이터 인증</h4><p>시즌 완주 자동 부여. 포트폴리오 페이지.</p></div>
+      <div class="loop-step"><div class="step-num">8</div><h4>리크루팅 의무</h4><p>피날레 포스팅 → 지인 문의 → 대답 자연 발생.</p></div>
+      <div class="loop-step"><div class="step-num">9</div><h4>Doubles 업그레이드</h4><p>다음 시즌은 멘티와 함께. 자발적 참여 증가.</p></div>
+      <div class="loop-step"><div class="step-num">10</div><h4>Lead 트랙</h4><p>인증된 Lead가 되어 자기 노드 운영. 루프가 다음 사이클의 시작.</p></div>
+    </div>
+
+    <div class="loop-hint">
+      <strong>핵심</strong> — 8단계(리크루팅 의무) ↔ 9단계(Doubles 업그레이드)가 이 루프의 진짜 엔진. 한 사람이 다음 사람을 데려오지 않으면 커뮤니티는 정지한다. 대신 Doubles 포맷이 리크루팅을 "자발적 행동"으로 만든다.
+    </div>
+  </div>
+</section>
+
+<!-- LADDER -->
+<section class="ladder">
+  <div class="container">
+    <div class="narrow" style="text-align:center; margin-bottom:48px;">
+      <p class="eyebrow">Identity Ladder</p>
+      <h2>정체성 계단</h2>
+      <p style="color:var(--muted)">Hyrox의 Hybrid Athlete → sub-90 → sub-60 → Pro → Worlds 구조를 HypeProof에.</p>
+    </div>
+
+    <div class="tier-list">
+      <div class="tier t0">
+        <div class="tier-no">00</div>
+        <div class="body"><h4>Observer</h4><div class="req">Discord 합류만 한 단계</div></div>
+        <div class="signal">읽기 전용</div>
+      </div>
+      <div class="tier t1">
+        <div class="tier-no">01</div>
+        <div class="body"><h4>Hype크리에이터 (Entry)</h4><div class="req">첫 시즌 챌린지 완주</div></div>
+        <div class="signal">포트폴리오 페이지 / 기본 배지</div>
+      </div>
+      <div class="tier t2">
+        <div class="tier-no">02</div>
+        <div class="body"><h4>Hype크리에이터 (Verified)</h4><div class="req">2 시즌 연속 + 피어 리뷰 통과</div></div>
+        <div class="signal">Verified 배지 / Discord 색상 / Lead 신청 가능</div>
+      </div>
+      <div class="tier t3">
+        <div class="tier-no">03</div>
+        <div class="body"><h4>Hype Lead</h4><div class="req">Lead 인증 수료 + 자기 노드(5+ 멤버) 운영</div></div>
+        <div class="signal">Lead 타이틀 / 리소스 접근 / 연사 자격</div>
+      </div>
+      <div class="tier t4">
+        <div class="tier-no">04</div>
+        <div class="body"><h4>Hype Architect</h4><div class="req">3 시즌+ · 생성 에이전트/파이프라인 공개</div></div>
+        <div class="signal">Top-tier 인증 / 공식 리서치 기여자</div>
+      </div>
+      <div class="tier t5">
+        <div class="tier-no">05</div>
+        <div class="body"><h4>Founding Circle</h4><div class="req">초기 Hype Architect + 거버넌스 기여</div></div>
+        <div class="signal">사이트 크레딧 / 의사결정 참여</div>
+      </div>
+    </div>
+
+    <p style="text-align:center; color:var(--muted); margin-top:28px; font-size:13px;">각 계단은 <b style="color:var(--accent)">"상품"이 아닌 "인정(recognition)"</b>. 돈으로 건너뛸 수 없음.</p>
+  </div>
+</section>
+
+<!-- TENSIONS -->
+<section class="tensions">
+  <div class="container">
+    <div class="narrow" style="text-align:center; margin-bottom:48px;">
+      <p class="eyebrow accent-eyebrow">Tensions We Must Resolve</p>
+      <h2>해결해야 할 철학적 긴장들</h2>
+      <p style="color:var(--muted)">커뮤니티 설계에서 피할 수 없는 대립. 답보다 균형이 중요.</p>
+    </div>
+
+    <div class="t-grid">
+      <div class="t-card">
+        <h4>01. 표준화 ↔ 창작의 자유</h4>
+        <div class="t-vs"><div class="side">포맷 고정</div><div class="center">VS</div><div class="side">풀이 자유</div></div>
+        <div class="resolve"><strong>해결:</strong> 평가 harness는 동일, 해법은 자유. "같은 입력 · 다른 에이전트"로 다양성 구현.</div>
+      </div>
+      <div class="t-card">
+        <h4>02. 개인 성과 ↔ 협업 공유</h4>
+        <div class="t-vs"><div class="side">개인 PR</div><div class="center">VS</div><div class="side">공동 창작</div></div>
+        <div class="resolve"><strong>해결:</strong> Solo 트랙 + Doubles/Relay 트랙 <b>둘 다</b> 동시 운영. 각자 리듬 선택.</div>
+      </div>
+      <div class="t-card">
+        <h4>03. 진입 장벽 ↔ 엘리트 인증</h4>
+        <div class="t-vs"><div class="side">쉽게 유입</div><div class="center">VS</div><div class="side">전문성 유지</div></div>
+        <div class="resolve"><strong>해결:</strong> 진입은 무조건 쉽게, 인증은 상위 단계에서 엄격. 레이스는 누구나, Pro는 top 10%.</div>
+      </div>
+      <div class="t-card">
+        <h4>04. 브랜드 주도 ↔ 자발성</h4>
+        <div class="t-vs"><div class="side">브랜드 푸시</div><div class="center">VS</div><div class="side">커뮤니티 풀</div></div>
+        <div class="resolve"><strong>해결:</strong> 1단계 브랜드 드라이븐, 2단계 Lead 인증과 함께 위임, 3단계 브랜드 = 커뮤니티.</div>
+      </div>
+      <div class="t-card">
+        <h4>05. 수익 ↔ 소속감</h4>
+        <div class="t-vs"><div class="side">상업화</div><div class="center">VS</div><div class="side">공동체성</div></div>
+        <div class="resolve"><strong>해결:</strong> 참가는 저비용/무료, <b>인증</b>(Lead·심화)이 유료. 시간과 노력 증명 시 접근권 자동 개방.</div>
+      </div>
+      <div class="t-card">
+        <h4>06. 글로벌 확장 ↔ 지역성</h4>
+        <div class="t-vs"><div class="side">same format</div><div class="center">VS</div><div class="side">local feel</div></div>
+        <div class="resolve"><strong>해결:</strong> 포맷은 글로벌 표준, 노드(커뮤니티 운영)는 철저히 지역. Hyrox가 런던/서울/뉴욕에서 다른 짐을 허용한 것과 같음.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap">
+  <div class="container">
+    <div class="narrow" style="text-align:center; margin-bottom:48px;">
+      <p class="eyebrow">Roadmap</p>
+      <h2>3개월 단위 실천 계획</h2>
+      <p style="color:var(--muted)">가설 검증부터 플라이휠 자율화까지, 1년.</p>
+    </div>
+
+    <div class="rm-grid">
+      <div class="rm-card">
+        <span class="q">Q1</span>
+        <h4>포맷 확정</h4>
+        <ul>
+          <li>단일 표준 챌린지 포맷 정의</li>
+          <li>시즌 1 등록 오픈</li>
+          <li>Hype크리에이터 배지 시스템</li>
+          <li>documentation 파이프라인 초안</li>
+        </ul>
+      </div>
+      <div class="rm-card">
+        <span class="q">Q2</span>
+        <h4>시즌 1 실행</h4>
+        <ul>
+          <li>30–50명 시즌 1 완주</li>
+          <li>주간 프로 documentation 자동화</li>
+          <li>피날레 showcase (온·오프라인)</li>
+          <li>시즌 1 아카이브 공개</li>
+        </ul>
+      </div>
+      <div class="rm-card">
+        <span class="q">Q3</span>
+        <h4>Lead 인증 출시</h4>
+        <ul>
+          <li>Lead 인증 코스 5–8시간</li>
+          <li>초기 Lead 10명 모집</li>
+          <li>지역 노드 5–10개</li>
+          <li>시즌 2 사전 등록</li>
+        </ul>
+      </div>
+      <div class="rm-card">
+        <span class="q">Q4</span>
+        <h4>플라이휠 점검</h4>
+        <ul>
+          <li>시즌 2 (신규 트랙/난이도)</li>
+          <li>Lead 주도 노드 가동</li>
+          <li>플라이휠 지표 트래킹</li>
+          <li>시즌 3 포맷 이터레이션</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="container">
+    <h2>"AI 커뮤니티를 만들자"가 아니라,<br /><span class="accent">"매 시즌 동일한 finish line을 세우고,<br />준비하는 과정 자체를 커뮤니티로 만들자."</span></h2>
+    <p>
+      Hyrox가 증명한 것: 커뮤니티는 반복 가능한 의식(ritual) 위에서만 자란다.
+      콘텐츠·이벤트·공간은 그 의식의 부산물이다. HypeProof의 다음 한 달은
+      — 그 ritual의 첫 번째 버전을 정의하는 일이다.
+    </p>
+  </div>
+</section>
+
+<footer>
+  HypeProof × Hyrox Synthesis · 2026-04-22 · based on PHILOSOPHY.md + 3-agent research (Products / Community / Social)
+</footer>
+
+</body>
+</html>
