@@ -16,6 +16,37 @@ Read CLAUDE.md first. Mother morning routine for {date}.
 Post briefing to Discord #daily-research (channel 1468135779271180502) via Discord MCP reply tool.
 Format: concise, max 500 chars, highlight any issues needing attention.
 
-Output JSON: {"status": "ok", "briefing": "...", "issues": [...]}
+## Discord Posting — Failure Surfacing
+
+If the Discord post is blocked (e.g., "channel ... not in allowlist", "blocked by access policy",
+MCP `reply` returns an access/permission error, or any other failure):
+
+- DO NOT silently swallow the error. The previous behavior caused a 15-day publishing drought
+  because failures were buried in narrative summary text (see issue #38).
+- Treat this as a HIGH-priority issue and prepend it to the `issues` array.
+- Set `discord.blocked: true` and `discord.posted: false` in the output JSON.
+- Capture the raw error string in `discord.error` so future automation can pattern-match
+  (e.g., "not in allowlist" → escalate to Jay for `/discord:access` approval).
+
+If the Discord post succeeds, set `discord.posted: true` and `discord.blocked: false`.
+
+> Note: agents must NEVER invoke `/discord:access` or edit `access.json` — that is a human-only
+> action per the discord MCP rules. Surfacing the flag is the agent's only job here.
+
+## Output JSON
+
+```json
+{
+  "status": "ok",
+  "briefing": "...",
+  "issues": [...],
+  "discord": {
+    "posted": true | false,
+    "blocked": true | false,
+    "channel_id": "1468135779271180502",
+    "error": "<raw error string if blocked, else null>"
+  }
+}
+```
 
 Date: {date}, Max turns: 15
