@@ -46,7 +46,8 @@ mkdir -p "$REPORT_DIR"
 # Log file (defined early so trap handler can use it)
 LOG_FILE="$REPORT_DIR/cron-${PROMPT_NAME}-${DATE}.log"
 
-# EXIT trap — always writes termination status to log, even on crash/kill
+# EXIT trap — always writes termination status to log AND a failure record,
+# even on crash/kill/signal, so silent failures stay observable.
 _cleanup() {
   local rc=$?
   if [[ -f "$LOG_FILE" ]] && ! grep -q '^COMPLETED$' "$LOG_FILE" 2>/dev/null; then
@@ -54,6 +55,23 @@ _cleanup() {
     echo "INTERRUPTED (signal or crash)" >> "$LOG_FILE"
     echo "Exit: $rc" >> "$LOG_FILE"
     echo "End: $(date -Iseconds)" >> "$LOG_FILE"
+    local FAIL_DIR="$WORKSPACE/.claude/failures"
+    local FAIL_FILE="$FAIL_DIR/${DATE}-${PROMPT_NAME}.md"
+    if [[ ! -f "$FAIL_FILE" ]]; then
+      mkdir -p "$FAIL_DIR" 2>/dev/null || true
+      {
+        echo "# Cron Failure: $PROMPT_NAME"
+        echo "- **Date**: $DATE"
+        echo "- **Exit Code**: $rc"
+        echo "- **Reason**: INTERRUPTED (signal/crash before COMPLETED)"
+        echo "- **Log**: $LOG_FILE"
+        echo
+        echo "## Last 20 lines of output"
+        echo '```'
+        tail -20 "$LOG_FILE" 2>/dev/null
+        echo '```'
+      } > "$FAIL_FILE" 2>/dev/null || true
+    fi
   fi
   rm -f "$LOCK_FILE"
 }
