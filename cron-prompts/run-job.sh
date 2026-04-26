@@ -134,35 +134,58 @@ fi
 echo "Claude: $CLAUDE_BIN ($($CLAUDE_BIN --version 2>/dev/null || echo 'version unknown'))" | tee -a "$LOG_FILE"
 echo "Timeout: ${TIMEOUT_SEC}s | MaxTurns: ${MAX_TURNS}" | tee -a "$LOG_FILE"
 
-# Pre-flight API health check — skip run if API is unreachable
-API_STATUS=$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 \
-  -H "x-api-key: ${ANTHROPIC_API_KEY:-dummy}" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  -d '{"model":"claude-sonnet-4-20250514","max_tokens":1,"messages":[{"role":"user","content":"ping"}]}' \
-  https://api.anthropic.com/v1/messages 2>/dev/null || echo "000")
-
-if [[ "$API_STATUS" == "000" ]]; then
-  echo "SKIP: Anthropic API unreachable (pre-flight check failed)" | tee -a "$LOG_FILE"
-  EXIT_CODE=2
+# Pre-flight API health check — validate credentials, not just network reachability.
+# Distinguishes 200 (auth ok) / 401-403 (bad credentials, fail fast) / 000-5xx (unreachable, skip).
+_emit_preflight_failure() {
+  local code="$1" reason="$2"
+  EXIT_CODE="$code"
   echo "COMPLETED" | tee -a "$LOG_FILE"
   echo "---" | tee -a "$LOG_FILE"
   echo "Exit: $EXIT_CODE" | tee -a "$LOG_FILE"
   echo "End: $(date -Iseconds)" | tee -a "$LOG_FILE"
-  # Log failure
-  FAILURE_DIR="$WORKSPACE/.claude/failures"
+  local FAILURE_DIR="$WORKSPACE/.claude/failures"
   mkdir -p "$FAILURE_DIR"
   cat > "$FAILURE_DIR/${DATE}-${PROMPT_NAME}.md" <<FAIL
 # Cron Failure: $PROMPT_NAME
 - **Date**: $DATE
 - **Exit Code**: $EXIT_CODE
-- **Reason**: API unreachable (pre-flight health check)
+- **Reason**: $reason
 - **Log**: $LOG_FILE
 FAIL
   rm -f "$LOCK_FILE"
-  exit $EXIT_CODE
+  exit "$EXIT_CODE"
+}
+
+if [[ -z "${ANTHROPIC_API_KEY:-}" ]]; then
+  echo "FATAL: ANTHROPIC_API_KEY is not set — cannot run cron job" | tee -a "$LOG_FILE"
+  _emit_preflight_failure 1 "ANTHROPIC_API_KEY not set"
 fi
-echo "Pre-flight: API reachable (HTTP $API_STATUS)" | tee -a "$LOG_FILE"
+
+# count_tokens endpoint is free and validates auth without consuming model tokens.
+API_STATUS=$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 \
+  -X POST \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d '{"model":"claude-sonnet-4-20250514","messages":[{"role":"user","content":"ping"}]}' \
+  https://api.anthropic.com/v1/messages/count_tokens 2>/dev/null || echo "000")
+
+case "$API_STATUS" in
+  200)
+    echo "Pre-flight: API authenticated (HTTP 200)" | tee -a "$LOG_FILE"
+    ;;
+  401|403)
+    echo "FATAL: API authentication failed (HTTP $API_STATUS) — check ANTHROPIC_API_KEY rotation/storage" | tee -a "$LOG_FILE"
+    _emit_preflight_failure 1 "API authentication failed (HTTP $API_STATUS)"
+    ;;
+  000|5*)
+    echo "SKIP: Anthropic API unreachable (HTTP $API_STATUS)" | tee -a "$LOG_FILE"
+    _emit_preflight_failure 2 "API unreachable (HTTP $API_STATUS)"
+    ;;
+  *)
+    echo "WARN: Pre-flight returned unexpected HTTP $API_STATUS — proceeding cautiously" | tee -a "$LOG_FILE"
+    ;;
+esac
 
 # Run Claude Code headless with exponential backoff retry + jitter
 RETRY_DELAYS=(30 60 120 180 300)
@@ -179,6 +202,11 @@ while true; do
     --max-turns "$MAX_TURNS" \
     <<< "$PROMPT_CONTENT" 2>&1 | tee -a "$LOG_FILE"
   EXIT_CODE=${pipestatus[1]}
+
+  # Claude's final stdout/stderr line may not end with a newline, which would
+  # concatenate with the next echo (e.g. "Reached max turns (15)FATAL: ...").
+  # Force a newline separator before any subsequent log output.
+  printf '\n' | tee -a "$LOG_FILE" >/dev/null
 
   if [[ "$EXIT_CODE" -eq 0 ]]; then
     break
