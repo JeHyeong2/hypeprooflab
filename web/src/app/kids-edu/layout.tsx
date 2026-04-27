@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LayoutFooter } from "./_components/LayoutFooter";
+import { LangSwitch } from "./_components/LangSwitch";
 import "./kids-edu.css";
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ export default function KidsEduLayout({
 }) {
   return (
     <div className="kids-edu-root">
+      <LangSwitch />
       {children}
       <LayoutFooter />
     </div>

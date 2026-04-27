@@ -1,26 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useKidsLang, c } from "../_i18n/content";
+import { useIdentityLang, c } from "../_i18n/content";
 
-export function LayoutFooter() {
-  const pathname = usePathname();
-  const lang = useKidsLang();
-  const isMainLanding = pathname === "/kids-edu";
-
-  const href = isMainLanding ? "/" : "/kids-edu";
-  const label = isMainLanding ? c.backHome[lang] : c.backAcademy[lang];
+export function IdentityFooter() {
+  const lang = useIdentityLang();
 
   return (
     <footer className="border-t border-[color:var(--kf-divider)] py-10">
       <div className="mx-auto max-w-6xl px-6 text-center">
         <Link
-          href={href}
+          href="/"
           className="inline-flex items-center gap-1.5 text-sm text-[color:var(--kf-muted)] hover:text-[color:var(--kf-fg)] transition-colors"
         >
           <span aria-hidden>←</span>
-          <span>{label}</span>
+          <span>{c.backHome[lang]}</span>
         </Link>
       </div>
     </footer>
