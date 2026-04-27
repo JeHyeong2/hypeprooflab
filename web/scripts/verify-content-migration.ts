@@ -42,8 +42,19 @@ function arraysEqual(a: unknown[], b: unknown[]): boolean {
   return true;
 }
 
+function normalize(v: unknown): unknown {
+  if (Array.isArray(v)) return v.map(normalize);
+  if (v && typeof v === 'object') {
+    return Object.keys(v as Record<string, unknown>).sort().reduce((acc, k) => {
+      acc[k] = normalize((v as Record<string, unknown>)[k]);
+      return acc;
+    }, {} as Record<string, unknown>);
+  }
+  return v;
+}
+
 function jsonEqual(a: unknown, b: unknown): boolean {
-  return JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
+  return JSON.stringify(normalize(a ?? null)) === JSON.stringify(normalize(b ?? null));
 }
 
 function bodyDiffSummary(fileBody: string, dbBody: string): string {
@@ -84,7 +95,11 @@ async function verifyArticles(): Promise<Diff[]> {
         diffs.push({ file: rel, reason: 'tags_mismatch', details: `file=${JSON.stringify(fm.tags)} db=${JSON.stringify(data.tags)}` });
       }
       if (fm.citations && !jsonEqual(data.citations, fm.citations)) {
-        diffs.push({ file: rel, reason: 'citations_mismatch' });
+        diffs.push({
+          file: rel,
+          reason: 'citations_mismatch',
+          details: `file=${JSON.stringify(fm.citations).slice(0, 200)}\n      db=${JSON.stringify(data.citations).slice(0, 200)}`,
+        });
       }
     }
   }
