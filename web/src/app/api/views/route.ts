@@ -6,6 +6,10 @@ const BOT_PATTERNS = /bot|crawler|spider|slurp|googlebot|bingbot|yandex|baidu|du
 
 const SLUG_REGEX = /^[a-z0-9][a-z0-9-]{0,199}$/;
 
+function isRedisConfigured(): boolean {
+  return Boolean(process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN);
+}
+
 // H4: Strong IP hashing with HMAC-SHA256
 function hashIp(ip: string): string {
   const salt = process.env.IP_HASH_SALT;
@@ -20,6 +24,9 @@ function hashIp(ip: string): string {
 
 export async function POST(request: NextRequest) {
   try {
+    if (!isRedisConfigured()) {
+      return NextResponse.json({ counted: false, reason: 'redis-disabled' });
+    }
     const ua = request.headers.get('user-agent') || '';
     if (BOT_PATTERNS.test(ua)) {
       return NextResponse.json({ counted: false, reason: 'bot' });
@@ -63,10 +70,21 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    const redis = getRedis();
     const { searchParams } = new URL(request.url);
     const slug = searchParams.get('slug');
     const slugs = searchParams.get('slugs');
+
+    if (!isRedisConfigured()) {
+      if (slugs) {
+        const slugList = slugs.split(',').filter(Boolean).slice(0, 50);
+        const counts: Record<string, number> = {};
+        for (const s of slugList) counts[s] = 0;
+        return NextResponse.json({ counts });
+      }
+      return NextResponse.json({ count: 0 });
+    }
+
+    const redis = getRedis();
 
     if (slugs) {
       // M2: Cap batch size to 50

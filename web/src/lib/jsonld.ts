@@ -62,7 +62,7 @@ export function generateArticleJsonLd(column: { frontmatter: ColumnFrontmatter; 
   const schemaType = fm.articleType === 'news' ? 'NewsArticle' : 'ScholarlyArticle';
 
   return {
-    '@context': { '@vocab': 'https://schema.org/', '@language': lang },
+    '@context': 'https://schema.org',
     '@type': schemaType,
     headline: fm.title,
     description: fm.excerpt,
@@ -160,7 +160,7 @@ export function generateResearchArticleJsonLd(
   }
 
   return {
-    '@context': { '@vocab': 'https://schema.org/', '@language': lang },
+    '@context': 'https://schema.org',
     '@type': 'TechArticle',
     headline: fm.title,
     description: fm.excerpt,

@@ -1,4 +1,4 @@
-import { getColumn, getAllColumns, getAvailableLocalesForSlug } from '@/lib/columns';
+import { getColumn, getAllColumns, getAvailableLocalesForSlug, getColumnFromDb, getAvailableLocalesForSlugFromDb } from '@/lib/columns';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -16,7 +16,21 @@ import { generateArticleJsonLd, generateBreadcrumbJsonLd, generateHowToJsonLd } 
 
 interface Props {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ lang?: string }>;
+  searchParams: Promise<{ lang?: string; source?: string }>;
+}
+
+async function resolveColumn(slug: string, locale: string, useDb: boolean) {
+  if (useDb) {
+    return (
+      (await getColumnFromDb(slug, locale)) ||
+      (await getColumnFromDb(slug, locale === 'ko' ? 'en' : 'ko'))
+    );
+  }
+  return getColumn(slug, locale) || getColumn(slug, locale === 'ko' ? 'en' : 'ko');
+}
+
+async function resolveLocales(slug: string, useDb: boolean) {
+  return useDb ? await getAvailableLocalesForSlugFromDb(slug) : getAvailableLocalesForSlug(slug);
 }
 
 export async function generateStaticParams() {
@@ -29,12 +43,13 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const { lang } = await searchParams;
+  const { lang, source } = await searchParams;
   const locale = lang === 'en' ? 'en' : 'ko';
-  const column = getColumn(slug, locale) || getColumn(slug, locale === 'ko' ? 'en' : 'ko');
+  const useDb = source === 'db';
+  const column = await resolveColumn(slug, locale, useDb);
   if (!column) return {};
   const fm = column.frontmatter;
-  const availableLocales = getAvailableLocalesForSlug(slug);
+  const availableLocales = await resolveLocales(slug, useDb);
   const baseUrl = 'https://hypeproof-ai.xyz';
   const columnUrl = `${baseUrl}/columns/${slug}`;
 
@@ -72,13 +87,14 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 
 export default async function ColumnPage({ params, searchParams }: Props) {
   const { slug } = await params;
-  const { lang } = await searchParams;
+  const { lang, source } = await searchParams;
   const locale = lang === 'en' ? 'en' : 'ko';
+  const useDb = source === 'db';
 
-  const column = getColumn(slug, locale) || getColumn(slug, locale === 'ko' ? 'en' : 'ko');
+  const column = await resolveColumn(slug, locale, useDb);
   if (!column) notFound();
 
-  const availableLocales = getAvailableLocalesForSlug(slug);
+  const availableLocales = await resolveLocales(slug, useDb);
   const { frontmatter, content } = column;
   const currentLocale = column.locale;
 

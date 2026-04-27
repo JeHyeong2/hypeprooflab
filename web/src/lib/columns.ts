@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { getSupabase } from './supabase';
 
 export interface Citation {
   title: string;
@@ -110,4 +111,51 @@ export function getAvailableLocalesForSlug(slug: string): string[] {
     const filePath = path.join(CONTENT_DIR, locale, `${slug}.md`);
     return fs.existsSync(filePath);
   });
+}
+
+// ─── DB-backed (track 1A) ─────────────────────────────────────────────
+// These coexist with the fs-backed functions above so callers can opt in
+// via `?source=db` for now. Once verified end-to-end, the fs path will
+// be removed.
+
+export async function getColumnFromDb(slug: string, locale: string = 'ko'): Promise<Column | null> {
+  const supabase = getSupabase();
+  const { data, error } = await supabase
+    .from('articles')
+    .select('*')
+    .eq('slug', slug)
+    .eq('locale', locale)
+    .eq('status', 'published')
+    .maybeSingle();
+  if (error || !data) return null;
+  return {
+    frontmatter: {
+      title: data.title,
+      creator: data.creator,
+      date: data.date,
+      updated: data.updated ?? undefined,
+      category: data.category,
+      tags: data.tags ?? [],
+      slug: data.slug,
+      readTime: data.read_time,
+      excerpt: data.excerpt,
+      creatorImage: data.creator_image ?? undefined,
+      citations: data.citations ?? undefined,
+      references: data.references_list ?? undefined,
+    } as ColumnFrontmatter,
+    content: data.body,
+    locale,
+    slug,
+  };
+}
+
+export async function getAvailableLocalesForSlugFromDb(slug: string): Promise<string[]> {
+  const supabase = getSupabase();
+  const { data, error } = await supabase
+    .from('articles')
+    .select('locale')
+    .eq('slug', slug)
+    .eq('status', 'published');
+  if (error || !data) return [];
+  return Array.from(new Set(data.map(r => r.locale as string)));
 }
