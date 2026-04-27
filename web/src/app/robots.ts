@@ -25,9 +25,11 @@ export default function robots(): MetadataRoute.Robots {
         crawlDelay: 1,
       },
 
-      // 2) Major search engines — tuned crawl rate
-      { userAgent: 'Googlebot',       crawlDelay: 0 },
-      { userAgent: 'Googlebot-Image', allow: ['/logos/', '/members/', '/authors/', '/og-image.png'], crawlDelay: 0 },
+      // 2) Major search engines — explicit allow + disallow.
+      //    Googlebot uses ONLY its own group (does not inherit from `*`),
+      //    so allow/disallow must be repeated here.
+      { userAgent: 'Googlebot',       allow: '/', disallow: blockedPaths },
+      { userAgent: 'Googlebot-Image', allow: ['/logos/', '/members/', '/authors/', '/og-image.png'], disallow: blockedPaths },
       { userAgent: 'Googlebot-News',  disallow: '/' }, // not a Google News publisher
       { userAgent: 'GoogleOther',     allow: '/', disallow: blockedPaths },
       { userAgent: 'Bingbot',         crawlDelay: 1 },
