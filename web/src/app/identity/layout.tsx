@@ -7,18 +7,18 @@ import { IdentityFooter } from "./_components/IdentityFooter";
 import "../kids-edu/kids-edu.css";
 
 export const metadata: Metadata = {
-  title: "HypeProof — AI 크리에이터가 모이는 곳",
+  title: "HypeProof Lab — AI 크리에이터가 모이는 곳",
   description:
     "AI 빌더·리서처·크리에이터가 모이는 곳. 기술이 아니라 창작에 집중합니다.",
   openGraph: {
-    title: "HypeProof — Where AI creators gather",
+    title: "HypeProof Lab — Where AI creators gather",
     description:
       "Where AI builders, researchers, and creators gather — focused on creation, not the tech itself.",
     type: "website",
   },
 };
 
-// HypeProof 브랜드 퍼플로 accent 재정의 (kids-edu의 Apple blue 대신).
+// HypeProof Lab 브랜드 퍼플로 accent 재정의 (kids-edu의 Apple blue 대신).
 const identityThemeVars: CSSProperties = {
   ["--kf-accent" as string]: "#a855f7",
   ["--kf-accent-hover" as string]: "#9333ea",

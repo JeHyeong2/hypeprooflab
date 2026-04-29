@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Platform Update — 2026-04-27 · 제형</title>
+  <style>
+    :root {
+      --bg-page: #0d1117;
+      --bg-card: #161b22;
+      --bg-card-hover: #1c2129;
+      --border: #30363d;
+      --border-soft: #21262d;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --text-dim: #6e7681;
+      --accent: #9b59b6;       /* 제형 색 */
+      --accent-soft: rgba(155,89,182,0.18);
+      --blue: #58a6ff;
+      --green: #27ae60;
+      --red: #e74c3c;
+      --yellow: #f1c40f;
+      --orange: #e8734a;
+    }
+    * { box-sizing: border-box; }
+    html, body { background: var(--bg-page); color: var(--text); margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', 'Noto Sans KR', sans-serif;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 36px 20px 80px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 22px;
+      margin-bottom: 28px;
+      position: relative;
+    }
+    header::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 22px; width: 4px;
+      background: var(--accent); border-radius: 2px;
+    }
+    header .meta { color: var(--text-muted); font-size: 12px; letter-spacing: 0.5px; margin-bottom: 6px; padding-left: 18px; }
+    header h1 { margin: 0 0 8px; font-size: 26px; font-weight: 700; padding-left: 18px; letter-spacing: -0.01em; }
+    header .sub { color: var(--text-muted); font-size: 13.5px; padding-left: 18px; }
+    header .badge-row { padding-left: 18px; margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .pill {
+      font-size: 11px; padding: 3px 10px; border-radius: 999px;
+      background: var(--accent-soft); color: var(--accent); font-weight: 600;
+      border: 1px solid var(--accent);
+    }
+    .pill.muted { background: rgba(139,148,158,0.12); color: var(--text-muted); border-color: var(--border); }
+
+    /* ── TLDR ── */
+    .tldr {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 16px 20px; margin-bottom: 28px;
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .tldr .label {
+      font-size: 11px; color: var(--accent); font-weight: 700; letter-spacing: 1px; flex-shrink: 0;
+      padding-top: 2px;
+    }
+    .tldr .body { font-size: 14px; line-height: 1.65; }
+
+    /* ── Sections ── */
+    section { margin-bottom: 36px; }
+    h2 {
+      font-size: 14px; font-weight: 700; letter-spacing: 1.2px;
+      color: var(--text-muted); text-transform: uppercase;
+      margin: 0 0 14px; padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    h2 .num { color: var(--accent); margin-right: 8px; }
+
+    /* ── KPI bars ── */
+    .kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 720px) { .kpi-grid { grid-template-columns: 1fr; } }
+    .kpi {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 16px;
+    }
+    .kpi-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 8px;
+    }
+    .kpi-name { font-weight: 600; font-size: 13.5px; }
+    .kpi-pct { font-variant-numeric: tabular-nums; font-size: 12px; color: var(--text-muted); }
+    .kpi-pct .v { color: var(--text); font-weight: 600; font-size: 13px; }
+    .bar-track {
+      height: 6px; background: var(--border-soft); border-radius: 3px; overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .bar-fill { height: 100%; border-radius: 3px; }
+    .kpi-note { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+    /* ── Track progress ── */
+    .tracks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    @media (max-width: 720px) { .tracks { grid-template-columns: 1fr 1fr; } }
+    .track {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px; position: relative; overflow: hidden;
+    }
+    .track .ring { position: relative; width: 80px; height: 80px; margin: 4px auto 8px; }
+    .track .ring svg { transform: rotate(-90deg); }
+    .track .ring .pct {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums;
+    }
+    .track-title { text-align: center; font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+    .track-sub { text-align: center; font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+
+    /* ── Deliverables list ── */
+    .deliv {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden;
+    }
+    .deliv-row {
+      display: grid; grid-template-columns: 26px 1fr 70px 70px;
+      gap: 12px; padding: 12px 16px;
+      border-bottom: 1px solid var(--border-soft);
+      align-items: center;
+    }
+    .deliv-row:last-child { border-bottom: none; }
+    .deliv-row .ico { font-size: 16px; text-align: center; }
+    .deliv-row .name { font-weight: 600; font-size: 13px; }
+    .deliv-row .name code {
+      background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 4px;
+      font-size: 12px; color: var(--accent); font-family: ui-monospace, monospace;
+    }
+    .deliv-row .desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; line-height: 1.5; }
+    .deliv-row .stat { font-size: 11.5px; color: var(--text-muted); text-align: right; font-variant-numeric: tabular-nums; }
+    .deliv-row .stat .num { color: var(--text); font-weight: 600; }
+
+    /* ── Timeline ── */
+    .timeline { position: relative; padding-left: 24px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 8px; top: 6px; bottom: 6px;
+      width: 2px; background: var(--border);
+    }
+    .tl-item { position: relative; margin-bottom: 14px; }
+    .tl-item::before {
+      content: ''; position: absolute; left: -22px; top: 6px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--bg-page);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .tl-item.done::before { background: var(--green); box-shadow: 0 0 0 2px var(--green); }
+    .tl-item.wip::before  { background: var(--yellow); box-shadow: 0 0 0 2px var(--yellow); }
+    .tl-time {
+      font-size: 11px; color: var(--text-muted); font-family: ui-monospace, monospace;
+      margin-bottom: 2px;
+    }
+    .tl-title { font-size: 13.5px; font-weight: 600; margin-bottom: 3px; }
+    .tl-meta { font-size: 12px; color: var(--text-muted); }
+    .tl-meta code {
+      font-size: 11px; padding: 1px 6px; background: var(--bg-card-hover);
+      border-radius: 4px; color: var(--text); font-family: ui-monospace, monospace;
+    }
+
+    /* ── Stat row ── */
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 12px;
+    }
+    @media (max-width: 600px) { .stats { grid-template-columns: 1fr 1fr; } }
+    .stat-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .stat-card .v { font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .stat-card .v.accent { color: var(--accent); }
+    .stat-card .l { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; margin-top: 2px; }
+
+    /* ── Tables ── */
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    table th, table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border-soft); }
+    table th { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+    table tbody tr:hover { background: rgba(255,255,255,0.02); }
+
+    /* ── Open Q badges ── */
+    .qbadge { font-size: 10.5px; padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.4px; }
+    .qbadge.tbd { background: rgba(241,196,15,0.12); color: var(--yellow); border: 1px solid rgba(241,196,15,0.4); }
+    .qbadge.set { background: rgba(39,174,96,0.12); color: var(--green); border: 1px solid rgba(39,174,96,0.4); }
+
+    footer {
+      margin-top: 40px; padding-top: 18px;
+      border-top: 1px solid var(--border-soft);
+      color: var(--text-dim); font-size: 11.5px; line-height: 1.6;
+    }
+    footer code { font-family: ui-monospace, monospace; padding: 1px 5px; background: var(--bg-card); border-radius: 3px; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ─── Header ─── -->
+  <header>
+    <div class="meta">DAILY PLATFORM UPDATE · 2026-04-27</div>
+    <h1>HypeProof Platform — DB 마이그레이션 1A 진입</h1>
+    <div class="sub">담당: <strong style="color:var(--accent)">신제형 (Platform Lead)</strong> · 브랜치 <code style="font-family:ui-monospace,monospace;font-size:12px;background:rgba(255,255,255,0.05);padding:1px 6px;border-radius:4px;">feat/migration-and-refactor</code></div>
+    <div class="badge-row">
+      <span class="pill">SEO 색인 fix</span>
+      <span class="pill">Migration RFC</span>
+      <span class="pill">Track 1A 진입</span>
+      <span class="pill muted">Track 1B–4 대기</span>
+    </div>
+  </header>
+
+  <!-- ─── TLDR ─── -->
+  <div class="tldr">
+    <div class="label">TL;DR</div>
+    <div class="body">
+      Google Search Console <strong>색인 누락 원인 5가지 진단·수정 완료</strong> (sitemap에 콘텐츠 페이지 186개 추가, robots.txt Googlebot 그룹 명시, lastmod 정확화). 동시에
+      <strong>markdown → Supabase 콘텐츠 마이그레이션 1A를 로컬에서 검증 완료</strong> — 186개 .md를 Postgres에 seed → DB와 byte-identical 일치 0 diff. 듀얼 소스 패턴(<code>?source=db</code>) 1개 라우트로 데모, 페이지가 동일 렌더되는 것 라이브로 확인. 다음 단계는 lib 함수 확장 + 어드민 UI(트랙 1B).
+    </div>
+  </div>
+
+  <!-- ─── 작업량 통계 ─── -->
+  <section>
+    <h2><span class="num">01</span>오늘의 작업량</h2>
+    <div class="stats">
+      <div class="stat-card"><div class="v accent">7</div><div class="l">Commits (today)</div></div>
+      <div class="stat-card"><div class="v">38</div><div class="l">Files Changed</div></div>
+      <div class="stat-card"><div class="v">+3,500</div><div class="l">Lines (net)</div></div>
+      <div class="stat-card"><div class="v">186</div><div class="l">.md → DB Seeded</div></div>
+    </div>
+  </section>
+
+  <!-- ─── KPI 진행도 ─── -->
+  <section>
+    <h2><span class="num">02</span>제형 KPI 영역별 진행도 (today's contribution)</h2>
+    <div class="kpi-grid">
+
+      <div class="kpi">
+        <div class="kpi-head"><div class="kpi-name">Next.js</div><div class="kpi-pct"><span class="v">85%</span> · 강한 기여</div></div>
+        <div class="bar-track"><div class="bar-fill" style="width: 85%; background: var(--accent);"></div></div>
+        <div class="kpi-note">App Router metadata routes(sitemap.ts·robots.ts) 전면 개편, 동적 라우트 듀얼 소스 패턴(<code style="font-size:11px;">?source=db</code>), ISR 1h 적용.</div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-head"><div class="kpi-name">TypeScript</div><div class="kpi-pct"><span class="v">75%</span> · 견고</div></div>
+        <div class="bar-track"><div class="bar-fill" style="width: 75%; background: var(--accent);"></div></div>
+        <div class="kpi-note">신규 스크립트 2개 모두 TS(<code style="font-size:11px;">tsx</code> 런너), Supabase 클라이언트 타입 안전 통합.</div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-head"><div class="kpi-name">Web Development</div><div class="kpi-pct"><span class="v">80%</span> · 풀스택</div></div>
+        <div class="bar-track"><div class="bar-fill" style="width: 80%; background: var(--accent);"></div></div>
+        <div class="kpi-note">Postgres 스키마 + RLS + 인덱스 + 트리거. Docker 위 Supabase 풀스택 (Auth/Storage/Realtime 12 컨테이너) 운용.</div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-head"><div class="kpi-name">Frontend Architecture</div><div class="kpi-pct"><span class="v">90%</span> · 큰 그림</div></div>
+        <div class="bar-track"><div class="bar-fill" style="width: 90%; background: var(--accent);"></div></div>
+        <div class="kpi-note">Migration RFC 4트랙 마스터 플랜(346 라인), §7.1 외부 기고 시나리오 매트릭스 9가지 옵션.</div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-head"><div class="kpi-name">Performance Optimization</div><div class="kpi-pct"><span class="v">70%</span> · SEO 회복</div></div>
+        <div class="bar-track"><div class="bar-fill" style="width: 70%; background: var(--accent);"></div></div>
+        <div class="kpi-note">lastmod 가짜 갱신 제거, Googlebot 그룹 explicit allow, views API 500→200 graceful fallback.</div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-head"><div class="kpi-name">UI/UX</div><div class="kpi-pct"><span class="v">15%</span> · 후속 트랙 1B</div></div>
+        <div class="bar-track"><div class="bar-fill" style="width: 15%; background: var(--orange);"></div></div>
+        <div class="kpi-note">오늘 작업은 인프라·문서 위주. 어드민 UI(트랙 1B) 진입 시 본격 가동 예정.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── 트랙 진행도 ─── -->
+  <section>
+    <h2><span class="num">03</span>마이그레이션 4트랙 — 전체 진행도</h2>
+    <div class="tracks">
+
+      <!-- Track 1: DB -->
+      <div class="track">
+        <div class="ring">
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <circle cx="40" cy="40" r="34" fill="none" stroke="var(--border)" stroke-width="6" />
+            <circle cx="40" cy="40" r="34" fill="none" stroke="var(--accent)" stroke-width="6"
+              stroke-dasharray="213.6" stroke-dashoffset="128.16" stroke-linecap="round" />
+          </svg>
+          <div class="pct" style="color: var(--accent);">40%</div>
+        </div>
+        <div class="track-title">트랙 1: DB 마이그</div>
+        <div class="track-sub">스키마·seed·검증·데모 1라우트<br/>나머지 12 호출지점 + 운영 적용</div>
+      </div>
+
+      <!-- Track 2: Realtime -->
+      <div class="track">
+        <div class="ring">
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <circle cx="40" cy="40" r="34" fill="none" stroke="var(--border)" stroke-width="6" />
+          </svg>
+          <div class="pct" style="color: var(--text-muted);">0%</div>
+        </div>
+        <div class="track-title">트랙 2: 실시간</div>
+        <div class="track-sub">Realtime 댓글<br/>+ in-app 알림</div>
+      </div>
+
+      <!-- Track 3: Messenger -->
+      <div class="track">
+        <div class="ring">
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <circle cx="40" cy="40" r="34" fill="none" stroke="var(--border)" stroke-width="6" />
+            <circle cx="40" cy="40" r="34" fill="none" stroke="var(--yellow)" stroke-width="6"
+              stroke-dasharray="213.6" stroke-dashoffset="202.92" stroke-linecap="round" />
+          </svg>
+          <div class="pct" style="color: var(--yellow);">5%</div>
+        </div>
+        <div class="track-title">트랙 3: 백오피스 메신저</div>
+        <div class="track-sub">RFC 설계·시나리오만<br/>구현 0%</div>
+      </div>
+
+      <!-- Track 4: Refactor -->
+      <div class="track">
+        <div class="ring">
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <circle cx="40" cy="40" r="34" fill="none" stroke="var(--border)" stroke-width="6" />
+          </svg>
+          <div class="pct" style="color: var(--text-muted);">0%</div>
+        </div>
+        <div class="track-title">트랙 4: 페이지 리뉴얼</div>
+        <div class="track-sub">스코프 미정<br/>1·2 안정 후 진입</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── 핵심 deliverables ─── -->
+  <section>
+    <h2><span class="num">04</span>오늘 만든 것 (deliverables)</h2>
+    <div class="deliv">
+
+      <div class="deliv-row">
+        <div class="ico">📐</div>
+        <div>
+          <div class="name"><code>docs/MIGRATION-RFC.md</code></div>
+          <div class="desc">4트랙(DB·실시간·메신저·리팩터) 마스터 플랜. §7 미해결 결정 9개, §7.1 외부 기고 9-옵션 매트릭스 + 추천 조합 3종.</div>
+        </div>
+        <div class="stat"><span class="num">+432</span> lines</div>
+        <div class="stat">신규</div>
+      </div>
+
+      <div class="deliv-row">
+        <div class="ico">🔍</div>
+        <div>
+          <div class="name"><code>docs/SEO-INDEXING.md</code></div>
+          <div class="desc">색인·사이트맵·robots 단일 참조 문서. Google Search Central 공식 규칙 인용, 흔한 실수 5개(이번 사례) 정리, 운영 매뉴얼.</div>
+        </div>
+        <div class="stat"><span class="num">+440</span> lines</div>
+        <div class="stat">신규</div>
+      </div>
+
+      <div class="deliv-row">
+        <div class="ico">🧪</div>
+        <div>
+          <div class="name"><code>docs/MIGRATION-TEST-SETUP.md</code></div>
+          <div class="desc">로컬 Supabase 테스트 환경 가이드 — 5분 안에 reset → seed → verify 일괄 실행. 실패 시나리오 6가지 트러블슈팅.</div>
+        </div>
+        <div class="stat"><span class="num">+154</span> lines</div>
+        <div class="stat">신규</div>
+      </div>
+
+      <div class="deliv-row">
+        <div class="ico">🗄️</div>
+        <div>
+          <div class="name"><code>web/supabase/migrations/003_content.sql</code></div>
+          <div class="desc">articles · novels · research_posts 3개 테이블 + GIN 인덱스 + updated_at 트리거 + RLS(published만 read).</div>
+        </div>
+        <div class="stat"><span class="num">+127</span> lines</div>
+        <div class="stat">신규</div>
+      </div>
+
+      <div class="deliv-row">
+        <div class="ico">🌱</div>
+        <div>
+          <div class="name"><code>web/scripts/seed-content.ts</code></div>
+          <div class="desc">186개 .md 파일을 gray-matter로 파싱 → 멱등 upsert. articles(68) + novels(32) + research_posts(86).</div>
+        </div>
+        <div class="stat"><span class="num">+186</span> lines</div>
+        <div class="stat">신규</div>
+      </div>
+
+      <div class="deliv-row">
+        <div class="ico">✅</div>
+        <div>
+          <div class="name"><code>web/scripts/verify-content-migration.ts</code></div>
+          <div class="desc">.md ↔ DB byte-identical 비교. body·tags·citations(JSONB) 정규화 deep-equal. <strong style="color:var(--green)">186/186 PASS</strong>.</div>
+        </div>
+        <div class="stat"><span class="num">+186</span> lines</div>
+        <div class="stat">신규</div>
+      </div>
+
+      <div class="deliv-row">
+        <div class="ico">🌐</div>
+        <div>
+          <div class="name"><code>web/src/app/sitemap.ts</code> · <code>robots.ts</code></div>
+          <div class="desc">콘텐츠 페이지 186개 동적 추가, lastmod=frontmatter.date(가짜 갱신 제거), hreflang(<code>alternates.languages</code>), Googlebot 그룹 explicit allow.</div>
+        </div>
+        <div class="stat"><span class="num">~150</span> lines</div>
+        <div class="stat">개선</div>
+      </div>
+
+      <div class="deliv-row">
+        <div class="ico">🔌</div>
+        <div>
+          <div class="name"><code>web/src/lib/columns.ts</code> · <code>app/columns/[slug]/page.tsx</code></div>
+          <div class="desc">DB 함수 추가(getColumnFromDb), <code>?source=db</code> 토글로 듀얼 소스 데모. 라이브에서 /columns/era-of-the-chairman?source=db 200 응답 확인.</div>
+        </div>
+        <div class="stat"><span class="num">~100</span> lines</div>
+        <div class="stat">개선</div>
+      </div>
+
+      <div class="deliv-row">
+        <div class="ico">🛡️</div>
+        <div>
+          <div class="name"><code>web/src/lib/jsonld.ts</code> · <code>api/views/route.ts</code></div>
+          <div class="desc">JSON-LD @context 객체→문자열 통일(파서 호환성), Redis 미설정 시 graceful no-op(500→200). fail-closed 안전성↑.</div>
+        </div>
+        <div class="stat"><span class="num">~30</span> lines</div>
+        <div class="stat">fix</div>
+      </div>
+
+      <div class="deliv-row">
+        <div class="ico">📦</div>
+        <div>
+          <div class="name"><code>web/supabase/config.toml</code> · <code>web/.env.test.example</code></div>
+          <div class="desc">로컬 스택 (Postgres 15 + Auth + Storage + Studio + Realtime) 12개 컨테이너 자동 기동. <code>npm run db:start</code> 1줄.</div>
+        </div>
+        <div class="stat"><span class="num">+90</span> lines</div>
+        <div class="stat">신규</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── Commit timeline ─── -->
+  <section>
+    <h2><span class="num">05</span>오늘 커밋 타임라인</h2>
+    <div class="timeline">
+
+      <div class="tl-item done">
+        <div class="tl-time">f69cb74 · kids_edu</div>
+        <div class="tl-title">feat(seo): fix sitemap and robots for proper indexing</div>
+        <div class="tl-meta">콘텐츠 186개 sitemap 동적 추가, lastmod 정확화, hreflang, Googlebot 그룹 명시. <code>4 files / +792</code></div>
+      </div>
+
+      <div class="tl-item done">
+        <div class="tl-time">38c9424 · kids_edu</div>
+        <div class="tl-title">feat(kids-edu, identity): add i18n content split + identity landing</div>
+        <div class="tl-meta">기존 작업 정리·커밋. <code>15 files / +1,581 / -508</code></div>
+      </div>
+
+      <div class="tl-item done">
+        <div class="tl-time">58689c1 · feat/migration</div>
+        <div class="tl-title">docs(migration): RFC + content tables migration</div>
+        <div class="tl-meta">RFC 마스터 플랜 + 003_content.sql. <code>2 files / +346</code></div>
+      </div>
+
+      <div class="tl-item done">
+        <div class="tl-time">83f58df · feat/migration</div>
+        <div class="tl-title">test(migration): local Supabase test env for track 1A</div>
+        <div class="tl-meta">config.toml + seed-content.ts + verify-content-migration.ts + npm scripts. <code>8 files / +633</code></div>
+      </div>
+
+      <div class="tl-item done">
+        <div class="tl-time">cc97e6b · feat/migration</div>
+        <div class="tl-title">test(migration): pass full local migration verification</div>
+        <div class="tl-meta">JSONB 키 순서 차이 정규화. <strong style="color:var(--green)">diffs=0</strong>. <code>2 files / +19</code></div>
+      </div>
+
+      <div class="tl-item wip">
+        <div class="tl-time">e6e53cc · feat/migration</div>
+        <div class="tl-title">feat(track-1A): dual-source columns route + jsonld string @context</div>
+        <div class="tl-meta">getColumnFromDb + ?source=db 토글 + JSON-LD @context 정규화. <code>6 files / +115 / -21</code></div>
+      </div>
+
+      <div class="tl-item wip">
+        <div class="tl-time">eae8ead · feat/migration</div>
+        <div class="tl-title">chore(env): clear literal sb_secret_* from .env.test.example</div>
+        <div class="tl-meta">GitHub Push Protection 우회용 placeholder + 동적 키 안내. <code>1 file / +13 / -17</code></div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">미커밋</div>
+        <div class="tl-title">RFC §7.1 외부 기고 시나리오 분석</div>
+        <div class="tl-meta">Q7-Q9 추가, 9-옵션 매트릭스, 추천 조합 3종, DB 스키마 영향. <code>+86 lines</code></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── Open Questions ─── -->
+  <section>
+    <h2><span class="num">06</span>의사결정 필요 (RFC §7)</h2>
+    <table>
+      <thead>
+        <tr><th style="width:40px;">#</th><th>질문</th><th style="width:90px;">상태</th><th style="width:160px;">결정 시점</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Q1</td><td>Discord와의 관계 (대체/병행/브리지)</td><td><span class="qbadge tbd">TBD</span></td><td>메신저 MVP 시작 전</td></tr>
+        <tr><td>Q2</td><td>백오피스 메신저 외부 공개 여부</td><td><span class="qbadge set">멤버 전용</span></td><td>(임시 디폴트)</td></tr>
+        <tr><td>Q3</td><td>콘텐츠 참조 UX (위키/슬래시/unfurl)</td><td><span class="qbadge set">URL unfurl + 슬래시</span></td><td>(임시 디폴트)</td></tr>
+        <tr><td>Q4</td><td>마크다운 에디터 (Tiptap/Lexical/CodeMirror)</td><td><span class="qbadge set">Tiptap</span></td><td>(임시 디폴트)</td></tr>
+        <tr><td>Q5</td><td>메신저 검색 강도 (ILIKE/FTS/Meilisearch)</td><td><span class="qbadge set">Postgres FTS</span></td><td>(임시 디폴트)</td></tr>
+        <tr><td>Q6</td><td>배포 흐름 (Vercel CLI vs GitHub Actions)</td><td><span class="qbadge set">GitHub Actions</span></td><td>CLAUDE.md 갱신 필요</td></tr>
+        <tr><td>Q7</td><td>외부 기고 정책 (closed/trusted/open)</td><td><span class="qbadge tbd">TBD</span></td><td>1B 안정화 후</td></tr>
+        <tr><td>Q8</td><td>외부 기고 게이트 (어드민/agent/자동발행)</td><td><span class="qbadge tbd">TBD</span></td><td>Q7과 묶어 결정</td></tr>
+        <tr><td>Q9</td><td>번역 정책 (수동/agent+검토/어드민발행)</td><td><span class="qbadge tbd">TBD</span></td><td>1B 시작 시</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ─── 다음 액션 ─── -->
+  <section>
+    <h2><span class="num">07</span>다음 액션 (this week)</h2>
+    <table>
+      <thead>
+        <tr><th style="width:40px;">#</th><th>작업</th><th style="width:120px;">트랙</th><th style="width:100px;">예상 시간</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td><code>lib/research.ts</code>·<code>lib/novels.ts</code>에 DB 함수 추가</td><td>1A</td><td>30분</td></tr>
+        <tr><td>2</td><td>research·novels 라우트에 <code>?source=db</code> 토글</td><td>1A</td><td>30분</td></tr>
+        <tr><td>3</td><td>호출지점 12+개 일괄 DB 전환 (env 토글)</td><td>1A</td><td>2~3시간</td></tr>
+        <tr><td>4</td><td>운영 Supabase에 003 적용 + seed (별도 승인)</td><td>1A</td><td>30분</td></tr>
+        <tr><td>5</td><td>트랙 1A 종료 → 어드민 UI 스펙 (트랙 1B)</td><td>1B 진입</td><td>다음 주</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ─── Member ask ─── -->
+  <section>
+    <h2><span class="num">08</span>멤버에게 부탁</h2>
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 16px 20px;">
+      <div style="font-weight: 600; margin-bottom: 8px;">Jay (admin) — Q1, Q6 결정 부탁드립니다</div>
+      <ul style="margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.8; color: var(--text-muted);">
+        <li><strong style="color:var(--text);">Q1 Discord</strong> — 메신저 트랙 진입 전 결정 필요. 저는 <em>병행 후 점진 이주(Q1=병행)</em>을 추천합니다.</li>
+        <li><strong style="color:var(--text);">Q6 배포 흐름</strong> — CLAUDE.md "Vercel: Git 미연결" 표기와 실제 GitHub Actions 자동 deploy가 모순. <em>자동 deploy 채택 + CLAUDE.md 갱신</em>으로 정리해도 될까요?</li>
+      </ul>
+      <div style="font-weight: 600; margin: 16px 0 8px;">전원 — 외부 기고(Q7-Q9) 의견</div>
+      <ul style="margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.8; color: var(--text-muted);">
+        <li>지금은 <strong style="color:var(--text);">Conservative(현재 그대로 + 멤버 7명만)</strong>이 디폴트. 추후 외부 칼럼 받고 싶으시면 RFC §7.1의 <strong style="color:var(--accent);">Curated 조합(trusted + agent filter + agent translate)</strong>을 추천합니다.</li>
+        <li>RFC 전체 본문: <code>docs/MIGRATION-RFC.md</code> (브랜치 <code>feat/migration-and-refactor</code>)</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    📂 <strong>관련 문서</strong> — <code>docs/MIGRATION-RFC.md</code> · <code>docs/MIGRATION-TEST-SETUP.md</code> · <code>docs/SEO-INDEXING.md</code><br/>
+    🌿 <strong>브랜치</strong> — <code>feat/migration-and-refactor</code> (push 대기 중, GitHub secret scanning 처리 후 push 예정)<br/>
+    🐳 <strong>로컬 스택 살아있음</strong> — Supabase Studio: <code>http://127.0.0.1:54323</code> · Next.js dev: <code>http://localhost:3030</code><br/>
+    🤖 작성: Platform Lead 신제형 + Claude Sonnet/Opus 협업 · 2026-04-27
+  </footer>
+
+</div>
+</body>
+</html>
