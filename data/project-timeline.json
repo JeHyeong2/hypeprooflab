@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "updatedAt": "2026-04-30T17:00:00+09:00",
+  "title": "HypeProof Current Project Timeline Map",
+  "subtitle": "계속 바뀌는 행보를 팀이 헷갈리지 않도록, 채널·고객·일정·산출물 기준으로 정리한 한 장",
+  "priorityBanner": {
+    "headline": "현재 우선순위 변경",
+    "body": "국립암센터 5/5 강의는 6월로 연기 → 5/5 기준 산출물은 Wrap-up → 치과 5/26과 바이오팜 제안 준비로 전환",
+    "severity": "pivot"
+  },
+  "lanes": {
+    "direct": { "label": "HypeProof Direct", "color": "#a78bfa" },
+    "channel": { "label": "Filamentree Channel", "color": "#34d399" },
+    "reusable": { "label": "Reusable Asset Layer", "color": "#94a3b8" }
+  },
+  "events": [
+    {
+      "id": "ev-boa-dental",
+      "lane": "direct",
+      "title": "보아치과",
+      "subtitle": "전문직 교육",
+      "date": { "kind": "date", "iso": "2026-04-29" },
+      "status": "planned",
+      "contacts": ["Jay 컨택트"],
+      "notes": ["5/26 확정 방향, 참석자 정리"]
+    },
+    {
+      "id": "ev-biofarm",
+      "lane": "channel",
+      "title": "바이오팜",
+      "subtitle": "Parents / Kids 교육",
+      "date": { "kind": "date", "iso": "2026-04-29" },
+      "status": "planned",
+      "contacts": ["오성은 팀장", "남완호 본부장"],
+      "notes": ["SANS 언급 금지"]
+    },
+    {
+      "id": "ev-0430-submit",
+      "lane": "channel",
+      "title": "4/30 오전 제출",
+      "subtitle": "커리큘럼 + 강사 프로필 슬라이드",
+      "date": { "kind": "date", "iso": "2026-04-30", "partOfDay": "AM" },
+      "status": "planned",
+      "owner": "TJ",
+      "notes": [
+        "필라멘트리 로고/정리 후 전달",
+        "TJ: 외부 노출 관점 검토"
+      ]
+    },
+    {
+      "id": "ev-dental-pilot",
+      "lane": "direct",
+      "title": "치과 파일럿 실행",
+      "subtitle": "간결한 강의 + 촬영 활용",
+      "date": { "kind": "date", "iso": "2026-05-26" },
+      "status": "planned",
+      "owner": "TJ",
+      "notes": ["TJ: 레퍼런스 패키지 준비"]
+    },
+    {
+      "id": "ev-donga-cancer",
+      "lane": "channel",
+      "title": "동아일보 / 국립암센터",
+      "subtitle": "소아암 교육 / 6월로 연기",
+      "date": { "kind": "month", "year": 2026, "month": 6 },
+      "status": "deferred",
+      "notes": [
+        "5/5 준비물은 폐기하지 않음",
+        "프로덕트화 / 재사용 자산화"
+      ]
+    },
+    {
+      "id": "ev-sales-asset",
+      "lane": "direct",
+      "title": "세일즈 자산화",
+      "subtitle": "영상 / 사례 / 1페이지 요약",
+      "date": { "kind": "quarter", "year": 2026, "quarter": 2 },
+      "status": "planned",
+      "notes": ["다음 유료 고객으로 연결"]
+    },
+    {
+      "id": "ev-hpl-meeting-0505",
+      "lane": "direct",
+      "title": "HypeProof Lab 모임",
+      "subtitle": "어린이날",
+      "date": { "kind": "date", "iso": "2026-05-05", "partOfDay": "PM" },
+      "status": "planned",
+      "contacts": ["참석자 전원"],
+      "notes": ["시간: 오후 5시"]
+    }
+  ],
+  "reusableAssets": [
+    {
+      "id": "asset-product-spec",
+      "title": "제품 명세서",
+      "subtitle": "무엇을 제공하는가",
+      "status": "draft"
+    },
+    {
+      "id": "asset-curriculum",
+      "title": "커리큘럼",
+      "subtitle": "누구에게 무엇을 훈련시키는가",
+      "status": "draft"
+    },
+    {
+      "id": "asset-shoot-direction",
+      "title": "촬영 방향성",
+      "subtitle": "무엇이 증거인가",
+      "status": "idea"
+    },
+    {
+      "id": "asset-sales-pitchpack",
+      "title": "세일즈 피치팩",
+      "subtitle": "Jay / 정우가 바로 사용",
+      "status": "ready",
+      "ownedBy": "Jay"
+    }
+  ],
+  "gcal": {}
+}

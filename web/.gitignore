@@ -24,6 +24,12 @@
 .DS_Store
 *.pem
 
+# Google service account keys (NEVER commit)
+hypeproof-*.json
+*-service-account*.json
+/tests/*.json
+!/tests/*.example.json
+
 # debug
 npm-debug.log*
 yarn-debug.log*

@@ -1,4 +1,4 @@
-import { getAllMembersAsync, FALLBACK_MEMBERS } from '@/lib/members';
+import { getAllMembersUnion } from '@/lib/members';
 import { getAllColumns } from '@/lib/columns';
 import { getPersonas } from '@/lib/personas';
 import { Metadata } from 'next';
@@ -39,11 +39,10 @@ export default async function CreatorsPage({ searchParams }: Props) {
   const locale = lang === 'en' ? 'en' : 'ko';
   const isKo = locale === 'ko';
 
-  // Get members from Notion (or fallback), deduplicated by displayName
-  const rawMembers = await getAllMembersAsync();
-  const members = Array.from(
-    new Map(rawMembers.map(m => [m.displayName.toLowerCase(), m])).values()
-  );
+  // Union of Notion DB + data/members.json (canonical roster). Members not yet
+  // in Notion (e.g. 정우, JeHyeong, Simon) are still rendered from members.json;
+  // Notion entries take precedence for enrichment (points, joinDate, etc).
+  const members = await getAllMembersUnion();
   const personas = await getPersonas();
 
   // Get all columns to count per creator
@@ -52,10 +51,7 @@ export default async function CreatorsPage({ searchParams }: Props) {
     new Map(allColumns.map(c => [c.frontmatter.slug, c])).values()
   );
 
-  // Build creator list: use Notion members if available, else fallback
-  const creatorList = members.length > 0
-    ? members.filter(m => m.role === 'admin' || m.role === 'creator')
-    : FALLBACK_MEMBERS.filter(m => m.role === 'admin' || m.role === 'creator');
+  const creatorList = members.filter(m => m.role === 'admin' || m.role === 'creator');
 
   // Count columns per creator
   function getColumnCount(name: string): number {

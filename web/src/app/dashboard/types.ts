@@ -20,3 +20,5 @@ export interface MembersData {
   updatedAt: string;
   members: DashboardMember[];
 }
+
+export type { TimelineData, Holiday } from '@/lib/timeline/types';

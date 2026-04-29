@@ -15,36 +15,48 @@ export interface MemberInfo {
 interface MembersJsonEntry {
   displayName: string;
   role: MemberRole;
+  email?: string;
+  joinDate?: string;
+  status?: string;
   [key: string]: unknown;
 }
 
-// Load fallback members from data/members.json (SSOT)
-function loadFallbackMembers(): { displayName: string; role: MemberRole }[] {
+// Load fallback members from data/members.json (SSOT for the canonical roster).
+// Returns the full MemberInfo shape so the /creators page can display joinDate
+// etc. for members not yet in the Notion DB (e.g. 정우, JeHyeong, Simon).
+function loadFallbackMembers(): MemberInfo[] {
   try {
     const jsonPath = join(process.cwd(), '..', 'data', 'members.json');
     const raw = readFileSync(jsonPath, 'utf-8');
     const data = JSON.parse(raw);
     return (data.members as MembersJsonEntry[])
       .filter((m) => m.status === 'active')
-      .map((m) => ({ displayName: m.displayName, role: m.role as MemberRole }));
+      .map((m) => ({
+        displayName: m.displayName,
+        role: m.role as MemberRole,
+        email: m.email ?? '',
+        ...(m.joinDate ? { joinDate: m.joinDate } : {}),
+        totalPoints: 0,
+      }));
   } catch {
-    // Hardcoded fallback if JSON file is unavailable (e.g. standalone build)
+    // Hardcoded fallback if JSON file is unavailable (e.g. standalone build).
+    // Keep this in sync with data/members.json (SSOT). 10 active members.
     return [
-      { displayName: 'Jay', role: 'admin' },
-      { displayName: 'Kiwon', role: 'creator' },
-      { displayName: 'TJ', role: 'creator' },
-      { displayName: 'Ryan', role: 'creator' },
-      { displayName: 'JY', role: 'creator' },
-      { displayName: 'BH', role: 'creator' },
-      { displayName: 'Sebastian', role: 'creator' },
-      { displayName: '제형', role: 'creator' },
-      { displayName: '정우', role: 'creator' },
-      { displayName: 'Simon', role: 'creator' },
+      { displayName: 'Jay', role: 'admin', email: '', joinDate: '2025-12-01', totalPoints: 0 },
+      { displayName: 'Kiwon', role: 'creator', email: '', joinDate: '2025-12-01', totalPoints: 0 },
+      { displayName: 'TJ', role: 'creator', email: '', joinDate: '2025-12-01', totalPoints: 0 },
+      { displayName: 'Ryan', role: 'creator', email: '', joinDate: '2025-12-01', totalPoints: 0 },
+      { displayName: 'JY', role: 'creator', email: '', joinDate: '2025-12-01', totalPoints: 0 },
+      { displayName: 'BH', role: 'creator', email: '', joinDate: '2025-12-01', totalPoints: 0 },
+      { displayName: 'Sebastian', role: 'creator', email: '', joinDate: '2025-12-01', totalPoints: 0 },
+      { displayName: '정우', role: 'creator', email: '', joinDate: '2026-01-01', totalPoints: 0 },
+      { displayName: 'JeHyeong', role: 'admin', email: '', joinDate: '2026-01-01', totalPoints: 0 },
+      { displayName: 'Simon', role: 'creator', email: '', joinDate: '2026-03-24', totalPoints: 0 },
     ];
   }
 }
 
-const FALLBACK_MEMBERS = loadFallbackMembers();
+const FALLBACK_MEMBERS: MemberInfo[] = loadFallbackMembers();
 
 // Cache — keyed by displayName (lowercased) for lookup, stores full list
 let memberList: MemberInfo[] = [];
@@ -173,6 +185,32 @@ export async function getAllMembersAsync(): Promise<MemberInfo[]> {
     await refreshCache();
   }
   return memberList;
+}
+
+/**
+ * Async union of Notion DB + data/members.json (FALLBACK_MEMBERS).
+ *
+ * Use this on pages that should show *every active member* on the roster
+ * (e.g. /creators), regardless of whether they've been added to the Notion
+ * DB yet. Notion entries take precedence (richer enrichment data: points,
+ * joinDate from Notion, etc.); members.json fills gaps for anyone not yet
+ * in Notion.
+ *
+ * Dedup key: displayName.toLowerCase().
+ */
+export async function getAllMembersUnion(): Promise<MemberInfo[]> {
+  const notion = await getAllMembersAsync();
+  const merged = new Map<string, MemberInfo>();
+
+  // Baseline: data/members.json (canonical roster).
+  for (const m of FALLBACK_MEMBERS) {
+    merged.set(m.displayName.toLowerCase(), m);
+  }
+  // Override: Notion entries (with their enrichment fields).
+  for (const m of notion) {
+    merged.set(m.displayName.toLowerCase(), m);
+  }
+  return Array.from(merged.values());
 }
 
 export { FALLBACK_MEMBERS };
