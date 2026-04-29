@@ -45,6 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/creators` },
     { url: `${SITE_URL}/glossary` },
     { url: `${SITE_URL}/ai-personas` },
+    { url: `${SITE_URL}/identity` },
   ]
 
   const koColumnSlugs = new Set(koColumns.map(c => c.slug))

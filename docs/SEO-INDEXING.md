@@ -218,6 +218,22 @@ curl -sI https://hypeproof-ai.xyz/sitemap.xml | head -5
 - 실제 빌드 안 하면 갱신 안 되는데 daily 신호 → 신뢰도 ↓
 - 그냥 빼는 게 정답.
 
+### ❌ 사례 6: layout.tsx에 직접 박은 canonical이 모든 자식 라우트와 충돌 (2026-04-29 fix)
+- 문제: `web/src/app/layout.tsx`의 `<head>` 안에 `<link rel="canonical" href="https://hypeproof-ai.xyz" />`를 직접 JSX로 출력
+- 동시에 자식 라우트(`columns/[slug]/page.tsx` 등)의 `generateMetadata()`가 `alternates.canonical`로 페이지별 정확한 canonical을 출력
+- 결과: 모든 콘텐츠 페이지의 head에 `rel="canonical"` 태그가 **2개** 출력됨 (홈 URL + 페이지 URL)
+- Google 공식 정책 (Search Central — Canonicalization): "If a page has more than one rel='canonical' link, Google will ignore all the rel='canonical' hints." → 두 시그널 **모두 무시** → 색인 그룹핑이 알고리즘 추정으로 처리되며 콘텐츠 페이지가 도메인 루트로 통합되어 색인 제외 ("Duplicate, Google chose different canonical")
+- 확인: `curl -s <url> | grep -c 'rel="canonical"'` → 2가 나오면 위반
+- 수정: layout.tsx에서 직접 JSX `<link rel="canonical">` 제거. canonical은 `metadata.alternates.canonical` (Metadata API)로만 관리. 자식 라우트의 generateMetadata가 자동으로 덮어씀.
+- 일반 원칙: **Next.js Metadata API와 직접 JSX `<link>`/`<meta>`를 혼용하지 말 것.** Next.js는 Metadata API끼리만 dedupe하며 직접 JSX는 그대로 출력됨.
+
+### ❌ 사례 7: 'use client' 페이지에 metadata export가 무력화
+- 문제: `welcome/page.tsx`, `kids-edu/page.tsx`, `identity/page.tsx`가 `'use client'`로 시작 → page.tsx에 `export const metadata = ...` 또는 `export const generateMetadata = ...` 사용 불가 (Next.js: "metadata can only be exported from a Server Component")
+- 결과: 색인 정책(`robots: { index: false }`)을 페이지 자체에 선언할 수 없어 sitemap·robots policy가 회색지대
+- 수정 패턴: 동일 라우트에 `layout.tsx` (server component)를 추가하고 거기서 `metadata`를 export. 자식 client page가 metadata를 상속받음.
+  - 색인 차단: `robots: { index: false, follow: false }`
+  - 색인 허용: layout 또는 page 둘 다에서 metadata 정의 안 하면 root layout의 robots 상속
+
 ---
 
 ## 8. 향후 작업 시 확인 사항
@@ -238,6 +254,7 @@ curl -sI https://hypeproof-ai.xyz/sitemap.xml | head -5
 | 날짜 | 작업 | PR/커밋 |
 |---|---|---|
 | 2026-04-27 | sitemap.ts 콘텐츠 페이지 동적 추가 / lastmod 정확화 / hreflang. robots.ts Googlebot 그룹 명시. SEO 문서 신설 | (이 변경) |
+| 2026-04-29 | layout.tsx의 하드코딩 `<link rel="canonical">` 제거 (canonical 중복 해결). `/welcome`·`/kids-edu` noindex 처리 (layout.tsx로 metadata 분리). `/identity` sitemap 등록. §7 사례 6·7 추가 | (이 변경) |
 
 ---
 
