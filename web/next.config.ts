@@ -25,6 +25,17 @@ const nextConfig: NextConfig = {
       ],
     },
     {
+      // Covers sub-sitemaps under the index: sitemap-static.xml,
+      // sitemap-columns.xml, sitemap-research.xml, sitemap-novels.xml,
+      // and any future sitemap-<type>.xml.
+      source: '/sitemap-:type.xml',
+      headers: [
+        { key: 'Content-Type', value: 'application/xml; charset=utf-8' },
+        { key: 'Cache-Control', value: 'public, max-age=0, s-maxage=3600, must-revalidate' },
+        { key: 'X-Robots-Tag', value: 'noindex' },
+      ],
+    },
+    {
       source: '/robots.txt',
       headers: [
         { key: 'Content-Type', value: 'text/plain; charset=utf-8' },

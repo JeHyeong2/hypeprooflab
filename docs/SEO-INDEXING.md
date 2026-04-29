@@ -46,10 +46,10 @@
 → HypeProof 사이트맵에서는 **둘 다 안 씀**. 코드 단순화 + 의도 명확.
 > *예외*: 네이버는 일부 참고하지만, 한국어/영어 양쪽 트래픽 모두 잡으려면 Google 우선이 합리적. 네이버 트래픽 비중이 압도적으로 커진다면 재고.
 
-### 1.4 크기 제한
+### 1.4 크기 제한 + 분할 전략
 - 사이트맵 1개 = **50,000 URL / 50MB**.
-- 현재 콘텐츠 약 200건 → 한참 멀음. 분할 불필요.
-- 1,000건 넘어가기 시작하면 `generateSitemaps`로 분할.
+- HypeProof는 117 URL이라 단일 sitemap으로 충분하지만 **2026-04-29부터 sitemap index + 4 sub-sitemap 구조로 선제 분할 적용**(미래 확장 대비). §3 참조.
+- 사용자 쿼리 패턴 변화 / 콘텐츠 타입 추가 시 sub-sitemap 추가만으로 확장 가능.
 
 ### 1.5 색인되지 않을 URL 배제
 - **검색 결과에 표시할 의도가 없는 URL은 sitemap에 넣지 말 것**.
@@ -59,7 +59,7 @@
 
 ### 1.6 형식
 - XML 권장 (이미지/동영상/hreflang 지원). RSS, txt도 가능하지만 다국어/이미지 메타 못 담음.
-- HypeProof는 XML 사용 (`MetadataRoute.Sitemap` → XML 자동 직렬화).
+- HypeProof는 **Route Handler(`Response()`)** 패턴 사용 (이전 `MetadataRoute.Sitemap` 자동 직렬화에서 전환). 응답 헤더(`Content-Type`, `Cache-Control`, `X-Robots-Tag`) 100% 명시 보장. §3, §7 사례 8 참조.
 
 ---
 
@@ -102,32 +102,142 @@
 
 ## 3. HypeProof 사이트맵 구조 (현재 구현)
 
-파일: `web/src/app/sitemap.ts`
+**2026-04-29 기준 — Sitemap Index + 4 sub-sitemap 구조**.
 
-### 3.1 정적 라우트
-| 라우트 | lastModified 산출 | 비고 |
+```
+web/src/
+├── lib/sitemap-helpers.ts            ← escapeXml, urlsetXml, sitemapindexXml,
+│                                       SITE_URL, SITEMAP_HEADERS, type Entry/Item
+└── app/
+    ├── sitemap.xml/route.ts          ← Sitemap Index (sitemapindex schema)
+    ├── sitemap-static.xml/route.ts   ← /, /columns, /research, /novels, /creators, /glossary, /ai-personas, /identity (8 URLs)
+    ├── sitemap-columns.xml/route.ts  ← KO 칼럼 + EN-only (~34 URLs, hreflang ko/en/x-default)
+    ├── sitemap-research.xml/route.ts ← KO 리서치 + EN-only (~43 URLs, 동일)
+    └── sitemap-novels.xml/route.ts   ← KO 노벨 (~32 URLs, 단일 locale)
+```
+
+Search Console에는 **sitemap index URL(`https://hypeproof-ai.xyz/sitemap.xml`)만 제출**. Google이 자동으로 sub-sitemap 발견.
+
+### 3.1 sitemap.xml (Index)
+
+각 sub-sitemap의 `<loc>`와 `<lastmod>`(sub의 콘텐츠 중 최신 시점) 포함. 출력 예:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<sitemap><loc>https://hypeproof-ai.xyz/sitemap-static.xml</loc></sitemap>
+<sitemap><loc>https://hypeproof-ai.xyz/sitemap-columns.xml</loc><lastmod>2026-04-08T00:00:00.000Z</lastmod></sitemap>
+<sitemap><loc>https://hypeproof-ai.xyz/sitemap-research.xml</loc><lastmod>2026-04-04T00:00:00.000Z</lastmod></sitemap>
+<sitemap><loc>https://hypeproof-ai.xyz/sitemap-novels.xml</loc><lastmod>2026-02-11T00:00:00.000Z</lastmod></sitemap>
+</sitemapindex>
+```
+
+### 3.2 sub-sitemap별 lastmod 산출
+| Sub-sitemap | URLs | lastModified 산출 |
 |---|---|---|
-| `/` | 모든 콘텐츠 중 최신 date | 홈은 콘텐츠 추가/수정 시 갱신 |
-| `/columns` | KO+EN 칼럼 중 최신 date | 인덱스 페이지 |
-| `/research` | KO+EN 리서치 중 최신 date | |
-| `/novels` | KO 노벨 중 최신 date | |
-| `/creators`, `/glossary`, `/ai-personas` | **lastModified 없음** | 데이터 변경 추적 불가 → 의도적 생략 |
+| `sitemap-static.xml` | `/`, `/columns`, `/research`, `/novels`, `/creators`, `/glossary`, `/ai-personas`, `/identity` | 인덱스 페이지(`/`, `/columns` 등)는 콘텐츠 중 최신 date. `/creators`, `/glossary`, `/ai-personas`, `/identity`는 추적 불가 → **lastmod 생략** (Google 권장: 검증 불가 시 안 넣는 게 신뢰점수에 좋음) |
+| `sitemap-columns.xml` | KO 칼럼 base + EN-only | 각 frontmatter의 `updated || date` |
+| `sitemap-research.xml` | KO 리서치 base + EN-only | 동일 |
+| `sitemap-novels.xml` | KO 노벨 (단일 locale) | 동일 |
 
-### 3.2 콘텐츠 라우트
-- 각 KO 슬러그를 base entry로 등록. URL은 쿼리 없는 형태(`/columns/<slug>`).
-- KO/EN 둘 다 있으면 `alternates.languages`로 hreflang 자동 생성.
-- EN-only 슬러그는 별도 entry (`?lang=en` 명시).
-- `lastModified = frontmatter.updated || frontmatter.date`.
+### 3.3 콘텐츠 라우트 + hreflang
 
-### 3.3 hreflang 출력 예시
+각 콘텐츠 entry:
+- KO base URL을 `<loc>`로 (`/columns/<slug>`, 쿼리 없음)
+- KO/EN 둘 다 있으면 `<xhtml:link rel="alternate" hreflang="...">`로 ko/en/**x-default** 3개 출력 (페이지 head의 alternates와 정합 필수)
+- EN-only 슬러그는 별도 entry (`?lang=en` URL)
+- `lastmod = frontmatter.updated || frontmatter.date`
+
+출력 예:
 ```xml
 <url>
-  <loc>https://hypeproof-ai.xyz/columns/2026-02-10-era-of-the-chairman</loc>
-  <lastmod>2026-02-10T00:00:00.000Z</lastmod>
-  <xhtml:link rel="alternate" hreflang="ko" href="https://hypeproof-ai.xyz/columns/2026-02-10-era-of-the-chairman?lang=ko"/>
-  <xhtml:link rel="alternate" hreflang="en" href="https://hypeproof-ai.xyz/columns/2026-02-10-era-of-the-chairman?lang=en"/>
+<loc>https://hypeproof-ai.xyz/columns/2026-02-10-era-of-the-chairman</loc>
+<lastmod>2026-02-10T00:00:00.000Z</lastmod>
+<xhtml:link rel="alternate" hreflang="ko" href="https://hypeproof-ai.xyz/columns/2026-02-10-era-of-the-chairman?lang=ko"/>
+<xhtml:link rel="alternate" hreflang="en" href="https://hypeproof-ai.xyz/columns/2026-02-10-era-of-the-chairman?lang=en"/>
+<xhtml:link rel="alternate" hreflang="x-default" href="https://hypeproof-ai.xyz/columns/2026-02-10-era-of-the-chairman"/>
 </url>
 ```
+
+### 3.4 응답 헤더 (모든 sitemap 공통)
+
+`web/src/lib/sitemap-helpers.ts`의 `SITEMAP_HEADERS` 상수 사용:
+- `Content-Type: application/xml; charset=utf-8`
+- `Cache-Control: public, max-age=0, s-maxage=3600, must-revalidate`
+- `X-Robots-Tag: noindex` (sitemap 자체는 색인 대상 아님)
+
+belt-and-suspenders로 `next.config.ts`의 `headers()` 콜백에서도 `/sitemap.xml`, `/sitemap-:type.xml` path에 동일 헤더 명시.
+
+### 3.5 ⚡ 새 콘텐츠 타입 추가 절차 (예: interviews, podcasts)
+
+새 콘텐츠 타입(`/interviews/[slug]`, `/podcasts/[slug]` 등)을 추가할 때 sitemap index에 동적으로 끼워 넣는 절차:
+
+**Step 1 — 콘텐츠 라이브러리 함수 만들기**
+`web/src/lib/<type>.ts`에 다음 패턴 (columns.ts 참조):
+- `getAll<Type>(locale)` — 해당 locale의 콘텐츠 전체 반환
+- `getAvailableLocalesFor<Type>Slug(slug)` — slug별 지원 locale 반환 (KO/EN 페어링 시 필수)
+
+**Step 2 — sub-sitemap route 추가**
+`web/src/app/sitemap-<type>.xml/route.ts` 신규 생성. `sitemap-columns.xml/route.ts`를 그대로 복사 후 `getAllColumns` → `getAll<Type>`로 치환:
+
+```typescript
+import { getAll<Type>, getAvailableLocalesFor<Type>Slug } from '@/lib/<type>'
+import {
+  SITE_URL, SITEMAP_HEADERS, urlsetXml, lastmodFromContent, type Entry,
+} from '@/lib/sitemap-helpers'
+
+export const dynamic = 'force-static'
+export const revalidate = 3600
+
+export async function GET() {
+  const koItems = getAll<Type>('ko')
+  const enItems = getAll<Type>('en')
+  // ... ko base + EN-only entries 패턴 그대로 ...
+  return new Response(urlsetXml([...koEntries, ...enOnlyEntries]), {
+    status: 200, headers: SITEMAP_HEADERS,
+  })
+}
+```
+
+단일 locale(novels처럼)이면 `sitemap-novels.xml/route.ts` 패턴 사용.
+
+**Step 3 — sitemap index에 등록 (필수)**
+`web/src/app/sitemap.xml/route.ts`의 `refs` 배열에 신규 sub-sitemap 추가:
+
+```typescript
+const refs: SitemapRef[] = [
+  { loc: `${SITE_URL}/sitemap-static.xml` },
+  { loc: `${SITE_URL}/sitemap-columns.xml`, lastmod: maxDate([...koColumns, ...enColumns]) },
+  { loc: `${SITE_URL}/sitemap-research.xml`, lastmod: maxDate([...koResearch, ...enResearch]) },
+  { loc: `${SITE_URL}/sitemap-novels.xml`, lastmod: maxDate(koNovels) },
+  // 👇 이 줄 추가
+  { loc: `${SITE_URL}/sitemap-<type>.xml`, lastmod: maxDate([...koItems, ...enItems]) },
+]
+```
+
+**Step 4 — sitemap-static.xml에 인덱스 페이지 등록 (필요 시)**
+새 콘텐츠 타입이 인덱스 페이지(예: `/interviews`)를 가지면 `sitemap-static.xml/route.ts`의 `entries` 배열에 추가.
+
+**Step 5 — robots.ts noindex 점검**
+새 콘텐츠 타입에 `noindex`로 처리할 라우트(예: `/<type>/draft`)가 있다면 §1.5 따라 sitemap에서 제외.
+
+**Step 6 — 배포 후 검증**
+§4 검증 체크리스트 전체 실행. 새 sub-sitemap 라이브 응답 확인:
+```bash
+curl -sI 'https://hypeproof-ai.xyz/sitemap-<type>.xml' | grep -iE 'content-type|x-robots'
+curl -s 'https://hypeproof-ai.xyz/sitemap-<type>.xml' | grep -c '<url>'
+```
+
+**Step 7 — Search Console**
+sitemap index URL은 이미 등록돼 있으므로 별도 제출 불필요. Google이 다음 fetch 사이클(보통 24~48h)에 새 sub-sitemap 자동 발견.
+
+### 3.6 변경 이력 (sitemap 관련)
+| 날짜 | 변경 |
+|---|---|
+| 2026-04-27 | 단일 sitemap.xml에 콘텐츠 페이지 동적 추가 (Metadata Route) |
+| 2026-04-29 | canonical 중복 제거 (layout.tsx 직접 JSX 삭제) |
+| 2026-04-29 | hreflang `x-default` 추가 (페이지-사이트맵 정합) |
+| 2026-04-29 | `MetadataRoute.Sitemap` → **Route Handler** 전환. `Response()` 객체에 `Content-Type: application/xml; charset=utf-8` 명시 (Search Console "Incorrect http header content-type: text/html" 진단 fix) |
+| 2026-04-29 | **Sitemap Index + 4 sub-sitemap 분할 구조**로 선제 전환 (forward-compat). 새 콘텐츠 타입 추가 시 §3.5 절차 |
 
 ---
 
@@ -136,20 +246,42 @@
 배포 직후 반드시 확인:
 
 ```bash
-# 1) 사이트맵에 콘텐츠 페이지 모두 들어갔는지 — 200개 가까이 나와야 함
-curl -s https://hypeproof-ai.xyz/sitemap.xml | grep -c '<url>'
+# 1) sitemap index가 sitemapindex schema인지 + 4 sub-sitemap 참조하는지
+curl -s https://hypeproof-ai.xyz/sitemap.xml | grep -c '<sitemap>'   # → 4
+curl -s https://hypeproof-ai.xyz/sitemap.xml | grep -oE '<loc>[^<]+' | sed 's/<loc>//'
 
-# 2) Googlebot 그룹에 Allow 명시 확인 — 빈 줄이 아니라 Allow: / 가 떠야 함
+# 2) 각 sub-sitemap의 URL 수
+curl -s https://hypeproof-ai.xyz/sitemap-static.xml   | grep -c '<url>'   # 8 (정적 라우트)
+curl -s https://hypeproof-ai.xyz/sitemap-columns.xml  | grep -c '<url>'   # 34+ KO 칼럼 + EN-only
+curl -s https://hypeproof-ai.xyz/sitemap-research.xml | grep -c '<url>'   # 43+ KO 리서치 + EN-only
+curl -s https://hypeproof-ai.xyz/sitemap-novels.xml   | grep -c '<url>'   # 32+ KO 노벨
+
+# 3) 모든 sitemap 응답이 Content-Type: application/xml + X-Robots-Tag: noindex
+for path in sitemap.xml sitemap-static.xml sitemap-columns.xml sitemap-research.xml sitemap-novels.xml; do
+  echo "=== $path ==="
+  curl -sI "https://hypeproof-ai.xyz/$path" | grep -iE '^(content-type|cache-control|x-robots-tag):'
+done
+# 기대: 모두 application/xml; charset=utf-8 / public, max-age=0, s-maxage=3600 / noindex
+
+# 4) Googlebot 그룹에 Allow 명시 확인 — 빈 줄이 아니라 Allow: / 가 떠야 함
 curl -s https://hypeproof-ai.xyz/robots.txt | grep -A2 '^User-Agent: Googlebot$'
 
-# 3) sitemap의 lastmod이 빌드 시간이 아닌지 — 콘텐츠별로 다른 날짜여야 함
-curl -s https://hypeproof-ai.xyz/sitemap.xml | grep -oE '<lastmod>[^<]+' | sort -u | head -10
+# 5) sub-sitemap의 lastmod이 빌드 시간이 아닌지 — 콘텐츠별로 다른 날짜여야 함
+curl -s https://hypeproof-ai.xyz/sitemap-columns.xml | grep -oE '<lastmod>[^<]+' | sort -u | head -10
 
-# 4) sitemap.xml 200 응답 + content-type
-curl -sI https://hypeproof-ai.xyz/sitemap.xml | head -5
+# 6) hreflang ko/en/x-default 모두 출력 (3종 동수 권장)
+curl -s https://hypeproof-ai.xyz/sitemap-columns.xml | grep -oE 'hreflang="[^"]+"' | sort | uniq -c
 
-# 5) XSD 검증 (외부 도구)
-#    https://www.xml-sitemaps.com/validate-xml-sitemap.html 에 sitemap URL 입력
+# 7) canonical 중복 점검 (페이지마다 1개만)
+curl -s 'https://hypeproof-ai.xyz/columns/<sample-slug>' | grep -c 'rel="canonical"'   # → 1
+
+# 8) XML schema 검증 (xmllint)
+for path in sitemap.xml sitemap-static.xml sitemap-columns.xml sitemap-research.xml sitemap-novels.xml; do
+  curl -s "https://hypeproof-ai.xyz/$path" | xmllint --noout - 2>&1 && echo "✅ $path"
+done
+
+# 9) 외부 XSD 검증 (선택)
+#    https://www.xml-sitemaps.com/validate-xml-sitemap.html 에 sitemap index URL 입력
 ```
 
 ---
@@ -158,8 +290,15 @@ curl -sI https://hypeproof-ai.xyz/sitemap.xml | head -5
 
 ### 5.1 사이트맵 제출
 - URL: https://search.google.com/search-console
-- 사이트맵 → 새 사이트맵 추가 → `sitemap.xml` (도메인 뒤 경로만)
-- 처리 결과: "성공" / "검색됨 URL 수" 확인
+- 사이트맵 → 새 사이트맵 추가 → **`sitemap.xml`** (sitemap index URL — sub-sitemap은 자동 발견되므로 별도 제출 X)
+- 처리 결과: "성공" / "검색됨 URL 수" 확인 — 처리되면 sub-sitemap별 행이 자동으로 추가 표시됨
+
+### 5.1.1 사이트맵 페이지 화면 vs URL 검사 도구 — 비동기 차이 주의
+Search Console의 사이트맵 처리는 **비동기 백엔드 큐**라 화면 상태가 stale일 수 있다:
+- **사이트맵 페이지 화면** ("가져올 수 없음" 등): 백엔드 큐 처리 결과, 수 시간~며칠 지연
+- **URL 검사 도구 → 라이브 URL 테스트**: *지금 이 순간* fetch 시도 결과, 즉시 반영
+
+⚠️ 사이트맵 화면이 빨갛더라도 **라이브 테스트가 초록이면 fetch는 가능 → 시간 문제**. 라이브 테스트도 빨개야 진짜 fetch 실패. 디버깅 시 라이브 테스트가 결정적 진단 도구.
 
 ### 5.2 URL 검사 도구
 - 특정 URL의 색인 상태 확인 + 즉시 색인 요청 (제한적)
@@ -234,17 +373,38 @@ curl -sI https://hypeproof-ai.xyz/sitemap.xml | head -5
   - 색인 차단: `robots: { index: false, follow: false }`
   - 색인 허용: layout 또는 page 둘 다에서 metadata 정의 안 하면 root layout의 robots 상속
 
+### ❌ 사례 8: Metadata Route(sitemap.ts)가 transition window에 text/html 응답 (2026-04-29 fix)
+- 문제: Search Console "Incorrect http header content-type: text/html; charset=utf-8 (expected: application/xml)". 직접 curl은 항상 `application/xml`이지만 Google이 fetch한 시점엔 HTML.
+- 원인: Next.js `MetadataRoute.Sitemap` 파일 컨벤션은 응답 헤더를 Vercel/Next.js 내부에서 자동 결정. Vercel deploy/ISR transition window 또는 prerender 미생성 시점에 fallback으로 default `text/html` 응답 가능.
+- 수정: `app/sitemap.ts` (Metadata Route) → `app/sitemap.xml/route.ts` (Route Handler)로 전환. `Response()` 객체에 `headers: { 'Content-Type': 'application/xml; charset=utf-8', ... }` 명시 → 어떤 fallback 시나리오에서도 100% 보장.
+- 일반 원칙: **sitemap, RSS feed처럼 응답 헤더 정확성이 중요한 라우트는 Metadata Route 대신 Route Handler 사용**. Response 객체로 헤더 직접 박기.
+
+### ❌ 사례 9: hreflang 페이지-사이트맵 mismatch (x-default 누락) (2026-04-29 fix)
+- 문제: 페이지 head에는 `<link rel="alternate" hreflang="x-default" ...>`가 있는데 sitemap의 `<xhtml:link>`에는 ko/en만 있고 x-default 누락.
+- Google docs: "The hreflang in your sitemap must match the hreflang on your pages." 위반.
+- 결과: sitemap fetch 자체 실패 직접 원인은 아니지만 SEO 품질 평가에 부정적. 한 번 mismatch 캐시되면 색인 지연.
+- 수정: KO/EN 둘 다 있는 슬러그에 `alternates['x-default'] = base URL`(쿼리 없는 형태) 추가. `sitemap-columns.xml/route.ts`, `sitemap-research.xml/route.ts` 모두 동일 패턴.
+- 검증: `curl -s sitemap-*.xml | grep -oE 'hreflang="[^"]+"' | sort | uniq -c` → ko / en / x-default 셋 다 같은 수.
+
+### ✅ 사례 10: 단일 sitemap → Sitemap Index 선제 분할 (2026-04-29 결정)
+- 결정: 117 URLs로 50,000 한참 미만이지만 미래 확장(콘텐츠 타입 추가, URL 폭증) 대비해 sitemap index + 4 sub-sitemap 구조로 *선제 전환*.
+- 근거: `MetadataRoute.Sitemap` → Route Handler 전환을 어차피 해야 했고, 분할 구조도 같이 하면 추후 단일 → 분할 마이그레이션 부담 0.
+- 구조: §3 참조. 새 콘텐츠 타입 추가 시 §3.5의 7-step 절차 따라 sub-sitemap 1개 추가 + index에 1줄 등록.
+- Trade-off: 코드 ~250줄 (helpers.ts + 5 route handlers). 단 helper로 중복 제거 → 각 route는 ~20줄.
+- ⚠️ Search Console 영향: 사이트맵 등록 URL은 그대로 `https://hypeproof-ai.xyz/sitemap.xml`. Google이 sitemapindex schema를 자동 인식해 sub-sitemap을 발견하므로 별도 작업 0.
+
 ---
 
 ## 8. 향후 작업 시 확인 사항
 
 | 작업 | 본 문서 어느 절을 참조 |
 |---|---|
-| 새 라우트 추가 | §3.1 — sitemap.ts에 추가하면서 lastModified 산출 방식 결정 |
-| 새 콘텐츠 타입 추가 (예: 인터뷰) | §3.2 — `lib/<type>.ts`에 `getAll<Type>` + `getAvailableLocales...` 만들고 sitemap.ts에서 동일 패턴으로 추가 |
-| 콘텐츠 DB 마이그레이션 (markdown → Supabase) | §3.2 — `lastmod` 산출이 Supabase row의 `updated_at`로 바뀜. Storage URL은 next.config.ts `remotePatterns`에 도메인 추가 필요 |
+| 새 정적 라우트 추가 (예: `/blog`) | §3.2 — sitemap-static.xml/route.ts의 `entries` 배열에 추가 |
+| **새 콘텐츠 타입 추가** (예: 인터뷰, 팟캐스트) | **§3.5 — 7-step 절차**: lib/<type>.ts → sitemap-<type>.xml/route.ts → sitemap.xml index에 등록 → 검증 |
+| 콘텐츠 DB 마이그레이션 (markdown → Supabase) | §3.2 — `lastmod` 산출이 Supabase row의 `updated_at`로 바뀜. Storage URL은 next.config.ts `remotePatterns`에 도메인 추가 필요. `docs/MIGRATION-RUNBOOK.md §5.4` 도 참조 |
 | 새 AI 봇 등장 (학습/인용) | §2.2 — robots.ts의 해당 카테고리에 추가 |
-| Google Search Console 에러 대응 | §5.4 — 메시지별 조치표 |
+| Google Search Console 에러 대응 | §5.4 (메시지별 조치표), §5.1.1 (사이트맵 페이지 vs URL 검사 도구 차이) |
+| sitemap fetch 디버깅 | §4 검증 체크리스트 + §5.1.1 비동기 캐시 + §7 사례 6/8/9 |
 | 네이버 노출 최적화 | §6 + §1.3 (네이버는 priority 일부 참고하므로 재검토 가능) |
 
 ---
@@ -253,8 +413,11 @@ curl -sI https://hypeproof-ai.xyz/sitemap.xml | head -5
 
 | 날짜 | 작업 | PR/커밋 |
 |---|---|---|
-| 2026-04-27 | sitemap.ts 콘텐츠 페이지 동적 추가 / lastmod 정확화 / hreflang. robots.ts Googlebot 그룹 명시. SEO 문서 신설 | (이 변경) |
-| 2026-04-29 | layout.tsx의 하드코딩 `<link rel="canonical">` 제거 (canonical 중복 해결). `/welcome`·`/kids-edu` noindex 처리 (layout.tsx로 metadata 분리). `/identity` sitemap 등록. §7 사례 6·7 추가 | (이 변경) |
+| 2026-04-27 | sitemap.ts 콘텐츠 페이지 동적 추가 / lastmod 정확화 / hreflang. robots.ts Googlebot 그룹 명시. SEO 문서 신설 | 초기 |
+| 2026-04-29 | layout.tsx의 하드코딩 `<link rel="canonical">` 제거 (canonical 중복 해결). `/welcome`·`/kids-edu` noindex 처리 (layout.tsx로 metadata 분리). `/identity` sitemap 등록. §7 사례 6·7 추가 | PR #40 |
+| 2026-04-29 | identity 페이지 "HypeProof" → "HypeProof Lab" 브랜딩 통일 (6곳) | PR #42 |
+| 2026-04-29 | sitemap Route Handler 전환 + Content-Type 명시 + hreflang x-default 추가 + next.config.ts 헤더 명시. §7 사례 8·9 추가 | PR #41 |
+| 2026-04-29 | Sitemap Index + 4 sub-sitemap 분할 (forward-compat). lib/sitemap-helpers.ts 공통 유틸. §3 전면 재작성 + §3.5 새 콘텐츠 타입 추가 절차 + §7 사례 10 추가 | (이 변경) |
 
 ---
 
