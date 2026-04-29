@@ -236,7 +236,6 @@ export default function RootLayout({
             __html: JSON.stringify([organizationData, websiteData])
           }}
         />
-        <link rel="canonical" href="https://hypeproof-ai.xyz" />
         <link rel="alternate" type="application/rss+xml" title="HypeProof AI (KO)" href="/feed.xml" />
         <meta name="theme-color" content="#7c3aed" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
