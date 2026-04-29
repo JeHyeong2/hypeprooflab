@@ -1,8 +1,16 @@
 import type { NextConfig } from "next";
+import path from "node:path";
 
 const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
+  },
+  // Bundle the repo-root /data directory into the dashboard server function
+  // so fs.readFileSync('../data/...') works at runtime on Vercel.
+  outputFileTracingRoot: path.join(__dirname, ".."),
+  outputFileTracingIncludes: {
+    "/dashboard": ["../data/**"],
+    "/dashboard/**": ["../data/**"],
   },
   images: {
     remotePatterns: [
