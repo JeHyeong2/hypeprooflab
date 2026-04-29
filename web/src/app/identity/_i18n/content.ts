@@ -14,10 +14,10 @@ export function useIdentityLang(): Lang {
 // -----------------------------------------------------------------------------
 
 export const c = {
-  backHome: { ko: "HypeProof 홈으로", en: "Back to HypeProof" },
+  backHome: { ko: "HypeProof Lab 홈으로", en: "Back to HypeProof Lab" },
 
   // Hero
-  heroEyebrow: { ko: "HypeProof", en: "HypeProof" },
+  heroEyebrow: { ko: "HypeProof Lab", en: "HypeProof Lab" },
   heroTension: {
     ko: "이름을 붙이기도 전에 AI는 세상을 다시 쓰고, 우리가 옳은 길로 가고 있는지 누구도 말해주지 않습니다.",
     en: "AI rewrites the world before we can name it — and whether we're on the right path, no one can say.",
@@ -247,7 +247,7 @@ export const c = {
     label: { ko: "Voluntary", en: "Voluntary" },
     title: { ko: "구독자가 아니라 참가자", en: "Participants, not subscribers" },
     body: {
-      ko: "HypeProof 멤버는 스크롤하는 사람이 아닙니다. AI로 무언가를 직접 만들려는 사람입니다.",
+      ko: "HypeProof Lab 멤버는 스크롤하는 사람이 아닙니다. AI로 무언가를 직접 만들려는 사람입니다.",
       en: "Members don't scroll through. They come to make something with AI.",
     },
   },
