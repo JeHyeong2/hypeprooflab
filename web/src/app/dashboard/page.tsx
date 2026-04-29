@@ -3,6 +3,10 @@ import path from 'path';
 import fs from 'fs';
 import DashboardClient from './DashboardClient';
 import type { MembersData } from './types';
+import type { TimelineData, Holiday } from '@/lib/timeline/types';
+import { getKoreanHolidays } from '@/lib/timeline/holidays.server';
+import { listNotes } from '@/lib/sheets/notes';
+import { isSheetsConfigured } from '@/lib/sheets/client';
 
 export const metadata: Metadata = {
   title: 'Dashboard | HypeProof AI',
@@ -12,24 +16,62 @@ export const metadata: Metadata = {
 
 export const revalidate = 300;
 
-function loadMembers(): MembersData {
-  // Try project root data/ (one level up from web/)
+function loadJsonFromDataDir<T>(filename: string, fallback: T): T {
   const paths = [
-    path.join(process.cwd(), '..', 'data', 'members.json'),
-    path.join(process.cwd(), 'data', 'members.json'),
+    path.join(process.cwd(), '..', 'data', filename),
+    path.join(process.cwd(), 'data', filename),
   ];
   for (const p of paths) {
     try {
       const raw = fs.readFileSync(p, 'utf-8');
-      return JSON.parse(raw) as MembersData;
+      return JSON.parse(raw) as T;
     } catch {
       // try next path
     }
   }
-  return { version: 1, updatedAt: '', members: [] };
+  return fallback;
 }
 
-export default function DashboardPage() {
-  const data = loadMembers();
-  return <DashboardClient members={data.members} updatedAt={data.updatedAt} />;
+function loadMembers(): MembersData {
+  return loadJsonFromDataDir<MembersData>('members.json', {
+    version: 1,
+    updatedAt: '',
+    members: [],
+  });
+}
+
+function loadTimeline(): TimelineData {
+  return loadJsonFromDataDir<TimelineData>('project-timeline.json', {
+    version: 1,
+    updatedAt: '',
+    lanes: {
+      direct: { label: 'HypeProof Direct', color: '#a78bfa' },
+      channel: { label: 'Filamentree Channel', color: '#34d399' },
+      reusable: { label: 'Reusable Asset Layer', color: '#94a3b8' },
+    },
+    events: [],
+    reusableAssets: [],
+  });
+}
+
+export default async function DashboardPage() {
+  const members = loadMembers();
+  const timeline = loadTimeline();
+  const currentYear = new Date().getFullYear();
+  const holidays: Holiday[] = [
+    ...getKoreanHolidays(currentYear),
+    ...getKoreanHolidays(currentYear + 1),
+  ];
+  const sheetsReady = isSheetsConfigured();
+  const notes = sheetsReady ? await listNotes() : [];
+  return (
+    <DashboardClient
+      members={members.members}
+      updatedAt={members.updatedAt}
+      timeline={timeline}
+      holidays={holidays}
+      notes={notes}
+      sheetsReady={sheetsReady}
+    />
+  );
 }

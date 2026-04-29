@@ -87,6 +87,16 @@ htmlcov/
 .claude/settings.local.json
 *_secret=*
 .claude/settings.local.*.json
+
+# Personal scratch / drafts (per CLAUDE.md memory rule)
+shin_bro/
+
+# Supabase local state (not source-controlled)
+web/supabase/.branches/
+
+# Google service account JSON keys (defense-in-depth, also covered by web/.gitignore)
+web/tests/hypeproof-*.json
+**/*-service-account*.json
 logs/
 *.backup
 .claude/.env.local*

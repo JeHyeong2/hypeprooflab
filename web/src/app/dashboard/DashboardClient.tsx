@@ -6,6 +6,9 @@ import Link from 'next/link';
 import AuthButton from '@/components/auth/AuthButton';
 import { Footer } from '@/components/layout/Footer';
 import type { DashboardMember } from './types';
+import type { TimelineData, Holiday } from '@/lib/timeline/types';
+import type { Note } from '@/lib/sheets/notes';
+import CalendarTab from './components/CalendarTab';
 
 // ── Color map for members ──
 const MEMBER_COLORS: Record<string, string> = {
@@ -28,6 +31,7 @@ function getMemberColor(name: string): string {
 
 // ── Tab definitions ──
 const TABS = [
+  { id: 'cal', label: '\uD83D\uDCC5 \uCE98\uB9B0\uB354' },
   { id: 'roadmap', label: '1. \uB85C\uB4DC\uB9F5' },
   { id: 'd1', label: '2. \uC804\uCCB4 \uC6CC\uD06C\uD50C\uB85C\uC6B0' },
   { id: 'd2', label: '3. \uCF58\uD150\uCE20 \uD30C\uC774\uD504\uB77C\uC778' },
@@ -695,11 +699,15 @@ function TabQA() {
 interface DashboardClientProps {
   members: DashboardMember[];
   updatedAt: string;
+  timeline: TimelineData;
+  holidays: Holiday[];
+  notes: Note[];
+  sheetsReady: boolean;
 }
 
-export default function DashboardClient({ members, updatedAt }: DashboardClientProps) {
+export default function DashboardClient({ members, updatedAt, timeline, holidays, notes, sheetsReady }: DashboardClientProps) {
   const { data: session, status } = useSession();
-  const [activeTab, setActiveTab] = useState('roadmap');
+  const [activeTab, setActiveTab] = useState('cal');
   const [detail, setDetail] = useState({ title: '', desc: '', owner: '' });
 
   const onDetail = (title: string, desc: string, owner: string) => {
@@ -776,6 +784,7 @@ export default function DashboardClient({ members, updatedAt }: DashboardClientP
       {/* Content Area */}
       <div className="flex gap-4 max-w-[1500px] mx-auto px-4 py-3 items-start">
         <div className="flex-1 min-w-0">
+          {activeTab === 'cal' && <CalendarTab data={timeline} holidays={holidays} notes={notes} members={activeMembers} sheetsReady={sheetsReady} />}
           {activeTab === 'roadmap' && <TabRoadmap onDetail={onDetail} />}
           {activeTab === 'd1' && <TabWorkflow onDetail={onDetail} />}
           {activeTab === 'd2' && <TabContentPipeline onDetail={onDetail} />}
@@ -789,11 +798,13 @@ export default function DashboardClient({ members, updatedAt }: DashboardClientP
           {activeTab === 'd10' && <TabCommunity />}
           {activeTab === 'qa' && <TabQA />}
         </div>
-        <div className="w-[340px] shrink-0 sticky top-14 hidden lg:block">
-          <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-4">
-            <DetailPanel title={detail.title} desc={detail.desc} owner={detail.owner} />
+        {activeTab !== 'cal' && (
+          <div className="w-[340px] shrink-0 sticky top-14 hidden lg:block">
+            <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-4">
+              <DetailPanel title={detail.title} desc={detail.desc} owner={detail.owner} />
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <Footer />
