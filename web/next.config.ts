@@ -4,14 +4,9 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
-  // Bundle the repo-root /data directory into the dashboard server function
-  // so fs.readFileSync('../data/...') works at runtime on Vercel.
-  // NOTE: do NOT set outputFileTracingRoot — it shifts module resolution
-  // up the tree and breaks tailwindcss/etc lookup.
-  outputFileTracingIncludes: {
-    "/dashboard": ["../data/**"],
-    "/dashboard/**": ["../data/**"],
-  },
+  // Calendar/holiday data lives in web/data/ now (project-root-internal),
+  // so Next.js outputFileTracing picks it up automatically — no need for
+  // outputFileTracingIncludes.
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'lh3.googleusercontent.com' },

@@ -29,12 +29,17 @@ const EMPTY: TimelineData = {
 
 export function resolveTimelinePath(): string {
   const candidates = [
-    path.join(process.cwd(), '..', 'data', 'project-timeline.json'),
+    // primary: web/data/
     path.join(process.cwd(), 'data', 'project-timeline.json'),
+    // skill cwd at repo root → hypeprooflab/web/data/
+    path.join(process.cwd(), 'web', 'data', 'project-timeline.json'),
+    // backward compat for legacy ../data
+    path.join(process.cwd(), '..', 'data', 'project-timeline.json'),
   ];
   for (const p of candidates) {
     if (fs.existsSync(p)) return p;
   }
+  // default to primary so first write creates the canonical location
   return candidates[0];
 }
 

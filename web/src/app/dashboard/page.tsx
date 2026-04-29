@@ -18,8 +18,12 @@ export const revalidate = 300;
 
 function loadJsonFromDataDir<T>(filename: string, fallback: T): T {
   const paths = [
-    path.join(process.cwd(), '..', 'data', filename),
+    // primary: web/data/ (bundled by Next.js outputFileTracing automatically)
     path.join(process.cwd(), 'data', filename),
+    // skill cwd at repo root → hypeprooflab/web/data/
+    path.join(process.cwd(), 'web', 'data', filename),
+    // backward compat: legacy ../data layout (e.g. members.json still there)
+    path.join(process.cwd(), '..', 'data', filename),
   ];
   for (const p of paths) {
     try {
