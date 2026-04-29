@@ -3,6 +3,7 @@ import { getAllColumns, getAvailableLocalesForSlug as getColumnLocales } from '@
 import { getAllResearch, getAvailableLocalesForResearchSlug } from '@/lib/research'
 import { getAllNovels } from '@/lib/novels'
 
+export const dynamic = 'force-static'
 export const revalidate = 3600
 
 const SITE_URL = process.env.SITE_URL || 'https://hypeproof-ai.xyz'
@@ -54,6 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const languages: Record<string, string> = {}
     if (locales.includes('ko')) languages.ko = `${SITE_URL}/columns/${c.slug}?lang=ko`
     if (locales.includes('en')) languages.en = `${SITE_URL}/columns/${c.slug}?lang=en`
+    if (locales.length > 1) languages['x-default'] = `${SITE_URL}/columns/${c.slug}`
     return {
       url: `${SITE_URL}/columns/${c.slug}`,
       lastModified: lastmodFromContent(c),
@@ -74,6 +76,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const languages: Record<string, string> = {}
     if (locales.includes('ko')) languages.ko = `${SITE_URL}/research/${r.slug}?lang=ko`
     if (locales.includes('en')) languages.en = `${SITE_URL}/research/${r.slug}?lang=en`
+    if (locales.length > 1) languages['x-default'] = `${SITE_URL}/research/${r.slug}`
     return {
       url: `${SITE_URL}/research/${r.slug}`,
       lastModified: lastmodFromContent(r),

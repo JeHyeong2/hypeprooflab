@@ -1,5 +1,8 @@
 import type { MetadataRoute } from 'next'
 
+export const dynamic = 'force-static'
+export const revalidate = 3600
+
 export default function robots(): MetadataRoute.Robots {
   const isProd = process.env.NODE_ENV === 'production'
   const siteUrl = process.env.SITE_URL || 'https://hypeproof-ai.xyz'
