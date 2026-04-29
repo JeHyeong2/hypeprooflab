@@ -73,7 +73,7 @@ export default function NotesPanel({ notes, members, sheetsReady }: Props) {
   };
 
   return (
-    <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-3 flex flex-col gap-3">
+    <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-3 flex flex-col gap-3 lg:flex-1 lg:min-h-0">
       <div className="flex items-center justify-between">
         <h3 className="text-[0.82rem] font-semibold">팀 메모</h3>
         {!sheetsReady && (
@@ -116,7 +116,7 @@ export default function NotesPanel({ notes, members, sheetsReady }: Props) {
       </div>
 
       {/* Notes list */}
-      <div className="space-y-2 max-h-[420px] overflow-y-auto pr-1">
+      <div className="space-y-2 max-h-[360px] overflow-y-auto pr-1 lg:max-h-none lg:flex-1 lg:min-h-0">
         {filtered.length === 0 && (
           <div className="text-[0.7rem] text-[#6e7681] text-center py-4">
             아직 메모가 없습니다.

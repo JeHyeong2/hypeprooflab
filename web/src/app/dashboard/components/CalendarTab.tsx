@@ -122,7 +122,7 @@ export default function CalendarTab({ data, holidays, notes, members, sheetsRead
       </div>
 
       {/* Right column: Event > Day > Empty 우선순위 + Notes */}
-      <aside className="space-y-3 lg:sticky lg:top-14 lg:self-start lg:max-h-[calc(100vh-4rem)] lg:overflow-y-auto lg:pr-1">
+      <aside className="space-y-3 lg:sticky lg:top-14 lg:self-start lg:max-h-[calc(100vh-4rem)] lg:flex lg:flex-col lg:overflow-hidden lg:pr-1">
         {selected ? (
           <div className="space-y-2">
             {selectedDay && (
