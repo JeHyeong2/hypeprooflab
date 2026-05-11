@@ -46,7 +46,7 @@ type Lane = 'direct' | 'channel' | 'reusable';
 ```
 
 - `direct` — HypeProof Direct (자사 직접 채널, 보라색)
-- `channel` — Filamentree Channel (파트너 채널, 녹색)
+- `channel` — 비트리 channel (前 Filamentree, 비트리코퍼레이션 산하 파트너 채널, 녹색)
 - `reusable` — Reusable Asset Layer (날짜 없는 자산, 회색)
 
 `reusable` lane은 보통 `events`가 아니라 `reusableAssets[]`에 들어감. events에 reusable이 들어가는 경우는 `kind: 'ongoing'`만 허용.
@@ -133,7 +133,7 @@ severity별 색:
 ```ts
 interface TimelineLanesMeta {
   direct: { label: 'HypeProof Direct'; color: '#a78bfa' };
-  channel: { label: 'Filamentree Channel'; color: '#34d399' };
+  channel: { label: '비트리 channel'; color: '#34d399' };
   reusable: { label: 'Reusable Asset Layer'; color: '#94a3b8' };
 }
 ```

@@ -1,6 +1,27 @@
 import path from 'path';
 import fs from 'fs';
-import type { TimelineData, TimelineEvent, ReusableAsset, PriorityBanner } from './types';
+import type {
+  TimelineData,
+  TimelineEvent,
+  ReusableAsset,
+  PriorityBanner,
+  SubTask,
+  TaskLogEntry,
+} from './types';
+
+function newLogId(): string {
+  return `log-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+}
+
+function appendLog(data: TimelineData, entry: Omit<TaskLogEntry, 'id' | 'createdAt'>): TaskLogEntry {
+  const log: TaskLogEntry = {
+    ...entry,
+    id: newLogId(),
+    createdAt: new Date().toISOString(),
+  };
+  // Mutates given object — caller wraps in {...data, taskLog: [...]}
+  return log;
+}
 
 export interface TimelineStore {
   read(): Promise<TimelineData>;
@@ -13,6 +34,11 @@ export interface TimelineStore {
   updateAsset(id: string, patch: Partial<ReusableAsset>): Promise<TimelineData>;
   removeAsset(id: string): Promise<TimelineData>;
   setPriorityBanner(b: PriorityBanner | undefined): Promise<TimelineData>;
+  // Sub-tasks
+  addTask(t: SubTask): Promise<TimelineData>;
+  updateTask(id: string, patch: Partial<SubTask>): Promise<TimelineData>;
+  toggleTaskDone(id: string, doneBy: string): Promise<TimelineData>;
+  removeTask(id: string): Promise<TimelineData>;
 }
 
 const EMPTY: TimelineData = {
@@ -20,11 +46,12 @@ const EMPTY: TimelineData = {
   updatedAt: '',
   lanes: {
     direct: { label: 'HypeProof Direct', color: '#a78bfa' },
-    channel: { label: 'Filamentree Channel', color: '#34d399' },
+    channel: { label: '비트리 channel', color: '#34d399' },
     reusable: { label: 'Reusable Asset Layer', color: '#94a3b8' },
   },
   events: [],
   reusableAssets: [],
+  tasks: [],
 };
 
 export function resolveTimelinePath(): string {
@@ -137,12 +164,114 @@ export class JsonFileStore implements TimelineStore {
     await this.write(next);
     return next;
   }
+
+  async addTask(t: SubTask): Promise<TimelineData> {
+    const data = await this.read();
+    const tasks = data.tasks ?? [];
+    if (tasks.some(x => x.id === t.id)) {
+      return this.updateTask(t.id, t);
+    }
+    const log = appendLog(data, {
+      taskId: t.id,
+      actor: t.reporter ?? 'unknown',
+      action: 'created',
+      after: t,
+    });
+    const next: TimelineData = {
+      ...data,
+      tasks: [...tasks, t],
+      taskLog: [...(data.taskLog ?? []), log],
+    };
+    await this.write(next);
+    return next;
+  }
+
+  async updateTask(id: string, patch: Partial<SubTask>): Promise<TimelineData> {
+    const data = await this.read();
+    const before = (data.tasks ?? []).find(t => t.id === id);
+    if (!before) return data;
+    const after: SubTask = { ...before, ...patch, id };
+    const tasks = (data.tasks ?? []).map(t => (t.id === id ? after : t));
+    const beforeRec = before as unknown as Record<string, unknown>;
+    const patchRec = patch as unknown as Record<string, unknown>;
+    const changedFields = Object.keys(patch).filter(
+      k => beforeRec[k] !== patchRec[k],
+    );
+    const log = appendLog(data, {
+      taskId: id,
+      actor: patch.reporter ?? before.reporter ?? 'unknown',
+      action: `updated:${changedFields.join(',') || '_'}`,
+      before,
+      after,
+    });
+    const next: TimelineData = { ...data, tasks, taskLog: [...(data.taskLog ?? []), log] };
+    await this.write(next);
+    return next;
+  }
+
+  async toggleTaskDone(id: string, doneBy: string): Promise<TimelineData> {
+    const data = await this.read();
+    const before = (data.tasks ?? []).find(t => t.id === id);
+    if (!before) return data;
+    const nowDone = !before.done;
+    const after: SubTask = {
+      ...before,
+      done: nowDone,
+      doneAt: nowDone ? new Date().toISOString() : undefined,
+      doneBy: nowDone ? doneBy : undefined,
+    };
+    const tasks = (data.tasks ?? []).map(t => (t.id === id ? after : t));
+    const log = appendLog(data, {
+      taskId: id,
+      actor: doneBy,
+      action: nowDone ? 'done:true' : 'done:false',
+      before: { done: before.done },
+      after: { done: nowDone, doneBy: after.doneBy, doneAt: after.doneAt },
+    });
+    const next: TimelineData = { ...data, tasks, taskLog: [...(data.taskLog ?? []), log] };
+    await this.write(next);
+    return next;
+  }
+
+  async removeTask(id: string): Promise<TimelineData> {
+    const data = await this.read();
+    const before = (data.tasks ?? []).find(t => t.id === id);
+    if (!before) return data;
+    const log = appendLog(data, {
+      taskId: id,
+      actor: before.reporter ?? 'unknown',
+      action: 'removed',
+      before,
+    });
+    const next: TimelineData = {
+      ...data,
+      tasks: (data.tasks ?? []).filter(t => t.id !== id),
+      taskLog: [...(data.taskLog ?? []), log],
+    };
+    await this.write(next);
+    return next;
+  }
 }
 
 let _store: TimelineStore | null = null;
 
+/**
+ * Default store selection (opt-in via env):
+ *   TIMELINE_STORE=supabase  → SupabaseTimelineStore
+ *   (unset / file)           → JsonFileStore (web/data/project-timeline.json)
+ *
+ * Migration plan: dual-write window optional, then flip TIMELINE_STORE.
+ */
 export function defaultStore(): TimelineStore {
-  if (!_store) _store = new JsonFileStore();
+  if (_store) return _store;
+  if (process.env.TIMELINE_STORE === 'supabase') {
+    // Lazy: avoid loading supabase code in environments that don't need it
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { SupabaseTimelineStore } = require('./supabaseStore') as typeof import('./supabaseStore');
+    _store = new SupabaseTimelineStore();
+  } else {
+    _store = new JsonFileStore();
+  }
   return _store;
 }
 

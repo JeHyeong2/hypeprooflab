@@ -1,7 +1,14 @@
 'use client';
 
-import type { TimelineEvent, TimelineLanesMeta, EventStatus } from '@/lib/timeline/types';
+import type {
+  TimelineEvent,
+  TimelineLanesMeta,
+  EventStatus,
+  SubTask,
+} from '@/lib/timeline/types';
 import { fuzzyDateLabel } from '@/lib/timeline/dateUtil';
+import type { DashboardMember } from '../../types';
+import TaskChecklist from './TaskChecklist';
 
 const STATUS: Record<EventStatus, { label: string; cls: string }> = {
   planned: { label: '예정', cls: 'bg-[rgba(31,111,235,0.18)] text-[#58a6ff]' },
@@ -15,10 +22,12 @@ const STATUS: Record<EventStatus, { label: string; cls: string }> = {
 interface Props {
   event: TimelineEvent | null;
   lanes: TimelineLanesMeta;
+  tasks?: SubTask[];
+  members?: DashboardMember[];
   onClose?: () => void;
 }
 
-export default function EventDetail({ event, lanes, onClose }: Props) {
+export default function EventDetail({ event, lanes, tasks, members, onClose }: Props) {
   if (!event) {
     return (
       <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-5 flex flex-col items-center justify-center text-center min-h-[200px]">
@@ -119,6 +128,17 @@ export default function EventDetail({ event, lanes, onClose }: Props) {
               </ul>
             }
           />
+        )}
+
+        {/* Sub-tasks 체크리스트 + 진척도 */}
+        {members && (
+          <div className="border-t border-[#21262d] pt-3">
+            <TaskChecklist
+              event={event}
+              tasks={(tasks ?? []).filter(t => t.eventId === event.id)}
+              members={members}
+            />
+          </div>
         )}
 
         {/* Cancel reason */}

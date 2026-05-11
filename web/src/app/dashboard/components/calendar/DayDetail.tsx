@@ -1,6 +1,6 @@
 'use client';
 
-import type { TimelineEvent, TimelineLanesMeta, Holiday } from '@/lib/timeline/types';
+import type { TimelineEvent, TimelineLanesMeta, Holiday, EventProgress } from '@/lib/timeline/types';
 import EventCard from './EventCard';
 
 interface Props {
@@ -9,6 +9,7 @@ interface Props {
   holiday?: Holiday | null;
   weekend?: 'sat' | 'sun' | null;
   lanes: TimelineLanesMeta;
+  progressMap?: Map<string, EventProgress>;
   onSelectEvent: (ev: TimelineEvent) => void;
   onClose?: () => void;
 }
@@ -21,6 +22,7 @@ export default function DayDetail({
   holiday,
   weekend,
   lanes,
+  progressMap,
   onSelectEvent,
   onClose,
 }: Props) {
@@ -82,7 +84,12 @@ export default function DayDetail({
                   onClick={() => onSelectEvent(ev)}
                   className="w-full text-left transition-all hover:brightness-110"
                 >
-                  <EventCard event={ev} lanes={lanes} compact />
+                  <EventCard
+                    event={ev}
+                    lanes={lanes}
+                    compact
+                    progress={progressMap?.get(ev.id)}
+                  />
                 </button>
               ))}
               <div className="text-[0.62rem] text-[#6e7681] text-center pt-1">

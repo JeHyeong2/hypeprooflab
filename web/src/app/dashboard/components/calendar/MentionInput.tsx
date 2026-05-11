@@ -10,6 +10,9 @@ interface Props {
   maxLength?: number;
   disabled?: boolean;
   rows?: number;
+  // Enter (without Shift) when dropdown is closed → submit.
+  // Useful for one-line inputs like task title bar.
+  onEnter?: () => void;
 }
 
 interface DropdownState {
@@ -36,6 +39,7 @@ export default function MentionInput({
   maxLength = 2000,
   disabled,
   rows = 3,
+  onEnter,
 }: Props) {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [dropdown, setDropdown] = useState<DropdownState>(initialDropdown);
@@ -60,7 +64,13 @@ export default function MentionInput({
       setDropdown(initialDropdown);
       return;
     }
-    setDropdown({ open: true, start: at, query: segment, items, index: 0 });
+    // Preserve index when the @ anchor & query are unchanged (e.g. ArrowDown keyup re-run).
+    // Only reset index when items list changed shape.
+    setDropdown(prev => {
+      const sameAnchor = prev.open && prev.start === at && prev.query === segment;
+      const idx = sameAnchor ? Math.min(prev.index, items.length - 1) : 0;
+      return { open: true, start: at, query: segment, items, index: idx };
+    });
   };
 
   const insertMention = (name: string) => {
@@ -80,18 +90,25 @@ export default function MentionInput({
   };
 
   const handleKey = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (!dropdown.open) return;
-    if (e.key === 'ArrowDown') {
+    if (dropdown.open) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setDropdown(d => ({ ...d, index: (d.index + 1) % d.items.length }));
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setDropdown(d => ({ ...d, index: (d.index - 1 + d.items.length) % d.items.length }));
+      } else if (e.key === 'Enter' || e.key === 'Tab') {
+        e.preventDefault();
+        insertMention(dropdown.items[dropdown.index]);
+      } else if (e.key === 'Escape') {
+        setDropdown(initialDropdown);
+      }
+      return;
+    }
+    // Dropdown closed: Enter (no Shift) → submit if onEnter provided
+    if (e.key === 'Enter' && !e.shiftKey && onEnter) {
       e.preventDefault();
-      setDropdown(d => ({ ...d, index: (d.index + 1) % d.items.length }));
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      setDropdown(d => ({ ...d, index: (d.index - 1 + d.items.length) % d.items.length }));
-    } else if (e.key === 'Enter' || e.key === 'Tab') {
-      e.preventDefault();
-      insertMention(dropdown.items[dropdown.index]);
-    } else if (e.key === 'Escape') {
-      setDropdown(initialDropdown);
+      onEnter();
     }
   };
 

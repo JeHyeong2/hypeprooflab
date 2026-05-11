@@ -7,6 +7,7 @@ import type { TimelineData, Holiday } from '@/lib/timeline/types';
 import { getKoreanHolidays } from '@/lib/timeline/holidays.server';
 import { listNotes } from '@/lib/sheets/notes';
 import { isSheetsConfigured } from '@/lib/sheets/client';
+import { defaultStore } from '@/lib/timeline/store';
 
 export const metadata: Metadata = {
   title: 'Dashboard | HypeProof AI',
@@ -44,23 +45,30 @@ function loadMembers(): MembersData {
   });
 }
 
-function loadTimeline(): TimelineData {
-  return loadJsonFromDataDir<TimelineData>('project-timeline.json', {
-    version: 1,
-    updatedAt: '',
-    lanes: {
-      direct: { label: 'HypeProof Direct', color: '#a78bfa' },
-      channel: { label: 'Filamentree Channel', color: '#34d399' },
-      reusable: { label: 'Reusable Asset Layer', color: '#94a3b8' },
-    },
-    events: [],
-    reusableAssets: [],
-  });
+async function loadTimeline(): Promise<TimelineData> {
+  // Routes through the storage abstraction so JSON file ↔ Supabase swap is
+  // transparent (driven by TIMELINE_STORE env). The page must see the same
+  // data that server actions (tasks.ts) write to.
+  try {
+    return await defaultStore().read();
+  } catch {
+    return {
+      version: 1,
+      updatedAt: '',
+      lanes: {
+        direct: { label: 'HypeProof Direct', color: '#a78bfa' },
+        channel: { label: '비트리 channel', color: '#34d399' },
+        reusable: { label: 'Reusable Asset Layer', color: '#94a3b8' },
+      },
+      events: [],
+      reusableAssets: [],
+    };
+  }
 }
 
 export default async function DashboardPage() {
   const members = loadMembers();
-  const timeline = loadTimeline();
+  const timeline = await loadTimeline();
   const currentYear = new Date().getFullYear();
   const holidays: Holiday[] = [
     ...getKoreanHolidays(currentYear),
