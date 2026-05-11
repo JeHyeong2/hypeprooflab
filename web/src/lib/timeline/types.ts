@@ -76,6 +76,16 @@ export interface GcalConfig {
   lastSyncAt?: string;
 }
 
+export interface TaskLogEntry {
+  id: string;
+  taskId: string;
+  actor: string;             // email or 'mother-bot' or display name
+  action: string;            // 'created' | 'done:true' | 'done:false' | 'removed' | 'updated:<field>'
+  before?: unknown;
+  after?: unknown;
+  createdAt: string;
+}
+
 export interface TimelineData {
   version: 1;
   updatedAt: string;
@@ -86,6 +96,7 @@ export interface TimelineData {
   events: TimelineEvent[];
   reusableAssets: ReusableAsset[];
   tasks?: SubTask[];
+  taskLog?: TaskLogEntry[];
   gcal?: GcalConfig;
 }
 

@@ -6,7 +6,22 @@ import type {
   ReusableAsset,
   PriorityBanner,
   SubTask,
+  TaskLogEntry,
 } from './types';
+
+function newLogId(): string {
+  return `log-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+}
+
+function appendLog(data: TimelineData, entry: Omit<TaskLogEntry, 'id' | 'createdAt'>): TaskLogEntry {
+  const log: TaskLogEntry = {
+    ...entry,
+    id: newLogId(),
+    createdAt: new Date().toISOString(),
+  };
+  // Mutates given object — caller wraps in {...data, taskLog: [...]}
+  return log;
+}
 
 export interface TimelineStore {
   read(): Promise<TimelineData>;
@@ -31,7 +46,7 @@ const EMPTY: TimelineData = {
   updatedAt: '',
   lanes: {
     direct: { label: 'HypeProof Direct', color: '#a78bfa' },
-    channel: { label: 'Filamentree Channel', color: '#34d399' },
+    channel: { label: '비트리 channel', color: '#34d399' },
     reusable: { label: 'Reusable Asset Layer', color: '#94a3b8' },
   },
   events: [],
@@ -156,43 +171,82 @@ export class JsonFileStore implements TimelineStore {
     if (tasks.some(x => x.id === t.id)) {
       return this.updateTask(t.id, t);
     }
-    const next: TimelineData = { ...data, tasks: [...tasks, t] };
+    const log = appendLog(data, {
+      taskId: t.id,
+      actor: t.reporter ?? 'unknown',
+      action: 'created',
+      after: t,
+    });
+    const next: TimelineData = {
+      ...data,
+      tasks: [...tasks, t],
+      taskLog: [...(data.taskLog ?? []), log],
+    };
     await this.write(next);
     return next;
   }
 
   async updateTask(id: string, patch: Partial<SubTask>): Promise<TimelineData> {
     const data = await this.read();
-    const tasks = (data.tasks ?? []).map(t =>
-      t.id === id ? { ...t, ...patch, id } : t,
+    const before = (data.tasks ?? []).find(t => t.id === id);
+    if (!before) return data;
+    const after: SubTask = { ...before, ...patch, id };
+    const tasks = (data.tasks ?? []).map(t => (t.id === id ? after : t));
+    const beforeRec = before as unknown as Record<string, unknown>;
+    const patchRec = patch as unknown as Record<string, unknown>;
+    const changedFields = Object.keys(patch).filter(
+      k => beforeRec[k] !== patchRec[k],
     );
-    const next: TimelineData = { ...data, tasks };
+    const log = appendLog(data, {
+      taskId: id,
+      actor: patch.reporter ?? before.reporter ?? 'unknown',
+      action: `updated:${changedFields.join(',') || '_'}`,
+      before,
+      after,
+    });
+    const next: TimelineData = { ...data, tasks, taskLog: [...(data.taskLog ?? []), log] };
     await this.write(next);
     return next;
   }
 
   async toggleTaskDone(id: string, doneBy: string): Promise<TimelineData> {
     const data = await this.read();
-    const tasks = (data.tasks ?? []).map(t => {
-      if (t.id !== id) return t;
-      const nowDone = !t.done;
-      return {
-        ...t,
-        done: nowDone,
-        doneAt: nowDone ? new Date().toISOString() : undefined,
-        doneBy: nowDone ? doneBy : undefined,
-      };
+    const before = (data.tasks ?? []).find(t => t.id === id);
+    if (!before) return data;
+    const nowDone = !before.done;
+    const after: SubTask = {
+      ...before,
+      done: nowDone,
+      doneAt: nowDone ? new Date().toISOString() : undefined,
+      doneBy: nowDone ? doneBy : undefined,
+    };
+    const tasks = (data.tasks ?? []).map(t => (t.id === id ? after : t));
+    const log = appendLog(data, {
+      taskId: id,
+      actor: doneBy,
+      action: nowDone ? 'done:true' : 'done:false',
+      before: { done: before.done },
+      after: { done: nowDone, doneBy: after.doneBy, doneAt: after.doneAt },
     });
-    const next: TimelineData = { ...data, tasks };
+    const next: TimelineData = { ...data, tasks, taskLog: [...(data.taskLog ?? []), log] };
     await this.write(next);
     return next;
   }
 
   async removeTask(id: string): Promise<TimelineData> {
     const data = await this.read();
+    const before = (data.tasks ?? []).find(t => t.id === id);
+    if (!before) return data;
+    const log = appendLog(data, {
+      taskId: id,
+      actor: before.reporter ?? 'unknown',
+      action: 'removed',
+      before,
+    });
     const next: TimelineData = {
       ...data,
       tasks: (data.tasks ?? []).filter(t => t.id !== id),
+      taskLog: [...(data.taskLog ?? []), log],
     };
     await this.write(next);
     return next;

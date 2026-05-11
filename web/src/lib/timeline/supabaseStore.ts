@@ -194,7 +194,7 @@ function rowToAsset(r: AssetRow): ReusableAsset {
 
 const DEFAULT_LANES: TimelineLanesMeta = {
   direct: { label: 'HypeProof Direct', color: '#a78bfa' },
-  channel: { label: 'Filamentree Channel', color: '#34d399' },
+  channel: { label: '비트리 channel', color: '#34d399' },
   reusable: { label: 'Reusable Asset Layer', color: '#94a3b8' },
 };
 

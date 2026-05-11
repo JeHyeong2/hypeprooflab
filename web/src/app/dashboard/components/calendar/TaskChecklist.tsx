@@ -9,6 +9,7 @@ import {
   toggleTaskDoneAction,
   removeTaskAction,
 } from '../../actions/tasks';
+import MentionInput from './MentionInput';
 
 interface Props {
   event: TimelineEvent;
@@ -84,6 +85,17 @@ export default function TaskChecklist({ event, tasks, members }: Props) {
   const [pending, startTransition] = useTransition();
 
   const myEmail = session?.user?.email ?? null;
+  const myDisplay = (session?.user as { displayName?: string; name?: string } | undefined)
+    ?.displayName
+    ?? session?.user?.name
+    ?? null;
+
+  const canToggle = (t: SubTask): boolean => {
+    if (!myEmail) return false;
+    if (t.reporter === myEmail) return true;
+    if (myDisplay && t.assignees.includes(myDisplay)) return true;
+    return false;
+  };
 
   const total = tasks.length;
   const done = tasks.filter(t => t.done).length;
@@ -115,8 +127,10 @@ export default function TaskChecklist({ event, tasks, members }: Props) {
   };
 
   const onToggle = (id: string) => {
+    setError(null);
     startTransition(async () => {
-      await toggleTaskDoneAction(id);
+      const r = await toggleTaskDoneAction(id);
+      if (!r.ok) setError(r.error ?? '실패');
     });
   };
 
@@ -161,6 +175,7 @@ export default function TaskChecklist({ event, tasks, members }: Props) {
           {tasks.map(t => {
             const overdue = isOverdue(t);
             const mine = myEmail && t.reporter === myEmail;
+            const togglable = canToggle(t);
             return (
               <li
                 key={t.id}
@@ -171,13 +186,23 @@ export default function TaskChecklist({ event, tasks, members }: Props) {
                 <button
                   type="button"
                   onClick={() => onToggle(t.id)}
-                  disabled={pending}
+                  disabled={pending || !togglable}
+                  title={
+                    togglable
+                      ? t.done
+                        ? '체크 해제'
+                        : '완료 처리'
+                      : 'reporter 또는 assignee만 체크 가능'
+                  }
                   className={`mt-0.5 w-3.5 h-3.5 shrink-0 rounded border ${
                     t.done
                       ? 'bg-[#27ae60] border-[#27ae60] text-white'
-                      : 'bg-transparent border-[#30363d] hover:border-[#58a6ff]'
+                      : togglable
+                      ? 'bg-transparent border-[#30363d] hover:border-[#58a6ff]'
+                      : 'bg-transparent border-[#21262d] cursor-not-allowed'
                   } flex items-center justify-center text-[0.6rem] leading-none`}
                   aria-pressed={t.done}
+                  aria-disabled={!togglable}
                 >
                   {t.done && '✓'}
                 </button>
@@ -231,23 +256,19 @@ export default function TaskChecklist({ event, tasks, members }: Props) {
 
       {session ? (
         <div className="pt-2 space-y-1">
-          <input
-            type="text"
+          <MentionInput
             value={input}
-            onChange={e => setInput(e.target.value)}
-            onKeyDown={e => {
-              if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                onAdd();
-              }
-            }}
+            onChange={setInput}
+            candidates={members.map(m => m.displayName)}
             placeholder="예: @TJ 5/22까지 촬영 준비"
             disabled={pending}
-            className="w-full bg-[#0d1117] border border-[#30363d] rounded-md px-2 py-1.5 text-[0.78rem] text-[#e6edf3] placeholder-[#6e7681] focus:outline-none focus:border-[#58a6ff] disabled:opacity-50"
+            rows={2}
+            maxLength={500}
+            onEnter={onAdd}
           />
           <div className="flex items-center justify-between gap-2">
             <span className="text-[0.6rem] text-[#6e7681]">
-              @멤버 · 5/22 또는 2026-05-22 · 긴급/낮음
+              @로 멤버 · 5/22 또는 2026-05-22 · 긴급/낮음 · Enter로 추가
             </span>
             <button
               type="button"

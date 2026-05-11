@@ -125,6 +125,6 @@ CREATE TRIGGER timeline_meta_touch
 INSERT INTO timeline_meta (id, lanes)
 VALUES ('singleton', jsonb_build_object(
   'direct',   jsonb_build_object('label', 'HypeProof Direct',    'color', '#a78bfa'),
-  'channel',  jsonb_build_object('label', 'Filamentree Channel', 'color', '#34d399'),
+  'channel',  jsonb_build_object('label', '비트리 channel', 'color', '#34d399'),
   'reusable', jsonb_build_object('label', 'Reusable Asset Layer','color', '#94a3b8')
 ));
