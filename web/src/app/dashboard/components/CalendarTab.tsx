@@ -12,6 +12,7 @@ import EventDetail from './calendar/EventDetail';
 import DayDetail from './calendar/DayDetail';
 import SyncButton from './calendar/SyncButton';
 import { isHoliday, isWeekend } from '@/lib/timeline/holidays';
+import { buildProgressMap } from '@/lib/timeline/progress';
 
 type ViewMode = 'grid' | 'timeline';
 
@@ -59,6 +60,8 @@ export default function CalendarTab({ data, holidays, notes, members, sheetsRead
   const dayHoliday = selectedDay ? isHoliday(selectedDay, holidays) : null;
   const dayWeekend = selectedDay ? isWeekend(selectedDay) : null;
 
+  const progressMap = useMemo(() => buildProgressMap(data.tasks), [data.tasks]);
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_360px] gap-3">
       {/* Main calendar column */}
@@ -104,6 +107,7 @@ export default function CalendarTab({ data, holidays, notes, members, sheetsRead
             holidays={holidays}
             selectedId={selected?.id ?? null}
             selectedDay={selectedDay}
+            progressMap={progressMap}
             onSelectEvent={onSelectEvent}
             onSelectDay={onSelectDay}
           />
@@ -112,6 +116,7 @@ export default function CalendarTab({ data, holidays, notes, members, sheetsRead
             data={data}
             holidays={holidays}
             selectedId={selected?.id ?? null}
+            progressMap={progressMap}
             onSelectEvent={onSelectEvent}
           />
         )}
@@ -136,6 +141,8 @@ export default function CalendarTab({ data, holidays, notes, members, sheetsRead
             <EventDetail
               event={selected}
               lanes={data.lanes}
+              tasks={data.tasks}
+              members={members}
               onClose={() => {
                 setSelected(null);
                 setSelectedDay(null);
@@ -149,6 +156,7 @@ export default function CalendarTab({ data, holidays, notes, members, sheetsRead
             holiday={dayHoliday}
             weekend={dayWeekend}
             lanes={data.lanes}
+            progressMap={progressMap}
             onSelectEvent={onSelectEvent}
             onClose={() => setSelectedDay(null)}
           />

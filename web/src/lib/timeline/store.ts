@@ -1,6 +1,12 @@
 import path from 'path';
 import fs from 'fs';
-import type { TimelineData, TimelineEvent, ReusableAsset, PriorityBanner } from './types';
+import type {
+  TimelineData,
+  TimelineEvent,
+  ReusableAsset,
+  PriorityBanner,
+  SubTask,
+} from './types';
 
 export interface TimelineStore {
   read(): Promise<TimelineData>;
@@ -13,6 +19,11 @@ export interface TimelineStore {
   updateAsset(id: string, patch: Partial<ReusableAsset>): Promise<TimelineData>;
   removeAsset(id: string): Promise<TimelineData>;
   setPriorityBanner(b: PriorityBanner | undefined): Promise<TimelineData>;
+  // Sub-tasks
+  addTask(t: SubTask): Promise<TimelineData>;
+  updateTask(id: string, patch: Partial<SubTask>): Promise<TimelineData>;
+  toggleTaskDone(id: string, doneBy: string): Promise<TimelineData>;
+  removeTask(id: string): Promise<TimelineData>;
 }
 
 const EMPTY: TimelineData = {
@@ -25,6 +36,7 @@ const EMPTY: TimelineData = {
   },
   events: [],
   reusableAssets: [],
+  tasks: [],
 };
 
 export function resolveTimelinePath(): string {
@@ -137,12 +149,75 @@ export class JsonFileStore implements TimelineStore {
     await this.write(next);
     return next;
   }
+
+  async addTask(t: SubTask): Promise<TimelineData> {
+    const data = await this.read();
+    const tasks = data.tasks ?? [];
+    if (tasks.some(x => x.id === t.id)) {
+      return this.updateTask(t.id, t);
+    }
+    const next: TimelineData = { ...data, tasks: [...tasks, t] };
+    await this.write(next);
+    return next;
+  }
+
+  async updateTask(id: string, patch: Partial<SubTask>): Promise<TimelineData> {
+    const data = await this.read();
+    const tasks = (data.tasks ?? []).map(t =>
+      t.id === id ? { ...t, ...patch, id } : t,
+    );
+    const next: TimelineData = { ...data, tasks };
+    await this.write(next);
+    return next;
+  }
+
+  async toggleTaskDone(id: string, doneBy: string): Promise<TimelineData> {
+    const data = await this.read();
+    const tasks = (data.tasks ?? []).map(t => {
+      if (t.id !== id) return t;
+      const nowDone = !t.done;
+      return {
+        ...t,
+        done: nowDone,
+        doneAt: nowDone ? new Date().toISOString() : undefined,
+        doneBy: nowDone ? doneBy : undefined,
+      };
+    });
+    const next: TimelineData = { ...data, tasks };
+    await this.write(next);
+    return next;
+  }
+
+  async removeTask(id: string): Promise<TimelineData> {
+    const data = await this.read();
+    const next: TimelineData = {
+      ...data,
+      tasks: (data.tasks ?? []).filter(t => t.id !== id),
+    };
+    await this.write(next);
+    return next;
+  }
 }
 
 let _store: TimelineStore | null = null;
 
+/**
+ * Default store selection (opt-in via env):
+ *   TIMELINE_STORE=supabase  → SupabaseTimelineStore
+ *   (unset / file)           → JsonFileStore (web/data/project-timeline.json)
+ *
+ * Migration plan: dual-write window optional, then flip TIMELINE_STORE.
+ */
 export function defaultStore(): TimelineStore {
-  if (!_store) _store = new JsonFileStore();
+  if (_store) return _store;
+  if (process.env.TIMELINE_STORE === 'supabase') {
+    // Lazy: avoid loading supabase code in environments that don't need it
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { SupabaseTimelineStore } = require('./supabaseStore') as typeof import('./supabaseStore');
+    _store = new SupabaseTimelineStore();
+  } else {
+    _store = new JsonFileStore();
+  }
   return _store;
 }
 

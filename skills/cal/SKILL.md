@@ -1,6 +1,6 @@
 ---
 name: cal
-description: HypeProof Lab 일정 등록·변경·취소·삭제 + Google Calendar 양방향 동기화. /cal 또는 자연어("일정 추가", "X 일정 바꿔", "Y 취소", "캘린더 동기화") 발동.
+description: HypeProof Lab 일정 + 이벤트 sub-task(체크리스트) 등록·변경·취소·삭제 + Google Calendar 양방향 동기화. /cal 또는 자연어("일정 추가", "X 일정 바꿔", "@TJ 할일 추가", "Y 취소", "캘린더 동기화") 발동.
 argument-hint: <자연어로 자유롭게>
 allowed-tools: Read, Edit, Bash, mcp__claude_ai_Google_Calendar__authenticate, mcp__claude_ai_Google_Calendar__complete_authentication
 ---
@@ -63,6 +63,43 @@ allowed-tools: Read, Edit, Bash, mcp__claude_ai_Google_Calendar__authenticate, m
 5. JSON에서 event 제거
 6. `gcalSync`: `delete_event(externalIds.gcal)` → externalIds.gcal 필드 함께 제거
 7. tsc 검증 → 결과 요약
+
+### TASK_ADD (이벤트 sub-task 등록)
+트리거: "@TJ 5/22까지 촬영 준비", "치과 파일럿에 동의서 양식 추가", `/cal task add ...`
+
+1. 자연어 파싱:
+   - `@displayName` → assignees (members.json의 displayName 매칭)
+   - 날짜 표현 (`5/22`, `2026-05-22`, `내일`, `다음 화요일`) → dueDate
+   - "긴급"/"high"/"urgent" → priority='high', "낮음"/"low" → priority='low'
+   - event 매칭: 발화 안에 이벤트 제목 키워드가 있으면 그 이벤트, 또는 가장 임박한 진행중 이벤트, 또는 unattached
+2. id 생성: `t-{Date.now()}-{rand}`
+3. **diff preview**: 신규 task 카드 (이벤트 제목, assignees, dueDate, priority)
+4. confirm
+5. store.addTask() — JsonFileStore일 땐 JSON write, SupabaseTimelineStore일 땐 timeline_tasks INSERT + timeline_task_log 'created'
+6. (선택) Discord webhook → assignees 멘션
+7. tsc 검증 → 결과 요약
+
+### TASK_DONE (체크)
+트리거: "촬영 준비 끝났어", "X 완료", `/cal task done <id 또는 키워드>`
+
+1. 키워드/id로 대상 식별. 모호 시 후보 나열 (open 상태만)
+2. 매칭된 task가 본인 reporter거나 assignees 포함이어야 (권한)
+3. store.toggleTaskDone(id, doneBy) — done=true, doneAt=now, doneBy=현재 사용자
+   → task_log 'done:true' 자동 기록
+4. 결과 요약 (이벤트 진척도 변화 포함: "치과 파일럿 진척도 2/5 → 3/5")
+
+### TASK_REMOVE
+트리거: "X 빼자", `/cal task remove <id>`
+
+1. 대상 식별 + 권한 (reporter만)
+2. confirm
+3. store.removeTask(id)
+
+### TASK_LIST (조회)
+트리거: "내 할 일", "@TJ 할 일", `/cal task list [@user]`
+
+1. 필터 조건 (assignee, event, done 여부)
+2. dashboard URL 함께 출력 ("자세히는 /dashboard 캘린더 탭")
 
 ## 공통 작업 흐름
 
@@ -144,7 +181,10 @@ FuzzyDate 표기 규약:
 
 - 항상 `web/src/lib/timeline/store.ts`의 `defaultStore()`만 사용
 - JSON 직접 sed 편집 금지 (구조 깨짐)
-- 추후 Supabase 이전 시 `JsonFileStore`만 `SupabaseStore`로 갈아끼우면 됨 → 본 skill 코드 변경 불필요
+- **env 분기**:
+  - `TIMELINE_STORE=supabase` → `SupabaseTimelineStore` (`timeline_events` / `timeline_tasks` / `timeline_task_log` 등)
+  - 미설정 → `JsonFileStore` (`web/data/project-timeline.json`)
+- Supabase로 전환 후엔 본 skill의 흐름·코드 변경 0. store 메서드 시그니처 동일.
 
 ## 출력 포맷 (예시)
 

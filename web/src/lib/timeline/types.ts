@@ -34,6 +34,23 @@ export interface TimelineEvent {
   needsClassification?: boolean;
 }
 
+export type TaskPriority = 'low' | 'med' | 'high';
+
+export interface SubTask {
+  id: string;
+  eventId?: string;          // 'ev-xxx' — null이면 unattached
+  title: string;
+  assignees: string[];       // displayName
+  reporter?: string;         // 작성자 email
+  dueDate?: string;          // 'YYYY-MM-DD'
+  priority?: TaskPriority;
+  done: boolean;
+  doneAt?: string;
+  doneBy?: string;           // displayName
+  sourceExcerpt?: string;
+  createdAt: string;
+}
+
 export interface ReusableAsset {
   id: string;
   title: string;
@@ -68,7 +85,14 @@ export interface TimelineData {
   lanes: TimelineLanesMeta;
   events: TimelineEvent[];
   reusableAssets: ReusableAsset[];
+  tasks?: SubTask[];
   gcal?: GcalConfig;
+}
+
+export interface EventProgress {
+  total: number;
+  done: number;
+  overdue: number;
 }
 
 export interface Holiday {

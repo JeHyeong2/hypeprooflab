@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useRef, useState } from 'react';
-import type { TimelineData, TimelineEvent, Holiday } from '@/lib/timeline/types';
+import type { TimelineData, TimelineEvent, Holiday, EventProgress } from '@/lib/timeline/types';
 import { fuzzyDateMatchesMonth } from '@/lib/timeline/dateUtil';
 import { isHoliday, isWeekend } from '@/lib/timeline/holidays';
 import EventCard from './EventCard';
@@ -11,6 +11,7 @@ interface Props {
   holidays: Holiday[];
   selectedId?: string | null;
   selectedDay?: string | null;
+  progressMap?: Map<string, EventProgress>;
   onSelectEvent: (ev: TimelineEvent) => void;
   onSelectDay: (iso: string) => void;
   initialYear?: number;
@@ -37,6 +38,7 @@ export default function GridView({
   holidays,
   selectedId,
   selectedDay,
+  progressMap,
   onSelectEvent,
   onSelectDay,
   initialYear,
@@ -249,7 +251,12 @@ export default function GridView({
                   selectedId === ev.id ? 'ring-1 ring-[#58a6ff] rounded-lg' : ''
                 }`}
               >
-                <EventCard event={ev} lanes={data.lanes} compact />
+                <EventCard
+                  event={ev}
+                  lanes={data.lanes}
+                  compact
+                  progress={progressMap?.get(ev.id)}
+                />
               </button>
             ))}
           </div>

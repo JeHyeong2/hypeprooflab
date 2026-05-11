@@ -25,13 +25,17 @@ export default function EventCard({
   event,
   lanes,
   compact = false,
+  progress,
 }: {
   event: TimelineEvent;
   lanes: TimelineLanesMeta;
   compact?: boolean;
+  progress?: { done: number; total: number; overdue: number };
 }) {
   const lane = lanes[event.lane];
   const cancelled = event.status === 'cancelled';
+  const hasTasks = progress && progress.total > 0;
+  const allDone = hasTasks && progress!.done === progress!.total;
   return (
     <div
       className={`relative rounded-lg border bg-[#161b22] border-[#30363d] ${
@@ -70,6 +74,26 @@ export default function EventCard({
       <div className={`text-[#8b949e] ${compact ? 'text-[0.62rem]' : 'text-[0.68rem]'} mt-1`}>
         {fuzzyDateLabel(event.date)}
       </div>
+      {hasTasks && (
+        <div className={`flex items-center gap-1 ${compact ? 'mt-0.5' : 'mt-1'}`}>
+          <div className="flex-1 h-1 rounded-full bg-[#21262d] overflow-hidden">
+            <div
+              className={`h-full ${
+                allDone
+                  ? 'bg-[#27ae60]'
+                  : progress!.overdue > 0
+                  ? 'bg-[#e74c3c]'
+                  : 'bg-[#58a6ff]'
+              }`}
+              style={{ width: `${(progress!.done / progress!.total) * 100}%` }}
+            />
+          </div>
+          <span className={`${compact ? 'text-[0.55rem]' : 'text-[0.6rem]'} text-[#8b949e] font-mono`}>
+            {progress!.done}/{progress!.total}
+            {progress!.overdue > 0 && ' 🔥'}
+          </span>
+        </div>
+      )}
       {!compact && event.notes && event.notes.length > 0 && (
         <ul className="mt-1.5 space-y-0.5">
           {event.notes.map((n, i) => (

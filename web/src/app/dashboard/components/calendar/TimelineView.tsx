@@ -1,13 +1,14 @@
 'use client';
 
 import { useMemo } from 'react';
-import type { TimelineData, TimelineEvent, Lane, Holiday } from '@/lib/timeline/types';
+import type { TimelineData, TimelineEvent, Lane, Holiday, EventProgress } from '@/lib/timeline/types';
 import EventCard from './EventCard';
 
 interface Props {
   data: TimelineData;
   holidays: Holiday[];
   selectedId?: string | null;
+  progressMap?: Map<string, EventProgress>;
   onSelectEvent: (ev: TimelineEvent) => void;
 }
 
@@ -42,7 +43,7 @@ function bucketOf(ev: TimelineEvent): Bucket {
   return 'other';
 }
 
-export default function TimelineView({ data, holidays, selectedId, onSelectEvent }: Props) {
+export default function TimelineView({ data, holidays, selectedId, progressMap, onSelectEvent }: Props) {
   const grouped = useMemo(() => {
     const result: Record<Lane, Record<Bucket, TimelineEvent[]>> = {
       direct: { apr: [], may: [], jun: [], 'q2-followup': [], other: [] },
@@ -124,7 +125,12 @@ export default function TimelineView({ data, holidays, selectedId, onSelectEvent
                           selectedId === ev.id ? 'ring-1 ring-[#58a6ff] rounded-lg' : ''
                         }`}
                       >
-                        <EventCard event={ev} lanes={data.lanes} compact />
+                        <EventCard
+                          event={ev}
+                          lanes={data.lanes}
+                          compact
+                          progress={progressMap?.get(ev.id)}
+                        />
                       </button>
                     ))
                   )}
