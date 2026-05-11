@@ -64,7 +64,13 @@ export default function MentionInput({
       setDropdown(initialDropdown);
       return;
     }
-    setDropdown({ open: true, start: at, query: segment, items, index: 0 });
+    // Preserve index when the @ anchor & query are unchanged (e.g. ArrowDown keyup re-run).
+    // Only reset index when items list changed shape.
+    setDropdown(prev => {
+      const sameAnchor = prev.open && prev.start === at && prev.query === segment;
+      const idx = sameAnchor ? Math.min(prev.index, items.length - 1) : 0;
+      return { open: true, start: at, query: segment, items, index: idx };
+    });
   };
 
   const insertMention = (name: string) => {

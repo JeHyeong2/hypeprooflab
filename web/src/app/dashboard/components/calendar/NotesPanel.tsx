@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import type { DashboardMember } from '../../types';
 import type { Note, NoteCategory } from '@/lib/sheets/notes';
@@ -22,6 +23,7 @@ interface Props {
 }
 
 export default function NotesPanel({ notes, members, sheetsReady }: Props) {
+  const router = useRouter();
   const { data: session } = useSession();
   const [active, setActive] = useState<NoteCategory>('spec');
   const [content, setContent] = useState('');
@@ -59,6 +61,7 @@ export default function NotesPanel({ notes, members, sheetsReady }: Props) {
       const r = await createNoteAction({ category: active, content: text });
       if (r.ok) {
         setContent('');
+        router.refresh();
       } else {
         setError(r.error ?? '등록 실패');
       }
@@ -68,7 +71,9 @@ export default function NotesPanel({ notes, members, sheetsReady }: Props) {
   const onDelete = (id: string) => {
     if (!confirm('이 메모를 삭제할까요?')) return;
     startTransition(async () => {
-      await deleteNoteAction(id);
+      const r = await deleteNoteAction(id);
+      if (r.ok) router.refresh();
+      else setError(r.error ?? '삭제 실패');
     });
   };
 

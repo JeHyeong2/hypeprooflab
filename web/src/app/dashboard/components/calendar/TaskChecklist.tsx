@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import type { SubTask, TimelineEvent } from '@/lib/timeline/types';
 import type { DashboardMember } from '../../types';
@@ -79,6 +80,7 @@ function isOverdue(t: SubTask): boolean {
 }
 
 export default function TaskChecklist({ event, tasks, members }: Props) {
+  const router = useRouter();
   const { data: session } = useSession();
   const [input, setInput] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -121,8 +123,10 @@ export default function TaskChecklist({ event, tasks, members }: Props) {
         priority: parsed.priority,
         sourceExcerpt: text,
       });
-      if (r.ok) setInput('');
-      else setError(r.error ?? '등록 실패');
+      if (r.ok) {
+        setInput('');
+        router.refresh();
+      } else setError(r.error ?? '등록 실패');
     });
   };
 
@@ -130,14 +134,17 @@ export default function TaskChecklist({ event, tasks, members }: Props) {
     setError(null);
     startTransition(async () => {
       const r = await toggleTaskDoneAction(id);
-      if (!r.ok) setError(r.error ?? '실패');
+      if (r.ok) router.refresh();
+      else setError(r.error ?? '실패');
     });
   };
 
   const onRemove = (id: string) => {
     if (!confirm('이 할 일을 삭제할까요?')) return;
     startTransition(async () => {
-      await removeTaskAction(id);
+      const r = await removeTaskAction(id);
+      if (r.ok) router.refresh();
+      else setError(r.error ?? '삭제 실패');
     });
   };
 

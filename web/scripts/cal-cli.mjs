@@ -261,10 +261,33 @@ async function handleJson() {
   }
 }
 
+// ─── Supabase helpers ──────────────────────────────────────
+function eventToRow(e) {
+  const row = {
+    id: e.id, lane: e.lane, title: e.title, subtitle: e.subtitle ?? null,
+    status: e.status ?? 'planned',
+    contacts: e.contacts ?? null, notes: e.notes ?? null,
+    owner: e.owner ?? null, links: e.links ?? null, tags: e.tags ?? null,
+    external_ids: e.externalIds ?? null,
+    needs_classification: !!e.needsClassification,
+    cancelled_at: e.cancelledAt ?? null, cancel_reason: e.cancelReason ?? null,
+    date_kind: e.date.kind,
+    date_iso: null, date_year: null, date_month: null, date_quarter: null, date_part_of_day: null,
+  };
+  if (e.date.kind === 'date') {
+    row.date_iso = e.date.iso;
+    row.date_part_of_day = e.date.partOfDay ?? null;
+  } else if (e.date.kind === 'month') {
+    row.date_year = e.date.year; row.date_month = e.date.month;
+  } else if (e.date.kind === 'quarter') {
+    row.date_year = e.date.year; row.date_quarter = e.date.quarter;
+  }
+  return row;
+}
+
 // ─── Supabase mode dispatcher ──────────────────────────────
 async function handleSupabase() {
   const s = await supa();
-  // Minimal supabase passthrough — JSON 모드와 같은 인터페이스
   switch (cmd) {
     case 'read': {
       const [e, t, a, m] = await Promise.all([
@@ -281,6 +304,47 @@ async function handleSupabase() {
         reusableAssets: a.data ?? [],
         meta: m.data ?? null,
       });
+      return;
+    }
+    case 'event-add': {
+      const ev = parseJson(args[0] ?? '', 'event');
+      if (!ev?.id || !ev?.title || !ev?.lane || !ev?.date) fail('event needs {id,lane,title,date,status}');
+      const row = eventToRow(ev);
+      if (dryRun) { out({ ok: true, mode: MODE, dryRun, action: 'event-add', row }); return; }
+      const { error } = await s.from('timeline_events').upsert(row);
+      if (error) fail(error.message);
+      out({ ok: true, mode: MODE, action: 'event-add', event: row });
+      return;
+    }
+    case 'event-update': {
+      const id = args[0];
+      const patch = parseJson(args[1] ?? '{}', 'patch');
+      const { data: cur, error: rErr } = await s.from('timeline_events').select('*').eq('id', id).single();
+      if (rErr) fail(rErr.message);
+      if (!cur) fail(`event ${id} not found`);
+      const merged = { ...cur, ...eventToRow({ ...cur, ...patch, id }) };
+      if (dryRun) { out({ ok: true, mode: MODE, dryRun, action: 'event-update', before: cur, after: merged }); return; }
+      const { error } = await s.from('timeline_events').update(merged).eq('id', id);
+      if (error) fail(error.message);
+      out({ ok: true, mode: MODE, action: 'event-update', id });
+      return;
+    }
+    case 'event-cancel': {
+      const id = args[0];
+      const reason = args[1];
+      const update = { status: 'cancelled', cancelled_at: new Date().toISOString(), cancel_reason: reason ?? null };
+      if (dryRun) { out({ ok: true, mode: MODE, dryRun, action: 'event-cancel', id, update }); return; }
+      const { error } = await s.from('timeline_events').update(update).eq('id', id);
+      if (error) fail(error.message);
+      out({ ok: true, mode: MODE, action: 'event-cancel', id });
+      return;
+    }
+    case 'event-remove': {
+      const id = args[0];
+      if (dryRun) { out({ ok: true, mode: MODE, dryRun, action: 'event-remove', id }); return; }
+      const { error } = await s.from('timeline_events').delete().eq('id', id);
+      if (error) fail(error.message);
+      out({ ok: true, mode: MODE, action: 'event-remove', id });
       return;
     }
     case 'task-add': {
